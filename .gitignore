@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.sql
+*.wpress
+backups/
+.DS_Store
