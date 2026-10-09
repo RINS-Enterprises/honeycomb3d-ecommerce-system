@@ -9,7 +9,7 @@ await p.goto(B+'/shop/?q=%3Cimg%20src%3Dx%20onerror%3Dalert(1)%3E&category=%3Csc
 out.push(['xss-params', await p.locator('img[src=x]').count()===0 && (await p.inputValue('#search')).includes('<img') ? 'PASS':'FAIL', 'search box shows text; no injected img; category='+await p.inputValue('#category')]);
 // 2. search + category combination & URL restore
 await p.goto(B+'/shop/?q=dragon&category=Keychains',{waitUntil:'networkidle'});
-const vis=await p.$$eval('[data-product-card]',cs=>cs.filter(c=>!c.hidden).map(c=>c.querySelector('h3').textContent));
+const vis=await p.$$eval('[data-product-card]',cs=>cs.filter(c=>!c.hidden).map(c=>c.querySelector('h2,h3,h4').textContent));
 out.push(['url-restore-combined', vis.length===2?'PASS':'FAIL', JSON.stringify(vis)]);
 // 3. tampered localStorage: huge qty, unknown id, wrong types
 await p.goto(B+'/cart/'); await p.evaluate(()=>localStorage.setItem('honeycomb.cart.v1', JSON.stringify([{id:'HC-KURAMA',quantity:999},{id:'EVIL<script>',quantity:1},{id:'HC-LEAF',quantity:'5'}])));
@@ -31,7 +31,7 @@ await p2.click('#add-form button'); await p2.waitForTimeout(300);
 out.push(['storage-blocked', e2.length===0 && /could not save/.test(await p2.textContent('#status'))?'PASS':'FAIL', (await p2.textContent('#status'))+' errors:'+e2.length]);
 // 7. keyboard: duplicate tab stops per product card
 await p.goto(B+'/shop/',{waitUntil:'networkidle'});
-const links=await p.$$eval('[data-product-card] a',as=>as.length); const cards=await p.$$eval('[data-product-card]',c=>c.length);
+const links=await p.$$eval('[data-product-card] a:not([tabindex="-1"])',as=>as.length); const cards=await p.$$eval('[data-product-card]',c=>c.length);
 out.push(['card-tab-stops', links===cards?'PASS':'REVIEW', `${links} focusable links for ${cards} cards`]);
 // 8. JS errors overall
 out.push(['page-errors', errs.length===0?'PASS':'FAIL', errs.join('|')||'none']);

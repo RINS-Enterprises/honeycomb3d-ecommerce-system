@@ -17,6 +17,9 @@ Requirements: Node ≥ 18, git, and for browser checks Playwright + Chromium. Th
 | `domain/domain-contract.test.mjs` | Contract tests for the implementation's `src/domain.mjs` and `data/*.json` (cart merge/caps, totals, corrupt storage, WhatsApp message, filters, live/preview rules). `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'`. Skips without `DOMAIN_DIR`. |
 | `e2e/edge-probes.mjs` | Implementation-specific probes: URL-parameter injection, filter state restore, tampered/blocked storage, quantity cap, notes escaping, duplicate card links. `BASE_URL=… node qa/e2e/edge-probes.mjs` |
 | `e2e/axe-audit.mjs` | axe-core WCAG 2.2 A/AA audit of every page plus interactive states, desktop and mobile. Needs `AXE_PATH` to an `axe.min.js` installed in a QA-owned directory (`npm i axe-core` in a scratch folder), never in the app. |
+| `e2e/image-audit.mjs` | Per page and viewport (mobile DPR 3, desktop DPR 1): image decode, natural vs rendered size, oversampling, bytes per image and page, object-fit crops, alt, LCP. `BASE_URL=… QA_SHA=… node qa/e2e/image-audit.mjs` |
+| `scripts/image-provenance.py` | Flags C2PA "Created by Google Generative AI"/SynthID, Canva/Adobe `CreatorTool`, camera EXIF. Detection by content only. |
+| `scripts/drive-decode.py` | Decodes a saved Drive-connector download into a scratch directory outside the repo, for hashing and inspection. Never import such files into the app. |
 | `e2e/storefront-smoke.mjs` | Browser smoke over nav, filters, PDP, cart qty/remove/totals, WhatsApp handoff, a11y basics, failure states, and claim scanning. Statuses: PASS / FAIL / INCONCLUSIVE (element not found, so not a pass) / REVIEW (needs human/owner evidence). |
 
 ## Reviewing an implementation commit

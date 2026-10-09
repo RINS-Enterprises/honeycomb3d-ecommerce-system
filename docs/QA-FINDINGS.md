@@ -3,13 +3,13 @@
 Owner: independent recovery QA (Claude). Acceptance criteria: [`QA-ACCEPTANCE.md`](QA-ACCEPTANCE.md).
 Last updated: **2026-10-09**.
 
-> **Headline (2026-10-09):** the implementation is `codex/storefront-mvp` in **this** repository. Three commits have been reviewed
-> (§7). **Current head `2260c7f913a340914a74249cefc8f668b962160c`:** install, test (11), build, check, audit and secret scan all
-> pass. QA domain contract tests 13/13. Chromium browser smoke 88/88 (preview) and 89/89 (live fixture with test-only data).
-> axe-core WCAG audit: 0 serious/critical. Earlier implementation findings I-1…I-7 are **fixed and re-tested**.
-> Open: I-9, I-10, I-13, I-14 (Low), I-11, I-12 (Info).
-> **QA sign-off (§7a):** code approved for a *private preview*. **Public launch not approved**, for data reasons, not code:
-> owner decisions D-1…D-9 (§5), original photos, a pricing decision and a verified WhatsApp number are still missing.
+> **Headline (2026-10-09, Run 4):** current head **`8d13b910bc4ff156a2ffd049cd4cc381f19828ad`**. Build, tests, check, audit and
+> secret scan pass. Domain contract tests 13/13. Browser smoke 88/88 and 89/89. axe: 0 violations. I-1…I-14 are fixed except I-12 (Info).
+> **New from the asset audit ([`ASSET-AUDIT.md`](ASSET-AUDIT.md)):** GPT's 8 imported files are byte-identical to the Drive files they cite, but
+> **4 of the 7 product images are Google-AI-generated (C2PA + SynthID)** (I-15, High). Pages also ship **4.7–7.9 MB of images**
+> with no responsive sizes (I-16, High) and a 16.6 MP logo (I-17, Medium).
+> **Sign-off (§7a):** code is OK for a *private* preview; the **image set must be corrected before any wider preview or launch**. Public launch is still
+> blocked by owner decisions D-1…D-9.
 
 Finding labels: **Tested failure** = reproduced by running something. **Inspection** = found by reading
 code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
@@ -26,6 +26,8 @@ code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
 | 2026-10-08 | `https://honeycomb3d.store` | — | HTTPS GET | Blocked by this environment's egress policy (proxy 403). **Live status unknown**, not "down". |
 | 2026-10-08 | Rebuild ZIP | — | Filesystem search for `*.zip` / recovery files | Not present. |
 | 2026-10-09 | `honeycomb3d-ecommerce-system` `codex/storefront-mvp` | `f801d314663470d5d4539f594e80acc0d63418e8` | Read `docs/RECOVERY-AND-BUILD-BRIEF.md` (E-7), `docs/BUILD-STATUS.md`, all source and data. `review-commit.sh` in a separate checkout. QA domain contract tests. Secret scan. | See §7 Run 1. |
+| 2026-10-09 | `codex/storefront-mvp` | `8d13b910bc4ff156a2ffd049cd4cc381f19828ad` | Run 4: review-commit, domain tests, smoke (preview/live), edge probes, axe, **image audit**; Drive asset provenance (35 files downloaded to QA scratch, hashed, C2PA-scanned, visually inspected) | See §7 Run 4 and `ASSET-AUDIT.md` |
+| 2026-10-09 | Owner Drive folder `HoneyComb` (`1BAhuPuAvAvgschy6bv-qW1YcBd74zaId`) | — | Read-only Drive connector: listing, metadata, downloads to scratch | Access works; nothing changed in Drive |
 | 2026-10-09 | Namecheap account (read-only connector) | — | Domain list; DNS host records for `honeycomb3d.store` | E-8. No changes made. |
 | 2026-10-09 | `https://honeycomb3d.store`, `ingress-cinna.easywp.com`, web archive | — | Fetch via a second tool | Inconclusive: that tool's DNS also failed for `www.namecheap.com`, so the failure says nothing about the site. |
 
@@ -311,7 +313,7 @@ Checkpoint 2: pages, request cart, custom enquiry, CI workflow, `vercel.json`.
   "Price on enquiry" is correct, and an "Add to cart" label where "Add to request cart" is used. The harness is fixed. Not app defects.
 - GitHub Actions on this commit: **failed** in GPT's own Chromium test (ambiguous category label, per BUILD-STATUS). Fixed in `09b5cd1`.
 
-### Run 3: 2026-10-09 · `codex/storefront-mvp` @ `2260c7f913a340914a74249cefc8f668b962160c` (current head)
+### Run 3: 2026-10-09 · `codex/storefront-mvp` @ `2260c7f913a340914a74249cefc8f668b962160c` 
 
 Includes `09b5cd1` ("Address Claude QA findings…"). GitHub Actions: success on both commits (runs 3–6).
 
@@ -377,9 +379,78 @@ New findings at `2260c7f` (all Low/Info; none block the preview):
 Deployed headers: `vercel.json` sets CSP, nosniff and Referrer-Policy, but nothing is deployed. Only the local `serve.mjs` headers were tested.
 
 
-## 7a. QA sign-off and launch readiness (2026-10-09, head `2260c7f`)
+### Run 4: 2026-10-09 · `codex/storefront-mvp` @ `8d13b910bc4ff156a2ffd049cd4cc381f19828ad` (current head)
 
-**Code: approved for a private preview deployment.** No open Blocker, High or Medium implementation finding. Build,
+Commits since Run 3: `8255a96` (branding and 7 product images), `94291ad` (QA fixes), `0f8b5fb`, `8532af3` (browser-compatible logo), `8d13b91`.
+Reviewed in a separate checkout. Asset provenance was checked against the owner's Drive; full detail is in **[`ASSET-AUDIT.md`](ASSET-AUDIT.md)**.
+
+| Check | Result |
+|---|---|
+| `npm ci` / `test` / `build` / `check` / `npm audit` / secret scan | all exit 0 |
+| QA domain contract tests | 13/13 |
+| Browser smoke: preview / live fixture | 88/88 PASS / 89/89 PASS |
+| Edge probes | all PASS (after making my probe heading-level agnostic; GPT changed card titles from `h3`) |
+| axe-core, 20 audits | **0 violations** (I-13 and I-14 fixed) |
+| Image audit (`qa/e2e/image-audit.mjs`, 9 pages × mobile DPR 3 / desktop DPR 1) | Decode, orientation, crops and alt text: PASS. Size and weight: **FAIL** (I-16, I-17) |
+| Imported assets vs Drive (SHA-256) | **8/8 byte-identical** to the cited Drive file IDs. The logo crop is pixel-identical. |
+| Provenance metadata | **4/7 product images carry Google Generative AI C2PA manifests + SynthID** (I-15) |
+
+Earlier findings re-tested at `8d13b91`:
+
+| ID | Status |
+|---|---|
+| I-9 duplicate card links | **Fixed**: the image link has `tabindex="-1"` and `aria-hidden`; 7 tab stops for 7 cards |
+| I-10 WhatsApp wording when off | **Fixed**: the sentence renders only when a WhatsApp URL exists |
+| I-11 internal fields in public JSON | **Fixed**: `copyStatus` and `imageSource` are stripped from `dist/data/products.json` |
+| I-12 contact page | Still deferred (Info) |
+| I-13 banner outside landmark / I-14 heading order | **Fixed** (axe: 0 violations) |
+
+#### I-15 · High · Tested (metadata) + Visual · Four "product photographs" are Google-AI-generated images
+- **Reviewed commit:** `8d13b91`.
+- **Reproduction:** Scan `public/assets/{kurama,classic-kunai,minato-kunai,light-fury}.jpg` for `c2pa.claim`, `Created by Google Generative AI` and `SynthID` (see `ASSET-AUDIT.md` §1). Compare `classic-kunai.jpg` with Drive `RAV_4322.jpg` (`1mx3YRM6o4CrGZtIl6TX2ZqnG8cacFDQo`).
+- **Expected:** The brief says "Use the user's original product photos. Preserve shape, color, proportions and visible 3D-print texture. Do not generate substitute product images." Provenance should state when an image is generated.
+- **Actual:** All four carry signed C2PA manifests ("Created by Google Generative AI", IPTC `trainedAlgorithmicMedia`, "Applied imperceptible SynthID watermark"); `kurama.jpg` has 4 chained generations. Visual comparison shows backgrounds replaced, a hand regenerated (Minato), handle engraving added, and print layer lines smoothed. GPT's commit `8255a96` calls them "seven product photographs", and `ASSET-PROVENANCE.md` does not mention AI. GPT did not generate them; they were already AI outputs in Drive.
+- **Evidence:** `ASSET-AUDIT.md` §2–3; contact sheets in the QA scratch directory (not committed).
+- **Recommended fix:**
+  1. Replace Classic Kunai with the real `RAV_4322.jpg`, after the owner copies it into the HoneyComb folder.
+  2. Replace Minato with the real photo of the variant that is actually sold.
+  3. Use the placeholder for Kurama (no real photo exists) and for Light Fury until `Variation 1 (n)` provenance is confirmed.
+  4. Add an "AI-generated: yes/no" field to `ASSET-PROVENANCE.md`.
+  - **Owner decision:** if the owner explicitly accepts AI imagery, label it, because the embedded C2PA/SynthID is publicly detectable.
+
+#### I-16 · High (performance) · Tested · 4.7–7.9 MB of images per page, no responsive variants
+- **Reviewed commit:** `8d13b91`.
+- **Reproduction:** `BASE_URL=… node qa/e2e/image-audit.mjs`.
+- **Expected:** Images sized to their slot (AC-IMG-2/3), at most ~1.5 MB of images per page on mobile.
+- **Actual:**
+  - `/shop/` loads 7.87 MB of images on both mobile and desktop; PDPs load 4.65–6.75 MB.
+  - Cards render at ~282 CSS px but receive `night-fury.jpg` (4000×3000, 2.41 MB) and `baymax.png` (1536×2048 PNG, 3.23 MB).
+  - There is no `srcset`/`sizes` and no WebP/AVIF.
+- **Evidence:** `qa/results/8d13b91…/images/summary.md` ("Image bytes per page").
+- **Recommended fix:** Generate resized derivatives at build time (e.g. 480/960/1440 px JPEG or WebP, with EXIF orientation applied and metadata stripped). Serve them with `srcset` and `sizes`. Keep the originals out of `dist/`, and record each derivative's source SHA-256 and parameters in `ASSET-PROVENANCE.md`. Any new image dependency is a GPT decision; Node-only options are possible.
+
+#### I-17 · Medium · Tested · 16.6-megapixel logo for a 220×66 slot on every page
+- **Reproduction:** Image audit, any page.
+- **Actual:** `honeycomb-logo-web.png` is 7435×2229 (253 KB transferred, ~66 MB decoded RGBA), displayed at 220×66 CSS px: 34× the needed resolution at DPR 1 and 11× at DPR 3. The same file appears in the header and footer. Chromium already failed to decode the 69 MP original in GPT's CI (`ASSET-PROVENANCE.md`), so low-memory phones are at risk with this one too.
+- **Recommended fix:** Use the **vector** brand source (`HONEYCOMB Logo in White Background.pdf` `1D_VZuA8Lshe78K_Gz1qBmpYKS9tuLG8s`, 22 KB, or the `.ai`) exported as SVG, or a 660×198 PNG. Record the derivation.
+
+#### I-18 · Low · Inspection · `ASSET-PROVENANCE.md` source titles don't match Drive
+- Six entries append `.jpg` to titles that end in `.jpeg` on Drive. For example, the record says `Pro-1_202604130244.jpeg.jpg`, but the Drive title is `Pro-1_202604130244.jpeg`. The Light Fury title has two spaces (`Product Photo  (5).jpeg`). The IDs are correct, so this is a cosmetic accuracy fix.
+
+#### I-19 · Low · Visual · Catalogue imagery is inconsistent and two images under-represent the product
+- **Actual:** Dark AI studio renders sit next to real grass-mat and blue-mat phone photos. In `hidden-leaf.jpg` (960×1280) the keychain occupies a small part of the frame. `night-fury.jpg` shows a batch of about 10 units for a single-unit listing.
+- **Recommended fix:** Use the consistent light-grey professional `RAV_*` shoot where available, and a cropped single unit where possible (`ASSET-AUDIT.md` §3).
+
+#### I-20 · Info · `width`/`height` attributes are 640×640 for 3:4 images
+- No layout shift, because the CSS box has a fixed `aspect-ratio` with `object-fit: contain`. Matching attributes would still help if the CSS changes.
+
+**Not verified at `8d13b91`:** real-device image decode on low-memory phones. A throttled-network LCP. Firefox and Safari. Cryptographic C2PA validation (markers were detected by content only).
+
+## 7a. QA sign-off and launch readiness (2026-10-09, updated for head `8d13b91`)
+
+**Update for `8d13b91`:** the code itself remains sound, but **I-15 (AI product images) and I-16 (image weight) are open High findings**. The site is fine for a *private* owner review. It is **not** approved for any wider preview or launch until the image set follows the brief and is resized. I-17 (logo) should ride the same change.
+
+**Previous sign-off (`2260c7f`): code approved for a private preview deployment.** No open Blocker, High or Medium implementation finding. Build,
 tests, browser flows, failure states, security headers (local server) and an automated WCAG audit all pass. Open items
 I-9, I-10, I-13, I-14 (Low) and I-11, I-12 (Info) can ride the next change.
 
@@ -390,7 +461,7 @@ I-9, I-10, I-13, I-14 (Low) and I-11, I-12 (Info) can ride the next change.
 | 1 | **Secure the old site before touching DNS.** Open the EasyWP dashboard or ask Namecheap support for a files/DB backup. The apex still points at EasyWP. Don't pay for reactivation until a backup is confirmed available. | Original photos, product data, policy text, prices | F-15, E-8, brief task 3 |
 | 2 | **Confirm the WhatsApp number** (`94703009064`?) and who answers it. Then GPT sets `whatsappNumber` and `whatsappVerified: true`. Test on a real phone without sending an order. | Any order request | D-2, F-11, AC-WA-6 |
 | 3 | **Choose prices or a quote-only policy** per product. The evidence conflicts (§3.1), so nothing can be copied. Leaving prices `null` with "Price on enquiry" is a valid launch choice. | Cart totals | D-3, F-02 |
-| 4 | **Supply original product photos** (no screenshot crops, no AI images) and approve or replace the draft descriptions (`copyStatus`). | `approved: true`, live mode | D-9, F-07, I-7 |
+| 4 | **Choose real product photos** per `ASSET-AUDIT.md` §3, and copy `RAV_4322.jpg` and the other chosen originals into the HoneyComb folder. Confirm the photographer and Canva rights. Say which Minato, Hidden Leaf and Light Fury variants are current. Provide a real Kurama photo. Approve or replace the draft descriptions. | `approved: true`, live mode | D-9, F-07, I-7, I-15 |
 | 5 | **Decide payment and delivery wording** (COD? bank transfer? courier fee, typical days). The site currently promises none, which is safe. | Quote conversations, policy pages | D-1, D-4, F-03, F-08 |
 | 6 | **Provide policy text** (shipping, returns, terms). The current `/privacy/` page accurately describes the app's own data handling, but the owner should approve it. | Footer policy links | D-5, F-10 |
 | 7 | **IP stance** on franchise-character products. | Catalogue scope | D-7, F-06 |
@@ -414,7 +485,9 @@ WhatsApp check with the confirmed number (open it, don't send) before switching 
 | Browser harness fixes (2026-10-09) | After the first run on real pages | Accepts "Price on enquiry" and "Add to request cart". Counts *visible* cards for filters. Edits quantity through the number input. Adds `QA_LIVE_FIXTURE=1`. Re-validated on the defect-seeded fixture: still 15 FAIL, all planted defects caught. |
 | `review-commit.sh` fixes (2026-10-09) | — | An abbreviated SHA had silently fallen back to `main`; it now resolves exactly or refuses. `check` now runs after `build`, as documented. |
 | axe-core audit (2026-10-09) | `qa/e2e/axe-audit.mjs`, with axe-core 4.10.3 installed in a QA scratch directory (no app dependency) | `2260c7f`: 20 audits, 0 serious/critical, 22 moderate (I-13, I-14). Its first run reported 20 ERRORs, not passes, while CSP blocked injection. |
-| Domain contract tests (new, 2026-10-09) | `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'` | `f801d31`: 10/13. `5d1c6a4`: 11/13. `2260c7f`: 13/13. Without `DOMAIN_DIR` they skip. |
+| Image audit (new, 2026-10-09) | `qa/e2e/image-audit.mjs` | `8d13b91`: decode, orientation and alt PASS; weight/oversampling FAIL (I-16, I-17). An early run mislabelled page totals because of a field-name clash in my script; fixed. |
+| Drive asset provenance (2026-10-09) | Drive connector downloads → `decode.py`/`prov.py` in QA scratch (not committed) | 35 files hashed and classified. 8/8 GPT assets byte-identical; 4/7 product images C2PA AI. |
+| Domain contract tests (new, 2026-10-09) | `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'` | `f801d31`: 10/13. `5d1c6a4`: 11/13. `2260c7f` and `8d13b91`: 13/13. Without `DOMAIN_DIR` they skip. |
 
 The fixture rows validate the **tools only**. §7 holds the results against the storefront.
 
@@ -427,3 +500,4 @@ The fixture rows validate the **tools only**. §7 holds the results against the 
 5. Live site and EasyWP state could not be fetched from this environment. Baserow data not inspected.
 6. The brief is second-hand (chat retrieval). Its historical claims are unverified.
 7. Screenshot capture date for the April evidence is inferred, not recorded.
+8. Asset audit: not every Drive file was opened (videos, ZIPs, `06 Product Records and Pricing`, deep Listing Kit and Product Studio pages). C2PA markers were detected by content, not cryptographically validated. No real-device low-memory decode test and no throttled-network LCP run. See `ASSET-AUDIT.md` §8.

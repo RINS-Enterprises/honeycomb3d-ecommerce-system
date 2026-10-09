@@ -113,6 +113,17 @@ SMTP, Trustpilot/CusRev. None of these is assumed to work (QA-FINDINGS F-09, §4
 | AC-PREV-4 | Live mode hides unapproved products everywhere, including stale cart lines (QA-FINDINGS I-6). |
 | AC-ENQ-1 | The custom-print enquiry collects only what is needed. It hands off via the same verified channel, or says the channel isn't available yet. It never claims a request was "received" unless a real backend confirms it. Free text is length-limited and never rendered as HTML. |
 
+### 3.5b Product images and assets (added 2026-10-09)
+
+| ID | Criterion |
+|---|---|
+| AC-IMG-1 | Every product image is the owner's **real photograph** of that product. No AI-generated or AI-edited substitutes, per the brief: no C2PA "Generative AI" or SynthID markers. Any crop or resize is recorded in `ASSET-PROVENANCE.md` with source Drive ID, source SHA-256 and parameters. A product without a real photo shows the neutral placeholder. |
+| AC-IMG-2 | Served images are sized for their slot: at most 3× the rendered CSS size at the device's pixel ratio. Product images have `srcset`/`sizes`. No single image over 500 KB, and at most 1.5 MB of images per page on mobile. |
+| AC-IMG-3 | The brand logo is an SVG or a ≤ 3× raster (e.g. ≤ 660×198 for a 220×66 slot), derived from the vector source in the Brand Kit. |
+| AC-IMG-4 | Every image decodes in Chromium (and Firefox/Safari before launch), and EXIF orientation is applied or normalised. Product boxes don't crop the product (`contain`, or a checked crop). |
+| AC-IMG-5 | Alt text describes the actual pictured item accurately. A decorative image uses `alt=""`. |
+| AC-IMG-6 | Image rights are confirmed for each image: owner-shot, a photographer licence, or the Canva account. Images never imply price, stock or availability. |
+
 ### 3.6 Failure states
 
 | ID | Criterion |

@@ -1,0 +1,7 @@
+reviewed_ref: 8d13b910bc4ff156a2ffd049cd4cc381f19828ad
+reviewed_sha: 8d13b910bc4ff156a2ffd049cd4cc381f19828ad
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-09T09:57:44Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-09T13:50:10+05:30
+subject: Record the verified storefront preview and preserve the recovery handoff
