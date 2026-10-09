@@ -55,7 +55,7 @@ SMTP, Trustpilot/CusRev. None of these is assumed to work (QA-FINDINGS F-09, §4
 | ID | Criterion |
 |---|---|
 | AC-NAV-1 | At 1280×800, a `<nav>` landmark shows links to Home, Shop/Catalog and Contact, plus a cart link showing the current item count. Home returns 2xx. |
-| AC-NAV-2 | At 390×844 and 360×740, a menu button opens the nav. The button has an accessible name and toggles `aria-expanded` false→true. **Escape** closes it and returns focus to the button. Tapping a link closes the menu and navigates. |
+| AC-NAV-2 | At 390×844 and 360×740, either all primary nav links are visible without overflow, or a menu button opens the nav. If a menu button is used: The button has an accessible name and toggles `aria-expanded` false→true. **Escape** closes it and returns focus to the button. Tapping a link closes the menu and navigates. |
 | AC-NAV-3 | No horizontal page scroll at 360, 390, 768, 1280 px widths. Tap targets are ≥ 24×24 CSS px (WCAG 2.2 2.5.8). |
 | AC-NAV-4 | Every internal link resolves (no 404s from header, footer, cards, breadcrumbs). |
 

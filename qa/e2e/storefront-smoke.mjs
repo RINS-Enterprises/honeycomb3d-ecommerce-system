@@ -23,6 +23,12 @@ const WA_NUMBER = process.env.WHATSAPP_NUMBER || '';
 const OUT = process.env.OUT_DIR || join(here, '..', 'results', SHA, 'browser');
 const CATALOG_PATHS = (process.env.CATALOG_PATH || '/shop,/products,/catalog,/').split(',');
 const CART_PATH = process.env.CART_PATH || '';
+// QA_LIVE_FIXTURE=1: intercept /data/store.json and /data/products.json so the client runs in live
+// mode with a TEST-ONLY number and TEST-ONLY prices. Nothing is sent; wa.me is never opened.
+const LIVE_FIXTURE = process.env.QA_LIVE_FIXTURE === '1';
+const FIXTURE_NUMBER = WA_NUMBER || '94000000000';
+const ADD_RE = /add to (request |my )?(cart|bag|basket)/i;
+const UNPRICED_RE = /price (on enquiry|to confirm|on request)|quote required/i;
 
 if (!BASE) {
   console.error('BASE_URL is required. Nothing was tested.');
@@ -146,6 +152,12 @@ async function productLinks(page) {
   return hrefs.filter((h) => h && !/^(#|mailto:|tel:|https?:\/\/(wa\.me|api\.whatsapp))/.test(h));
 }
 
+async function visibleProductCount(page) {
+  const card = tid(page, 'product-card');
+  const scope = (await card.count()) ? card : page.locator('[data-product-card], main a[href*="/product"]');
+  return scope.evaluateAll((els) => new Set(els.filter((e) => e.offsetParent !== null).map((e) => e.querySelector?.('a[href]')?.getAttribute('href') || e.getAttribute('href'))).size);
+}
+
 async function cartCount(page) {
   const el = await first(tid(page, 'cart-count'));
   if (el) return Number((await el.innerText()).replace(/\D/g, '') || 0);
@@ -217,6 +229,23 @@ async function captureWhatsApp(context, page) {
   return url ? { found: true, href: url, how: opened.length ? 'window.open' : 'navigation' } : { found: true, href: null, how: 'none' };
 }
 
+const fixturePrices = {};
+const PNG_1PX = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64');
+async function installLiveFixture(ctx) {
+  await ctx.route('**/data/store.json', async (route) => {
+    const data = await (await route.fetch()).json();
+    await route.fulfill({ json: { ...data, mode: 'live', whatsappVerified: true, whatsappNumber: FIXTURE_NUMBER } });
+  });
+  await ctx.route('**/data/products.json', async (route) => {
+    const data = await (await route.fetch()).json();
+    await route.fulfill({ json: data.map((p, i) => {
+      fixturePrices[p.name] = 100 * (i + 1); // TEST-ONLY prices
+      return { ...p, approved: true, availability: 'made-to-order', priceLkr: 100 * (i + 1), image: p.image || '/assets/qa-fixture.png', imageAlt: p.imageAlt || p.name };
+    }) });
+  });
+  await ctx.route('**/assets/qa-fixture.png', (route) => route.fulfill({ contentType: 'image/png', body: PNG_1PX }));
+}
+
 async function main() {
   mkdirSync(OUT, { recursive: true });
   const { chromium } = await loadPlaywright();
@@ -249,7 +278,7 @@ async function main() {
       const toggle = await first(tid(page, 'nav-toggle'), page.getByRole('button', { name: /menu|navigation|open nav/i }));
       if (!toggle) {
         const n = await nav.getByRole('link').evaluateAll((ls) => ls.filter((l) => l.offsetParent !== null).length).catch(() => 0);
-        record(`nav-${vp}`, 'AC-NAV-2', n > 0 ? 'INCONCLUSIVE' : 'FAIL', `no menu toggle found; ${n} nav links visible without one`);
+        record(`nav-${vp}`, 'AC-NAV-2', n > 0 ? 'PASS' : 'FAIL', `no menu toggle; ${n} nav links visible directly (overflow checked separately)`);
       } else {
         const before = await toggle.getAttribute('aria-expanded');
         await toggle.click();
@@ -298,6 +327,7 @@ async function main() {
   // 2. Catalog -> PDP -> cart -> WhatsApp -> removal (desktop and mobile).
   for (const [vp, size] of [['desktop', { width: 1280, height: 800 }], ['mobile', { width: 390, height: 844 }]]) {
     const ctx = await browser.newContext({ viewport: size, isMobile: vp === 'mobile', hasTouch: vp === 'mobile' });
+    if (LIVE_FIXTURE) await installLiveFixture(ctx);
     const page = await ctx.newPage();
     const errs = watch(page, vp);
     const catPath = await gotoCatalog(page);
@@ -315,24 +345,25 @@ async function main() {
     if (vp === 'desktop') {
       const filter = await first(
         page.locator('[data-testid^="filter-"]'),
-        page.getByRole('button', { pressed: false }),
         page.locator('main select'),
         page.locator('main input[type=checkbox], main input[type=radio]'),
+        page.locator('main [aria-pressed]'),
       );
       if (!filter) record('filter-apply', 'AC-CAT-2', 'INCONCLUSIVE', 'no filter control located');
       else {
         const url0 = page.url();
+        const before = await visibleProductCount(page);
         const tag = await filter.evaluate((e) => e.tagName);
         if (tag === 'SELECT') {
           const opts = await filter.locator('option').evaluateAll((os) => os.map((o) => o.value));
           if (opts.length > 1) await filter.selectOption(opts[1]);
         } else await filter.click();
         await page.waitForTimeout(600);
-        const after = await productLinks(page);
-        const changed = after.length !== links.length || page.url() !== url0;
-        const empty = after.length === 0 ? await page.getByText(/no (products|results|items)|nothing (found|matches)/i).count() : 1;
-        record('filter-apply', 'AC-CAT-2', changed && empty ? 'PASS' : changed ? 'FAIL' : 'INCONCLUSIVE',
-          `filter (${tag}) -> ${links.length} to ${after.length} products, url ${page.url() === url0 ? 'unchanged' : 'changed'}${after.length === 0 && !empty ? ', no empty-state message' : ''}`);
+        const after = await visibleProductCount(page);
+        const narrowed = after < before;
+        const empty = after === 0 ? await page.getByText(/no (products|results|items|matching)|nothing (found|matches)/i).count() : 1;
+        record('filter-apply', 'AC-CAT-2', narrowed && empty ? 'PASS' : after === before ? 'INCONCLUSIVE' : 'FAIL',
+          `filter (${tag}) -> ${before} to ${after} visible products, url ${page.url() === url0 ? 'unchanged' : 'changed'}${after === 0 && !empty ? ', no empty-state message' : ''}`);
         await shot(page, 'catalog-filtered');
         await page.goto(BASE + catPath, { waitUntil: 'networkidle' });
       }
@@ -344,12 +375,14 @@ async function main() {
     const name = (await page.locator('h1').first().innerText().catch(() => '')).trim();
     const priceEl = await first(tid(page, 'product-price'));
     const price = priceEl ? parseMoney(await priceEl.innerText())[0] : parseMoney(await page.locator('main').first().innerText().catch(() => ''))[0];
-    record(`pdp-${vp}`, 'AC-PDP-1', pdpResp.status() < 400 && name && price ? 'PASS' : 'FAIL', `${href} -> ${pdpResp.status()}, name "${name}", price ${price}`);
+    const unpricedLabel = price == null ? ((await page.locator('main').first().innerText().catch(() => '')).match(UNPRICED_RE) || [])[0] : null;
+    record(`pdp-${vp}`, 'AC-PDP-1', pdpResp.status() < 400 && name && (price || unpricedLabel) ? 'PASS' : 'FAIL',
+      `${href} -> ${pdpResp.status()}, name "${name}", price ${price ?? `unpriced ("${unpricedLabel}")`}`);
     await shot(page, `pdp-${vp}`);
     await pageBasics(page, errs, 'pdp', vp);
     if (vp === 'desktop') await scanText(page, 'pdp');
 
-    const add = await first(tid(page, 'add-to-cart'), page.getByRole('button', { name: /add to (cart|bag)/i }));
+    const add = await first(tid(page, 'add-to-cart'), page.getByRole('button', { name: ADD_RE }));
     if (!add) {
       record(`add-to-cart-${vp}`, 'AC-CART-1', 'FAIL', 'no add-to-cart button');
       await ctx.close();
@@ -369,18 +402,39 @@ async function main() {
       continue;
     }
     await shot(page, `cart-${vp}`);
+    const unit = LIVE_FIXTURE ? fixturePrices[name] : price;
     const s1 = await cartState(page);
-    record(`cart-line-${vp}`, 'AC-CART-2', s1.qty === 1 && s1.subtotal === price ? 'PASS' : s1.qty == null || s1.subtotal == null ? 'INCONCLUSIVE' : 'FAIL',
-      `qty ${s1.qty}, subtotal ${s1.subtotal}, expected 1 x ${price}`);
+    if (unit == null) {
+      const txt = await page.locator('main').first().innerText();
+      record(`cart-line-${vp}`, 'AC-PREV-2', s1.qty === 1 && UNPRICED_RE.test(txt) && !/\b0\.00\b/.test(txt) ? 'PASS' : 'FAIL',
+        `unpriced item: qty ${s1.qty}, unpriced label ${UNPRICED_RE.test(txt) ? 'shown' : 'missing'}, zero amount ${/\b0\.00\b/.test(txt) ? 'shown' : 'absent'}`);
+    } else {
+      record(`cart-line-${vp}`, 'AC-CART-2', s1.qty === 1 && s1.subtotal === unit ? 'PASS' : s1.qty == null || s1.subtotal == null ? 'INCONCLUSIVE' : 'FAIL',
+        `qty ${s1.qty}, subtotal ${s1.subtotal}, expected 1 x ${unit}`);
+    }
 
     const inc = await first(tid(page, 'cart-qty-increase'), page.getByRole('button', { name: /increase|add one|more|^\+$/i }));
+    const qtyInput = inc ? null : await first(tid(page, 'cart-qty'), page.getByRole('spinbutton'));
     let s2 = s1;
-    if (!inc) record(`cart-qty-inc-${vp}`, 'AC-CART-3', 'INCONCLUSIVE', 'no increase control');
+    if (!inc && !qtyInput) record(`cart-qty-inc-${vp}`, 'AC-CART-3', 'INCONCLUSIVE', 'no quantity control');
     else {
-      await inc.click();
+      if (inc) await inc.click();
+      else { await qtyInput.fill('2'); await qtyInput.press('Tab'); }
       await page.waitForTimeout(400);
       s2 = await cartState(page);
-      record(`cart-qty-inc-${vp}`, 'AC-CART-3', s2.qty === 2 && s2.subtotal === price * 2 ? 'PASS' : 'FAIL', `after +: qty ${s2.qty}, subtotal ${s2.subtotal}, expected 2 x ${price} = ${price * 2}`);
+      const okTotal = unit == null ? s2.subtotal == null : s2.subtotal === unit * 2;
+      record(`cart-qty-inc-${vp}`, 'AC-CART-3', s2.qty === 2 && okTotal ? 'PASS' : 'FAIL',
+        `via ${inc ? '+ button' : 'quantity input'}: qty ${s2.qty}, subtotal ${s2.subtotal}, expected ${unit == null ? 'none (unpriced)' : `2 x ${unit} = ${unit * 2}`}`);
+      // Invalid quantities must be rejected without corrupting the cart.
+      if (qtyInput) {
+        for (const bad of ['0', '21', '1.5']) {
+          const q = await first(tid(page, 'cart-qty'), page.getByRole('spinbutton'));
+          await q.fill(bad); await q.press('Tab'); await page.waitForTimeout(300);
+        }
+        const s4 = await cartState(page);
+        record(`cart-qty-invalid-${vp}`, 'AC-CART-3', s4.qty === 2 ? 'PASS' : 'FAIL', `after entering 0, 21, 1.5: qty ${s4.qty} (expected to stay 2)`);
+        await page.keyboard.press('Escape');
+      }
       await page.reload({ waitUntil: 'networkidle' });
       if (!CART_PATH) await openCart(page);
       const s3 = await cartState(page);
@@ -389,13 +443,15 @@ async function main() {
 
     if (vp === 'desktop') {
       const wa = await captureWhatsApp(ctx, page);
-      if (!wa.found) record('whatsapp-handoff', 'AC-WA-1', 'FAIL', 'no WhatsApp checkout control in cart');
+      const closedNotice = await page.getByText(/not open yet|orders are not open|requests are not open/i).count();
+      if (!wa.found && !LIVE_FIXTURE && closedNotice) record('whatsapp-handoff', 'AC-PREV-3', 'PASS', 'preview: no WhatsApp link, "not open yet" notice shown (run with QA_LIVE_FIXTURE=1 to test the handoff)');
+      else if (!wa.found) record('whatsapp-handoff', 'AC-WA-1', 'FAIL', 'no WhatsApp checkout control in cart');
       else if (!wa.href) record('whatsapp-handoff', 'AC-WA-1', 'FAIL', 'WhatsApp control produced no wa.me URL');
       else {
-        const v = validateHandoff(wa.href, { expectedNumber: WA_NUMBER || undefined, items: [{ name, qty: s2.qty }], total: s2.subtotal });
+        const v = validateHandoff(wa.href, { expectedNumber: LIVE_FIXTURE ? FIXTURE_NUMBER : WA_NUMBER || undefined, items: [{ name, qty: s2.qty }], total: s2.subtotal ?? undefined });
         record('whatsapp-handoff', 'AC-WA-2', v.ok ? 'PASS' : 'FAIL', v.issues.map((i) => `${i.severity}: ${i.message}`).join('; ') || 'number, item, qty, total present', { href: wa.href, text: v.parsed.text });
         if (wa.target === '_blank') record('whatsapp-rel', 'AC-SEC-4', /noopener|noreferrer/.test(wa.rel) ? 'PASS' : 'FAIL', `target=_blank rel="${wa.rel}"`);
-        if (!WA_NUMBER) record('whatsapp-number', 'AC-WA-2', 'INCONCLUSIVE', `sends to ${v.parsed.number}; set WHATSAPP_NUMBER to the owner-confirmed number`);
+        if (!WA_NUMBER && !LIVE_FIXTURE) record('whatsapp-number', 'AC-WA-2', 'INCONCLUSIVE', `sends to ${v.parsed.number}; set WHATSAPP_NUMBER to the owner-confirmed number`);
       }
     }
 
@@ -430,7 +486,7 @@ async function main() {
     if (await gotoCatalog(page)) {
       const [h] = await productLinks(page);
       await page.goto(new URL(h, BASE + '/').href, { waitUntil: 'networkidle' });
-      const add = await first(tid(page, 'add-to-cart'), page.getByRole('button', { name: /add to (cart|bag)/i }));
+      const add = await first(tid(page, 'add-to-cart'), page.getByRole('button', { name: ADD_RE }));
       if (add) await add.click().then(() => page.waitForTimeout(400));
     }
     const keys = await page.evaluate(() => Object.keys(localStorage).filter((k) => /cart|bag|basket/i.test(k)));

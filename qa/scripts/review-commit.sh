@@ -16,8 +16,18 @@ mkdir -p "$work"
 if [[ ! -d "$mirror/.git" ]]; then
   git clone --no-checkout --filter=blob:none "$src" "$mirror" || exit 1
 fi
-git -C "$mirror" fetch --no-tags origin "$ref" || git -C "$mirror" fetch --no-tags origin || exit 1
-sha=$(git -C "$mirror" rev-parse --verify "FETCH_HEAD^{commit}" 2>/dev/null || git -C "$mirror" rev-parse --verify "$ref^{commit}") || exit 1
+# Fetch the ref itself if the server allows (branch name or full SHA); otherwise fetch all
+# branches and resolve locally. Never fall back to whatever FETCH_HEAD happens to hold.
+if git -C "$mirror" fetch --no-tags origin "$ref" 2>/dev/null; then
+  sha=$(git -C "$mirror" rev-parse --verify "FETCH_HEAD^{commit}") || exit 1
+else
+  git -C "$mirror" fetch --no-tags origin '+refs/heads/*:refs/remotes/origin/*' || exit 1
+  sha=$(git -C "$mirror" rev-parse --verify --quiet "$ref^{commit}" || git -C "$mirror" rev-parse --verify --quiet "origin/$ref^{commit}") \
+    || { echo "cannot resolve ref '$ref'" >&2; exit 1; }
+fi
+if [[ "$ref" =~ ^[0-9a-f]{7,40}$ && "$sha" != "$ref"* ]]; then
+  echo "resolved $ref to $sha - refusing mismatched review" >&2; exit 1
+fi
 co="$work/review-${sha:0:12}"
 [[ -d "$co" ]] || git -C "$mirror" worktree add --detach "$co" "$sha" || exit 1
 
@@ -51,7 +61,8 @@ else
   else pm=npm; echo "WARNING: no lockfile committed" | tee -a "$summary"; run install npm install --no-audit --no-fund
   fi
   # Only the scripts the project itself defines; record absent ones explicitly.
-  for s in lint typecheck check test build test:e2e; do
+  # Same order as the documented run sequence: tests, build, then checks over the build output.
+  for s in lint typecheck test build check test:e2e; do
     if node -e "process.exit(require('$co/package.json').scripts?.['$s']?0:1)"; then
       run "${s//:/-}" "$pm" run "$s"
     else

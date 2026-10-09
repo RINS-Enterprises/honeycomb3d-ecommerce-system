@@ -3,12 +3,12 @@
 Owner: independent recovery QA (Claude). Acceptance criteria: [`QA-ACCEPTANCE.md`](QA-ACCEPTANCE.md).
 Last updated: **2026-10-09**.
 
-> **Headline (2026-10-09):** the implementation branch is `codex/storefront-mvp` in **this** repository
-> (`honeycomb3d-website` was only proposed in the brief and never created, see F-01). Run 1 reviewed
-> `f801d314663470d5d4539f594e80acc0d63418e8` (checkpoint 1: data model and cart/WhatsApp logic, **no pages yet**).
-> Run 1 result: `npm run build` and `npm run check` **fail**. `npm test` passes with **zero tests**. QA domain contract
-> tests: 10 pass, 3 fail. See §7. No browser test has been possible, because nothing renders yet.
-> §2–6 remain the requirements and evidence audit (inspection).
+> **Headline (2026-10-09):** the implementation is `codex/storefront-mvp` in **this** repository. Three commits have been reviewed
+> (§7). **Current head `2260c7f913a340914a74249cefc8f668b962160c`:** install, test (11), build, check, audit and secret scan all
+> pass. QA domain contract tests 13/13. Chromium browser smoke 88/88 (preview) and 89/89 (live fixture with test-only data).
+> Earlier implementation findings I-1…I-7 are **fixed and re-tested**. Open: I-9, I-10 (Low), I-11, I-12 (Info).
+> **The storefront is not launch-ready** for data reasons, not code: owner decisions D-1…D-9 (§5), original photos,
+> confirmed prices and a verified WhatsApp number are all still missing.
 
 Finding labels: **Tested failure** = reproduced by running something. **Inspection** = found by reading
 code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
@@ -297,8 +297,68 @@ acceptance checks and AC-CONTENT-1/2, AC-WA-1/3/4 and AC-FAIL-2.
 #### I-8 · Info · Branch naming
 - `docs/BUILD-STATUS.md` correctly notes that QA is on `claude/wizardly-mendel-73bkuw`, not `claude/recovery-qa`. That is this session's assigned branch. See F-01.
 
-**Next QA run:** at GPT's next checkpoint (pages, persistent cart, request previews). I will re-run
-`review-commit.sh`, `qa/domain/` and the browser smoke against the new SHA, and re-test I-1…I-6.
+### Run 2: 2026-10-09 · `codex/storefront-mvp` @ `5d1c6a45686bf9df6b5c0670fb1541e7e8c0c7c2`
+
+Checkpoint 2: pages, request cart, custom enquiry, CI workflow, `vercel.json`.
+- `review-commit.sh` (documented order): install ✔, test ✔ (7), build ✔ (13 pages), check ✔, audit ✔ (0), secret scan ✔.
+  *QA tooling note:* my first pass reported `check` exit 1, because my script ran `check` before `build`. That was a
+  QA bug, fixed in `qa/scripts/review-commit.sh`; it was not an app defect. A separate QA bug made one pass review the wrong
+  commit when given an abbreviated SHA. That is fixed too, and the script now refuses a mismatched SHA.
+- QA domain contract tests: 11 pass, 2 fail (I-3, I-5 still open; I-4 fixed).
+- Browser smoke (Chromium, `scripts/serve.mjs` on the build output): preview 88 PASS / 0 FAIL. Live fixture 89 PASS / 0 FAIL.
+  The first harness run showed 4 FAIL, all from **QA harness heuristics**: it expected a numeric price where
+  "Price on enquiry" is correct, and an "Add to cart" label where "Add to request cart" is used. The harness is fixed. Not app defects.
+- GitHub Actions on this commit: **failed** in GPT's own Chromium test (ambiguous category label, per BUILD-STATUS). Fixed in `09b5cd1`.
+
+### Run 3: 2026-10-09 · `codex/storefront-mvp` @ `2260c7f913a340914a74249cefc8f668b962160c` (current head)
+
+Includes `09b5cd1` ("Address Claude QA findings…"). GitHub Actions: success on both commits (runs 3–6).
+
+| Check | Result |
+|---|---|
+| `npm ci` / `npm test` / `npm run build` / `npm run check` | all exit 0. 11 unit tests. 13 pages. `check` now fails if no test files exist. |
+| `npm audit --omit=dev` / secret scan | 0 vulnerabilities / no HIGH findings |
+| QA domain contract tests | **13 / 13 pass** |
+| Browser smoke, preview (as shipped) | **88 PASS, 0 FAIL**. Screenshots and `summary.md` in `qa/results/2260c7f…/browser-preview/` |
+| Browser smoke, live fixture (`QA_LIVE_FIXTURE=1`: test-only number `94000000000` and test-only prices injected by request interception; nothing sent) | **89 PASS, 0 FAIL**. The `wa.me` URL carries name, `[ID]`, qty, line and subtotal, plus "not a confirmed purchase". `rel="noopener noreferrer"`. |
+| Extra browser probes (`qa/e2e/edge-probes.mjs`) | PASS: `?q=`/`?category=` injection rendered as text. Search+category restored from URL. Tampered storage clamped (999→20, unknown/`'5'` dropped). Add beyond 20 refused with a message. Notes markup escaped. Blocked `localStorage` degrades with a notice and 0 page errors. |
+| Contrast (computed from `src/styles.css`) | Text 17.4:1, muted 9.4:1 (8.6:1 on panels), accent 9.6:1, button text 9.3:1, preview notice 10.9:1, price 12.7:1, form-control border 3.9:1. All meet WCAG AA. |
+| Visual review (QA read the screenshots) | Home, PDP and cart on mobile and desktop: legible, no overflow. Preview banner visible. Neutral photo placeholders. No stock, sale, review or payment claims. |
+
+Status of earlier findings at `2260c7f`:
+
+| ID | Status | Evidence |
+|---|---|---|
+| I-1 build/check missing | **Fixed** | all scripts exit 0 |
+| I-2 zero tests green | **Fixed** | 11 tests; `check` asserts test files exist |
+| I-3 keychain category split | **Fixed** | contract test 3; browser filter Keychains → 3 visible |
+| I-4 `LKR 0.00` subtotal | **Fixed** | contract test 9; cart shows "Quote required for all items" |
+| I-5 19.99 rejected | **Fixed** | contract test 11 |
+| I-6 hidden products in live cart | **Fixed (UI)** | `app.mjs` passes `visibleProducts()`; GPT test + live-fixture run |
+| I-7 copy provenance | **Fixed** | `copyStatus: "draft-needs-owner-approval"`, `approved: false` |
+
+New findings at `2260c7f` (all Low/Info; none block the preview):
+
+#### I-9 · Low · Tested · Every product card has two links to the same page
+- **Reproduction:** `/shop/`. Count `[data-product-card] a`.
+- **Expected:** One focusable link per card (AC-A11Y-5 tab order, less screen-reader repetition).
+- **Actual:** 14 links for 7 cards: an image link with a visually hidden name, plus the heading link. Keyboard users tab twice per product, and screen readers announce each name twice.
+- **Recommended fix:** Give the image link `tabindex="-1"` and `aria-hidden="true"`, or wrap the card in a single link.
+
+#### I-10 · Low · Inspection (seen in screenshot) · WhatsApp wording shown when WhatsApp is off
+- **Reproduction:** Preview mode. Add an item, then open `/cart/`.
+- **Actual:** Under "Online requests are not open yet", the page still says "Opening WhatsApp does not send the message. Review and send it yourself…", although no WhatsApp button exists. Same on `/custom/` after preview.
+- **Recommended fix:** In `handoff()`, render that sentence only when `url` is set.
+
+#### I-11 · Info · Inspection · Public data file carries internal workflow fields
+- `dist/data/products.json` publishes `approved` and `copyStatus: "draft-needs-owner-approval"`. The build comment says internal approval flags are not storefront payloads. `approved` is needed by the client's live-mode filter, so the fix is the comment, plus dropping `copyStatus` from the public payload.
+
+#### I-12 · Info · Not built yet: contact page
+- The brief lists a contact page. It is reasonably deferred until D-2 confirms a working contact; `/custom/` covers enquiries meanwhile.
+
+**Not verified at `2260c7f`:** real-phone WhatsApp opening (AC-WA-6). Firefox and Safari. A screen-reader pass.
+Deployed headers: `vercel.json` sets CSP, nosniff and Referrer-Policy, but nothing is deployed. Only the local `serve.mjs` headers were tested.
+
 
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 
@@ -310,16 +370,18 @@ acceptance checks and AC-CONTENT-1/2, AC-WA-1/3/4 and AC-FAIL-2.
 | Commit review script | `qa/scripts/review-commit.sh` against a scratch npm project and against reference `c78e12f` | Recorded the SHA. Ran `npm ci`/`test`/`build`/`audit` and captured a failing `test` exit 3. Reported "no package.json" for the reference repo. |
 | Browser harness, **synthetic fixture only** (scratch, not committed) | `node qa/e2e/storefront-smoke.mjs` on Chromium (Playwright 1.56.1) | Correct fixture: 90 PASS, 0 FAIL, 1 REVIEW (no security headers on the plain server). Defect-seeded fixture: 15 FAIL + 4 REVIEW, catching every planted defect (subtotal off by 1, local-format WhatsApp number, soft-404, Escape not closing the menu, horizontal overflow, "Only 2 left" copy). |
 
-| Domain contract tests (new, 2026-10-09) | `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'` | Against `f801d31`: 10 pass, 3 fail (§7 Run 1). Without `DOMAIN_DIR` they skip. |
+| Browser harness fixes (2026-10-09) | After the first run on real pages | Accepts "Price on enquiry" and "Add to request cart". Counts *visible* cards for filters. Edits quantity through the number input. Adds `QA_LIVE_FIXTURE=1`. Re-validated on the defect-seeded fixture: still 15 FAIL, all planted defects caught. |
+| `review-commit.sh` fixes (2026-10-09) | — | An abbreviated SHA had silently fallen back to `main`; it now resolves exactly or refuses. `check` now runs after `build`, as documented. |
+| Domain contract tests (new, 2026-10-09) | `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'` | `f801d31`: 10/13. `5d1c6a4`: 11/13. `2260c7f`: 13/13. Without `DOMAIN_DIR` they skip. |
 
 The fixture rows validate the **tools only**. §7 holds the results against the storefront.
 
 ## 9. Remaining verification gaps
 
-1. No pages exist at `f801d31`, so there is no browser, navigation, accessibility, contrast or failure-state run yet. `qa/e2e/storefront-smoke.mjs` is ready for the next checkpoint.
-2. The WhatsApp handoff could only be tested at function level with a **test-only** number, because the shipped config disables it pending D-2. A real-phone check (AC-WA-6) is manual.
-3. Firefox/WebKit are not available here (Chromium only).
-4. No axe-core audit (dependency decision for GPT). Contrast is manual.
-5. Live site and EasyWP state: not fetchable from this environment. Baserow data: not inspected.
-6. Screenshot capture date is inferred (2026-04-05 to 2026-04-19), not recorded.
-7. The brief is itself second-hand (chat retrieval). Its claims are historical, not verified.
+1. Real-phone WhatsApp opening (AC-WA-6) is manual. The handoff was tested only with a test-only number via request interception, because the shipped config keeps it disabled pending D-2.
+2. Browsers: Chromium only. No Firefox or Safari. No screen-reader pass (only automated name, role and focus checks).
+3. Nothing is deployed. Security headers were verified on `scripts/serve.mjs` only. `vercel.json` headers are inspected, not tested.
+4. No axe-core audit (dependency decision for GPT). Contrast was computed from the CSS, not measured on rendered pixels.
+5. Live site and EasyWP state could not be fetched from this environment. Baserow data not inspected.
+6. The brief is second-hand (chat retrieval). Its historical claims are unverified.
+7. Screenshot capture date for the April evidence is inferred, not recorded.
