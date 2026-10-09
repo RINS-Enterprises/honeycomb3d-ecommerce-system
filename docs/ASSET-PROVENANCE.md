@@ -12,3 +12,13 @@ Recovered 9 October 2026 from the HoneyComb Drive folder supplied by the owner. 
 - classic-kunai.jpg → HC-KUNAI; source file Copy_of_RAV_4322.jpg_202604130724.jpeg.jpg; Drive file ID 1xgQx1gPc0au7Q4mNE_In0xrHmQC0JgFk
 
 Historical SKU folder mappings: HC-LEAF → HNYCMB511; HC-BAYMAX → HNYCMB504; HC-KURAMA → HNYCMB503; HC-MINATO → HNYCMB508; HC-LIGHTFURY → HNYCMB502; HC-KUNAI → HNYCMB509. These do not establish current stock or prices. Catalog approval remains false.
+
+## Browser-compatible logo derivative
+
+Chromium image decoding failed for the original 8,334 × 8,334 PNG during continuation CI (`0f8b5fb`, run 37902451780). The original `honeycomb-logo.png` remains byte-for-byte unchanged. `honeycomb-logo-web.png` removes only the empty white border around the same artwork, with 48 source pixels of padding. No drawing, colour, text, proportion or artwork pixel was changed. A decoded-pixel comparison against the same source crop passed. Product photographs were not changed.
+
+Crop box (left, top, right, bottom): `(583, 3156, 8018, 5385)`; derivative size: `7435 × 2229`.
+
+Original SHA-256: `1a31b02c4343ed657a62d3dd49a86d5fe6b950b0d68b747877828ab4288ad08e`.
+
+Web derivative SHA-256: `5b8a247c9961ee542e54623a94d35a6e54692b7869059b1c94fb5926f4e7f83b`.
