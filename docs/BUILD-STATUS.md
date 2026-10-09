@@ -54,3 +54,9 @@ GitHub Actions run: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-sy
 - Artifact storefront-check-output contains dist/ and desktop/mobile screenshots. Screenshots were captured by CI but not visually inspected in this session. WhatsApp fixture checks never sent a message.
 
 These are remote CI build/browser results, not a local terminal build or a deployed storefront. The Windows sandbox error remains local to this session. No live checkout exists.
+
+## Asset recovery and hosted preview, 9 October 2026
+
+The owner supplied the HoneyComb Drive folder. Original brand logo and matching supplied photos for all seven catalogue products are recovered and integrated. Source files and historical SKU folder mappings are in docs/ASSET-PROVENANCE.md. Earlier missing-logo/photo notes above describe earlier checkpoints and are now resolved. Current pricing, availability, contact and sale approval are still unconfirmed.
+
+Initial isolated preview project: https://honeycomb3d-storefront-preview.vercel.app (Vercel project prj_gpsHMSC2HZWoBOrx79ypk36O2rsS). The first deployment at 2260c7f reached READY. Vercel assigned its first deployment the production target inside this new preview-only project; it is not the business domain or an enabled store. No domain DNS or main branch changed. The asset checkpoint will be verified and redeployed before handoff.

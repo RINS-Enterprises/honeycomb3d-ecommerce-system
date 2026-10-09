@@ -13,6 +13,7 @@ export function card(p) {
 function availability(p) {
   return ({unconfirmed:'Availability to confirm',available:'Available',unavailable:'Currently unavailable','made-to-order':'Made to order'})[p.availability];
 }
+function brand(store) { return store.logo ? '<img class="brand-image" src="'+e(store.logo)+'" alt="HoneyComb" width="220" height="66">' : 'HONEYCOMB<span>3D PRINT STUDIO</span>'; }
 export function layout(title, body, store, current='') {
   return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>' + e(title) + ' | HoneyComb 3D</title><meta name="description" content="Explore HoneyComb 3D collectibles and custom prints. Request a quote and confirm the details before ordering.">' +
@@ -20,15 +21,15 @@ export function layout(title, body, store, current='') {
     '<link rel="stylesheet" href="/styles.css"><script type="module" src="/app.mjs"></script></head><body>' +
     '<a class="skip-link" href="#main">Skip to content</a>' +
     (store.mode==='preview' ? '<div class="preview-notice">Store preview · Product details are being confirmed. Orders are not open yet.</div>' : '') +
-    '<header class="site-header"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">HONEYCOMB<span>3D PRINT STUDIO</span></a>' +
+    '<header class="site-header"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a>' +
     '<nav aria-label="Main navigation"><a href="/shop/"' + (current==='shop'?' aria-current="page"':'') + '>Shop</a><a href="/custom/"' + (current==='custom'?' aria-current="page"':'') + '>Custom prints</a><a class="cart-link" href="/cart/"' + (current==='cart'?' aria-current="page"':'') + '>Cart <span data-cart-count aria-label="items in cart">0</span></a></nav></header>' +
-    '<main id="main" tabindex="-1">' + body + '</main><footer><a class="wordmark" href="/">HONEYCOMB<span>MADE LAYER BY LAYER</span></a><p>3D prints, collectibles &amp; custom ideas.</p><p class="muted">Sri Lanka · Prices in LKR</p><a href="/custom/">Have something in mind? Tell us.</a><p class="fine">An enquiry is not a confirmed purchase. Availability, delivery and payment arrangements are confirmed with your quote.</p><a href="/privacy/">How this site handles your data</a></footer>' +
+    '<main id="main" tabindex="-1">' + body + '</main><footer><a class="wordmark" href="/">'+brand(store)+'</a><p>3D prints, collectibles &amp; custom ideas.</p><p class="muted">Sri Lanka · Prices in LKR</p><a href="/custom/">Have something in mind? Tell us.</a><p class="fine">An enquiry is not a confirmed purchase. Availability, delivery and payment arrangements are confirmed with your quote.</p><a href="/privacy/">How this site handles your data</a></footer>' +
     '<div class="toast" role="status" aria-live="polite" id="status"></div></body></html>';
 }
 export function home(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];
   return layout('Collectibles & custom prints',
-    '<section class="hero wrap"><div><p class="eyebrow">HONEYCOMB 3D / SRI LANKA</p><h1>Make room for<br><em>something you.</em></h1><p class="lead">A little character for your desk. A favourite for your collection. An idea brought to life, layer by layer.</p><div class="actions"><a class="button" href="/shop/">Explore the collection <span aria-hidden="true">↗</span></a><a class="text-link" href="/custom/">Bring your own idea →</a></div></div><div class="hero-art" aria-hidden="true"><div class="layer layer-one"></div><div class="layer layer-two"></div><div class="layer layer-three"></div><span>IDEA.<br>LAYER.<br>OBJECT.</span><small>THE HONEYCOMB WAY</small></div></section>' +
+    '<section class="hero wrap"><div><p class="eyebrow">HONEYCOMB 3D / SRI LANKA</p><h1>Make room for<br><em>something you.</em></h1><p class="lead">A little character for your desk. A favourite for your collection. An idea brought to life, layer by layer.</p><div class="actions"><a class="button" href="/shop/">Explore the collection <span aria-hidden="true">↗</span></a><a class="text-link" href="/custom/">Bring your own idea →</a></div></div><a class="hero-photo" href="/products/kurama-figure/"><img src="/assets/kurama.jpg" width="1024" height="1024" alt="Orange Kurama figure from the HoneyComb collection" fetchpriority="high"><span>MEET THE COLLECTION <b aria-hidden="true">↗</b></span></a></section>' +
     '<div class="studio-strip"><span>COLLECTIBLES</span><span>KEYCHAINS</span><span>CUSTOM PRINTS</span><span>YOUR NEXT IDEA</span></div>' +
     '<section class="wrap section"><div class="section-heading"><div><p class="eyebrow">FIND YOUR CORNER</p><h2>Small objects. Big character.</h2></div><a href="/shop/">View collection →</a></div><div class="collection-links">' +
     categories.map((c,i)=>'<a href="/shop/?category='+encodeURIComponent(c)+'"><span class="muted">0'+(i+1)+'</span><strong>'+e(c)+'</strong><span aria-hidden="true">↗</span></a>').join('') +
