@@ -414,7 +414,7 @@ Earlier findings re-tested at `8d13b91`:
 - **Recommended fix:**
   1. Replace Classic Kunai with the real `RAV_4322.jpg`, after the owner copies it into the HoneyComb folder.
   2. Replace Minato with the real photo of the variant that is actually sold.
-  3. Use the placeholder for Kurama (no real photo exists) and for Light Fury until `Variation 1 (n)` provenance is confirmed.
+  3. Kurama: the real photo `1.png` exists in the business account; Light Fury: use the real `Variation 1 (2).jpg` (see the update below and `ASSET-AUDIT.md` §3).
   4. Add an "AI-generated: yes/no" field to `ASSET-PROVENANCE.md`.
   - **Owner decision:** if the owner explicitly accepts AI imagery, label it, because the embedded C2PA/SynthID is publicly detectable.
 
@@ -444,7 +444,9 @@ Earlier findings re-tested at `8d13b91`:
 #### I-20 · Info · `width`/`height` attributes are 640×640 for 3:4 images
 - No layout shift, because the CSS box has a fixed `aspect-ratio` with `object-fit: contain`. Matching attributes would still help if the CSS changes.
 
-**Not verified at `8d13b91`:** real-device image decode on low-memory phones. A throttled-network LCP. Firefox and Safari. Cryptographic C2PA validation (markers were detected by content only).
+**Not verified at `8d13b91`:** real-device image decode on low-memory phones. A throttled-network LCP. Firefox and Safari.
+
+**Update (second asset pass, same day):** C2PA is now cryptographically validated: claim signatures and data hashes are valid, issuer Google LLC, and the only code is `signingCredential.untrusted` (trust anchor not configured). **Real photos were found for all 7 products**, including Kurama (business-account `1.png`, with the background removed in Canva) and Light Fury (`Variation 1 (2)`). I-15's fix is therefore fully actionable once the owner copies the originals into the HoneyComb folder. See `ASSET-AUDIT.md` §3 and `qa/asset-recommendations.json`.
 
 ## 7a. QA sign-off and launch readiness (2026-10-09, updated for head `8d13b91`)
 
@@ -461,7 +463,7 @@ I-9, I-10, I-13, I-14 (Low) and I-11, I-12 (Info) can ride the next change.
 | 1 | **Secure the old site before touching DNS.** Open the EasyWP dashboard or ask Namecheap support for a files/DB backup. The apex still points at EasyWP. Don't pay for reactivation until a backup is confirmed available. | Original photos, product data, policy text, prices | F-15, E-8, brief task 3 |
 | 2 | **Confirm the WhatsApp number** (`94703009064`?) and who answers it. Then GPT sets `whatsappNumber` and `whatsappVerified: true`. Test on a real phone without sending an order. | Any order request | D-2, F-11, AC-WA-6 |
 | 3 | **Choose prices or a quote-only policy** per product. The evidence conflicts (§3.1), so nothing can be copied. Leaving prices `null` with "Price on enquiry" is a valid launch choice. | Cart totals | D-3, F-02 |
-| 4 | **Choose real product photos** per `ASSET-AUDIT.md` §3, and copy `RAV_4322.jpg` and the other chosen originals into the HoneyComb folder. Confirm the photographer and Canva rights. Say which Minato, Hidden Leaf and Light Fury variants are current. Provide a real Kurama photo. Approve or replace the draft descriptions. | `approved: true`, live mode | D-9, F-07, I-7, I-15 |
+| 4 | **Choose real product photos** per `ASSET-AUDIT.md` §3, and copy `RAV_4322.jpg` and the other chosen originals into the HoneyComb folder. Confirm the photographer and Canva rights. Say which Minato, Hidden Leaf and Light Fury variants are current. Copy the real Kurama `1.png` from the business account into the HoneyComb folder. Approve or replace the draft descriptions. | `approved: true`, live mode | D-9, F-07, I-7, I-15 |
 | 5 | **Decide payment and delivery wording** (COD? bank transfer? courier fee, typical days). The site currently promises none, which is safe. | Quote conversations, policy pages | D-1, D-4, F-03, F-08 |
 | 6 | **Provide policy text** (shipping, returns, terms). The current `/privacy/` page accurately describes the app's own data handling, but the owner should approve it. | Footer policy links | D-5, F-10 |
 | 7 | **IP stance** on franchise-character products. | Catalogue scope | D-7, F-06 |
@@ -500,4 +502,4 @@ The fixture rows validate the **tools only**. §7 holds the results against the 
 5. Live site and EasyWP state could not be fetched from this environment. Baserow data not inspected.
 6. The brief is second-hand (chat retrieval). Its historical claims are unverified.
 7. Screenshot capture date for the April evidence is inferred, not recorded.
-8. Asset audit: not every Drive file was opened (videos, ZIPs, `06 Product Records and Pricing`, deep Listing Kit and Product Studio pages). C2PA markers were detected by content, not cryptographically validated. No real-device low-memory decode test and no throttled-network LCP run. See `ASSET-AUDIT.md` §8.
+8. Asset audit: not every Drive file was opened (videos, ZIPs, `06 Product Records and Pricing`, deep Listing Kit and Product Studio pages). C2PA manifests were validated with `c2pa-python` (signatures valid; Google root not in the default trust list). No real-device low-memory decode test and no throttled-network LCP run. See `ASSET-AUDIT.md` §8.
