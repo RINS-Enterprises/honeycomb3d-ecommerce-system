@@ -49,7 +49,7 @@ export function cartSummary(items, products) {
 export function orderMessage(items, products, notes='') {
   const s=cartSummary(items,products);
   if (!s.lines.length) return '';
-  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`:`Estimated items subtotal: ${money(s.knownSubtotal)}`, 'Please confirm availability, options, delivery cost, final total and payment arrangements. This is an order request, not a confirmed purchase.',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
+  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, 'Please confirm availability, options, delivery cost, final total and payment arrangements. This is an order request, not a confirmed purchase.',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
 }
 export function whatsappUrl(message, store) {
   if (!message || !store.whatsappVerified || !/^[1-9]\d{7,14}$/.test(store.whatsappNumber||'')) return null;

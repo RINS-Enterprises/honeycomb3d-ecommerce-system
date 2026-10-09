@@ -1,31 +1,42 @@
 # Build status
 
-Implementation branch: `codex/storefront-mvp` in `RINS-Enterprises/honeycomb3d-ecommerce-system`.
-Updated 2026-10-08. Checkpoint 1: data and commerce boundary.
+Branch: codex/storefront-mvp. Updated 2026-10-09. Checkpoint 2: complete storefront source, pending execution checks.
 
 ## Architecture
 
-Node.js 22+ builds pre-rendered HTML for homepage, catalog and each product. Small browser ES modules progressively enhance filters, cart and enquiry. No third-party runtime dependencies or remote scripts. Output is portable static `dist/`, suitable for a commercially permitted static hosting plan. Product and public store configuration are separate JSON files. No database or payment provider is implied.
+Node.js 22+ produces static HTML for home, shop, seven recovered product routes, cart, custom enquiry, data-handling notice and 404. Browser ES modules enhance these pages. There are no runtime packages, external fonts or remote scripts. Public catalogue and contact configuration live in data/*.json. Output is dist/.
 
-This keeps product URLs crawlable and allows a later server-side WooCommerce/catalog adapter without rewriting the presentation. An actual checkout would require server-authoritative pricing, orders, inventory, payment webhooks and idempotency, added as a separate reviewed integration.
+This is an order-request storefront, with no order database, payment processor or inventory integration. A future checkout must add server-authoritative prices and inventory, payment webhooks and order lifecycle handling.
 
-## Implemented at this checkpoint
+## Implemented
 
-- Validated catalog schema and seven recovered product-name seeds, with provenance.
-- Safe cart normalization and minor-unit arithmetic; explicit unknown-price handling.
-- Order-request message builder and verified-contact gate for WhatsApp.
-- Recovered build brief available from the supplied ZIP.
+- Responsive dark/gold storefront with text branding and abstract decorative artwork.
+- Pre-rendered product pages, original-photo slots with explicit missing-photo states.
+- Search/category filters, URL parameters, reset and no-results state.
+- Cart quantity changes, removal, storage recovery and browser persistence.
+- Explicit unknown pricing; no zero-price/free implication for products awaiting quotes.
+- Readable request preview, clipboard fallback and verified-contact WhatsApp gate.
+- Custom enquiry with reference link, quantity, size and finish; preview before external handoff.
+- Labels, skip link, native controls, keyboard focus, no-JS guidance and data-fetch failure state.
+- Static server with real 404s and security headers; portable build plus Vercel configuration.
+- Domain tests, generated-link checks and Playwright functional smoke tests in tests/. Claude-owned qa/ files are untouched.
 
-## Missing data and integrations
+## Data and launch blockers
 
-All seed prices and availability remain unconfirmed; all photos are missing. New HC-* IDs are stable storefront identifiers, not recovered SKUs (only HNYCMB501 is historical). No stock counters, sale prices, reviews, paid checkout, email service or shipping promises are included. Historical phone is documented in the brief but not enabled. Preview mode is explicit; live mode requires confirmed contact and excludes unapproved products. Source logo and photos are being sought in Drive.
+All seven seeds remain unapproved, with null prices/photos and unconfirmed availability. Only HNYCMB501 is a recovered SKU; HC-* identifiers are new stable references. Source logo is missing. Neutral photo placeholders are not substitutes for original photos.
 
-## Access and verification
+The public store remains in preview mode with noindex. No WhatsApp handoff is enabled until both live mode and a verified international contact are configured. Live output filters unapproved products and fails validation if approved products lack photos/confirmed availability. Price-on-enquiry remains supported.
 
-GitHub read/write verified; branch creation succeeded. Local Git network failed at the configured proxy. An isolated shallow checkout is reconstructed from verified Git objects through the connector; historical PNG blobs are sparse-excluded locally and retained remotely. No live account settings or DNS changed.
+Business shipping, returns, payment terms and contact confirmation remain outstanding. The data-handling page describes implemented behavior, not an invented business policy. No reviews, stock counts, discounts, payment badges or delivery promises have been invented.
 
-Claude QA was found on `claude/wizardly-mendel-73bkuw` (not the requested `claude/recovery-qa`). Read its existing QA-FINDINGS.md. Those are reference/recovery findings, not a review of this implementation. Findings inform the contact gate, unknown data states, category derivation and exclusion of legacy commerce claims. Claude's branch and files are untouched.
+## Verification and access
+
+Repository read access and push permission verified through GitHub. Existing draft PR #2 and implementation branch resumed. Shell execution currently fails before launching due to the Windows managed-network sandbox backend; no local build or browser run is claimed.
+
+In-memory JavaScript rendering successfully generated 12 normal pages, with no undefined/NaN values and preview noindex present. A GitHub Actions workflow is included to run Node tests, the real build, link checks and Chromium flows. Its actual outcome will be recorded after execution.
+
+Claude's docs/QA-FINDINGS.md on claude/wizardly-mendel-73bkuw was read. It contains recovery findings, not an implementation review. Addressed in scope: contact gating, current-data separation, neutral placeholders, no unsupported commerce claims and actual catalogue-derived categories. No Claude branch or QA file was changed.
 
 ## Next checkpoint
 
-Build responsive pages, persistent cart, request previews and custom enquiry; run domain/build/browser checks. No deployment has occurred.
+Run CI, address failures, inspect generated screenshots if available, and record exact results. Recover original logo/photos and confirm sale-ready data before any public launch. No deployment or domain/account changes have occurred.
