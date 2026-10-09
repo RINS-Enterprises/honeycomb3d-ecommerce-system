@@ -30,8 +30,8 @@ for(const name of ['app.mjs','domain.mjs','styles.css'])await copyFile(join(root
 try {await access(join(root,'public/assets'));await cp(join(root,'public/assets'),join(dist,'assets'),{recursive:true});}
 catch(error){if(error.code!=='ENOENT')throw error;}
 await mkdir(join(dist,'data'),{recursive:true});
-// Provenance and internal approval flags are build inputs, not storefront payloads.
-await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,...p})=>({...p,source:'Public catalog'}))));
+// Approval stays in the payload for client-side live filtering. Recovery and copy-workflow metadata do not.
+await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,copyStatus,imageSource,...p})=>({...p,source:'Public catalog'}))));
 await writeFile(join(dist,'data/store.json'),JSON.stringify({name:store.name,currency:store.currency,country:store.country,mode:store.mode,whatsappNumber:store.whatsappVerified?store.whatsappNumber:null,whatsappVerified:store.whatsappVerified,logo:store.logo}));
 await writeFile(join(dist,'robots.txt'),store.mode==='preview'?'User-agent: *\nDisallow: /\n':'User-agent: *\nAllow: /\n');
 console.log('Built '+(products.length+6)+' static pages into dist/ ('+store.mode+' mode).');

@@ -2,6 +2,7 @@ import {chromium} from 'playwright';
 import {spawn} from 'node:child_process';
 import assert from 'node:assert/strict';
 import {mkdir} from 'node:fs/promises';
+import {money} from '../src/domain.mjs';
 const server=spawn(process.execPath,['scripts/serve.mjs'],{stdio:'inherit'});
 let browser;
 try {
@@ -12,9 +13,24 @@ try {
   await mkdir('test-results',{recursive:true});
   const page=await browser.newPage({viewport:{width:1440,height:1000}});
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
+  async function screenshot(path) {
+    await page.evaluate(async()=>{
+      const images=[...document.images];
+      images.forEach(img=>img.loading='eager');
+      await Promise.all(images.map(img=>img.decode()));
+    });
+    await page.screenshot({path,fullPage:true});
+  }
   await page.goto('http://127.0.0.1:4173/');
-  await page.screenshot({path:'test-results/home-desktop.png',fullPage:true});
+  await page.getByRole('complementary',{name:'Store preview notice'}).waitFor();
+  await screenshot('test-results/home-desktop.png');
   await page.getByRole('link',{name:'Explore the collection'}).first().click();
+  assert.equal(await page.locator('[data-product-card]').count(),7);
+  for(const card of await page.locator('[data-product-card]').all()) {
+    assert.equal(await card.getByRole('link').count(),1,'One accessible link per product card');
+    assert.equal(await card.getByRole('heading',{level:2}).count(),1,'Shop heading hierarchy');
+  }
+  await screenshot('test-results/shop-desktop.png');
   await page.getByRole('searchbox').fill('no-match-here');
   await page.waitForFunction(()=>document.querySelector('#no-results').hidden===false);
   await page.getByRole('button',{name:'Clear filters'}).click();
@@ -25,13 +41,19 @@ try {
   await page.getByRole('heading',{name:'Baymax Figure'}).getByRole('link').click();
   await page.getByRole('button',{name:'Add to request cart'}).waitFor({state:'visible'});
   await page.waitForFunction(()=>!document.querySelector('#add-form button').disabled);
+  await screenshot('test-results/product-desktop.png');
   await page.getByRole('spinbutton').fill('2');
   await page.getByRole('button',{name:'Add to request cart'}).click();
   await page.getByRole('link',{name:'View your request cart'}).click();
   await page.getByRole('heading',{name:'Quote required for all items'}).waitFor();
   assert.equal(await page.getByRole('spinbutton').inputValue(),'2');
   assert.equal(await page.locator('a[href^="https://wa.me/"]').count(),0);
+  assert(!await page.locator('#order-handoff').textContent().then(t=>t.includes('Opening WhatsApp')));
   assert.match(await page.locator('.message-preview').inputValue(),/Baymax Figure \[HC-BAYMAX\] x 2/);
+  await screenshot('test-results/cart-desktop.png');
+  await page.setViewportSize({width:390,height:844});
+  await screenshot('test-results/cart-mobile.png');
+  await page.setViewportSize({width:1440,height:1000});
   await page.reload();
   await page.getByRole('spinbutton').waitFor();
   assert.equal(await page.getByRole('spinbutton').inputValue(),'2');
@@ -48,6 +70,7 @@ try {
   await page.getByRole('button',{name:'Preview enquiry'}).click();
   assert.match(await page.locator('.message-preview').inputValue(),/<script>alert\(1\)<\/script>/);
   assert.equal(await page.locator('#custom-result script').count(),0);
+  assert(!await page.locator('#custom-result').textContent().then(t=>t.includes('Opening WhatsApp')));
   // Contact handoff is tested with an intercepted fixture only; no message is sent.
   await page.route('**/data/store.json',async route=>{
     const response=await route.fetch();const data=await response.json();
@@ -59,14 +82,44 @@ try {
   const href=await page.getByRole('link',{name:'Open WhatsApp request'}).getAttribute('href');
   assert.equal(new URL(href).hostname,'wa.me');
   assert.match(new URL(href).searchParams.get('text'),/A blue sign/);
+  // Mixed-price cart fixture verifies the complete cart handoff, including cents.
+  await page.route('**/data/products.json',async route=>{
+    const response=await route.fetch();const data=await response.json();
+    await route.fulfill({json:data.map(p=>({...p,approved:true,availability:'made-to-order',priceLkr:p.id==='HC-BAYMAX'?19.99:null}))});
+  });
+  for(const [slug,quantity] of [['baymax-figure','2'],['night-fury-keychain','3']]) {
+    await page.goto('http://127.0.0.1:4173/products/'+slug+'/');
+    await page.waitForFunction(()=>!document.querySelector('#add-form button').disabled);
+    await page.getByRole('spinbutton').fill(quantity);
+    await page.getByRole('button',{name:'Add to request cart'}).click();
+  }
+  await page.goto('http://127.0.0.1:4173/cart/');
+  await page.getByRole('heading',{name:'Priced items subtotal: '+money(39.98),exact:true}).waitFor();
+  const cartHref=await page.getByRole('link',{name:'Open WhatsApp request'}).getAttribute('href');
+  const request=new URL(cartHref).searchParams.get('text');
+  assert.match(request,/Baymax Figure \[HC-BAYMAX\] x 2/);
+  assert.match(request,/Night Fury Keychain \[HNYCMB501\] x 3: price to confirm/);
+  assert(request.includes(money(39.98))&&request.includes('not the full total'));
+  assert.match(request,/not a confirmed purchase/);
+  assert.equal(await page.getByRole('link',{name:'Open WhatsApp request'}).getAttribute('rel'),'noopener noreferrer');
+  assert.match(await page.locator('#order-handoff').textContent(),/Opening WhatsApp does not send/);
+  await page.evaluate(()=>localStorage.clear());
+  await page.unroute('**/data/products.json');
   await page.unroute('**/data/store.json');
+  for(const width of [320,390,768,1440]) {
+    await page.setViewportSize({width,height:844});
+    for(const path of ['/','/shop/','/products/baymax-figure/','/cart/','/custom/','/privacy/']) {
+      await page.goto('http://127.0.0.1:4173'+path);
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at '+width+': '+path);
+    }
+  }
   await page.setViewportSize({width:390,height:844});
-  for(const path of ['/','/shop/','/products/baymax-figure/','/cart/','/custom/']) {
-    await page.goto('http://127.0.0.1:4173'+path);
-    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow: '+path);
+  for(const [route,name] of [['/shop/','shop'],['/products/baymax-figure/','product'],['/custom/','custom']]) {
+    await page.goto('http://127.0.0.1:4173'+route);
+    await screenshot('test-results/'+name+'-mobile.png');
   }
   await page.goto('http://127.0.0.1:4173/');
-  await page.screenshot({path:'test-results/home-mobile.png',fullPage:true});
+  await screenshot('test-results/home-mobile.png');
   await page.keyboard.press('Tab');assert.equal(await page.locator(':focus').textContent(),'Skip to content');
   await page.keyboard.press('Enter');assert.equal(await page.locator(':focus').getAttribute('id'),'main');
   const missing=await page.goto('http://127.0.0.1:4173/not-found/');
@@ -75,5 +128,5 @@ try {
   await page.goto('http://127.0.0.1:4173/cart/');
   await page.getByRole('heading',{name:'Your cart could not load'}).waitFor();
   assert.equal(errors.length,0,errors.join('\n'));
-  console.log('PASS: desktop/mobile catalogue, filters, cart persistence/update/removal, unknown pricing, custom enquiry, verified handoff fixture, keyboard skip link, 404, network failure and no page errors.');
+  console.log('PASS: original image decoding, accessible cards/headings/preview landmark, catalogue filters, cart persistence/update/removal, unknown pricing, custom enquiry, mixed-price WhatsApp fixture, 320/390/768/1440px layouts, keyboard skip link, 404, network failure and no page errors. No message was sent.');
 } finally {if(browser)await browser.close();server.kill();}

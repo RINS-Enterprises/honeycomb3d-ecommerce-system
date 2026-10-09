@@ -13,7 +13,8 @@ function handoff(message) {
   const url=store.mode==='live'?whatsappUrl(message,store):null;
   return '<div class="request-preview"><h2>Review your request</h2><label>Message to HoneyComb<textarea class="message-preview" rows="10" readonly>'+e(message)+'</textarea></label><div class="actions">'+
     (url?'<a class="button" href="'+e(url)+'" target="_blank" rel="noopener noreferrer">Open WhatsApp request ↗</a>':'<p class="notice">Online requests are not open yet. You can copy this draft and keep it for later.</p>')+
-    '<button type="button" class="button secondary" data-copy>Copy message</button></div><p class="fine">Opening WhatsApp does not send the message. Review and send it yourself. Your order is only confirmed after HoneyComb agrees on the details.</p></div>';
+    '<button type="button" class="button secondary" data-copy>Copy message</button></div>'+
+    (url?'<p class="fine">Opening WhatsApp does not send the message. Review and send it yourself. Your order is only confirmed after HoneyComb agrees on the details.</p>':'')+'</div>';
 }
 document.addEventListener('click',async event=>{
   const button=event.target.closest('[data-copy]');

@@ -9,6 +9,12 @@ const all=JSON.parse(await readFile(join(root,'data/products.json'),'utf8'));
 const store=JSON.parse(await readFile(join(root,'data/store.json'),'utf8'));
 validateData(all,store);
 const products=visibleProducts(all,store);
+const publicProducts=JSON.parse(await readFile(join(root,'dist/data/products.json'),'utf8'));
+for(const p of publicProducts) {
+  assert.equal(p.copyStatus,undefined,'Copy approval workflow must not be published');
+  assert.equal(p.imageSource,undefined,'Recovery asset filenames must not be published');
+  assert.equal(p.source,'Public catalog','Recovery evidence must stay in source data');
+}
 const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','404.html',...products.map(p=>'products/'+p.slug+'/index.html')];
 for(const path of paths) {
   const html=await readFile(join(root,'dist',path),'utf8');
