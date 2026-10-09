@@ -6,9 +6,10 @@ Last updated: **2026-10-09**.
 > **Headline (2026-10-09):** the implementation is `codex/storefront-mvp` in **this** repository. Three commits have been reviewed
 > (§7). **Current head `2260c7f913a340914a74249cefc8f668b962160c`:** install, test (11), build, check, audit and secret scan all
 > pass. QA domain contract tests 13/13. Chromium browser smoke 88/88 (preview) and 89/89 (live fixture with test-only data).
-> Earlier implementation findings I-1…I-7 are **fixed and re-tested**. Open: I-9, I-10 (Low), I-11, I-12 (Info).
-> **The storefront is not launch-ready** for data reasons, not code: owner decisions D-1…D-9 (§5), original photos,
-> confirmed prices and a verified WhatsApp number are all still missing.
+> axe-core WCAG audit: 0 serious/critical. Earlier implementation findings I-1…I-7 are **fixed and re-tested**.
+> Open: I-9, I-10, I-13, I-14 (Low), I-11, I-12 (Info).
+> **QA sign-off (§7a):** code approved for a *private preview*. **Public launch not approved**, for data reasons, not code:
+> owner decisions D-1…D-9 (§5), original photos, a pricing decision and a verified WhatsApp number are still missing.
 
 Finding labels: **Tested failure** = reproduced by running something. **Inspection** = found by reading
 code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
@@ -356,9 +357,49 @@ New findings at `2260c7f` (all Low/Info; none block the preview):
 #### I-12 · Info · Not built yet: contact page
 - The brief lists a contact page. It is reasonably deferred until D-2 confirms a working contact; `/custom/` covers enquiries meanwhile.
 
+#### Accessibility audit (axe-core 4.10.3) at `2260c7f`
+- **Command:** `AXE_PATH=… BASE_URL=… node qa/e2e/axe-audit.mjs`, using WCAG 2.0/2.1/2.2 A+AA plus best-practice rules. It covers 7 pages and 3 interactive states (filled cart, custom-enquiry preview, empty search) at desktop and mobile: 20 audits. Results are in `qa/results/2260c7f…/axe/axe-results.json`.
+- **Result: 0 serious or critical violations.** Two moderate best-practice issues: I-13 and I-14.
+- **Contrast items axe marked "needs review"**, because of gradients and overlays: placeholder text 8.1:1 and textarea text 14.6:1 (computed). The hero artwork is `aria-hidden` decoration, so it is exempt. **Pass.**
+- **Side observation:** the site's CSP (`script-src 'self'`) blocked axe injection until the audit browser was told to bypass CSP. That is positive evidence the CSP is enforced.
+
+#### I-13 · Low · Tested (axe `region`) · Preview banner sits outside any landmark
+- **Reproduction:** Any page in preview mode, axe-core.
+- **Actual:** `.preview-notice` is outside `<header>` and `<main>`, so screen-reader users navigating by landmark can skip the "Orders are not open yet" notice.
+- **Recommended fix:** Move it inside `<header>`, or make it `<aside aria-label="Store preview notice">`.
+
+#### I-14 · Low · Tested (axe `heading-order`) · Shop page jumps from h1 to h3
+- **Reproduction:** `/shop/`, axe-core.
+- **Actual:** Product card titles are `h3` with no `h2` between them and the page `h1`.
+- **Recommended fix:** Use `h2` for card titles on `/shop/`, or add a visually hidden `<h2>Designs</h2>` before the grid.
+
 **Not verified at `2260c7f`:** real-phone WhatsApp opening (AC-WA-6). Firefox and Safari. A screen-reader pass.
 Deployed headers: `vercel.json` sets CSP, nosniff and Referrer-Policy, but nothing is deployed. Only the local `serve.mjs` headers were tested.
 
+
+## 7a. QA sign-off and launch readiness (2026-10-09, head `2260c7f`)
+
+**Code: approved for a private preview deployment.** No open Blocker, High or Medium implementation finding. Build,
+tests, browser flows, failure states, security headers (local server) and an automated WCAG audit all pass. Open items
+I-9, I-10, I-13, I-14 (Low) and I-11, I-12 (Info) can ride the next change.
+
+**Public launch: NOT approved.** Every blocker is data or an owner decision; none is code. In priority order:
+
+| # | Owner action | Unblocks | Ref |
+|---|---|---|---|
+| 1 | **Secure the old site before touching DNS.** Open the EasyWP dashboard or ask Namecheap support for a files/DB backup. The apex still points at EasyWP. Don't pay for reactivation until a backup is confirmed available. | Original photos, product data, policy text, prices | F-15, E-8, brief task 3 |
+| 2 | **Confirm the WhatsApp number** (`94703009064`?) and who answers it. Then GPT sets `whatsappNumber` and `whatsappVerified: true`. Test on a real phone without sending an order. | Any order request | D-2, F-11, AC-WA-6 |
+| 3 | **Choose prices or a quote-only policy** per product. The evidence conflicts (§3.1), so nothing can be copied. Leaving prices `null` with "Price on enquiry" is a valid launch choice. | Cart totals | D-3, F-02 |
+| 4 | **Supply original product photos** (no screenshot crops, no AI images) and approve or replace the draft descriptions (`copyStatus`). | `approved: true`, live mode | D-9, F-07, I-7 |
+| 5 | **Decide payment and delivery wording** (COD? bank transfer? courier fee, typical days). The site currently promises none, which is safe. | Quote conversations, policy pages | D-1, D-4, F-03, F-08 |
+| 6 | **Provide policy text** (shipping, returns, terms). The current `/privacy/` page accurately describes the app's own data handling, but the owner should approve it. | Footer policy links | D-5, F-10 |
+| 7 | **IP stance** on franchise-character products. | Catalogue scope | D-7, F-06 |
+| 8 | **Email:** add MX records and test `info@honeycomb3d.store`, or keep it off the site. | Contact page (I-12) | E-8 |
+| 9 | **Hosting:** pick a plan that permits commercial use. Deploy `dist/` privately first and re-run `qa/e2e/storefront-smoke.mjs` against that URL to verify the real headers and 404 status. | Launch | RUN-AND-RELEASE.md |
+
+**Re-test procedure after the owner's data lands:** run `qa/scripts/review-commit.sh` on the new SHA, then `qa/domain/`,
+`storefront-smoke.mjs` (preview and `QA_LIVE_FIXTURE=1`), `edge-probes.mjs` and `axe-audit.mjs`. Then do one manual real-phone
+WhatsApp check with the confirmed number (open it, don't send) before switching `mode` to `live`.
 
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 
@@ -372,6 +413,7 @@ Deployed headers: `vercel.json` sets CSP, nosniff and Referrer-Policy, but nothi
 
 | Browser harness fixes (2026-10-09) | After the first run on real pages | Accepts "Price on enquiry" and "Add to request cart". Counts *visible* cards for filters. Edits quantity through the number input. Adds `QA_LIVE_FIXTURE=1`. Re-validated on the defect-seeded fixture: still 15 FAIL, all planted defects caught. |
 | `review-commit.sh` fixes (2026-10-09) | — | An abbreviated SHA had silently fallen back to `main`; it now resolves exactly or refuses. `check` now runs after `build`, as documented. |
+| axe-core audit (2026-10-09) | `qa/e2e/axe-audit.mjs`, with axe-core 4.10.3 installed in a QA scratch directory (no app dependency) | `2260c7f`: 20 audits, 0 serious/critical, 22 moderate (I-13, I-14). Its first run reported 20 ERRORs, not passes, while CSP blocked injection. |
 | Domain contract tests (new, 2026-10-09) | `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'` | `f801d31`: 10/13. `5d1c6a4`: 11/13. `2260c7f`: 13/13. Without `DOMAIN_DIR` they skip. |
 
 The fixture rows validate the **tools only**. §7 holds the results against the storefront.
@@ -381,7 +423,7 @@ The fixture rows validate the **tools only**. §7 holds the results against the 
 1. Real-phone WhatsApp opening (AC-WA-6) is manual. The handoff was tested only with a test-only number via request interception, because the shipped config keeps it disabled pending D-2.
 2. Browsers: Chromium only. No Firefox or Safari. No screen-reader pass (only automated name, role and focus checks).
 3. Nothing is deployed. Security headers were verified on `scripts/serve.mjs` only. `vercel.json` headers are inspected, not tested.
-4. No axe-core audit (dependency decision for GPT). Contrast was computed from the CSS, not measured on rendered pixels.
+4. Automated a11y is covered by axe-core (0 serious). There has been no human screen-reader pass. Contrast is computed from CSS plus axe's rendered checks.
 5. Live site and EasyWP state could not be fetched from this environment. Baserow data not inspected.
 6. The brief is second-hand (chat retrieval). Its historical claims are unverified.
 7. Screenshot capture date for the April evidence is inferred, not recorded.
