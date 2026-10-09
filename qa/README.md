@@ -14,12 +14,14 @@ Requirements: Node ≥ 18, git, and for browser checks Playwright + Chromium. Th
 | `scripts/secret-scan.sh <checkout>` | Scan tracked files for secrets, committed `.env`, and secrets behind client-exposed env prefixes. Exit 1 on HIGH. Also run it on the build output. |
 | `lib/whatsapp-link-check.mjs` | Parse and validate a `wa.me` order handoff (number format, items, qty, total, encoding). |
 | `lib/whatsapp-link-check.test.mjs` | Unit tests: `node --test 'qa/**/*.test.mjs'` |
+| `domain/domain-contract.test.mjs` | Contract tests for the implementation's `src/domain.mjs` and `data/*.json` (cart merge/caps, totals, corrupt storage, WhatsApp message, filters, live/preview rules). `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'`. Skips without `DOMAIN_DIR`. |
 | `e2e/storefront-smoke.mjs` | Browser smoke over nav, filters, PDP, cart qty/remove/totals, WhatsApp handoff, a11y basics, failure states, and claim scanning. Statuses: PASS / FAIL / INCONCLUSIVE (element not found, so not a pass) / REVIEW (needs human/owner evidence). |
 
 ## Reviewing an implementation commit
 
 ```bash
-qa/scripts/review-commit.sh https://github.com/RINS-Enterprises/honeycomb3d-website codex/storefront-mvp
+qa/scripts/review-commit.sh https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system codex/storefront-mvp
+DOMAIN_DIR=../qa-review/review-<sha12> node --test 'qa/domain/*.test.mjs'
 # then start the app from the review checkout printed above, using ITS documented command, e.g.
 #   (cd ../qa-review/review-<sha12> && npm run build && npm run preview -- --port 4173)
 BASE_URL=http://127.0.0.1:4173 QA_SHA=<full sha> WHATSAPP_NUMBER=<owner-confirmed digits> \

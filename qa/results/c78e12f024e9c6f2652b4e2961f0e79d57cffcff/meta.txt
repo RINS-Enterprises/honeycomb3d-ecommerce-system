@@ -1,6 +1,6 @@
 reviewed_ref: main
 reviewed_sha: c78e12f024e9c6f2652b4e2961f0e79d57cffcff
-source: /home/user/honeycomb3d-ecommerce-system
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
 checked_out_at: 2026-10-08T09:52:34Z
 node: v22.22.0  npm: 10.9.4
 commit_date: 2026-04-19T20:30:31+05:30

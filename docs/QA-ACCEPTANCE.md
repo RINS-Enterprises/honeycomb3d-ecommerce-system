@@ -2,9 +2,8 @@
 
 Owner: independent recovery QA (Claude), branch `claude/wizardly-mendel-73bkuw` of
 `RINS-Enterprises/honeycomb3d-ecommerce-system`.
-Status: **draft v1, 2026-10-08**. Written **before** the recovery brief or the implementation could be read. See
-"Access and basis" below; criteria marked *(confirm vs brief)* must be re-checked against
-`docs/RECOVERY-AND-BUILD-BRIEF.md` once it is readable.
+Status: **v2, 2026-10-09**. Now aligned with `docs/RECOVERY-AND-BUILD-BRIEF.md` (read from
+`codex/storefront-mvp@f801d31`). v1 (2026-10-08) was written before the brief was readable.
 
 Companion documents: [`QA-FINDINGS.md`](QA-FINDINGS.md) (evidence register, findings) and
 [`../qa/README.md`](../qa/README.md) (how to run the checks).
@@ -13,28 +12,23 @@ Companion documents: [`QA-FINDINGS.md`](QA-FINDINGS.md) (evidence register, find
 
 ## 0. Access and basis
 
-| Item | State on 2026-10-08 |
+| Item | State on 2026-10-09 |
 |---|---|
-| `RINS-Enterprises/honeycomb3d-website` (target repo, brief, `codex/storefront-mvp`) | **Not accessible** to this session: not found, or the session's GitHub credential lacks access. Not read, not cloned, nothing pushed. |
-| Rebuild ZIP | Not present anywhere in the container. |
-| `honeycomb3d-ecommerce-system` @ `c78e12f` (reference) | Read and write access. README + 4 screenshots. |
-| `honeycomb3d-ops-system` @ `a0cfadb` (internal ops tool) | Read access. README + LICENSE only. |
-| Historical live site `https://honeycomb3d.store` | Blocked by this environment's network policy (proxy 403). Live status unknown. |
+| Implementation | `codex/storefront-mvp` in **this** repo (`honeycomb3d-ecommerce-system`). The brief's suggested `honeycomb3d-website` repo was never created. |
+| Brief | `docs/RECOVERY-AND-BUILD-BRIEF.md` on the implementation branch. Its "Acceptance checks" section is the owner-level source. This document makes them testable. |
+| QA branch | `claude/wizardly-mendel-73bkuw` (session-assigned; the brief suggests `claude/recovery-qa`) |
+| Historical live site | `honeycomb3d.store` is registered to 2027-03-31; DNS still aims at EasyWP. Not fetchable from the QA environment. |
 
-The criteria therefore rest on what the user's task statement names: mobile/desktop navigation,
-filters, product detail, cart quantities/removal/totals, **WhatsApp handoff**, accessibility,
-failure states, security, and honest commerce claims. The reference evidence is in QA-FINDINGS §2.
+## 1. MVP scope (from the brief, §"Build today")
 
-## 1. Assumed MVP scope *(confirm vs brief)*
+1. Catalog with **search** and **category filters**, product details, cart.
+2. **WhatsApp order-request handoff** carrying product identifiers, quantities and an estimated subtotal. Availability, delivery and final total stay "to be confirmed".
+3. Contact page and **custom-print enquiry** (brief §"Recovered page and content direction").
+4. Policy pages only with approved text (none recovered yet).
+5. **Preview vs live** mode: unknown prices, stock and photos stay visibly unconfirmed or excluded from the published catalog.
 
-1. Catalog browsing (home, catalog with filters, product detail).
-2. A client-side cart (add, change quantity, remove, totals).
-3. **Order handoff to WhatsApp** (`wa.me` link with a prefilled order summary) instead of online payment.
-4. Static policy/contact pages, only with owner-supplied content.
-
-Out of scope unless the brief says otherwise: online card payment (Stripe / Google Pay / Link),
-accounts/login, transactional email (SMTP), automated review collection (Trustpilot / CusRev),
-live inventory, coupons. None of these is assumed to still work (QA-FINDINGS F-09).
+Out of scope: paid checkout, accounts, order database, inventory sync, Stripe/PayHere/WebXPay/KOKO/Mint,
+SMTP, Trustpilot/CusRev. None of these is assumed to work (QA-FINDINGS F-09, §4.3).
 
 ## 2. Global rules (apply to every page)
 
@@ -70,8 +64,9 @@ live inventory, coupons. None of these is assumed to still work (QA-FINDINGS F-0
 | ID | Criterion |
 |---|---|
 | AC-CAT-1 | The catalog lists every published product exactly once. Each card shows image (with meaningful `alt`), name, and price, and links to its PDP. The count shown matches the products rendered. |
-| AC-CAT-2 | Filters exist for the categories in the data (at minimum franchise/universe and product type, *(confirm vs brief)*). Applying one updates the list without a full error state. The active filter is visible and exposed to AT (`aria-pressed` / checked state). Clearing restores the full list. A filter result of zero shows an explicit "no products" message with a clear action. |
-| AC-CAT-3 | The filter state is reflected in the URL (shareable, survives reload, back button restores the previous state) *(recommended; confirm vs brief)*. |
+| AC-CAT-2 | Filters exist for the categories in the data (at minimum franchise/universe and product type,). Applying one updates the list without a full error state. The active filter is visible and exposed to AT (`aria-pressed` / checked state). Clearing restores the full list. A filter result of zero shows an explicit "no products" message with a clear action. |
+| AC-CAT-3 | The filter state is reflected in the URL (shareable, survives reload, back button restores the previous state) *(recommended)*. |
+| AC-CAT-5 | Search matches product name, tags and category, ignoring case and word order. An empty query shows everything; a no-match query shows the empty state. Combined search + filter narrows correctly. |
 | AC-CAT-4 | Sorting, if offered, is correct for price ascending/descending using numeric values, not string order. |
 
 ### 3.3 Product detail page (PDP)
@@ -102,10 +97,21 @@ live inventory, coupons. None of these is assumed to still work (QA-FINDINGS F-0
 |---|---|
 | AC-WA-1 | The cart has one clearly labelled primary action (e.g. "Send order on WhatsApp"), available only when the cart is non-empty. |
 | AC-WA-2 | The action opens `https://wa.me/<number>?text=<encoded>`. `<number>` is the **owner-confirmed** number in international digits-only format (the old site showed `+94 70 300 9064`, i.e. `94703009064`, which has not been re-confirmed). The decoded text has no `%XX`, `undefined`, `NaN` or `[object Object]`. It lists every line with name, quantity and line total, then the subtotal, the delivery note, and the currency. Validated by `qa/lib/whatsapp-link-check.mjs`. |
+| AC-WA-2a | Each line also carries the stable product identifier, e.g. `[HNYCMB501]` (brief). An unpriced line reads "price to confirm". An all-unpriced cart shows **no** amount (never `0.00`). A mixed cart's subtotal is labelled partial. |
 | AC-WA-3 | The number lives in one config value; it is not hard-coded in multiple components. |
 | AC-WA-4 | The page states plainly that the order is **not placed or paid** until confirmed on WhatsApp. It makes no claim of order confirmation, email receipt, or payment. |
 | AC-WA-5 | The cart is not cleared just because the WhatsApp link was clicked, so the customer can return if WhatsApp failed to open. |
 | AC-WA-6 | Works on mobile (opens the WhatsApp app) and desktop (opens WhatsApp Web or the app chooser). Tested manually on at least one real phone before launch. |
+
+### 3.5a Preview mode, unknown data, enquiry
+
+| ID | Criterion |
+|---|---|
+| AC-PREV-1 | While `mode: preview`, every page shows a persistent, plainly worded preview notice. No published URL is presented as the live store. |
+| AC-PREV-2 | A product with `priceLkr: null` shows "Price to be confirmed" (never blank, 0, or a strikethrough). `availability: unconfirmed` is shown as text. A missing photo uses a neutral placeholder, never a generated or scraped image (brief: "Do not generate substitute product images"). |
+| AC-PREV-3 | While the WhatsApp contact is unverified, the order-request button is visibly disabled with a reason, and the cart still works. No historical number or email is shown. |
+| AC-PREV-4 | Live mode hides unapproved products everywhere, including stale cart lines (QA-FINDINGS I-6). |
+| AC-ENQ-1 | The custom-print enquiry collects only what is needed. It hands off via the same verified channel, or says the channel isn't available yet. It never claims a request was "received" unless a real backend confirms it. Free text is length-limited and never rendered as HTML. |
 
 ### 3.6 Failure states
 
@@ -159,5 +165,6 @@ All of the following must hold, at a recorded commit SHA:
 2. `qa/scripts/review-commit.sh` shows install, build, and every project-defined check passing.
 3. `qa/scripts/secret-scan.sh` shows no HIGH findings on the source **and** on the build output directory.
 4. `qa/e2e/storefront-smoke.mjs` reports zero FAIL. Each REVIEW item is either signed off by the owner with evidence or removed.
-5. Owner decisions D-1…D-8 in QA-FINDINGS §5 are answered in writing.
+5. Owner decisions D-1…D-9 in QA-FINDINGS §5 are answered in writing.
 6. Manual checks done: real-phone WhatsApp handoff (AC-WA-6), contrast (AC-A11Y-8), footer links (AC-CONTENT-4).
+7. `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'` shows 0 failures.

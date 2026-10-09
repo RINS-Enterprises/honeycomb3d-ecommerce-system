@@ -1,12 +1,14 @@
 # HoneyComb 3D storefront rebuild: QA findings
 
 Owner: independent recovery QA (Claude). Acceptance criteria: [`QA-ACCEPTANCE.md`](QA-ACCEPTANCE.md).
-Last updated: **2026-10-08**.
+Last updated: **2026-10-09**.
 
-> **Headline:** the implementation (`codex/storefront-mvp` in `RINS-Enterprises/honeycomb3d-website`) has
-> **not been reviewed**. That repository was not accessible to this session (F-01). Everything below is
-> a **requirements and evidence audit, by inspection**, plus verification of the QA tooling itself.
-> **No storefront build, test or browser run has been performed, and no implementation finding exists yet.**
+> **Headline (2026-10-09):** the implementation branch is `codex/storefront-mvp` in **this** repository
+> (`honeycomb3d-website` was only proposed in the brief and never created, see F-01). Run 1 reviewed
+> `f801d314663470d5d4539f594e80acc0d63418e8` (checkpoint 1: data model and cart/WhatsApp logic, **no pages yet**).
+> Run 1 result: `npm run build` and `npm run check` **fail**. `npm test` passes with **zero tests**. QA domain contract
+> tests: 10 pass, 3 fail. See §7. No browser test has been possible, because nothing renders yet.
+> §2–6 remain the requirements and evidence audit (inspection).
 
 Finding labels: **Tested failure** = reproduced by running something. **Inspection** = found by reading
 code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
@@ -22,6 +24,9 @@ code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
 | 2026-10-08 | `RINS-Enterprises/honeycomb3d-ops-system` `main` | `a0cfadb38fda01262e40a258f0b6c7c3291a8d2d` | Read README + LICENSE; secret scan | README only (Appsmith + Baserow internal tool). Secret scan: no HIGH findings. |
 | 2026-10-08 | `https://honeycomb3d.store` | — | HTTPS GET | Blocked by this environment's egress policy (proxy 403). **Live status unknown**, not "down". |
 | 2026-10-08 | Rebuild ZIP | — | Filesystem search for `*.zip` / recovery files | Not present. |
+| 2026-10-09 | `honeycomb3d-ecommerce-system` `codex/storefront-mvp` | `f801d314663470d5d4539f594e80acc0d63418e8` | Read `docs/RECOVERY-AND-BUILD-BRIEF.md` (E-7), `docs/BUILD-STATUS.md`, all source and data. `review-commit.sh` in a separate checkout. QA domain contract tests. Secret scan. | See §7 Run 1. |
+| 2026-10-09 | Namecheap account (read-only connector) | — | Domain list; DNS host records for `honeycomb3d.store` | E-8. No changes made. |
+| 2026-10-09 | `https://honeycomb3d.store`, `ingress-cinna.easywp.com`, web archive | — | Fetch via a second tool | Inconclusive: that tool's DNS also failed for `www.namecheap.com`, so the failure says nothing about the site. |
 
 ## 2. Evidence register (directly recovered)
 
@@ -37,6 +42,8 @@ but it is on or after the newest review shown (2026-04-05) and on or before the 
 | E-4 | `checkout.png` (1920×2128) | `dfd25f20b11dad429adb24054468049ad26a7ef98c176960207d0aa6c598d534` | Checkout with Night Fury ×1: shipping, payment options, review opt-in |
 | E-5 | `README.md` | — | Historical claims about features/integrations (§4.2) |
 | E-6 | ops-system `README.md` | — | Internal tool: Appsmith front end, **Baserow** DB, Products → Order Items → Orders, cost/profit; inventory tracking listed as a *future* improvement |
+| E-7 | `docs/RECOVERY-AND-BUILD-BRIEF.md` @ `f801d31` (dated 2026-10-08) | — | Recovered **from chat history, second-hand**: EasyWP/WooCommerce/Blocksy platform, `info@honeycomb3d.store`, CSS colours, a shipping draft, historical prices, scope and acceptance checks. The brief itself classifies most of this as historical/unverified. |
+| E-8 | Namecheap read via the user's connector, 2026-10-09 | — | `honeycomb3d.store` **registered** 2026-03-31, expires **2027-03-31**, auto-renew **on**. DNS: apex `ALIAS → ingress-cinna.easywp.com`, `www CNAME → apex`, SPF `include:spf.easywp.com`, a Comodo DCV CNAME, an ACME TXT. **No MX records** returned by the host-records API. |
 
 ## 3. Recovered catalog (as observed, not current-verified)
 
@@ -58,6 +65,19 @@ line for #4 (500, save 400) agrees with E-2/E-3.
 Shipping observed (E-4): one method, "Islandwide Delivery (Rs. 300)" at රු300.00. Checkout country: Sri Lanka.
 Contact observed (E-1, E-3): WhatsApp `+94 70 300 9064` (3 occurrences, consistent).
 
+### 3.1 Price evidence conflicts (E-2 vs E-7)
+
+| Product | Screenshot price / compare-at (April, E-2) | Brief historical figures (E-7) |
+|---|---|---|
+| Kurama Figure | 1,200 / 1,500 | 2,000 / 1,000 ("175 g", September) |
+| Baymax Figure | 800 / 1,200 | 900 / 600 ("50 g", September) |
+| Classic Kunai | 900 / 1,200 | 600 / 400 (September) |
+| Night Fury | 500 / 900 (keychain) | 1,500 ("Articulated Dragon", April suggested). It may be a different product. |
+| Dragon keychain | 500 / 900 (Night/Light Fury) | 500 / 250 (September) |
+
+No two sources agree, so **no price can be published from the evidence**. Implementation
+`f801d31` correctly sets every `priceLkr` to `null`.
+
 ## 4. Classification of what is known
 
 ### 4.1 Directly recovered evidence (seen in E-1…E-4)
@@ -71,13 +91,15 @@ Contact observed (E-1, E-3): WhatsApp `+94 70 300 9064` (3 occurrences, consiste
 ### 4.2 Historical claims (README text, not evidenced by artefacts)
 - Stripe integration; COD; FluentSMTP email; "Trustpilot review automation (BCC logic)"; low-stock and "X sold" "urgency system"; WhatsApp contact; "live store designed to generate actual sales".
 - No code, configuration, plugin export, credentials or DB dump backs any of these. **Treat every integration as non-functional.**
+- From the brief (E-7, chat-derived): `info@honeycomb3d.store` as the customer email; a shipping draft of "1–3 business days processing, typically 1–5 business days delivery, courier-dependent customer-paid fees"; an April terms draft; and the September/April price figures in §3.1.
 
 ### 4.3 Old proposals / practices (not to be carried over without a decision)
 - "Psychological triggers", "scarcity triggers ('Only X left')", "social proof ('X sold')": README §"What I Optimized". These were deliberate conversion tactics, not data.
 - Ops-system future items: dashboard, inventory tracking, order history. **Inventory tracking did not exist** at the time of that README (2026-04-22).
+- From the brief (E-7): payment providers PayHere, WebXPay, KOKO and Mint were *considered*, never evidenced as active. Hero variants "Precision in Every Layer" / "LEVEL UP YOUR SETUP". A September homepage layout proposal. Category suggestions Anime, Weapons/props, Gaming, Keychains, Collectibles, Dragons.
 
 ### 4.4 Current unknowns
-See owner decisions §5. Also unknown: whether the WooCommerce site, its database, `wp-content/uploads` or a hosting backup still exist; who controls `honeycomb3d.store` DNS and hosting; whether the Baserow product table is current; actual stock and print lead times; product dimensions, materials and colour options; legal business name and registration for policy pages.
+See owner decisions §5. Also unknown: whether the EasyWP site, its database, `wp-content/uploads` or a hosting backup still exist (DNS still points at EasyWP, E-8); whether `info@honeycomb3d.store` receives mail (no MX records returned, E-8); whether the Baserow product table is current; actual stock and print lead times; product dimensions, materials and colour options; legal business name and registration for policy pages.
 
 ## 5. Owner decisions required
 
@@ -95,13 +117,10 @@ See owner decisions §5. Also unknown: whether the WooCommerce site, its databas
 
 ## 6. Findings
 
-### F-01 · Blocker · Target repository and implementation branch inaccessible
-- **Type:** Tested failure (access). **Reviewed commit:** none (no access).
-- **Reproduction:** From this session: (1) attach `RINS-Enterprises/honeycomb3d-website`, which fails with "not found or credential doesn't have access"; (2) `git ls-remote https://github.com/RINS-Enterprises/honeycomb3d-website` is refused (no credential for the repo); (3) the session's accessible-repo listing shows only `honeycomb3d-ecommerce-system` and `honeycomb3d-ops-system`.
-- **Expected:** Read access to the brief and `codex/storefront-mvp`; write access to `claude/recovery-qa`.
-- **Actual:** No read or write access. The brief, the ZIP and GPT's branch could not be inspected. QA work is staged on `claude/wizardly-mendel-73bkuw` of `honeycomb3d-ecommerce-system` instead.
-- **Evidence:** Session tool output, 2026-10-08.
-- **Recommended fix:** Check the repo name. Install the Claude GitHub App on `honeycomb3d-website` (or grant the connected account access), then start a session with it selected. Then run `qa/scripts/review-commit.sh https://github.com/RINS-Enterprises/honeycomb3d-website codex/storefront-mvp` and copy `docs/QA-*.md` + `qa/` onto `claude/recovery-qa`.
+### F-01 · Closed 2026-10-09 · Target repository was a proposal; work moved to this repo
+- **Type:** Tested (access). **Reviewed commit:** n/a.
+- **What happened:** `RINS-Enterprises/honeycomb3d-website` could not be attached (2026-10-08) because it was never created. The brief only *suggests* it (E-7 §"Two-agent workflow"). The implementation is on `codex/storefront-mvp` in `honeycomb3d-ecommerce-system`, which QA can read.
+- **Residual:** QA work is on the session-assigned branch `claude/wizardly-mendel-73bkuw`, not the brief's `claude/recovery-qa`. Both agents should treat this branch as the QA branch, or the owner can ask for it to be mirrored.
 
 ### F-02 · High · Catalog cannot be rebuilt from recovered evidence alone
 - **Type:** Inspection. **Reviewed commit:** reference `c78e12f`.
@@ -165,8 +184,8 @@ See owner decisions §5. Also unknown: whether the WooCommerce site, its databas
 
 ### F-11 · Medium · Single order channel depends on an unconfirmed phone number
 - **Type:** Inspection. **Reviewed commit:** reference `c78e12f`.
-- **Actual:** `+94 70 300 9064` is consistent across E-1/E-3 but was last evidenced in April 2026.
-- **Recommended fix:** D-2. Keep the number in one config value (AC-WA-3). Run the harness with `WHATSAPP_NUMBER=<confirmed>`.
+- **Actual:** `+94 70 300 9064` is consistent across E-1/E-3 but was last evidenced in April 2026. The brief's alternate contact `info@honeycomb3d.store` has **no MX records** in the domain's DNS (E-8), so it should be assumed **not to receive mail** until a test message is delivered.
+- **Recommended fix:** D-2. Keep the number in one config value (AC-WA-3). Run the harness with `WHATSAPP_NUMBER=<confirmed>`. Do not show the email until a test message to it has been received. `f801d31` already keeps both disabled (`whatsappNumber: null`, `whatsappVerified: false`).
 
 ### F-12 · Medium · Navigation taxonomy doesn't match catalog
 - **Type:** Inspection. **Reviewed commit:** reference `c78e12f`.
@@ -184,8 +203,8 @@ See owner decisions §5. Also unknown: whether the WooCommerce site, its databas
 - **Recommended fix:** If the new design reuses the palette, verify AC-A11Y-8 with measured contrast ratios.
 
 ### F-15 · Info · Better recovery sources may exist
-- **Type:** Inspection. The live site could not be checked from here (egress 403). The best sources are, in order: hosting backup / WooCommerce DB, WooCommerce product CSV export, `wp-content/uploads`, the Baserow product table, then a web archive of `honeycomb3d.store`.
-- **Recommended fix:** The owner checks the hosting account and Baserow before more screenshot-based reconstruction.
+- **Type:** Inspection plus a read-only account check (E-8). The domain is safe until 2027-03-31 with auto-renew on. Its apex still aliases to `ingress-cinna.easywp.com`. That means either the EasyWP site still exists, or DNS was left pointing at a cancelled instance; this could not be fetched from here. The best sources are, in order: EasyWP dashboard backup / WooCommerce DB, WooCommerce product CSV export, `wp-content/uploads`, the Baserow product table, then a web archive.
+- **Recommended fix:** The owner opens the EasyWP dashboard (or asks Namecheap support) **before** any DNS change, because re-pointing the apex to a new host could cut access to a recoverable site. This matches the brief's outstanding task 3. Do not change DNS until a backup is secured.
 
 ### F-16 · Info · Ops data contains cost/profit fields
 - **Type:** Inspection. **Reviewed commit:** ops `a0cfadb`.
@@ -194,18 +213,94 @@ See owner decisions §5. Also unknown: whether the WooCommerce site, its databas
 
 ## 7. Implementation review: `codex/storefront-mvp`
 
-**Not started. Blocked by F-01.** No commit SHA recorded, no build run, no browser test run.
-Once access exists, each run is recorded here as:
+### Run 1: 2026-10-09 · `codex/storefront-mvp` @ `f801d314663470d5d4539f594e80acc0d63418e8`
 
-```
-### Run N: <date> · codex/storefront-mvp @ <full sha>
-review-commit.sh summary: install / lint / typecheck / test / build / audit / secret-scan exit codes
-storefront-smoke.mjs: counts {PASS, FAIL, INCONCLUSIVE, REVIEW}; results under qa/results/<sha>/browser/
-Findings: I-<n> (severity, Tested failure | Inspection, repro, expected, actual, evidence, fix)
-Re-test of earlier findings: I-<n> fixed at <sha> / still open
-```
+Checkpoint 1 ("Establish recovered catalog schema and honest order-request boundary", 2026-10-08).
+Files: `package.json`, `package-lock.json`, `.gitignore`, `data/products.json`, `data/store.json`,
+`src/domain.mjs`, `docs/BUILD-STATUS.md`, `docs/RECOVERY-AND-BUILD-BRIEF.md`.
+Reviewed in a separate checkout created by `qa/scripts/review-commit.sh`. GPT's branch and checkout were not touched.
+Raw output: `qa/results/f801d314663470d5d4539f594e80acc0d63418e8/`.
 
-## 8. QA tooling: what was actually executed (2026-10-08)
+| Check | Result |
+|---|---|
+| `npm ci` | exit 0 (no dependencies) |
+| `npm run check` | **exit 1**: `Cannot find module …/scripts/check.mjs` |
+| `npm test` | exit 0, but **0 tests** ran (`tests/` does not exist) |
+| `npm run build` | **exit 1**: `Cannot find module …/scripts/build.mjs` |
+| lint / typecheck / test:e2e | not defined |
+| `npm audit --omit=dev` | 0 vulnerabilities |
+| `qa/scripts/secret-scan.sh` | no HIGH findings |
+| QA domain contract tests (`qa/domain/`) | **10 pass, 3 fail** (I-3, I-4, I-5) |
+| Browser smoke (`qa/e2e/`) | **Not run**: no pages or server exist at this commit |
+
+**Verified as good at this commit (tested):** every price is `null`, so nothing is invented. No stock,
+sold, sale or review fields exist. WhatsApp is disabled until `whatsappVerified` and a digits-only
+number are set. Cart arithmetic is done in whole cents. Quantities are capped at 20 and invalid lines
+are dropped. Corrupt or throwing `localStorage` yields an empty cart. `escapeHtml` is correct. The
+order message carries the product name, `[ID]`, quantity and subtotal, and says *"This is an order
+request, not a confirmed purchase."* Live mode hides unapproved products. These match the brief's
+acceptance checks and AC-CONTENT-1/2, AC-WA-1/3/4 and AC-FAIL-2.
+
+#### I-1 · High · Tested failure · `build` and `check` scripts are declared but missing
+- **Reviewed commit:** `f801d31`.
+- **Reproduction:** `npm ci && npm run build`; `npm run check`.
+- **Expected:** Both exit 0, or are not declared until they exist (AC-BUILD-1).
+- **Actual:** Both exit 1 with `MODULE_NOT_FOUND` for `scripts/build.mjs` and `scripts/check.mjs`. `dev` and `start` also reference the missing `scripts/serve.mjs` (by inspection).
+- **Evidence:** `qa/results/f801d31…/build.log`, `check.log`.
+- **Recommended fix:** Add the scripts at the next checkpoint (BUILD-STATUS says pages come next). Until then, don't commit `package.json` entries that can't run, so a red build means a real regression.
+
+#### I-2 · Medium · Tested failure · `npm test` is green with zero tests
+- **Reviewed commit:** `f801d31`.
+- **Reproduction:** `npm test`.
+- **Expected:** Domain logic is covered by tests, and an empty test run fails.
+- **Actual:** `node --test tests/*.test.mjs` prints `1..0 … # pass 0` and exits 0. `tests/` doesn't exist.
+- **Evidence:** `qa/results/f801d31…/test.log`.
+- **Recommended fix:** Add `tests/domain.test.mjs`, which may reuse cases from `qa/domain/domain-contract.test.mjs`. Make `check` fail when no test files are found.
+
+#### I-3 · Medium · Tested failure · Category filter splits keychains across two categories
+- **Reviewed commit:** `f801d31`.
+- **Reproduction:** `filterProducts(products, '', 'Keychains')`.
+- **Expected:** The category filter returns all 3 keychains (AC-CAT-2).
+- **Actual:** It returns only *Hidden Leaf Keychain*. *Night Fury Keychain* and *Light Fury Keychain* have category `Dragons`, so "Keychains" sits in tags only. A shopper filtering by Keychains misses 2 of 3.
+- **Evidence:** QA contract test 3: `keychains are split across categories ["Keychains","Dragons"]`.
+- **Recommended fix:** Use two facets: a product type (`Keychain`, `Figure`, `Prop`) and a collection/franchise (`Naruto`, `How to Train Your Dragon`, `Big Hero 6`, or the brief's `Dragons`). Filter on both. The final taxonomy is still owner decision D-3.
+
+#### I-4 · Low · Tested failure · An all-unpriced handoff shows "Priced items subtotal: LKR 0.00"
+- **Reviewed commit:** `f801d31`.
+- **Reproduction:** `orderMessage([{id:'HC-KURAMA',quantity:2}], products)` with the shipped data, where every price is null.
+- **Expected:** No zero amount when nothing is priced (AC-WA-2).
+- **Actual:** The message contains `Priced items subtotal: LKR 0.00. Other item prices are pending; this is not the full total.` A customer or staff member can read LKR 0.00 as a price.
+- **Evidence:** QA contract test 9.
+- **Recommended fix:** When `knownSubtotal === 0 && unpriced`, emit "Prices to be confirmed by HoneyComb 3D" and no amount. Keep the current wording for mixed carts.
+
+#### I-5 · Low · Tested failure · Price validation rejects valid amounts, with a misleading message
+- **Reviewed commit:** `f801d31`.
+- **Reproduction:** `validateData([{...products[0], priceLkr: 19.99}], store)`.
+- **Expected:** Any positive LKR amount with ≤ 2 decimals is accepted, or the schema states "whole rupees only".
+- **Actual:** 19.99 is rejected but 10.15 is accepted, because `Number.isSafeInteger(19.99*100)` hits float error (`1998.9999…`). The error text says "LKR amount in cents", but the field holds rupees.
+- **Evidence:** QA contract test 11.
+- **Recommended fix:** If LKR prices are whole rupees, require `Number.isSafeInteger(priceLkr)` with message "whole rupees". Otherwise check `Math.abs(Math.round(v*100) - v*100) < 1e-6`.
+
+#### I-6 · Medium · Inspection (reproduced at function level) · Cart can keep products hidden in live mode
+- **Reviewed commit:** `f801d31`.
+- **Reproduction:** Live config (`mode:'live'`, verified contact). Then `normalizeCart([{id:'HC-KUNAI',quantity:1}], products)` with the full catalog.
+- **Expected:** An unapproved product, invisible in live mode, can't stay in a cart or reach the WhatsApp message (AC-DATA-2, AC-CART-7).
+- **Actual:** It is kept, because `normalizeCart`/`cartSummary`/`orderMessage` trust whatever product list the caller passes. Whether the UI passes `visibleProducts()` can't be checked yet (no UI).
+- **Recommended fix:** Pass `visibleProducts(products, store)` into every cart function, or filter `approved` inside them when `store.mode === 'live'`. Add a test. QA will re-check at the UI checkpoint.
+
+#### I-7 · Low · Inspection · New product copy is attributed to recovered sources
+- **Reviewed commit:** `f801d31`.
+- **Actual:** Descriptions such as "Ask about available sizes, colours and finishing options" and "A decorative Minato-inspired kunai prop" are newly written. Each `source` says "Recovery brief; April storefront screenshots…", but neither contains that text. The brief calls one item "Minato spinner", while the data says "Minato Kunai" (the screenshots also say Minato Kunai). The copy also implies colour/size options that no source evidences.
+- **Expected:** Provenance distinguishes recovered facts from drafted copy (AC-DATA-1, AC-PDP-2).
+- **Recommended fix:** Add `copyStatus: "draft-needs-owner-approval"`, or limit `source` to identity facts. Keep `approved: false` until the owner signs off the wording.
+
+#### I-8 · Info · Branch naming
+- `docs/BUILD-STATUS.md` correctly notes that QA is on `claude/wizardly-mendel-73bkuw`, not `claude/recovery-qa`. That is this session's assigned branch. See F-01.
+
+**Next QA run:** at GPT's next checkpoint (pages, persistent cart, request previews). I will re-run
+`review-commit.sh`, `qa/domain/` and the browser smoke against the new SHA, and re-test I-1…I-6.
+
+## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 
 | Check | Command | Result |
 |---|---|---|
@@ -215,13 +310,16 @@ Re-test of earlier findings: I-<n> fixed at <sha> / still open
 | Commit review script | `qa/scripts/review-commit.sh` against a scratch npm project and against reference `c78e12f` | Recorded the SHA. Ran `npm ci`/`test`/`build`/`audit` and captured a failing `test` exit 3. Reported "no package.json" for the reference repo. |
 | Browser harness, **synthetic fixture only** (scratch, not committed) | `node qa/e2e/storefront-smoke.mjs` on Chromium (Playwright 1.56.1) | Correct fixture: 90 PASS, 0 FAIL, 1 REVIEW (no security headers on the plain server). Defect-seeded fixture: 15 FAIL + 4 REVIEW, catching every planted defect (subtotal off by 1, local-format WhatsApp number, soft-404, Escape not closing the menu, horizontal overflow, "Only 2 left" copy). |
 
-These results validate the **tools only**. They say nothing about the HoneyComb storefront.
+| Domain contract tests (new, 2026-10-09) | `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'` | Against `f801d31`: 10 pass, 3 fail (§7 Run 1). Without `DOMAIN_DIR` they skip. |
+
+The fixture rows validate the **tools only**. §7 holds the results against the storefront.
 
 ## 9. Remaining verification gaps
 
-1. Brief, ZIP and `codex/storefront-mvp`: unread (F-01). Acceptance criteria marked *(confirm vs brief)* are assumptions.
-2. No build, test, browser, accessibility or security check has run against the implementation.
-3. Firefox/WebKit are not available here (Chromium only). Real-phone WhatsApp handoff (AC-WA-6) is manual.
-4. No automated contrast or axe-core audit. axe-core is not installed, and adding it is a dependency change for GPT to decide. Contrast (AC-A11Y-8) is manual for now.
-5. Live site, hosting backups and Baserow data: not inspected.
+1. No pages exist at `f801d31`, so there is no browser, navigation, accessibility, contrast or failure-state run yet. `qa/e2e/storefront-smoke.mjs` is ready for the next checkpoint.
+2. The WhatsApp handoff could only be tested at function level with a **test-only** number, because the shipped config disables it pending D-2. A real-phone check (AC-WA-6) is manual.
+3. Firefox/WebKit are not available here (Chromium only).
+4. No axe-core audit (dependency decision for GPT). Contrast is manual.
+5. Live site and EasyWP state: not fetchable from this environment. Baserow data: not inspected.
 6. Screenshot capture date is inferred (2026-04-05 to 2026-04-19), not recorded.
+7. The brief is itself second-hand (chat retrieval). Its claims are historical, not verified.
