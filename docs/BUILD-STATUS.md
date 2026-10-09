@@ -1,6 +1,6 @@
 # Build status
 
-Branch: codex/storefront-mvp. Updated 2026-10-09. Checkpoint 3: QA fixes and browser verification.
+Branch: codex/storefront-mvp. Updated 2026-10-09. Checkpoint 3: QA fixes verified in CI.
 
 ## Architecture
 
@@ -39,4 +39,18 @@ Claude's docs/QA-FINDINGS.md on claude/wizardly-mendel-73bkuw was read. Its new 
 
 ## Next checkpoint
 
-Run CI, address failures, inspect generated screenshots if available, and record exact results. Recover original logo/photos and confirm sale-ready data before any public launch. No deployment or domain/account changes have occurred.
+Recover original logo/photos and confirm sale-ready data before any public launch. A human visual review of captured screenshots and real-device WhatsApp check remain. No deployment or domain/account changes have occurred.
+
+## Verified checkpoint
+
+Application commit: 09b5cd10dcf8c52c38db11317dae35a143c0f02a.
+GitHub Actions run: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system/actions/runs/37889677666
+
+- npm ci: passed.
+- npm test: 11 passed, 0 failed.
+- npm run build: passed; 13 pages including the 404 page.
+- npm run check: passed; generated pages and local links/assets verified; nonempty unit suite required.
+- Chromium: passed desktop/mobile catalogue, search/category, cart persistence/quantity/removal, unknown-price messaging, custom enquiry, safe text rendering, verified-contact fixture, keyboard skip link, true 404, data-load failure and zero uncaught page errors.
+- Artifact storefront-check-output contains dist/ and desktop/mobile screenshots. Screenshots were captured by CI but not visually inspected in this session. WhatsApp fixture checks never sent a message.
+
+These are remote CI build/browser results, not a local terminal build or a deployed storefront. The Windows sandbox error remains local to this session. No live checkout exists.
