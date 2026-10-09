@@ -1,0 +1,56 @@
+
+> honeycomb3d-storefront@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+ok 1 - restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+  ---
+  duration_ms: 2.042828
+  type: 'test'
+  ...
+# Subtest: money is computed in cents and unknown prices remain explicit
+ok 2 - money is computed in cents and unknown prices remain explicit
+  ---
+  duration_ms: 14.954924
+  type: 'test'
+  ...
+# Subtest: bad storage and invalid JSON are recoverable
+ok 3 - bad storage and invalid JSON are recoverable
+  ---
+  duration_ms: 1.166423
+  type: 'test'
+  ...
+# Subtest: WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+ok 4 - WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+  ---
+  duration_ms: 0.341788
+  type: 'test'
+  ...
+# Subtest: all search words and category must match
+ok 5 - all search words and category must match
+  ---
+  duration_ms: 0.415939
+  type: 'test'
+  ...
+# Subtest: live build requires verified contact, approvals, original photos and availability
+ok 6 - live build requires verified contact, approvals, original photos and availability
+  ---
+  duration_ms: 0.749428
+  type: 'test'
+  ...
+# Subtest: escaping prevents catalogue text from becoming markup
+ok 7 - escaping prevents catalogue text from becoming markup
+  ---
+  duration_ms: 0.246312
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 104.32257

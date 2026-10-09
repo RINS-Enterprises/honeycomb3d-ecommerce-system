@@ -1,0 +1,2 @@
+no package.json at c78e12f024e9c6f2652b4e2961f0e79d57cffcff - nothing to build
+secret-scan  exit=0  

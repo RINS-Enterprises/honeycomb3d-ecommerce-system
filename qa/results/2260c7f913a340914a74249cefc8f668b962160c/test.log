@@ -1,0 +1,80 @@
+
+> honeycomb3d-storefront@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: all three recovered keychains appear under the keychain category
+ok 1 - all three recovered keychains appear under the keychain category
+  ---
+  duration_ms: 1.052593
+  type: 'test'
+  ...
+# Subtest: draft descriptions are explicitly attributed and remain unapproved
+ok 2 - draft descriptions are explicitly attributed and remain unapproved
+  ---
+  duration_ms: 0.216923
+  type: 'test'
+  ...
+# Subtest: restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+ok 3 - restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+  ---
+  duration_ms: 2.249339
+  type: 'test'
+  ...
+# Subtest: money is computed in cents and unknown prices remain explicit
+ok 4 - money is computed in cents and unknown prices remain explicit
+  ---
+  duration_ms: 16.292168
+  type: 'test'
+  ...
+# Subtest: bad storage and invalid JSON are recoverable
+ok 5 - bad storage and invalid JSON are recoverable
+  ---
+  duration_ms: 0.293413
+  type: 'test'
+  ...
+# Subtest: WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+ok 6 - WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+  ---
+  duration_ms: 0.481668
+  type: 'test'
+  ...
+# Subtest: all search words and category must match
+ok 7 - all search words and category must match
+  ---
+  duration_ms: 0.346524
+  type: 'test'
+  ...
+# Subtest: live build requires verified contact, approvals, original photos and availability
+ok 8 - live build requires verified contact, approvals, original photos and availability
+  ---
+  duration_ms: 0.820823
+  type: 'test'
+  ...
+# Subtest: escaping prevents catalogue text from becoming markup
+ok 9 - escaping prevents catalogue text from becoming markup
+  ---
+  duration_ms: 0.194736
+  type: 'test'
+  ...
+# Subtest: decimal prices accept normal currency and reject sub-cent values
+ok 10 - decimal prices accept normal currency and reject sub-cent values
+  ---
+  duration_ms: 0.323131
+  type: 'test'
+  ...
+# Subtest: live-visible catalogue strips unapproved items from every cart operation
+ok 11 - live-visible catalogue strips unapproved items from every cart operation
+  ---
+  duration_ms: 0.337787
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 110.244011

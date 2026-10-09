@@ -1,0 +1,9 @@
+install      exit=0   npm ci
+lint         NOT DEFINED
+typecheck    NOT DEFINED
+check        exit=1   npm run check
+test         exit=0   npm run test
+build        exit=1   npm run build
+test:e2e     NOT DEFINED
+audit        exit=0   npm audit --omit=dev --audit-level=high
+secret-scan  exit=0  
