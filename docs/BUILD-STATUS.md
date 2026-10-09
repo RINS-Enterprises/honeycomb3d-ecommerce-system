@@ -1,6 +1,6 @@
 # Build status
 
-Branch: codex/storefront-mvp. Updated 2026-10-09. Checkpoint 2: complete storefront source, pending execution checks.
+Branch: codex/storefront-mvp. Updated 2026-10-09. Checkpoint 3: QA fixes and browser verification.
 
 ## Architecture
 
@@ -33,9 +33,9 @@ Business shipping, returns, payment terms and contact confirmation remain outsta
 
 Repository read access and push permission verified through GitHub. Existing draft PR #2 and implementation branch resumed. Shell execution currently fails before launching due to the Windows managed-network sandbox backend; no local build or browser run is claimed.
 
-In-memory JavaScript rendering successfully generated 12 normal pages, with no undefined/NaN values and preview noindex present. A GitHub Actions workflow is included to run Node tests, the real build, link checks and Chromium flows. Its actual outcome will be recorded after execution.
+CI run 37889509551 at 5d1c6a4 passed npm ci, 7 unit tests, npm run build (13 pages including 404) and npm run check (local links/assets). Chromium identified an ambiguous implicit category label before completing the flows. This checkpoint gives the control an explicit accessible name and reruns verification.
 
-Claude's docs/QA-FINDINGS.md on claude/wizardly-mendel-73bkuw was read. It contains recovery findings, not an implementation review. Addressed in scope: contact gating, current-data separation, neutral placeholders, no unsupported commerce claims and actual catalogue-derived categories. No Claude branch or QA file was changed.
+Claude's docs/QA-FINDINGS.md on claude/wizardly-mendel-73bkuw was read. Its new implementation review of f801d31 (QA blob 47994be) was read at this milestone. I-1: missing scripts now implemented. I-2: real tests added and check rejects absent test files. I-3: all keychains now share the Keychains category; Dragons remains a searchable collection tag. I-4: all-unpriced requests contain no zero subtotal. I-5: cent validation tolerates binary floating-point error for 19.99. I-6: UI passes the live-visible catalogue into cart functions; regression covered. I-7: identity provenance is separated from explicitly draft description copy. No Claude branch or QA file was changed.
 
 ## Next checkpoint
 

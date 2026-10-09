@@ -1,9 +1,10 @@
-import {readFile,stat} from 'node:fs/promises';
+import {readFile,stat,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 import {validateData,visibleProducts} from '../src/domain.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
+assert((await readdir(join(root,'tests'))).some(name=>name.endsWith('.test.mjs')), 'At least one unit-test file must exist');
 const all=JSON.parse(await readFile(join(root,'data/products.json'),'utf8'));
 const store=JSON.parse(await readFile(join(root,'data/store.json'),'utf8'));
 validateData(all,store);

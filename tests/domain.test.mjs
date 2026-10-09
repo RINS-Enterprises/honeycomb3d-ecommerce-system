@@ -42,3 +42,14 @@ test('live build requires verified contact, approvals, original photos and avail
 test('escaping prevents catalogue text from becoming markup',()=>{
   assert.equal(escapeHtml('<img onerror="x">&'), '&lt;img onerror=&quot;x&quot;&gt;&amp;');
 });
+
+test('decimal prices accept normal currency and reject sub-cent values',()=>{
+  validateData([p('A',19.99)],preview);
+  assert.throws(()=>validateData([p('A',19.999)],preview));
+});
+test('live-visible catalogue strips unapproved items from every cart operation',()=>{
+  const visible=visibleProducts(products,{mode:'live'});
+  assert.deepEqual(normalizeCart([{id:'A',quantity:1}],visible),[]);
+  assert.equal(cartSummary([{id:'A',quantity:1}],visible).count,0);
+  assert.equal(orderMessage([{id:'A',quantity:1}],visible),'');
+});

@@ -1,9 +1,132 @@
 [
-  {"id":"HC-LEAF","slug":"hidden-leaf-keychain","name":"Hidden Leaf Keychain","category":"Keychains","tags":["Naruto","Anime"],"description":"A Hidden Leaf design for your keyring. Ask us about the available colours and size.","priceLkr":null,"availability":"unconfirmed","image":null,"imageAlt":null,"approved":false,"source":"Recovery brief; April storefront screenshots catalogued by Claude QA. Current details unverified."},
-  {"id":"HC-BAYMAX","slug":"baymax-figure","name":"Baymax Figure","category":"Figures","tags":["Big Hero 6","Movies"],"description":"Bring Baymax to your shelf. Size, colour and finish will be confirmed with your quote.","priceLkr":null,"availability":"unconfirmed","image":null,"imageAlt":null,"approved":false,"source":"Recovery brief; April storefront screenshots catalogued by Claude QA. Current details unverified."},
-  {"id":"HC-KURAMA","slug":"kurama-figure","name":"Kurama Figure","category":"Figures","tags":["Naruto","Anime"],"description":"A Kurama figure for your collection. Ask about available sizes, colours and finishing options.","priceLkr":null,"availability":"unconfirmed","image":null,"imageAlt":null,"approved":false,"source":"Recovery brief; April storefront screenshots catalogued by Claude QA. Current details unverified."},
-  {"id":"HNYCMB501","slug":"night-fury-keychain","name":"Night Fury Keychain","category":"Dragons","tags":["How to Train Your Dragon","Keychains","Movies"],"description":"A little Night Fury for your keys or bag. Confirm the size, colour and keyring details with us.","priceLkr":null,"availability":"unconfirmed","image":null,"imageAlt":null,"approved":false,"source":"Historical SKU HNYCMB501 recovered from product.png by Claude QA. Current details unverified."},
-  {"id":"HC-MINATO","slug":"minato-kunai","name":"Minato Kunai","category":"Props","tags":["Naruto","Anime"],"description":"A decorative Minato-inspired kunai prop. Ask about dimensions and finish before ordering.","priceLkr":null,"availability":"unconfirmed","image":null,"imageAlt":null,"approved":false,"source":"Recovery brief; April storefront screenshots catalogued by Claude QA. Current details unverified."},
-  {"id":"HC-LIGHTFURY","slug":"light-fury-keychain","name":"Light Fury Keychain","category":"Dragons","tags":["How to Train Your Dragon","Keychains","Movies"],"description":"A Light Fury keychain for your collection. Size and finishing details are confirmed on enquiry.","priceLkr":null,"availability":"unconfirmed","image":null,"imageAlt":null,"approved":false,"source":"April storefront screenshots catalogued by Claude QA. Current details unverified."},
-  {"id":"HC-KUNAI","slug":"classic-kunai","name":"Classic Kunai","category":"Props","tags":["Naruto","Anime"],"description":"A classic kunai display prop. Tell us the size and colour you have in mind when requesting a quote.","priceLkr":null,"availability":"unconfirmed","image":null,"imageAlt":null,"approved":false,"source":"Recovery brief; April storefront screenshots catalogued by Claude QA. Current details unverified."}
+  {
+    "id": "HC-LEAF",
+    "slug": "hidden-leaf-keychain",
+    "name": "Hidden Leaf Keychain",
+    "category": "Keychains",
+    "tags": [
+      "Naruto",
+      "Anime"
+    ],
+    "description": "A Hidden Leaf design for your keyring. Ask us about the available colours and size.",
+    "priceLkr": null,
+    "availability": "unconfirmed",
+    "image": null,
+    "imageAlt": null,
+    "approved": false,
+    "source": "Recovery brief; April storefront screenshots catalogued by Claude QA. Current details unverified. Provenance applies to product identity only; description is newly drafted and needs owner approval.",
+    "copyStatus": "draft-needs-owner-approval"
+  },
+  {
+    "id": "HC-BAYMAX",
+    "slug": "baymax-figure",
+    "name": "Baymax Figure",
+    "category": "Figures",
+    "tags": [
+      "Big Hero 6",
+      "Movies"
+    ],
+    "description": "Bring Baymax to your shelf. Size, colour and finish will be confirmed with your quote.",
+    "priceLkr": null,
+    "availability": "unconfirmed",
+    "image": null,
+    "imageAlt": null,
+    "approved": false,
+    "source": "Recovery brief; April storefront screenshots catalogued by Claude QA. Current details unverified. Provenance applies to product identity only; description is newly drafted and needs owner approval.",
+    "copyStatus": "draft-needs-owner-approval"
+  },
+  {
+    "id": "HC-KURAMA",
+    "slug": "kurama-figure",
+    "name": "Kurama Figure",
+    "category": "Figures",
+    "tags": [
+      "Naruto",
+      "Anime"
+    ],
+    "description": "A Kurama figure for your collection. Ask about available sizes, colours and finishing options.",
+    "priceLkr": null,
+    "availability": "unconfirmed",
+    "image": null,
+    "imageAlt": null,
+    "approved": false,
+    "source": "Recovery brief; April storefront screenshots catalogued by Claude QA. Current details unverified. Provenance applies to product identity only; description is newly drafted and needs owner approval.",
+    "copyStatus": "draft-needs-owner-approval"
+  },
+  {
+    "id": "HNYCMB501",
+    "slug": "night-fury-keychain",
+    "name": "Night Fury Keychain",
+    "category": "Keychains",
+    "tags": [
+      "How to Train Your Dragon",
+      "Keychains",
+      "Movies",
+      "Dragons"
+    ],
+    "description": "A little Night Fury for your keys or bag. Confirm the size, colour and keyring details with us.",
+    "priceLkr": null,
+    "availability": "unconfirmed",
+    "image": null,
+    "imageAlt": null,
+    "approved": false,
+    "source": "Historical SKU HNYCMB501 recovered from product.png by Claude QA. Current details unverified. Provenance applies to product identity only; description is newly drafted and needs owner approval.",
+    "copyStatus": "draft-needs-owner-approval"
+  },
+  {
+    "id": "HC-MINATO",
+    "slug": "minato-kunai",
+    "name": "Minato Kunai",
+    "category": "Props",
+    "tags": [
+      "Naruto",
+      "Anime"
+    ],
+    "description": "A decorative Minato-inspired kunai prop. Ask about dimensions and finish before ordering.",
+    "priceLkr": null,
+    "availability": "unconfirmed",
+    "image": null,
+    "imageAlt": null,
+    "approved": false,
+    "source": "Recovery brief; April storefront screenshots catalogued by Claude QA. Current details unverified. Provenance applies to product identity only; description is newly drafted and needs owner approval.",
+    "copyStatus": "draft-needs-owner-approval"
+  },
+  {
+    "id": "HC-LIGHTFURY",
+    "slug": "light-fury-keychain",
+    "name": "Light Fury Keychain",
+    "category": "Keychains",
+    "tags": [
+      "How to Train Your Dragon",
+      "Keychains",
+      "Movies",
+      "Dragons"
+    ],
+    "description": "A Light Fury keychain for your collection. Size and finishing details are confirmed on enquiry.",
+    "priceLkr": null,
+    "availability": "unconfirmed",
+    "image": null,
+    "imageAlt": null,
+    "approved": false,
+    "source": "April storefront screenshots catalogued by Claude QA. Current details unverified. Provenance applies to product identity only; description is newly drafted and needs owner approval.",
+    "copyStatus": "draft-needs-owner-approval"
+  },
+  {
+    "id": "HC-KUNAI",
+    "slug": "classic-kunai",
+    "name": "Classic Kunai",
+    "category": "Props",
+    "tags": [
+      "Naruto",
+      "Anime"
+    ],
+    "description": "A classic kunai display prop. Tell us the size and colour you have in mind when requesting a quote.",
+    "priceLkr": null,
+    "availability": "unconfirmed",
+    "image": null,
+    "imageAlt": null,
+    "approved": false,
+    "source": "Recovery brief; April storefront screenshots catalogued by Claude QA. Current details unverified. Provenance applies to product identity only; description is newly drafted and needs owner approval.",
+    "copyStatus": "draft-needs-owner-approval"
+  }
 ]

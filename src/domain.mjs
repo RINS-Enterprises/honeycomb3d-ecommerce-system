@@ -14,7 +14,7 @@ export function validateData(products, store) {
     ids.add(p.id); slugs.add(p.slug);
     for (const k of ['name','category','description','source']) if (typeof p[k] !== 'string' || !p[k].trim()) throw new Error(`Missing ${k}: ${p.id}`);
     if (!Array.isArray(p.tags) || p.tags.some(t=>typeof t !== 'string')) throw new Error('Invalid tags');
-    if (p.priceLkr !== null && (!Number.isFinite(p.priceLkr) || p.priceLkr <= 0 || !Number.isSafeInteger(p.priceLkr*100))) throw new Error('Price must be null or a positive LKR amount in cents');
+    if (p.priceLkr !== null && (!Number.isFinite(p.priceLkr) || p.priceLkr <= 0 || (!Number.isSafeInteger(Math.round(p.priceLkr*100)) || Math.abs(Math.round(p.priceLkr*100)-p.priceLkr*100)>1e-6))) throw new Error('Price must be null or a positive LKR amount with at most two decimal places');
     if (!['unconfirmed','available','unavailable','made-to-order'].includes(p.availability)) throw new Error('Invalid availability');
     if (p.image !== null && (!/^\/assets\/[a-zA-Z0-9/_-]+\.(?:jpg|jpeg|png|webp|svg)$/.test(p.image) || !p.imageAlt)) throw new Error('Image must be local with alt text');
     if (typeof p.approved !== 'boolean') throw new Error('Missing approval state');
