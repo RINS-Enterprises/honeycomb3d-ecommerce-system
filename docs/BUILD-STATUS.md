@@ -1,62 +1,84 @@
 # Build status
 
-Branch: codex/storefront-mvp. Updated 2026-10-09. Checkpoint 3: QA fixes verified in CI.
+Updated 9 October 2026. Implementation: `codex/storefront-mvp`, draft PR #2, repository `RINS-Enterprises/honeycomb3d-ecommerce-system`.
 
-## Architecture
+## Current state
 
-Node.js 22+ produces static HTML for home, shop, seven recovered product routes, cart, custom enquiry, data-handling notice and 404. Browser ES modules enhance these pages. There are no runtime packages, external fonts or remote scripts. Public catalogue and contact configuration live in data/*.json. Output is dist/.
+The storefront continues the existing application. The recovery checkpoint found at the start of this continuation was `8255a96`, which already contained the core storefront and the original assets. The previous chat’s temporary filesystem was not used. No separate attachment was available in this workspace; the checked-in recovery brief and asset provenance supplied the handoff.
 
-This is an order-request storefront, with no order database, payment processor or inventory integration. A future checkout must add server-authoritative prices and inventory, payment webhooks and order lifecycle handling.
+The current implementation includes:
 
-## Implemented
+- Responsive homepage with recovered HoneyComb branding and a real product hero.
+- Searchable catalogue with category filters, URL state and an empty-results view.
+- Seven product-detail pages using the original supplied product photographs.
+- Persistent request cart, quantity changes/removal and explicit unknown-price handling.
+- Cart notes, readable request preview, copy fallback and gated WhatsApp handoff.
+- Custom-print enquiry with reference link, quantity, size and finish; no uploads or automatic sending.
+- Data-handling notice, keyboard skip link, labelled controls, real 404 and data-load failure handling.
+- Static build, local server, Vercel security configuration and GitHub Actions browser verification.
 
-- Responsive dark/gold storefront with text branding and abstract decorative artwork.
-- Pre-rendered product pages, original-photo slots with explicit missing-photo states.
-- Search/category filters, URL parameters, reset and no-results state.
-- Cart quantity changes, removal, storage recovery and browser persistence.
-- Explicit unknown pricing; no zero-price/free implication for products awaiting quotes.
-- Readable request preview, clipboard fallback and verified-contact WhatsApp gate.
-- Custom enquiry with reference link, quantity, size and finish; preview before external handoff.
-- Labels, skip link, native controls, keyboard focus, no-JS guidance and data-fetch failure state.
-- Static server with real 404s and security headers; portable build plus Vercel configuration.
-- Domain tests, generated-link checks and Playwright functional smoke tests in tests/. Claude-owned qa/ files are untouched.
+Architecture remains Node.js 22+ static HTML and browser ES modules, with structured catalogue/configuration in `data/`. There are no application dependencies, payment integration, order database or inventory connection.
 
-## Data and launch blockers
+## Recovery and QA changes in this continuation
 
-All seven seeds remain unapproved, with null prices/photos and unconfirmed availability. Only HNYCMB501 is a recovered SKU; HC-* identifiers are new stable references. Source logo is missing. Neutral photo placeholders are not substitutes for original photos.
+Claude’s actual QA branch is `claude/wizardly-mendel-73bkuw` at `51964cb`, draft PR #1. The proposed `claude/recovery-qa` branch was absent. Its findings were read; its branch and files were not changed. Claude’s previous sign-off was for `2260c7f`, before original assets were integrated.
 
-The public store remains in preview mode with noindex. No WhatsApp handoff is enabled until both live mode and a verified international contact are configured. Live output filters unapproved products and fails validation if approved products lack photos/confirmed availability. Price-on-enquiry remains supported.
+| Finding | Resolution |
+| --- | --- |
+| I-9: duplicate accessible product links | Image link is excluded from keyboard/screen-reader traversal; the named heading link remains. |
+| I-10: WhatsApp instructions when handoff is disabled | Handoff instructions appear only when a verified live WhatsApp link exists. Preview custom-enquiry guidance explains copying instead. |
+| I-11: internal workflow metadata in public data | Copy approval state and asset recovery filenames are omitted from public JSON; product approval remains for client-side filtering. |
+| I-13: preview notice outside landmarks | The notice is a labelled complementary landmark. |
+| I-14: catalogue heading order | Shop card titles are h2; home/related cards remain h3 under their h2 sections. |
+| Additional: hard-coded Kurama hero creates a dead link after live filtering | The hero selects only a visible product; an empty catalogue uses a decorative fallback with no product link. |
+| Chromium could not decode the 8,334 × 8,334 original logo | Added a crop of its empty white margins; artwork pixels and original file are preserved. See ASSET-PROVENANCE.md. |
 
-Business shipping, returns, payment terms and contact confirmation remain outstanding. The data-handling page describes implemented behavior, not an invented business policy. No reviews, stock counts, discounts, payment badges or delivery promises have been invented.
+Original logo and all seven photos are recovered. Product images remain unchanged. Current sale approval, prices and availability remain unconfirmed; recovering photos did not approve the catalogue.
 
-## Verification and access
+## Access and saved progress
 
-Repository read access and push permission verified through GitHub. Existing draft PR #2 and implementation branch resumed. Shell execution currently fails before launching due to the Windows managed-network sandbox backend; no local build or browser run is claimed.
+Read access was verified through GitHub and a separate clone. The GitHub connection reported write permission. The terminal’s dry-run push failed because it has no GitHub credentials; the connected GitHub write route successfully committed and advanced only `codex/storefront-mvp`. Each update used the prior head as a guard and was fetched back into the clone. No force push or main merge occurred.
 
-CI run 37889509551 at 5d1c6a4 passed npm ci, 7 unit tests, npm run build (13 pages including 404) and npm run check (local links/assets). Chromium identified an ambiguous implicit category label before completing the flows. This checkpoint gives the control an explicit accessible name and reruns verification.
+Continuation commits:
 
-Claude's docs/QA-FINDINGS.md on claude/wizardly-mendel-73bkuw was read. Its new implementation review of f801d31 (QA blob 47994be) was read at this milestone. I-1: missing scripts now implemented. I-2: real tests added and check rejects absent test files. I-3: all keychains now share the Keychains category; Dragons remains a searchable collection tag. I-4: all-unpriced requests contain no zero subtotal. I-5: cent validation tolerates binary floating-point error for 19.99. I-6: UI passes the live-visible catalogue into cart functions; regression covered. I-7: identity provenance is separated from explicitly draft description copy. No Claude branch or QA file was changed.
+- `94291ad`: recovery QA fixes, live-visible hero, public metadata cleanup and expanded browser checks.
+- `0f8b5fb`: load-aware image checks with explicit failing asset diagnostics.
+- `8532af3`: browser-compatible logo crop with original/pixel provenance.
 
-## Next checkpoint
+## Verification
 
-Recover original logo/photos and confirm sale-ready data before any public launch. A human visual review of captured screenshots and real-device WhatsApp check remain. No deployment or domain/account changes have occurred.
+- Local `npm test`: 13/13 passed.
+- Local `npm run build` and `npm run check`: 13 pages, local links and assets passed.
+- Claude domain-contract suite, run read-only from its separate QA worktree against the implementation: 13/13 passed.
+- Isolated live build fixtures: one approved non-Kurama product (7 pages) and no approved products (6 pages) passed build/link checks. Test-only contact values were never deployed.
+- Local browser execution unavailable: the browser package download failed. Browser checks use GitHub Actions instead.
+- GitHub Actions Chromium verification for application commit `8532af3`: passed in [run 37903006682](https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system/actions/runs/37903006682). The run also passed all 13 implementation tests and the 13-page build/link checks.
+- Browser checks passed for original image decoding, accessible product links/heading order/preview landmark, search and category filters, cart persistence/quantity/removal, unknown pricing, custom enquiries, a mixed-price WhatsApp request fixture, keyboard skip link, 404, network failure and no page errors. Layouts passed at 320, 390, 768 and 1440 pixels. No message was sent.
+- Desktop/mobile screenshot review passed for the homepage, catalogue, product details and cart; the custom-enquiry mobile view also passed. Original imagery remains legible and proportional, with no observed clipping or fabricated sales information.
+- The successful CI artifact's generated `dist/` matches the locally verified output byte for byte. All eight recovered source images also match recovery commit `8255a96` byte for byte. The separate logo crop preserves the corresponding original artwork pixels.
 
-## Verified checkpoint
+The first two continuation browser runs correctly failed at image decoding. The diagnostic rerun identified the original logo, leading to the preserved-artwork crop. These failed runs are not counted as successful browser verification.
 
-Application commit: 09b5cd10dcf8c52c38db11317dae35a143c0f02a.
-GitHub Actions run: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system/actions/runs/37889677666
+## Hosted preview
 
-- npm ci: passed.
-- npm test: 11 passed, 0 failed.
-- npm run build: passed; 13 pages including the 404 page.
-- npm run check: passed; generated pages and local links/assets verified; nonempty unit suite required.
-- Chromium: passed desktop/mobile catalogue, search/category, cart persistence/quantity/removal, unknown-price messaging, custom enquiry, safe text rendering, verified-contact fixture, keyboard skip link, true 404, data-load failure and zero uncaught page errors.
-- Artifact storefront-check-output contains dist/ and desktop/mobile screenshots. Screenshots were captured by CI but not visually inspected in this session. WhatsApp fixture checks never sent a message.
+An isolated Vercel project already exists: `honeycomb3d-storefront-preview`, project `prj_gpsHMSC2HZWoBOrx79ypk36O2rsS`, team `team_dErX7uzTIgpWT6SY1Syo3uxr`.
 
-These are remote CI build/browser results, not a local terminal build or a deployed storefront. The Windows sandbox error remains local to this session. No live checkout exists.
+At recovery inspection, its READY deployment `dpl_5vAADCgWroCeU2zeD6iYrP8Eonx8` served `2260c7f`, without recovered photos. Vercel labelled that initial deployment production inside the isolated preview project. It was not the business domain.
 
-## Asset recovery and hosted preview, 9 October 2026
+The tested application commit `8532af3e6c685420786506b1954f98a3255eefc1` is now deployed as READY preview `dpl_DffNN11Xs8mgkwAx48rwVy9MYcdj`:
 
-The owner supplied the HoneyComb Drive folder. Original brand logo and matching supplied photos for all seven catalogue products are recovered and integrated. Source files and historical SKU folder mappings are in docs/ASSET-PROVENANCE.md. Earlier missing-logo/photo notes above describe earlier checkpoints and are now resolved. Current pricing, availability, contact and sale approval are still unconfirmed.
+[Protected storefront preview](https://honeycomb3d-storefront-preview-p41x44enh.vercel.app)
 
-Initial isolated preview project: https://honeycomb3d-storefront-preview.vercel.app (Vercel project prj_gpsHMSC2HZWoBOrx79ypk36O2rsS). The first deployment at 2260c7f reached READY. Vercel assigned its first deployment the production target inside this new preview-only project; it is not the business domain or an enabled store. No domain DNS or main branch changed. The asset checkpoint will be verified and redeployed before handoff.
+Authenticated live responses passed for `/`, `/shop/`, `/products/baymax-figure/`, `/cart/`, `/custom/` and both catalogue/configuration JSON routes (HTTP 200); an unknown route returned HTTP 404. Deployed CSP is present on these responses. The homepage also returned `X-Robots-Tag: noindex`, the noindex/nofollow meta tag, `nosniff`, `Referrer-Policy: no-referrer`, and revalidating cache headers. Hosted configuration remains preview mode and includes the seven unapproved products without internal copy/asset-recovery metadata.
+
+Deployment Protection remains enabled. The older stable project production alias was not promoted to this preview. No business-domain, DNS, main-branch or live-ordering changes were made. Later documentation-only commits do not alter the deployed application code.
+
+## What still blocks opening orders
+
+`data/store.json` remains in preview mode, with `whatsappVerified: false` and no contact. All products remain `approved: false`, `priceLkr: null` and `availability: unconfirmed`. The site is noindex and external order requests are disabled.
+
+The owner still needs to confirm the current business WhatsApp number, catalogue/description approval, availability, current prices or an explicit quote-only policy, and delivery/payment/return terms. The historical contact `94703009064` is recovery evidence, not current verification. There is no verified mailbox or recovered complete business policy text. A contact page remains deferred (Claude I-12).
+
+A real-phone WhatsApp opening and human screen-reader check remain manual. No real request or payment was sent. The old EasyWP files/database backup remains unrecovered; changing business DNS is outside this continuation.
+
+Run and continuation instructions: RUN-AND-RELEASE.md. Historical WooCommerce claims are preserved separately in LEGACY-WOOCOMMERCE-README.md.

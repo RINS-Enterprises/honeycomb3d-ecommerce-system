@@ -1,131 +1,43 @@
-# Honeycomb 3D Store 🚀
+# HoneyComb 3D storefront
 
-![Preview](homepage.png)
+The recovered storefront is maintained on `codex/storefront-mvp` in this repository, with implementation draft PR [#2](https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system/pull/2). This continues the existing build; it is not a second application.
 
-> Built and optimized a real-world e-commerce system focused on conversions, trust, and user experience.
+A static storefront for HoneyComb 3D / HONEYCOMB™ in Sri Lanka. It includes the homepage, searchable catalogue, seven product pages, a persistent request cart and a custom-print enquiry. Original branding and product photographs are recovered; see [asset provenance](docs/ASSET-PROVENANCE.md).
 
-A conversion-focused e-commerce store built for anime collectible lovers in Sri Lanka.
+**Current mode: preview. Orders are not open.** Product prices and availability are unconfirmed, and the business WhatsApp contact is not verified. The interface shows “Price on enquiry” and “Availability to confirm”. It makes no payment, stock, review or delivery promises.
 
-🔗 Live Site: https://honeycomb3d.store
+[Protected storefront preview](https://honeycomb3d-storefront-preview-p41x44enh.vercel.app) · [Successful application verification](https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system/actions/runs/37903006682), both for application commit `8532af3`. See [build status](docs/BUILD-STATUS.md) for the exact deployment, evidence and remaining launch inputs.
 
----
+## Run locally
 
-## 💡 Role & Contribution
+Requires Node.js 22 or newer. No application dependencies.
 
-Independently built and optimized a full e-commerce system, focusing on conversion optimization, payment integration, and trust-building mechanisms.
+```sh
+npm ci
+npm test
+npm run build
+npm run check
+npm start
+```
 
-**Key responsibilities:**
+Open http://127.0.0.1:4173. `npm run dev` builds once and serves; it does not watch for edits. The generated site is in `dist/`.
 
-* Store setup and configuration (WooCommerce)
-* UI/UX improvements for better product focus
-* Stripe payment gateway integration
-* Email system setup using SMTP (FluentSMTP)
-* Trustpilot review automation (via email logic)
+GitHub Actions separately installs pinned browser-test tooling and runs `tests/browser.mjs`. Screenshots and the generated site are retained in its `storefront-check-output` artifact. Test contacts and test prices are used only in fixtures; no WhatsApp message is sent.
 
----
+## Order requests
 
-## 📈 Real-World Application
+The cart saves product IDs and quantities on the visitor’s device. Notes and custom enquiries are not persisted. Visitors review a message before copying it or opening WhatsApp. A WhatsApp handoff opens a prepared request; the visitor must send it, and HoneyComb must confirm the details.
 
-This project is a live store designed to generate actual sales, not just a demo.
+Preview mode disables external WhatsApp handoff. Live mode requires a verified international contact and hides unapproved products. Approved products require original photos and confirmed availability; quote-only pricing is supported. There is no payment processor, order database or inventory integration.
 
-It applies real-world e-commerce principles such as:
+## Source and recovery
 
-* Conversion optimization
-* Customer trust building
-* Friction reduction in checkout
+- `src/`: page rendering, styles, browser interactions and cart rules.
+- `data/`: catalogue and store settings; unknown prices remain `null`.
+- `public/assets/`: original logo and product photographs, retained without pixel changes.
+- [Build status](docs/BUILD-STATUS.md): current checkpoint, verification and remaining launch inputs.
+- [Run and release](docs/RUN-AND-RELEASE.md): configuration, deployment and handoff instructions.
+- [Recovery brief](docs/RECOVERY-AND-BUILD-BRIEF.md): historical specification with explicitly unverified claims.
+- [Historical WooCommerce README](docs/LEGACY-WOOCOMMERCE-README.md): preserved April evidence. Its payment and stock claims do not describe this implementation.
 
----
-
-## 🧠 Project Overview
-
-The store is designed to:
-
-* Sell 3D printed anime collectibles
-* Optimize product pages for conversions
-* Use psychological triggers to influence buying decisions
-
----
-
-## 🔄 System Flow
-
-User browses products → selects item → adds to cart
-→ proceeds to checkout → completes payment (Stripe or COD)
-→ receives order confirmation email (SMTP)
-→ Trustpilot review request is triggered → customer feedback collected
-
----
-
-## ⚔️ Key Features
-
-* 🔥 Stripe payment integration
-* 📦 Cash on Delivery (COD)
-* ⚡ Low stock + “X sold” urgency system
-* 💬 WhatsApp direct customer contact
-* ⭐ Trustpilot review automation
-* 🌙 Dark UI optimized for product focus
-
----
-
-## 🛠 Tech Stack
-
-* WordPress
-* WooCommerce
-* Blocksy Theme
-* FluentSMTP (Email system)
-* Stripe (Payments)
-
----
-
-## 🎯 What I Optimized
-
-Focused on **conversion psychology**, not just design:
-
-* Product hierarchy (best sellers prioritized)
-* Scarcity triggers (“Only X left”)
-* Social proof (“X sold” indicators)
-* Clean UI for faster decision-making
-* Reduced checkout friction
-
----
-
-## 🧩 Problems Solved
-
-* Low trust in new stores → Implemented review system (Trustpilot)
-* Cart abandonment → Simplified checkout + added COD
-* Weak product appeal → Improved visuals and hierarchy
-* Lack of urgency → Added stock indicators and demand signals
-
----
-
-## 📸 Screenshots
-
-### Homepage
-
-![Homepage](homepage.png)
-
-### Shop Page
-
-![Shop](shop.png)
-
-### Product Page
-
-![Product](product.png)
-
-### Checkout Page
-
-![Checkout](checkout.png)
-
----
-
-## ⚙️ Custom Work
-
-* CSS fixes for UI consistency
-* Product card and layout optimization
-* Trustpilot automated review system (BCC logic)
-* SMTP email system configuration
-
----
-
-## 🧠 Summary
-
-This project demonstrates the ability to build and optimize a real-world e-commerce system with a strong focus on conversions, user experience, and trust.
+Claude’s independent QA is in draft PR [#1](https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system/pull/1), on `claude/wizardly-mendel-73bkuw`. The implementation branch does not alter that work or merge into `main`.

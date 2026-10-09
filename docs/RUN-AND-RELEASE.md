@@ -26,12 +26,26 @@ Preview uses noindex and disables external WhatsApp handoff. This is an indexing
 
 ## Hosting
 
-Deploy dist/ on a static host that supports directory index routes and a real 404 status for missing paths. vercel.json specifies the build output and security headers, but no Vercel project or deployment has been created. Do not use a SPA wildcard that turns missing products into HTTP 200.
+Deploy dist/ on a static host that supports directory index routes and a real 404 status for missing paths. vercel.json specifies the build output and security headers. An isolated preview project already exists: `honeycomb3d-storefront-preview`, project `prj_gpsHMSC2HZWoBOrx79ypk36O2rsS`, team `team_dErX7uzTIgpWT6SY1Syo3uxr`. Its initial deployment served the older `2260c7f` checkpoint. Consult BUILD-STATUS.md for the current tested deployment; do not create a second application or overwrite the business domain. Do not use a SPA wildcard that turns missing products into HTTP 200.
 
 Apply the same CSP and other headers as scripts/serve.mjs when using another host. Revalidate HTML/data rather than retaining old prices indefinitely. Use HTTPS. Keep custom domain/DNS changes separate from preview deployment. Confirm the hosting plan permits the intended commercial use before launch.
 
-The current README describes the historical WooCommerce site. Its integrations are not the implementation or deployment status of this branch.
+The former WooCommerce README is preserved in docs/LEGACY-WOOCOMMERCE-README.md. Its integrations are historical evidence, not active behavior. README.md describes this storefront.
 
 ## Remaining human checks before opening orders
 
-Original brand/photo approval; current products, prices or quote-only policy and availability; business WhatsApp; actual delivery/payment/return terms; real-phone WhatsApp opening; desktop/mobile visual review and assistive-technology review. A static page build does not verify any payment or order backend.
+Original logo and all seven photos have been restored, and desktop/mobile Chromium screenshots have been reviewed. Remaining human checks: approval of product identity and draft descriptions; current products, prices or quote-only policy and availability; business WhatsApp; actual delivery/payment/return terms; real-phone WhatsApp opening and assistive-technology review. Firefox and Safari have not been tested. A static page build does not verify any payment or order backend.
+
+## Continue safely in a new chat
+
+Use `RINS-Enterprises/honeycomb3d-ecommerce-system` and `codex/storefront-mvp`. Read BUILD-STATUS.md and inspect the latest remote commit before editing. Clone separately; do not depend on another chat’s temporary files. Claude’s actual QA branch is `claude/wizardly-mendel-73bkuw`, with draft PR #1. Implementation draft PR #2 already exists. Do not create a duplicate PR/application, edit Claude’s branch, force-push or merge into main.
+
+If a terminal lacks GitHub credentials but the GitHub connection permits writes, publish through that connection, then fetch and verify the branch head. Reject a changed expected head and reconcile it before retrying. Do not call a local commit “pushed” until the remote has been read back.
+
+If all remote write routes fail, keep local commits and export a complete source archive:
+
+```sh
+git archive --format=zip --prefix=honeycomb3d-storefront/ --output=../honeycomb3d-storefront-source.zip HEAD
+```
+
+The archive includes source, original assets, data, tests and documentation. It excludes generated dist/ and credentials. Run the local commands above after extracting it. This is a source export, not an EasyWP/WordPress files-and-database backup.
