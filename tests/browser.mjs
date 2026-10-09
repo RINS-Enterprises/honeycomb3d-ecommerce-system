@@ -14,10 +14,14 @@ try {
   const page=await browser.newPage({viewport:{width:1440,height:1000}});
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   async function screenshot(path) {
+    await page.evaluate(()=>{for(const img of document.images)img.loading='eager';});
+    await page.waitForFunction(()=>[...document.images].every(img=>img.complete));
     await page.evaluate(async()=>{
-      const images=[...document.images];
-      images.forEach(img=>img.loading='eager');
-      await Promise.all(images.map(img=>img.decode()));
+      for(const img of document.images) {
+        if(!img.naturalWidth)throw new Error('Image did not load: '+img.src);
+        try {await img.decode();}
+        catch {throw new Error('Image did not decode: '+img.src);}
+      }
     });
     await page.screenshot({path,fullPage:true});
   }
