@@ -1,6 +1,6 @@
 {
-  "_about": "QA asset recommendations for codex/storefront-mvp, reviewed at 8d13b910bc4ff156a2ffd049cd4cc381f19828ad. Source: docs/ASSET-AUDIT.md. Recommendations only: owner sign-off is required before any import. Several originals are outside the supplied HoneyComb folder; the owner must copy them in first. Images do not establish price, availability or permission to sell.",
-  "generated": "2026-10-09",
+  "_about": "QA asset recommendations for codex/storefront-mvp, reviewed at 8d13b910bc4ff156a2ffd049cd4cc381f19828ad. Source: docs/ASSET-AUDIT.md. The owner approved the recommended photos on 2026-10-11 (QA-FINDINGS.md §5a). Classic Kunai RAV_4322.jpg and Kurama 1.png are outside the supplied HoneyComb folder; the owner must copy them in first. Images do not establish price, availability or permission to sell.",
+  "generated": "2026-10-11",
   "rules": [
     "Use only real photographs (no C2PA 'Created by Google Generative AI' / SynthID).",
     "Serve resized derivatives (srcset/sizes); keep originals out of dist/.",
@@ -24,7 +24,7 @@
         "provenance": "professional photo (Nikon D810 shoot), light-grey backdrop",
         "location": "owner Drive /Download (1X1vuCjd-d7qEwmaXammBkbJEcTjp6DnI), OUTSIDE supplied folder; business-account copy 1pXQXPxzZSGacNSmSVGp7z3-9Lp4SfiUF"
       },
-      "ownerDecision": "Confirm photographer licence for the RAV_ shoot."
+      "ownerDecision": "Approved 2026-10-11. Still open: photographer licence for the RAV_ shoot; copy into the HoneyComb folder."
     },
     "HC-KURAMA": {
       "current": {
@@ -46,7 +46,8 @@
         ],
         "sha256": "d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494"
       },
-      "ownerDecision": "Confirm Canva account ownership."
+      "ownerDecision": "Approved 2026-10-11. Still open: Canva account ownership; copy into the HoneyComb folder.",
+      "skuNote": "SKU conflict 503/504 between Airtable and Drive: QA-FINDINGS.md F-17."
     },
     "HC-LIGHTFURY": {
       "current": {
@@ -68,7 +69,7 @@
         ],
         "sha256": "508c5590ee15f6f55c3db605080b0c8a8000e6c9758f0b61aad333786ee1c9e9"
       },
-      "ownerDecision": "Confirm painted finish is the current product (20260308_160213.jpg shows an unpainted print)."
+      "ownerDecision": "Approved 2026-10-11 (painted unit). Already inside the HoneyComb folder."
     },
     "HC-MINATO": {
       "current": {
@@ -77,24 +78,26 @@
         "provenance": "AI re-render of a real phone photo (Google C2PA, validated)",
         "sha256": "c33cd7f2835166a3b0ac8901d72b520596d2743906ed1a58b3ef6977a014e69e"
       },
-      "recommended": [
-        {
-          "variant": "white handle",
-          "driveId": "12KT8iT8zQ8iOOfAhFek8cqeYQJKzjF8n",
-          "title": "WhatsApp Image 2025-12-22 at 14.39.39.jpeg",
-          "size": "899x1599",
-          "provenance": "real phone photo (WhatsApp-recompressed)",
-          "sha256": "80805c0c5ba62ec2c3434e6d33bc7b71e374f9ee57181c1c0e8680b7f7f5342b"
+      "recommended": {
+        "variant": "tan handle with engraved characters, black blade",
+        "driveId": "1saPgsNnYGHltaJeXCLFe4w5pL48P4v9F",
+        "title": "Copy of RAV_4468.jpg",
+        "size": "4912x7360",
+        "provenance": "professional photo; group shot, needs documented crop",
+        "sha256": "6bed862cf24b3c9522222aa839198a94326ff1ca06c98f3dd0a43f9f24b02028",
+        "selected": true,
+        "driveFolder": "HoneyComb/Productions/Old list/Naruto-20260105T130713Z-3-001/Naruto (1OkxJXSmdwn7ec6uW_sqk_O-mnSl79y0o)",
+        "observed": "black blade with silver edge bevels, tan handle with engraved characters, black ring (Visual, 2026-10-11)",
+        "cropBox": {
+          "left": 2770,
+          "top": 2150,
+          "right": 4600,
+          "bottom": 6250,
+          "frame": "4912x7360",
+          "constraint": "left edge between x=2756 and x=2794: middle-blade notches end at x<=2754, Minato wing tip at x~2800"
         },
-        {
-          "variant": "tan cord-wrapped handle",
-          "driveId": "1saPgsNnYGHltaJeXCLFe4w5pL48P4v9F",
-          "title": "Copy of RAV_4468.jpg",
-          "size": "4912x7360",
-          "provenance": "professional photo; group shot, needs documented crop",
-          "sha256": "6bed862cf24b3c9522222aa839198a94326ff1ca06c98f3dd0a43f9f24b02028"
-        }
-      ],
+        "altTextNote": "replace the current alt (it describes a white handle)"
+      },
       "doNotUse": [
         {
           "driveId": "1sBz3bH6mqjuY5YayCn3AbVGYKWKqh_OE",
@@ -103,7 +106,18 @@
           "sha256": "1b16242ba086364afdc17b6a2868598606e78a579d96f0ca418a78e22600cdb3"
         }
       ],
-      "ownerDecision": "Which handle variant is sold now."
+      "ownerDecision": "Resolved 2026-10-11: tan handle, black blade. Still open: photographer licence for the RAV_ shoot.",
+      "notSelected": [
+        {
+          "variant": "white handle",
+          "driveId": "12KT8iT8zQ8iOOfAhFek8cqeYQJKzjF8n",
+          "title": "WhatsApp Image 2025-12-22 at 14.39.39.jpeg",
+          "size": "899x1599",
+          "provenance": "real phone photo (WhatsApp-recompressed)",
+          "sha256": "80805c0c5ba62ec2c3434e6d33bc7b71e374f9ee57181c1c0e8680b7f7f5342b",
+          "reason": "white-handle variant; owner chose tan on 2026-10-11"
+        }
+      ]
     },
     "HC-LEAF": {
       "current": {
@@ -122,7 +136,7 @@
         ],
         "sha256": "d1f9cb985d101fde84d3decfb82c3b9ae8f90f67a2c82db03606b214ccef9b04"
       },
-      "ownerDecision": "Confirm product identity (white headband plate vs grey plate on April site vs leaf-symbol keychain RAV_4361)."
+      "ownerDecision": "Approved 2026-10-11 (white headband plate, crop to one plate). Still open: photographer licence for the RAV_ shoot."
     },
     "HNYCMB501": {
       "current": {
@@ -138,7 +152,7 @@
         "provenance": "real phone photo, single unit in hand",
         "sha256": "408785f66536cca48db02286bdc9fdc50a3e246e4d69a6cd7f1343329f87807b"
       },
-      "ownerDecision": "Optional swap; silver/glitter variant (1JLAPvlSlaYNEA-jlr6yVN35MmoRoxlNn) exists - confirm colourways offered."
+      "ownerDecision": "Approved 2026-10-11 (single-unit photo). Silver/glitter colourway (1JLAPvlSlaYNEA-jlr6yVN35MmoRoxlNn) not part of the approval."
     },
     "HC-BAYMAX": {
       "current": {
@@ -148,7 +162,7 @@
         "sha256": "d9c9b702a5af80a9019a2224dbd5e102e4f0afd4fef9cab4948e471ea0efcdb5"
       },
       "recommended": "keep (resize only)",
-      "ownerDecision": "Confirm Canva team 'Anthony Dyer's team' belongs to the owner."
+      "ownerDecision": "Keep (resize only). Still open: Canva team ownership. SKU conflict 503/504: QA-FINDINGS.md F-17."
     },
     "brand-logo": {
       "current": {
@@ -163,5 +177,16 @@
       },
       "ownerDecision": "Confirm logo agreement fully paid / signed copy (rights transfer on full payment)."
     }
+  },
+  "ownerApproval": {
+    "date": "2026-10-11",
+    "source": "owner reply in the QA chat (QA-FINDINGS.md E-12)",
+    "scope": "the recommended photo for every product in this file; Minato variant: tan handle, black blade",
+    "stillOpen": [
+      "copy RAV_4322.jpg and Kurama 1.png into the HoneyComb folder",
+      "photographer licence for the RAV_ shoot",
+      "Canva team ownership",
+      "logo agreement payment/signature"
+    ]
   }
 }

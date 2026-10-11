@@ -21,6 +21,7 @@ Requirements: Node ≥ 18, git, and for browser checks Playwright + Chromium. Th
 | `scripts/image-provenance.py` | Flags C2PA "Created by Google Generative AI"/SynthID, Canva/Adobe `CreatorTool`, camera EXIF. Detection by content only. |
 | `scripts/c2pa-validate.py` | Cryptographic C2PA validation (signature, data hash, issuer, actions) via `c2pa-python` in a QA-owned venv. |
 | `asset-recommendations.json` | Machine-readable per-product image recommendations (Drive IDs, SHA-256, provenance, owner decisions) from `docs/ASSET-AUDIT.md`. |
+| `owner-catalog-airtable.json` | Prices, SKUs, stock evidence and model sources for the 7 storefront products, read without changes from the owner's Airtable (2026-10-11). It is a reference for GPT; it does not replace `data/products.json`. See `docs/QA-FINDINGS.md` §3.2. |
 | `scripts/drive-decode.py` | Decodes a saved Drive-connector download into a scratch directory outside the repo, for hashing and inspection. Never import such files into the app. |
 | `e2e/storefront-smoke.mjs` | Browser smoke over nav, filters, PDP, cart qty/remove/totals, WhatsApp handoff, a11y basics, failure states, and claim scanning. Statuses: PASS / FAIL / INCONCLUSIVE (element not found, so not a pass) / REVIEW (needs human/owner evidence). |
 

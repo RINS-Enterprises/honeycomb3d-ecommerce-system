@@ -1,8 +1,17 @@
 # HoneyComb 3D storefront rebuild: QA findings
 
 Owner: independent recovery QA (Claude). Acceptance criteria: [`QA-ACCEPTANCE.md`](QA-ACCEPTANCE.md).
-Last updated: **2026-10-09**.
+Last updated: **2026-10-11**.
 
+> **Owner answers (2026-10-11, §5a):**
+> - The owner approved the recommended real photos.
+> - Minato Kunai variant: **tan handle, black blade**.
+> - Airtable is the owner's **price and stock source**. It has a price for all 7 storefront products (§3.2), but **no per-product stock count**.
+> - Two new problems came out of it:
+>   - **Baymax and Kurama SKUs are swapped** between Airtable and Drive (F-17).
+>   - Airtable shows the products are printed from **third-party MakerWorld models**, whose licences for selling prints are unconfirmed (F-18).
+> - `codex/storefront-mvp` is still at `8d13b91`, so there is nothing new to re-test.
+>
 > **Headline (2026-10-09, Run 4):** current head **`8d13b910bc4ff156a2ffd049cd4cc381f19828ad`**. Build, tests, check, audit and
 > secret scan pass. Domain contract tests 13/13. Browser smoke 88/88 and 89/89. axe: 0 violations. I-1…I-14 are fixed except I-12 (Info).
 > **New from the asset audit ([`ASSET-AUDIT.md`](ASSET-AUDIT.md)):** GPT's 8 imported files are byte-identical to the Drive files they cite, but
@@ -30,6 +39,9 @@ code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
 | 2026-10-09 | Owner Drive folder `HoneyComb` (`1BAhuPuAvAvgschy6bv-qW1YcBd74zaId`) | — | Read-only Drive connector: listing, metadata, downloads to scratch | Access works; nothing changed in Drive |
 | 2026-10-09 | Namecheap account (read-only connector) | — | Domain list; DNS host records for `honeycomb3d.store` | E-8. No changes made. |
 | 2026-10-09 | `https://honeycomb3d.store`, `ingress-cinna.easywp.com`, web archive | — | Fetch via a second tool | Inconclusive: that tool's DNS also failed for `www.namecheap.com`, so the failure says nothing about the site. |
+| 2026-10-11 | Owner's Airtable base `appTRxtdHRFH7mgLX` | — | Read-only via the owner's Airtable connector. Read the schema of every table, the records of **Products** (`tblmUOdfunwP8iWKi`, 18 rows) and **Filament Inventory** (`tbl2kT7YFNC6Jm0Pk`, 16 rows). **Not read:** cost and supplier fields, and all finance tables (Orders, Financial Periods, Capital, Loans, Withdrawals, Expenses and so on). | §3.2, F-17…F-20. Nothing in Airtable was changed. |
+| 2026-10-11 | Drive `HoneyComb/Stock` (`1FaOJQ7XVN3uQMVxoo04_IvXZq5ff6FTs`) and SKU folders | — | Read the sheet `HC-BOX`. Read metadata for the folder `HNYCMB503 Kurama` (`1AV2PhFD…`) and for `Baymax.3mf` (`1SfuSyhm…`). Listed `06 Product Records and Pricing`, which came back empty. | E-11, F-17. Nothing in Drive was changed. |
+| 2026-10-11 | `codex/storefront-mvp` | `8d13b91` (unchanged since 2026-10-09) | `git ls-remote` | No new commit, so no re-test was needed. |
 
 ## 2. Evidence register (directly recovered)
 
@@ -47,6 +59,10 @@ but it is on or after the newest review shown (2026-04-05) and on or before the 
 | E-6 | ops-system `README.md` | — | Internal tool: Appsmith front end, **Baserow** DB, Products → Order Items → Orders, cost/profit; inventory tracking listed as a *future* improvement |
 | E-7 | `docs/RECOVERY-AND-BUILD-BRIEF.md` @ `f801d31` (dated 2026-10-08) | — | Recovered **from chat history, second-hand**: EasyWP/WooCommerce/Blocksy platform, `info@honeycomb3d.store`, CSS colours, a shipping draft, historical prices, scope and acceptance checks. The brief itself classifies most of this as historical/unverified. |
 | E-8 | Namecheap read via the user's connector, 2026-10-09 | — | `honeycomb3d.store` **registered** 2026-03-31, expires **2027-03-31**, auto-renew **on**. DNS: apex `ALIAS → ingress-cinna.easywp.com`, `www CNAME → apex`, SPF `include:spf.easywp.com`, a Comodo DCV CNAME, an ACME TXT. **No MX records** returned by the host-records API. |
+| E-9 | Airtable `appTRxtdHRFH7mgLX` / Products `tblmUOdfunwP8iWKi`, read 2026-10-11 | — | 18 products, all `Active`. Fields: SKU, name, category, **Selling Price (LKR)**, status, asset name, model/source link. There is no compare-at price, no stock quantity, and every Bill of Materials link is empty. Records were created 2026-08-23 ("original workbook"); the connector does not return a last-modified time. **The owner named this as the price source (E-12).** |
+| E-10 | Airtable Filament Inventory `tbl2kT7YFNC6Jm0Pk`, read 2026-10-11 | — | 16 filament rows (colour, material, stock in kg, status). This is raw material, not finished products. |
+| E-11 | Drive sheet `HC-BOX` `1qSC_e4OGonIkcnxZehLXo1bSWBQfQwAp4s8WOXmQTWQ`, in `HoneyComb/Stock`, created 2026-10-09, modified 2026-10-10 | — | Free-text contents of storage boxes `HC-BOX-001…012`, e.g. "NightFury x3" (005), "Lightfiry x5" (007), "Naruto Keytags" (008, no count). |
+| E-12 | Owner's answers in the QA chat, 2026-10-11 | — | "1. approved" (the real-photo recommendations). "2. tan handle, kunai black colour" (Minato). "3. okay" plus the Airtable link, as the source for prices and stock. |
 
 ## 3. Recovered catalog (as observed, not current-verified)
 
@@ -80,6 +96,55 @@ Contact observed (E-1, E-3): WhatsApp `+94 70 300 9064` (3 occurrences, consiste
 
 No two sources agree, so **no price can be published from the evidence**. Implementation
 `f801d31` correctly sets every `priceLkr` to `null`.
+
+### 3.2 Owner-designated catalogue source: Airtable (read 2026-10-11)
+
+On 2026-10-11 the owner named the Airtable base as the source for prices and stock (E-12). For the storefront, that
+**supersedes §3 and §3.1**. The data below was read without changes (E-9). A machine-readable copy is in
+[`qa/owner-catalog-airtable.json`](../qa/owner-catalog-airtable.json).
+
+| Storefront ID (`8d13b91`) | Airtable SKU (record) | Airtable name | Airtable category | **Price LKR (Airtable)** | April site price / compare-at (§3) | Airtable status |
+|---|---|---|---|---|---|---|
+| HC-LEAF | HNYCMB511 (`recgVDtQsRTEGSyzG`) | Hidden Leaf Keychain Naruto | Keytag | **400** | 400 / 600 | Active |
+| HC-BAYMAX | **HNYCMB503** (`recIC7e7QDrEe31ac`), see F-17 | BayMax | Figurine | **1,000** | 800 / 1,200 | Active |
+| HC-KURAMA | **HNYCMB504** (`recIEe7aBzmZkPiIQ`), see F-17 | Kurama | Figurine | **1,500** | 1,200 / 1,500 | Active |
+| HNYCMB501 | HNYCMB501 (`rechNg8MzLC5lT3uu`) | Night Fury Keytag | Keytag | **500** | 500 / 900 | Active |
+| HC-MINATO | HNYCMB508 (`recjsg5yUe8VJDPWl`) | Minato Kunai (Naruto) | Weapon | **1,000** | 1,000 / 1,500 | Active |
+| HC-LIGHTFURY | HNYCMB502 (`recI8XqnYur0JllUa`) | Light Fury Keytag | Keytag | **500** | 500 / 900 | Active |
+| HC-KUNAI | HNYCMB509 (`recXi9upTrq3CYmlF`) | Classic Kunai (Naruto) | Weapon | **1,000** | 900 / 1,200 | Active |
+
+- **Prices:**
+  - Four of the seven prices match the April site.
+  - Three are higher: Baymax by 200, Kurama by 300 and Classic Kunai by 100.
+  - Airtable's records date from 2026-08-23. They count as current only because the owner says so; QA cannot verify that.
+- **No compare-at prices.** Airtable has no former-price field, so the site must not show SALE badges or struck-through prices (F-04).
+- **"Active" is a catalogue status, not availability.** None of the 18 Products rows has a quantity field.
+- **Stock evidence that does exist:**
+  - **Filament Inventory (E-10)** tracks raw filament by weight:
+    - 9 of the 16 rows have no stock value, including Black PLA (`FIL-009`).
+    - Beige PLA (`FIL-007`) is at 0.1 kg, below its 0.2 kg reorder threshold, and marked "Reorder Needed".
+    - If the Minato's tan handle is printed in Beige, the chosen variant may be limited. The owner should say which filament the handle uses, because the Bill of Materials links are empty.
+  - **The owner's box sheet `HC-BOX` (E-11)** has free-text counts. How each entry maps to a SKU is QA's reading, not confirmed:
+    - "NightFury x3" (`HC-BOX-005`) is probably HNYCMB501.
+    - "Lightfiry x5" (`HC-BOX-007`) is HNYCMB502 or HNYCMB510 (Light Fury Big Wings).
+    - "Naruto Keytags" (`HC-BOX-008`) has no count; it may be HNYCMB511.
+    - Kurama, Baymax, Minato Kunai and Classic Kunai appear in no box.
+- **QA recommendation for D-8:** show **no stock counts**. A hand-kept box list goes out of date, and the brief forbids invented scarcity.
+  - The app already supports per-product `availability`: `unconfirmed`, `available`, `unavailable` or `made-to-order`.
+  - The owner should pick one value per product. Example: `available` for items on hand and `made-to-order` for the rest, with a lead time the owner states.
+  - Until the owner does, keep `unconfirmed`.
+- **Other Active Airtable products that are not on the storefront** (F-19):
+  - HNYCMB505 Bridgerton Bookmark: 300
+  - HNYCMB506 Flexi Derpy (Kpop Demon Hunters): 500
+  - HNYCMB507 Office Desk Organizer With Phone Holder: 2,000
+  - HNYCMB510 Light Fury Big Wings: 600
+  - HNYCMB512 Urban Spider Man: 1,750
+  - HNYCMB513 Stormtrooper Star Wars keychain: 500
+  - HNYCMB514 Shuriken Ninja Star: 500
+  - HNYCMB515 "Gorgu" Baby Yoda keychain: 500
+  - HNYCMB516 Dummy13 Iron Man: 1,500
+  - HNYCMB517 Dummy 13 Spider Man: 1,500
+  - HNYCMB518 Horse figurine: 1,600
 
 ## 4. Classification of what is known
 
@@ -117,6 +182,17 @@ See owner decisions §5. Also unknown: whether the EasyWP site, its database, `w
 | D-7 | IP stance on franchise-character products and franchise names in titles; any "fan-made, not affiliated" notice | Legal/marketplace risk | F-06 |
 | D-8 | Stock/urgency: show stock at all? If so, from what source? | Avoid fabricated scarcity | F-04 |
 | D-9 | Provide original assets: vector logo, original product photos, collection images, brand colours/fonts, favicon | Screenshot crops are not production assets | F-07 |
+| D-10 | Confirm that each MakerWorld model's licence (or the designer's permission) allows selling printed copies | Permission to sell, separate from character IP | F-18 |
+| D-11 | Which SKU is right for Baymax and Kurama, `HNYCMB503` or `HNYCMB504`? Then fix the other source. | SKUs in order messages and ops records | F-17 |
+
+### 5a. Owner answers received (2026-10-11, E-12)
+
+| Decision | Owner's answer | What QA recorded | Still open |
+|---|---|---|---|
+| D-9 photos | "approved" | QA reads this as approval of the **recommended photo for every product** in `ASSET-AUDIT.md` §3: Classic Kunai `RAV_4322`, Kurama `1.png`, Light Fury `Variation 1 (2)` (painted), Hidden Leaf `RAV_4459` crop (white plate), Night Fury `20260301_152139` (single unit) and Baymax unchanged. If any of these is not what the owner meant, the owner should say which. | Copy the originals that sit outside the HoneyComb folder into it (`ASSET-AUDIT.md` §3). Confirm rights for the photographer, the Canva exports and the logo (`ASSET-AUDIT.md` §6). |
+| D-9 Minato variant | "tan handle, kunai black colour" | Use `Copy of RAV_4468.jpg` (`1saPgsNnYGHltaJeXCLFe4w5pL48P4v9F`). It is the only real photo of that variant QA has found, and it matches the request (Visual): black blade with silver edge bevels, tan handle with engraved characters, black ring. It is a group shot, so it needs a documented crop (`ASSET-AUDIT.md` §3). The white-handle photo is **not** to be used for this listing. | None for the photo. The filament question is in §3.2. |
+| D-3 price | Airtable is the source | The prices are in §3.2 and `qa/owner-catalog-airtable.json`. | Descriptions, size, material and lead time. SKU conflict D-11. |
+| D-8 stock | Airtable is the source | Airtable has **no per-product stock** (§3.2). QA recommends no counts on the site and an owner-chosen `availability` value per product. | The owner picks `availability` per product, and a lead time if any product is `made-to-order`. |
 
 ## 6. Findings
 
@@ -213,6 +289,54 @@ See owner decisions §5. Also unknown: whether the EasyWP site, its database, `w
 - **Type:** Inspection. **Reviewed commit:** ops `a0cfadb`.
 - **Actual:** The ops README says Products hold cost, and order items hold profit.
 - **Recommended fix:** If the storefront ever reads from Baserow, use a read-only view or token limited to public fields, server-side only. Cost/profit must never reach the client bundle.
+- **Update 2026-10-11:** the same applies to the Airtable base (E-9). It also holds cost, supplier and finance tables. Any future sync must use a token scoped to the Products table's public fields, server-side only.
+
+### F-17 · Medium · Inspection (data) · Baymax and Kurama SKUs are swapped between Airtable and Drive
+- **Evidence:**
+  - **Airtable (E-9):** `HNYCMB503` is BayMax (`recIC7e7QDrEe31ac`, asset field "HNYCMB503 BayMax"). `HNYCMB504` is Kurama (`recIEe7aBzmZkPiIQ`, "HNYCMB504 Kurama").
+  - **Drive:** the folder `HNYCMB503 Kurama` exists in both accounts: `1a9HcP0gS5kuGiPzY0o6Dt1A2jePDzZFw`, and `1AV2PhFDGihCTDXph5SRToMQgZ4AwObJj` (business account, created 2026-04-01). The Baymax folder is `Baymax HNYCMB504` (`1o4lJ9_zSS8dx5DR2uCl2spHV0gpNXfFI`), and its images are named `HNYCMB504 (n).png`.
+  - **GPT:** `docs/ASSET-PROVENANCE.md` at `8d13b91` follows Drive (BAYMAX→504, KURAMA→503; Verified in `ASSET-AUDIT.md` §2).
+  - **Other SKUs:** 501, 502, 508, 509 and 511 agree everywhere.
+- **Expected:** One SKU per product across ops data, asset folders and the storefront.
+- **Actual:** Today the storefront uses `HC-BAYMAX` and `HC-KURAMA` as IDs, so it shows neither number. The WhatsApp message does include the product ID (`src/domain.mjs`: `- ${p.name} [${p.id}] x …`).
+- **Impact:** If GPT switches IDs to the Airtable SKUs before this is settled, Baymax and Kurama order requests could be logged against each other's Airtable record.
+- **Fix:**
+  1. The owner settles D-11.
+  2. The owner corrects Airtable or renames the Drive folders.
+  3. Only then should GPT use the SKUs as IDs.
+
+### F-18 · High (decision) · Products are printed from third-party MakerWorld models; licence for sale unconfirmed
+- **Evidence (E-9, `Model/Source Link`):**
+  - 17 of the 18 products link to a MakerWorld model page.
+  - Storefront products:
+    - Night Fury: `makerworld.com/en/models/2465337-articulated-toothless-dragon-keychain`
+    - Light Fury: `…/2495866-articulated-light-fury-dragon-keychain`
+    - Kurama: `…/19101-nine-tailed-demon-fox`
+    - Classic Kunai: `…/672914-kunai-fidget-spinner`
+    - Minato: `…/814550-minato-kunai-fidget-spinner`
+    - Hidden Leaf: `…/2282457-akatsuki-headband-keychains`
+  - Baymax links to a 3MF file in the business Drive (`Baymax.3mf`, `1SfuSyhm_kCdzrSHToEen4813earSuITj`), with no designer recorded.
+- **Expected:** Each model's licence allows commercial sale of prints, or the designer has given permission, and this is recorded.
+- **Actual:** Not checked. Licence terms are set per model on each page. QA did not open the pages.
+- **Fix:** Owner decision D-10. Add a licence or permission column next to the Airtable source link. This is **separate** from the franchise-character question (F-06, D-7): a model can be licensed for sale and still depict a character the seller has no rights to.
+
+### F-19 · Info · Airtable lists 11 Active products that the storefront doesn't have
+- **Evidence:** §3.2 lists the 11 extra products (E-9).
+- **Note:**
+  - "Active" in Airtable does not mean ready to list. Each extra product would still need a real photo, a description and the D-7/D-10 checks.
+  - Several are franchise characters: Spider-Man, Iron Man, Star Wars, Baby Yoda, Kpop Demon Hunters and Bridgerton.
+- **Fix:** The owner decides the launch scope. The 7-product scope stays valid until then.
+
+### F-20 · Low · Ops-data quality issues seen while reading Airtable
+- **Filament stock:** 9 of the 16 filament rows have no stock value or status, including Black, White (`FIL-008`) and Orange PLA.
+- **Colour codes don't match names:**
+  - "Blue" is `#dcb3b7`, which is pink.
+  - "Yellow" is `#dbcea1`, which is beige.
+  - One White is `##f6f8f9`, with a double `#`; the row's own note flags it.
+- **Duplicate rows:** White PLA appears twice (`FIL-002`, `FIL-008`).
+- **No product-to-filament mapping:** every product's Bill of Materials link is empty.
+- **Shared model link:** HNYCMB505 Bridgerton Bookmark and HNYCMB506 Flexi Derpy point to the same MakerWorld link (`models/1710900`).
+- **Impact:** None on the storefront today. It matters if colour swatches, availability or sourcing are ever generated from Airtable.
 
 ## 7. Implementation review: `codex/storefront-mvp`
 
@@ -448,6 +572,15 @@ Earlier findings re-tested at `8d13b91`:
 
 **Update (second asset pass, same day):** C2PA is now cryptographically validated: claim signatures and data hashes are valid, issuer Google LLC, and the only code is `signingCredential.untrusted` (trust anchor not configured). **Real photos were found for all 7 products**, including Kurama (business-account `1.png`, with the background removed in Canva) and Light Fury (`Variation 1 (2)`). I-15's fix is therefore fully actionable once the owner copies the originals into the HoneyComb folder. See `ASSET-AUDIT.md` §3 and `qa/asset-recommendations.json`.
 
+**Update 2026-10-11 (owner, §5a):**
+- The recommended photos are approved.
+- Minato will use the tan-handle, black-blade photo `Copy of RAV_4468.jpg`, cropped. The suggested crop box is in `ASSET-AUDIT.md` §3.
+- The current Minato alt text ("…with a white handle held in a hand") must change with the image.
+- I-15 is no longer waiting on an owner choice. It still needs:
+  - the originals copied into the HoneyComb folder;
+  - GPT's change;
+  - a QA re-run of `image-provenance.py` on the new outputs.
+
 ## 7a. QA sign-off and launch readiness (2026-10-09, updated for head `8d13b91`)
 
 **Update for `8d13b91`:** the code itself remains sound, but **I-15 (AI product images) and I-16 (image weight) are open High findings**. The site is fine for a *private* owner review. It is **not** approved for any wider preview or launch until the image set follows the brief and is resized. I-17 (logo) should ride the same change.
@@ -462,8 +595,9 @@ I-9, I-10, I-13, I-14 (Low) and I-11, I-12 (Info) can ride the next change.
 |---|---|---|---|
 | 1 | **Secure the old site before touching DNS.** Open the EasyWP dashboard or ask Namecheap support for a files/DB backup. The apex still points at EasyWP. Don't pay for reactivation until a backup is confirmed available. | Original photos, product data, policy text, prices | F-15, E-8, brief task 3 |
 | 2 | **Confirm the WhatsApp number** (`94703009064`?) and who answers it. Then GPT sets `whatsappNumber` and `whatsappVerified: true`. Test on a real phone without sending an order. | Any order request | D-2, F-11, AC-WA-6 |
-| 3 | **Choose prices or a quote-only policy** per product. The evidence conflicts (§3.1), so nothing can be copied. Leaving prices `null` with "Price on enquiry" is a valid launch choice. | Cart totals | D-3, F-02 |
-| 4 | **Choose real product photos** per `ASSET-AUDIT.md` §3, and copy `RAV_4322.jpg` and the other chosen originals into the HoneyComb folder. Confirm the photographer and Canva rights. Say which Minato, Hidden Leaf and Light Fury variants are current. Copy the real Kurama `1.png` from the business account into the HoneyComb folder. Approve or replace the draft descriptions. | `approved: true`, live mode | D-9, F-07, I-7, I-15 |
+| 3 | ~~Choose prices~~ **Done 2026-10-11:** Airtable is the price source (§3.2). **Still to do:** settle the Baymax/Kurama SKU swap (D-11), and choose `availability` per product, with a lead time for `made-to-order` items (D-8). | Cart totals, order messages | D-3, D-8, D-11, F-17 |
+| 4 | ~~Choose real product photos~~ **Done 2026-10-11** (§5a). **Still to do:** copy the originals that are outside the HoneyComb folder into it (`RAV_4322.jpg` and Kurama `1.png`; see `ASSET-AUDIT.md` §3). Confirm the photographer, Canva and logo rights. Approve or replace the draft descriptions. | `approved: true`, live mode | D-9, F-07, I-7, I-15 |
+| 4b | **Model licences:** confirm that each MakerWorld model may be printed for sale. | Permission to sell | D-10, F-18 |
 | 5 | **Decide payment and delivery wording** (COD? bank transfer? courier fee, typical days). The site currently promises none, which is safe. | Quote conversations, policy pages | D-1, D-4, F-03, F-08 |
 | 6 | **Provide policy text** (shipping, returns, terms). The current `/privacy/` page accurately describes the app's own data handling, but the owner should approve it. | Footer policy links | D-5, F-10 |
 | 7 | **IP stance** on franchise-character products. | Catalogue scope | D-7, F-06 |
@@ -473,6 +607,55 @@ I-9, I-10, I-13, I-14 (Low) and I-11, I-12 (Info) can ride the next change.
 **Re-test procedure after the owner's data lands:** run `qa/scripts/review-commit.sh` on the new SHA, then `qa/domain/`,
 `storefront-smoke.mjs` (preview and `QA_LIVE_FIXTURE=1`), `edge-probes.mjs` and `axe-audit.mjs`. Then do one manual real-phone
 WhatsApp check with the confirmed number (open it, don't send) before switching `mode` to `live`.
+
+### 7b. Handoff to GPT (2026-10-11, for `codex/storefront-mvp` after `8d13b91`)
+
+The owner relays this to GPT. These are QA recommendations: GPT owns the code, data and dependency choices.
+
+```
+QA handoff for codex/storefront-mvp @ 8d13b91. Details are on branch claude/recovery-qa:
+docs/QA-FINDINGS.md (§3.2, §5a, I-15..I-20, F-17), docs/ASSET-AUDIT.md §3,
+qa/asset-recommendations.json and qa/owner-catalog-airtable.json.
+
+Can be done now:
+1. I-16 (High): build resized image copies (for example 480/960/1440 px JPEG or WebP,
+   EXIF orientation applied, metadata stripped) and serve them with srcset/sizes. Keep the
+   originals out of dist/. Targets: at most 500 KB per image and 1.5 MB of images per
+   mobile page.
+2. I-17 (Medium): export the logo as SVG from the vector PDF
+   (Drive 1D_VZuA8Lshe78K_Gz1qBmpYKS9tuLG8s), or use a PNG of at most 660x198.
+3. I-18 (Low): remove the extra ".jpg" from source titles in docs/ASSET-PROVENANCE.md.
+4. I-20 (Info): set width/height attributes to each image's real proportions.
+5. Prices, from the owner's chosen source (Airtable Products, read 2026-10-11), in LKR:
+   HC-LEAF 400, HC-BAYMAX 1000, HC-KURAMA 1500, HNYCMB501 500, HC-MINATO 1000,
+   HC-LIGHTFURY 500, HC-KUNAI 1000.
+   Record that source on each product. Airtable has no compare-at prices, so show no sale
+   or struck-through prices.
+6. Keep availability "unconfirmed" and approved=false until the owner sets them. Show no
+   stock counts.
+7. Don't switch product IDs to Airtable SKUs yet. Airtable and Drive disagree on the
+   Baymax and Kurama SKUs (F-17).
+8. I-15 (High): the owner approved real photos on 2026-10-11. These are already in the
+   HoneyComb folder:
+   - Light Fury: "Variation 1 (2).jpg" (1pMK8OOE9bvE4WsKDRONnPk38k5HQbVaU)
+   - Minato, tan handle with black blade: a crop of "Copy of RAV_4468.jpg"
+     (1saPgsNnYGHltaJeXCLFe4w5pL48P4v9F). Suggested box: left 2770, top 2150,
+     right 4600, bottom 6250 in the 4912x7360 frame; the left edge must stay between
+     x=2756 and x=2794. Its alt text must stop saying "white handle".
+   - Hidden Leaf: a crop to one plate of "Copy of RAV_4459.jpg"
+     (1rW98jCTB1kwWoP0gMThUrnWitqN8-q_v)
+   - Night Fury, single unit: "20260301_152139.jpg" (1w5Ulskt4b-WEdJkQLXcR52s3YucH5Rfg)
+   - Baymax: keep the current file and resize it only.
+
+After the owner copies these into the HoneyComb folder:
+9. Classic Kunai: "RAV_4322.jpg". Kurama: the business-account "1.png".
+   Check that each copy's SHA-256 matches qa/asset-recommendations.json.
+
+For every image: record the source Drive ID and SHA-256, the crop box, the resize width and
+the output SHA-256 in docs/ASSET-PROVENANCE.md.
+```
+
+The photographer, Canva and logo rights (`ASSET-AUDIT.md` §6) gate a **public launch**, not a private preview.
 
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 
@@ -502,4 +685,5 @@ The fixture rows validate the **tools only**. §7 holds the results against the 
 5. Live site and EasyWP state could not be fetched from this environment. Baserow data not inspected.
 6. The brief is second-hand (chat retrieval). Its historical claims are unverified.
 7. Screenshot capture date for the April evidence is inferred, not recorded.
-8. Asset audit: not every Drive file was opened (videos, ZIPs, `06 Product Records and Pricing`, deep Listing Kit and Product Studio pages). C2PA manifests were validated with `c2pa-python` (signatures valid; Google root not in the default trust list). No real-device low-memory decode test and no throttled-network LCP run. See `ASSET-AUDIT.md` §8.
+8. Airtable (2026-10-11): QA read only Products and Filament Inventory. It did not check MakerWorld licence pages (F-18). The "current" status of the Airtable prices rests on the owner's word, because the connector shows creation dates only.
+9. Asset audit: not every Drive file was opened (videos, ZIPs, `06 Product Records and Pricing` (empty listing on 2026-10-11), deep Listing Kit and Product Studio pages). C2PA manifests were validated with `c2pa-python` (signatures valid; Google root not in the default trust list). No real-device low-memory decode test and no throttled-network LCP run. See `ASSET-AUDIT.md` §8.

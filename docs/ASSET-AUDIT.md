@@ -1,6 +1,6 @@
 # HoneyComb 3D asset audit
 
-Owner: independent recovery QA (Claude), branch `claude/recovery-qa`. Date: **2026-10-09**.
+Owner: independent recovery QA (Claude), branch `claude/recovery-qa`. Date: **2026-10-09**, updated **2026-10-11** with the owner's answers.
 Implementation reviewed: `codex/storefront-mvp` @ `8d13b910bc4ff156a2ffd049cd4cc381f19828ad`
 (GPT's `public/assets/` and `docs/ASSET-PROVENANCE.md`).
 Source: owner's Drive folder **HoneyComb** (`1BAhuPuAvAvgschy6bv-qW1YcBd74zaId`).
@@ -11,6 +11,7 @@ Source: owner's Drive folder **HoneyComb** (`1BAhuPuAvAvgschy6bv-qW1YcBd74zaId`)
 > - **Real photographs exist for all 7 products** (updated 2026-10-09, second pass). Classic Kunai, Minato and Hidden Leaf come from a professional Nikon D810 shoot. Kurama is a real photo with the background removed in Canva. Light Fury and Night Fury have real single-unit phone photos. Several of these live **outside** the supplied folder, in the owner's `Download` folder or the business account `honeycomb.3d.sl@gmail.com`.
 > - The AI manifests are **cryptographically validated**: claim signature and data hash valid, issuer Google LLC (§1).
 > - Images do **not** establish price, availability, current product variant or permission to sell. Those stay owner decisions (§6).
+> - **2026-10-11:** the owner approved the recommended real photos and chose the Minato variant with the **tan handle and black blade**. That variant's only real photo is the group shot `Copy of RAV_4468.jpg`, so it needs a crop (§3). Prices now come from the owner's Airtable (`QA-FINDINGS.md` §3.2), not from images. The rights checks in §6 are still open.
 
 Method labels used below:
 - **Verified:** bytes downloaded and checked here.
@@ -57,22 +58,34 @@ All "Verified" rows were downloaded, hashed and inspected. File IDs are exact.
 | Product | Best real candidate(s) | Location | Notes |
 |---|---|---|---|
 | **HC-KUNAI** Classic Kunai | `RAV_4322.jpg`, `1mx3YRM6o4CrGZtIl6TX2ZqnG8cacFDQo`, 4912×7360, 4,887,510 B, sha256 `f41368de…` (Verified, Visual) | **Outside the supplied folder**: owner Drive `…/Download` (`1X1vuCjd-d7qEwmaXammBkbJEcTjp6DnI`). The business account `honeycomb.3d.sl@gmail.com` holds same-size copies: `Copy of RAV_4322.jpg` `1pXQXPxzZSGacNSmSVGp7z3-9Lp4SfiUF`, `Copy of RAV_4326.jpg` `14ezBceiU3WQ5aND_EydTa46fETLBXq79`, `Copy of RAV_4332.jpg` `1Na5mpWeyftPAxu3VmHcZ7_JdtV_SY06l` (Listing) | Clean, professional, light-grey backdrop. Also in group shot `Copy of RAV_4468.jpg` `1saPgsNnYGHltaJeXCLFe4w5pL48P4v9F` (Verified). **Best replacement.** |
-| **HC-MINATO** Minato Kunai | (a) white-handle: `WhatsApp Image 2025-12-22 at 14.39.39.jpeg` `12KT8iT8zQ8iOOfAhFek8cqeYQJKzjF8n`, 899×1599 (Verified). (b) tan cord-wrapped handle: `Copy of RAV_4468.jpg` `1saPgsNnYGHltaJeXCLFe4w5pL48P4v9F`, a group shot with the Classic Kunai and Azuma Blade (Verified) | `HNYCMB508 Minato Kunai` (`19Zde1TJYKaTElJ6qk62ZtuyyFKkvbNr1`); `Naruto` (`1OkxJXSmdwn7ec6uW_sqk_O-mnSl79y0o`) | **Two variants exist.** The owner must say which is sold now. The AI image shows the white variant. |
+| **HC-MINATO** Minato Kunai | (a) white-handle: `WhatsApp Image 2025-12-22 at 14.39.39.jpeg` `12KT8iT8zQ8iOOfAhFek8cqeYQJKzjF8n`, 899×1599 (Verified). (b) tan handle with engraved characters (earlier described as "cord-wrapped"; corrected 2026-10-11 after a 1:1 look): `Copy of RAV_4468.jpg` `1saPgsNnYGHltaJeXCLFe4w5pL48P4v9F`, a group shot with the Classic Kunai and Azuma Blade (Verified) | `HNYCMB508 Minato Kunai` (`19Zde1TJYKaTElJ6qk62ZtuyyFKkvbNr1`); `Naruto` (`1OkxJXSmdwn7ec6uW_sqk_O-mnSl79y0o`) | **Two variants exist.** The owner must say which is sold now. The AI image shows the white variant. **2026-10-11: the owner chose the tan handle with a black blade, so use (b).** See the crop note below. |
 | **HC-LEAF** Hidden Leaf Keychain | `Copy of RAV_4459.jpg` `1rW98jCTB1kwWoP0gMThUrnWitqN8-q_v`, Nikon D810, Lightroom Classic 14.5.1, shot 2025-10-09 (Verified Metadata). It shows 4 village headband plates, so it needs a crop. Also `Copy of RAV_4463.jpg` `1NIqS9NGhOtB9AFwximWhxC5ZSUj9dWEG` (6 plates) | `Naruto` | Far higher quality than the current 960 px WhatsApp image. **Identity caveat:** `Copy of RAV_4361.jpg` `1GCyzwWxds8eT26kaak3xMXHsGsxZKZtr` is a *leaf-symbol* keychain, a different design. The April storefront showed a *grey* headband plate; the photos show *white* plates. |
 | **HC-KURAMA** Kurama Figure | `1.png` `1nQvOC8nPm9BNK496GZveJEim2dspvYwN`, `3.png` `1D9b0zNCxbFWZZh61be2XfldM4HC5bCeH`, `5.png` `1GlZ5wKITKKEUVVzQIut-JNmifF6Bwnm8`: 3415×5120 PNG (Verified, Visual). Unlisted siblings: `2.png` `1z1ulqE2-aFf9orDlhqIcRZBekhJzWj-W`, `4.png` `1WIXnU38WP1rUhHXrJARL3GB8EkBQ8jXU` | **Outside the supplied folder**: business account `honeycomb.3d.sl@gmail.com`, folder `HNYCMB503 Kurama` (`1AV2PhFDGihCTDXph5SRToMQgZ4AwObJj`), 2026-03-31 | **Real photo with the background removed in Canva** (XMP `Canva (Renderer)`, no C2PA). A 1:1 zoom shows filament stringing and layer lines that the AI version lacks. **Best replacement.** The supplied-folder `HNYCMB503 Kurama` (`1a9HcP0gS5kuGiPzY0o6Dt1A2jePDzZFw`) holds only AI derivatives (`download/Pro-1…5`) and an empty `Untitled design/`. |
 | **HC-LIGHTFURY** Light Fury | `Variation 1 (2).jpg` `1pMK8OOE9bvE4WsKDRONnPk38k5HQbVaU`, 1500×2000: a single painted unit held in a hand; a 1:1 zoom shows clear layer lines (Verified, Visual). `Variation 1 (5).jpg` `1Y0uSbSbmgCTsAWPfLz01BPkSatKxyJgw` (actually a PNG, 1918×1438, in a hand). `Variation 1 (3).jpg` `1DByRq1R4TgAuDHCwOiZHmhA-jM2aTkz8`: a batch on the **same blue mat as the real Night Fury batch photos**. `Variation 1 (1).jpg` `1RIgISQZuseq_Vr69vMqig1ztODPDmWwb`. `20260308_160213.jpg` `1kqwnUbpCyoJ5waS7zcBTfT9Jq-poskak` shows an **unpainted** print. | `HNYCMB502 Light Fury` (`1bVcPHq8OTZC5aKz7fuJAyURLBbidRzvd`) | The `Variation 1 (n)` files have no metadata, but the print texture and shared set point to **real photos**, probably exported or renamed. They carry no C2PA markers. **Best replacement: `Variation 1 (2)`.** `Product Photo  (n)` / `Product Photo Angels (n)` are AI (`Angels (1)` C2PA Verified). |
 | **HNYCMB501** Night Fury | `20260301_152139.jpg` `1w5Ulskt4b-WEdJkQLXcR52s3YucH5Rfg`, 1893×1420: a **single unit held in a hand**, real (Verified, Visual). The current `20260301_144017.jpg` is a real batch shot. | `HNYCMB501 Night Fury` (`1qSnm2uGbMlekXqsqPQjwFDosX0HHfWE_`) | **Better listing image: `20260301_152139`.** `WhatsApp Image 2026-04-13 at 05.55.33.jpeg` `1JLAPvlSlaYNEA-jlr6yVN35MmoRoxlNn` (720×1280, Verified) shows a **silver/glitter** variant, so it is a different colourway. `20260301_144334.jpg` is a resized copy of the batch shoot. |
 | **HC-BAYMAX** | Current file is acceptable (real). Alternates `HNYCMB504 (2…8).png` are the same Canva export series (`(2)` Verified). | `Baymax HNYCMB504/Images` (`1Zr_gD236oF1mSXoBhZ7CVYkOw4yBLoR7`) | Confirm the Canva team ownership. |
 
-**Recommendation for GPT (do not act without owner sign-off).** It is also available machine-readably in `qa/asset-recommendations.json`:
-1. **Owner first** copies the chosen originals into the HoneyComb folder, because several are outside it: `RAV_4322.jpg` and Kurama `1.png`.
-2. Replace `classic-kunai.jpg` with a resized `RAV_4322.jpg`.
-3. Replace `kurama.jpg` with a resized Kurama `1.png`.
-4. Replace `light-fury.jpg` with a resized `Variation 1 (2).jpg`.
-5. Replace `minato-kunai.jpg` with the real photo of the variant actually sold: white-handle WhatsApp `12KT8iT8…`, or tan-handle `RAV_4468` (crop).
-6. Replace `hidden-leaf.jpg` with a documented crop of `RAV_4459`/`4463`, if the owner confirms the white headband plate.
-7. Optionally replace `night-fury.jpg` with `20260301_152139.jpg` (single unit).
-8. For each replacement, record the derivative (crop box, resize width, output SHA-256, source Drive ID and SHA-256) in `ASSET-PROVENANCE.md`, and re-run `qa/scripts/image-provenance.py` on the outputs.
+**Minato crop (checked 2026-10-11, Visual, QA scratch only).**
+- **Source:** `Copy of RAV_4468.jpg` is 4912×7360, sha256 `6bed862cf24b3c9522222aa839198a94326ff1ca06c98f3dd0a43f9f24b02028`, recomputed on 2026-10-11. It holds three items side by side: the Classic Kunai on the left, the Azuma Blade in the middle and the Minato on the right.
+- **What the Minato looks like:** black blade with silver edge bevels, a tan handle with engraved characters, and a black ring. This matches the owner's "tan handle, kunai black colour".
+- **Suggested crop box:** `(left 2770, top 2150, right 4600, bottom 6250)`, which is 1830×4100. A test crop at `(2780, 2150, 4560, 6250)` showed only the Minato.
+- **Tight left edge:**
+  - The middle blade's rightmost notch ends at about x=2755.
+  - The Minato's left wing tip starts at about x=2795.
+  - So the left edge must stay **between x=2756 and x=2794**.
+  - A pixel map confirms this. Notch tips are at x≤2754 (y≈4260–4290 and 4800–4875). The wing tip is at x≈2800, y≈4665. The dark pixels between x=2756 and x=2794 belong to the Minato's own soft shadow, which the crop edge will cut through; that is expected.
+- **Fitting a 3:4 box:** the crop is tall (aspect ≈0.45). The site's `object-fit: contain` will letterbox it on the light backdrop. Don't widen the crop to 3:4, because that would pull in the middle blade.
+- **Alt text:** the current alt ("…with a white handle held in a hand") describes the AI image and must change.
+
+**Recommendation for GPT. The owner approved the photo choices on 2026-10-11.** It is also in `qa/asset-recommendations.json`. `QA-FINDINGS.md` §7b has a ready-to-paste version.
+1. **Owner first** copies the two originals that are **outside** the HoneyComb folder into it: `RAV_4322.jpg` (Classic Kunai) and the business-account Kurama `1.png`. **Still pending on 2026-10-11.** The other approved photos are already inside it under `Productions/Old list/…`; the parent chain was checked on 2026-10-11.
+2. Replace `classic-kunai.jpg` with a resized `RAV_4322.jpg` (approved).
+3. Replace `kurama.jpg` with a resized Kurama `1.png` (approved).
+4. Replace `light-fury.jpg` with a resized `Variation 1 (2).jpg` (approved: the painted unit).
+5. Replace `minato-kunai.jpg` with the documented crop of `Copy of RAV_4468.jpg` above (the tan variant the owner chose). **Do not** use the white-handle WhatsApp photo for this listing.
+6. Replace `hidden-leaf.jpg` with a documented single-plate crop of `RAV_4459` (approved: the white headband plate).
+7. Replace `night-fury.jpg` with `20260301_152139.jpg` (single unit, approved).
+8. For each replacement, record the derivative (crop box, resize width, output SHA-256, source Drive ID and SHA-256) in `ASSET-PROVENANCE.md`. QA then re-runs `qa/scripts/image-provenance.py` and `qa/e2e/image-audit.mjs` on the outputs.
 
 ## 4. Classification of other inspected Drive assets
 
@@ -111,8 +124,8 @@ From `qa/e2e/image-audit.mjs`. Details are in `qa/results/8d13b91…/images/summ
 
 ## 6. Uncertainties that images cannot resolve (owner decisions, not technical findings)
 
-1. **Price, availability and stock:** no image establishes these. All catalogue prices stay `null`.
-2. **Which variant is current:** the Minato white versus tan-wrapped handle; the Hidden Leaf grey (April site) versus white plates (shoot and phone); Light Fury painted versus unpainted.
+1. **Price, availability and stock:** no image establishes these. **2026-10-11:** prices now come from the owner's Airtable (`QA-FINDINGS.md` §3.2). Airtable has no per-product stock count, so availability is still the owner's call.
+2. **Which variant is current:** the Minato white versus tan handle; the Hidden Leaf grey (April site) versus white plates (shoot and phone); Light Fury painted versus unpainted. **2026-10-11:** the Minato is the tan handle with a black blade (owner). QA takes the owner's "approved" as confirming the white plate and the painted Light Fury shown in the recommended photos. The owner should say if not.
 3. **AI imagery policy:** whether any AI-edited image may be used at all. The brief says no. If the owner allows it, label it, because the files carry public C2PA/SynthID markers that platforms can surface.
 4. **Photo rights:**
    - The `RAV_*` shoot looks professional. Confirm who shot it and that HoneyComb may use it.
@@ -175,6 +188,6 @@ Folder IDs: Brand Kit `1_XuhStCc-GR_fH0jKq-p7NtHF3O1onDI`, Productions `1LoG3r7A
 
 - Not every Drive file was opened. Classifications marked "inferred" rely on filename patterns.
 - ZIPs and videos were not inspected: `Final by RINS.mp4`, `Articulated Light Fury Dragon Keychain.mp4`, `download.zip` files, and the 165 MB Naruto ZIP.
-- `06 Product Records and Pricing` was **deliberately not opened** for pricing. Prices are owner decisions, and images must not be used to infer them.
+- `06 Product Records and Pricing` was **deliberately not opened** for pricing. Prices are owner decisions, and images must not be used to infer them. On 2026-10-11 the connector listed it as empty. Prices now come from the owner-designated Airtable source instead.
 - C2PA: **validated with `c2pa-python` 0.38.0** (QA scratch venv, not an app dependency). On all four AI assets the claim signature and data hash are valid; issuer Google LLC; signed 2026-04-08 … 04-14; actions `c2pa.created` (trainedAlgorithmicMedia) plus `c2pa.edited` (SynthID). The only status code is `signingCredential.untrusted`: Google's signing root isn't in the library's default trust list. That means the trust anchor wasn't configured, not that the file was tampered with. The real photos have no manifest (`ManifestNotFound`).
 - No throttled-network performance run, and no Firefox/Safari image decoding check.
