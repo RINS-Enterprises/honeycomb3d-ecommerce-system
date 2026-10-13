@@ -2,6 +2,16 @@
 
 Updated 13 October 2026. Branch: codex/storefront-mvp.
 
+## QA Run 5 follow-ups (I-21 / I-22)
+
+- /favicon.ico now serves a 5,500-byte ICO containing 16, 32 and 48 px frames exported from the supplied HONEYCOMB Symbol.pdf (Drive 1AOoBNTsdAzj_getImty-054LJWxjzfFq). Every page declares it, and the local server sends image/vnd.microsoft.icon.
+- Portrait srcset sizes describe the contained image width within the square card, hero and detail boxes. Minato also has 160 px (3,536 bytes) and 240 px (6,474 bytes) derivatives from the unchanged approved source and crop.
+- Favicon source/output hashes and crop details are recorded in assets/favicon.json, docs/FAVICON-PROVENANCE.md and docs/ASSET-PROVENANCE.md. The PDF source stays outside dist/.
+- Independent CI scripts are pinned to QA Run 5, 97780b00907571e64703daa3adfd5f03d5d5263d, including real srcset-pixel measurement and failure on AI markers.
+- Browser regression checks cover favicon HTTP status/type/frames and actual Minato resource resolution in card/detail views at 320/390/768/1280 px, DPR 1 and 3.
+- Classic Kunai and Kurama are still placeholders: the latest Drive search found only the original Kunai outside HoneyComb and no matching Kurama copy.
+- Temporary asset-generation workflow removed. CI permissions are read-only.
+
 ## QA handoff implementation
 
 Continued the existing application from 8d13b91 using the QA handoff on claude/recovery-qa at aedc1e4. That review branch and main were not changed.
