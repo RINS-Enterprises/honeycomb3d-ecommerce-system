@@ -149,6 +149,9 @@ doc += ["", "## Superseded imports (not served)", "",
         "Storefront IDs remain unchanged. Airtable Products is the owner-designated price source, read 11 October 2026; each product records its price field, base, table, record and read date.",
         "Airtable and Drive disagree on Baymax/Kurama SKUs 503/504 (QA F-17), so no SKU migration was made.",
         "There are no compare-at prices or stock counts. Availability stays unconfirmed and catalog approval stays false. Photo approval does not approve the listing, description, availability or public launch.", ""]
+favicon_doc = ROOT / "docs/FAVICON-PROVENANCE.md"
+if favicon_doc.exists():
+    doc += ["", favicon_doc.read_text()]
 (ROOT / "docs/ASSET-PROVENANCE.md").write_text("\n".join(doc))
 print("Generated", sum(len(r["outputs"]) for r in records), "derivatives; largest",
       max(o["bytes"] for r in records for o in r["outputs"]), "bytes.")

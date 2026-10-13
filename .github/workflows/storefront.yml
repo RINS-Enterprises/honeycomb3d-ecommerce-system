@@ -30,10 +30,10 @@ jobs:
       - name: Read independent QA image checks at the handoff snapshot
         run: |
           python -m pip install Pillow==11.3.0
-          git fetch --depth=1 origin aedc1e4a3dc4a4f7292f26776821e2a79db3f300
+          git fetch --depth=1 origin 97780b00907571e64703daa3adfd5f03d5d5263d
           mkdir -p test-results/qa
-          git show aedc1e4a3dc4a4f7292f26776821e2a79db3f300:qa/scripts/image-provenance.py > test-results/qa/image-provenance.py
-          git show aedc1e4a3dc4a4f7292f26776821e2a79db3f300:qa/e2e/image-audit.mjs > test-results/qa/image-audit.mjs
+          git show 97780b00907571e64703daa3adfd5f03d5d5263d:qa/scripts/image-provenance.py > test-results/qa/image-provenance.py
+          git show 97780b00907571e64703daa3adfd5f03d5d5263d:qa/e2e/image-audit.mjs > test-results/qa/image-audit.mjs
           python -I test-results/qa/image-provenance.py public/assets/*
       - name: Run independent QA responsive image audit
         run: |

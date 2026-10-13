@@ -4,10 +4,22 @@ export const price = p => p.priceLkr === null ? 'Price on enquiry' : money(p.pri
 export const CARD_SIZES = '(max-width: 700px) calc((100vw - 52px) / 2), (max-width: 1000px) calc((100vw - 124px) / 3), (max-width: 1280px) calc((100vw - 146px) / 4), 284px';
 const DETAIL_SIZES = '(max-width: 700px) calc(100vw - 40px), (max-width: 1000px) calc((100vw - 110px) / 2), (max-width: 1280px) calc((100vw - 140px) / 2), 570px';
 const HERO_SIZES = '(max-width: 480px) calc(100vw - 40px), (max-width: 700px) 440px, (max-width: 1000px) calc((100vw - 100px) / 2.2), (max-width: 1280px) calc((100vw - 140px) / 2.2), 519px';
+
+export function containedSizes(p, sizes) {
+  // All photo slots are square and use object-fit: contain. A portrait fills
+  // only aspectRatio * slotWidth; srcset widths describe image pixels.
+  const ratio = Math.min(1, p.imageWidth / p.imageHeight);
+  if (!(ratio > 0 && ratio < 1)) return sizes;
+  return sizes.split(',').map(part => {
+    const match = part.trim().match(/^(\(max-width: \d+px\)\s+)?(.+)$/);
+    return (match[1] || '') + 'calc((' + match[2] + ') * ' + ratio.toFixed(6) + ')';
+  }).join(', ');
+}
+
 export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}) {
   if (!p.image) return '<div class="photo-placeholder"><span aria-hidden="true">◇</span><span>Original photo coming soon</span></div>';
   const responsive=p.imageVariants?.length ?
-    ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'"' : '';
+    ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(containedSizes(p, sizes))+'"' : '';
   return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'" decoding="async"'+(priority?' fetchpriority="high"':'')+'>';
 }
 export function card(p, {headingLevel=3}={}) {
@@ -24,7 +36,7 @@ export function layout(title, body, store, current='') {
   return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>' + e(title) + ' | HoneyComb 3D</title><meta name="description" content="Explore HoneyComb 3D collectibles and custom prints. Request a quote and confirm the details before ordering.">' +
     (store.mode==='preview' ? '<meta name="robots" content="noindex,nofollow">' : '') +
-    '<link rel="stylesheet" href="/styles.css"><script type="module" src="/app.mjs"></script></head><body>' +
+    '<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.mjs"></script></head><body>' +
     '<a class="skip-link" href="#main">Skip to content</a>' +
     (store.mode==='preview' ? '<aside class="preview-notice" aria-label="Store preview notice">Store preview · Product details are being confirmed. Orders are not open yet.</aside>' : '') +
     '<header class="site-header"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a>' +

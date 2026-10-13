@@ -34,6 +34,7 @@ for(const asset of assets) {
   if(!/^\/assets\/[a-zA-Z0-9_-]+\.(?:png|jpg|jpeg|webp|svg)$/.test(asset))throw new Error('Invalid public derivative: '+asset);
   await copyFile(join(root,'public',asset),join(dist,asset));
 }
+await copyFile(join(root,'public/favicon.ico'),join(dist,'favicon.ico'));
 await mkdir(join(dist,'data'),{recursive:true});
 // Approval stays in the payload for client-side live filtering. Recovery and copy-workflow metadata do not.
 await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,copyStatus,imageSource,priceSource,imageApprovedAt,imageStatus,...p})=>({...p,source:'Public catalog'}))));

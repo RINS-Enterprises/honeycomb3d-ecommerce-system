@@ -10,6 +10,14 @@ try {
   for(let i=0;i<50;i++){try{if((await fetch('http://127.0.0.1:4173/')).ok){ready=true;break;}}catch{}await new Promise(r=>setTimeout(r,100));}
   assert(ready,'Image test server starts');
   browser=await chromium.launch();
+  const favicon=await fetch('http://127.0.0.1:4173/favicon.ico');
+  assert.equal(favicon.status,200,'Favicon route');
+  assert.match(favicon.headers.get('content-type'),/image\/vnd\.microsoft\.icon/);
+  const icon=Buffer.from(await favicon.arrayBuffer());
+  assert.equal(icon.readUInt16LE(2),1,'ICO type');
+  assert.equal(icon.readUInt16LE(4),3,'Three favicon frames');
+  const iconSizes=Array.from({length:3},(_,i)=>icon[6+i*16]).sort((a,b)=>a-b);
+  assert.deepEqual(iconSizes,[16,32,48]);
   const report=[];
   for(const route of ['/','/shop/','/cart/','/custom/','/privacy/',...products.map(p=>'/products/'+p.slug+'/')]) {
     const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:3,isMobile:true});
@@ -41,6 +49,26 @@ try {
     if(['/','/products/minato-kunai/','/products/hidden-leaf-keychain/'].includes(route)) {
       await mkdir('test-results',{recursive:true});
       await page.screenshot({path:'test-results/'+(route==='/'?'home-approved-photos':route.split('/')[2])+'-mobile.png',fullPage:true});
+    }
+    await context.close();
+  }
+  for(const [width,dpr] of [[320,1],[390,3],[768,1],[1280,1]]) {
+    const context=await browser.newContext({viewport:{width,height:900},deviceScaleFactor:dpr});
+    const page=await context.newPage();
+    for(const route of ['/shop/','/products/minato-kunai/']) {
+      await page.goto('http://127.0.0.1:4173'+route);
+      await page.evaluate(()=>{for(const img of document.images)img.loading='eager';});
+      await page.waitForFunction(()=>[...document.images].every(img=>img.complete&&img.naturalWidth>0));
+      const samples=await page.evaluate(async()=>Promise.all(
+        [...document.images].filter(img=>img.currentSrc.includes('minato-kunai')).map(async img=>{
+          const decoded=new Image(); decoded.src=img.currentSrc; await decoded.decode();
+          const box=img.getBoundingClientRect();
+          const actualWidth=Math.min(box.width,box.height*decoded.naturalWidth/decoded.naturalHeight);
+          return {src:img.currentSrc,pixels:decoded.naturalWidth,actualWidth};
+        })));
+      assert(samples.length,'Minato is present');
+      for(const sample of samples)assert(sample.pixels/(sample.actualWidth*dpr)<=3,
+        'Portrait oversampling: '+JSON.stringify({width,dpr,route,...sample}));
     }
     await context.close();
   }
