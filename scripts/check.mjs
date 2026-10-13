@@ -1,3 +1,4 @@
+import {checkImageOutputs} from './check-images.mjs';
 import {readFile,stat,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -13,6 +14,7 @@ const publicProducts=JSON.parse(await readFile(join(root,'dist/data/products.jso
 for(const p of publicProducts) {
   assert.equal(p.copyStatus,undefined,'Copy approval workflow must not be published');
   assert.equal(p.imageSource,undefined,'Recovery asset filenames must not be published');
+  for(const key of ['priceSource','imageApprovedAt','imageStatus'])assert.equal(p[key],undefined,'Source workflow metadata must not be published');
   assert.equal(p.source,'Public catalog','Recovery evidence must stay in source data');
 }
 const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','404.html',...products.map(p=>'products/'+p.slug+'/index.html')];
@@ -27,4 +29,5 @@ for(const path of paths) {
     await stat(join(root,'dist',local));
   }
 }
+await checkImageOutputs(paths);
 console.log('Verified '+paths.length+' generated pages and their local links/assets.');

@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "importedAt": "2026-10-13",
+  "ownerApprovalDate": "2026-10-11",
+  "widths": [
+    480,
+    960,
+    1440
+  ],
+  "assets": [
+    {
+      "id": "HC-LEAF",
+      "stem": "hidden-leaf",
+      "input": "assets/photo-sources/hidden-leaf.jpg",
+      "sourceTitle": "Copy of RAV_4459.jpg",
+      "sourceDriveId": "1rW98jCTB1kwWoP0gMThUrnWitqN8-q_v",
+      "sourceSha256": "d1f9cb985d101fde84d3decfb82c3b9ae8f90f67a2c82db03606b214ccef9b04",
+      "inputSha256": "6550f9d1c2a03ffedba857715ddfb9cbb55d3c2c5f566d789dde966b94b9145e",
+      "exifOrientation": 1,
+      "sourceSize": [
+        4299,
+        6442
+      ],
+      "cropBox": [
+        1250,
+        1660,
+        3000,
+        2430
+      ],
+      "alt": "White Hidden Leaf headband keychain with a black leaf symbol on a light backdrop",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ]
+    },
+    {
+      "id": "HC-BAYMAX",
+      "stem": "baymax",
+      "input": "assets/photo-sources/baymax.png",
+      "sourceTitle": "HNYCMB504 (1).png",
+      "sourceDriveId": "1XGpES0PDcZuXp46hSPsD_gtHMsP_qVbY",
+      "sourceSha256": "d9c9b702a5af80a9019a2224dbd5e102e4f0afd4fef9cab4948e471ea0efcdb5",
+      "inputSha256": "2caef48ac4bbcbcc586df925b59e77a4f1c706ca07b51d0d9061aa8babe4bc7e",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1536,
+        2048
+      ],
+      "cropBox": null,
+      "alt": "Two white 3D-printed Baymax figures photographed on a green display surface",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ]
+    },
+    {
+      "id": "HNYCMB501",
+      "stem": "night-fury",
+      "input": "assets/photo-sources/night-fury.jpg",
+      "sourceTitle": "20260301_152139.jpg",
+      "sourceDriveId": "1w5Ulskt4b-WEdJkQLXcR52s3YucH5Rfg",
+      "sourceSha256": "408785f66536cca48db02286bdc9fdc50a3e246e4d69a6cd7f1343329f87807b",
+      "inputSha256": "775dddb36cf5d98a07ce92ba4a1ddad26c0e27bd7868c55bfe5822b447b04959",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1893,
+        1420
+      ],
+      "cropBox": null,
+      "alt": "A single black articulated Night Fury keychain with yellow-green eyes held in a hand",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ]
+    },
+    {
+      "id": "HC-MINATO",
+      "stem": "minato-kunai",
+      "input": "assets/photo-sources/minato-kunai.jpg",
+      "sourceTitle": "Copy of RAV_4468.jpg",
+      "sourceDriveId": "1saPgsNnYGHltaJeXCLFe4w5pL48P4v9F",
+      "sourceSha256": "6bed862cf24b3c9522222aa839198a94326ff1ca06c98f3dd0a43f9f24b02028",
+      "inputSha256": "4c9673b96abc990ab4505ef0f46e6f4050029e0ed0ee44ba21b681c47af77479",
+      "exifOrientation": 1,
+      "sourceSize": [
+        4912,
+        7360
+      ],
+      "cropBox": [
+        2770,
+        2150,
+        4600,
+        6250
+      ],
+      "alt": "Black three-pronged Minato kunai with silver edge bevels, a tan engraved handle and a black ring on a light backdrop",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ]
+    },
+    {
+      "id": "HC-LIGHTFURY",
+      "stem": "light-fury",
+      "input": "assets/photo-sources/light-fury.jpg",
+      "sourceTitle": "Variation 1 (2).jpg",
+      "sourceDriveId": "1pMK8OOE9bvE4WsKDRONnPk38k5HQbVaU",
+      "sourceSha256": "508c5590ee15f6f55c3db605080b0c8a8000e6c9758f0b61aad333786ee1c9e9",
+      "inputSha256": "371ebf51441bcf82c1feb7afa256b420e0d95d15a2834ad1811fd3f538fe069d",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1500,
+        2000
+      ],
+      "cropBox": null,
+      "alt": "A single painted white Light Fury keychain with blue eyes and black claws held in a hand",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ]
+    },
+    {
+      "id": "brand-logo",
+      "stem": "honeycomb-logo",
+      "input": "assets/photo-sources/honeycomb-logo.png",
+      "sourceTitle": "HC_WhiteBK-1.png",
+      "sourceDriveId": "1sHmDdDKtS_qnh76ctrgYkJj_Uokaj23e",
+      "sourceSha256": "1a31b02c4343ed657a62d3dd49a86d5fe6b950b0d68b747877828ab4288ad08e",
+      "inputSha256": "1a31b02c4343ed657a62d3dd49a86d5fe6b950b0d68b747877828ab4288ad08e",
+      "exifOrientation": 1,
+      "sourceSize": [
+        8334,
+        8334
+      ],
+      "cropBox": [
+        583,
+        3156,
+        8018,
+        5385
+      ],
+      "alt": "HoneyComb",
+      "format": "png",
+      "widths": [
+        660
+      ],
+      "output": "/assets/honeycomb-logo-web.png"
+    }
+  ],
+  "pending": [
+    {
+      "id": "HC-KUNAI",
+      "sourceTitle": "RAV_4322.jpg",
+      "expectedSourceSha256": "f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722",
+      "referenceDriveId": "1mx3YRM6o4CrGZtIl6TX2ZqnG8cacFDQo",
+      "state": "awaiting-owner-copy-into-HoneyComb"
+    },
+    {
+      "id": "HC-KURAMA",
+      "sourceTitle": "1.png",
+      "expectedSourceSha256": "d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494",
+      "referenceDriveId": "1nQvOC8nPm9BNK496GZveJEim2dspvYwN",
+      "state": "awaiting-owner-copy-into-HoneyComb"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import {readFile,writeFile,mkdir,copyFile,cp,rm,access} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,copyFile,rm,access} from 'node:fs/promises';
 import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateData,visibleProducts} from '../src/domain.mjs';
@@ -27,11 +27,16 @@ await page('privacy/index.html',privacyPage(store));
 await page('404.html',layout('Page not found','<section class="wrap section narrow"><p class="eyebrow">404</p><h1>This page wandered off.</h1><p>The design you are looking for may have moved.</p><a class="button" href="/shop/">Explore the collection →</a></section>',store));
 for(const p of products)await page('products/'+p.slug+'/index.html',detail(p,products,store));
 for(const name of ['app.mjs','domain.mjs','styles.css'])await copyFile(join(root,'src',name),join(dist,name));
-try {await access(join(root,'public/assets'));await cp(join(root,'public/assets'),join(dist,'assets'),{recursive:true});}
-catch(error){if(error.code!=='ENOENT')throw error;}
+// Copy only explicitly referenced derivatives. Source images and unused assets never ship.
+const assets=new Set([store.logo,...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src)])].filter(Boolean));
+await mkdir(join(dist,'assets'),{recursive:true});
+for(const asset of assets) {
+  if(!/^\/assets\/[a-zA-Z0-9_-]+\.(?:png|jpg|jpeg|webp|svg)$/.test(asset))throw new Error('Invalid public derivative: '+asset);
+  await copyFile(join(root,'public',asset),join(dist,asset));
+}
 await mkdir(join(dist,'data'),{recursive:true});
 // Approval stays in the payload for client-side live filtering. Recovery and copy-workflow metadata do not.
-await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,copyStatus,imageSource,...p})=>({...p,source:'Public catalog'}))));
-await writeFile(join(dist,'data/store.json'),JSON.stringify({name:store.name,currency:store.currency,country:store.country,mode:store.mode,whatsappNumber:store.whatsappVerified?store.whatsappNumber:null,whatsappVerified:store.whatsappVerified,logo:store.logo}));
+await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,copyStatus,imageSource,priceSource,imageApprovedAt,imageStatus,...p})=>({...p,source:'Public catalog'}))));
+await writeFile(join(dist,'data/store.json'),JSON.stringify({name:store.name,currency:store.currency,country:store.country,mode:store.mode,whatsappNumber:store.whatsappVerified?store.whatsappNumber:null,whatsappVerified:store.whatsappVerified,logo:store.logo,logoWidth:store.logoWidth,logoHeight:store.logoHeight}));
 await writeFile(join(dist,'robots.txt'),store.mode==='preview'?'User-agent: *\nDisallow: /\n':'User-agent: *\nAllow: /\n');
 console.log('Built '+(products.length+6)+' static pages into dist/ ('+store.mode+' mode).');

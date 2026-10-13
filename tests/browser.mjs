@@ -49,7 +49,7 @@ try {
   await page.getByRole('spinbutton').fill('2');
   await page.getByRole('button',{name:'Add to request cart'}).click();
   await page.getByRole('link',{name:'View your request cart'}).click();
-  await page.getByRole('heading',{name:'Quote required for all items'}).waitFor();
+  await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
   assert.equal(await page.getByRole('spinbutton').inputValue(),'2');
   assert.equal(await page.locator('a[href^="https://wa.me/"]').count(),0);
   assert(!await page.locator('#order-handoff').textContent().then(t=>t.includes('Opening WhatsApp')));
@@ -132,5 +132,5 @@ try {
   await page.goto('http://127.0.0.1:4173/cart/');
   await page.getByRole('heading',{name:'Your cart could not load'}).waitFor();
   assert.equal(errors.length,0,errors.join('\n'));
-  console.log('PASS: original image decoding, accessible cards/headings/preview landmark, catalogue filters, cart persistence/update/removal, unknown pricing, custom enquiry, mixed-price WhatsApp fixture, 320/390/768/1440px layouts, keyboard skip link, 404, network failure and no page errors. No message was sent.');
+  console.log('PASS: original image decoding, accessible cards/headings/preview landmark, catalogue filters, cart persistence/update/removal, owner-sourced pricing, custom enquiry, mixed-price WhatsApp fixture, 320/390/768/1440px layouts, keyboard skip link, 404, network failure and no page errors. No message was sent.');
 } finally {if(browser)await browser.close();server.kill();}

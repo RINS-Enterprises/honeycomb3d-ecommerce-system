@@ -1,9 +1,14 @@
 import {escapeHtml as e, money} from './domain.mjs';
 
 export const price = p => p.priceLkr === null ? 'Price on enquiry' : money(p.priceLkr);
-export function picture(p) {
-  return p.image ? '<img src="' + e(p.image) + '" alt="' + e(p.imageAlt) + '" width="640" height="640" loading="lazy">' :
-    '<div class="photo-placeholder"><span aria-hidden="true">◇</span><span>Original photo coming soon</span></div>';
+export const CARD_SIZES = '(max-width: 700px) calc((100vw - 52px) / 2), (max-width: 1000px) calc((100vw - 124px) / 3), (max-width: 1280px) calc((100vw - 146px) / 4), 284px';
+const DETAIL_SIZES = '(max-width: 700px) calc(100vw - 40px), (max-width: 1000px) calc((100vw - 110px) / 2), (max-width: 1280px) calc((100vw - 140px) / 2), 570px';
+const HERO_SIZES = '(max-width: 480px) calc(100vw - 40px), (max-width: 700px) 440px, (max-width: 1000px) calc((100vw - 100px) / 2.2), (max-width: 1280px) calc((100vw - 140px) / 2.2), 519px';
+export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}) {
+  if (!p.image) return '<div class="photo-placeholder"><span aria-hidden="true">◇</span><span>Original photo coming soon</span></div>';
+  const responsive=p.imageVariants?.length ?
+    ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'"' : '';
+  return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'" decoding="async"'+(priority?' fetchpriority="high"':'')+'>';
 }
 export function card(p, {headingLevel=3}={}) {
   const heading=headingLevel===2?'h2':'h3';
@@ -14,7 +19,7 @@ export function card(p, {headingLevel=3}={}) {
 function availability(p) {
   return ({unconfirmed:'Availability to confirm',available:'Available',unavailable:'Currently unavailable','made-to-order':'Made to order'})[p.availability];
 }
-function brand(store) { return store.logo ? '<img class="brand-image" src="'+e(store.logo)+'" alt="HoneyComb" width="220" height="66">' : 'HONEYCOMB<span>3D PRINT STUDIO</span>'; }
+function brand(store) { return store.logo ? '<img class="brand-image" src="'+e(store.logo)+'" alt="HoneyComb" width="'+(store.logoWidth||220)+'" height="'+(store.logoHeight||66)+'">' : 'HONEYCOMB<span>3D PRINT STUDIO</span>'; }
 export function layout(title, body, store, current='') {
   return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>' + e(title) + ' | HoneyComb 3D</title><meta name="description" content="Explore HoneyComb 3D collectibles and custom prints. Request a quote and confirm the details before ordering.">' +
@@ -29,9 +34,9 @@ export function layout(title, body, store, current='') {
 }
 export function home(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];
-  const featured=products.find(p=>p.id==='HC-KURAMA'&&p.image)||products.find(p=>p.image);
+  const featured=products.find(p=>p.id==='HC-KURAMA'&&p.image)||products.find(p=>p.id==='HC-BAYMAX'&&p.image)||products.find(p=>p.image);
   const heroMedia=featured?
-    '<a class="hero-photo" href="/products/'+e(featured.slug)+'/"><img src="'+e(featured.image)+'" width="1024" height="1024" alt="'+e(featured.imageAlt)+'" fetchpriority="high"><span>MEET THE COLLECTION <b aria-hidden="true">↗</b></span></a>':
+    '<a class="hero-photo" href="/products/'+e(featured.slug)+'/">'+picture(featured,{sizes:HERO_SIZES,loading:'eager',priority:true})+'<span>MEET THE COLLECTION <b aria-hidden="true">↗</b></span></a>':
     '<div class="hero-art" aria-hidden="true"><div class="layer"></div><div class="layer layer-two"></div><div class="layer layer-three"></div><span>IDEAS<br>TAKE<br>SHAPE.</span><small>HONEYCOMB 3D</small></div>';
   return layout('Collectibles & custom prints',
     '<section class="hero wrap"><div><p class="eyebrow">HONEYCOMB 3D / SRI LANKA</p><h1>Make room for<br><em>something you.</em></h1><p class="lead">A little character for your desk. A favourite for your collection. An idea brought to life, layer by layer.</p><div class="actions"><a class="button" href="/shop/">Explore the collection <span aria-hidden="true">↗</span></a><a class="text-link" href="/custom/">Bring your own idea →</a></div></div>'+heroMedia+'</section>' +
@@ -49,7 +54,7 @@ export function shop(products,store) {
     '<div class="product-grid">'+products.map(p=>card(p,{headingLevel:2})).join('')+'</div><div class="empty" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><a href="/custom/">Ask about a custom print →</a></div><noscript><p>All designs are shown. Enable JavaScript to use search and category filters.</p></noscript></section>',store,'shop');
 }
 export function detail(p,products,store) {
-  return layout(p.name,'<section class="wrap section"><a class="text-link" href="/shop/">← Back to the collection</a><div class="product-detail"><div class="detail-image">'+picture(p)+'</div><div><p class="eyebrow">'+e(p.category)+'</p><h1>'+e(p.name)+'</h1><p class="detail-price">'+e(price(p))+'</p><p class="lead">'+e(p.description)+'</p><p>'+availability(p)+'</p><p class="muted">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
+  return layout(p.name,'<section class="wrap section"><a class="text-link" href="/shop/">← Back to the collection</a><div class="product-detail"><div class="detail-image">'+picture(p,{sizes:DETAIL_SIZES,loading:'eager'})+'</div><div><p class="eyebrow">'+e(p.category)+'</p><h1>'+e(p.name)+'</h1><p class="detail-price">'+e(price(p))+'</p><p class="lead">'+e(p.description)+'</p><p>'+availability(p)+'</p><p class="muted">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
     '<form id="add-form" data-product-id="'+e(p.id)+'"><label>Quantity<input name="quantity" type="number" min="1" max="20" step="1" value="1" required></label><button class="button" type="submit" disabled data-enable="'+(p.availability!=='unavailable')+'">'+(p.availability==='unavailable'?'Currently unavailable':'Add to request cart')+'</button></form><noscript><p>Enable JavaScript to build a request cart.</p></noscript><p class="fine">This saves a request on your device. It does not reserve stock or complete a purchase.</p><p class="fine">Reference: '+e(p.id)+'</p><a href="/cart/">View your request cart →</a></div></div></section><section class="wrap section"><h2>Keep exploring</h2><div class="product-grid">'+products.filter(x=>x.id!==p.id).slice(0,3).map(p=>card(p)).join('')+'</div></section>',store,'shop');
 }
 export function cartPage(store) {

@@ -6,5 +6,7 @@
   "whatsappNumber": null,
   "whatsappVerified": false,
   "logo": "/assets/honeycomb-logo-web.png",
-  "source": "Recovered brief, 2026-10-08. Historical contact requires owner confirmation."
+  "source": "Recovered brief, 2026-10-08. Historical contact requires owner confirmation.",
+  "logoWidth": 660,
+  "logoHeight": 198
 }
