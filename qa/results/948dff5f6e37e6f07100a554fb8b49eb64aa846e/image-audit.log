@@ -1,0 +1,78 @@
+INFO    home@mobile /assets/baymax-960.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    home@mobile /assets/hidden-leaf-960.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    home@mobile /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    home@mobile /assets/night-fury-960.webp - letterboxed (contain): image 1.33 in box 1.00
+PASS    home@mobile page-image-bytes - 0.28 MB of images on / (limit 1.5 MB); LCP 72 ms (text) on local server
+INFO    shop@mobile /assets/hidden-leaf-960.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    shop@mobile /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    shop@mobile /assets/night-fury-960.webp - letterboxed (contain): image 1.33 in box 1.00
+INFO    shop@mobile /assets/minato-kunai-240.webp - letterboxed (contain): image 0.45 in box 1.00
+INFO    shop@mobile /assets/light-fury-480.webp - letterboxed (contain): image 0.75 in box 1.00
+PASS    shop@mobile page-image-bytes - 0.21 MB of images on /shop/ (limit 1.5 MB); LCP 44 ms (text) on local server
+INFO    products-hidden-leaf-keychain@mobile /assets/hidden-leaf-1440.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-hidden-leaf-keychain@mobile /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    products-hidden-leaf-keychain@mobile /assets/night-fury-960.webp - letterboxed (contain): image 1.33 in box 1.00
+PASS    products-hidden-leaf-keychain@mobile page-image-bytes - 0.23 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 44 ms (/assets/hidden-leaf-1440.webp) on local server
+INFO    products-baymax-figure@mobile /assets/baymax-960.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    products-baymax-figure@mobile /assets/hidden-leaf-960.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-baymax-figure@mobile /assets/night-fury-960.webp - letterboxed (contain): image 1.33 in box 1.00
+PASS    products-baymax-figure@mobile page-image-bytes - 0.25 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 48 ms (/assets/baymax-960.webp) on local server
+INFO    products-kurama-figure@mobile /assets/hidden-leaf-960.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-kurama-figure@mobile /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    products-kurama-figure@mobile /assets/night-fury-960.webp - letterboxed (contain): image 1.33 in box 1.00
+PASS    products-kurama-figure@mobile page-image-bytes - 0.19 MB of images on /products/kurama-figure/ (limit 1.5 MB); LCP 48 ms (text) on local server
+INFO    products-night-fury-keychain@mobile /assets/night-fury-1440.webp - letterboxed (contain): image 1.33 in box 1.00
+INFO    products-night-fury-keychain@mobile /assets/hidden-leaf-960.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-night-fury-keychain@mobile /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+PASS    products-night-fury-keychain@mobile page-image-bytes - 0.22 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 40 ms (/assets/night-fury-1440.webp) on local server
+INFO    products-minato-kunai@mobile /assets/minato-kunai-480.webp - letterboxed (contain): image 0.45 in box 1.00
+INFO    products-minato-kunai@mobile /assets/hidden-leaf-960.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-minato-kunai@mobile /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+PASS    products-minato-kunai@mobile page-image-bytes - 0.17 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 48 ms (/assets/minato-kunai-480.webp) on local server
+INFO    products-light-fury-keychain@mobile /assets/light-fury-960.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    products-light-fury-keychain@mobile /assets/hidden-leaf-960.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-light-fury-keychain@mobile /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+PASS    products-light-fury-keychain@mobile page-image-bytes - 0.18 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 48 ms (/assets/light-fury-960.webp) on local server
+INFO    products-classic-kunai@mobile /assets/hidden-leaf-960.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-classic-kunai@mobile /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+PASS    products-classic-kunai@mobile page-image-bytes - 0.15 MB of images on /products/classic-kunai/ (limit 1.5 MB); LCP 48 ms (text) on local server
+INFO    home@desktop /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    home@desktop /assets/hidden-leaf-480.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    home@desktop /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    home@desktop /assets/night-fury-480.webp - letterboxed (contain): image 1.33 in box 1.00
+PASS    home@desktop page-image-bytes - 0.17 MB of images on / (limit 1.5 MB); LCP 60 ms (/assets/baymax-480.webp) on local server
+INFO    shop@desktop /assets/hidden-leaf-480.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    shop@desktop /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    shop@desktop /assets/night-fury-480.webp - letterboxed (contain): image 1.33 in box 1.00
+INFO    shop@desktop /assets/minato-kunai-160.webp - letterboxed (contain): image 0.45 in box 1.00
+INFO    shop@desktop /assets/light-fury-480.webp - letterboxed (contain): image 0.75 in box 1.00
+PASS    shop@desktop page-image-bytes - 0.15 MB of images on /shop/ (limit 1.5 MB); LCP 68 ms (text) on local server
+INFO    products-hidden-leaf-keychain@desktop /assets/hidden-leaf-960.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-hidden-leaf-keychain@desktop /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    products-hidden-leaf-keychain@desktop /assets/night-fury-480.webp - letterboxed (contain): image 1.33 in box 1.00
+PASS    products-hidden-leaf-keychain@desktop page-image-bytes - 0.17 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 72 ms (/assets/hidden-leaf-960.webp) on local server
+INFO    products-baymax-figure@desktop /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    products-baymax-figure@desktop /assets/hidden-leaf-480.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-baymax-figure@desktop /assets/night-fury-480.webp - letterboxed (contain): image 1.33 in box 1.00
+PASS    products-baymax-figure@desktop page-image-bytes - 0.14 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 56 ms (/assets/baymax-480.webp) on local server
+INFO    products-kurama-figure@desktop /assets/hidden-leaf-480.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-kurama-figure@desktop /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    products-kurama-figure@desktop /assets/night-fury-480.webp - letterboxed (contain): image 1.33 in box 1.00
+PASS    products-kurama-figure@desktop page-image-bytes - 0.14 MB of images on /products/kurama-figure/ (limit 1.5 MB); LCP 56 ms (text) on local server
+INFO    products-night-fury-keychain@desktop /assets/night-fury-960.webp - letterboxed (contain): image 1.33 in box 1.00
+INFO    products-night-fury-keychain@desktop /assets/hidden-leaf-480.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-night-fury-keychain@desktop /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+PASS    products-night-fury-keychain@desktop page-image-bytes - 0.16 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 60 ms (/assets/night-fury-960.webp) on local server
+INFO    products-minato-kunai@desktop /assets/minato-kunai-480.webp - letterboxed (contain): image 0.45 in box 1.00
+INFO    products-minato-kunai@desktop /assets/hidden-leaf-480.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-minato-kunai@desktop /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+PASS    products-minato-kunai@desktop page-image-bytes - 0.14 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 72 ms (/assets/minato-kunai-480.webp) on local server
+INFO    products-light-fury-keychain@desktop /assets/light-fury-480.webp - letterboxed (contain): image 0.75 in box 1.00
+INFO    products-light-fury-keychain@desktop /assets/hidden-leaf-480.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-light-fury-keychain@desktop /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+PASS    products-light-fury-keychain@desktop page-image-bytes - 0.13 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 60 ms (/assets/light-fury-480.webp) on local server
+INFO    products-classic-kunai@desktop /assets/hidden-leaf-480.webp - letterboxed (contain): image 2.27 in box 1.00
+INFO    products-classic-kunai@desktop /assets/baymax-480.webp - letterboxed (contain): image 0.75 in box 1.00
+PASS    products-classic-kunai@desktop page-image-bytes - 0.12 MB of images on /products/classic-kunai/ (limit 1.5 MB); LCP 60 ms (text) on local server
+
+{"INFO":58,"PASS":18} -> /home/user/honeycomb3d-ecommerce-system/qa/results/948dff5f6e37e6f07100a554fb8b49eb64aa846e/images

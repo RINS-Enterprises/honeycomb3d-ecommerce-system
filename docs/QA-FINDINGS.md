@@ -3,7 +3,17 @@
 Owner: independent recovery QA (Claude). Acceptance criteria: [`QA-ACCEPTANCE.md`](QA-ACCEPTANCE.md).
 Last updated: **2026-10-13**.
 
-> **Headline (2026-10-13, Run 5):** current head **`acca67f326a2036d527a1ffef5a727dcc3ca2d7d`**.
+> **Headline (2026-10-13, Run 6):** current head **`948dff5f6e37e6f07100a554fb8b49eb64aa846e`**.
+> - **Fixed and verified:** the favicon (I-21, made from the owner's brand-symbol PDF) and the Minato image sizing (I-22).
+> - **Image weight:** at most **281 KB per page**. The Minato page dropped from 467 KB to 173 KB.
+> - **Checks:**
+>   - Build, tests, audit and secret scan pass. Domain 13/13. Smoke 88/88 in 3 of 3 preview runs and 89/89 live. axe 0. Image audit 18 PASS, 0 FAIL.
+>   - GPT's CI is green, read-only, and runs the QA scripts at `97780b0`.
+> - **Still waiting on the owner:** the Kurama and Classic Kunai photos. Their pages show "Original photo coming soon".
+> - **Process note (I-23, Info):** one more write-enabled workflow produced the favicon commit; it is now deleted.
+> - **Sign-off:** OK for a private or invite-only preview. Public launch is blocked only by owner items (§7a).
+>
+> **Earlier headline (2026-10-13, Run 5, superseded):** head at the time was **`acca67f326a2036d527a1ffef5a727dcc3ca2d7d`**.
 > - **GPT's fixes are verified:**
 >   - All 4 AI images are gone, and the approved real photos are cropped and resized faithfully.
 >   - Image weight is down from **4.7–7.9 MB per page to at most 467 KB**, and the logo is 660×198.
@@ -55,6 +65,7 @@ code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
 | 2026-10-11 | Owner's Airtable base `appTRxtdHRFH7mgLX` | — | Read-only via the owner's Airtable connector. Read the schema of every table, the records of **Products** (`tblmUOdfunwP8iWKi`, 18 rows) and **Filament Inventory** (`tbl2kT7YFNC6Jm0Pk`, 16 rows). **Not read:** cost and supplier fields, and all finance tables (Orders, Financial Periods, Capital, Loans, Withdrawals, Expenses and so on). | §3.2, F-17…F-20. Nothing in Airtable was changed. |
 | 2026-10-11 | Drive `HoneyComb/Stock` (`1FaOJQ7XVN3uQMVxoo04_IvXZq5ff6FTs`) and SKU folders | — | Read the sheet `HC-BOX`. Read metadata for the folder `HNYCMB503 Kurama` (`1AV2PhFD…`) and for `Baymax.3mf` (`1SfuSyhm…`). Listed `06 Product Records and Pricing`, which came back empty. | E-11, F-17. Nothing in Drive was changed. |
 | 2026-10-11 | `codex/storefront-mvp` | `8d13b91` (unchanged since 2026-10-09) | `git ls-remote` | No new commit, so no re-test was needed. |
+| 2026-10-13 | `codex/storefront-mvp` | `948dff5f6e37e6f07100a554fb8b49eb64aa846e` | Run 6: review-commit, domain tests, smoke (3 preview runs, 1 live), edge probes, axe, image audit, provenance scan, a hash and pixel check of all 18 derivatives and 6 sources, a favicon source and frame check, PR #2 CI and workflow review, and a Drive title search. | See §7 Run 6 |
 | 2026-10-13 | `codex/storefront-mvp` | `acca67f326a2036d527a1ffef5a727dcc3ca2d7d` | Run 5: review-commit, domain tests, smoke (4 preview runs, 1 live), edge probes, axe, image audit, provenance scan, a pixel and hash check of every source and derivative, and PR #2 CI status. Drive title search for the two pending photos. | See §7 Run 5 |
 
 ## 2. Evidence register (directly recovered)
@@ -667,7 +678,46 @@ GPT reported that items 1–8 of the §7b handoff are done. QA checked each clai
 
 GPT reported a peak mobile image transfer of 424 KB. QA measured 428 KB on the home page and 467 KB on the Minato product page (mobile, DPR 3). Both are far under the limit; the difference is probably which pages were measured.
 
-## 7a. QA sign-off and launch readiness (2026-10-09, updated for head `acca67f` on 2026-10-13)
+### Run 6: 2026-10-13 · `codex/storefront-mvp` @ `948dff5f6e37e6f07100a554fb8b49eb64aa846e` (current head)
+
+Commits since `acca67f`:
+- `d2a4a7b`, `16763db`: a one-off, write-enabled asset workflow (see I-23).
+- `12354a5`: the favicon and two smaller Minato images, pushed by that workflow.
+- `ef2774a`: portrait `sizes`, the favicon link, the QA pin moved to `97780b0`, and the one-off workflow deleted.
+- `5196210`, `948dff5`: tests and docs.
+
+GPT reported I-21 and I-22 fixed. QA checked this independently in a separate checkout. Results are in `qa/results/948dff5…/`.
+
+| Check | Result |
+|---|---|
+| `review-commit.sh` | Install, test, build, check, `npm audit --omit=dev --audit-level=high` and secret scan all exit 0. |
+| Domain contract tests | 13/13 |
+| Browser smoke | Preview: **88/88 in all 3 runs** (the Run 5 console 404 did not recur). Live fixture: 89/89. |
+| Edge probes | All PASS |
+| axe-core 4.10.3 | 0 violations at any level |
+| Image audit | **18 PASS, 0 FAIL** (58 INFO letterbox notes). **Image bytes per page:** at most **281 KB** (home, mobile). The Minato product page dropped from 467 KB to **173 KB** at mobile DPR 3, counting the logo and related-product images; GPT's 130 KB likely counts differently. **Sizing:** the worst oversampling is 3.0× (logo, desktop), and nothing is upscaled; the lowest ratio is 1.02×, the Minato on its product page. |
+| Provenance | No AI markers in any served image, the favicon or the committed sources (26 files). All 18 derivative records match their files. The 6 sources are still pixel-identical to the Drive originals. The new `minato-kunai-160/240.webp` re-derive from the recorded crop at 39.8 and 40.0 dB PSNR. No unlisted image files. |
+| Favicon (I-21) | `/favicon.ico` returns 200 `image/vnd.microsoft.icon` (5,500 B), and every page links it.<br>**Source PDF:** the committed `assets/brand-sources/honeycomb-symbol.pdf` matches Drive `HONEYCOMB Symbol.pdf` (`1AOoBNTsdAzj_getImty-054LJWxjzfFq`) on byte size (14,143), header, trailer, xref offset, producer and creation date. The connector returned the file inline, so QA compared those fingerprints rather than a full SHA-256.<br>**Frames:** `favicon.json` hashes match the files. The 16/32/48 px frames match the owner's separate PNG export of the symbol (`HC_Symbol-1.png`) at 52–56 dB PSNR, so this is the brand symbol, not redrawn artwork. |
+| Portrait sizing (I-22) | Portrait images now carry `sizes` scaled by their aspect ratio (Minato × 0.446, Baymax and Light Fury × 0.75). |
+| CI on `948dff5` | PR #2 has two `verify` runs, both successful (18:04 UTC). `storefront.yml` is `contents: read`, and it is the only workflow. It now runs QA scripts pinned at `97780b0`. |
+| Pending photos | No `RAV_4322` or Kurama `1.png` copy in Drive since 2026-10-10 (title search, 2026-10-13). |
+
+**Status at `948dff5`:**
+- **I-21: fixed.**
+- **I-22: fixed.**
+- **I-15:** unchanged (Low). Kurama and Classic Kunai still show placeholders, waiting on the owner.
+- **I-23 (Info): updated.** The current CI is read-only, but the favicon and Minato images were again produced by a write-enabled workflow (`prepare-run5.yml`).
+  - That workflow was separate and triggered only by edits to itself. It installed Pillow and PyMuPDF (version-pinned), ran GPT's scripts and pushed `12354a5`. It was deleted in `ef2774a`.
+  - It was narrower than the Run 5 job (no npm, no Playwright, no QA scripts), but it still ran installed packages with a write token.
+  - `12354a5` is attributed to GPT's usual human git identity rather than the bot, so the log doesn't show it was CI-generated.
+  - QA verified the generated files independently (rows above), so nothing is wrong at `948dff5`. The recommendation from Run 5 stands for next time.
+
+## 7a. QA sign-off and launch readiness (2026-10-09, updated for head `948dff5` on 2026-10-13)
+
+**Update for `948dff5` (2026-10-13):**
+- No implementation finding is open apart from I-15's two placeholders, which wait on the owner's photos, and I-23 (Info, process only).
+- **QA approval for a private or invite-only preview stands.**
+- **Public launch is still not approved.** The owner items below remain.
 
 **Update for `acca67f` (2026-10-13):**
 - No High or Medium implementation finding is open. I-21 and I-22 (Low) and I-23 (Info) can ride the next change.
@@ -770,6 +820,8 @@ on claude/recovery-qa). Optional follow-ups:
 4. Item 9 from the earlier handoff, once the owner has copied RAV_4322.jpg and Kurama 1.png
    into the HoneyComb folder.
 ```
+
+**Status at `948dff5`:** items 1–3 are done and verified (Run 6). Item 4 still waits on the owner. GPT has nothing else open from QA.
 
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 
