@@ -9,7 +9,7 @@ Last updated: **2026-10-13**.
 > - **Checks:**
 >   - Build, tests, audit and secret scan pass. Domain 13/13. Smoke 88/88 in 3 of 3 preview runs and 89/89 live. axe 0. Image audit 18 PASS, 0 FAIL.
 >   - GPT's CI is green, read-only, and runs the QA scripts at `97780b0`.
-> - **Still waiting on the owner:** the Kurama and Classic Kunai photos. Their pages show "Original photo coming soon".
+> - **Photos copied (later on 2026-10-13):** the owner copied the Kurama and Classic Kunai originals into the HoneyComb folder. QA downloaded both, and their SHA-256 hashes equal the approved originals (§7, "Owner photo copies"). GPT can now replace the two placeholders.
 > - **Process note (I-23, Info):** one more write-enabled workflow produced the favicon commit; it is now deleted.
 > - **Sign-off:** OK for a private or invite-only preview. Public launch is blocked only by owner items (§7a).
 >
@@ -65,6 +65,7 @@ code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
 | 2026-10-11 | Owner's Airtable base `appTRxtdHRFH7mgLX` | — | Read-only via the owner's Airtable connector. Read the schema of every table, the records of **Products** (`tblmUOdfunwP8iWKi`, 18 rows) and **Filament Inventory** (`tbl2kT7YFNC6Jm0Pk`, 16 rows). **Not read:** cost and supplier fields, and all finance tables (Orders, Financial Periods, Capital, Loans, Withdrawals, Expenses and so on). | §3.2, F-17…F-20. Nothing in Airtable was changed. |
 | 2026-10-11 | Drive `HoneyComb/Stock` (`1FaOJQ7XVN3uQMVxoo04_IvXZq5ff6FTs`) and SKU folders | — | Read the sheet `HC-BOX`. Read metadata for the folder `HNYCMB503 Kurama` (`1AV2PhFD…`) and for `Baymax.3mf` (`1SfuSyhm…`). Listed `06 Product Records and Pricing`, which came back empty. | E-11, F-17. Nothing in Drive was changed. |
 | 2026-10-11 | `codex/storefront-mvp` | `8d13b91` (unchanged since 2026-10-09) | `git ls-remote` | No new commit, so no re-test was needed. |
+| 2026-10-13 | Owner Drive, HoneyComb folder | — | Searched for the two pending photos. Downloaded both new copies to QA scratch, hashed them, and checked them for AI markers. Checked their folder chain up to the HoneyComb root. | Both match the approved originals (§7, "Owner photo copies"). Nothing in Drive was changed by QA. |
 | 2026-10-13 | `codex/storefront-mvp` | `948dff5f6e37e6f07100a554fb8b49eb64aa846e` | Run 6: review-commit, domain tests, smoke (3 preview runs, 1 live), edge probes, axe, image audit, provenance scan, a hash and pixel check of all 18 derivatives and 6 sources, a favicon source and frame check, PR #2 CI and workflow review, and a Drive title search. | See §7 Run 6 |
 | 2026-10-13 | `codex/storefront-mvp` | `acca67f326a2036d527a1ffef5a727dcc3ca2d7d` | Run 5: review-commit, domain tests, smoke (4 preview runs, 1 live), edge probes, axe, image audit, provenance scan, a pixel and hash check of every source and derivative, and PR #2 CI status. Drive title search for the two pending photos. | See §7 Run 5 |
 
@@ -700,7 +701,7 @@ GPT reported I-21 and I-22 fixed. QA checked this independently in a separate ch
 | Favicon (I-21) | `/favicon.ico` returns 200 `image/vnd.microsoft.icon` (5,500 B), and every page links it.<br>**Source PDF:** the committed `assets/brand-sources/honeycomb-symbol.pdf` matches Drive `HONEYCOMB Symbol.pdf` (`1AOoBNTsdAzj_getImty-054LJWxjzfFq`) on byte size (14,143), header, trailer, xref offset, producer and creation date. The connector returned the file inline, so QA compared those fingerprints rather than a full SHA-256.<br>**Frames:** `favicon.json` hashes match the files. The 16/32/48 px frames match the owner's separate PNG export of the symbol (`HC_Symbol-1.png`) at 52–56 dB PSNR, so this is the brand symbol, not redrawn artwork. |
 | Portrait sizing (I-22) | Portrait images now carry `sizes` scaled by their aspect ratio (Minato × 0.446, Baymax and Light Fury × 0.75). |
 | CI on `948dff5` | PR #2 has two `verify` runs, both successful (18:04 UTC). `storefront.yml` is `contents: read`, and it is the only workflow. It now runs QA scripts pinned at `97780b0`. |
-| Pending photos | No `RAV_4322` or Kurama `1.png` copy in Drive since 2026-10-10 (title search, 2026-10-13). |
+| Pending photos | At the time of Run 6, there was no `RAV_4322` or Kurama `1.png` copy in Drive. Both were copied in later that day; see "Owner photo copies" below. |
 
 **Status at `948dff5`:**
 - **I-21: fixed.**
@@ -711,6 +712,18 @@ GPT reported I-21 and I-22 fixed. QA checked this independently in a separate ch
   - It was narrower than the Run 5 job (no npm, no Playwright, no QA scripts), but it still ran installed packages with a write token.
   - `12354a5` is attributed to GPT's usual human git identity rather than the bot, so the log doesn't show it was CI-generated.
   - QA verified the generated files independently (rows above), so nothing is wrong at `948dff5`. The recommendation from Run 5 stands for next time.
+
+#### Owner photo copies (2026-10-13, after Run 6)
+The owner copied the two remaining approved originals into the HoneyComb folder. QA downloaded each copy and hashed it.
+
+| Product | HoneyComb copy (Drive ID) | Location | SHA-256 | Matches the approved original | AI markers |
+|---|---|---|---|---|---|
+| Classic Kunai | `Copy of RAV_4322.jpg` (`1PaOuVcZ82ij2vV2hq08fiFC42_w9iKua`), 4,887,510 B, 4912×7360 | `HoneyComb/Productions/Old list/Naruto-20260105T130713Z-3-001/Naruto/HNYCMB509 Kunai` | `f41368de…3c8722` | **Yes**, byte-identical to `RAV_4322.jpg` `1mx3YRM6…` | None |
+| Kurama | `1.png` (`1wkBiKm7ZUMRYRpHJojCI9YPhv3ePKIXn`), 2,348,045 B, 3415×5120 | `HoneyComb/Productions/Old list/Naruto-20260105T130713Z-3-001/Naruto/HNYCMB503 Kurama` | `d33853df…f5a494` | **Yes**, byte-identical to the business-account `1.png` `1nQvOC8n…` | None (Canva export, as before) |
+
+- **Duplicate copy:** a same-size `1.png` also sits in that folder's `Untitled design` subfolder (`1icgn6MlRI_NzuiQScFc65tN9457JqqJq`). QA did not hash it, so GPT should use the verified ID above.
+- **Other files copied in the same batch:** they include the AI-generated Kurama renders (`Pro_1…5.png`) and Minato `Product Photo (n).png` files. None of them is approved, so the site must not use them.
+- **What this unblocks:** GPT can replace the two placeholders (handoff §7b, item 4). I-15 closes once QA verifies that change.
 
 ## 7a. QA sign-off and launch readiness (2026-10-09, updated for head `948dff5` on 2026-10-13)
 
@@ -738,7 +751,7 @@ I-9, I-10, I-13, I-14 (Low) and I-11, I-12 (Info) can ride the next change.
 | 1 | **Secure the old site before touching DNS.** Open the EasyWP dashboard or ask Namecheap support for a files/DB backup. The apex still points at EasyWP. Don't pay for reactivation until a backup is confirmed available. | Original photos, product data, policy text, prices | F-15, E-8, brief task 3 |
 | 2 | **Confirm the WhatsApp number** (`94703009064`?) and who answers it. Then GPT sets `whatsappNumber` and `whatsappVerified: true`. Test on a real phone without sending an order. | Any order request | D-2, F-11, AC-WA-6 |
 | 3 | ~~Choose prices~~ **Done 2026-10-11:** Airtable is the price source (§3.2). **Still to do:** settle the Baymax/Kurama SKU swap (D-11), and choose `availability` per product, with a lead time for `made-to-order` items (D-8). | Cart totals, order messages | D-3, D-8, D-11, F-17 |
-| 4 | ~~Choose real product photos~~ **Done 2026-10-11** (§5a). **Still to do:** copy the originals that are outside the HoneyComb folder into it (`RAV_4322.jpg` and Kurama `1.png`; see `ASSET-AUDIT.md` §3). Confirm the photographer, Canva and logo rights. Approve or replace the draft descriptions. | `approved: true`, live mode | D-9, F-07, I-7, I-15 |
+| 4 | ~~Choose real product photos~~ **Done 2026-10-11** (§5a). ~~Copy the originals into the HoneyComb folder~~ **Done 2026-10-13**, and QA verified the hashes. **Still to do:** confirm the photographer, Canva and logo rights, and approve or replace the draft descriptions. | `approved: true`, live mode | D-9, F-07, I-7, I-15 |
 | 4b | **Model licences:** confirm that each MakerWorld model may be printed for sale. | Permission to sell | D-10, F-18 |
 | 5 | **Decide payment and delivery wording** (COD? bank transfer? courier fee, typical days). The site currently promises none, which is safe. | Quote conversations, policy pages | D-1, D-4, F-03, F-08 |
 | 6 | **Provide policy text** (shipping, returns, terms). The current `/privacy/` page accurately describes the app's own data handling, but the owner should approve it. | Footer policy links | D-5, F-10 |
@@ -821,7 +834,13 @@ on claude/recovery-qa). Optional follow-ups:
    into the HoneyComb folder.
 ```
 
-**Status at `948dff5`:** items 1–3 are done and verified (Run 6). Item 4 still waits on the owner. GPT has nothing else open from QA.
+**Status at `948dff5`:** items 1–3 are done and verified (Run 6).
+
+**Update 2026-10-13:** item 4 is unblocked. The owner copied both photos, and QA verified them:
+- Classic Kunai: `Copy of RAV_4322.jpg`, `1PaOuVcZ82ij2vV2hq08fiFC42_w9iKua`
+- Kurama: `1.png`, `1wkBiKm7ZUMRYRpHJojCI9YPhv3ePKIXn`
+
+Both SHA-256 hashes equal the `expectedSourceSha256` values already recorded in GPT's `assets/image-sources.json`.
 
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 

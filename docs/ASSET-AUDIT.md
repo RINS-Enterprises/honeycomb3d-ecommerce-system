@@ -11,6 +11,7 @@ Source: owner's Drive folder **HoneyComb** (`1BAhuPuAvAvgschy6bv-qW1YcBd74zaId`)
 > - **Real photographs exist for all 7 products** (updated 2026-10-09, second pass). Classic Kunai, Minato and Hidden Leaf come from a professional Nikon D810 shoot. Kurama is a real photo with the background removed in Canva. Light Fury and Night Fury have real single-unit phone photos. Several of these live **outside** the supplied folder, in the owner's `Download` folder or the business account `honeycomb.3d.sl@gmail.com`.
 > - The AI manifests are **cryptographically validated**: claim signature and data hash valid, issuer Google LLC (§1).
 > - Images do **not** establish price, availability, current product variant or permission to sell. Those stay owner decisions (§6).
+> - **2026-10-13 (later):** the owner copied `RAV_4322.jpg` and Kurama `1.png` into the HoneyComb folder. QA verified both copies byte-for-byte (§3, step 1). The last two placeholders can now be replaced.
 > - **2026-10-13:** GPT implemented the approved set at `acca67f`, and QA verified it (`QA-FINDINGS.md` Run 5):
 >   - No AI markers remain.
 >   - The committed sources are pixel-identical to the Drive originals (metadata stripped).
@@ -84,7 +85,10 @@ All "Verified" rows were downloaded, hashed and inspected. File IDs are exact.
 - **Alt text:** the current alt ("…with a white handle held in a hand") describes the AI image and must change.
 
 **Recommendation for GPT. The owner approved the photo choices on 2026-10-11.** It is also in `qa/asset-recommendations.json`. `QA-FINDINGS.md` §7b has a ready-to-paste version.
-1. **Owner first** copies the two originals that are **outside** the HoneyComb folder into it: `RAV_4322.jpg` (Classic Kunai) and the business-account Kurama `1.png`. **Still pending on 2026-10-11.** The other approved photos are already inside it under `Productions/Old list/…`; the parent chain was checked on 2026-10-11.
+1. **Owner first** copies the two originals that are **outside** the HoneyComb folder into it: `RAV_4322.jpg` (Classic Kunai) and the business-account Kurama `1.png`. **Done 2026-10-13, and QA verified it:**
+   - Classic Kunai: `Copy of RAV_4322.jpg` (`1PaOuVcZ82ij2vV2hq08fiFC42_w9iKua`) in `…/Naruto/HNYCMB509 Kunai`, SHA-256 `f41368de…`.
+   - Kurama: `1.png` (`1wkBiKm7ZUMRYRpHJojCI9YPhv3ePKIXn`) in `…/Naruto/HNYCMB503 Kurama`, SHA-256 `d33853df…`.
+   - Both are byte-identical to the approved originals. The other approved photos are already inside it under `Productions/Old list/…`; the parent chain was checked on 2026-10-11.
 2. Replace `classic-kunai.jpg` with a resized `RAV_4322.jpg` (approved).
 3. Replace `kurama.jpg` with a resized Kurama `1.png` (approved).
 4. Replace `light-fury.jpg` with a resized `Variation 1 (2).jpg` (approved: the painted unit).

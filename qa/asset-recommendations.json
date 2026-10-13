@@ -1,6 +1,6 @@
 {
   "_about": "QA asset recommendations for codex/storefront-mvp, reviewed at 8d13b910bc4ff156a2ffd049cd4cc381f19828ad. Source: docs/ASSET-AUDIT.md. The owner approved the recommended photos on 2026-10-11 (QA-FINDINGS.md §5a). Classic Kunai RAV_4322.jpg and Kurama 1.png are outside the supplied HoneyComb folder; the owner must copy them in first. Images do not establish price, availability or permission to sell.",
-  "generated": "2026-10-11",
+  "generated": "2026-10-13",
   "rules": [
     "Use only real photographs (no C2PA 'Created by Google Generative AI' / SynthID).",
     "Serve resized derivatives (srcset/sizes); keep originals out of dist/.",
@@ -22,9 +22,17 @@
         "sha256": "f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722",
         "size": "4912x7360",
         "provenance": "professional photo (Nikon D810 shoot), light-grey backdrop",
-        "location": "owner Drive /Download (1X1vuCjd-d7qEwmaXammBkbJEcTjp6DnI), OUTSIDE supplied folder; business-account copy 1pXQXPxzZSGacNSmSVGp7z3-9Lp4SfiUF"
+        "location": "owner Drive /Download (1X1vuCjd-d7qEwmaXammBkbJEcTjp6DnI), OUTSIDE supplied folder; business-account copy 1pXQXPxzZSGacNSmSVGp7z3-9Lp4SfiUF",
+        "honeyCombCopy": {
+          "driveId": "1PaOuVcZ82ij2vV2hq08fiFC42_w9iKua",
+          "title": "Copy of RAV_4322.jpg",
+          "bytes": 4887510,
+          "sha256": "f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722",
+          "path": "HoneyComb/Productions/Old list/Naruto-20260105T130713Z-3-001/Naruto/HNYCMB509 Kunai (1Wrc8Ir0j6mNNBErtH6WZI8fB6ndLqvw2)",
+          "verified": "2026-10-13: downloaded by QA; SHA-256 equals the approved original; no AI markers"
+        }
       },
-      "ownerDecision": "Approved 2026-10-11. Still open: photographer licence for the RAV_ shoot; copy into the HoneyComb folder."
+      "ownerDecision": "Approved 2026-10-11; copied into the HoneyComb folder 2026-10-13. Still open: photographer licence for the RAV_ shoot."
     },
     "HC-KURAMA": {
       "current": {
@@ -44,9 +52,18 @@
           "1D9b0zNCxbFWZZh61be2XfldM4HC5bCeH (3.png)",
           "1GlZ5wKITKKEUVVzQIut-JNmifF6Bwnm8 (5.png)"
         ],
-        "sha256": "d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494"
+        "sha256": "d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494",
+        "honeyCombCopy": {
+          "driveId": "1wkBiKm7ZUMRYRpHJojCI9YPhv3ePKIXn",
+          "title": "1.png",
+          "bytes": 2348045,
+          "sha256": "d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494",
+          "path": "HoneyComb/Productions/Old list/Naruto-20260105T130713Z-3-001/Naruto/HNYCMB503 Kurama (1a9HcP0gS5kuGiPzY0o6Dt1A2jePDzZFw)",
+          "verified": "2026-10-13: downloaded by QA; SHA-256 equals the approved original; Canva export, no AI markers",
+          "note": "A same-size duplicate also exists in the Untitled design subfolder (1icgn6MlRI_NzuiQScFc65tN9457JqqJq); QA did not hash it. Use the verified ID above."
+        }
       },
-      "ownerDecision": "Approved 2026-10-11. Still open: Canva account ownership; copy into the HoneyComb folder.",
+      "ownerDecision": "Approved 2026-10-11; copied into the HoneyComb folder 2026-10-13. Still open: Canva account ownership.",
       "skuNote": "SKU conflict 503/504 between Airtable and Drive: QA-FINDINGS.md F-17."
     },
     "HC-LIGHTFURY": {
@@ -183,10 +200,10 @@
     "source": "owner reply in the QA chat (QA-FINDINGS.md E-12)",
     "scope": "the recommended photo for every product in this file; Minato variant: tan handle, black blade",
     "stillOpen": [
-      "copy RAV_4322.jpg and Kurama 1.png into the HoneyComb folder",
       "photographer licence for the RAV_ shoot",
       "Canva team ownership",
       "logo agreement payment/signature"
-    ]
+    ],
+    "copiedIntoHoneyComb": "2026-10-13: owner copied RAV_4322.jpg and Kurama 1.png into the HoneyComb folder; QA verified SHA-256 of both copies."
   }
 }
