@@ -72,6 +72,8 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 
 | Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
+| `/assets/minato-kunai-160.webp` | 160 | 160 × 358 | 3536 | 82 | `2ea7980f03aa5e465e3f9e07d64ae8c59a745b7c7f4324a9ab3744b4684cf83e` |
+| `/assets/minato-kunai-240.webp` | 240 | 240 × 538 | 6474 | 82 | `7fd13d17c5885ef58d47711bf43b0e44457dcd07300459433d59d34e90c0820e` |
 | `/assets/minato-kunai-480.webp` | 480 | 480 × 1075 | 20718 | 82 | `9880a18df2a171585733ea002c0dec08d1b319dd1a11d1d832020b3333617f79` |
 | `/assets/minato-kunai-960.webp` | 960 | 960 × 2151 | 93218 | 82 | `3490f32cac68d84b5c6097e9f5a2af038298c2fcec41e090c367bb263ad259e4` |
 | `/assets/minato-kunai-1440.webp` | 1440 | 1440 × 3226 | 251428 | 82 | `34d72359b337d2f5f14ef44c1c1e9754a98dc05d39530adfc70748aca137c1f2` |

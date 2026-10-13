@@ -210,6 +210,8 @@
       "alt": "Black three-pronged Minato kunai with silver edge bevels, a tan engraved handle and a black ring on a light backdrop",
       "format": "webp",
       "widths": [
+        160,
+        240,
         480,
         960,
         1440
@@ -225,6 +227,22 @@
         6250
       ],
       "outputs": [
+        {
+          "src": "/assets/minato-kunai-160.webp",
+          "width": 160,
+          "height": 358,
+          "bytes": 3536,
+          "sha256": "2ea7980f03aa5e465e3f9e07d64ae8c59a745b7c7f4324a9ab3744b4684cf83e",
+          "quality": 82
+        },
+        {
+          "src": "/assets/minato-kunai-240.webp",
+          "width": 240,
+          "height": 538,
+          "bytes": 6474,
+          "sha256": "7fd13d17c5885ef58d47711bf43b0e44457dcd07300459433d59d34e90c0820e",
+          "quality": 82
+        },
         {
           "src": "/assets/minato-kunai-480.webp",
           "width": 480,

@@ -207,6 +207,16 @@
     },
     "imageVariants": [
       {
+        "src": "/assets/minato-kunai-160.webp",
+        "width": 160,
+        "height": 358
+      },
+      {
+        "src": "/assets/minato-kunai-240.webp",
+        "width": 240,
+        "height": 538
+      },
+      {
         "src": "/assets/minato-kunai-480.webp",
         "width": 480,
         "height": 1075
