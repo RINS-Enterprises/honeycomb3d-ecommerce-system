@@ -101,6 +101,8 @@
       "alt": "Black three-pronged Minato kunai with silver edge bevels, a tan engraved handle and a black ring on a light backdrop",
       "format": "webp",
       "widths": [
+        160,
+        240,
         480,
         960,
         1440

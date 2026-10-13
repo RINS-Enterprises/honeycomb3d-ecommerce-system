@@ -1,0 +1,35 @@
+name: Prepare Run 5 assets
+on:
+  push:
+    branches: [codex/storefront-mvp]
+    paths: [.github/workflows/prepare-run5.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/codex/storefront-mvp'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install Pillow==11.3.0 PyMuPDF==1.26.5
+      - name: Retrieve the specified public Drive brand symbol
+        run: |
+          mkdir -p assets/brand-sources
+          curl --fail --location --retry 2 'https://drive.google.com/uc?export=download&id=1AOoBNTsdAzj_getImty-054LJWxjzfFq' -o assets/brand-sources/honeycomb-symbol.pdf
+          python scripts/prepare-favicon.py
+      - run: python scripts/prepare-images.py
+      - name: Save generated assets on the implementation branch
+        run: |
+          git config user.name 'Isuru Rajapaksha'
+          git config user.email 'rins.enterprises.404@gmail.com'
+          git add assets/brand-sources/honeycomb-symbol.pdf assets/favicon.json public/favicon.ico docs/FAVICON-PROVENANCE.md public/assets/minato-kunai-160.webp public/assets/minato-kunai-240.webp assets/derivatives.json data/products.json docs/ASSET-PROVENANCE.md
+          git commit -m "Generate brand-symbol favicon and smaller portrait derivatives"
+          git push origin HEAD:codex/storefront-mvp
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: run5-asset-preview
+          path: test-results/
