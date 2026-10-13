@@ -16,7 +16,7 @@ GitHub Actions also installs Playwright 1.56.1 without changing the lockfile and
 
 Edit data/products.json, preserving IDs and slugs. Keep unknown prices null. Prices are positive LKR amounts with up to two decimal places. Never use zero to mean unknown. Supported availability: unconfirmed, available, unavailable, made-to-order.
 
-Place original product photos in public/assets/. Set image to /assets/filename.webp (or png/jpg/jpeg) and provide descriptive imageAlt. Do not replace actual products with AI-generated pictures or screenshot crops. Record provenance in source. Set approved only after the owner verifies the entry.
+Keep photo source inputs outside public/ under assets/photo-sources/. Verify the original Drive SHA-256 before removing non-rendering source metadata, then record both hashes, the Drive ID, orientation and crop in assets/image-sources.json. Generate 480/960/1440 px WebP derivatives with python scripts/prepare-images.py (Pillow 11.3.0). It writes real dimensions and srcset variants into the catalog and records every output SHA-256 in docs/ASSET-PROVENANCE.md. Only derivatives referenced by the visible catalog are copied into dist/. Do not use AI-generated product photos. Set approved only after the owner verifies the full entry.
 
 ## Contact and live mode
 
@@ -34,7 +34,7 @@ The former WooCommerce README is preserved in docs/LEGACY-WOOCOMMERCE-README.md.
 
 ## Remaining human checks before opening orders
 
-Original logo and all seven photos have been restored, and desktop/mobile Chromium screenshots have been reviewed. Remaining human checks: approval of product identity and draft descriptions; current products, prices or quote-only policy and availability; business WhatsApp; actual delivery/payment/return terms; real-phone WhatsApp opening and assistive-technology review. Firefox and Safari have not been tested. A static page build does not verify any payment or order backend.
+Five approved real photos and a 660 × 198 logo are available. Classic Kunai and Kurama use placeholders pending the owner's source copies into HoneyComb. The seven LKR prices come from owner-designated Airtable Products data read 11 October 2026, with per-product provenance; no compare-at prices or stock counts are shown. Remaining owner checks: the two source copies, Baymax/Kurama SKU reconciliation, product identity and draft descriptions, and availability; business WhatsApp; actual delivery/payment/return terms; real-phone WhatsApp opening and assistive-technology review. Firefox and Safari have not been tested. A static page build does not verify any payment or order backend.
 
 ## Continue safely in a new chat
 

@@ -89,7 +89,7 @@ try {
   // Mixed-price cart fixture verifies the complete cart handoff, including cents.
   await page.route('**/data/products.json',async route=>{
     const response=await route.fetch();const data=await response.json();
-    await route.fulfill({json:data.map(p=>({...p,approved:true,availability:'made-to-order',priceLkr:p.id==='HC-BAYMAX'?19.99:null}))});
+    await route.fulfill({json:data.map(p=>({...p,approved:!!p.image,availability:'made-to-order',priceLkr:p.id==='HC-BAYMAX'?19.99:null}))});
   });
   for(const [slug,quantity] of [['baymax-figure','2'],['night-fury-keychain','3']]) {
     await page.goto('http://127.0.0.1:4173/products/'+slug+'/');
