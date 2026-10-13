@@ -1,8 +1,21 @@
 # HoneyComb 3D storefront rebuild: QA findings
 
 Owner: independent recovery QA (Claude). Acceptance criteria: [`QA-ACCEPTANCE.md`](QA-ACCEPTANCE.md).
-Last updated: **2026-10-11**.
+Last updated: **2026-10-13**.
 
+> **Headline (2026-10-13, Run 5):** current head **`acca67f326a2036d527a1ffef5a727dcc3ca2d7d`**.
+> - **GPT's fixes are verified:**
+>   - All 4 AI images are gone, and the approved real photos are cropped and resized faithfully.
+>   - Image weight is down from **4.7–7.9 MB per page to at most 467 KB**, and the logo is 660×198.
+>   - The Airtable prices are in, and availability stays "to confirm".
+> - **Checks:** build, tests, audit and secret scan pass. Domain 13/13. Smoke 88/88 (3 of 4 preview runs; one intermittent console 404) and 89/89 live. axe: 0.
+> - **New Low/Info items:**
+>   - No favicon (I-21).
+>   - The tall Minato image is oversampled (I-22).
+>   - CI briefly had write access (I-23, now fixed).
+> - **Waiting on the owner:** Kurama and Classic Kunai show "Original photo coming soon" until their photos are copied into the HoneyComb folder.
+> - **Sign-off (§7a):** OK for a private or invite-only preview. Public launch is still blocked by owner decisions.
+>
 > **Owner answers (2026-10-11, §5a):**
 > - The owner approved the recommended real photos.
 > - Minato Kunai variant: **tan handle, black blade**.
@@ -10,9 +23,9 @@ Last updated: **2026-10-11**.
 > - Two new problems came out of it:
 >   - **Baymax and Kurama SKUs are swapped** between Airtable and Drive (F-17).
 >   - Airtable shows the products are printed from **third-party MakerWorld models**, whose licences for selling prints are unconfirmed (F-18).
-> - `codex/storefront-mvp` is still at `8d13b91`, so there is nothing new to re-test.
+> - At the time, `codex/storefront-mvp` was still at `8d13b91`.
 >
-> **Headline (2026-10-09, Run 4):** current head **`8d13b910bc4ff156a2ffd049cd4cc381f19828ad`**. Build, tests, check, audit and
+> **Earlier headline (2026-10-09, Run 4, superseded by Run 5):** head at the time was **`8d13b910bc4ff156a2ffd049cd4cc381f19828ad`**. Build, tests, check, audit and
 > secret scan pass. Domain contract tests 13/13. Browser smoke 88/88 and 89/89. axe: 0 violations. I-1…I-14 are fixed except I-12 (Info).
 > **New from the asset audit ([`ASSET-AUDIT.md`](ASSET-AUDIT.md)):** GPT's 8 imported files are byte-identical to the Drive files they cite, but
 > **4 of the 7 product images are Google-AI-generated (C2PA + SynthID)** (I-15, High). Pages also ship **4.7–7.9 MB of images**
@@ -42,6 +55,7 @@ code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
 | 2026-10-11 | Owner's Airtable base `appTRxtdHRFH7mgLX` | — | Read-only via the owner's Airtable connector. Read the schema of every table, the records of **Products** (`tblmUOdfunwP8iWKi`, 18 rows) and **Filament Inventory** (`tbl2kT7YFNC6Jm0Pk`, 16 rows). **Not read:** cost and supplier fields, and all finance tables (Orders, Financial Periods, Capital, Loans, Withdrawals, Expenses and so on). | §3.2, F-17…F-20. Nothing in Airtable was changed. |
 | 2026-10-11 | Drive `HoneyComb/Stock` (`1FaOJQ7XVN3uQMVxoo04_IvXZq5ff6FTs`) and SKU folders | — | Read the sheet `HC-BOX`. Read metadata for the folder `HNYCMB503 Kurama` (`1AV2PhFD…`) and for `Baymax.3mf` (`1SfuSyhm…`). Listed `06 Product Records and Pricing`, which came back empty. | E-11, F-17. Nothing in Drive was changed. |
 | 2026-10-11 | `codex/storefront-mvp` | `8d13b91` (unchanged since 2026-10-09) | `git ls-remote` | No new commit, so no re-test was needed. |
+| 2026-10-13 | `codex/storefront-mvp` | `acca67f326a2036d527a1ffef5a727dcc3ca2d7d` | Run 5: review-commit, domain tests, smoke (4 preview runs, 1 live), edge probes, axe, image audit, provenance scan, a pixel and hash check of every source and derivative, and PR #2 CI status. Drive title search for the two pending photos. | See §7 Run 5 |
 
 ## 2. Evidence register (directly recovered)
 
@@ -581,7 +595,85 @@ Earlier findings re-tested at `8d13b91`:
   - GPT's change;
   - a QA re-run of `image-provenance.py` on the new outputs.
 
-## 7a. QA sign-off and launch readiness (2026-10-09, updated for head `8d13b91`)
+### Run 5: 2026-10-13 · `codex/storefront-mvp` @ `acca67f326a2036d527a1ffef5a727dcc3ca2d7d` (current head)
+
+Commits since `8d13b91`:
+- `40d0f1e`: prices and photos.
+- `692945e`: test fixtures and docs.
+- `838d0e1`: image derivatives, committed by `github-actions[bot]`.
+- `acca67f`: CI returned to read-only.
+
+GPT reported that items 1–8 of the §7b handoff are done. QA checked each claim independently in a separate checkout. Results are in `qa/results/acca67f…/`.
+
+| Check | Result |
+|---|---|
+| `review-commit.sh` | Install, test, build, check, `npm audit --omit=dev --audit-level=high` and secret scan all exit 0. lint, typecheck and test:e2e are not defined. |
+| Domain contract tests | 13/13 |
+| Browser smoke, preview | 4 runs. Runs 2–4: 88/88 PASS. Run 1: 87 PASS and 1 FAIL (`js-errors-home@mobile`, console "Failed to load resource: 404"). The harness did not record the URL at the time; see I-21. |
+| Browser smoke, live fixture | 89/89 PASS, after a QA fixture fix (below). The WhatsApp handoff has the number, item, quantity and total, and `rel="noopener noreferrer"`. |
+| Edge probes | All PASS |
+| axe-core 4.10.3 | 0 violations at any level |
+| Image audit (corrected tool) | All images decode. **Image bytes per page:** at most **467 KB** (Minato page, mobile); home 428 KB; shop 374 KB. At `8d13b91` this was 4.65–7.87 MB. The largest file is 251 KB (`minato-kunai-1440.webp`). The logo is 660×198 and 42.7 KB. **4 FAIL:** the Minato image is oversampled 3.1–4.3× (I-22). |
+| Provenance | **No** C2PA, "Google Generative AI" or SynthID marker in any served image or committed source. **Sources:** the 6 committed sources in `assets/photo-sources/` are **pixel-identical** to the Drive originals QA hashed on 2026-10-09. Only metadata was stripped, and GPT records both hashes (`sourceSha256`, `inputSha256`). **Derivatives:** all 16 records in `assets/derivatives.json` match their files (SHA-256, bytes, size). **Re-derivation:** rebuilding each 960 px image from the committed source and recorded crop box matches GPT's file at 34–39 dB PSNR. That is what WebP re-encoding of the same crop and resize gives, so there were no other edits. **Crops:** the Minato crop box is exactly QA's recommendation, and the Hidden Leaf crop shows one whole plate (Visual). |
+| Catalogue data | All 7 prices equal Airtable (§3.2), and each product records its Airtable record in `priceSource`. No compare-at or sale prices. All 7 have `availability: unconfirmed` and `approved: false`. IDs are unchanged. The Airtable IDs do **not** reach `dist/` (searched). The Minato alt text now describes the tan handle. |
+| Placeholders | Kurama and Classic Kunai have `image: null` and show "Original photo coming soon" (Visual). The owner's copies were still missing from Drive on 2026-10-13: a title search found no `RAV_4322` or `1.png` created since 2026-10-10. |
+| CI on `acca67f` | PR #2 has two `verify` check runs, both successful (03:21 UTC). |
+
+**Status of earlier findings at `acca67f`:**
+- **I-15 (High) → Low, mostly fixed.**
+  - All 4 AI images are gone from the repo and the site.
+  - Minato and Light Fury now use the approved real photos.
+  - Kurama and Classic Kunai show an honest placeholder until the owner copies `RAV_4322.jpg` and `1.png` into the HoneyComb folder. It closes when those two photos are in.
+- **I-16 (High): fixed.**
+- **I-17 (Medium): fixed.**
+- **I-18 (Low): fixed.** No `.jpeg.jpg` titles are left, and the removed AI files are listed as "Google AI; removed".
+- **I-19 (Low): fixed** for the 5 products with photos: consistent real photos, a single-unit Night Fury and a single-plate Hidden Leaf.
+- **I-20 (Info): fixed.** No width/height ratio mismatches remain.
+
+#### I-21 · Low · Tested · No favicon, so browsers get a 404 for `/favicon.ico`
+- **Reproduction:** `curl -I http://127.0.0.1:4173/favicon.ico` returns 404, and no page has `<link rel="icon">`.
+- **Impact:** a 404 and a console error in each new browser session. It is the only same-origin 404 QA could find, and the most likely cause of the one intermittent smoke failure above. That is **not proven**: 72 further targeted page loads and 3 full runs did not reproduce it.
+- **Fix:** add a small favicon made from the brand symbol (`HONEYCOMB Symbol.pdf` `1AOoBNTsdAzj_getImty-054LJWxjzfFq`, or `HC_Symbol-1.png`), and record it in `ASSET-PROVENANCE.md`.
+
+#### I-22 · Low · Tested · The tall Minato image is oversampled 3.1–4.3×
+- **Reproduction:** `qa/e2e/image-audit.mjs` (corrected version).
+- **Actual:**
+  - The Minato images are 0.45:1. In the square `object-fit: contain` boxes their height is what limits them, but `srcset` picks a file by the box *width*.
+  - The shop at mobile DPR 3 loads `minato-kunai-960.webp` (960×2151) for a 167 px box: 4.3×.
+  - The product page loads the 1440 file: 3.1×.
+  - The cost is small, about 70–160 KB extra per page, and every page is still far under 1.5 MB.
+- **Fix:** give portrait images a `sizes` value scaled by their aspect ratio (box width × 0.45 for the Minato), or add height-based widths for tall images.
+
+#### I-23 · Info · Inspection · CI briefly had write access while running third-party code
+- **What happened:**
+  - From `692945e` to `acca67f`, the `verify` job had `contents: write`.
+  - With that token it ran `npm ci`, installed Playwright and ran QA scripts fetched from `claude/recovery-qa`.
+  - It then pushed `838d0e1` as `github-actions[bot]`.
+  - `acca67f` returned the job to `contents: read`.
+- **Now:** QA verified the bot-generated content independently (Provenance row above), so nothing is wrong at `acca67f`.
+- **Recommendation:** don't give a job that runs installed packages a write token again. Generate derivatives locally, or in a separate job that runs no third-party code.
+- **QA scripts pinned in GPT's CI:** GPT's CI pins two QA scripts at `aedc1e4`.
+  - At that pin, `image-audit.mjs` under-reports oversampling for `srcset` images. This was a QA bug, fixed in the commit that records this run.
+  - At that pin, `image-provenance.py` always exits 0. It now exits 1 on AI markers. Because GPT strips metadata, though, the scan can't see markers on stripped files anyway. Provenance rests on the source-hash chain QA verified.
+  - If GPT re-pins to the new QA commit, its CI will fail on I-22 until the Minato `sizes` are fixed.
+
+**QA tooling fixes in this run.** These were QA bugs, not app defects.
+1. **Live fixture (`storefront-smoke.mjs`):** it gave products without a photo a stand-in image.
+   - Since `acca67f`, the app rejects a photo that has no matching responsive variant. So the whole live data set failed validation and the add buttons stayed disabled; the app correctly failed closed.
+   - The fixture now approves only products that have a real photo, as GPT's own fixture does.
+2. **Console errors (`storefront-smoke.mjs`):** it now records the URL of each console error.
+3. **Oversampling (`image-audit.mjs`):** it measured oversampling from `naturalWidth`, which browsers density-correct for `srcset` images. It now decodes the chosen file to get real pixels. Earlier runs had no `srcset`, so their results stand.
+4. **Provenance gate (`image-provenance.py`):** it now exits 1 when any file carries generative-AI markers.
+
+GPT reported a peak mobile image transfer of 424 KB. QA measured 428 KB on the home page and 467 KB on the Minato product page (mobile, DPR 3). Both are far under the limit; the difference is probably which pages were measured.
+
+## 7a. QA sign-off and launch readiness (2026-10-09, updated for head `acca67f` on 2026-10-13)
+
+**Update for `acca67f` (2026-10-13):**
+- No High or Medium implementation finding is open. I-21 and I-22 (Low) and I-23 (Info) can ride the next change.
+- The image set now follows the brief (real photos only, or an honest placeholder) and is resized.
+- QA approves this build for a **private or invite-only preview**. Two products show "Original photo coming soon" until the owner copies their photos.
+- **Public launch is still not approved.** The owner items below remain.
 
 **Update for `8d13b91`:** the code itself remains sound, but **I-15 (AI product images) and I-16 (image weight) are open High findings**. The site is fine for a *private* owner review. It is **not** approved for any wider preview or launch until the image set follows the brief and is resized. I-17 (logo) should ride the same change.
 
@@ -657,6 +749,28 @@ the output SHA-256 in docs/ASSET-PROVENANCE.md.
 
 The photographer, Canva and logo rights (`ASSET-AUDIT.md` §6) gate a **public launch**, not a private preview.
 
+**Status 2026-10-13:** items 1–8 are done at `acca67f`, and QA verified them (Run 5). Item 9 waits on the owner copying the two photos.
+
+**Next handoff to GPT (2026-10-13, after `acca67f`).** All of these are Low or Info and can ride one change:
+
+```
+QA Run 5 on codex/storefront-mvp @ acca67f: items 1-8 verified (docs/QA-FINDINGS.md §7 Run 5
+on claude/recovery-qa). Optional follow-ups:
+1. I-21 (Low): add a favicon made from the brand symbol (Drive "HONEYCOMB Symbol.pdf"
+   1AOoBNTsdAzj_getImty-054LJWxjzfFq, or HC_Symbol-1.png) and record it in
+   ASSET-PROVENANCE.md. /favicon.ico currently returns 404.
+2. I-22 (Low): the Minato image (0.45:1) is chosen by box width but shown height-limited
+   in square contain boxes, so it is 3.1-4.3x oversampled. Give portrait images a sizes
+   value scaled by their aspect ratio, or add height-based widths.
+3. I-23 (Info): CI is read-only again; keep write tokens away from jobs that run installed
+   packages. If you re-pin the QA scripts, use the claude/recovery-qa commit that records
+   Run 5: image-audit.mjs now measures real pixels for srcset images, and
+   image-provenance.py exits 1 on AI markers. The re-pinned audit will fail on I-22 until
+   it is fixed.
+4. Item 9 from the earlier handoff, once the owner has copied RAV_4322.jpg and Kurama 1.png
+   into the HoneyComb folder.
+```
+
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 
 | Check | Command | Result |
@@ -672,7 +786,9 @@ The photographer, Canva and logo rights (`ASSET-AUDIT.md` §6) gate a **public l
 | axe-core audit (2026-10-09) | `qa/e2e/axe-audit.mjs`, with axe-core 4.10.3 installed in a QA scratch directory (no app dependency) | `2260c7f`: 20 audits, 0 serious/critical, 22 moderate (I-13, I-14). Its first run reported 20 ERRORs, not passes, while CSP blocked injection. |
 | Image audit (new, 2026-10-09) | `qa/e2e/image-audit.mjs` | `8d13b91`: decode, orientation and alt PASS; weight/oversampling FAIL (I-16, I-17). An early run mislabelled page totals because of a field-name clash in my script; fixed. |
 | Drive asset provenance (2026-10-09) | Drive connector downloads → `decode.py`/`prov.py` in QA scratch (not committed) | 35 files hashed and classified. 8/8 GPT assets byte-identical; 4/7 product images C2PA AI. |
-| Domain contract tests (new, 2026-10-09) | `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'` | `f801d31`: 10/13. `5d1c6a4`: 11/13. `2260c7f` and `8d13b91`: 13/13. Without `DOMAIN_DIR` they skip. |
+| Domain contract tests (new, 2026-10-09) | `DOMAIN_DIR=<review checkout> node --test 'qa/domain/*.test.mjs'` | `f801d31`: 10/13. `5d1c6a4`: 11/13. `2260c7f`, `8d13b91` and `acca67f`: 13/13. Without `DOMAIN_DIR` they skip. |
+| Run 5 tooling fixes (2026-10-13) | `storefront-smoke.mjs`, `image-audit.mjs`, `image-provenance.py` | The live fixture now approves only products with a real photo, and console errors record their URL. Oversampling is measured on the decoded file, not the density-corrected `naturalWidth`. The provenance scan exits 1 on AI markers (checked: exit 1 on a Google-AI sample, exit 0 on `RAV_4322.jpg`). |
+| Source and derivative verification (2026-10-13) | Ad hoc Python/Pillow in QA scratch | 6 committed sources are pixel-identical to the Drive originals. 16 derivative records match their files. Re-derivations match at 34–39 dB PSNR. |
 
 The fixture rows validate the **tools only**. §7 holds the results against the storefront.
 

@@ -52,8 +52,15 @@ for (const [vp, size, dpr] of [['mobile', { width: 390, height: 844 }, 3], ['des
     const imgs = await page.$$eval('img', async (els) => Promise.all(els.map(async (img) => {
       let decodeOk = true; try { await img.decode(); } catch { decodeOk = false; }
       const r = img.getBoundingClientRect(); const cs = getComputedStyle(img);
+      // With srcset w-descriptors, naturalWidth/Height are density-corrected (they report the
+      // `sizes` slot, not the file). Decode the chosen resource on its own to get real pixels.
+      let pw = img.naturalWidth, ph = img.naturalHeight;
+      if (img.srcset && img.currentSrc) {
+        try { const probe = new Image(); probe.src = img.currentSrc; await probe.decode(); pw = probe.naturalWidth; ph = probe.naturalHeight; } catch {}
+      }
       return { src: new URL(img.currentSrc || img.src).pathname, alt: img.getAttribute('alt'), complete: img.complete, decodeOk,
-        nw: img.naturalWidth, nh: img.naturalHeight, rw: Math.round(r.width), rh: Math.round(r.height), fit: cs.objectFit,
+        nw: pw, nh: ph, densityW: img.naturalWidth, srcset: !!img.srcset, sizes: img.getAttribute('sizes'),
+        rw: Math.round(r.width), rh: Math.round(r.height), fit: cs.objectFit,
         loading: img.getAttribute('loading'), attrW: img.getAttribute('width'), attrH: img.getAttribute('height'), visible: r.width > 0 && r.height > 0 };
     })));
     const lcp = await page.evaluate(() => window.__lcp);

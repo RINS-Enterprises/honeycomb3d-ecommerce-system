@@ -11,6 +11,12 @@ Source: owner's Drive folder **HoneyComb** (`1BAhuPuAvAvgschy6bv-qW1YcBd74zaId`)
 > - **Real photographs exist for all 7 products** (updated 2026-10-09, second pass). Classic Kunai, Minato and Hidden Leaf come from a professional Nikon D810 shoot. Kurama is a real photo with the background removed in Canva. Light Fury and Night Fury have real single-unit phone photos. Several of these live **outside** the supplied folder, in the owner's `Download` folder or the business account `honeycomb.3d.sl@gmail.com`.
 > - The AI manifests are **cryptographically validated**: claim signature and data hash valid, issuer Google LLC (§1).
 > - Images do **not** establish price, availability, current product variant or permission to sell. Those stay owner decisions (§6).
+> - **2026-10-13:** GPT implemented the approved set at `acca67f`, and QA verified it (`QA-FINDINGS.md` Run 5):
+>   - No AI markers remain.
+>   - The committed sources are pixel-identical to the Drive originals (metadata stripped).
+>   - The derivatives match the recorded crops.
+>   - The Minato crop is the box below.
+>   - Kurama and Classic Kunai show "Original photo coming soon" until the owner copies `1.png` and `RAV_4322.jpg` into the HoneyComb folder.
 > - **2026-10-11:** the owner approved the recommended real photos and chose the Minato variant with the **tan handle and black blade**. That variant's only real photo is the group shot `Copy of RAV_4468.jpg`, so it needs a crop (§3). Prices now come from the owner's Airtable (`QA-FINDINGS.md` §3.2), not from images. The rights checks in §6 are still open.
 
 Method labels used below:

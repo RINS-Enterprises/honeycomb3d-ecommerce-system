@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 # QA helper: classify image provenance markers (C2PA / Google Generative AI / SynthID, XMP CreatorTool, camera EXIF).
 # Usage: python3 -I qa/scripts/image-provenance.py <image>...   (detects markers by content; does not cryptographically validate C2PA)
+# Exit 1 if any file carries Google Generative AI / SynthID markers. No markers is NOT proof of a real photo:
+# stripped metadata removes them, so check stripped files through their recorded source hash instead.
 import sys, re, os
 from PIL import Image, ExifTags
 Image.MAX_IMAGE_PIXELS = None
+flagged = []
 for f in sys.argv[1:]:
     b = open(f, 'rb').read()
     ai = len(re.findall(rb'Created by Google Generative AI', b))
@@ -20,9 +23,13 @@ for f in sys.argv[1:]:
         ori = tags.get('Orientation', '')
     except Exception as e:
         size, cam, sw, dt, ori = ('?',) * 5
+    if ai or synth: flagged.append(f)
     if ai: cls = 'AI-GENERATED (C2PA: Google Generative AI)'
     elif tool: cls = 'EDITED/EXPORTED (' + tool[0].decode('utf8', 'replace')[:30] + ')'
     elif cam: cls = 'CAMERA ORIGINAL'
     else: cls = 'NO PROVENANCE METADATA'
     name = os.path.basename(f).split('__', 1)[-1]
     print(f"{name[:46]:46s} {str(size):14s} {cls:44s} cam='{cam}' sw='{sw}' date='{dt}' orient={ori} c2pa={c2pa} synthid={synth}")
+if flagged:
+    print(f'{len(flagged)} file(s) carry generative-AI markers', file=sys.stderr)
+    sys.exit(1)

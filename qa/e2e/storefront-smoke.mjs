@@ -67,7 +67,8 @@ const tid = (scope, id) => scope.locator(`[data-testid="${id}"]`);
 function watch(page, label) {
   const errs = { console: [], page: [], http: [], thirdParty: new Set() };
   const origin = new URL(BASE).origin;
-  page.on('console', (m) => m.type() === 'error' && errs.console.push(m.text().slice(0, 200)));
+  // Keep the failing resource's URL: "Failed to load resource" text alone does not say what failed.
+  page.on('console', (m) => m.type() === 'error' && errs.console.push(`${m.text().slice(0, 200)}${m.location()?.url ? ` @ ${m.location().url}` : ''}`));
   page.on('pageerror', (e) => errs.page.push(String(e.message || e).slice(0, 200)));
   page.on('response', (r) => {
     const u = r.url();
@@ -240,6 +241,10 @@ async function installLiveFixture(ctx) {
     const data = await (await route.fetch()).json();
     await route.fulfill({ json: data.map((p, i) => {
       fixturePrices[p.name] = 100 * (i + 1); // TEST-ONLY prices
+      // Approve only products that already have a real photo. Since acca67f the app rejects a
+      // photo that has no matching responsive variant, so a stand-in image would make the whole
+      // live data set invalid (fail-closed) instead of testing the cart.
+      if (Array.isArray(p.imageVariants)) return { ...p, approved: !!p.image, availability: 'made-to-order', priceLkr: 100 * (i + 1) };
       return { ...p, approved: true, availability: 'made-to-order', priceLkr: 100 * (i + 1), image: p.image || '/assets/qa-fixture.png', imageAlt: p.imageAlt || p.name };
     }) });
   });
