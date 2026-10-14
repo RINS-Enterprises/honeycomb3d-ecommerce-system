@@ -895,6 +895,16 @@ Before pushing, run npm test, npm run build, npm run check, tests/images-browser
 pinned QA image audit. Report the final commit SHA.
 ```
 
+**2026-10-14, later: a second GPT chat also ended before pushing.**
+- **What happened:** GPT said it had a local commit but could not reach `localhost` to run the browser checks. It was trying a workaround when its chat hit the length limit.
+- **Repository state:** unchanged. `codex/storefront-mvp` is still at `948dff5`, there are no new branches or pull requests, and the only workflow is still `storefront.yml`.
+- **Correction to the restart prompt:** GPT does not need to run browser checks locally.
+  - The read-only `Storefront checks` workflow already runs `tests/browser.mjs`, `tests/images-browser.mjs` and the pinned QA image checks on every push to `codex/storefront-mvp`.
+  - QA re-tests every pushed commit in a separate checkout.
+  - GPT should therefore run `npm test`, `npm run build` and `npm run check`, then push and report the SHA and the CI result.
+  - It should not create workflows or other workarounds for `localhost`.
+
+
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 
 | Check | Command | Result |
