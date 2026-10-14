@@ -30,6 +30,19 @@
           "sha256": "f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722",
           "path": "HoneyComb/Productions/Old list/Naruto-20260105T130713Z-3-001/Naruto/HNYCMB509 Kunai (1Wrc8Ir0j6mNNBErtH6WZI8fB6ndLqvw2)",
           "verified": "2026-10-13: downloaded by QA; SHA-256 equals the approved original; no AI markers"
+        },
+        "suggestedCrop": {
+          "box": [
+            627,
+            1370,
+            4205,
+            6142
+          ],
+          "frame": "4912x7360",
+          "aspect": "3:4",
+          "basis": "kunai extent (dark parts) (2016,1832)-(2816,5680) plus ~12% margin, widened to 3:4; checked visually 2026-10-14",
+          "optional": true,
+          "note": "Full frame is acceptable; at full frame the kunai fills only ~52% of the image height."
         }
       },
       "ownerDecision": "Approved 2026-10-11; copied into the HoneyComb folder 2026-10-13. Still open: photographer licence for the RAV_ shoot."
@@ -61,6 +74,18 @@
           "path": "HoneyComb/Productions/Old list/Naruto-20260105T130713Z-3-001/Naruto/HNYCMB503 Kurama (1a9HcP0gS5kuGiPzY0o6Dt1A2jePDzZFw)",
           "verified": "2026-10-13: downloaded by QA; SHA-256 equals the approved original; Canva export, no AI markers",
           "note": "A same-size duplicate also exists in the Untitled design subfolder (1icgn6MlRI_NzuiQScFc65tN9457JqqJq); QA did not hash it. Use the verified ID above."
+        },
+        "suggestedCrop": {
+          "box": [
+            487,
+            1228,
+            2937,
+            3876
+          ],
+          "frame": "3415x5120",
+          "basis": "figure extent on the white Canva background (656,1411)-(2768,3693) plus 8% margin; checked 2026-10-14",
+          "optional": true,
+          "note": "At full frame the figure fills ~62% x 45% of the image."
         }
       },
       "ownerDecision": "Approved 2026-10-11; copied into the HoneyComb folder 2026-10-13. Still open: Canva account ownership.",

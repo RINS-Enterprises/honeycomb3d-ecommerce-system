@@ -842,6 +842,59 @@ on claude/recovery-qa). Optional follow-ups:
 
 Both SHA-256 hashes equal the `expectedSourceSha256` values already recorded in GPT's `assets/image-sources.json`.
 
+**2026-10-14: GPT's chat ended mid-task.** GPT's chat for item 4 hit its length limit while it was setting up a temporary workflow. QA checked the repository afterwards:
+- `codex/storefront-mvp` is still at `948dff5`, with no new commits and no new branches.
+- `storefront.yml` (read-only) is the only workflow.
+- Nothing was half-applied.
+
+Restart prompt for a new GPT chat (also given to the owner in chat):
+
+```
+Continue the HoneyComb 3D storefront work in RINS-Enterprises/honeycomb3d-ecommerce-system on
+branch codex/storefront-mvp. The current head is 948dff5f6e37e6f07100a554fb8b49eb64aa846e.
+The previous chat ended before pushing anything. QA notes are on branch claude/recovery-qa
+(docs/QA-FINDINGS.md §7 Run 6 and "Owner photo copies"; qa/asset-recommendations.json).
+
+Task: replace the two "Original photo coming soon" placeholders with the owner-approved photos
+(approved 2026-10-11, copied into the HoneyComb Drive folder 2026-10-13, hashes verified by QA):
+- HC-KUNAI: "Copy of RAV_4322.jpg", Drive 1PaOuVcZ82ij2vV2hq08fiFC42_w9iKua, 4912x7360,
+  SHA-256 f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722
+  (black blade and ring, white handle, light-grey backdrop)
+- HC-KURAMA: "1.png", Drive 1wkBiKm7ZUMRYRpHJojCI9YPhv3ePKIXn, 3415x5120, a Canva background-removed
+  real photo, SHA-256 d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494
+  (orange figure on white)
+
+Do it the same way as the other five photos:
+1. Verify each download's SHA-256 before use.
+2. Strip metadata in the committed source copy and record both hashes
+   (assets/image-sources.json, assets/derivatives.json).
+3. Make WebP derivatives with scripts/prepare-images.py. Include the small portrait widths and
+   aspect-scaled sizes. Write accurate alt text.
+4. Set image, imageVariants, imageWidth and imageHeight in data/products.json.
+5. Update docs/ASSET-PROVENANCE.md.
+6. Remove both entries from "pending".
+
+Optional QA-suggested crops (record any crop you use):
+- Kunai: [627,1370,4205,6142], 3:4. At full frame the kunai fills only about 52% of the height.
+- Kurama: [487,1228,2937,3876]. At full frame the figure fills about 62% x 45%.
+
+Keep these unchanged: prices, availability "unconfirmed", approved=false, and product IDs
+(the Baymax/Kurama SKU conflict is still open).
+
+Don't use any other file from those folders. Pro_*.png and "Product Photo" files are
+AI-generated and not approved.
+
+Prefer generating files without a write-enabled workflow. If you must use one:
+- trigger it manually or only on its own file;
+- install only hash-pinned packages;
+- run only scripts/prepare-images.py;
+- commit as github-actions[bot];
+- delete the workflow in the next commit.
+
+Before pushing, run npm test, npm run build, npm run check, tests/images-browser.mjs and the
+pinned QA image audit. Report the final commit SHA.
+```
+
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 
 | Check | Command | Result |
