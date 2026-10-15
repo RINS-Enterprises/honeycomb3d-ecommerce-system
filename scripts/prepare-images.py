@@ -7,38 +7,63 @@ from pathlib import Path
 from io import BytesIO
 import hashlib, json
 import PIL, statistics
-from PIL import Image, ImageOps, ImageCms, ImageDraw, features
+from PIL import Image, ImageOps, ImageCms, ImageDraw, ImageFilter, features
 
 
-def pad_to_square(im, feather_ratio=0.04):
-    """Centre the whole approved crop on a square of the photo's own backdrop colour.
-    The colour is the per-channel median of the crop's outer 8 px on the sides that meet
-    the padding; the photo's edge is feathered into it so no seam or bar shows.
-    No pixels inside the approved crop are changed apart from that edge fade."""
+def pad_to_square(im, feather_ratio=0.04, tolerance=14):
+    """Centre the whole approved crop on a square that continues the photo's own backdrop.
+    The backdrop is rebuilt from the crop's outer 8 px edges: a median tone per row (or
+    column), clamped near the overall backdrop colour so any object touching the edge is
+    ignored, smoothed, then interpolated across the square between the two opposite edges.
+    The photo's edge is feathered into it; nothing else inside the approved crop changes."""
     w, h = im.size
     side = max(w, h)
     if w == h:
         return im, None
     ring = 8
-    if w < h:
-        strips = [im.crop((0, 0, ring, h)), im.crop((w - ring, 0, w, h))]
+    rgb = im.convert("RGB")
+    vertical = w < h  # padding goes left and right
+    length = h if vertical else w
+    strips = ([rgb.crop((0, 0, ring, h)), rgb.crop((w - ring, 0, w, h))] if vertical
+              else [rgb.crop((0, 0, w, ring)), rgb.crop((0, h - ring, w, h))])
+    everything = [px for strip in strips for px in strip.getdata()]
+    colour = tuple(int(statistics.median(px[i] for px in everything)) for i in range(3))
+    blur = ImageFilter.GaussianBlur(max(4, round(length / 40)))
+    edges = []
+    for strip in strips:
+        line = Image.new("RGB", (1, length) if vertical else (length, 1))
+        for k in range(length):
+            cells = strip.crop((0, k, ring, k + 1) if vertical else (k, 0, k + 1, ring)).getdata()
+            tone = tuple(int(statistics.median(px[i] for px in cells)) for i in range(3))
+            tone = tuple(min(max(tone[i], colour[i] - tolerance), colour[i] + tolerance) for i in range(3))
+            line.putpixel((0, k) if vertical else (k, 0), tone)
+        edges.append(line.filter(blur))
+    ox, oy = (side - w) // 2, (side - h) // 2
+    if vertical:
+        first, second = (e.resize((side, h)) for e in edges)
+        ramp = Image.linear_gradient("L").rotate(90, expand=True).resize((side, h))  # 0 at left
+        ramp = ramp.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
+        band = Image.composite(second, first, ramp)
+        canvas = Image.new("RGB", (side, side))
+        canvas.paste(band.resize((side, side)) if h != side else band, (0, 0))
     else:
-        strips = [im.crop((0, 0, w, ring)), im.crop((0, h - ring, w, h))]
-    pixels = [px for strip in strips for px in strip.convert("RGB").getdata()]
-    colour = tuple(int(statistics.median(px[i] for px in pixels)) for i in range(3))
-    canvas = Image.new("RGB", (side, side), colour)
+        first, second = (e.resize((w, side)) for e in edges)
+        ramp = Image.linear_gradient("L").resize((w, side))  # 0 at top
+        band = Image.composite(second, first, ramp)
+        canvas = Image.new("RGB", (side, side))
+        canvas.paste(band.resize((side, side)), (0, 0))
     feather = max(8, round(side * feather_ratio))
     mask = Image.new("L", (w, h), 255)
     draw = ImageDraw.Draw(mask)
     for step in range(feather):
         value = round(255 * (step + 1) / (feather + 1))
-        if w < h:
+        if vertical:
             draw.line([(step, 0), (step, h)], fill=value)
             draw.line([(w - 1 - step, 0), (w - 1 - step, h)], fill=value)
         else:
             draw.line([(0, step), (w, step)], fill=value)
             draw.line([(0, h - 1 - step), (w, h - 1 - step)], fill=value)
-    canvas.paste(im.convert("RGB"), ((side - w) // 2, (side - h) // 2), mask)
+    canvas.paste(rgb, (ox, oy), mask)
     return canvas, {"backdrop": "#%02x%02x%02x" % colour, "feather": feather, "side": side}
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -209,7 +234,7 @@ for rec in records:
             f'- Applied crop box after orientation: {code(tuple(rec["appliedCropBox"]))}.']
     if rec.get("square", {}).get("mode") == "pad":
         pad = rec["square"]["padding"]
-        doc += [f'- Square storefront frame: the whole applied crop centred on a {pad["side"]} × {pad["side"]} square of its own backdrop colour {code(pad["backdrop"])} (median of the crop edges that meet the padding), with a {pad["feather"]} px edge fade. {rec["square"]["note"]}']
+        doc += [f'- Square storefront frame: the whole applied crop centred on a {pad["side"]} × {pad["side"]} square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop {code(pad["backdrop"])}), with a {pad["feather"]} px edge fade. {rec["square"]["note"]}']
     elif rec.get("square"):
         doc += [f'- Square storefront frame (inside the applied crop): {code(tuple(rec["square"]["box"]))}. {rec["square"]["note"]}']
     for i, frame in enumerate(rec.get("gallery") or [], start=2):

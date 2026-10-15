@@ -17,7 +17,7 @@ Reproduce with python -m pip install Pillow==11.3.0 and python scripts/prepare-i
 - Input SHA-256: `6550f9d1c2a03ffedba857715ddfb9cbb55d3c2c5f566d789dde966b94b9145e`
 - Source dimensions: 4299 × 6442; EXIF orientation 1.
 - Applied crop box after orientation: `(1250, 1660, 3000, 2430)`.
-- Square storefront frame: the whole applied crop centred on a 1750 × 1750 square of its own backdrop colour `#d8d2d2` (median of the crop edges that meet the padding), with a 70 px edge fade. Shows the whole plate, keyring loop to right end.
+- Square storefront frame: the whole applied crop centred on a 1750 × 1750 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#d8d2d2`), with a 70 px edge fade. Shows the whole plate, keyring loop to right end.
 - Product-page gallery image 2 (inside the applied crop): `(1640, 1660, 2410, 2430)`. Detail: Centres the Hidden Leaf emblem and the plate's left rivets; the approved crop is too shallow for a square of the whole plate.
 - Product-page gallery image 3 (inside the applied crop): `(1250, 1660, 2020, 2430)`. Keyring loop and rivets.
 
@@ -28,12 +28,12 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 | `/assets/hidden-leaf-480.webp` | 480 | 480 × 211 | 9786 | 82 | `a11f9205ab677bf93b12e72f75b823b9ce0d2f9254d04badbeb2cefbad6f5bda` |
 | `/assets/hidden-leaf-960.webp` | 960 | 960 × 422 | 38452 | 82 | `784dbe7234ac62af94f162c336a0031c7ec5eac014b8da942a3de8fcf6fc3614` |
 | `/assets/hidden-leaf-1440.webp` | 1440 | 1440 × 634 | 79138 | 82 | `437caad3c0dfffb60dd8daf0d6e47384893ed3dd566993e1e513aef72a559723` |
-| `/assets/hidden-leaf-sq-160.webp` | 160 | 160 × 160 | 1588 | 82 | `ec77ec2df1fa95563216dd6debb57e6da7b076fbaa662a59f46e931fb897e0d5` |
-| `/assets/hidden-leaf-sq-320.webp` | 320 | 320 × 320 | 3980 | 82 | `df6ccc098a2da6a5fe256480fd212c08131ab1df5391657ee6ddcf0e695d08be` |
-| `/assets/hidden-leaf-sq-480.webp` | 480 | 480 × 480 | 8736 | 82 | `36c0c11e52911d8a7b7efcea1ac58b3c4c086bb9aaea78238b157c6dc285d3ef` |
-| `/assets/hidden-leaf-sq-640.webp` | 640 | 640 × 640 | 14820 | 82 | `5c849d12962715a2f9ed4609983d6be911445493d4e711634ed7bff4adac3bde` |
-| `/assets/hidden-leaf-sq-960.webp` | 960 | 960 × 960 | 32988 | 82 | `e6bc83f6bf032fb4ced66d20480a46cd09676d8e9ed6132a2fdfc1ada03e6fbf` |
-| `/assets/hidden-leaf-sq-1200.webp` | 1200 | 1200 × 1200 | 50438 | 82 | `5a0a728555e60ec5f380d4bdd1ea50f8ad474a8b681384a3de3f9565082949f5` |
+| `/assets/hidden-leaf-sq-160.webp` | 160 | 160 × 160 | 1588 | 82 | `1b9837f5db14a61744c5d00033d0db4261a3439ddba309c83ecf896efc877d3b` |
+| `/assets/hidden-leaf-sq-320.webp` | 320 | 320 × 320 | 4058 | 82 | `6024c57c0cf3f6474aac33a43bbd586728aa84aecd69f51fb139303f63cfd2d3` |
+| `/assets/hidden-leaf-sq-480.webp` | 480 | 480 × 480 | 8856 | 82 | `740fffa937980fa4a95a82c7cc14d18399489ffa2e387cf2cb000fa09a3d0a31` |
+| `/assets/hidden-leaf-sq-640.webp` | 640 | 640 × 640 | 14940 | 82 | `3594a05a5eda66538f3ee2e13f6f799a57e43c3ad86d2dbcc6e0d68de4aab08a` |
+| `/assets/hidden-leaf-sq-960.webp` | 960 | 960 × 960 | 33236 | 82 | `a2e68f492685f9a9eee982d9f23353e453129dd21b26a285bebb9cf56e9c264c` |
+| `/assets/hidden-leaf-sq-1200.webp` | 1200 | 1200 × 1200 | 50574 | 82 | `2c22b301c50fc22ab921459c675ae5f2c3b76a135e75f889e6819c4f6129b8a1` |
 | `/assets/hidden-leaf-g2-160.webp` | 160 | 160 × 160 | 3232 | 82 | `91acf2bcb1bb145be559d35d1cb1fdc10a20eb483732382dc7339673956a669f` |
 | `/assets/hidden-leaf-g2-320.webp` | 320 | 320 × 320 | 11288 | 82 | `78c3a6223f8f6368e2ea1fc156b757c480790cb1f8f619d040b00069c2962013` |
 | `/assets/hidden-leaf-g2-480.webp` | 480 | 480 × 480 | 23952 | 82 | `2d664b89e3be87c9329bc767e7a3544b1ea8e4873a760bf5941a467510ed165a` |
@@ -110,7 +110,7 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 - Input SHA-256: `4c9673b96abc990ab4505ef0f46e6f4050029e0ed0ee44ba21b681c47af77479`
 - Source dimensions: 4912 × 7360; EXIF orientation 1.
 - Applied crop box after orientation: `(2770, 2150, 4600, 6250)`.
-- Square storefront frame: the whole applied crop centred on a 4100 × 4100 square of its own backdrop colour `#eae6e5` (median of the crop edges that meet the padding), with a 164 px edge fade. Shows the whole kunai, ring to blade tip, with a margin.
+- Square storefront frame: the whole applied crop centred on a 4100 × 4100 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#eae6e5`), with a 164 px edge fade. Shows the whole kunai, ring to blade tip, with a margin.
 - Product-page gallery image 2 (inside the applied crop): `(2770, 2950, 4600, 4780)`. Detail: Shows the engraved handle and full wings; the ring and blade tip fall outside the square.
 - Product-page gallery image 3 (inside the applied crop): `(2770, 2200, 4600, 4030)`. Ring and engraved grip.
 - Product-page gallery image 4 (inside the applied crop): `(2770, 4320, 4600, 6150)`. Wings and blade to the tip.
@@ -124,12 +124,12 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 | `/assets/minato-kunai-480.webp` | 480 | 480 × 1075 | 20718 | 82 | `9880a18df2a171585733ea002c0dec08d1b319dd1a11d1d832020b3333617f79` |
 | `/assets/minato-kunai-960.webp` | 960 | 960 × 2151 | 93218 | 82 | `3490f32cac68d84b5c6097e9f5a2af038298c2fcec41e090c367bb263ad259e4` |
 | `/assets/minato-kunai-1440.webp` | 1440 | 1440 × 3226 | 251428 | 82 | `34d72359b337d2f5f14ef44c1c1e9754a98dc05d39530adfc70748aca137c1f2` |
-| `/assets/minato-kunai-sq-160.webp` | 160 | 160 × 160 | 1160 | 82 | `50891cc18c9774b8a28ca9b7d26ee919ee8e25c929385df779a335622e026220` |
-| `/assets/minato-kunai-sq-320.webp` | 320 | 320 × 320 | 2894 | 82 | `951ba609da6114c8c06166aeceebd6059791f6c26c624c2d70f0c6769a3d3820` |
-| `/assets/minato-kunai-sq-480.webp` | 480 | 480 × 480 | 5362 | 82 | `cee39642814ac7c7955fdd6fab69a53e5fa7b470d4d6f2a2675c3f0591d24614` |
-| `/assets/minato-kunai-sq-640.webp` | 640 | 640 × 640 | 8780 | 82 | `c53ba50a6c56574fda3cc05b527717369e2da42821a406cf5a4d2ab31f7fed75` |
-| `/assets/minato-kunai-sq-960.webp` | 960 | 960 × 960 | 17650 | 82 | `09ab2773dabafbc63d5679a5114ea7a761b65d8b438462c5093dded6314d5059` |
-| `/assets/minato-kunai-sq-1200.webp` | 1200 | 1200 × 1200 | 26600 | 82 | `bc1658059d68991c92a139a64b6629caa9d90db2120328737cf6519c6b198739` |
+| `/assets/minato-kunai-sq-160.webp` | 160 | 160 × 160 | 1228 | 82 | `6d81157b1f7ac4f3c5f93c06699c06b3e0fbcc3ef09b3855c043f4dbb7051ea9` |
+| `/assets/minato-kunai-sq-320.webp` | 320 | 320 × 320 | 3034 | 82 | `4d28ec398615b8d0b6e730ffb8622bc41262b13be2d5106a70d43d2adee58baf` |
+| `/assets/minato-kunai-sq-480.webp` | 480 | 480 × 480 | 5670 | 82 | `134c5a8faa657b729c15fac81379e04d1cf7de423a24c53b4a0683ff2c579c99` |
+| `/assets/minato-kunai-sq-640.webp` | 640 | 640 × 640 | 9180 | 82 | `509436116d935f3ebda384389553adeb8c8861dbb82bd4b01f8392f14447f339` |
+| `/assets/minato-kunai-sq-960.webp` | 960 | 960 × 960 | 18292 | 82 | `907103368b5858a42ef3847dd5919d26c578e8a81246aded3b938634ec9cfdaa` |
+| `/assets/minato-kunai-sq-1200.webp` | 1200 | 1200 × 1200 | 27422 | 82 | `803302b86666e8d2f09c74c62f02fda8ba8482b8c6b0be3cc6007d82a3ff184a` |
 | `/assets/minato-kunai-g2-160.webp` | 160 | 160 × 160 | 1866 | 82 | `9849929b329dfa1fd5d35a66973e4f4d0013dcadf491556378d60734a8999391` |
 | `/assets/minato-kunai-g2-320.webp` | 320 | 320 × 320 | 5274 | 82 | `614914d378cbb2a606f1ff1bafcb00a14fa339bc6c6e1f69e89253fa6d676068` |
 | `/assets/minato-kunai-g2-480.webp` | 480 | 480 × 480 | 9738 | 82 | `ad02a6ee4457279d6ef2d7644a89a8ed48652b6b9e487ec57ca37f6f20b747dc` |
