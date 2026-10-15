@@ -341,6 +341,10 @@ textarea{resize:vertical;line-height:1.5}
 @media(min-width:901px){.form-panel{position:sticky;top:calc(var(--header-h) + 24px)}}
 @media(max-width:900px){.custom-layout{grid-template-columns:minmax(0,1fr)}.mini-steps{display:none}}
 
+/* Text pages */
+.prose-page p:not(.eyebrow){max-width:68ch;color:var(--text-soft);font-size:var(--step-1);line-height:1.7;margin-bottom:var(--space-5)}
+.form-panel .request-preview h2{font-size:var(--step-2)}
+
 /* Empty and not-found states */
 .state-panel{display:grid;justify-items:center;gap:var(--space-2)}
 .state-panel .actions,.state-page .actions{justify-content:center;margin-top:var(--space-3)}
