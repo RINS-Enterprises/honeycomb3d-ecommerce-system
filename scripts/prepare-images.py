@@ -16,6 +16,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 digest = lambda b: hashlib.sha256(b).hexdigest()
 products = json.loads((ROOT / "data/products.json").read_text())
 records = []
+hero = None
 for entry in SPECS["assets"]:
     source = (ROOT / entry["input"]).resolve()
     if not source.is_relative_to(ROOT / "assets/photo-sources"):
@@ -92,8 +93,17 @@ for entry in SPECS["assets"]:
                 raise ValueError("Minato square frame includes a neighbour or clips its wing")
             square_outputs = render(im.crop((sl - left, st - top, sr - left, sb - top)),
                                     square["widths"], entry["stem"] + "-sq")
+        hero_outputs = {}
+        for shape, frame in (entry.get("hero") or {}).items():
+            # Art-directed home hero frames, also cut from inside the approved crop.
+            hl, ht, hr, hb = frame["box"]
+            if not (left <= hl < hr <= right and top <= ht < hb <= bottom):
+                raise ValueError("Hero frame must sit inside the approved crop: " + entry["id"])
+            hero_outputs[shape] = render(im.crop((hl - left, ht - top, hr - left, hb - top)),
+                                         frame["widths"], entry["stem"] + "-hero-" + shape)
         record = {**entry, "orientedSize": oriented_size, "appliedCropBox": crop,
-                  "outputs": outputs + [{**o, "frame": "square"} for o in square_outputs]}
+                  "outputs": outputs + [{**o, "frame": "square"} for o in square_outputs]
+                  + [{**o, "frame": "hero-" + shape} for shape, outs in hero_outputs.items() for o in outs]}
         records.append(record)
         if entry["id"] != "brand-logo":
             product = next(p for p in products if p["id"] == entry["id"])
@@ -105,6 +115,10 @@ for entry in SPECS["assets"]:
                            imageVariants=[{k: o[k] for k in ("src", "width", "height")} for o in shown],
                            imageSource=entry["sourceTitle"], imageApprovedAt=SPECS["ownerApprovalDate"])
             product.pop("imageStatus", None)
+            if hero_outputs:
+                hero = {"product": entry["id"]}
+                for shape, outs in hero_outputs.items():
+                    hero[shape] = [{k: o[k] for k in ("src", "width", "height")} for o in outs]
 
 metadata = {"version": 1, "importedAt": SPECS["importedAt"],
             "encoder": {"Pillow": PIL.__version__, "libwebp": features.version("webp"),
@@ -112,6 +126,10 @@ metadata = {"version": 1, "importedAt": SPECS["importedAt"],
             "assets": records, "pending": SPECS["pending"]}
 (ROOT / "assets/derivatives.json").write_text(json.dumps(metadata, indent=2) + "\n")
 (ROOT / "data/products.json").write_text(json.dumps(products, indent=2, ensure_ascii=False) + "\n")
+store_path = ROOT / "data/store.json"
+store = json.loads(store_path.read_text())
+store["hero"] = hero
+store_path.write_text(json.dumps(store, indent=2) + "\n")
 
 bt = chr(96)
 code = lambda value: bt + str(value) + bt
@@ -136,6 +154,8 @@ for rec in records:
             f'- Applied crop box after orientation: {code(tuple(rec["appliedCropBox"]))}.']
     if rec.get("square"):
         doc += [f'- Square storefront frame (inside the applied crop): {code(tuple(rec["square"]["box"]))}. {rec["square"]["note"]}']
+    for shape, frame in (rec.get("hero") or {}).items():
+        doc += [f'- Home hero {shape} frame (inside the applied crop): {code(tuple(frame["box"]))}. {frame["note"]}']
     doc += [""]
     if rec["id"] == "HC-MINATO":
         doc += ["The left edge is x=2770, within the required x=2756…2794 bounds. The crop isolates the tan engraved handle, black blade, silver edge bevels and black ring. The full crop is not widened to include the adjacent blade. Its square storefront frame is cut from inside this crop.", ""]

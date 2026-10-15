@@ -4,7 +4,8 @@ export const price = p => p.priceLkr === null ? 'Price on enquiry' : money(p.pri
 export const CARD_SIZES = '(max-width: 700px) calc((100vw - 52px) / 2), (max-width: 1000px) calc((100vw - 124px) / 3), (max-width: 1280px) calc((100vw - 146px) / 4), 284px';
 // Every photo slot is a square frame filled by a square derivative (object-fit: cover).
 const DETAIL_SIZES = '(max-width: 700px) calc(100vw - 40px), (max-width: 1000px) calc((100vw - 110px) / 2), (max-width: 1280px) calc((100vw - 140px) / 2), 570px';
-const HERO_SIZES = '(max-width: 480px) calc(100vw - 40px), (max-width: 700px) 440px, (max-width: 1000px) calc((100vw - 100px) / 2.2), (max-width: 1280px) calc((100vw - 140px) / 2.2), 519px';
+const HERO_LANDSCAPE = '(min-width: 700px)';
+const srcset = variants => variants.map(v=>v.src+' '+v.width+'w').join(', ');
 
 export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}) {
   if (!p.image) return '';
@@ -27,11 +28,11 @@ function brand(store) {
   const srcset = store.logoVariants?.length ? ' srcset="'+e(store.logoVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+LOGO_SIZES+'"' : '';
   return '<img class="brand-image" src="'+e(store.logo)+'"'+srcset+' alt="HoneyComb" width="'+(store.logoWidth||220)+'" height="'+(store.logoHeight||66)+'">';
 }
-export function layout(title, body, store, current='') {
+export function layout(title, body, store, current='', head='') {
   return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>' + e(title) + ' | HoneyComb 3D</title><meta name="description" content="Explore HoneyComb 3D collectibles and custom prints. Request a quote and confirm the details before ordering.">' +
     (store.mode==='preview' ? '<meta name="robots" content="noindex,nofollow">' : '') +
-    '<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.mjs"></script></head><body>' +
+    head+'<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.mjs"></script></head><body>' +
     '<a class="skip-link" href="#main">Skip to content</a>' +
     (store.mode==='preview' ? '<aside class="preview-notice" aria-label="Store preview notice">Store preview · Product details are being confirmed. Orders are not open yet.</aside>' : '') +
     '<header class="site-header"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a>' +
@@ -41,18 +42,24 @@ export function layout(title, body, store, current='') {
 }
 export function home(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];
-  const featured=products.find(p=>p.id==='HC-KURAMA'&&p.image)||products.find(p=>p.id==='HC-BAYMAX'&&p.image)||products.find(p=>p.image);
-  const heroMedia=featured?
-    '<a class="hero-photo" href="/products/'+e(featured.slug)+'/">'+picture(featured,{sizes:HERO_SIZES,loading:'eager',priority:true})+'<span>MEET THE COLLECTION <b aria-hidden="true">↗</b></span></a>':
-    '<div class="hero-art" aria-hidden="true"><div class="layer"></div><div class="layer layer-two"></div><div class="layer layer-three"></div><span>IDEAS<br>TAKE<br>SHAPE.</span><small>HONEYCOMB 3D</small></div>';
+  const featured=store.hero&&products.find(p=>p.id===store.hero.product&&p.image);
+  // The LCP photo: preloaded per art-directed frame, eager, high priority.
+  const fallback=featured&&(store.hero.portrait.find(v=>v.width===960)||store.hero.portrait.at(-1));
+  const head=featured?
+    '<link rel="preload" as="image" imagesrcset="'+e(srcset(store.hero.portrait))+'" imagesizes="100vw" media="(max-width: 699px)" fetchpriority="high">'+
+    '<link rel="preload" as="image" imagesrcset="'+e(srcset(store.hero.landscape))+'" imagesizes="100vw" media="'+HERO_LANDSCAPE+'" fetchpriority="high">':'';
+  const visual=featured?
+    '<div class="hero-visual"><picture><source media="'+HERO_LANDSCAPE+'" srcset="'+e(srcset(store.hero.landscape))+'" sizes="100vw" width="'+store.hero.landscape[0].width+'" height="'+store.hero.landscape[0].height+'">'+
+    '<img src="'+e(fallback.src)+'" srcset="'+e(srcset(store.hero.portrait))+'" sizes="100vw" alt="'+e(featured.imageAlt)+'" width="'+fallback.width+'" height="'+fallback.height+'" loading="eager" fetchpriority="high"></picture></div>':'';
   return layout('Collectibles & custom prints',
-    '<section class="hero wrap"><div><p class="eyebrow">HONEYCOMB 3D / SRI LANKA</p><h1>Make room for<br><em>something you.</em></h1><p class="lead">A little character for your desk. A favourite for your collection. An idea brought to life, layer by layer.</p><div class="actions"><a class="button" href="/shop/">Explore the collection <span aria-hidden="true">↗</span></a><a class="text-link" href="/custom/">Bring your own idea →</a></div></div>'+heroMedia+'</section>' +
+    '<section class="hero'+(featured?'':' hero--plain')+'" data-testid="hero">'+visual+'<div class="hero-content wrap"><p class="eyebrow">HONEYCOMB 3D / SRI LANKA</p><h1>Make room for <em>something you.</em></h1><p class="lead">A little character for your desk. A favourite for your collection. An idea brought to life, layer by layer.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/custom/">Bring your own idea</a></div>'+
+    (featured?'<a class="hero-credit" href="/products/'+e(featured.slug)+'/">Pictured <b>'+e(featured.name)+'</b> <span aria-hidden="true">→</span></a>':'')+'</div></section>' +
     '<div class="studio-strip"><span>COLLECTIBLES</span><span>KEYCHAINS</span><span>CUSTOM PRINTS</span><span>YOUR NEXT IDEA</span></div>' +
     '<section class="wrap section"><div class="section-heading"><div><p class="eyebrow">FIND YOUR CORNER</p><h2>Small objects. Big character.</h2></div><a href="/shop/">View collection →</a></div><div class="collection-links">' +
     categories.map((c,i)=>'<a href="/shop/?category='+encodeURIComponent(c)+'"><span class="muted">0'+(i+1)+'</span><strong>'+e(c)+'</strong><span aria-hidden="true">↗</span></a>').join('') +
     '</div><div class="product-grid">' + products.slice(0,4).map(p=>card(p)).join('') + (products.length?'':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</div></section>' +
     '<section class="wrap custom-banner"><p class="eyebrow">YOUR IDEA, OUR NEXT PRINT</p><h2>Can’t find it?<br>Let’s talk about making it.</h2><p>Share a model link or describe your idea. We’ll confirm what is possible, the finish and the quote.</p><a class="button" href="/custom/">Start a custom enquiry ↗</a></section>' +
-    '<section class="wrap section steps"><div><span>01 / EXPLORE</span><h3>Find your favourites</h3><p>Browse the collection or bring a custom idea.</p></div><div><span>02 / ASK</span><h3>Build your request</h3><p>Choose quantities and tell us the details that matter.</p></div><div><span>03 / CONFIRM</span><h3>Agree on the details</h3><p>Confirm price, availability, delivery and payment before placing an order.</p></div></section>',store);
+    '<section class="wrap section steps"><div><span>01 / EXPLORE</span><h3>Find your favourites</h3><p>Browse the collection or bring a custom idea.</p></div><div><span>02 / ASK</span><h3>Build your request</h3><p>Choose quantities and tell us the details that matter.</p></div><div><span>03 / CONFIRM</span><h3>Agree on the details</h3><p>Confirm price, availability, delivery and payment before placing an order.</p></div></section>',store,'',head);
 }
 export function shop(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];

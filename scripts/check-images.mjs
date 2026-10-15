@@ -50,7 +50,8 @@ export async function checkImageOutputs(paths) {
   }
   const config=JSON.parse(await readFile(join(root,'dist/data/store.json'),'utf8'));
   const products=JSON.parse(await readFile(join(root,'dist/data/products.json'),'utf8'));
-  const referenced=new Set([config.logo,...(config.logoVariants||[]).map(v=>v.src),...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src)])].filter(Boolean));
+  const heroSrcs=config.hero?[...config.hero.portrait,...config.hero.landscape].map(v=>v.src):[];
+  const referenced=new Set([config.logo,...(config.logoVariants||[]).map(v=>v.src),...heroSrcs,...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src)])].filter(Boolean));
   const shipped=(await readdir(join(root,'dist/assets'))).map(name=>'/assets/'+name);
   assert.deepEqual([...shipped].sort(),[...referenced].sort(),'Only referenced derivatives belong in dist/');
   for(const src of shipped) {
@@ -70,6 +71,11 @@ export async function checkImageOutputs(paths) {
       const candidates=attrs.srcset?attrs.srcset.split(',').map(x=>x.trim().split(/\s+/)[0]):[attrs.src];
       if(attrs.src.endsWith('.webp'))assert(attrs.srcset&&attrs.sizes,'Responsive product photo');
       for(const src of candidates)assert(outputs.has(src)&&referenced.has(src),'Unknown srcset candidate: '+src);
+      ceiling+=Math.max(...candidates.map(src=>outputs.get(src).bytes));
+    }
+    for(const [tag] of html.matchAll(/<source\b[^>]*>/g)) {
+      const candidates=tag.match(/srcset="([^"]*)"/)[1].split(',').map(x=>x.trim().split(/\s+/)[0]);
+      for(const src of candidates)assert(outputs.has(src)&&referenced.has(src),'Unknown <source> candidate: '+src);
       ceiling+=Math.max(...candidates.map(src=>outputs.get(src).bytes));
     }
     assert(ceiling<=1_500_000,'Conservative page image budget: '+path);

@@ -279,6 +279,38 @@
         ],
         "note": "Centres the figure and the holding hand."
       },
+      "hero": {
+        "landscape": {
+          "box": [
+            0,
+            200,
+            1893,
+            1146
+          ],
+          "widths": [
+            960,
+            1280,
+            1600,
+            1893
+          ],
+          "note": "2:1 desktop hero; the dragon sits just right of centre so the headline can sit on the darkened left."
+        },
+        "portrait": {
+          "box": [
+            480,
+            0,
+            1545,
+            1420
+          ],
+          "widths": [
+            480,
+            720,
+            960,
+            1065
+          ],
+          "note": "3:4 mobile hero; head, wings and tail."
+        }
+      },
       "orientedSize": [
         1893,
         1420
@@ -358,6 +390,78 @@
           "sha256": "0c473534c6a8db00444e6f31895d7745426a96b77f835e45aab51305a15def78",
           "quality": 82,
           "frame": "square"
+        },
+        {
+          "src": "/assets/night-fury-hero-landscape-960.webp",
+          "width": 960,
+          "height": 480,
+          "bytes": 32056,
+          "sha256": "8f911c242137d4587e5928f3c77e6c871291c1a26a673484e84efa4ad6a87d6c",
+          "quality": 82,
+          "frame": "hero-landscape"
+        },
+        {
+          "src": "/assets/night-fury-hero-landscape-1280.webp",
+          "width": 1280,
+          "height": 640,
+          "bytes": 47668,
+          "sha256": "fc51f086b2e7c3493f5434340e413acde1406e64a7b4a7ce5ce1887f72b924cd",
+          "quality": 82,
+          "frame": "hero-landscape"
+        },
+        {
+          "src": "/assets/night-fury-hero-landscape-1600.webp",
+          "width": 1600,
+          "height": 800,
+          "bytes": 64520,
+          "sha256": "882cb4c4b2db25952fb9437d672aa9e02cfad58c39ef4d9f244f186b0fd1fee7",
+          "quality": 82,
+          "frame": "hero-landscape"
+        },
+        {
+          "src": "/assets/night-fury-hero-landscape-1893.webp",
+          "width": 1893,
+          "height": 946,
+          "bytes": 80530,
+          "sha256": "048bef15e77ed7e3159e9789aee6e51316eb8e441028c61fcce78cd0b8f68596",
+          "quality": 82,
+          "frame": "hero-landscape"
+        },
+        {
+          "src": "/assets/night-fury-hero-portrait-480.webp",
+          "width": 480,
+          "height": 640,
+          "bytes": 25756,
+          "sha256": "6aa20a795e485be19d8183d2b7fb09bfd3aee9535f8e4199c31be9be2e592666",
+          "quality": 82,
+          "frame": "hero-portrait"
+        },
+        {
+          "src": "/assets/night-fury-hero-portrait-720.webp",
+          "width": 720,
+          "height": 960,
+          "bytes": 45514,
+          "sha256": "870734819b4708c1c26a2db7c8e9e427ffb693da6826b630eccef58b5126122a",
+          "quality": 82,
+          "frame": "hero-portrait"
+        },
+        {
+          "src": "/assets/night-fury-hero-portrait-960.webp",
+          "width": 960,
+          "height": 1280,
+          "bytes": 68160,
+          "sha256": "8bfe5b8bc444125d725952a43eee1b880ffa33167c4814d5251eb70447f2dee3",
+          "quality": 82,
+          "frame": "hero-portrait"
+        },
+        {
+          "src": "/assets/night-fury-hero-portrait-1065.webp",
+          "width": 1065,
+          "height": 1420,
+          "bytes": 74826,
+          "sha256": "b717079dd6f830bc1b91141bf70d690b5983a33489769f12365134d233656788",
+          "quality": 82,
+          "frame": "hero-portrait"
         }
       ]
     },

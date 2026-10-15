@@ -63,6 +63,8 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 - Source dimensions: 1893 × 1420; EXIF orientation 1.
 - Applied crop box after orientation: `(0, 0, 1893, 1420)`.
 - Square storefront frame (inside the applied crop): `(236, 0, 1656, 1420)`. Centres the figure and the holding hand.
+- Home hero landscape frame (inside the applied crop): `(0, 200, 1893, 1146)`. 2:1 desktop hero; the dragon sits just right of centre so the headline can sit on the darkened left.
+- Home hero portrait frame (inside the applied crop): `(480, 0, 1545, 1420)`. 3:4 mobile hero; head, wings and tail.
 
 | Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
@@ -74,6 +76,14 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 | `/assets/night-fury-sq-640.webp` | 640 | 640 × 640 | 29256 | 82 | `9530e86ee2856af28560674109f61c0f6d0e54e4b9416b59de1fdba83e4a7601` |
 | `/assets/night-fury-sq-960.webp` | 960 | 960 × 960 | 50340 | 82 | `dea3be4fd9c0f8ddb9cfd7e517409b1eaf87445139d58e9b29929c7315006402` |
 | `/assets/night-fury-sq-1200.webp` | 1200 | 1200 × 1200 | 68408 | 82 | `0c473534c6a8db00444e6f31895d7745426a96b77f835e45aab51305a15def78` |
+| `/assets/night-fury-hero-landscape-960.webp` | 960 | 960 × 480 | 32056 | 82 | `8f911c242137d4587e5928f3c77e6c871291c1a26a673484e84efa4ad6a87d6c` |
+| `/assets/night-fury-hero-landscape-1280.webp` | 1280 | 1280 × 640 | 47668 | 82 | `fc51f086b2e7c3493f5434340e413acde1406e64a7b4a7ce5ce1887f72b924cd` |
+| `/assets/night-fury-hero-landscape-1600.webp` | 1600 | 1600 × 800 | 64520 | 82 | `882cb4c4b2db25952fb9437d672aa9e02cfad58c39ef4d9f244f186b0fd1fee7` |
+| `/assets/night-fury-hero-landscape-1893.webp` | 1893 | 1893 × 946 | 80530 | 82 | `048bef15e77ed7e3159e9789aee6e51316eb8e441028c61fcce78cd0b8f68596` |
+| `/assets/night-fury-hero-portrait-480.webp` | 480 | 480 × 640 | 25756 | 82 | `6aa20a795e485be19d8183d2b7fb09bfd3aee9535f8e4199c31be9be2e592666` |
+| `/assets/night-fury-hero-portrait-720.webp` | 720 | 720 × 960 | 45514 | 82 | `870734819b4708c1c26a2db7c8e9e427ffb693da6826b630eccef58b5126122a` |
+| `/assets/night-fury-hero-portrait-960.webp` | 960 | 960 × 1280 | 68160 | 82 | `8bfe5b8bc444125d725952a43eee1b880ffa33167c4814d5251eb70447f2dee3` |
+| `/assets/night-fury-hero-portrait-1065.webp` | 1065 | 1065 × 1420 | 74826 | 82 | `b717079dd6f830bc1b91141bf70d690b5983a33489769f12365134d233656788` |
 
 ## HC-MINATO
 

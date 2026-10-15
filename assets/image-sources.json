@@ -124,6 +124,38 @@
           1200
         ],
         "note": "Centres the figure and the holding hand."
+      },
+      "hero": {
+        "landscape": {
+          "box": [
+            0,
+            200,
+            1893,
+            1146
+          ],
+          "widths": [
+            960,
+            1280,
+            1600,
+            1893
+          ],
+          "note": "2:1 desktop hero; the dragon sits just right of centre so the headline can sit on the darkened left."
+        },
+        "portrait": {
+          "box": [
+            480,
+            0,
+            1545,
+            1420
+          ],
+          "widths": [
+            480,
+            720,
+            960,
+            1065
+          ],
+          "note": "3:4 mobile hero; head, wings and tail."
+        }
       }
     },
     {

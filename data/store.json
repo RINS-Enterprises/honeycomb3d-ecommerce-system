@@ -20,5 +20,52 @@
       "width": 660,
       "height": 192
     }
-  ]
+  ],
+  "hero": {
+    "product": "HNYCMB501",
+    "landscape": [
+      {
+        "src": "/assets/night-fury-hero-landscape-960.webp",
+        "width": 960,
+        "height": 480
+      },
+      {
+        "src": "/assets/night-fury-hero-landscape-1280.webp",
+        "width": 1280,
+        "height": 640
+      },
+      {
+        "src": "/assets/night-fury-hero-landscape-1600.webp",
+        "width": 1600,
+        "height": 800
+      },
+      {
+        "src": "/assets/night-fury-hero-landscape-1893.webp",
+        "width": 1893,
+        "height": 946
+      }
+    ],
+    "portrait": [
+      {
+        "src": "/assets/night-fury-hero-portrait-480.webp",
+        "width": 480,
+        "height": 640
+      },
+      {
+        "src": "/assets/night-fury-hero-portrait-720.webp",
+        "width": 720,
+        "height": 960
+      },
+      {
+        "src": "/assets/night-fury-hero-portrait-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/assets/night-fury-hero-portrait-1065.webp",
+        "width": 1065,
+        "height": 1420
+      }
+    ]
+  }
 }

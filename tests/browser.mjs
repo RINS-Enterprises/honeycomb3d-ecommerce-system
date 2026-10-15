@@ -28,7 +28,7 @@ try {
   await page.goto('http://127.0.0.1:4173/');
   await page.getByRole('complementary',{name:'Store preview notice'}).waitFor();
   await screenshot('test-results/home-desktop.png');
-  await page.getByRole('link',{name:'Explore the collection'}).first().click();
+  await page.getByRole('link',{name:'Shop the collection'}).click();
   assert.equal(await page.locator('[data-product-card]').count(),5,'Products without an approved photo stay hidden');
   assert.equal(await page.locator('.photo-placeholder').count(),0);
   for(const card of await page.locator('[data-product-card]').all()) {
