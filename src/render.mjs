@@ -17,7 +17,7 @@ export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}
 export function card(p, {headingLevel=3}={}) {
   const heading=headingLevel===2?'h2':'h3';
   // One link per card; its ::after stretches over the whole card so the photo is clickable too.
-  return '<article class="product-card" data-product-card data-testid="product-card" data-category="' + e(p.category) + '" data-search="' + e([p.name,p.category,...p.tags].join(' ').toLowerCase()) + '">' +
+  return '<article class="product-card" data-product-card data-testid="product-card" data-category="' + e(p.category) + '" data-search="' + e([p.name,p.category,...p.tags].join(' ').toLowerCase()) + '" data-tags="' + e(p.tags.join('|')) + '">' +
     '<div class="product-image">' + picture(p) + '</div>' +
     '<div class="card-copy"><p class="eyebrow">' + e(p.category) + '</p><'+heading+'><a class="card-link" href="/products/' + e(p.slug) + '/">' + e(p.name) + '</a></'+heading+'><p class="price" data-testid="product-price">' + e(price(p)) + '</p><p class="card-status">' + availability(p) + '</p></div></article>';
 }
@@ -88,11 +88,21 @@ export function home(products,store) {
     '<section class="wrap banner-wrap"><div class="custom-banner"><p class="eyebrow">YOUR IDEA, OUR NEXT PRINT</p><h2>Can’t find it?<br>Let’s talk about making it.</h2><p>Share a model link or describe your idea. We’ll confirm what is possible, the finish and the quote.</p><a class="button" href="/custom/">Start a custom enquiry <span aria-hidden="true">→</span></a></div></section>' +
     '<section class="wrap section steps"><div><span>01 / EXPLORE</span><h3>Find your favourites</h3><p>Browse the collection or bring a custom idea.</p></div><div><span>02 / ASK</span><h3>Build your request</h3><p>Choose quantities and tell us the details that matter.</p></div><div><span>03 / CONFIRM</span><h3>Agree on the details</h3><p>Confirm price, availability, delivery and payment before placing an order.</p></div></section>',store,'',head,{description:'A little character for your desk. A favourite for your collection. An idea brought to life, layer by layer. 3D-printed collectibles from Sri Lanka, priced in LKR.'});
 }
+const slug = value => value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function chips(name, legend, options) {
+  return '<fieldset class="chip-group"><legend>'+legend+'</legend><div class="chips">'+options.map(([value,label],i)=>
+    '<label class="chip" data-testid="filter-'+slug(value)+'"><input type="radio" name="'+name+'" value="'+e(value)+'"'+(i===0?' checked':'')+'><span>'+e(label)+'</span></label>').join('')+'</div></fieldset>';
+}
 export function shop(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];
-  return layout('Shop','<section class="wrap section"><p class="eyebrow">THE COLLECTION</p><h1>Find your next favourite.</h1><p class="lead">Explore the designs. Ask about colours, sizes and finishes.</p>' +
-    '<form class="filters" id="filters" role="search"><label>Search the collection<input type="search" id="search" name="q" placeholder="Try dragons, Naruto, keychains…" maxlength="100"></label><label>Category<select aria-label="Category" id="category" name="category"><option value="all">All categories</option>'+categories.map(c=>'<option value="'+e(c)+'">'+e(c)+'</option>').join('')+'</select></label><button class="button secondary" type="submit">Search</button><button class="text-button" id="reset-filters" type="button">Clear filters</button></form><p class="muted" role="status" id="result-count">'+products.length+' designs</p>' +
-    '<div class="product-grid">'+products.map(p=>card(p,{headingLevel:2})).join('')+'</div><div class="empty" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><a href="/custom/">Ask about a custom print →</a></div><noscript><p>All designs are shown. Enable JavaScript to use search and category filters.</p></noscript></section>',store,'shop','',{description:'Explore the designs. Ask about colours, sizes and finishes. 3D-printed keychains, figures and props, priced in LKR.',path:'/shop/'});
+  // Themes come from the tags, minus tags that only repeat a category name.
+  const themes=[...new Set(products.flatMap(p=>p.tags))].filter(t=>!categories.includes(t));
+  return layout('Shop','<section class="wrap section shop-section"><p class="eyebrow">THE COLLECTION</p><h1>Find your next favourite.</h1><p class="lead">Explore the designs. Ask about colours, sizes and finishes.</p>' +
+    '<form class="filters" id="filters" role="search" aria-label="Filter the collection"><label class="search-field">Search the collection<input type="search" id="search" name="q" placeholder="Try dragons, Naruto, keychains…" maxlength="100" autocomplete="off"></label>' +
+    chips('category','Category',[['all','All'],...categories.map(c=>[c,c])]) +
+    (themes.length?chips('theme','Theme',[['any','Any theme'],...themes.map(t=>[t,t])]):'') +
+    '</form><div class="results-bar"><p class="muted" role="status" id="result-count">'+products.length+' designs</p><button class="text-button" id="reset-filters" type="button" hidden>Clear filters</button></div>' +
+    '<div class="product-grid">'+products.map(p=>card(p,{headingLevel:2})).join('')+'</div><div class="empty state-panel" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><div class="actions"><a class="button secondary" href="/custom/">Ask about a custom print</a></div></div><noscript><p>All designs are shown. Enable JavaScript to use search and filters.</p></noscript></section>',store,'shop','',{description:'Explore the designs. Ask about colours, sizes and finishes. 3D-printed keychains, figures and props, priced in LKR.',path:'/shop/'});
 }
 function gallerySlides(p) {
   return [{src:p.image,alt:p.imageAlt,width:p.imageWidth,height:p.imageHeight,variants:p.imageVariants||[]},...(p.gallery||[])];
