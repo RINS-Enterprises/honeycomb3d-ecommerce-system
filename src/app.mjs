@@ -16,7 +16,7 @@ function saveCart() {
 function handoff(message) {
   const url=store.mode==='live'?whatsappUrl(message,store):null;
   return '<div class="request-preview"><h2>Review your request</h2><label>Message to HoneyComb<textarea class="message-preview" rows="10" readonly>'+e(message)+'</textarea></label><div class="actions">'+
-    (url?'<a class="button" href="'+e(url)+'" target="_blank" rel="noopener noreferrer">Open WhatsApp request ↗</a>':'<p class="notice">Online requests are not open yet. You can copy this draft and keep it for later.</p>')+
+    (url?'<a class="button" href="'+e(url)+'" target="_blank" rel="noopener noreferrer" data-testid="whatsapp-checkout">Open WhatsApp request ↗</a>':'<p class="notice">Online requests are not open yet. You can copy this draft and keep it for later.</p>')+
     '<button type="button" class="button secondary" data-copy>Copy message</button></div>'+
     (url?'<p class="fine">Opening WhatsApp does not send the message. Review and send it yourself. Your order is only confirmed after HoneyComb agrees on the details.</p>':'')+'</div>';
 }
@@ -91,10 +91,24 @@ function initCart() {
       if(focusKey)root.querySelector('a').focus();return;
     }
     const hasPriced=s.lines.some(x=>x.product.priceLkr!==null);
-    root.innerHTML='<div class="cart-lines">'+s.lines.map(({product:p,quantity:q})=>'<article class="cart-line"><div><h2><a href="/products/'+e(p.slug)+'/">'+e(p.name)+'</a></h2><p>'+e(p.priceLkr===null?'Price to confirm':money(p.priceLkr*q))+'</p></div><label>Quantity for '+e(p.name)+'<input data-quantity="'+e(p.id)+'" type="number" min="1" max="20" step="1" value="'+q+'" required></label><button type="button" class="text-button" data-remove="'+e(p.id)+'" aria-label="Remove '+e(p.name)+'">Remove</button></article>').join('')+'</div><div class="cart-summary"><h2>'+(s.unpriced?(hasPriced?'Priced items subtotal: '+e(money(s.knownSubtotal)):'Quote required for all items'):'Estimated items subtotal: '+e(money(s.knownSubtotal)))+'</h2><p>'+(s.unpriced?'Unpriced items are not included in a subtotal. ':'')+'Delivery and the final total will be confirmed with your quote.</p></div><label>Notes <span>(optional)</span><textarea id="order-notes" maxlength="500" rows="3" placeholder="Colours, sizes or anything else we should know">'+e(notes)+'</textarea></label><div id="order-handoff">'+handoff(orderMessage(cart,products,notes))+'</div>';
+    const thumb=p=>{const v=(p.imageVariants||[]).filter(x=>x.width>=160);if(!p.image)return '';
+      return '<img src="'+e((v[0]||p).src||p.image)+'" srcset="'+e(v.map(x=>x.src+' '+x.width+'w').join(', '))+'" sizes="80px" alt="'+e(p.imageAlt)+'" width="'+(v[0]?.width||p.imageWidth)+'" height="'+(v[0]?.height||p.imageHeight)+'" loading="lazy">';};
+    const lines=s.lines.map(({product:p,quantity:q})=>'<article class="cart-line" data-testid="cart-line"><a class="cart-thumb" href="/products/'+e(p.slug)+'/" tabindex="-1" aria-hidden="true">'+thumb(p)+'</a>'+
+      '<div class="cart-line-copy"><h2><a href="/products/'+e(p.slug)+'/">'+e(p.name)+'</a></h2><p class="muted">'+e(p.priceLkr===null?'Price to confirm':money(p.priceLkr)+' each')+'</p>'+
+      '<button type="button" class="text-button" data-remove="'+e(p.id)+'" data-testid="cart-remove" aria-label="Remove '+e(p.name)+'">Remove</button></div>'+
+      '<div class="cart-line-end"><div class="stepper"><button type="button" data-step="-1" data-id="'+e(p.id)+'" data-testid="cart-qty-decrease" aria-label="Decrease quantity of '+e(p.name)+'"'+(q<=1?' disabled':'')+'>−</button>'+
+      '<label><span class="sr-only">Quantity for '+e(p.name)+'</span><input data-quantity="'+e(p.id)+'" data-testid="cart-qty" type="number" inputmode="numeric" min="1" max="'+MAX_QUANTITY+'" step="1" value="'+q+'" required></label>'+
+      '<button type="button" data-step="1" data-id="'+e(p.id)+'" data-testid="cart-qty-increase" aria-label="Increase quantity of '+e(p.name)+'"'+(q>=MAX_QUANTITY?' disabled':'')+'>+</button></div>'+
+      '<p class="cart-line-total">'+e(p.priceLkr===null?'To confirm':money(p.priceLkr*q))+'</p></div></article>').join('');
+    root.innerHTML='<div class="cart-layout"><div class="cart-main"><div class="cart-lines">'+lines+'</div>'+
+      '<label class="cart-notes">Notes <span>(optional)</span><textarea id="order-notes" maxlength="500" rows="3" placeholder="Colours, sizes or anything else we should know">'+e(notes)+'</textarea></label></div>'+
+      '<aside class="cart-aside" aria-label="Request summary"><div class="cart-summary"><p class="eyebrow">Summary</p><dl class="summary-rows"><div><dt>Items</dt><dd>'+s.count+'</dd></div><div><dt>Delivery</dt><dd>Confirmed with your quote</dd></div></dl>'+
+      '<h2 data-testid="cart-subtotal">'+(s.unpriced?(hasPriced?'Priced items subtotal: '+e(money(s.knownSubtotal)):'Quote required for all items'):'Estimated items subtotal: '+e(money(s.knownSubtotal)))+'</h2><p>'+(s.unpriced?'Unpriced items are not included in a subtotal. ':'')+'Delivery and the final total will be confirmed with your quote.</p></div>'+
+      '<div id="order-handoff">'+handoff(orderMessage(cart,products,notes))+'</div></aside></div>';
     if(focusKey) {
-      const target=[...root.querySelectorAll('[data-quantity]')].find(x=>x.dataset.quantity===focusKey);
-      (target||root.querySelector('[data-quantity]'))?.focus();
+      const [id,kind]=String(focusKey).split(':');
+      const target=kind?root.querySelector('[data-step="'+kind+'"][data-id="'+CSS.escape(id)+'"]:not(:disabled)'):null;
+      (target||[...root.querySelectorAll('[data-quantity]')].find(x=>x.dataset.quantity===id)||root.querySelector('[data-quantity]'))?.focus();
     }
     root.querySelector('#order-notes').addEventListener('input',event=>{
       notes=event.target.value;
@@ -109,6 +123,13 @@ function initCart() {
     item.quantity=Number(input.value);saveCart();render(item.id);
   });
   root.addEventListener('click',event=>{
+    const step=event.target.closest('[data-step]');
+    if(step) {
+      const item=cart.find(x=>x.id===step.dataset.id);if(!item)return;
+      const next=item.quantity+Number(step.dataset.step);
+      if(next<1||next>MAX_QUANTITY)return;
+      item.quantity=next;saveCart();render(item.id+':'+step.dataset.step);announce('Quantity updated to '+next+'.');return;
+    }
     const button=event.target.closest('[data-remove]');if(!button)return;
     const id=button.dataset.remove;cart=cart.filter(x=>x.id!==id);saveCart();render(id);announce('Item removed from your cart.');
   });

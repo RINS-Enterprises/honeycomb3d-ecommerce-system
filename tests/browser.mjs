@@ -62,6 +62,16 @@ try {
   await page.getByRole('link',{name:'View your request cart'}).click();
   await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
   assert.equal(await page.getByRole('spinbutton').inputValue(),'2');
+  await page.getByTestId('cart-qty-increase').click();
+  await page.getByRole('heading',{name:'Estimated items subtotal: '+money(3000),exact:true}).waitFor();
+  assert.equal(await page.getByTestId('cart-qty').inputValue(),'3');
+  await page.getByTestId('cart-qty-decrease').click();
+  await page.getByTestId('cart-qty-decrease').click();
+  assert.equal(await page.getByTestId('cart-qty').inputValue(),'1');
+  assert.equal(await page.getByTestId('cart-qty-decrease').isDisabled(),true,'Quantity cannot go below 1');
+  await page.getByTestId('cart-qty-increase').click();
+  await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
+  assert.equal(await page.getByTestId('cart-line').count(),1);
   assert.equal(await page.locator('a[href^="https://wa.me/"]').count(),0);
   assert(!await page.locator('#order-handoff').textContent().then(t=>t.includes('Opening WhatsApp')));
   assert.match(await page.locator('.message-preview').inputValue(),/Baymax Figure \[HC-BAYMAX\] x 2/);
