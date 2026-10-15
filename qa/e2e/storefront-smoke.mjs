@@ -378,7 +378,8 @@ async function main() {
     const href = links[0];
     const pdpResp = await page.goto(new URL(href, BASE + '/').href, { waitUntil: 'networkidle' });
     const name = (await page.locator('h1').first().innerText().catch(() => '')).trim();
-    const priceEl = await first(tid(page, 'product-price'));
+    // The product's own price, not one inside a related-product card on the same page.
+    const priceEl = await first(page.locator('[data-testid="product-price"]:not([data-testid="product-card"] *)'));
     const price = priceEl ? parseMoney(await priceEl.innerText())[0] : parseMoney(await page.locator('main').first().innerText().catch(() => ''))[0];
     const unpricedLabel = price == null ? ((await page.locator('main').first().innerText().catch(() => '')).match(UNPRICED_RE) || [])[0] : null;
     record(`pdp-${vp}`, 'AC-PDP-1', pdpResp.status() < 400 && name && (price || unpricedLabel) ? 'PASS' : 'FAIL',
