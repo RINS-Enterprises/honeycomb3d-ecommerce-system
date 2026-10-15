@@ -65,6 +65,7 @@ code/evidence, not executed. Severity: Blocker > High > Medium > Low > Info.
 | 2026-10-11 | Owner's Airtable base `appTRxtdHRFH7mgLX` | — | Read-only via the owner's Airtable connector. Read the schema of every table, the records of **Products** (`tblmUOdfunwP8iWKi`, 18 rows) and **Filament Inventory** (`tbl2kT7YFNC6Jm0Pk`, 16 rows). **Not read:** cost and supplier fields, and all finance tables (Orders, Financial Periods, Capital, Loans, Withdrawals, Expenses and so on). | §3.2, F-17…F-20. Nothing in Airtable was changed. |
 | 2026-10-11 | Drive `HoneyComb/Stock` (`1FaOJQ7XVN3uQMVxoo04_IvXZq5ff6FTs`) and SKU folders | — | Read the sheet `HC-BOX`. Read metadata for the folder `HNYCMB503 Kurama` (`1AV2PhFD…`) and for `Baymax.3mf` (`1SfuSyhm…`). Listed `06 Product Records and Pricing`, which came back empty. | E-11, F-17. Nothing in Drive was changed. |
 | 2026-10-11 | `codex/storefront-mvp` | `8d13b91` (unchanged since 2026-10-09) | `git ls-remote` | No new commit, so no re-test was needed. |
+| 2026-10-15 | `codex/storefront-mvp` | `948dff5` (unchanged) | `git ls-remote` (no new commit from GPT). Ran an emulated slow-network check (slow 4G and 3G, 4× CPU). Tried to read the MakerWorld licence pages, which the network policy blocked. | §7 "Slow-network check", I-24 |
 | 2026-10-13 | Owner Drive, HoneyComb folder | — | Searched for the two pending photos. Downloaded both new copies to QA scratch, hashed them, and checked them for AI markers. Checked their folder chain up to the HoneyComb root. | Both match the approved originals (§7, "Owner photo copies"). Nothing in Drive was changed by QA. |
 | 2026-10-13 | `codex/storefront-mvp` | `948dff5f6e37e6f07100a554fb8b49eb64aa846e` | Run 6: review-commit, domain tests, smoke (3 preview runs, 1 live), edge probes, axe, image audit, provenance scan, a hash and pixel check of all 18 derivatives and 6 sources, a favicon source and frame check, PR #2 CI and workflow review, and a Drive title search. | See §7 Run 6 |
 | 2026-10-13 | `codex/storefront-mvp` | `acca67f326a2036d527a1ffef5a727dcc3ca2d7d` | Run 5: review-commit, domain tests, smoke (4 preview runs, 1 live), edge probes, axe, image audit, provenance scan, a pixel and hash check of every source and derivative, and PR #2 CI status. Drive title search for the two pending photos. | See §7 Run 5 |
@@ -713,6 +714,26 @@ GPT reported I-21 and I-22 fixed. QA checked this independently in a separate ch
   - `12354a5` is attributed to GPT's usual human git identity rather than the bot, so the log doesn't show it was CI-generated.
   - QA verified the generated files independently (rows above), so nothing is wrong at `948dff5`. The recommendation from Run 5 stands for next time.
 
+#### Slow-network check on `948dff5` (2026-10-15)
+`qa/e2e/throttled-perf.mjs` emulates a slow network and a 4× slower CPU with Chrome DevTools throttling, against a local server. The screen is a 390×844 phone at DPR 3. This is an **emulation, not a real device or network**. Results are in `qa/results/948dff5…/perf-throttled.json`; a second, ad hoc run gave the same picture.
+
+| Page | Slow 4G LCP | 3G LCP | CLS (slow 4G / 3G) | Transferred |
+|---|---|---|---|---|
+| `/` | 0.70 s | 1.20 s | 0 / 0 | 276 KB |
+| `/shop/` | 0.58 s | 1.10 s | 0 / 0 | 204 KB |
+| `/products/minato-kunai/` | 0.71 s | 1.37 s | 0 / 0 | 168 KB |
+| `/products/baymax-figure/` | 1.73 s | **3.30 s** | 0 / 0 | 246 KB |
+| `/cart/` | 0.57 s | 1.03 s | 0 / **0.096** | 77 KB |
+
+Every page is inside Google's "good" LCP limit (≤ 2.5 s) on slow 4G. On 3G, all but one are too. Layout shift is "good" everywhere (≤ 0.1).
+
+#### I-24 · Info · Tested (emulated) · Product-page photo is not prioritised; Baymax page LCP is 3.3 s on emulated 3G
+- **Actual:**
+  - The main product photo has `loading="eager"` but no `fetchpriority="high"` and no preload. So on a slow connection it competes with the stylesheet and other images.
+  - The Baymax page, which has the heaviest image of the product pages, reaches LCP at 3.30 s on emulated 3G. That is Google's "needs improvement" band (2.5–4 s).
+  - The cart page shows a small layout shift on 3G (0.096, just under the 0.1 limit).
+- **Fix (optional):** add `fetchpriority="high"` to the product-page photo. Optionally, give the cart's late-filled area a reserved height.
+
 #### Owner photo copies (2026-10-13, after Run 6)
 The owner copied the two remaining approved originals into the HoneyComb folder. QA downloaded each copy and hashed it.
 
@@ -935,5 +956,5 @@ The fixture rows validate the **tools only**. §7 holds the results against the 
 5. Live site and EasyWP state could not be fetched from this environment. Baserow data not inspected.
 6. The brief is second-hand (chat retrieval). Its historical claims are unverified.
 7. Screenshot capture date for the April evidence is inferred, not recorded.
-8. Airtable (2026-10-11): QA read only Products and Filament Inventory. It did not check MakerWorld licence pages (F-18). The "current" status of the Airtable prices rests on the owner's word, because the connector shows creation dates only.
-9. Asset audit: not every Drive file was opened (videos, ZIPs, `06 Product Records and Pricing` (empty listing on 2026-10-11), deep Listing Kit and Product Studio pages). C2PA manifests were validated with `c2pa-python` (signatures valid; Google root not in the default trust list). No real-device low-memory decode test and no throttled-network LCP run. See `ASSET-AUDIT.md` §8.
+8. Airtable (2026-10-11): QA read only Products and Filament Inventory. **MakerWorld licence pages (F-18) could not be checked.** On 2026-10-15 this environment's network policy blocked `makerworld.com` (proxy 403). The owner can check each model page, or allow that host in the environment's network settings. The "current" status of the Airtable prices rests on the owner's word, because the connector shows creation dates only.
+9. Asset audit: not every Drive file was opened (videos, ZIPs, `06 Product Records and Pricing` (empty listing on 2026-10-11), deep Listing Kit and Product Studio pages). C2PA manifests were validated with `c2pa-python` (signatures valid; Google root not in the default trust list). No real-device low-memory decode test. The throttled-network LCP was run on 2026-10-15 in emulation (see I-24). See `ASSET-AUDIT.md` §8.
