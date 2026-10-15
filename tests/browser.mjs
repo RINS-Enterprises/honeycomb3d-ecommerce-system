@@ -152,9 +152,9 @@ try {
   await page.unroute('**/styles.css');
   await page.setViewportSize({width:1280,height:900});
   await page.goto('http://127.0.0.1:4173/products/minato-kunai/');
-  await page.getByRole('button',{name:'Show photo 3 of 3'}).click();
+  await page.getByRole('button',{name:'Show photo 3 of 4'}).click();
   await page.waitForFunction(()=>{const t=document.querySelector('[data-gallery-track]');return Math.round(t.scrollLeft/t.clientWidth)===2;});
-  assert.equal(await page.getByRole('button',{name:'Show photo 3 of 3'}).getAttribute('aria-current'),'true');
+  assert.equal(await page.getByRole('button',{name:'Show photo 3 of 4'}).getAttribute('aria-current'),'true');
   assert.equal(await page.locator('[data-gallery-thumb][aria-current]').count(),1,'Exactly one current thumbnail');
   assert.equal(await page.getByRole('button',{name:'Ordering opens soon'}).isDisabled(),true);
   await page.setViewportSize({width:390,height:844});

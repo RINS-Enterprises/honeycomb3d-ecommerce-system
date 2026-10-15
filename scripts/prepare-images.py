@@ -6,8 +6,40 @@ Source files stay outside public/. No raw Drive originals are served.
 from pathlib import Path
 from io import BytesIO
 import hashlib, json
-import PIL
-from PIL import Image, ImageOps, ImageCms, features
+import PIL, statistics
+from PIL import Image, ImageOps, ImageCms, ImageDraw, features
+
+
+def pad_to_square(im, feather_ratio=0.04):
+    """Centre the whole approved crop on a square of the photo's own backdrop colour.
+    The colour is the per-channel median of the crop's outer 8 px on the sides that meet
+    the padding; the photo's edge is feathered into it so no seam or bar shows.
+    No pixels inside the approved crop are changed apart from that edge fade."""
+    w, h = im.size
+    side = max(w, h)
+    if w == h:
+        return im, None
+    ring = 8
+    if w < h:
+        strips = [im.crop((0, 0, ring, h)), im.crop((w - ring, 0, w, h))]
+    else:
+        strips = [im.crop((0, 0, w, ring)), im.crop((0, h - ring, w, h))]
+    pixels = [px for strip in strips for px in strip.convert("RGB").getdata()]
+    colour = tuple(int(statistics.median(px[i] for px in pixels)) for i in range(3))
+    canvas = Image.new("RGB", (side, side), colour)
+    feather = max(8, round(side * feather_ratio))
+    mask = Image.new("L", (w, h), 255)
+    draw = ImageDraw.Draw(mask)
+    for step in range(feather):
+        value = round(255 * (step + 1) / (feather + 1))
+        if w < h:
+            draw.line([(step, 0), (step, h)], fill=value)
+            draw.line([(w - 1 - step, 0), (w - 1 - step, h)], fill=value)
+        else:
+            draw.line([(0, step), (w, step)], fill=value)
+            draw.line([(0, h - 1 - step), (w, h - 1 - step)], fill=value)
+    canvas.paste(im.convert("RGB"), ((side - w) // 2, (side - h) // 2), mask)
+    return canvas, {"backdrop": "#%02x%02x%02x" % colour, "feather": feather, "side": side}
 
 ROOT = Path(__file__).resolve().parents[1]
 SPECS = json.loads((ROOT / "assets/image-sources.json").read_text())
@@ -86,13 +118,19 @@ for entry in SPECS["assets"]:
         if square:
             # Square frames for cards and the product page. The box is in oriented
             # source pixels and must sit inside the approved crop, so it never widens it.
-            sl, st, sr, sb = square["box"]
-            if sr - sl != sb - st or not (left <= sl < sr <= right and top <= st < sb <= bottom):
-                raise ValueError("Square frame must be square and inside the approved crop: " + entry["id"])
-            if entry["id"] == "HC-MINATO" and not 2756 <= sl <= 2794:
-                raise ValueError("Minato square frame includes a neighbour or clips its wing")
-            square_outputs = render(im.crop((sl - left, st - top, sr - left, sb - top)),
-                                    square["widths"], entry["stem"] + "-sq")
+            if square.get("mode") == "pad":
+                # Whole product first: the full approved crop, padded to a square.
+                padded, pad_info = pad_to_square(im)
+                square["padding"] = pad_info
+                square_outputs = render(padded, square["widths"], entry["stem"] + "-sq")
+            else:
+                sl, st, sr, sb = square["box"]
+                if sr - sl != sb - st or not (left <= sl < sr <= right and top <= st < sb <= bottom):
+                    raise ValueError("Square frame must be square and inside the approved crop: " + entry["id"])
+                if entry["id"] == "HC-MINATO" and not 2756 <= sl <= 2794:
+                    raise ValueError("Minato square frame includes a neighbour or clips its wing")
+                square_outputs = render(im.crop((sl - left, st - top, sr - left, sb - top)),
+                                        square["widths"], entry["stem"] + "-sq")
         gallery_outputs = []
         for index, frame in enumerate(entry.get("gallery") or [], start=2):
             # Extra square detail frames for the product-page gallery, inside the approved crop.
@@ -169,7 +207,10 @@ for rec in records:
             f'- Input SHA-256: {code(rec["inputSha256"])}',
             f'- Source dimensions: {rec["sourceSize"][0]} × {rec["sourceSize"][1]}; EXIF orientation {rec["exifOrientation"]}.',
             f'- Applied crop box after orientation: {code(tuple(rec["appliedCropBox"]))}.']
-    if rec.get("square"):
+    if rec.get("square", {}).get("mode") == "pad":
+        pad = rec["square"]["padding"]
+        doc += [f'- Square storefront frame: the whole applied crop centred on a {pad["side"]} × {pad["side"]} square of its own backdrop colour {code(pad["backdrop"])} (median of the crop edges that meet the padding), with a {pad["feather"]} px edge fade. {rec["square"]["note"]}']
+    elif rec.get("square"):
         doc += [f'- Square storefront frame (inside the applied crop): {code(tuple(rec["square"]["box"]))}. {rec["square"]["note"]}']
     for i, frame in enumerate(rec.get("gallery") or [], start=2):
         doc += [f'- Product-page gallery image {i} (inside the applied crop): {code(tuple(frame["box"]))}. {frame["note"]}']
@@ -189,7 +230,7 @@ for rec in records:
     doc += [""]
 
 doc += ["## Pending approved originals", "",
-        "Classic Kunai and Kurama display photo placeholders. Their former AI images have been removed from the served assets. Neither pending source below has been imported.",
+        "Classic Kunai and Kurama are hidden from the storefront until their approved originals are imported. Their former AI images have been removed from the served assets. Neither pending source below has been imported.",
         "The owner first copies each original into the supplied HoneyComb folder. Verify the new copy against the expected original SHA-256 before adding it to the source manifest.", "",
         "| Product | Approved source title | Reference Drive ID outside HoneyComb | Expected original SHA-256 |",
         "|---|---|---|---|"]

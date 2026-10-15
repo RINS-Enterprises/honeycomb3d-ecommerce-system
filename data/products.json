@@ -48,9 +48,14 @@
         "height": 640
       },
       {
-        "src": "/assets/hidden-leaf-sq-770.webp",
-        "width": 770,
-        "height": 770
+        "src": "/assets/hidden-leaf-sq-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/assets/hidden-leaf-sq-1200.webp",
+        "width": 1200,
+        "height": 1200
       }
     ],
     "imageWidth": 640,
@@ -60,7 +65,7 @@
     "gallery": [
       {
         "src": "/assets/hidden-leaf-g2-640.webp",
-        "alt": "Left end of the white Hidden Leaf keychain plate with its keyring loop and black rivets",
+        "alt": "Close-up of the Hidden Leaf emblem and rivets on the white keychain plate",
         "width": 640,
         "height": 640,
         "variants": [
@@ -86,6 +91,39 @@
           },
           {
             "src": "/assets/hidden-leaf-g2-770.webp",
+            "width": 770,
+            "height": 770
+          }
+        ]
+      },
+      {
+        "src": "/assets/hidden-leaf-g3-640.webp",
+        "alt": "Left end of the white Hidden Leaf keychain plate with its keyring loop and black rivets",
+        "width": 640,
+        "height": 640,
+        "variants": [
+          {
+            "src": "/assets/hidden-leaf-g3-160.webp",
+            "width": 160,
+            "height": 160
+          },
+          {
+            "src": "/assets/hidden-leaf-g3-320.webp",
+            "width": 320,
+            "height": 320
+          },
+          {
+            "src": "/assets/hidden-leaf-g3-480.webp",
+            "width": 480,
+            "height": 480
+          },
+          {
+            "src": "/assets/hidden-leaf-g3-640.webp",
+            "width": 640,
+            "height": 640
+          },
+          {
+            "src": "/assets/hidden-leaf-g3-770.webp",
             "width": 770,
             "height": 770
           }
@@ -321,7 +359,7 @@
     "gallery": [
       {
         "src": "/assets/minato-kunai-g2-640.webp",
-        "alt": "Close-up of the Minato kunai: black ring and tan handle with engraved characters",
+        "alt": "Close-up of the Minato kunai: tan engraved handle and black curved wings",
         "width": 640,
         "height": 640,
         "variants": [
@@ -359,7 +397,7 @@
       },
       {
         "src": "/assets/minato-kunai-g3-640.webp",
-        "alt": "Close-up of the Minato kunai: black blade with silver edge bevels and curved wings",
+        "alt": "Close-up of the Minato kunai: black ring and tan handle with engraved characters",
         "width": 640,
         "height": 640,
         "variants": [
@@ -390,6 +428,44 @@
           },
           {
             "src": "/assets/minato-kunai-g3-1200.webp",
+            "width": 1200,
+            "height": 1200
+          }
+        ]
+      },
+      {
+        "src": "/assets/minato-kunai-g4-640.webp",
+        "alt": "Close-up of the Minato kunai: black blade with silver edge bevels and curved wings",
+        "width": 640,
+        "height": 640,
+        "variants": [
+          {
+            "src": "/assets/minato-kunai-g4-160.webp",
+            "width": 160,
+            "height": 160
+          },
+          {
+            "src": "/assets/minato-kunai-g4-320.webp",
+            "width": 320,
+            "height": 320
+          },
+          {
+            "src": "/assets/minato-kunai-g4-480.webp",
+            "width": 480,
+            "height": 480
+          },
+          {
+            "src": "/assets/minato-kunai-g4-640.webp",
+            "width": 640,
+            "height": 640
+          },
+          {
+            "src": "/assets/minato-kunai-g4-960.webp",
+            "width": 960,
+            "height": 960
+          },
+          {
+            "src": "/assets/minato-kunai-g4-1200.webp",
             "width": 1200,
             "height": 1200
           }

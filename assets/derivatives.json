@@ -36,22 +36,40 @@
         1440
       ],
       "square": {
-        "box": [
-          1640,
-          1660,
-          2410,
-          2430
-        ],
+        "mode": "pad",
         "widths": [
           160,
           320,
           480,
           640,
-          770
+          960,
+          1200
         ],
-        "note": "Centres the Hidden Leaf emblem and the plate's left rivets; the approved crop is too shallow for a square of the whole plate."
+        "note": "Shows the whole plate, keyring loop to right end.",
+        "padding": {
+          "backdrop": "#d8d2d2",
+          "feather": 70,
+          "side": 1750
+        }
       },
       "gallery": [
+        {
+          "box": [
+            1640,
+            1660,
+            2410,
+            2430
+          ],
+          "widths": [
+            160,
+            320,
+            480,
+            640,
+            770
+          ],
+          "alt": "Close-up of the Hidden Leaf emblem and rivets on the white keychain plate",
+          "note": "Detail: Centres the Hidden Leaf emblem and the plate's left rivets; the approved crop is too shallow for a square of the whole plate."
+        },
         {
           "box": [
             1250,
@@ -109,8 +127,8 @@
           "src": "/assets/hidden-leaf-sq-160.webp",
           "width": 160,
           "height": 160,
-          "bytes": 3232,
-          "sha256": "91acf2bcb1bb145be559d35d1cb1fdc10a20eb483732382dc7339673956a669f",
+          "bytes": 1588,
+          "sha256": "ec77ec2df1fa95563216dd6debb57e6da7b076fbaa662a59f46e931fb897e0d5",
           "quality": 82,
           "frame": "square"
         },
@@ -118,8 +136,8 @@
           "src": "/assets/hidden-leaf-sq-320.webp",
           "width": 320,
           "height": 320,
-          "bytes": 11288,
-          "sha256": "78c3a6223f8f6368e2ea1fc156b757c480790cb1f8f619d040b00069c2962013",
+          "bytes": 3980,
+          "sha256": "df6ccc098a2da6a5fe256480fd212c08131ab1df5391657ee6ddcf0e695d08be",
           "quality": 82,
           "frame": "square"
         },
@@ -127,8 +145,8 @@
           "src": "/assets/hidden-leaf-sq-480.webp",
           "width": 480,
           "height": 480,
-          "bytes": 23952,
-          "sha256": "2d664b89e3be87c9329bc767e7a3544b1ea8e4873a760bf5941a467510ed165a",
+          "bytes": 8736,
+          "sha256": "36c0c11e52911d8a7b7efcea1ac58b3c4c086bb9aaea78238b157c6dc285d3ef",
           "quality": 82,
           "frame": "square"
         },
@@ -136,17 +154,26 @@
           "src": "/assets/hidden-leaf-sq-640.webp",
           "width": 640,
           "height": 640,
-          "bytes": 38990,
-          "sha256": "5a8fe30feb0456d7b9dc4a84c8606943f3a3f3af9caada2d2da8c7a493ab67b6",
+          "bytes": 14820,
+          "sha256": "5c849d12962715a2f9ed4609983d6be911445493d4e711634ed7bff4adac3bde",
           "quality": 82,
           "frame": "square"
         },
         {
-          "src": "/assets/hidden-leaf-sq-770.webp",
-          "width": 770,
-          "height": 770,
-          "bytes": 55564,
-          "sha256": "8fd28d63e926265af6186da05196e6162ebb2ce70fc066b2d92e8448a08618c4",
+          "src": "/assets/hidden-leaf-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 32988,
+          "sha256": "e6bc83f6bf032fb4ced66d20480a46cd09676d8e9ed6132a2fdfc1ada03e6fbf",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/hidden-leaf-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 50438,
+          "sha256": "5a0a728555e60ec5f380d4bdd1ea50f8ad474a8b681384a3de3f9565082949f5",
           "quality": 82,
           "frame": "square"
         },
@@ -154,8 +181,8 @@
           "src": "/assets/hidden-leaf-g2-160.webp",
           "width": 160,
           "height": 160,
-          "bytes": 2222,
-          "sha256": "07c9648bd99f42373ad1f30392d824c4ede189e78b3e60562d7d051fa000fdac",
+          "bytes": 3232,
+          "sha256": "91acf2bcb1bb145be559d35d1cb1fdc10a20eb483732382dc7339673956a669f",
           "quality": 82,
           "frame": "gallery-2"
         },
@@ -163,8 +190,8 @@
           "src": "/assets/hidden-leaf-g2-320.webp",
           "width": 320,
           "height": 320,
-          "bytes": 8846,
-          "sha256": "ffcdbcd1e0a60f764e72e2e1a5876773c921f3364a6032324417bff3e9de156a",
+          "bytes": 11288,
+          "sha256": "78c3a6223f8f6368e2ea1fc156b757c480790cb1f8f619d040b00069c2962013",
           "quality": 82,
           "frame": "gallery-2"
         },
@@ -172,8 +199,8 @@
           "src": "/assets/hidden-leaf-g2-480.webp",
           "width": 480,
           "height": 480,
-          "bytes": 20920,
-          "sha256": "f2acd171b23fb158dbe96c6c20e718e34763ad16190f3f331786b0cfa48eea99",
+          "bytes": 23952,
+          "sha256": "2d664b89e3be87c9329bc767e7a3544b1ea8e4873a760bf5941a467510ed165a",
           "quality": 82,
           "frame": "gallery-2"
         },
@@ -181,8 +208,8 @@
           "src": "/assets/hidden-leaf-g2-640.webp",
           "width": 640,
           "height": 640,
-          "bytes": 35736,
-          "sha256": "16913d3621c7ea263ad7ebf57326e5bee374dc7a8b53c9b953c8d0d15713e9a5",
+          "bytes": 38990,
+          "sha256": "5a8fe30feb0456d7b9dc4a84c8606943f3a3f3af9caada2d2da8c7a493ab67b6",
           "quality": 82,
           "frame": "gallery-2"
         },
@@ -190,10 +217,55 @@
           "src": "/assets/hidden-leaf-g2-770.webp",
           "width": 770,
           "height": 770,
+          "bytes": 55564,
+          "sha256": "8fd28d63e926265af6186da05196e6162ebb2ce70fc066b2d92e8448a08618c4",
+          "quality": 82,
+          "frame": "gallery-2"
+        },
+        {
+          "src": "/assets/hidden-leaf-g3-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 2222,
+          "sha256": "07c9648bd99f42373ad1f30392d824c4ede189e78b3e60562d7d051fa000fdac",
+          "quality": 82,
+          "frame": "gallery-3"
+        },
+        {
+          "src": "/assets/hidden-leaf-g3-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 8846,
+          "sha256": "ffcdbcd1e0a60f764e72e2e1a5876773c921f3364a6032324417bff3e9de156a",
+          "quality": 82,
+          "frame": "gallery-3"
+        },
+        {
+          "src": "/assets/hidden-leaf-g3-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 20920,
+          "sha256": "f2acd171b23fb158dbe96c6c20e718e34763ad16190f3f331786b0cfa48eea99",
+          "quality": 82,
+          "frame": "gallery-3"
+        },
+        {
+          "src": "/assets/hidden-leaf-g3-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 35736,
+          "sha256": "16913d3621c7ea263ad7ebf57326e5bee374dc7a8b53c9b953c8d0d15713e9a5",
+          "quality": 82,
+          "frame": "gallery-3"
+        },
+        {
+          "src": "/assets/hidden-leaf-g3-770.webp",
+          "width": 770,
+          "height": 770,
           "bytes": 51844,
           "sha256": "5eb860918aa32d0325f6d90cb4f87da7715135d3b4781c47b311744272c96cbe",
           "quality": 82,
-          "frame": "gallery-2"
+          "frame": "gallery-3"
         }
       ]
     },
@@ -588,12 +660,7 @@
         1440
       ],
       "square": {
-        "box": [
-          2770,
-          2950,
-          4600,
-          4780
-        ],
+        "mode": "pad",
         "widths": [
           160,
           320,
@@ -602,9 +669,32 @@
           960,
           1200
         ],
-        "note": "Shows the engraved handle and full wings; the ring and blade tip fall outside the square."
+        "note": "Shows the whole kunai, ring to blade tip, with a margin.",
+        "padding": {
+          "backdrop": "#eae6e5",
+          "feather": 164,
+          "side": 4100
+        }
       },
       "gallery": [
+        {
+          "box": [
+            2770,
+            2950,
+            4600,
+            4780
+          ],
+          "widths": [
+            160,
+            320,
+            480,
+            640,
+            960,
+            1200
+          ],
+          "alt": "Close-up of the Minato kunai: tan engraved handle and black curved wings",
+          "note": "Detail: Shows the engraved handle and full wings; the ring and blade tip fall outside the square."
+        },
         {
           "box": [
             2770,
@@ -697,8 +787,8 @@
           "src": "/assets/minato-kunai-sq-160.webp",
           "width": 160,
           "height": 160,
-          "bytes": 1866,
-          "sha256": "9849929b329dfa1fd5d35a66973e4f4d0013dcadf491556378d60734a8999391",
+          "bytes": 1160,
+          "sha256": "50891cc18c9774b8a28ca9b7d26ee919ee8e25c929385df779a335622e026220",
           "quality": 82,
           "frame": "square"
         },
@@ -706,8 +796,8 @@
           "src": "/assets/minato-kunai-sq-320.webp",
           "width": 320,
           "height": 320,
-          "bytes": 5274,
-          "sha256": "614914d378cbb2a606f1ff1bafcb00a14fa339bc6c6e1f69e89253fa6d676068",
+          "bytes": 2894,
+          "sha256": "951ba609da6114c8c06166aeceebd6059791f6c26c624c2d70f0c6769a3d3820",
           "quality": 82,
           "frame": "square"
         },
@@ -715,8 +805,8 @@
           "src": "/assets/minato-kunai-sq-480.webp",
           "width": 480,
           "height": 480,
-          "bytes": 9738,
-          "sha256": "ad02a6ee4457279d6ef2d7644a89a8ed48652b6b9e487ec57ca37f6f20b747dc",
+          "bytes": 5362,
+          "sha256": "cee39642814ac7c7955fdd6fab69a53e5fa7b470d4d6f2a2675c3f0591d24614",
           "quality": 82,
           "frame": "square"
         },
@@ -724,8 +814,8 @@
           "src": "/assets/minato-kunai-sq-640.webp",
           "width": 640,
           "height": 640,
-          "bytes": 17036,
-          "sha256": "4d5cc866b87e74da57559b11ac6c6e8de30ca662d8cc6d63d39c09b69b65b0e8",
+          "bytes": 8780,
+          "sha256": "c53ba50a6c56574fda3cc05b527717369e2da42821a406cf5a4d2ab31f7fed75",
           "quality": 82,
           "frame": "square"
         },
@@ -733,8 +823,8 @@
           "src": "/assets/minato-kunai-sq-960.webp",
           "width": 960,
           "height": 960,
-          "bytes": 47800,
-          "sha256": "7ac893191b13968986c4d966f457cbbd2fae040b855992f096027e44cee55208",
+          "bytes": 17650,
+          "sha256": "09ab2773dabafbc63d5679a5114ea7a761b65d8b438462c5093dded6314d5059",
           "quality": 82,
           "frame": "square"
         },
@@ -742,8 +832,8 @@
           "src": "/assets/minato-kunai-sq-1200.webp",
           "width": 1200,
           "height": 1200,
-          "bytes": 88300,
-          "sha256": "b5b4b6a21cc19b104c8af1b65d0e99d9750b1a24c1313ba62f25f019691f1fa3",
+          "bytes": 26600,
+          "sha256": "bc1658059d68991c92a139a64b6629caa9d90db2120328737cf6519c6b198739",
           "quality": 82,
           "frame": "square"
         },
@@ -751,8 +841,8 @@
           "src": "/assets/minato-kunai-g2-160.webp",
           "width": 160,
           "height": 160,
-          "bytes": 1806,
-          "sha256": "973b6b187c6c4e53f7115335fecd99094217e5204798ab019fb4e9611cf0f75e",
+          "bytes": 1866,
+          "sha256": "9849929b329dfa1fd5d35a66973e4f4d0013dcadf491556378d60734a8999391",
           "quality": 82,
           "frame": "gallery-2"
         },
@@ -760,8 +850,8 @@
           "src": "/assets/minato-kunai-g2-320.webp",
           "width": 320,
           "height": 320,
-          "bytes": 5400,
-          "sha256": "a35e7894af42b943041ad30cf51c5993d78283a1239e73ad359ea4603fb7ec13",
+          "bytes": 5274,
+          "sha256": "614914d378cbb2a606f1ff1bafcb00a14fa339bc6c6e1f69e89253fa6d676068",
           "quality": 82,
           "frame": "gallery-2"
         },
@@ -769,8 +859,8 @@
           "src": "/assets/minato-kunai-g2-480.webp",
           "width": 480,
           "height": 480,
-          "bytes": 11544,
-          "sha256": "2b368bbf33adb48db35d2143a1fe0ac3fb215e68860d6a7f9b77be5dc55de120",
+          "bytes": 9738,
+          "sha256": "ad02a6ee4457279d6ef2d7644a89a8ed48652b6b9e487ec57ca37f6f20b747dc",
           "quality": 82,
           "frame": "gallery-2"
         },
@@ -778,8 +868,8 @@
           "src": "/assets/minato-kunai-g2-640.webp",
           "width": 640,
           "height": 640,
-          "bytes": 20502,
-          "sha256": "ca624aa352bd52e17c44b3070eba2a4708871a9d993583ed7249e1c56d7ed5b5",
+          "bytes": 17036,
+          "sha256": "4d5cc866b87e74da57559b11ac6c6e8de30ca662d8cc6d63d39c09b69b65b0e8",
           "quality": 82,
           "frame": "gallery-2"
         },
@@ -787,8 +877,8 @@
           "src": "/assets/minato-kunai-g2-960.webp",
           "width": 960,
           "height": 960,
-          "bytes": 50612,
-          "sha256": "0ec76cfe59dd09869629a891b4bbcb8a82ac7fcdb180fed6e7253e71bc3d3f62",
+          "bytes": 47800,
+          "sha256": "7ac893191b13968986c4d966f457cbbd2fae040b855992f096027e44cee55208",
           "quality": 82,
           "frame": "gallery-2"
         },
@@ -796,8 +886,8 @@
           "src": "/assets/minato-kunai-g2-1200.webp",
           "width": 1200,
           "height": 1200,
-          "bytes": 84564,
-          "sha256": "c8012b3bd0a2cd8a331325b8e36f0fc0641cbef3b137dc41ad8bf3a284a3ceea",
+          "bytes": 88300,
+          "sha256": "b5b4b6a21cc19b104c8af1b65d0e99d9750b1a24c1313ba62f25f019691f1fa3",
           "quality": 82,
           "frame": "gallery-2"
         },
@@ -805,8 +895,8 @@
           "src": "/assets/minato-kunai-g3-160.webp",
           "width": 160,
           "height": 160,
-          "bytes": 1438,
-          "sha256": "76112521390187a4a64ddd45e7f118e3da32d47cd64c87f7ad24f83f2f9252ea",
+          "bytes": 1806,
+          "sha256": "973b6b187c6c4e53f7115335fecd99094217e5204798ab019fb4e9611cf0f75e",
           "quality": 82,
           "frame": "gallery-3"
         },
@@ -814,8 +904,8 @@
           "src": "/assets/minato-kunai-g3-320.webp",
           "width": 320,
           "height": 320,
-          "bytes": 4014,
-          "sha256": "44bd2cf8fec2b9828a5af1817030cc86451943ccffd5c1bd2bf813673234ff42",
+          "bytes": 5400,
+          "sha256": "a35e7894af42b943041ad30cf51c5993d78283a1239e73ad359ea4603fb7ec13",
           "quality": 82,
           "frame": "gallery-3"
         },
@@ -823,8 +913,8 @@
           "src": "/assets/minato-kunai-g3-480.webp",
           "width": 480,
           "height": 480,
-          "bytes": 7766,
-          "sha256": "8a87bd29b77d9d87b7b70353b841cf58dbf060846eab7000c46297e5b9b3b111",
+          "bytes": 11544,
+          "sha256": "2b368bbf33adb48db35d2143a1fe0ac3fb215e68860d6a7f9b77be5dc55de120",
           "quality": 82,
           "frame": "gallery-3"
         },
@@ -832,8 +922,8 @@
           "src": "/assets/minato-kunai-g3-640.webp",
           "width": 640,
           "height": 640,
-          "bytes": 13626,
-          "sha256": "6db0cb17d88c0cf3337df6dc16562d1d2fae3bf7049e283eb86933e525016742",
+          "bytes": 20502,
+          "sha256": "ca624aa352bd52e17c44b3070eba2a4708871a9d993583ed7249e1c56d7ed5b5",
           "quality": 82,
           "frame": "gallery-3"
         },
@@ -841,8 +931,8 @@
           "src": "/assets/minato-kunai-g3-960.webp",
           "width": 960,
           "height": 960,
-          "bytes": 35852,
-          "sha256": "8b6cc1f54ab8103ce8841db455895ebf12abf62ea4ae81c023caf9026ee77d5a",
+          "bytes": 50612,
+          "sha256": "0ec76cfe59dd09869629a891b4bbcb8a82ac7fcdb180fed6e7253e71bc3d3f62",
           "quality": 82,
           "frame": "gallery-3"
         },
@@ -850,10 +940,64 @@
           "src": "/assets/minato-kunai-g3-1200.webp",
           "width": 1200,
           "height": 1200,
+          "bytes": 84564,
+          "sha256": "c8012b3bd0a2cd8a331325b8e36f0fc0641cbef3b137dc41ad8bf3a284a3ceea",
+          "quality": 82,
+          "frame": "gallery-3"
+        },
+        {
+          "src": "/assets/minato-kunai-g4-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 1438,
+          "sha256": "76112521390187a4a64ddd45e7f118e3da32d47cd64c87f7ad24f83f2f9252ea",
+          "quality": 82,
+          "frame": "gallery-4"
+        },
+        {
+          "src": "/assets/minato-kunai-g4-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 4014,
+          "sha256": "44bd2cf8fec2b9828a5af1817030cc86451943ccffd5c1bd2bf813673234ff42",
+          "quality": 82,
+          "frame": "gallery-4"
+        },
+        {
+          "src": "/assets/minato-kunai-g4-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 7766,
+          "sha256": "8a87bd29b77d9d87b7b70353b841cf58dbf060846eab7000c46297e5b9b3b111",
+          "quality": 82,
+          "frame": "gallery-4"
+        },
+        {
+          "src": "/assets/minato-kunai-g4-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 13626,
+          "sha256": "6db0cb17d88c0cf3337df6dc16562d1d2fae3bf7049e283eb86933e525016742",
+          "quality": 82,
+          "frame": "gallery-4"
+        },
+        {
+          "src": "/assets/minato-kunai-g4-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 35852,
+          "sha256": "8b6cc1f54ab8103ce8841db455895ebf12abf62ea4ae81c023caf9026ee77d5a",
+          "quality": 82,
+          "frame": "gallery-4"
+        },
+        {
+          "src": "/assets/minato-kunai-g4-1200.webp",
+          "width": 1200,
+          "height": 1200,
           "bytes": 65284,
           "sha256": "4843e447aca750e4e4ed8e19bc09da5c11318dde882698f555c9b72b07ad913b",
           "quality": 82,
-          "frame": "gallery-3"
+          "frame": "gallery-4"
         }
       ]
     },

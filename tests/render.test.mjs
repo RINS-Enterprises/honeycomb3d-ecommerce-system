@@ -70,7 +70,7 @@ test('product page: gallery only with several photos, clear price, availability 
   const {detail}=await import('../src/render.mjs');
   const visible=visibleProducts(products,store);
   const minato=detail(visible.find(p=>p.id==='HC-MINATO'),visible,store);
-  assert.equal([...minato.matchAll(/data-gallery-thumb=/g)].length,3);
+  assert.equal([...minato.matchAll(/data-gallery-thumb=/g)].length,4);
   assert.match(minato,/<p class="detail-price" data-testid="product-price">LKR\s1,000<\/p>/);
   assert.match(minato,/data-testid="availability"><span aria-hidden="true"><\/span>Availability to confirm/);
   assert.match(minato,/<button class="button secondary order-soon" type="button" disabled data-testid="order-button">Ordering opens soon<\/button>/);
@@ -86,7 +86,7 @@ test('pages carry share metadata, theme colour, touch icon and price-only Produc
   const leaf=visible.find(p=>p.id==='HC-LEAF');
   const html=detail(leaf,visible,store);
   assert.match(html,/<meta name="description" content="A Hidden Leaf design for your keyring\./);
-  assert.match(html,/<meta property="og:image" content="https:\/\/honeycomb3d\.store\/assets\/hidden-leaf-sq-770\.webp">/);
+  assert.match(html,/<meta property="og:image" content="https:\/\/honeycomb3d\.store\/assets\/hidden-leaf-sq-1200\.webp">/);
   assert.match(html,/<meta name="twitter:card" content="summary_large_image">/);
   assert.match(html,/<meta name="theme-color" content="#0c0b0a">/);
   assert.match(html,/<link rel="apple-touch-icon" href="\/apple-touch-icon\.png">/);
