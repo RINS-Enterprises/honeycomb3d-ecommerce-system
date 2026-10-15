@@ -35,6 +35,21 @@
         960,
         1440
       ],
+      "square": {
+        "box": [
+          1640,
+          1660,
+          2410,
+          2430
+        ],
+        "widths": [
+          320,
+          480,
+          640,
+          770
+        ],
+        "note": "Centres the Hidden Leaf emblem and the plate's left rivets; the approved crop is too shallow for a square of the whole plate."
+      },
       "orientedSize": [
         4299,
         6442
@@ -69,6 +84,42 @@
           "bytes": 79138,
           "sha256": "437caad3c0dfffb60dd8daf0d6e47384893ed3dd566993e1e513aef72a559723",
           "quality": 82
+        },
+        {
+          "src": "/assets/hidden-leaf-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 11288,
+          "sha256": "78c3a6223f8f6368e2ea1fc156b757c480790cb1f8f619d040b00069c2962013",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/hidden-leaf-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 23952,
+          "sha256": "2d664b89e3be87c9329bc767e7a3544b1ea8e4873a760bf5941a467510ed165a",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/hidden-leaf-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 38990,
+          "sha256": "5a8fe30feb0456d7b9dc4a84c8606943f3a3f3af9caada2d2da8c7a493ab67b6",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/hidden-leaf-sq-770.webp",
+          "width": 770,
+          "height": 770,
+          "bytes": 55564,
+          "sha256": "8fd28d63e926265af6186da05196e6162ebb2ce70fc066b2d92e8448a08618c4",
+          "quality": 82,
+          "frame": "square"
         }
       ]
     },
@@ -93,6 +144,22 @@
         960,
         1440
       ],
+      "square": {
+        "box": [
+          0,
+          400,
+          1536,
+          1936
+        ],
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Keeps both figures; trims the empty wall above and part of the grass below."
+      },
       "orientedSize": [
         1536,
         2048
@@ -127,6 +194,51 @@
           "bytes": 174868,
           "sha256": "0c76fede0f9678fda981bf49026d6c25f688df3954f19cbe5676a83fdc520dcf",
           "quality": 82
+        },
+        {
+          "src": "/assets/baymax-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 12108,
+          "sha256": "9ebe7175b33bb183cf2afc137a92666af033f4e2d33b3619948ec55419d9c2da",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/baymax-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 25188,
+          "sha256": "f56dcd5a8939ad3b8774b52074adce0fb3deed97615a0938f5c596ea88f290af",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/baymax-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 41458,
+          "sha256": "856ec11c7318be0a618482c94d0bafd0c5aa3a9bfe4c3f5c0550b3d6fc738101",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/baymax-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 82492,
+          "sha256": "42e3d86e2a3f4e947119e5a955831adb5c702474ee0a229dd3cd7a469a56523c",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/baymax-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 119270,
+          "sha256": "52b777d3455d694898a299b4f5440e97f9af86729a689e19f02e2c42d2968182",
+          "quality": 82,
+          "frame": "square"
         }
       ]
     },
@@ -151,6 +263,22 @@
         960,
         1440
       ],
+      "square": {
+        "box": [
+          236,
+          0,
+          1656,
+          1420
+        ],
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Centres the figure and the holding hand."
+      },
       "orientedSize": [
         1893,
         1420
@@ -185,6 +313,51 @@
           "bytes": 65288,
           "sha256": "e1f5abdffb91b9542ea26845ca57a53a66980d2cf97773b9c271005110b16dbe",
           "quality": 82
+        },
+        {
+          "src": "/assets/night-fury-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 11300,
+          "sha256": "f171e0233af66fa4448ac12c995de1173c9e59a748abdc1688bbbba220fc83d2",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/night-fury-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 19770,
+          "sha256": "5f0288b1bacd43f6efdc84a5606cb40366559faf6dae6e9f5759ec8b43e17d6b",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/night-fury-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 29256,
+          "sha256": "9530e86ee2856af28560674109f61c0f6d0e54e4b9416b59de1fdba83e4a7601",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/night-fury-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 50340,
+          "sha256": "dea3be4fd9c0f8ddb9cfd7e517409b1eaf87445139d58e9b29929c7315006402",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/night-fury-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 68408,
+          "sha256": "0c473534c6a8db00444e6f31895d7745426a96b77f835e45aab51305a15def78",
+          "quality": 82,
+          "frame": "square"
         }
       ]
     },
@@ -216,6 +389,22 @@
         960,
         1440
       ],
+      "square": {
+        "box": [
+          2770,
+          2950,
+          4600,
+          4780
+        ],
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Shows the engraved handle and full wings; the ring and blade tip fall outside the square."
+      },
       "orientedSize": [
         4912,
         7360
@@ -266,6 +455,51 @@
           "bytes": 251428,
           "sha256": "34d72359b337d2f5f14ef44c1c1e9754a98dc05d39530adfc70748aca137c1f2",
           "quality": 82
+        },
+        {
+          "src": "/assets/minato-kunai-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 5274,
+          "sha256": "614914d378cbb2a606f1ff1bafcb00a14fa339bc6c6e1f69e89253fa6d676068",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/minato-kunai-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 9738,
+          "sha256": "ad02a6ee4457279d6ef2d7644a89a8ed48652b6b9e487ec57ca37f6f20b747dc",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/minato-kunai-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 17036,
+          "sha256": "4d5cc866b87e74da57559b11ac6c6e8de30ca662d8cc6d63d39c09b69b65b0e8",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/minato-kunai-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 47800,
+          "sha256": "7ac893191b13968986c4d966f457cbbd2fae040b855992f096027e44cee55208",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/minato-kunai-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 88300,
+          "sha256": "b5b4b6a21cc19b104c8af1b65d0e99d9750b1a24c1313ba62f25f019691f1fa3",
+          "quality": 82,
+          "frame": "square"
         }
       ]
     },
@@ -290,6 +524,22 @@
         960,
         1440
       ],
+      "square": {
+        "box": [
+          0,
+          300,
+          1500,
+          1800
+        ],
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Centres the figure and its tail."
+      },
       "orientedSize": [
         1500,
         2000
@@ -324,6 +574,51 @@
           "bytes": 50262,
           "sha256": "76caea753630918bead191910048b3c652b94d5ce562af537bf114ddaebb0cee",
           "quality": 82
+        },
+        {
+          "src": "/assets/light-fury-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 5744,
+          "sha256": "ffd470c98cc3a50cd98b3b6fb9416dd3dd1f039d4af1d01757afd2644a76bf61",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 9820,
+          "sha256": "495b8d538c0496b9df28575c1746a6cc15bccdcbcc6a08e1e4520c23ade75ab5",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 14648,
+          "sha256": "ee003266d74ee4a289856d6834023e769ef6986b81f9634e083148ff674d6ba0",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 26680,
+          "sha256": "932a58d7c4ff151959b893d0431c9a3a6c3f73782259fdf5f33dfb0508260f27",
+          "quality": 82,
+          "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 36326,
+          "sha256": "13bc15075daccfb24a45c562fcba908cf2b4dc017289bc2f9548d77f26a6ca77",
+          "quality": 82,
+          "frame": "square"
         }
       ]
     },

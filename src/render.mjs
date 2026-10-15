@@ -2,24 +2,14 @@ import {escapeHtml as e, money} from './domain.mjs';
 
 export const price = p => p.priceLkr === null ? 'Price on enquiry' : money(p.priceLkr);
 export const CARD_SIZES = '(max-width: 700px) calc((100vw - 52px) / 2), (max-width: 1000px) calc((100vw - 124px) / 3), (max-width: 1280px) calc((100vw - 146px) / 4), 284px';
+// Every photo slot is a square frame filled by a square derivative (object-fit: cover).
 const DETAIL_SIZES = '(max-width: 700px) calc(100vw - 40px), (max-width: 1000px) calc((100vw - 110px) / 2), (max-width: 1280px) calc((100vw - 140px) / 2), 570px';
 const HERO_SIZES = '(max-width: 480px) calc(100vw - 40px), (max-width: 700px) 440px, (max-width: 1000px) calc((100vw - 100px) / 2.2), (max-width: 1280px) calc((100vw - 140px) / 2.2), 519px';
-
-export function containedSizes(p, sizes) {
-  // All photo slots are square and use object-fit: contain. A portrait fills
-  // only aspectRatio * slotWidth; srcset widths describe image pixels.
-  const ratio = Math.min(1, p.imageWidth / p.imageHeight);
-  if (!(ratio > 0 && ratio < 1)) return sizes;
-  return sizes.split(',').map(part => {
-    const match = part.trim().match(/^(\(max-width: \d+px\)\s+)?(.+)$/);
-    return (match[1] || '') + 'calc((' + match[2] + ') * ' + ratio.toFixed(6) + ')';
-  }).join(', ');
-}
 
 export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}) {
   if (!p.image) return '<div class="photo-placeholder"><span aria-hidden="true">◇</span><span>Original photo coming soon</span></div>';
   const responsive=p.imageVariants?.length ?
-    ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(containedSizes(p, sizes))+'"' : '';
+    ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'"' : '';
   return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'" decoding="async"'+(priority?' fetchpriority="high"':'')+'>';
 }
 export function card(p, {headingLevel=3}={}) {

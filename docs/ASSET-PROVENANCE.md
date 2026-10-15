@@ -17,6 +17,7 @@ Reproduce with python -m pip install Pillow==11.3.0 and python scripts/prepare-i
 - Input SHA-256: `6550f9d1c2a03ffedba857715ddfb9cbb55d3c2c5f566d789dde966b94b9145e`
 - Source dimensions: 4299 × 6442; EXIF orientation 1.
 - Applied crop box after orientation: `(1250, 1660, 3000, 2430)`.
+- Square storefront frame (inside the applied crop): `(1640, 1660, 2410, 2430)`. Centres the Hidden Leaf emblem and the plate's left rivets; the approved crop is too shallow for a square of the whole plate.
 
 The crop selects only the upper Hidden Leaf headband plate, including its keyring loop and shadow; the other three village plates are outside the crop.
 
@@ -25,6 +26,10 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 | `/assets/hidden-leaf-480.webp` | 480 | 480 × 211 | 9786 | 82 | `a11f9205ab677bf93b12e72f75b823b9ce0d2f9254d04badbeb2cefbad6f5bda` |
 | `/assets/hidden-leaf-960.webp` | 960 | 960 × 422 | 38452 | 82 | `784dbe7234ac62af94f162c336a0031c7ec5eac014b8da942a3de8fcf6fc3614` |
 | `/assets/hidden-leaf-1440.webp` | 1440 | 1440 × 634 | 79138 | 82 | `437caad3c0dfffb60dd8daf0d6e47384893ed3dd566993e1e513aef72a559723` |
+| `/assets/hidden-leaf-sq-320.webp` | 320 | 320 × 320 | 11288 | 82 | `78c3a6223f8f6368e2ea1fc156b757c480790cb1f8f619d040b00069c2962013` |
+| `/assets/hidden-leaf-sq-480.webp` | 480 | 480 × 480 | 23952 | 82 | `2d664b89e3be87c9329bc767e7a3544b1ea8e4873a760bf5941a467510ed165a` |
+| `/assets/hidden-leaf-sq-640.webp` | 640 | 640 × 640 | 38990 | 82 | `5a8fe30feb0456d7b9dc4a84c8606943f3a3f3af9caada2d2da8c7a493ab67b6` |
+| `/assets/hidden-leaf-sq-770.webp` | 770 | 770 × 770 | 55564 | 82 | `8fd28d63e926265af6186da05196e6162ebb2ce70fc066b2d92e8448a08618c4` |
 
 ## HC-BAYMAX
 
@@ -35,12 +40,18 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 - Input SHA-256: `2caef48ac4bbcbcc586df925b59e77a4f1c706ca07b51d0d9061aa8babe4bc7e`
 - Source dimensions: 1536 × 2048; EXIF orientation 1.
 - Applied crop box after orientation: `(0, 0, 1536, 2048)`.
+- Square storefront frame (inside the applied crop): `(0, 400, 1536, 1936)`. Keeps both figures; trims the empty wall above and part of the grass below.
 
 | Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
 | `/assets/baymax-480.webp` | 480 | 480 × 640 | 28300 | 82 | `250873e25a2a5060e8b62bf90093cd3ad84356ea5f2f96800995e0e9c2354d93` |
 | `/assets/baymax-960.webp` | 960 | 960 × 1280 | 91622 | 82 | `72e907f1342fbb8e4e489114a48109874a0b19c36071d5643a3250c21565106f` |
 | `/assets/baymax-1440.webp` | 1440 | 1440 × 1920 | 174868 | 82 | `0c76fede0f9678fda981bf49026d6c25f688df3954f19cbe5676a83fdc520dcf` |
+| `/assets/baymax-sq-320.webp` | 320 | 320 × 320 | 12108 | 82 | `9ebe7175b33bb183cf2afc137a92666af033f4e2d33b3619948ec55419d9c2da` |
+| `/assets/baymax-sq-480.webp` | 480 | 480 × 480 | 25188 | 82 | `f56dcd5a8939ad3b8774b52074adce0fb3deed97615a0938f5c596ea88f290af` |
+| `/assets/baymax-sq-640.webp` | 640 | 640 × 640 | 41458 | 82 | `856ec11c7318be0a618482c94d0bafd0c5aa3a9bfe4c3f5c0550b3d6fc738101` |
+| `/assets/baymax-sq-960.webp` | 960 | 960 × 960 | 82492 | 82 | `42e3d86e2a3f4e947119e5a955831adb5c702474ee0a229dd3cd7a469a56523c` |
+| `/assets/baymax-sq-1200.webp` | 1200 | 1200 × 1200 | 119270 | 82 | `52b777d3455d694898a299b4f5440e97f9af86729a689e19f02e2c42d2968182` |
 
 ## HNYCMB501
 
@@ -51,12 +62,18 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 - Input SHA-256: `775dddb36cf5d98a07ce92ba4a1ddad26c0e27bd7868c55bfe5822b447b04959`
 - Source dimensions: 1893 × 1420; EXIF orientation 1.
 - Applied crop box after orientation: `(0, 0, 1893, 1420)`.
+- Square storefront frame (inside the applied crop): `(236, 0, 1656, 1420)`. Centres the figure and the holding hand.
 
 | Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
 | `/assets/night-fury-480.webp` | 480 | 480 × 360 | 14324 | 82 | `7e480852833cecbdf57660165d7a6a3ad44296980114f566f72db051f6c0a9d8` |
 | `/assets/night-fury-960.webp` | 960 | 960 × 720 | 37432 | 82 | `2071959e347554061056f0c997e4834b37519adb10c4b609ccfce9bf7867bb70` |
 | `/assets/night-fury-1440.webp` | 1440 | 1440 × 1080 | 65288 | 82 | `e1f5abdffb91b9542ea26845ca57a53a66980d2cf97773b9c271005110b16dbe` |
+| `/assets/night-fury-sq-320.webp` | 320 | 320 × 320 | 11300 | 82 | `f171e0233af66fa4448ac12c995de1173c9e59a748abdc1688bbbba220fc83d2` |
+| `/assets/night-fury-sq-480.webp` | 480 | 480 × 480 | 19770 | 82 | `5f0288b1bacd43f6efdc84a5606cb40366559faf6dae6e9f5759ec8b43e17d6b` |
+| `/assets/night-fury-sq-640.webp` | 640 | 640 × 640 | 29256 | 82 | `9530e86ee2856af28560674109f61c0f6d0e54e4b9416b59de1fdba83e4a7601` |
+| `/assets/night-fury-sq-960.webp` | 960 | 960 × 960 | 50340 | 82 | `dea3be4fd9c0f8ddb9cfd7e517409b1eaf87445139d58e9b29929c7315006402` |
+| `/assets/night-fury-sq-1200.webp` | 1200 | 1200 × 1200 | 68408 | 82 | `0c473534c6a8db00444e6f31895d7745426a96b77f835e45aab51305a15def78` |
 
 ## HC-MINATO
 
@@ -67,8 +84,9 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 - Input SHA-256: `4c9673b96abc990ab4505ef0f46e6f4050029e0ed0ee44ba21b681c47af77479`
 - Source dimensions: 4912 × 7360; EXIF orientation 1.
 - Applied crop box after orientation: `(2770, 2150, 4600, 6250)`.
+- Square storefront frame (inside the applied crop): `(2770, 2950, 4600, 4780)`. Shows the engraved handle and full wings; the ring and blade tip fall outside the square.
 
-The left edge is x=2770, within the required x=2756…2794 bounds. The crop isolates the tan engraved handle, black blade, silver edge bevels and black ring. It is letterboxed with object-fit: contain; it is not widened to include the adjacent blade.
+The left edge is x=2770, within the required x=2756…2794 bounds. The crop isolates the tan engraved handle, black blade, silver edge bevels and black ring. The full crop is not widened to include the adjacent blade. Its square storefront frame is cut from inside this crop.
 
 | Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
@@ -77,6 +95,11 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 | `/assets/minato-kunai-480.webp` | 480 | 480 × 1075 | 20718 | 82 | `9880a18df2a171585733ea002c0dec08d1b319dd1a11d1d832020b3333617f79` |
 | `/assets/minato-kunai-960.webp` | 960 | 960 × 2151 | 93218 | 82 | `3490f32cac68d84b5c6097e9f5a2af038298c2fcec41e090c367bb263ad259e4` |
 | `/assets/minato-kunai-1440.webp` | 1440 | 1440 × 3226 | 251428 | 82 | `34d72359b337d2f5f14ef44c1c1e9754a98dc05d39530adfc70748aca137c1f2` |
+| `/assets/minato-kunai-sq-320.webp` | 320 | 320 × 320 | 5274 | 82 | `614914d378cbb2a606f1ff1bafcb00a14fa339bc6c6e1f69e89253fa6d676068` |
+| `/assets/minato-kunai-sq-480.webp` | 480 | 480 × 480 | 9738 | 82 | `ad02a6ee4457279d6ef2d7644a89a8ed48652b6b9e487ec57ca37f6f20b747dc` |
+| `/assets/minato-kunai-sq-640.webp` | 640 | 640 × 640 | 17036 | 82 | `4d5cc866b87e74da57559b11ac6c6e8de30ca662d8cc6d63d39c09b69b65b0e8` |
+| `/assets/minato-kunai-sq-960.webp` | 960 | 960 × 960 | 47800 | 82 | `7ac893191b13968986c4d966f457cbbd2fae040b855992f096027e44cee55208` |
+| `/assets/minato-kunai-sq-1200.webp` | 1200 | 1200 × 1200 | 88300 | 82 | `b5b4b6a21cc19b104c8af1b65d0e99d9750b1a24c1313ba62f25f019691f1fa3` |
 
 ## HC-LIGHTFURY
 
@@ -87,12 +110,18 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 - Input SHA-256: `371ebf51441bcf82c1feb7afa256b420e0d95d15a2834ad1811fd3f538fe069d`
 - Source dimensions: 1500 × 2000; EXIF orientation 1.
 - Applied crop box after orientation: `(0, 0, 1500, 2000)`.
+- Square storefront frame (inside the applied crop): `(0, 300, 1500, 1800)`. Centres the figure and its tail.
 
 | Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
 | `/assets/light-fury-480.webp` | 480 | 480 × 640 | 10204 | 82 | `b3f42484e301ce003661b4fbb88a6693514483b2aac08158eeb5aef79b119a60` |
 | `/assets/light-fury-960.webp` | 960 | 960 × 1280 | 28132 | 82 | `e108d5ac558aca70ca553bdcf48d9ee310da6d878b7d3ac076520acc2568b7a6` |
 | `/assets/light-fury-1440.webp` | 1440 | 1440 × 1920 | 50262 | 82 | `76caea753630918bead191910048b3c652b94d5ce562af537bf114ddaebb0cee` |
+| `/assets/light-fury-sq-320.webp` | 320 | 320 × 320 | 5744 | 82 | `ffd470c98cc3a50cd98b3b6fb9416dd3dd1f039d4af1d01757afd2644a76bf61` |
+| `/assets/light-fury-sq-480.webp` | 480 | 480 × 480 | 9820 | 82 | `495b8d538c0496b9df28575c1746a6cc15bccdcbcc6a08e1e4520c23ade75ab5` |
+| `/assets/light-fury-sq-640.webp` | 640 | 640 × 640 | 14648 | 82 | `ee003266d74ee4a289856d6834023e769ef6986b81f9634e083148ff674d6ba0` |
+| `/assets/light-fury-sq-960.webp` | 960 | 960 × 960 | 26680 | 82 | `932a58d7c4ff151959b893d0431c9a3a6c3f73782259fdf5f33dfb0508260f27` |
+| `/assets/light-fury-sq-1200.webp` | 1200 | 1200 × 1200 | 36326 | 82 | `13bc15075daccfb24a45c562fcba908cf2b4dc017289bc2f9548d77f26a6ca77` |
 
 ## brand-logo
 
@@ -138,6 +167,7 @@ These exact source titles correct the extra .jpg suffixes recorded in the former
 Storefront IDs remain unchanged. Airtable Products is the owner-designated price source, read 11 October 2026; each product records its price field, base, table, record and read date.
 Airtable and Drive disagree on Baymax/Kurama SKUs 503/504 (QA F-17), so no SKU migration was made.
 There are no compare-at prices or stock counts. Availability stays unconfirmed and catalog approval stays false. Photo approval does not approve the listing, description, availability or public launch.
+
 
 # Brand symbol favicon
 

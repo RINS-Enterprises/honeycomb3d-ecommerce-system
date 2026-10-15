@@ -33,7 +33,22 @@
         480,
         960,
         1440
-      ]
+      ],
+      "square": {
+        "box": [
+          1640,
+          1660,
+          2410,
+          2430
+        ],
+        "widths": [
+          320,
+          480,
+          640,
+          770
+        ],
+        "note": "Centres the Hidden Leaf emblem and the plate's left rivets; the approved crop is too shallow for a square of the whole plate."
+      }
     },
     {
       "id": "HC-BAYMAX",
@@ -55,7 +70,23 @@
         480,
         960,
         1440
-      ]
+      ],
+      "square": {
+        "box": [
+          0,
+          400,
+          1536,
+          1936
+        ],
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Keeps both figures; trims the empty wall above and part of the grass below."
+      }
     },
     {
       "id": "HNYCMB501",
@@ -77,7 +108,23 @@
         480,
         960,
         1440
-      ]
+      ],
+      "square": {
+        "box": [
+          236,
+          0,
+          1656,
+          1420
+        ],
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Centres the figure and the holding hand."
+      }
     },
     {
       "id": "HC-MINATO",
@@ -106,7 +153,23 @@
         480,
         960,
         1440
-      ]
+      ],
+      "square": {
+        "box": [
+          2770,
+          2950,
+          4600,
+          4780
+        ],
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Shows the engraved handle and full wings; the ring and blade tip fall outside the square."
+      }
     },
     {
       "id": "HC-LIGHTFURY",
@@ -128,7 +191,23 @@
         480,
         960,
         1440
-      ]
+      ],
+      "square": {
+        "box": [
+          0,
+          300,
+          1500,
+          1800
+        ],
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Centres the figure and its tail."
+      }
     },
     {
       "id": "brand-logo",

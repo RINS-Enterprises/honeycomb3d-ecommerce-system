@@ -25,14 +25,15 @@ test('owner prices preserve storefront IDs, provenance and unconfirmed approval'
     for(const key of ['compareAtPrice','compareAtLkr','stock','stockCount','stockQuantity'])assert.equal(p[key],undefined);
   }
 });
-test('pending owner copies use placeholders; approved photos are responsive with real dimensions',()=>{
+test('pending owner copies use placeholders; approved photos are responsive square frames with real dimensions',()=>{
   for(const p of products) {
     if(['HC-KURAMA','HC-KUNAI'].includes(p.id)) {
       assert.equal(p.image,null);assert.deepEqual(p.imageVariants,[]);
     } else {
-      assert.match(p.image,/^\/assets\/.+-960\.webp$/);
+      assert.match(p.image,/^\/assets\/.+-sq-640\.webp$/);
       const widths=p.imageVariants.map(v=>v.width);
-      assert([480,960,1440].every(w=>widths.includes(w)),'Core responsive widths remain available');
+      assert([320,480,640].every(w=>widths.includes(w)),'Core responsive widths remain available');
+      assert(p.imageVariants.every(v=>v.width===v.height),'Storefront frames are square');
       assert(widths.every((w,i)=>w>0&&(!i||w>widths[i-1])),'Candidate widths are positive and ascending');
       assert(p.imageWidth>0&&p.imageHeight>0&&p.imageAlt);
     }

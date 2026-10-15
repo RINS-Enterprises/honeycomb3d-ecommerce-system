@@ -46,45 +46,63 @@ for entry in SPECS["assets"]:
             if alpha is not None:
                 im.putalpha(alpha)
         im = im.convert("RGBA" if alpha is not None else "RGB")
-        outputs = []
-        for width in entry["widths"]:
-            if width > im.width:
-                raise ValueError("Upscaling is not permitted: " + entry["id"])
-            height = round(im.height * width / im.width)
-            resized = im.resize((width, height), Image.Resampling.LANCZOS)
-            clean = Image.frombytes(resized.mode, resized.size, resized.tobytes())
-            output = entry.get("output") or f'/assets/{entry["stem"]}-{width}.webp'
-            target = (ROOT / "public" / output.lstrip("/")).resolve()
-            if target.parent != OUT.resolve():
-                raise ValueError("Unsafe output path")
-            quality = None
-            if entry["format"] == "png":
-                clean.save(target, "PNG", optimize=True)
-            else:
-                for quality in [82, 76, 70, 64, 58]:
-                    clean.save(target, "WEBP", quality=quality, method=6,
-                               exif=b"", xmp=b"", icc_profile=b"")
-                    if target.stat().st_size <= 500_000:
-                        break
-            data = target.read_bytes()
-            if len(data) > 500_000:
-                raise ValueError("Image exceeds 500 KB: " + output)
-            with Image.open(target) as check:
-                check.load()
-                if check.size != (width, height):
-                    raise ValueError("Incorrect output size")
-                if check.getexif() or any(k in check.info for k in ("exif", "xmp", "icc_profile")):
-                    raise ValueError("Output retains metadata")
-            outputs.append({"src": output, "width": width, "height": height,
-                            "bytes": len(data), "sha256": digest(data), "quality": quality})
-        record = {**entry, "orientedSize": oriented_size, "appliedCropBox": crop, "outputs": outputs}
+        def render(source_im, widths, stem):
+            outputs = []
+            for width in widths:
+                if width > source_im.width:
+                    raise ValueError("Upscaling is not permitted: " + entry["id"])
+                height = round(source_im.height * width / source_im.width)
+                resized = source_im.resize((width, height), Image.Resampling.LANCZOS)
+                clean = Image.frombytes(resized.mode, resized.size, resized.tobytes())
+                output = entry.get("output") or f'/assets/{stem}-{width}.webp'
+                target = (ROOT / "public" / output.lstrip("/")).resolve()
+                if target.parent != OUT.resolve():
+                    raise ValueError("Unsafe output path")
+                quality = None
+                if entry["format"] == "png":
+                    clean.save(target, "PNG", optimize=True)
+                else:
+                    for quality in [82, 76, 70, 64, 58]:
+                        clean.save(target, "WEBP", quality=quality, method=6,
+                                   exif=b"", xmp=b"", icc_profile=b"")
+                        if target.stat().st_size <= 500_000:
+                            break
+                data = target.read_bytes()
+                if len(data) > 500_000:
+                    raise ValueError("Image exceeds 500 KB: " + output)
+                with Image.open(target) as check:
+                    check.load()
+                    if check.size != (width, height):
+                        raise ValueError("Incorrect output size")
+                    if check.getexif() or any(k in check.info for k in ("exif", "xmp", "icc_profile")):
+                        raise ValueError("Output retains metadata")
+                outputs.append({"src": output, "width": width, "height": height,
+                                "bytes": len(data), "sha256": digest(data), "quality": quality})
+            return outputs
+        outputs = render(im, entry["widths"], entry["stem"])
+        square = entry.get("square")
+        square_outputs = []
+        if square:
+            # Square frames for cards and the product page. The box is in oriented
+            # source pixels and must sit inside the approved crop, so it never widens it.
+            sl, st, sr, sb = square["box"]
+            if sr - sl != sb - st or not (left <= sl < sr <= right and top <= st < sb <= bottom):
+                raise ValueError("Square frame must be square and inside the approved crop: " + entry["id"])
+            if entry["id"] == "HC-MINATO" and not 2756 <= sl <= 2794:
+                raise ValueError("Minato square frame includes a neighbour or clips its wing")
+            square_outputs = render(im.crop((sl - left, st - top, sr - left, sb - top)),
+                                    square["widths"], entry["stem"] + "-sq")
+        record = {**entry, "orientedSize": oriented_size, "appliedCropBox": crop,
+                  "outputs": outputs + [{**o, "frame": "square"} for o in square_outputs]}
         records.append(record)
         if entry["id"] != "brand-logo":
             product = next(p for p in products if p["id"] == entry["id"])
-            fallback = next((o for o in outputs if o["width"] == 960), outputs[-1])
+            # The storefront shows the square frame; full-crop outputs stay registered for later use.
+            shown = square_outputs or outputs
+            fallback = next((o for o in shown if o["width"] == 640), shown[-1])
             product.update(image=fallback["src"], imageAlt=entry["alt"],
                            imageWidth=fallback["width"], imageHeight=fallback["height"],
-                           imageVariants=[{k: o[k] for k in ("src", "width", "height")} for o in outputs],
+                           imageVariants=[{k: o[k] for k in ("src", "width", "height")} for o in shown],
                            imageSource=entry["sourceTitle"], imageApprovedAt=SPECS["ownerApprovalDate"])
             product.pop("imageStatus", None)
 
@@ -115,9 +133,12 @@ for rec in records:
             f'- Metadata-clean source input: {code(rec["input"])}',
             f'- Input SHA-256: {code(rec["inputSha256"])}',
             f'- Source dimensions: {rec["sourceSize"][0]} × {rec["sourceSize"][1]}; EXIF orientation {rec["exifOrientation"]}.',
-            f'- Applied crop box after orientation: {code(tuple(rec["appliedCropBox"]))}.', ""]
+            f'- Applied crop box after orientation: {code(tuple(rec["appliedCropBox"]))}.']
+    if rec.get("square"):
+        doc += [f'- Square storefront frame (inside the applied crop): {code(tuple(rec["square"]["box"]))}. {rec["square"]["note"]}']
+    doc += [""]
     if rec["id"] == "HC-MINATO":
-        doc += ["The left edge is x=2770, within the required x=2756…2794 bounds. The crop isolates the tan engraved handle, black blade, silver edge bevels and black ring. It is letterboxed with object-fit: contain; it is not widened to include the adjacent blade.", ""]
+        doc += ["The left edge is x=2770, within the required x=2756…2794 bounds. The crop isolates the tan engraved handle, black blade, silver edge bevels and black ring. The full crop is not widened to include the adjacent blade. Its square storefront frame is cut from inside this crop.", ""]
     if rec["id"] == "HC-LEAF":
         doc += ["The crop selects only the upper Hidden Leaf headband plate, including its keyring loop and shadow; the other three village plates are outside the crop.", ""]
     if rec["id"] == "brand-logo":
