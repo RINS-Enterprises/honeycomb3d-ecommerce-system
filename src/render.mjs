@@ -3,7 +3,7 @@ import {escapeHtml as e, money} from './domain.mjs';
 export const price = p => p.priceLkr === null ? 'Price on enquiry' : money(p.priceLkr);
 export const CARD_SIZES = '(max-width: 700px) calc((100vw - 52px) / 2), (max-width: 1000px) calc((100vw - 124px) / 3), (max-width: 1280px) calc((100vw - 146px) / 4), 284px';
 // Every photo slot is a square frame filled by a square derivative (object-fit: cover).
-const DETAIL_SIZES = '(max-width: 700px) 100vw, (max-width: 1280px) calc((100vw - 120px) * .55), 640px';
+const DETAIL_SIZES = '(max-width: 700px) 100vw, (max-width: 1280px) calc((100vw - 144px) * .584), 664px';
 const THUMB_SIZES = '72px';
 const TILE_SIZES = '(max-width: 700px) 88px, (max-width: 1280px) calc((100vw - 112px) / 3), 390px';
 const HERO_LANDSCAPE = '(min-width: 700px)';

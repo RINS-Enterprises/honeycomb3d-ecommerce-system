@@ -224,7 +224,7 @@ textarea{resize:vertical;line-height:1.5}
 .breadcrumbs a{text-decoration:none;color:var(--text-soft);display:inline-flex;min-height:32px;align-items:center}
 .breadcrumbs a:hover{color:var(--accent)}
 .breadcrumbs [aria-current]{color:var(--text)}
-.product-detail{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:start;margin-top:var(--space-5)}
+.product-detail{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,64px);align-items:start;margin-top:var(--space-5)}
 .detail-image{aspect-ratio:1;border-radius:var(--radius-lg);overflow:hidden;background:var(--panel)}
 .gallery-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
 .gallery-track::-webkit-scrollbar{display:none}
