@@ -137,6 +137,8 @@ em{color:var(--accent);font-style:normal}
 
 /* Home sections */
 .studio-strip{border-block:1px solid var(--line);display:flex;justify-content:space-around;gap:var(--space-3) var(--space-5);padding:var(--space-5) var(--gutter);color:var(--muted);font-size:var(--step--2);letter-spacing:.18em;flex-wrap:wrap}
+.studio-strip span{display:inline-flex;align-items:center;gap:10px}
+.studio-strip span::before{content:"";width:7px;height:8px;background:var(--accent);opacity:.8;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
 .section-heading{display:flex;align-items:end;justify-content:space-between;gap:var(--space-5);margin-bottom:var(--space-6)}
 .section-heading h2{margin-bottom:0}
 .section-heading>a{white-space:nowrap;font-weight:600}
@@ -307,7 +309,7 @@ textarea{resize:vertical;line-height:1.5}
 .category-copy{position:static}
 .category-copy strong{font-size:var(--step-1)}
 .category-arrow{position:static;margin-left:auto;background:var(--panel-2)}
-.studio-strip{gap:var(--space-3) var(--space-4)}
+.studio-strip{display:grid;grid-template-columns:repeat(2,max-content);justify-content:center;gap:var(--space-3) var(--space-6)}
 .steps{grid-template-columns:1fr;gap:var(--space-5)}
 .steps h3{margin-bottom:var(--space-3)}
 .product-detail{grid-template-columns:minmax(0,1fr)}
