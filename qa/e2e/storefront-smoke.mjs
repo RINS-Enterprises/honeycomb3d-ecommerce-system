@@ -434,7 +434,10 @@ async function main() {
       record(`cart-qty-inc-${vp}`, 'AC-CART-3', s2.qty === 2 && okTotal ? 'PASS' : 'FAIL',
         `via ${inc ? '+ button' : 'quantity input'}: qty ${s2.qty}, subtotal ${s2.subtotal}, expected ${unit == null ? 'none (unpriced)' : `2 x ${unit} = ${unit * 2}`}`);
       // Invalid quantities must be rejected without corrupting the cart.
-      if (qtyInput) {
+      // Run it whenever a typed quantity field exists, also when the increase went through a stepper button.
+      const typedQty = qtyInput || await first(tid(page, 'cart-qty'), page.getByRole('spinbutton'));
+      if (!typedQty) record(`cart-qty-invalid-${vp}`, 'AC-CART-3', 'INCONCLUSIVE', 'no typed quantity field to try invalid values in');
+      else {
         for (const bad of ['0', '21', '1.5']) {
           const q = await first(tid(page, 'cart-qty'), page.getByRole('spinbutton'));
           await q.fill(bad); await q.press('Tab'); await page.waitForTimeout(300);

@@ -24,7 +24,7 @@ await probe.goto(BASE + '/shop/', { waitUntil: 'networkidle' });
 const pdps = await probe.$$eval('a[href^="/products/"]', (as) => [...new Set(as.map((a) => a.getAttribute('href')))]);
 await probe.close();
 const MISSING = '/qa-missing-page/';
-const pages = ['/', '/shop/', ...pdps, '/cart/', MISSING];
+const pages = ['/', '/shop/', ...pdps, '/cart/', '/custom/', '/privacy/', MISSING];
 const problems = [];
 
 for (const [vp, viewport, dpr] of [['small', { width: 320, height: 640 }, 2], ['mobile', { width: 390, height: 844 }, 2], ['desktop', { width: 1440, height: 900 }, 1]]) {
