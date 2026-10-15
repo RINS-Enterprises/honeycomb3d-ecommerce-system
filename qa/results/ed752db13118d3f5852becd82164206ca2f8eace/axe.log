@@ -1,0 +1,22 @@
+PASS   desktop  /                            no violations | needs review: color-contrast
+PASS   desktop  /shop/                       no violations | needs review: color-contrast
+PASS   desktop  /cart/                       no violations | needs review: color-contrast
+PASS   desktop  /custom/                     no violations | needs review: color-contrast
+PASS   desktop  /privacy/                    no violations | needs review: color-contrast
+PASS   desktop  /products/hidden-leaf-keychain/ no violations | needs review: color-contrast
+PASS   desktop  /qa-missing-page/            no violations | needs review: color-contrast
+PASS   desktop  cart-filled                  no violations | needs review: color-contrast
+PASS   desktop  custom-preview               no violations | needs review: color-contrast
+PASS   desktop  shop-no-results              no violations | needs review: color-contrast
+PASS   mobile   /                            no violations | needs review: color-contrast
+PASS   mobile   /shop/                       no violations | needs review: color-contrast
+PASS   mobile   /cart/                       no violations | needs review: color-contrast
+PASS   mobile   /custom/                     no violations | needs review: color-contrast
+PASS   mobile   /privacy/                    no violations | needs review: color-contrast
+PASS   mobile   /products/hidden-leaf-keychain/ no violations | needs review: color-contrast
+PASS   mobile   /qa-missing-page/            no violations | needs review: color-contrast
+PASS   mobile   cart-filled                  no violations | needs review: color-contrast
+PASS   mobile   custom-preview               no violations | needs review: color-contrast
+PASS   mobile   shop-no-results              no violations | needs review: color-contrast
+
+serious/critical: 0, minor/moderate: 0, errors: 0 -> /home/user/honeycomb3d-ecommerce-system/qa/results/ed752db13118d3f5852becd82164206ca2f8eace/axe
