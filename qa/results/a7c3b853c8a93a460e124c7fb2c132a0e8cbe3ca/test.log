@@ -1,0 +1,164 @@
+
+> honeycomb3d-storefront@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: all three recovered keychains appear under the keychain category
+ok 1 - all three recovered keychains appear under the keychain category
+  ---
+  duration_ms: 0.913299
+  type: 'test'
+  ...
+# Subtest: draft descriptions are explicitly attributed and remain unapproved
+ok 2 - draft descriptions are explicitly attributed and remain unapproved
+  ---
+  duration_ms: 0.189325
+  type: 'test'
+  ...
+# Subtest: owner prices preserve storefront IDs, provenance and unconfirmed approval
+ok 3 - owner prices preserve storefront IDs, provenance and unconfirmed approval
+  ---
+  duration_ms: 2.86478
+  type: 'test'
+  ...
+# Subtest: pending owner copies use placeholders; approved photos are responsive square frames with real dimensions
+ok 4 - pending owner copies use placeholders; approved photos are responsive square frames with real dimensions
+  ---
+  duration_ms: 0.949341
+  type: 'test'
+  ...
+# Subtest: Kurama and Classic Kunai stay off the storefront until their photos are imported
+ok 5 - Kurama and Classic Kunai stay off the storefront until their photos are imported
+  ---
+  duration_ms: 0.796763
+  type: 'test'
+  ...
+# Subtest: restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+ok 6 - restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+  ---
+  duration_ms: 2.32601
+  type: 'test'
+  ...
+# Subtest: money is computed in cents and unknown prices remain explicit
+ok 7 - money is computed in cents and unknown prices remain explicit
+  ---
+  duration_ms: 19.035731
+  type: 'test'
+  ...
+# Subtest: bad storage and invalid JSON are recoverable
+ok 8 - bad storage and invalid JSON are recoverable
+  ---
+  duration_ms: 0.238256
+  type: 'test'
+  ...
+# Subtest: WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+ok 9 - WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+  ---
+  duration_ms: 0.413188
+  type: 'test'
+  ...
+# Subtest: all search words and category must match
+ok 10 - all search words and category must match
+  ---
+  duration_ms: 0.355093
+  type: 'test'
+  ...
+# Subtest: live build requires verified contact, approvals, original photos and availability
+ok 11 - live build requires verified contact, approvals, original photos and availability
+  ---
+  duration_ms: 0.762473
+  type: 'test'
+  ...
+# Subtest: escaping prevents catalogue text from becoming markup
+ok 12 - escaping prevents catalogue text from becoming markup
+  ---
+  duration_ms: 0.247604
+  type: 'test'
+  ...
+# Subtest: decimal prices accept normal currency and reject sub-cent values
+ok 13 - decimal prices accept normal currency and reject sub-cent values
+  ---
+  duration_ms: 0.321355
+  type: 'test'
+  ...
+# Subtest: live-visible catalogue strips unapproved items from every cart operation
+ok 14 - live-visible catalogue strips unapproved items from every cart operation
+  ---
+  duration_ms: 0.31176
+  type: 'test'
+  ...
+# Subtest: products without an approved photo are hidden in preview and live
+ok 15 - products without an approved photo are hidden in preview and live
+  ---
+  duration_ms: 0.491495
+  type: 'test'
+  ...
+# Subtest: LKR amounts use one format: whole rupees without decimals, otherwise two decimals
+ok 16 - LKR amounts use one format: whole rupees without decimals, otherwise two decimals
+  ---
+  duration_ms: 0.671854
+  type: 'test'
+  ...
+# Subtest: the home hero only links to a product included in the live-visible catalogue
+ok 17 - the home hero only links to a product included in the live-visible catalogue
+  ---
+  duration_ms: 15.692233
+  type: 'test'
+  ...
+# Subtest: an empty live catalogue has no dead product link or unapproved hero photo
+ok 18 - an empty live catalogue has no dead product link or unapproved hero photo
+  ---
+  duration_ms: 0.249106
+  type: 'test'
+  ...
+# Subtest: photos decode synchronously so off-screen cards never paint as empty frames
+ok 19 - photos decode synchronously so off-screen cards never paint as empty frames
+  ---
+  duration_ms: 0.49682
+  type: 'test'
+  ...
+# Subtest: the full-bleed hero photo is the preloaded, eager, high-priority LCP image
+ok 20 - the full-bleed hero photo is the preloaded, eager, high-priority LCP image
+  ---
+  duration_ms: 0.993534
+  type: 'test'
+  ...
+# Subtest: preview mode shows a slim, plainly worded ordering notice without dates
+ok 21 - preview mode shows a slim, plainly worded ordering notice without dates
+  ---
+  duration_ms: 2.289631
+  type: 'test'
+  ...
+# Subtest: every page has the sticky header cart hooks and a footer with real links
+ok 22 - every page has the sticky header cart hooks and a footer with real links
+  ---
+  duration_ms: 0.519626
+  type: 'test'
+  ...
+# Subtest: cards are one link with a clean LKR price and test hooks
+ok 23 - cards are one link with a clean LKR price and test hooks
+  ---
+  duration_ms: 0.706481
+  type: 'test'
+  ...
+# Subtest: product page: gallery only with several photos, clear price, availability and a disabled ordering button
+ok 24 - product page: gallery only with several photos, clear price, availability and a disabled ordering button
+  ---
+  duration_ms: 1.587867
+  type: 'test'
+  ...
+# Subtest: pages carry share metadata, theme colour, touch icon and price-only Product JSON-LD
+ok 25 - pages carry share metadata, theme colour, touch icon and price-only Product JSON-LD
+  ---
+  duration_ms: 2.233207
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 160.81729
