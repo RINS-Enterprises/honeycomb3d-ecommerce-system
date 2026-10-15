@@ -22,3 +22,9 @@ test('an empty live catalogue has no dead product link or unapproved hero photo'
   assert(!html.includes('class="hero-photo"'));
   assert(html.includes('href="/custom/"'));
 });
+
+test('photos decode synchronously so off-screen cards never paint as empty frames',()=>{
+  const html=home(products,{mode:'preview'});
+  assert(html.includes('<img '));
+  assert(!html.includes('decoding="async"'));
+});

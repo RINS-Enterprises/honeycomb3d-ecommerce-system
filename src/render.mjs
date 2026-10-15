@@ -10,7 +10,7 @@ export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}
   if (!p.image) return '<div class="photo-placeholder"><span aria-hidden="true">◇</span><span>Original photo coming soon</span></div>';
   const responsive=p.imageVariants?.length ?
     ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'"' : '';
-  return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'" decoding="async"'+(priority?' fetchpriority="high"':'')+'>';
+  return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'"'+(priority?' fetchpriority="high"':'')+'>';
 }
 export function card(p, {headingLevel=3}={}) {
   const heading=headingLevel===2?'h2':'h3';
