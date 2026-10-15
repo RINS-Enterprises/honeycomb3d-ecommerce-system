@@ -1,7 +1,8 @@
 export const MAX_QUANTITY = 20;
 export const MAX_LINES = 20;
 export const CART_KEY = 'honeycomb.cart.v1';
-export const money = value => new Intl.NumberFormat('en-LK', {style:'currency',currency:'LKR'}).format(value);
+// One format everywhere (AC-DATA-3): whole rupees without decimals (LKR 4,500), otherwise two decimals (LKR 19.99).
+export const money = value => new Intl.NumberFormat('en-LK', {style:'currency',currency:'LKR',minimumFractionDigits:Number.isInteger(value)?0:2,maximumFractionDigits:2}).format(value);
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function validateData(products, store) {
   if (!Array.isArray(products)) throw new Error('Catalog must be an array');

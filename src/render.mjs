@@ -15,9 +15,10 @@ export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}
 }
 export function card(p, {headingLevel=3}={}) {
   const heading=headingLevel===2?'h2':'h3';
-  return '<article class="product-card" data-product-card data-category="' + e(p.category) + '" data-search="' + e([p.name,p.category,...p.tags].join(' ').toLowerCase()) + '">' +
-    '<a class="product-image" href="/products/' + e(p.slug) + '/" tabindex="-1" aria-hidden="true">' + picture(p) + '</a>' +
-    '<div class="card-copy"><p class="eyebrow">' + e(p.category) + '</p><'+heading+'><a href="/products/' + e(p.slug) + '/">' + e(p.name) + '</a></'+heading+'><p class="price">' + e(price(p)) + '</p><p class="muted">' + availability(p) + '</p></div></article>';
+  // One link per card; its ::after stretches over the whole card so the photo is clickable too.
+  return '<article class="product-card" data-product-card data-testid="product-card" data-category="' + e(p.category) + '" data-search="' + e([p.name,p.category,...p.tags].join(' ').toLowerCase()) + '">' +
+    '<div class="product-image">' + picture(p) + '</div>' +
+    '<div class="card-copy"><p class="eyebrow">' + e(p.category) + '</p><'+heading+'><a class="card-link" href="/products/' + e(p.slug) + '/">' + e(p.name) + '</a></'+heading+'><p class="price" data-testid="product-price">' + e(price(p)) + '</p><p class="card-status">' + availability(p) + '</p></div></article>';
 }
 function availability(p) {
   return ({unconfirmed:'Availability to confirm',available:'Available',unavailable:'Currently unavailable','made-to-order':'Made to order'})[p.availability];

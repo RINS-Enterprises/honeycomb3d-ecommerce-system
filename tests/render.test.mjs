@@ -57,3 +57,11 @@ test('every page has the sticky header cart hooks and a footer with real links',
   const foot=html.match(/<footer class="site-footer">.*<\/footer>/)[0];
   for(const href of ['/shop/','/cart/','/custom/','/privacy/'])assert(foot.includes('href="'+href+'"'));
 });
+
+test('cards are one link with a clean LKR price and test hooks',async()=>{
+  const {card}=await import('../src/render.mjs');
+  const html=card(products.find(p=>p.id==='HC-LEAF'));
+  assert.equal([...html.matchAll(/<a\b/g)].length,1,'A single link covers the whole card');
+  assert.match(html,/data-testid="product-card"/);
+  assert.match(html,/<p class="price" data-testid="product-price">LKR\s400<\/p>/);
+});

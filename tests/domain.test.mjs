@@ -59,3 +59,9 @@ test('products without an approved photo are hidden in preview and live',()=>{
   assert.deepEqual(visibleProducts([...products,{...withPhoto,approved:true}],{mode:'live'}).map(x=>x.id),['P']);
   assert.deepEqual(visibleProducts([withPhoto],{mode:'live'}),[]);
 });
+test('LKR amounts use one format: whole rupees without decimals, otherwise two decimals',async()=>{
+  const {money}=await import('../src/domain.mjs');
+  assert.match(money(4500),/^LKR\s4,500$/);
+  assert.match(money(19.99),/^LKR\s19\.99$/);
+  assert.match(money(39.98),/^LKR\s39\.98$/);
+});
