@@ -22,10 +22,12 @@ if (!BASE || !AXE || !existsSync(AXE)) {
 let pw;
 try { pw = await import('playwright'); } catch { pw = createRequire(join(execSync('npm root -g').toString().trim(), 'x.js'))('playwright'); }
 
-const PAGES = (process.env.PAGES || '/,/shop/,/cart/,/custom/,/privacy/,/products/kurama-figure/,/qa-missing-page/').split(',');
+// A product the catalogue lists (products without an approved photo are hidden).
+const PDP = `/products/${process.env.PROBE_PRODUCT || (await (await fetch(BASE + '/data/products.json')).json())[0].slug}/`;
+const PAGES = (process.env.PAGES || `/,/shop/,/cart/,/custom/,/privacy/,${PDP},/qa-missing-page/`).split(',');
 const STATES = {
   'cart-filled': async (p) => {
-    await p.goto(BASE + '/products/kurama-figure/', { waitUntil: 'networkidle' });
+    await p.goto(BASE + PDP, { waitUntil: 'networkidle' });
     const add = p.getByRole('button', { name: /add to (request )?(cart|bag)/i });
     await add.waitFor(); await p.waitForFunction(() => ![...document.querySelectorAll('button')].some((b) => /add to/i.test(b.textContent) && b.disabled));
     await add.click();

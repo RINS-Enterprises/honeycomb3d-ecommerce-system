@@ -946,6 +946,8 @@ pinned QA image audit. Report the final commit SHA.
 | Round | Commit | Change | QA result | Deployed |
 |---|---|---|---|---|
 | Baseline | `948dff5` | Live version before the design work | `full-run.sh` PASS on 2026-10-15: tests, build, check, audit, secret scan, domain, smoke 88/88 and live 89/89, edge, axe 0, images 18 PASS and 0 FAIL, provenance, slow network, and screenshots with no blank image at 390 px. The blank Baymax card seen earlier did not recur. | live since 2026-10-15 |
+| D1 | `2b3ccb3` | Square, cover-fit photo frames on cards, product pages and the hero; new square WebP derivatives cut inside the approved crops | PASS: smoke 88/88 and live 89/89, edge, axe 0, images 18 PASS with no letterbox INFO left, no blank images. **Visual:** Minato's square crop cuts off the ring and the blade tip, and Hidden Leaf loses both ends of the plate. Sent to the builder. | **yes**, `dpl_Bs5jEV7Htedur8aGL73va9NRJmv1`, READY and aliased to both hostnames |
+| D2–D3 | `b1ccd60`, `4d54be9` | Synchronous image decoding; hide Kurama and Classic Kunai until their photos are added | Tested `4d54be9`, which includes `b1ccd60`. Project checks, domain, smoke and live smoke, images and screens PASS. Edge probes and axe errored because both hard-coded the now-hidden Kurama page. That is a QA harness defect, not an app defect, and it is fixed in this commit: the probes now use a product the catalogue lists. | superseded by the next head |
 
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 

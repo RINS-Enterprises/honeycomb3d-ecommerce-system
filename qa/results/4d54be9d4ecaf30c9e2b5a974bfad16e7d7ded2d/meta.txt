@@ -1,0 +1,7 @@
+reviewed_ref: 4d54be9
+reviewed_sha: 4d54be9d4ecaf30c9e2b5a974bfad16e7d7ded2d
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-15T20:00:00Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-15T19:59:34+00:00
+subject: Hide products that have no approved photo yet
