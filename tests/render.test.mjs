@@ -40,3 +40,11 @@ test('the full-bleed hero photo is the preloaded, eager, high-priority LCP image
   assert.equal([...html.matchAll(/<link rel="preload" as="image"[^>]*fetchpriority="high"/g)].length,2);
   assert.match(html,/<a class="button" href="\/shop\/">Shop the collection/);
 });
+
+test('preview mode shows a slim, plainly worded ordering notice without dates',()=>{
+  const html=home(visibleProducts(products,store),store);
+  const notice=html.match(/<aside class="preview-notice"[^>]*>(.*?)<\/aside>/)[1];
+  assert.match(notice,/Online ordering opens soon\./);
+  assert(!/\d{4}|\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/.test(notice.replace(/<[^>]+>/g,'')));
+  assert(!home(visibleProducts(products,store),{...store,mode:'live'}).includes('preview-notice'));
+});
