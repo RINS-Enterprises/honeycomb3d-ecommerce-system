@@ -11,6 +11,8 @@ Requirements: Node ≥ 18, git, and for browser checks Playwright + Chromium. Th
 | Path | Purpose |
 |---|---|
 | `scripts/review-commit.sh <repo> <ref> [workdir]` | Clone into a QA-owned dir **outside** this repo, check out the exact SHA, run install + the project's own `lint/typecheck/check/test/build/test:e2e` + `npm audit` + secret scan. Writes `results/<sha>/`. |
+| `scripts/full-run.sh <repo> <ref> [port]` | One full round: `review-commit.sh`, then domain tests, smoke (preview and live fixture), edge probes, axe, image audit, provenance, slow-network run and screenshots against the review build. Writes `results/<sha>/full-run.txt`, exit 1 if any check failed. Needs `QA_WORKDIR` and `AXE_PATH`. |
+| `e2e/screens.mjs` | Full-page JPEG screenshots of every page at 390 px and 1440 px for design review, after scrolling so lazy images load. Flags blank images and a missing page that doesn't return 404. `BASE_URL=… OUT_DIR=<scratch> node qa/e2e/screens.mjs` |
 | `scripts/secret-scan.sh <checkout>` | Scan tracked files for secrets, committed `.env`, and secrets behind client-exposed env prefixes. Exit 1 on HIGH. Also run it on the build output. |
 | `lib/whatsapp-link-check.mjs` | Parse and validate a `wa.me` order handoff (number format, items, qty, total, encoding). |
 | `lib/whatsapp-link-check.test.mjs` | Unit tests: `node --test 'qa/**/*.test.mjs'` |

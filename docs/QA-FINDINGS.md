@@ -1,7 +1,7 @@
 # HoneyComb 3D storefront rebuild: QA findings
 
 Owner: independent recovery QA (Claude). Acceptance criteria: [`QA-ACCEPTANCE.md`](QA-ACCEPTANCE.md).
-Last updated: **2026-10-13**.
+Last updated: **2026-10-15**.
 
 > **Headline (2026-10-13, Run 6):** current head **`948dff5f6e37e6f07100a554fb8b49eb64aa846e`**.
 > - **Fixed and verified:** the favicon (I-21, made from the owner's brand-symbol PDF) and the Minato image sizing (I-22).
@@ -925,6 +925,27 @@ pinned QA image audit. Report the final commit SHA.
   - GPT should therefore run `npm test`, `npm run build` and `npm run check`, then push and report the SHA and the CI result.
   - It should not create workflows or other workarounds for `localhost`.
 
+
+### 7c. Public launch and design rounds (from 2026-10-15)
+
+**Public launch (owner decision, 2026-10-15).**
+- **Decision:** the owner asked for the site to be public at once and said updates will continue as normal. This overrides the §7a gate for owner items. Those items stay open: WhatsApp number, availability, F-17 and F-18.
+- **What is live:** `https://honeycomb3d.store` serves commit `948dff5` through Vercel. Project `honeycomb3d-storefront-preview`, deployment `dpl_5GmV5ARhUXgdZ4J3bkZZkVg5w3g3`.
+- **State of that version:** preview mode, ordering off, and availability "to confirm".
+- **DNS:** the owner entered the records in Namecheap. QA checked them, and Vercel issued certificates for both hostnames.
+- **Rollback DNS:** `ALIAS @ ingress-cinna.easywp.com.`, `CNAME www honeycomb3d.store.`
+
+**Builder switch (owner decision, 2026-10-15).**
+- **Why:** both GPT chats hit their limits. The owner asked for continuous design upgrades and approved a Claude Opus builder session (`session_01TEeSdr5WV5Hvnw8RC17Exi`) on `codex/storefront-mvp`.
+- **Builder rules:**
+  - The data rules are unchanged: no price, SKU, availability or WhatsApp changes, and no invented claims.
+  - No new runtime dependencies.
+  - One improvement per commit, and the SHA is reported to QA.
+- **QA's part:** QA does not write to that branch. It re-tests each reported commit with `qa/scripts/full-run.sh`, reviews the screenshots from `qa/e2e/screens.mjs`, and deploys passing commits to production.
+
+| Round | Commit | Change | QA result | Deployed |
+|---|---|---|---|---|
+| Baseline | `948dff5` | Live version before the design work | see below | live since 2026-10-15 |
 
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 
