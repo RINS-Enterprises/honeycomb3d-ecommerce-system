@@ -941,7 +941,7 @@ pinned QA image audit. Report the final commit SHA.
   - The data rules are unchanged: no price, SKU, availability or WhatsApp changes, and no invented claims.
   - No new runtime dependencies.
   - One improvement per commit, and the SHA is reported to QA.
-- **QA's part:** QA does not write to that branch. It re-tests each reported commit with `qa/scripts/full-run.sh`, reviews the screenshots from `qa/e2e/screens.mjs`, and deploys passing commits to production.
+- **QA's part:** QA does not write to that branch. It re-tests each reported commit with `qa/scripts/full-run.sh` and reviews the screenshots from `qa/e2e/screens.mjs`. It deploys a commit to production only when both its own checks and the GitHub CI push run for that SHA pass.
 
 | Round | Commit | Change | QA result | Deployed |
 |---|---|---|---|---|
@@ -952,6 +952,12 @@ pinned QA image audit. Report the final commit SHA.
 | D5 | `4475bf0` | Full-bleed hero: Night Fury photo with a dark gradient, headline from the store copy, "Shop the collection" CTA | PASS: all checks, images 14 PASS and 1 INFO, no blank images. **Visual:** strong and readable at 390 px and 1440 px. | **yes**, `dpl_DmzM1Nacq2W4PLdzXT6ejrZLg1Rw` |
 | D6–D7 | `827c6c3`, `e5bdc9d` | Slim notice bar ("Online ordering opens soon"); design tokens, button system, sticky blurred header, footer, "Keep exploring" row | Tested `e5bdc9d`, which includes `827c6c3`: all checks PASS (images 14 PASS and 1 INFO). **Visual:** cohesive. The product-page photo is small at 1440 px; sent to the builder for item 8. | **yes**, `dpl_AFveJFKTBVeSohV87ju3ARsmNocG` |
 | D8 | `878bd69` | Product cards: the whole card is a link, hover lift, clean "LKR 1,000" prices, equal heights | First run: smoke 84 PASS and 4 FAIL (cart subtotal). Cause: the new card markup carries `data-testid="product-price"`, so on a product page the harness read a "Keep exploring" card's price. The app's cart totals were correct. **QA harness fix:** the product-page price lookup now ignores prices inside product cards. Re-run: smoke 88/88. All other checks PASS. Asked the builder to put the hook on the product page's own price as well (QA-ACCEPTANCE §5). | **yes**, `dpl_8wY8eZbHcjVM9LXQM6aCswjrY9mu` |
+| D9–D10 | `f3866f6`, `868c92f` | Product page redesign: breadcrumbs, large square photo, gallery with whole-object frames for Minato and Hidden Leaf, sticky info column, "Ordering opens soon" state, details table, "More from HoneyComb 3D". Then the add-to-cart button may wrap at 320 px. | Tested `868c92f`, which includes `f3866f6`: all QA checks PASS. GitHub CI is green on `868c92f`. **Visual:** professional, and the whole Minato kunai is now visible in the gallery. | **yes**, `dpl_2WujsHtS2GF4NLC8RxQ6K2H5Ae7X` |
+
+**Process gap found in D7–D8 (Low, closed).**
+- **What happened:** GitHub CI (`Storefront checks`) was red on `e5bdc9d` and `878bd69`. At 320 px the product page overflowed sideways by 22 px, because CI's Chromium renders `system-ui` as the wider DejaVu Sans. QA had deployed both on its own checks alone.
+- **Effect:** `honeycomb3d.store` had that overflow at 320 px from about 20:15 to 20:32 UTC.
+- **Fix:** the builder fixed the overflow in `868c92f`. QA now requires the CI push run for the exact SHA to be green before deploying. `qa/e2e/screens.mjs` also sweeps 320 px and flags any sideways overflow.
 
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 

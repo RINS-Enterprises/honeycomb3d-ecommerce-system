@@ -1,0 +1,7 @@
+reviewed_ref: 868c92f9754ebf468531241c6f9302046e29b994
+reviewed_sha: 868c92f9754ebf468531241c6f9302046e29b994
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-15T20:28:37Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-15T20:27:47+00:00
+subject: Let the add-to-cart button wrap so 320 px never overflows with wide fonts

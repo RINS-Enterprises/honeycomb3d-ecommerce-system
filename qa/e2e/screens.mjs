@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-// Review screenshots for design QA: every page at phone and desktop width, taken after scrolling
-// so lazy images load. It also reports visible images that stayed blank, console errors and failed
-// requests per page, and checks that a missing page returns HTTP 404.
+// Review screenshots for design QA: every page at 320 px, 390 px and 1440 px, taken after scrolling
+// so lazy images load. It also reports visible images that stayed blank, sideways overflow, console
+// errors and failed requests per page, and checks that a missing page returns HTTP 404.
 //   BASE_URL=http://127.0.0.1:4173 OUT_DIR=<scratch dir> node qa/e2e/screens.mjs
 // JPEGs go to OUT_DIR. Keep them out of the repo, and copy downscaled ones into qa/results only
-// as evidence. Exit 1 if a visible image stayed blank or a page returned the wrong status.
+// as evidence. Exit 1 if a visible image stayed blank, a page scrolls sideways or a page returned the
+// wrong status.
 import { createRequire } from 'node:module';
 import { execSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -26,8 +27,8 @@ const MISSING = '/qa-missing-page/';
 const pages = ['/', '/shop/', ...pdps, '/cart/', MISSING];
 const problems = [];
 
-for (const [vp, viewport, dpr] of [['mobile', { width: 390, height: 844 }, 2], ['desktop', { width: 1440, height: 900 }, 1]]) {
-  const ctx = await browser.newContext({ viewport, deviceScaleFactor: dpr, isMobile: vp === 'mobile', hasTouch: vp === 'mobile' });
+for (const [vp, viewport, dpr] of [['small', { width: 320, height: 640 }, 2], ['mobile', { width: 390, height: 844 }, 2], ['desktop', { width: 1440, height: 900 }, 1]]) {
+  const ctx = await browser.newContext({ viewport, deviceScaleFactor: dpr, isMobile: vp !== 'desktop', hasTouch: vp !== 'desktop' });
   for (const path of pages) {
     const page = await ctx.newPage();
     const errors = [];
@@ -46,8 +47,11 @@ for (const [vp, viewport, dpr] of [['mobile', { width: 390, height: 844 }, 2], [
     await page.screenshot({ path: join(OUT, `${tag}.jpg`), type: 'jpeg', quality: 70, fullPage: true });
     const status = resp.status();
     const statusOk = path === MISSING ? status === 404 : resp.ok();
-    if (!statusOk || blank.length) problems.push({ tag, status, blank });
-    console.log(statusOk && !blank.length ? 'OK     ' : 'PROBLEM', tag, status,
+    // Sideways scrolling on a phone: the page is wider than the viewport.
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    if (!statusOk || blank.length || overflow > 1) problems.push({ tag, status, blank, overflow });
+    console.log(statusOk && !blank.length && overflow <= 1 ? 'OK     ' : 'PROBLEM', tag, status,
+      overflow > 1 ? `overflows by ${overflow} px` : '',
       blank.length ? `blank: ${blank.join(', ')}` : '', errors.length ? `console: ${errors.join(' | ')}` : '');
     await page.close();
   }
