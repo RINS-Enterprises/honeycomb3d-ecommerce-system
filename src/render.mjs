@@ -5,6 +5,7 @@ export const CARD_SIZES = '(max-width: 700px) calc((100vw - 52px) / 2), (max-wid
 // Every photo slot is a square frame filled by a square derivative (object-fit: cover).
 const DETAIL_SIZES = '(max-width: 700px) 100vw, (max-width: 1280px) calc((100vw - 120px) * .55), 640px';
 const THUMB_SIZES = '72px';
+const TILE_SIZES = '(max-width: 700px) 88px, (max-width: 1280px) calc((100vw - 112px) / 3), 390px';
 const HERO_LANDSCAPE = '(min-width: 700px)';
 const srcset = variants => variants.map(v=>v.src+' '+v.width+'w').join(', ');
 
@@ -82,9 +83,15 @@ export function home(products,store) {
     '<section class="hero'+(featured?'':' hero--plain')+'" data-testid="hero">'+visual+'<div class="hero-content wrap"><p class="eyebrow">HONEYCOMB 3D / SRI LANKA</p><h1>Make room for <em>something you.</em></h1><p class="lead">A little character for your desk. A favourite for your collection. An idea brought to life, layer by layer.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/custom/">Bring your own idea</a></div>'+
     (featured?'<a class="hero-credit" href="/products/'+e(featured.slug)+'/">Pictured <b>'+e(featured.name)+'</b> <span aria-hidden="true">→</span></a>':'')+'</div></section>' +
     '<div class="studio-strip"><span>COLLECTIBLES</span><span>KEYCHAINS</span><span>CUSTOM PRINTS</span><span>YOUR NEXT IDEA</span></div>' +
-    '<section class="wrap section"><div class="section-heading"><div><p class="eyebrow">FIND YOUR CORNER</p><h2>Small objects. Big character.</h2></div><a href="/shop/">View collection →</a></div><div class="collection-links">' +
-    categories.map((c,i)=>'<a href="/shop/?category='+encodeURIComponent(c)+'"><span class="muted">0'+(i+1)+'</span><strong>'+e(c)+'</strong><span aria-hidden="true">↗</span></a>').join('') +
-    '</div><div class="product-grid">' + products.slice(0,4).map(p=>card(p)).join('') + (products.length?'':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</div></section>' +
+    (categories.length?'<section class="wrap section category-section" aria-labelledby="corner-title"><div class="section-heading"><div><p class="eyebrow">FIND YOUR CORNER</p><h2 id="corner-title">Shop by category</h2></div></div><div class="collection-links">' +
+    categories.map(c=>{
+      // Each tile shows the most recently listed product in its category and a factual design count.
+      const inCategory=products.filter(p=>p.category===c), cover=inCategory.at(-1);
+      const count=inCategory.length+' '+(inCategory.length===1?'design':'designs');
+      return '<a class="category-tile" href="/shop/?category='+encodeURIComponent(c)+'" aria-label="'+e(c)+', '+count+'"><span class="category-photo">'+picture(cover,{sizes:TILE_SIZES})+'</span><span class="category-copy"><strong>'+e(c)+'</strong><span>'+count+'</span></span><span class="category-arrow" aria-hidden="true">→</span></a>';
+    }).join('') + '</div></section>':'') +
+    '<section class="wrap section featured-section" aria-labelledby="featured-title"><div class="section-heading"><div><p class="eyebrow">THE COLLECTION</p><h2 id="featured-title">Small objects. Big character.</h2></div><a href="/shop/">View collection →</a></div>' +
+    '<div class="product-grid">' + products.slice(0,4).map(p=>card(p)).join('') + (products.length?'':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</div></section>' +
     '<section class="wrap banner-wrap"><div class="custom-banner"><p class="eyebrow">YOUR IDEA, OUR NEXT PRINT</p><h2>Can’t find it?<br>Let’s talk about making it.</h2><p>Share a model link or describe your idea. We’ll confirm what is possible, the finish and the quote.</p><a class="button" href="/custom/">Start a custom enquiry <span aria-hidden="true">→</span></a></div></section>' +
     '<section class="wrap section steps"><div><span>01 / EXPLORE</span><h3>Find your favourites</h3><p>Browse the collection or bring a custom idea.</p></div><div><span>02 / ASK</span><h3>Build your request</h3><p>Choose quantities and tell us the details that matter.</p></div><div><span>03 / CONFIRM</span><h3>Agree on the details</h3><p>Confirm price, availability, delivery and payment before placing an order.</p></div></section>',store,'',head,{description:'A little character for your desk. A favourite for your collection. An idea brought to life, layer by layer. 3D-printed collectibles from Sri Lanka, priced in LKR.'});
 }
