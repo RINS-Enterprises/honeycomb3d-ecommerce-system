@@ -214,7 +214,7 @@ textarea{resize:vertical;line-height:1.5}
 #add-form{display:flex;align-items:end;gap:var(--space-3);margin:0 0 var(--space-3)}
 #add-form label{flex:none}
 #add-form input{width:88px}
-#add-form .button{flex:1}
+#add-form .button{flex:1;min-width:0;white-space:normal;text-align:center;padding-inline:16px}
 .order-soon{width:100%;margin-bottom:var(--space-4)}
 .detail-facts{margin:var(--space-5) 0;border-top:1px solid var(--line)}
 .detail-facts div{display:grid;grid-template-columns:120px 1fr;gap:var(--space-4);padding:12px 0;border-bottom:1px solid var(--line);font-size:var(--step--1)}

@@ -118,6 +118,14 @@ try {
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at '+width+': '+path);
     }
   }
+  // System fonts differ by machine; repeat the narrowest check with a wide fallback face (as on CI runners).
+  await page.route('**/styles.css',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace(/--font-sans:[^;]*;/,'--font-sans:"DejaVu Sans",sans-serif;')});});
+  await page.setViewportSize({width:320,height:844});
+  for(const path of ['/','/shop/','/products/baymax-figure/','/products/minato-kunai/','/cart/','/custom/','/privacy/']) {
+    await page.goto('http://127.0.0.1:4173'+path);
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at 320 with a wide font: '+path);
+  }
+  await page.unroute('**/styles.css');
   await page.setViewportSize({width:1280,height:900});
   await page.goto('http://127.0.0.1:4173/products/minato-kunai/');
   await page.getByRole('button',{name:'Show photo 3 of 3'}).click();
