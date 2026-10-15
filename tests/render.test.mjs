@@ -79,3 +79,19 @@ test('product page: gallery only with several photos, clear price, availability 
   assert(!baymax.includes('data-gallery-thumb'));
   assert.equal([...baymax.matchAll(/fetchpriority="high"/g)].length,1);
 });
+
+test('pages carry share metadata, theme colour, touch icon and price-only Product JSON-LD',async()=>{
+  const {detail}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const leaf=visible.find(p=>p.id==='HC-LEAF');
+  const html=detail(leaf,visible,store);
+  assert.match(html,/<meta name="description" content="A Hidden Leaf design for your keyring\./);
+  assert.match(html,/<meta property="og:image" content="https:\/\/honeycomb3d\.store\/assets\/hidden-leaf-sq-770\.webp">/);
+  assert.match(html,/<meta name="twitter:card" content="summary_large_image">/);
+  assert.match(html,/<meta name="theme-color" content="#0c0b0a">/);
+  assert.match(html,/<link rel="apple-touch-icon" href="\/apple-touch-icon\.png">/);
+  const ld=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);
+  assert.deepEqual(Object.keys(ld).sort(),['@context','@type','image','name','offers']);
+  assert.deepEqual(ld.offers,{'@type':'Offer',price:'400',priceCurrency:'LKR'});
+  assert(!/availability|rating|review/i.test(JSON.stringify(ld)));
+});

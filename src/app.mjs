@@ -76,7 +76,7 @@ function initCart() {
   function render(focusKey) {
     const s=cartSummary(cart,products);
     if(!s.lines.length) {
-      root.innerHTML='<div class="empty"><h2>Your cart is empty</h2><p>Find a design you like and add it to start a request.</p><a class="button" href="/shop/">Explore the collection →</a></div>';
+      root.innerHTML='<div class="empty state-panel"><div class="state-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></div><h2>Your cart is empty</h2><p>Find a design you like and add it to start a request.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/custom/">Start a custom enquiry</a></div></div>';
       if(focusKey)root.querySelector('a').focus();return;
     }
     const hasPriced=s.lines.some(x=>x.product.priceLkr!==null);

@@ -14,5 +14,6 @@ Exported directly from the owner's HONEYCOMB Symbol.pdf; no generated artwork.
 - sizes: [16, 32, 48]
 - bytes: 5500
 - outputSha256: 3784411f3db70b8e9ab6c209c4e472dac1b8c4ed4445b8fb142bf99ff893b0b6
+- appleTouchIcon: {'output': '/apple-touch-icon.png', 'size': [180, 180], 'background': '#0c0b0a', 'symbolSize': [121, 136], 'bytes': 11526, 'sha256': '4fbdf6ba7c6fe532e639b0307a77daeb09efc5ab6a7116756a6d73dcdbe86e0e'}
 
-Crop coordinates refer to the 2x rendered first PDF page. Aspect ratio is preserved on a centered white square. ICO contains 16, 32 and 48 pixel frames; no EXIF/XMP/ICC metadata is copied. Reproduce with python scripts/prepare-favicon.py using Pillow 11.3.0 and PyMuPDF 1.26.5.
+Crop coordinates refer to the 2x rendered first PDF page. Aspect ratio is preserved on a centered white square. ICO contains 16, 32 and 48 pixel frames; no EXIF/XMP/ICC metadata is copied. The 180 x 180 apple-touch-icon.png renders the same page on transparency, fits the symbol in 136 px and centres it on #0c0b0a. Reproduce with python scripts/prepare-favicon.py using Pillow 11.3.0 and PyMuPDF 1.26.5.

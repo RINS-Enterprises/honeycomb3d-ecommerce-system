@@ -40,11 +40,25 @@ function footer(store) {
     '<div class="footer-bottom"><p class="fine">An enquiry is not a confirmed purchase. Availability, delivery and payment arrangements are confirmed with your quote.</p>' +
     '<p class="fine">© '+new Date().getFullYear()+' '+e(store.name||'HoneyComb 3D')+'</p></div></div></footer>';
 }
-export function layout(title, body, store, current='', head='') {
+const DEFAULT_DESCRIPTION = 'Explore HoneyComb 3D collectibles and custom prints. Request a quote and confirm the details before ordering.';
+const absolute = (store, path) => (store.siteUrl || '').replace(/\/$/, '') + path;
+function socialMeta(title, store, {description=DEFAULT_DESCRIPTION, path='/', image, imageAlt, imageWidth, imageHeight}={}) {
+  const fallback = store.hero?.landscape?.find(v=>v.width===1280);
+  if (!image && fallback) ({src:image, width:imageWidth, height:imageHeight} = fallback), imageAlt = 'HoneyComb 3D Night Fury keychain held between two fingers';
+  const tags = [['description',description]].map(([n,c])=>'<meta name="'+n+'" content="'+e(c)+'">').join('') +
+    '<meta property="og:site_name" content="HoneyComb 3D"><meta property="og:type" content="website"><meta property="og:title" content="'+e(title)+'"><meta property="og:description" content="'+e(description)+'">' +
+    (store.siteUrl ? '<meta property="og:url" content="'+e(absolute(store,path))+'">' : '') +
+    (image && store.siteUrl ? '<meta property="og:image" content="'+e(absolute(store,image))+'"><meta property="og:image:width" content="'+imageWidth+'"><meta property="og:image:height" content="'+imageHeight+'"><meta property="og:image:alt" content="'+e(imageAlt||'')+'">' : '') +
+    '<meta name="twitter:card" content="'+(image?'summary_large_image':'summary')+'"><meta name="twitter:title" content="'+e(title)+'"><meta name="twitter:description" content="'+e(description)+'">' +
+    (image && store.siteUrl ? '<meta name="twitter:image" content="'+e(absolute(store,image))+'"><meta name="twitter:image:alt" content="'+e(imageAlt||'')+'">' : '');
+  return tags;
+}
+export function layout(title, body, store, current='', head='', meta={}) {
   return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
-    '<title>' + e(title) + ' | HoneyComb 3D</title><meta name="description" content="Explore HoneyComb 3D collectibles and custom prints. Request a quote and confirm the details before ordering.">' +
+    '<title>' + e(title) + ' | HoneyComb 3D</title>' + socialMeta(title+' | HoneyComb 3D', store, meta) +
+    '<meta name="theme-color" content="#0c0b0a">' +
     (store.mode==='preview' ? '<meta name="robots" content="noindex,nofollow">' : '') +
-    head+'<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.mjs"></script></head><body>' +
+    head+'<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.mjs"></script></head><body>' +
     '<a class="skip-link" href="#main">Skip to content</a>' +
     (store.mode==='preview' ? '<aside class="preview-notice" aria-label="Store preview notice" data-testid="preview-notice"><span class="notice-mark" aria-hidden="true"></span><span>Online ordering opens soon.</span> <a href="/shop/">Browse the collection <span aria-hidden="true">→</span></a></aside>' : '') +
     '<header class="site-header"><div class="header-inner"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a>' +
@@ -72,13 +86,13 @@ export function home(products,store) {
     categories.map((c,i)=>'<a href="/shop/?category='+encodeURIComponent(c)+'"><span class="muted">0'+(i+1)+'</span><strong>'+e(c)+'</strong><span aria-hidden="true">↗</span></a>').join('') +
     '</div><div class="product-grid">' + products.slice(0,4).map(p=>card(p)).join('') + (products.length?'':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</div></section>' +
     '<section class="wrap banner-wrap"><div class="custom-banner"><p class="eyebrow">YOUR IDEA, OUR NEXT PRINT</p><h2>Can’t find it?<br>Let’s talk about making it.</h2><p>Share a model link or describe your idea. We’ll confirm what is possible, the finish and the quote.</p><a class="button" href="/custom/">Start a custom enquiry <span aria-hidden="true">→</span></a></div></section>' +
-    '<section class="wrap section steps"><div><span>01 / EXPLORE</span><h3>Find your favourites</h3><p>Browse the collection or bring a custom idea.</p></div><div><span>02 / ASK</span><h3>Build your request</h3><p>Choose quantities and tell us the details that matter.</p></div><div><span>03 / CONFIRM</span><h3>Agree on the details</h3><p>Confirm price, availability, delivery and payment before placing an order.</p></div></section>',store,'',head);
+    '<section class="wrap section steps"><div><span>01 / EXPLORE</span><h3>Find your favourites</h3><p>Browse the collection or bring a custom idea.</p></div><div><span>02 / ASK</span><h3>Build your request</h3><p>Choose quantities and tell us the details that matter.</p></div><div><span>03 / CONFIRM</span><h3>Agree on the details</h3><p>Confirm price, availability, delivery and payment before placing an order.</p></div></section>',store,'',head,{description:'A little character for your desk. A favourite for your collection. An idea brought to life, layer by layer. 3D-printed collectibles from Sri Lanka, priced in LKR.'});
 }
 export function shop(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];
   return layout('Shop','<section class="wrap section"><p class="eyebrow">THE COLLECTION</p><h1>Find your next favourite.</h1><p class="lead">Explore the designs. Ask about colours, sizes and finishes.</p>' +
     '<form class="filters" id="filters" role="search"><label>Search the collection<input type="search" id="search" name="q" placeholder="Try dragons, Naruto, keychains…" maxlength="100"></label><label>Category<select aria-label="Category" id="category" name="category"><option value="all">All categories</option>'+categories.map(c=>'<option value="'+e(c)+'">'+e(c)+'</option>').join('')+'</select></label><button class="button secondary" type="submit">Search</button><button class="text-button" id="reset-filters" type="button">Clear filters</button></form><p class="muted" role="status" id="result-count">'+products.length+' designs</p>' +
-    '<div class="product-grid">'+products.map(p=>card(p,{headingLevel:2})).join('')+'</div><div class="empty" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><a href="/custom/">Ask about a custom print →</a></div><noscript><p>All designs are shown. Enable JavaScript to use search and category filters.</p></noscript></section>',store,'shop');
+    '<div class="product-grid">'+products.map(p=>card(p,{headingLevel:2})).join('')+'</div><div class="empty" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><a href="/custom/">Ask about a custom print →</a></div><noscript><p>All designs are shown. Enable JavaScript to use search and category filters.</p></noscript></section>',store,'shop','',{description:'Explore the designs. Ask about colours, sizes and finishes. 3D-printed keychains, figures and props, priced in LKR.',path:'/shop/'});
 }
 function gallerySlides(p) {
   return [{src:p.image,alt:p.imageAlt,width:p.imageWidth,height:p.imageHeight,variants:p.imageVariants||[]},...(p.gallery||[])];
@@ -97,6 +111,10 @@ export function detail(p,products,store) {
   const facts=[['Category',e(p.category)],['Price',e(price(p))],['Availability',availability(p)],['Reference',e(p.id)]];
   if(p.tags?.length)facts.splice(1,0,['Themes',p.tags.map(e).join(', ')]);
   const more=products.filter(x=>x.id!==p.id).slice(0,4);
+  const share=p.imageVariants?.at(-1)||{src:p.image,width:p.imageWidth,height:p.imageHeight};
+  // Structured data: name, photos and the LKR price only (no availability, ratings or reviews).
+  const ld={'@context':'https://schema.org','@type':'Product',name:p.name,image:gallerySlides(p).map(g=>absolute(store,(g.variants.at(-1)||g).src)),...(p.priceLkr===null?{}:{offers:{'@type':'Offer',price:String(p.priceLkr),priceCurrency:'LKR'}})};
+  const head='<script type="application/ld+json">'+JSON.stringify(ld).replace(/</g,'\\u003c')+'</script>';
   return layout(p.name,'<section class="wrap section product-section">'+crumbs+'<div class="product-detail">'+gallery(p)+
     '<div class="detail-info"><p class="eyebrow">'+e(p.category)+'</p><h1>'+e(p.name)+'</h1><p class="detail-price" data-testid="product-price">'+e(price(p))+'</p>' +
     '<p class="status-chip status-'+e(p.availability)+'" data-testid="availability"><span aria-hidden="true"></span>'+availability(p)+'</p>' +
@@ -108,7 +126,7 @@ export function detail(p,products,store) {
     '<dl class="detail-facts">'+facts.map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('')+'</dl>' +
     '<p class="fine">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
     '<a class="text-link" href="/cart/">View your request cart →</a></div></div></section>' +
-    (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+more.map(p=>card(p)).join('')+'</div></section>':''),store,'shop');
+    (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+more.map(p=>card(p)).join('')+'</div></section>':''),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
 }
 export function cartPage(store) {
   return layout('Your request cart','<section class="wrap section narrow"><p class="eyebrow">YOUR SELECTION</p><h1>Request cart.</h1><p class="lead">A starting point for your order. We’ll confirm the details together.</p><div id="cart-body"><p>Loading your cart…</p></div><noscript><p>Enable JavaScript to access the cart saved on this device.</p></noscript></section>',store,'cart');

@@ -22,5 +22,19 @@
     48
   ],
   "bytes": 5500,
-  "outputSha256": "3784411f3db70b8e9ab6c209c4e472dac1b8c4ed4445b8fb142bf99ff893b0b6"
+  "outputSha256": "3784411f3db70b8e9ab6c209c4e472dac1b8c4ed4445b8fb142bf99ff893b0b6",
+  "appleTouchIcon": {
+    "output": "/apple-touch-icon.png",
+    "size": [
+      180,
+      180
+    ],
+    "background": "#0c0b0a",
+    "symbolSize": [
+      121,
+      136
+    ],
+    "bytes": 11526,
+    "sha256": "4fbdf6ba7c6fe532e639b0307a77daeb09efc5ab6a7116756a6d73dcdbe86e0e"
+  }
 }

@@ -266,6 +266,13 @@ textarea{resize:vertical;line-height:1.5}
 .toast{bottom:10px}
 }
 
+/* Empty and not-found states */
+.state-panel{display:grid;justify-items:center;gap:var(--space-2)}
+.state-panel .actions,.state-page .actions{justify-content:center;margin-top:var(--space-3)}
+.state-mark{display:grid;place-items:center;width:84px;height:96px;margin:0 auto var(--space-4);color:var(--accent);background:var(--panel-2);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);font-weight:900;letter-spacing:-.02em;font-size:1.3rem}
+.state-page{text-align:center}
+.state-page .lead{margin-inline:auto}
+
 /* Motion: small, smooth, and off for reduced motion. */
 @media(prefers-reduced-motion:no-preference){
 a,button,.button,input,select,textarea{transition:color var(--dur) var(--ease),background-color var(--dur) var(--ease),border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease)}

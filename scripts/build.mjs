@@ -14,21 +14,23 @@ const products=visibleProducts(all,store);
 for(const product of products) {
   if(product.image)await access(join(root,'public',product.image));
 }
+// The hero (and its share image) is used only when its product is visible, so pages never reference unshipped files.
+const heroVariants=store.hero&&products.some(p=>p.id===store.hero.product)?[...store.hero.portrait,...store.hero.landscape]:[];
+const site={...store,hero:heroVariants.length?store.hero:null};
 await rm(dist,{recursive:true,force:true});
 await mkdir(dist,{recursive:true});
 async function page(path,html) {
   const output=join(dist,path);await mkdir(dirname(output),{recursive:true});await writeFile(output,html);
 }
-await page('index.html',home(products,store));
-await page('shop/index.html',shop(products,store));
-await page('cart/index.html',cartPage(store));
-await page('custom/index.html',customPage(store));
-await page('privacy/index.html',privacyPage(store));
-await page('404.html',layout('Page not found','<section class="wrap section narrow"><p class="eyebrow">404</p><h1>This page wandered off.</h1><p>The design you are looking for may have moved.</p><a class="button" href="/shop/">Explore the collection →</a></section>',store));
-for(const p of products)await page('products/'+p.slug+'/index.html',detail(p,products,store));
+await page('index.html',home(products,site));
+await page('shop/index.html',shop(products,site));
+await page('cart/index.html',cartPage(site));
+await page('custom/index.html',customPage(site));
+await page('privacy/index.html',privacyPage(site));
+await page('404.html',layout('Page not found','<section class="wrap section narrow state-page"><div class="state-mark" aria-hidden="true">404</div><p class="eyebrow">Page not found</p><h1>This page wandered off.</h1><p class="lead">The design you are looking for may have moved.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/">Back to home</a></div></section>',site,'','',{description:'This page could not be found. Explore the HoneyComb 3D collection instead.'}));
+for(const p of products)await page('products/'+p.slug+'/index.html',detail(p,products,site));
 for(const name of ['app.mjs','domain.mjs','styles.css'])await copyFile(join(root,'src',name),join(dist,name));
 // Copy only explicitly referenced derivatives. Source images and unused assets never ship.
-const heroVariants=store.hero&&products.some(p=>p.id===store.hero.product)?[...store.hero.portrait,...store.hero.landscape]:[];
 const assets=new Set([store.logo,...(store.logoVariants||[]).map(v=>v.src),...heroVariants.map(v=>v.src),...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src),...(p.gallery||[]).flatMap(g=>g.variants.map(v=>v.src))])].filter(Boolean));
 await mkdir(join(dist,'assets'),{recursive:true});
 for(const asset of assets) {
@@ -36,6 +38,7 @@ for(const asset of assets) {
   await copyFile(join(root,'public',asset),join(dist,asset));
 }
 await copyFile(join(root,'public/favicon.ico'),join(dist,'favicon.ico'));
+await copyFile(join(root,'public/apple-touch-icon.png'),join(dist,'apple-touch-icon.png'));
 await mkdir(join(dist,'data'),{recursive:true});
 // Approval stays in the payload for client-side live filtering. Recovery and copy-workflow metadata do not.
 await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,copyStatus,imageSource,priceSource,imageApprovedAt,imageStatus,...p})=>({...p,source:'Public catalog'}))));
