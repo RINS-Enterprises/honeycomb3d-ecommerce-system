@@ -39,6 +39,8 @@ for(const asset of assets) {
 }
 await copyFile(join(root,'public/favicon.ico'),join(dist,'favicon.ico'));
 await copyFile(join(root,'public/apple-touch-icon.png'),join(dist,'apple-touch-icon.png'));
+await mkdir(join(dist,'fonts'),{recursive:true});
+for(const name of ['bricolage-grotesque-display.woff2','OFL.txt'])await copyFile(join(root,'public/fonts',name),join(dist,'fonts',name));
 await mkdir(join(dist,'data'),{recursive:true});
 // Approval stays in the payload for client-side live filtering. Recovery and copy-workflow metadata do not.
 await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,copyStatus,imageSource,priceSource,imageApprovedAt,imageStatus,...p})=>({...p,source:'Public catalog'}))));

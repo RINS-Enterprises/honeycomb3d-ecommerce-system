@@ -3,6 +3,7 @@ import {readFile,stat,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {validateData,visibleProducts} from '../src/domain.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 assert((await readdir(join(root,'tests'))).some(name=>name.endsWith('.test.mjs')), 'At least one unit-test file must exist');
@@ -30,4 +31,10 @@ for(const path of paths) {
   }
 }
 await checkImageOutputs(paths);
+// Self-hosted heading font: hash matches its provenance record, licence ships with it, total stays under ~100 KB.
+const fontRecord=JSON.parse(await readFile(join(root,'assets/font.json'),'utf8'));
+const fontBytes=await readFile(join(root,'dist',fontRecord.output));
+assert.equal(createHash('sha256').update(fontBytes).digest('hex'),fontRecord.sha256,'Font hash');
+assert(fontBytes.length<=100_000,'Fonts stay under 100 KB');
+assert.match(await readFile(join(root,'dist/fonts/OFL.txt'),'utf8'),/SIL OPEN FONT LICENSE Version 1\.1/);
 console.log('Verified '+paths.length+' generated pages and their local links/assets.');

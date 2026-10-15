@@ -21,7 +21,7 @@ test('an empty live catalogue has no dead product link or unapproved hero photo'
   const html=home(visibleProducts(products,live),live);
   assert(!html.includes('href="/products/'));
   assert(!html.includes('class="hero-visual"'));
-  assert(!html.includes('rel="preload"'));
+  assert(!/rel="preload" as="image"/.test(html),'No hero image preload without a visible hero product');
   assert(html.includes('href="/custom/"'));
 });
 
