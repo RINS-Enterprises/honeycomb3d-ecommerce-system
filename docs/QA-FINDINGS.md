@@ -945,7 +945,7 @@ pinned QA image audit. Report the final commit SHA.
 
 | Round | Commit | Change | QA result | Deployed |
 |---|---|---|---|---|
-| Baseline | `948dff5` | Live version before the design work | see below | live since 2026-10-15 |
+| Baseline | `948dff5` | Live version before the design work | `full-run.sh` PASS on 2026-10-15: tests, build, check, audit, secret scan, domain, smoke 88/88 and live 89/89, edge, axe 0, images 18 PASS and 0 FAIL, provenance, slow network, and screenshots with no blank image at 390 px. The blank Baymax card seen earlier did not recur. | live since 2026-10-15 |
 
 ## 8. QA tooling: what was actually executed (2026-10-08, 2026-10-09)
 
