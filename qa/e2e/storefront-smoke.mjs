@@ -349,6 +349,8 @@ async function main() {
 
     if (vp === 'desktop') {
       const filter = await first(
+        // A chip that is not already selected ("All" or "Any theme" would not narrow anything).
+        page.locator('[data-testid^="filter-"]:not(:has(input:checked)):not([aria-pressed="true"])'),
         page.locator('[data-testid^="filter-"]'),
         page.locator('main select'),
         page.locator('main input[type=checkbox], main input[type=radio]'),

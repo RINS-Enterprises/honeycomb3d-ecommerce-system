@@ -1,0 +1,22 @@
+reviewed: cc01cb76267bd19bd16680b118042eb3353709e7
+date: 2026-10-15T20:37:56Z
+install      exit=0   npm ci
+lint         NOT DEFINED
+typecheck    NOT DEFINED
+test         exit=0   npm run test
+build        exit=0   npm run build
+check        exit=0   npm run check
+test:e2e     NOT DEFINED
+audit        exit=0   npm audit --omit=dev --audit-level=high
+secret-scan  exit=0  
+domain       exit=0   # duration_ms 124.263819
+smoke        exit=0   {"PASS":87,"INCONCLUSIVE":1} -> /home/user/honeycomb3d-ecommerce-system/qa/results/cc01cb76267bd19bd16680b118042eb3353709e7/browser
+smoke-live   exit=0   {"PASS":88,"INCONCLUSIVE":1} -> /home/user/honeycomb3d-ecommerce-system/qa/results/cc01cb76267bd19bd16680b118042eb3353709e7/browser-live
+edge         exit=1   Node.js v22.22.0
+axe          exit=0   serious/critical: 0, minor/moderate: 0, errors: 0 -> /home/user/honeycomb3d-ecommerce-system/qa/results/cc01cb76267bd19bd16680b118042eb3353709e7/axe
+images       exit=0   {"PASS":14,"INFO":1} -> /home/user/honeycomb3d-ecommerce-system/qa/results/cc01cb76267bd19bd16680b118042eb3353709e7/images
+provenance   exit=0   night-fury-sq-960.webp                         (960, 960)     NO PROVENANCE METADATA                       cam='' sw='' date='' orient= c2pa=0 synthid
+perf         exit=0   └─────────┴───────────┴───────────────────────────
+screens      exit=0   all pages captured, no blank images -> /tmp/claude-0/-home-user/60c97030-e9e1-5c3b-a7ae-5fe64c98386a/scratchpad/qa-review/screens-cc01cb76267b
+overall: FAIL
+harness: smoke filter step picked the already-selected "All" chip (INCONCLUSIVE) and edge-probes read the removed #category select (TimeoutError). Both are QA harness gaps for the intended chip UI; fixed in claude/recovery-qa and re-tested on the next head.

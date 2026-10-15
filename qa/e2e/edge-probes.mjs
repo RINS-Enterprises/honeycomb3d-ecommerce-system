@@ -9,9 +9,11 @@ const ctx = await b.newContext(); const p = await ctx.newPage(); const errs=[]; 
 const listed = await (await fetch(B + '/data/products.json')).json();
 const P0 = (process.env.PROBE_PRODUCT && listed.find((x) => x.slug === process.env.PROBE_PRODUCT)) || listed[0];
 const P1 = listed.find((x) => x.id !== P0.id);
+// The active category: a <select id="category"> (before cc01cb7) or the checked category chip.
+const category = (pg) => pg.evaluate(() => document.querySelector('#category')?.value ?? document.querySelector('input[name=category]:checked')?.value ?? '(none)');
 // 1. URL params: XSS attempt and unknown category
 await p.goto(B+'/shop/?q=%3Cimg%20src%3Dx%20onerror%3Dalert(1)%3E&category=%3Cscript%3E', {waitUntil:'networkidle'});
-out.push(['xss-params', await p.locator('img[src=x]').count()===0 && (await p.inputValue('#search')).includes('<img') ? 'PASS':'FAIL', 'search box shows text; no injected img; category='+await p.inputValue('#category')]);
+out.push(['xss-params', await p.locator('img[src=x]').count()===0 && (await p.inputValue('#search')).includes('<img') ? 'PASS':'FAIL', 'search box shows text; no injected img; category='+await category(p)]);
 // 2. search + category combination & URL restore
 await p.goto(B+'/shop/?q=dragon&category=Keychains',{waitUntil:'networkidle'});
 const vis=await p.$$eval('[data-product-card]',cs=>cs.filter(c=>!c.hidden).map(c=>c.querySelector('h2,h3,h4').textContent));
