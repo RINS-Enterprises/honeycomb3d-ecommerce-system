@@ -29,7 +29,9 @@ try {
     await page.waitForLoadState('networkidle');
     const imgs=await page.evaluate(async()=>Promise.all([...document.images].map(async img=>{
       await img.decode();
-      return {src:new URL(img.currentSrc).pathname,width:img.naturalWidth,height:img.naturalHeight,
+      // With srcset w-descriptors naturalWidth/Height are density-corrected; decode the file for its real pixels.
+      const file=new Image();file.src=img.currentSrc;await file.decode();
+      return {src:new URL(img.currentSrc).pathname,width:file.naturalWidth,height:file.naturalHeight,
               attrWidth:Number(img.getAttribute('width')),attrHeight:Number(img.getAttribute('height')),
               responsive:!!img.getAttribute('srcset'),alt:img.alt};
     })));

@@ -29,10 +29,11 @@ function dimensions(b,src) {
 }
 export async function checkImageOutputs(paths) {
   const metadata=JSON.parse(await readFile(join(root,'assets/derivatives.json'),'utf8'));
+  const logoRecord=JSON.parse(await readFile(join(root,'assets/logo.json'),'utf8'));
   const outputs=new Map();
-  const provenance=await readFile(join(root,'docs/ASSET-PROVENANCE.md'),'utf8');
+  const provenance=await readFile(join(root,'docs/ASSET-PROVENANCE.md'),'utf8')+await readFile(join(root,'docs/LOGO-PROVENANCE.md'),'utf8');
   assert(!/\.(?:jpeg|png)\.jpg\b/.test(provenance),'Source titles have extra .jpg suffixes');
-  for(const asset of metadata.assets) {
+  for(const asset of [...metadata.assets,logoRecord]) {
     const input=await readFile(join(root,asset.input));
     assert.equal(sha(input),asset.inputSha256,'Normalized source hash: '+asset.id);
     assert(provenance.includes(asset.sourceDriveId)&&provenance.includes(asset.sourceSha256));
@@ -49,7 +50,7 @@ export async function checkImageOutputs(paths) {
   }
   const config=JSON.parse(await readFile(join(root,'dist/data/store.json'),'utf8'));
   const products=JSON.parse(await readFile(join(root,'dist/data/products.json'),'utf8'));
-  const referenced=new Set([config.logo,...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src)])].filter(Boolean));
+  const referenced=new Set([config.logo,...(config.logoVariants||[]).map(v=>v.src),...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src)])].filter(Boolean));
   const shipped=(await readdir(join(root,'dist/assets'))).map(name=>'/assets/'+name);
   assert.deepEqual([...shipped].sort(),[...referenced].sort(),'Only referenced derivatives belong in dist/');
   for(const src of shipped) {
@@ -57,6 +58,7 @@ export async function checkImageOutputs(paths) {
     const b=await readFile(join(root,'dist',src));assert.equal(sha(b),outputs.get(src).sha256);
   }
   const logo=outputs.get(config.logo);assert(logo.width<=660&&logo.height<=198,'660 × 198 logo limit');
+  assert(config.logo.startsWith('/assets/honeycomb-logo-dark-'),'Header logo is the transparent dark-background export');
   const report={largestImageBytes:Math.max(...[...outputs.values()].map(o=>o.bytes)),pages:[]};
   for(const path of paths) {
     const html=await readFile(join(root,'dist',path),'utf8');let ceiling=0;

@@ -5,8 +5,20 @@
   "mode": "preview",
   "whatsappNumber": null,
   "whatsappVerified": false,
-  "logo": "/assets/honeycomb-logo-web.png",
+  "logo": "/assets/honeycomb-logo-dark-660.png",
   "source": "Recovered brief, 2026-10-08. Historical contact requires owner confirmation.",
   "logoWidth": 660,
-  "logoHeight": 198
+  "logoHeight": 192,
+  "logoVariants": [
+    {
+      "src": "/assets/honeycomb-logo-dark-264.png",
+      "width": 264,
+      "height": 77
+    },
+    {
+      "src": "/assets/honeycomb-logo-dark-660.png",
+      "width": 660,
+      "height": 192
+    }
+  ]
 }

@@ -21,7 +21,12 @@ export function card(p, {headingLevel=3}={}) {
 function availability(p) {
   return ({unconfirmed:'Availability to confirm',available:'Available',unavailable:'Currently unavailable','made-to-order':'Made to order'})[p.availability];
 }
-function brand(store) { return store.logo ? '<img class="brand-image" src="'+e(store.logo)+'" alt="HoneyComb" width="'+(store.logoWidth||220)+'" height="'+(store.logoHeight||66)+'">' : 'HONEYCOMB<span>3D PRINT STUDIO</span>'; }
+const LOGO_SIZES = '(max-width: 700px) 150px, 180px';
+function brand(store) {
+  if (!store.logo) return 'HONEYCOMB<span>3D PRINT STUDIO</span>';
+  const srcset = store.logoVariants?.length ? ' srcset="'+e(store.logoVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+LOGO_SIZES+'"' : '';
+  return '<img class="brand-image" src="'+e(store.logo)+'"'+srcset+' alt="HoneyComb" width="'+(store.logoWidth||220)+'" height="'+(store.logoHeight||66)+'">';
+}
 export function layout(title, body, store, current='') {
   return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>' + e(title) + ' | HoneyComb 3D</title><meta name="description" content="Explore HoneyComb 3D collectibles and custom prints. Request a quote and confirm the details before ordering.">' +
