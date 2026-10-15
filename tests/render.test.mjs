@@ -48,3 +48,12 @@ test('preview mode shows a slim, plainly worded ordering notice without dates',(
   assert(!/\d{4}|\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/.test(notice.replace(/<[^>]+>/g,'')));
   assert(!home(visibleProducts(products,store),{...store,mode:'live'}).includes('preview-notice'));
 });
+
+test('every page has the sticky header cart hooks and a footer with real links',()=>{
+  const html=home(visibleProducts(products,store),store);
+  assert.match(html,/<header class="site-header">/);
+  assert.match(html,/<a class="cart-link" href="\/cart\/" data-testid="cart-link"/);
+  assert.match(html,/data-cart-count data-count="0" data-testid="cart-count">0</);
+  const foot=html.match(/<footer class="site-footer">.*<\/footer>/)[0];
+  for(const href of ['/shop/','/cart/','/custom/','/privacy/'])assert(foot.includes('href="'+href+'"'));
+});

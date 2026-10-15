@@ -3,11 +3,15 @@ import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary,
 const status=document.querySelector('#status');
 function announce(message) { status.textContent=message; }
 let products=[],store={},cart=[],storage;
+function updateCount() {
+  const count=String(cartSummary(cart,products).count);
+  document.querySelectorAll('[data-cart-count]').forEach(el=>{el.textContent=count;el.dataset.count=count;});
+}
 function saveCart() {
   cart=normalizeCart(cart,products);
   try { if(!storage) throw new Error(); storage.setItem(CART_KEY,JSON.stringify(cart)); }
   catch { announce('Your cart works for this page, but this browser could not save it. Keep this page open to copy your request.'); }
-  document.querySelectorAll('[data-cart-count]').forEach(el=>el.textContent=cartSummary(cart,products).count);
+  updateCount();
 }
 function handoff(message) {
   const url=store.mode==='live'?whatsappUrl(message,store):null;
@@ -122,7 +126,7 @@ try {
   try{storage=window.localStorage;}catch{}
   const saved=readCart(storage,products);cart=saved.items;
   if(saved.error)announce('Saved cart unavailable. You can start a new request here.');
-  document.querySelectorAll('[data-cart-count]').forEach(el=>el.textContent=cartSummary(cart,products).count);
+  updateCount();
   initAdd();initCart();initCustom();
   document.querySelectorAll('[data-enable="true"]').forEach(button=>button.disabled=false);
 } catch {

@@ -28,6 +28,16 @@ function brand(store) {
   const srcset = store.logoVariants?.length ? ' srcset="'+e(store.logoVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+LOGO_SIZES+'"' : '';
   return '<img class="brand-image" src="'+e(store.logo)+'"'+srcset+' alt="HoneyComb" width="'+(store.logoWidth||220)+'" height="'+(store.logoHeight||66)+'">';
 }
+const CART_ICON = '<svg class="icon" aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>';
+function footer(store) {
+  return '<footer class="site-footer"><div class="footer-inner">' +
+    '<div class="footer-brand"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a><p>3D prints, collectibles &amp; custom ideas.</p><p class="muted">Sri Lanka · Prices in LKR</p></div>' +
+    '<nav class="footer-links" aria-label="Footer"><div><h2>Shop</h2><ul><li><a href="/shop/">The collection</a></li><li><a href="/cart/">Request cart</a></li></ul></div>' +
+    '<div><h2>Make</h2><ul><li><a href="/custom/">Have something in mind? Tell us.</a></li></ul></div>' +
+    '<div><h2>About</h2><ul><li><a href="/privacy/">How this site handles your data</a></li></ul></div></nav>' +
+    '<div class="footer-bottom"><p class="fine">An enquiry is not a confirmed purchase. Availability, delivery and payment arrangements are confirmed with your quote.</p>' +
+    '<p class="fine">© '+new Date().getFullYear()+' '+e(store.name||'HoneyComb 3D')+'</p></div></div></footer>';
+}
 export function layout(title, body, store, current='', head='') {
   return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>' + e(title) + ' | HoneyComb 3D</title><meta name="description" content="Explore HoneyComb 3D collectibles and custom prints. Request a quote and confirm the details before ordering.">' +
@@ -35,9 +45,10 @@ export function layout(title, body, store, current='', head='') {
     head+'<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.mjs"></script></head><body>' +
     '<a class="skip-link" href="#main">Skip to content</a>' +
     (store.mode==='preview' ? '<aside class="preview-notice" aria-label="Store preview notice" data-testid="preview-notice"><span class="notice-mark" aria-hidden="true"></span><span>Online ordering opens soon.</span> <a href="/shop/">Browse the collection <span aria-hidden="true">→</span></a></aside>' : '') +
-    '<header class="site-header"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a>' +
-    '<nav aria-label="Main navigation"><a href="/shop/"' + (current==='shop'?' aria-current="page"':'') + '>Shop</a><a href="/custom/"' + (current==='custom'?' aria-current="page"':'') + '>Custom prints</a><a class="cart-link" href="/cart/"' + (current==='cart'?' aria-current="page"':'') + '>Cart <span data-cart-count aria-label="items in cart">0</span></a></nav></header>' +
-    '<main id="main" tabindex="-1">' + body + '</main><footer><a class="wordmark" href="/">'+brand(store)+'</a><p>3D prints, collectibles &amp; custom ideas.</p><p class="muted">Sri Lanka · Prices in LKR</p><a href="/custom/">Have something in mind? Tell us.</a><p class="fine">An enquiry is not a confirmed purchase. Availability, delivery and payment arrangements are confirmed with your quote.</p><a href="/privacy/">How this site handles your data</a></footer>' +
+    '<header class="site-header"><div class="header-inner"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a>' +
+    '<nav aria-label="Main navigation"><a href="/shop/"' + (current==='shop'?' aria-current="page"':'') + '>Shop</a><a href="/custom/"' + (current==='custom'?' aria-current="page"':'') + '>Custom<span class="nav-long">&nbsp;prints</span></a>' +
+    '<a class="cart-link" href="/cart/" data-testid="cart-link"' + (current==='cart'?' aria-current="page"':'') + '>'+CART_ICON+'<span class="cart-label">Cart</span> <span class="cart-count" data-cart-count data-count="0" data-testid="cart-count">0</span><span class="sr-only"> items</span></a></nav></div></header>' +
+    '<main id="main" tabindex="-1">' + body + '</main>' + footer(store) +
     '<div class="toast" role="status" aria-live="polite" id="status"></div></body></html>';
 }
 export function home(products,store) {
@@ -58,7 +69,7 @@ export function home(products,store) {
     '<section class="wrap section"><div class="section-heading"><div><p class="eyebrow">FIND YOUR CORNER</p><h2>Small objects. Big character.</h2></div><a href="/shop/">View collection →</a></div><div class="collection-links">' +
     categories.map((c,i)=>'<a href="/shop/?category='+encodeURIComponent(c)+'"><span class="muted">0'+(i+1)+'</span><strong>'+e(c)+'</strong><span aria-hidden="true">↗</span></a>').join('') +
     '</div><div class="product-grid">' + products.slice(0,4).map(p=>card(p)).join('') + (products.length?'':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</div></section>' +
-    '<section class="wrap custom-banner"><p class="eyebrow">YOUR IDEA, OUR NEXT PRINT</p><h2>Can’t find it?<br>Let’s talk about making it.</h2><p>Share a model link or describe your idea. We’ll confirm what is possible, the finish and the quote.</p><a class="button" href="/custom/">Start a custom enquiry ↗</a></section>' +
+    '<section class="wrap banner-wrap"><div class="custom-banner"><p class="eyebrow">YOUR IDEA, OUR NEXT PRINT</p><h2>Can’t find it?<br>Let’s talk about making it.</h2><p>Share a model link or describe your idea. We’ll confirm what is possible, the finish and the quote.</p><a class="button" href="/custom/">Start a custom enquiry <span aria-hidden="true">→</span></a></div></section>' +
     '<section class="wrap section steps"><div><span>01 / EXPLORE</span><h3>Find your favourites</h3><p>Browse the collection or bring a custom idea.</p></div><div><span>02 / ASK</span><h3>Build your request</h3><p>Choose quantities and tell us the details that matter.</p></div><div><span>03 / CONFIRM</span><h3>Agree on the details</h3><p>Confirm price, availability, delivery and payment before placing an order.</p></div></section>',store,'',head);
 }
 export function shop(products,store) {
