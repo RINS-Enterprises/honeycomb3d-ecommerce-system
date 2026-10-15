@@ -51,7 +51,7 @@ export async function checkImageOutputs(paths) {
   const config=JSON.parse(await readFile(join(root,'dist/data/store.json'),'utf8'));
   const products=JSON.parse(await readFile(join(root,'dist/data/products.json'),'utf8'));
   const heroSrcs=config.hero?[...config.hero.portrait,...config.hero.landscape].map(v=>v.src):[];
-  const referenced=new Set([config.logo,...(config.logoVariants||[]).map(v=>v.src),...heroSrcs,...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src)])].filter(Boolean));
+  const referenced=new Set([config.logo,...(config.logoVariants||[]).map(v=>v.src),...heroSrcs,...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src),...(p.gallery||[]).flatMap(g=>g.variants.map(v=>v.src))])].filter(Boolean));
   const shipped=(await readdir(join(root,'dist/assets'))).map(name=>'/assets/'+name);
   assert.deepEqual([...shipped].sort(),[...referenced].sort(),'Only referenced derivatives belong in dist/');
   for(const src of shipped) {

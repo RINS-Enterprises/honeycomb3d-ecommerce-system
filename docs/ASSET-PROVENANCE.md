@@ -18,6 +18,7 @@ Reproduce with python -m pip install Pillow==11.3.0 and python scripts/prepare-i
 - Source dimensions: 4299 × 6442; EXIF orientation 1.
 - Applied crop box after orientation: `(1250, 1660, 3000, 2430)`.
 - Square storefront frame (inside the applied crop): `(1640, 1660, 2410, 2430)`. Centres the Hidden Leaf emblem and the plate's left rivets; the approved crop is too shallow for a square of the whole plate.
+- Product-page gallery image 2 (inside the applied crop): `(1250, 1660, 2020, 2430)`. Keyring loop and rivets.
 
 The crop selects only the upper Hidden Leaf headband plate, including its keyring loop and shadow; the other three village plates are outside the crop.
 
@@ -26,10 +27,16 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 | `/assets/hidden-leaf-480.webp` | 480 | 480 × 211 | 9786 | 82 | `a11f9205ab677bf93b12e72f75b823b9ce0d2f9254d04badbeb2cefbad6f5bda` |
 | `/assets/hidden-leaf-960.webp` | 960 | 960 × 422 | 38452 | 82 | `784dbe7234ac62af94f162c336a0031c7ec5eac014b8da942a3de8fcf6fc3614` |
 | `/assets/hidden-leaf-1440.webp` | 1440 | 1440 × 634 | 79138 | 82 | `437caad3c0dfffb60dd8daf0d6e47384893ed3dd566993e1e513aef72a559723` |
+| `/assets/hidden-leaf-sq-160.webp` | 160 | 160 × 160 | 3232 | 82 | `91acf2bcb1bb145be559d35d1cb1fdc10a20eb483732382dc7339673956a669f` |
 | `/assets/hidden-leaf-sq-320.webp` | 320 | 320 × 320 | 11288 | 82 | `78c3a6223f8f6368e2ea1fc156b757c480790cb1f8f619d040b00069c2962013` |
 | `/assets/hidden-leaf-sq-480.webp` | 480 | 480 × 480 | 23952 | 82 | `2d664b89e3be87c9329bc767e7a3544b1ea8e4873a760bf5941a467510ed165a` |
 | `/assets/hidden-leaf-sq-640.webp` | 640 | 640 × 640 | 38990 | 82 | `5a8fe30feb0456d7b9dc4a84c8606943f3a3f3af9caada2d2da8c7a493ab67b6` |
 | `/assets/hidden-leaf-sq-770.webp` | 770 | 770 × 770 | 55564 | 82 | `8fd28d63e926265af6186da05196e6162ebb2ce70fc066b2d92e8448a08618c4` |
+| `/assets/hidden-leaf-g2-160.webp` | 160 | 160 × 160 | 2222 | 82 | `07c9648bd99f42373ad1f30392d824c4ede189e78b3e60562d7d051fa000fdac` |
+| `/assets/hidden-leaf-g2-320.webp` | 320 | 320 × 320 | 8846 | 82 | `ffcdbcd1e0a60f764e72e2e1a5876773c921f3364a6032324417bff3e9de156a` |
+| `/assets/hidden-leaf-g2-480.webp` | 480 | 480 × 480 | 20920 | 82 | `f2acd171b23fb158dbe96c6c20e718e34763ad16190f3f331786b0cfa48eea99` |
+| `/assets/hidden-leaf-g2-640.webp` | 640 | 640 × 640 | 35736 | 82 | `16913d3621c7ea263ad7ebf57326e5bee374dc7a8b53c9b953c8d0d15713e9a5` |
+| `/assets/hidden-leaf-g2-770.webp` | 770 | 770 × 770 | 51844 | 82 | `5eb860918aa32d0325f6d90cb4f87da7715135d3b4781c47b311744272c96cbe` |
 
 ## HC-BAYMAX
 
@@ -47,6 +54,7 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 | `/assets/baymax-480.webp` | 480 | 480 × 640 | 28300 | 82 | `250873e25a2a5060e8b62bf90093cd3ad84356ea5f2f96800995e0e9c2354d93` |
 | `/assets/baymax-960.webp` | 960 | 960 × 1280 | 91622 | 82 | `72e907f1342fbb8e4e489114a48109874a0b19c36071d5643a3250c21565106f` |
 | `/assets/baymax-1440.webp` | 1440 | 1440 × 1920 | 174868 | 82 | `0c76fede0f9678fda981bf49026d6c25f688df3954f19cbe5676a83fdc520dcf` |
+| `/assets/baymax-sq-160.webp` | 160 | 160 × 160 | 3646 | 82 | `c3b6bdc9d754a89a5e0e836c4cd8c97afe620f1506277f2ed51c871219f22dd6` |
 | `/assets/baymax-sq-320.webp` | 320 | 320 × 320 | 12108 | 82 | `9ebe7175b33bb183cf2afc137a92666af033f4e2d33b3619948ec55419d9c2da` |
 | `/assets/baymax-sq-480.webp` | 480 | 480 × 480 | 25188 | 82 | `f56dcd5a8939ad3b8774b52074adce0fb3deed97615a0938f5c596ea88f290af` |
 | `/assets/baymax-sq-640.webp` | 640 | 640 × 640 | 41458 | 82 | `856ec11c7318be0a618482c94d0bafd0c5aa3a9bfe4c3f5c0550b3d6fc738101` |
@@ -71,6 +79,7 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 | `/assets/night-fury-480.webp` | 480 | 480 × 360 | 14324 | 82 | `7e480852833cecbdf57660165d7a6a3ad44296980114f566f72db051f6c0a9d8` |
 | `/assets/night-fury-960.webp` | 960 | 960 × 720 | 37432 | 82 | `2071959e347554061056f0c997e4834b37519adb10c4b609ccfce9bf7867bb70` |
 | `/assets/night-fury-1440.webp` | 1440 | 1440 × 1080 | 65288 | 82 | `e1f5abdffb91b9542ea26845ca57a53a66980d2cf97773b9c271005110b16dbe` |
+| `/assets/night-fury-sq-160.webp` | 160 | 160 × 160 | 4416 | 82 | `e4da14a88a0cd445ab1ea6c7fbe12a8d4f11536d791a9a56ba634ee304731b97` |
 | `/assets/night-fury-sq-320.webp` | 320 | 320 × 320 | 11300 | 82 | `f171e0233af66fa4448ac12c995de1173c9e59a748abdc1688bbbba220fc83d2` |
 | `/assets/night-fury-sq-480.webp` | 480 | 480 × 480 | 19770 | 82 | `5f0288b1bacd43f6efdc84a5606cb40366559faf6dae6e9f5759ec8b43e17d6b` |
 | `/assets/night-fury-sq-640.webp` | 640 | 640 × 640 | 29256 | 82 | `9530e86ee2856af28560674109f61c0f6d0e54e4b9416b59de1fdba83e4a7601` |
@@ -95,6 +104,8 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 - Source dimensions: 4912 × 7360; EXIF orientation 1.
 - Applied crop box after orientation: `(2770, 2150, 4600, 6250)`.
 - Square storefront frame (inside the applied crop): `(2770, 2950, 4600, 4780)`. Shows the engraved handle and full wings; the ring and blade tip fall outside the square.
+- Product-page gallery image 2 (inside the applied crop): `(2770, 2200, 4600, 4030)`. Ring and engraved grip.
+- Product-page gallery image 3 (inside the applied crop): `(2770, 4320, 4600, 6150)`. Wings and blade to the tip.
 
 The left edge is x=2770, within the required x=2756…2794 bounds. The crop isolates the tan engraved handle, black blade, silver edge bevels and black ring. The full crop is not widened to include the adjacent blade. Its square storefront frame is cut from inside this crop.
 
@@ -105,11 +116,24 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 | `/assets/minato-kunai-480.webp` | 480 | 480 × 1075 | 20718 | 82 | `9880a18df2a171585733ea002c0dec08d1b319dd1a11d1d832020b3333617f79` |
 | `/assets/minato-kunai-960.webp` | 960 | 960 × 2151 | 93218 | 82 | `3490f32cac68d84b5c6097e9f5a2af038298c2fcec41e090c367bb263ad259e4` |
 | `/assets/minato-kunai-1440.webp` | 1440 | 1440 × 3226 | 251428 | 82 | `34d72359b337d2f5f14ef44c1c1e9754a98dc05d39530adfc70748aca137c1f2` |
+| `/assets/minato-kunai-sq-160.webp` | 160 | 160 × 160 | 1866 | 82 | `9849929b329dfa1fd5d35a66973e4f4d0013dcadf491556378d60734a8999391` |
 | `/assets/minato-kunai-sq-320.webp` | 320 | 320 × 320 | 5274 | 82 | `614914d378cbb2a606f1ff1bafcb00a14fa339bc6c6e1f69e89253fa6d676068` |
 | `/assets/minato-kunai-sq-480.webp` | 480 | 480 × 480 | 9738 | 82 | `ad02a6ee4457279d6ef2d7644a89a8ed48652b6b9e487ec57ca37f6f20b747dc` |
 | `/assets/minato-kunai-sq-640.webp` | 640 | 640 × 640 | 17036 | 82 | `4d5cc866b87e74da57559b11ac6c6e8de30ca662d8cc6d63d39c09b69b65b0e8` |
 | `/assets/minato-kunai-sq-960.webp` | 960 | 960 × 960 | 47800 | 82 | `7ac893191b13968986c4d966f457cbbd2fae040b855992f096027e44cee55208` |
 | `/assets/minato-kunai-sq-1200.webp` | 1200 | 1200 × 1200 | 88300 | 82 | `b5b4b6a21cc19b104c8af1b65d0e99d9750b1a24c1313ba62f25f019691f1fa3` |
+| `/assets/minato-kunai-g2-160.webp` | 160 | 160 × 160 | 1806 | 82 | `973b6b187c6c4e53f7115335fecd99094217e5204798ab019fb4e9611cf0f75e` |
+| `/assets/minato-kunai-g2-320.webp` | 320 | 320 × 320 | 5400 | 82 | `a35e7894af42b943041ad30cf51c5993d78283a1239e73ad359ea4603fb7ec13` |
+| `/assets/minato-kunai-g2-480.webp` | 480 | 480 × 480 | 11544 | 82 | `2b368bbf33adb48db35d2143a1fe0ac3fb215e68860d6a7f9b77be5dc55de120` |
+| `/assets/minato-kunai-g2-640.webp` | 640 | 640 × 640 | 20502 | 82 | `ca624aa352bd52e17c44b3070eba2a4708871a9d993583ed7249e1c56d7ed5b5` |
+| `/assets/minato-kunai-g2-960.webp` | 960 | 960 × 960 | 50612 | 82 | `0ec76cfe59dd09869629a891b4bbcb8a82ac7fcdb180fed6e7253e71bc3d3f62` |
+| `/assets/minato-kunai-g2-1200.webp` | 1200 | 1200 × 1200 | 84564 | 82 | `c8012b3bd0a2cd8a331325b8e36f0fc0641cbef3b137dc41ad8bf3a284a3ceea` |
+| `/assets/minato-kunai-g3-160.webp` | 160 | 160 × 160 | 1438 | 82 | `76112521390187a4a64ddd45e7f118e3da32d47cd64c87f7ad24f83f2f9252ea` |
+| `/assets/minato-kunai-g3-320.webp` | 320 | 320 × 320 | 4014 | 82 | `44bd2cf8fec2b9828a5af1817030cc86451943ccffd5c1bd2bf813673234ff42` |
+| `/assets/minato-kunai-g3-480.webp` | 480 | 480 × 480 | 7766 | 82 | `8a87bd29b77d9d87b7b70353b841cf58dbf060846eab7000c46297e5b9b3b111` |
+| `/assets/minato-kunai-g3-640.webp` | 640 | 640 × 640 | 13626 | 82 | `6db0cb17d88c0cf3337df6dc16562d1d2fae3bf7049e283eb86933e525016742` |
+| `/assets/minato-kunai-g3-960.webp` | 960 | 960 × 960 | 35852 | 82 | `8b6cc1f54ab8103ce8841db455895ebf12abf62ea4ae81c023caf9026ee77d5a` |
+| `/assets/minato-kunai-g3-1200.webp` | 1200 | 1200 × 1200 | 65284 | 82 | `4843e447aca750e4e4ed8e19bc09da5c11318dde882698f555c9b72b07ad913b` |
 
 ## HC-LIGHTFURY
 
@@ -127,6 +151,7 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 | `/assets/light-fury-480.webp` | 480 | 480 × 640 | 10204 | 82 | `b3f42484e301ce003661b4fbb88a6693514483b2aac08158eeb5aef79b119a60` |
 | `/assets/light-fury-960.webp` | 960 | 960 × 1280 | 28132 | 82 | `e108d5ac558aca70ca553bdcf48d9ee310da6d878b7d3ac076520acc2568b7a6` |
 | `/assets/light-fury-1440.webp` | 1440 | 1440 × 1920 | 50262 | 82 | `76caea753630918bead191910048b3c652b94d5ce562af537bf114ddaebb0cee` |
+| `/assets/light-fury-sq-160.webp` | 160 | 160 × 160 | 2330 | 82 | `3bc3dbc88eef7bde0eebbbb4865337958b1f45f1f8fcda44fdd64b955bbf6e42` |
 | `/assets/light-fury-sq-320.webp` | 320 | 320 × 320 | 5744 | 82 | `ffd470c98cc3a50cd98b3b6fb9416dd3dd1f039d4af1d01757afd2644a76bf61` |
 | `/assets/light-fury-sq-480.webp` | 480 | 480 × 480 | 9820 | 82 | `495b8d538c0496b9df28575c1746a6cc15bccdcbcc6a08e1e4520c23ade75ab5` |
 | `/assets/light-fury-sq-640.webp` | 640 | 640 × 640 | 14648 | 82 | `ee003266d74ee4a289856d6834023e769ef6986b81f9634e083148ff674d6ba0` |

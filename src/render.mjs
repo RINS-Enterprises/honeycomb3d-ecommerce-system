@@ -3,7 +3,8 @@ import {escapeHtml as e, money} from './domain.mjs';
 export const price = p => p.priceLkr === null ? 'Price on enquiry' : money(p.priceLkr);
 export const CARD_SIZES = '(max-width: 700px) calc((100vw - 52px) / 2), (max-width: 1000px) calc((100vw - 124px) / 3), (max-width: 1280px) calc((100vw - 146px) / 4), 284px';
 // Every photo slot is a square frame filled by a square derivative (object-fit: cover).
-const DETAIL_SIZES = '(max-width: 700px) calc(100vw - 40px), (max-width: 1000px) calc((100vw - 110px) / 2), (max-width: 1280px) calc((100vw - 140px) / 2), 570px';
+const DETAIL_SIZES = '(max-width: 700px) 100vw, (max-width: 1280px) calc((100vw - 120px) * .55), 640px';
+const THUMB_SIZES = '72px';
 const HERO_LANDSCAPE = '(min-width: 700px)';
 const srcset = variants => variants.map(v=>v.src+' '+v.width+'w').join(', ');
 
@@ -79,9 +80,35 @@ export function shop(products,store) {
     '<form class="filters" id="filters" role="search"><label>Search the collection<input type="search" id="search" name="q" placeholder="Try dragons, Naruto, keychains…" maxlength="100"></label><label>Category<select aria-label="Category" id="category" name="category"><option value="all">All categories</option>'+categories.map(c=>'<option value="'+e(c)+'">'+e(c)+'</option>').join('')+'</select></label><button class="button secondary" type="submit">Search</button><button class="text-button" id="reset-filters" type="button">Clear filters</button></form><p class="muted" role="status" id="result-count">'+products.length+' designs</p>' +
     '<div class="product-grid">'+products.map(p=>card(p,{headingLevel:2})).join('')+'</div><div class="empty" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><a href="/custom/">Ask about a custom print →</a></div><noscript><p>All designs are shown. Enable JavaScript to use search and category filters.</p></noscript></section>',store,'shop');
 }
+function gallerySlides(p) {
+  return [{src:p.image,alt:p.imageAlt,width:p.imageWidth,height:p.imageHeight,variants:p.imageVariants||[]},...(p.gallery||[])];
+}
+function gallery(p) {
+  const slides=gallerySlides(p);
+  const img=(g,i,sizes)=>'<img src="'+e(g.src)+'" srcset="'+e(srcset(g.variants))+'" sizes="'+sizes+'" alt="'+e(g.alt)+'" width="'+g.width+'" height="'+g.height+'" loading="eager"'+(i===0?' fetchpriority="high"':'')+'>';
+  if(slides.length===1)return '<div class="detail-gallery"><div class="detail-image">'+img(slides[0],0,DETAIL_SIZES)+'</div></div>';
+  return '<div class="detail-gallery" data-gallery><div class="gallery-track detail-image" tabindex="0" role="region" aria-label="'+e(p.name)+' photos, '+slides.length+' images" data-gallery-track>'+
+    slides.map((g,i)=>'<figure class="gallery-slide" id="photo-'+(i+1)+'" data-gallery-slide>'+img(g,i,DETAIL_SIZES)+'</figure>').join('')+'</div>'+
+    '<div class="gallery-thumbs" role="group" aria-label="Choose a photo">'+slides.map((g,i)=>'<button type="button" class="gallery-thumb" data-gallery-thumb="'+i+'" aria-label="Show photo '+(i+1)+' of '+slides.length+'"'+(i===0?' aria-current="true"':'')+'>'+img(g,1,THUMB_SIZES)+'</button>').join('')+'</div></div>';
+}
 export function detail(p,products,store) {
-  return layout(p.name,'<section class="wrap section"><a class="text-link" href="/shop/">← Back to the collection</a><div class="product-detail"><div class="detail-image">'+picture(p,{sizes:DETAIL_SIZES,loading:'eager'})+'</div><div><p class="eyebrow">'+e(p.category)+'</p><h1>'+e(p.name)+'</h1><p class="detail-price">'+e(price(p))+'</p><p class="lead">'+e(p.description)+'</p><p>'+availability(p)+'</p><p class="muted">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
-    '<form id="add-form" data-product-id="'+e(p.id)+'"><label>Quantity<input name="quantity" type="number" min="1" max="20" step="1" value="1" required></label><button class="button" type="submit" disabled data-enable="'+(p.availability!=='unavailable')+'">'+(p.availability==='unavailable'?'Currently unavailable':'Add to request cart')+'</button></form><noscript><p>Enable JavaScript to build a request cart.</p></noscript><p class="fine">This saves a request on your device. It does not reserve stock or complete a purchase.</p><p class="fine">Reference: '+e(p.id)+'</p><a href="/cart/">View your request cart →</a></div></div></section><section class="wrap section"><h2>Keep exploring</h2><div class="product-grid">'+products.filter(x=>x.id!==p.id).slice(0,3).map(p=>card(p)).join('')+'</div></section>',store,'shop');
+  const ordering=store.mode==='live'&&store.whatsappVerified;
+  const crumbs='<nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/shop/">Shop</a></li><li><a href="/shop/?category='+encodeURIComponent(p.category)+'">'+e(p.category)+'</a></li><li><span aria-current="page">'+e(p.name)+'</span></li></ol></nav>';
+  const facts=[['Category',e(p.category)],['Price',e(price(p))],['Availability',availability(p)],['Reference',e(p.id)]];
+  if(p.tags?.length)facts.splice(1,0,['Themes',p.tags.map(e).join(', ')]);
+  const more=products.filter(x=>x.id!==p.id).slice(0,4);
+  return layout(p.name,'<section class="wrap section product-section">'+crumbs+'<div class="product-detail">'+gallery(p)+
+    '<div class="detail-info"><p class="eyebrow">'+e(p.category)+'</p><h1>'+e(p.name)+'</h1><p class="detail-price" data-testid="product-price">'+e(price(p))+'</p>' +
+    '<p class="status-chip status-'+e(p.availability)+'" data-testid="availability"><span aria-hidden="true"></span>'+availability(p)+'</p>' +
+    '<p class="lead">'+e(p.description)+'</p>' +
+    '<form id="add-form" data-product-id="'+e(p.id)+'"><label>Quantity<input name="quantity" type="number" min="1" max="20" step="1" value="1" required></label><button class="button" type="submit" disabled data-enable="'+(p.availability!=='unavailable')+'" data-testid="add-to-cart">'+(p.availability==='unavailable'?'Currently unavailable':'Add to request cart')+'</button></form>' +
+    (ordering?'':'<button class="button secondary order-soon" type="button" disabled data-testid="order-button">Ordering opens soon</button>') +
+    '<noscript><p>Enable JavaScript to build a request cart.</p></noscript>' +
+    '<p class="fine">The request cart saves a list on your device. It does not reserve stock or complete a purchase.</p>' +
+    '<dl class="detail-facts">'+facts.map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('')+'</dl>' +
+    '<p class="fine">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
+    '<a class="text-link" href="/cart/">View your request cart →</a></div></div></section>' +
+    (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+more.map(p=>card(p)).join('')+'</div></section>':''),store,'shop');
 }
 export function cartPage(store) {
   return layout('Your request cart','<section class="wrap section narrow"><p class="eyebrow">YOUR SELECTION</p><h1>Request cart.</h1><p class="lead">A starting point for your order. We’ll confirm the details together.</p><div id="cart-body"><p>Loading your cart…</p></div><noscript><p>Enable JavaScript to access the cart saved on this device.</p></noscript></section>',store,'cart');

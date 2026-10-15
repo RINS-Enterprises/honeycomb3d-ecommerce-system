@@ -28,6 +28,12 @@ export function validateData(products, store) {
       if (p.image && (!p.imageVariants.length || !p.imageVariants.some(v=>v.src===p.image && v.width===p.imageWidth && v.height===p.imageHeight))) throw new Error('Image dimensions must match its fallback variant');
       if (!p.image && p.imageVariants.length) throw new Error('A placeholder cannot have image variants');
     }
+    if (p.gallery !== undefined) {
+      if (!Array.isArray(p.gallery) || (!p.image && p.gallery.length)) throw new Error('Invalid gallery');
+      for (const g of p.gallery) {
+        if (!g.alt || !Array.isArray(g.variants) || !g.variants.some(v=>v.src===g.src && v.width===g.width && v.height===g.height) || g.variants.some(v=>!/^\/assets\/[a-zA-Z0-9/_-]+\.webp$/.test(v.src))) throw new Error('Invalid gallery image: '+p.id);
+      }
+    }
     if (typeof p.approved !== 'boolean') throw new Error('Missing approval state');
     if (store.mode === 'live' && p.approved && (!p.image || p.availability === 'unconfirmed')) throw new Error(`Approved live product needs an original photo and confirmed availability: ${p.id}`);
   }

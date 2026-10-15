@@ -65,3 +65,17 @@ test('cards are one link with a clean LKR price and test hooks',async()=>{
   assert.match(html,/data-testid="product-card"/);
   assert.match(html,/<p class="price" data-testid="product-price">LKR\s400<\/p>/);
 });
+
+test('product page: gallery only with several photos, clear price, availability and a disabled ordering button',async()=>{
+  const {detail}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const minato=detail(visible.find(p=>p.id==='HC-MINATO'),visible,store);
+  assert.equal([...minato.matchAll(/data-gallery-thumb=/g)].length,3);
+  assert.match(minato,/<p class="detail-price" data-testid="product-price">LKR\s1,000<\/p>/);
+  assert.match(minato,/data-testid="availability"><span aria-hidden="true"><\/span>Availability to confirm/);
+  assert.match(minato,/<button class="button secondary order-soon" type="button" disabled data-testid="order-button">Ordering opens soon<\/button>/);
+  assert.match(minato,/<h2>More from HoneyComb 3D<\/h2>/);
+  const baymax=detail(visible.find(p=>p.id==='HC-BAYMAX'),visible,store);
+  assert(!baymax.includes('data-gallery-thumb'));
+  assert.equal([...baymax.matchAll(/fetchpriority="high"/g)].length,1);
+});

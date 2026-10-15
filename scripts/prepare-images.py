@@ -93,6 +93,16 @@ for entry in SPECS["assets"]:
                 raise ValueError("Minato square frame includes a neighbour or clips its wing")
             square_outputs = render(im.crop((sl - left, st - top, sr - left, sb - top)),
                                     square["widths"], entry["stem"] + "-sq")
+        gallery_outputs = []
+        for index, frame in enumerate(entry.get("gallery") or [], start=2):
+            # Extra square detail frames for the product-page gallery, inside the approved crop.
+            gl, gt, gr, gb = frame["box"]
+            if gr - gl != gb - gt or not (left <= gl < gr <= right and top <= gt < gb <= bottom):
+                raise ValueError("Gallery frame must be square and inside the approved crop: " + entry["id"])
+            if entry["id"] == "HC-MINATO" and not 2756 <= gl <= 2794:
+                raise ValueError("Minato gallery frame includes a neighbour or clips its wing")
+            gallery_outputs.append((frame, render(im.crop((gl - left, gt - top, gr - left, gb - top)),
+                                                  frame["widths"], f'{entry["stem"]}-g{index}')))
         hero_outputs = {}
         for shape, frame in (entry.get("hero") or {}).items():
             # Art-directed home hero frames, also cut from inside the approved crop.
@@ -103,7 +113,8 @@ for entry in SPECS["assets"]:
                                          frame["widths"], entry["stem"] + "-hero-" + shape)
         record = {**entry, "orientedSize": oriented_size, "appliedCropBox": crop,
                   "outputs": outputs + [{**o, "frame": "square"} for o in square_outputs]
-                  + [{**o, "frame": "hero-" + shape} for shape, outs in hero_outputs.items() for o in outs]}
+                  + [{**o, "frame": "hero-" + shape} for shape, outs in hero_outputs.items() for o in outs]
+                  + [{**o, "frame": f"gallery-{i}"} for i, (_, outs) in enumerate(gallery_outputs, start=2) for o in outs]}
         records.append(record)
         if entry["id"] != "brand-logo":
             product = next(p for p in products if p["id"] == entry["id"])
@@ -115,6 +126,12 @@ for entry in SPECS["assets"]:
                            imageVariants=[{k: o[k] for k in ("src", "width", "height")} for o in shown],
                            imageSource=entry["sourceTitle"], imageApprovedAt=SPECS["ownerApprovalDate"])
             product.pop("imageStatus", None)
+            product["gallery"] = []
+            for frame, outs in gallery_outputs:
+                g_fallback = next((o for o in outs if o["width"] == 640), outs[-1])
+                product["gallery"].append({"src": g_fallback["src"], "alt": frame["alt"],
+                                           "width": g_fallback["width"], "height": g_fallback["height"],
+                                           "variants": [{k: o[k] for k in ("src", "width", "height")} for o in outs]})
             if hero_outputs:
                 hero = {"product": entry["id"]}
                 for shape, outs in hero_outputs.items():
@@ -154,6 +171,8 @@ for rec in records:
             f'- Applied crop box after orientation: {code(tuple(rec["appliedCropBox"]))}.']
     if rec.get("square"):
         doc += [f'- Square storefront frame (inside the applied crop): {code(tuple(rec["square"]["box"]))}. {rec["square"]["note"]}']
+    for i, frame in enumerate(rec.get("gallery") or [], start=2):
+        doc += [f'- Product-page gallery image {i} (inside the applied crop): {code(tuple(frame["box"]))}. {frame["note"]}']
     for shape, frame in (rec.get("hero") or {}).items():
         doc += [f'- Home hero {shape} frame (inside the applied crop): {code(tuple(frame["box"]))}. {frame["note"]}']
     doc += [""]

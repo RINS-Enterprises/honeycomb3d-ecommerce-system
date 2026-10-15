@@ -117,7 +117,19 @@ function initCustom() {
   });
   ['idea','reference'].forEach(name=>form.elements[name].addEventListener('input',()=>form.elements[name].setCustomValidity('')));
 }
-initFilters();
+function initGallery() {
+  // Thumbnails steer a scroll-snap track; swiping the track updates the current thumbnail.
+  const root=document.querySelector('[data-gallery]');if(!root)return;
+  const track=root.querySelector('[data-gallery-track]'), thumbs=[...root.querySelectorAll('[data-gallery-thumb]')];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+  const mark=index=>thumbs.forEach((t,i)=>{if(i===index)t.setAttribute('aria-current','true');else t.removeAttribute('aria-current');});
+  thumbs.forEach((thumb,index)=>thumb.addEventListener('click',()=>{
+    track.scrollTo({left:index*track.clientWidth,behavior:reduce.matches?'auto':'smooth'});mark(index);
+  }));
+  let frame;
+  track.addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>mark(Math.round(track.scrollLeft/track.clientWidth)));},{passive:true});
+}
+initFilters();initGallery();
 try {
   const responses=await Promise.all([fetch('/data/products.json'),fetch('/data/store.json')]);
   if(responses.some(r=>!r.ok))throw new Error('Data unavailable');
