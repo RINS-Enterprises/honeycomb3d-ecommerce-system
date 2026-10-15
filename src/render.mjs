@@ -7,7 +7,7 @@ const DETAIL_SIZES = '(max-width: 700px) calc(100vw - 40px), (max-width: 1000px)
 const HERO_SIZES = '(max-width: 480px) calc(100vw - 40px), (max-width: 700px) 440px, (max-width: 1000px) calc((100vw - 100px) / 2.2), (max-width: 1280px) calc((100vw - 140px) / 2.2), 519px';
 
 export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}) {
-  if (!p.image) return '<div class="photo-placeholder"><span aria-hidden="true">◇</span><span>Original photo coming soon</span></div>';
+  if (!p.image) return '';
   const responsive=p.imageVariants?.length ?
     ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'"' : '';
   return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'"'+(priority?' fetchpriority="high"':'')+'>';

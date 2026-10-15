@@ -2,7 +2,7 @@ import {chromium} from 'playwright';
 import {spawn} from 'node:child_process';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
-const products=JSON.parse(await readFile('data/products.json','utf8'));
+const products=JSON.parse(await readFile('data/products.json','utf8')).filter(p=>p.image);
 const server=spawn(process.execPath,['scripts/serve.mjs'],{stdio:'inherit'});
 let browser;
 try {

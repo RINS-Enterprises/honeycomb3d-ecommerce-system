@@ -53,3 +53,9 @@ test('live-visible catalogue strips unapproved items from every cart operation',
   assert.equal(cartSummary([{id:'A',quantity:1}],visible).count,0);
   assert.equal(orderMessage([{id:'A',quantity:1}],visible),'');
 });
+test('products without an approved photo are hidden in preview and live',()=>{
+  const withPhoto={...p('P',100),image:'/assets/x-sq-640.webp',imageAlt:'Photo'};
+  assert.deepEqual(visibleProducts([...products,withPhoto],preview),[withPhoto]);
+  assert.deepEqual(visibleProducts([...products,{...withPhoto,approved:true}],{mode:'live'}).map(x=>x.id),['P']);
+  assert.deepEqual(visibleProducts([withPhoto],{mode:'live'}),[]);
+});

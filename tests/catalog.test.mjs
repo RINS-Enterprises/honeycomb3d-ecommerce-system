@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {filterProducts} from '../src/domain.mjs';
+import {filterProducts,visibleProducts} from '../src/domain.mjs';
 const products=JSON.parse(await readFile(new URL('../data/products.json',import.meta.url),'utf8'));
 test('all three recovered keychains appear under the keychain category',()=>{
   assert.equal(filterProducts(products,'','Keychains').length,3);
@@ -40,4 +40,9 @@ test('pending owner copies use placeholders; approved photos are responsive squa
   }
   assert.match(products.find(p=>p.id==='HC-MINATO').imageAlt,/tan engraved handle/);
   assert(!products.find(p=>p.id==='HC-MINATO').imageAlt.includes('white handle'));
+});
+test('Kurama and Classic Kunai stay off the storefront until their photos are imported',()=>{
+  const shown=visibleProducts(products,{mode:'preview'}).map(p=>p.id);
+  assert(!shown.includes('HC-KURAMA')&&!shown.includes('HC-KUNAI'));
+  assert.equal(shown.length,5);
 });

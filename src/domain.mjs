@@ -32,7 +32,8 @@ export function validateData(products, store) {
   }
   if (store.mode === 'live' && !store.whatsappVerified) throw new Error('Live ordering requires a verified WhatsApp contact');
 }
-export const visibleProducts = (products, store) => store.mode === 'live' ? products.filter(p=>p.approved) : products;
+// Products without an approved original photo stay hidden until their photo is imported.
+export const visibleProducts = (products, store) => products.filter(p => p.image && (store.mode !== 'live' || p.approved));
 export function filterProducts(products, query='', category='all') {
   const words = query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
   return products.filter(p => (category==='all' || p.category===category) && words.every(w=>[p.name,p.category,...p.tags].join(' ').toLocaleLowerCase().includes(w)));

@@ -29,7 +29,8 @@ try {
   await page.getByRole('complementary',{name:'Store preview notice'}).waitFor();
   await screenshot('test-results/home-desktop.png');
   await page.getByRole('link',{name:'Explore the collection'}).first().click();
-  assert.equal(await page.locator('[data-product-card]').count(),7);
+  assert.equal(await page.locator('[data-product-card]').count(),5,'Products without an approved photo stay hidden');
+  assert.equal(await page.locator('.photo-placeholder').count(),0);
   for(const card of await page.locator('[data-product-card]').all()) {
     assert.equal(await card.getByRole('link').count(),1,'One accessible link per product card');
     assert.equal(await card.getByRole('heading',{level:2}).count(),1,'Shop heading hierarchy');
@@ -39,7 +40,7 @@ try {
   await page.waitForFunction(()=>document.querySelector('#no-results').hidden===false);
   await page.getByRole('button',{name:'Clear filters'}).click();
   await page.getByLabel('Category',{exact:true}).selectOption('Figures');
-  assert.equal(await page.locator('[data-product-card]:visible').count(),2);
+  assert.equal(await page.locator('[data-product-card]:visible').count(),1);
   await page.getByRole('searchbox').fill('Baymax');
   assert.equal(await page.locator('[data-product-card]:visible').count(),1);
   await page.getByRole('heading',{name:'Baymax Figure'}).getByRole('link').click();
