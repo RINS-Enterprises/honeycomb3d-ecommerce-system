@@ -1,11 +1,16 @@
 import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, visibleProducts} from './domain.mjs';
 
 const status=document.querySelector('#status');
-function announce(message) { status.textContent=message; }
+let toastTimer;
+// Status messages are read by assistive tech and shown as a toast that clears itself.
+function announce(message) { status.textContent=message; clearTimeout(toastTimer); toastTimer=setTimeout(()=>{status.textContent='';},4500); }
 let products=[],store={},cart=[],storage;
 function updateCount() {
   const count=String(cartSummary(cart,products).count);
-  document.querySelectorAll('[data-cart-count]').forEach(el=>{el.textContent=count;el.dataset.count=count;});
+  document.querySelectorAll('[data-cart-count]').forEach(el=>{
+    if(el.dataset.count!==count&&el.dataset.count!==undefined&&products.length){el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump');}
+    el.textContent=count;el.dataset.count=count;
+  });
 }
 function saveCart() {
   cart=normalizeCart(cart,products);
@@ -79,6 +84,9 @@ function initAdd() {
     if((existing?.quantity||0)+quantity>MAX_QUANTITY)return announce('You can request up to '+MAX_QUANTITY+' of this design. Adjust the quantity in your cart.');
     if(existing)existing.quantity+=quantity;else cart.push({id:product.id,quantity});
     announce(product.name+' added to your request cart.');saveCart();
+    const button=form.querySelector('button[type="submit"]');
+    clearTimeout(button.resetTimer);button.dataset.state='added';button.textContent='Added to cart ✓';
+    button.resetTimer=setTimeout(()=>{button.textContent='Add to request cart';delete button.dataset.state;},1800);
   });
 }
 function initCart() {
@@ -161,7 +169,12 @@ function initGallery() {
   let frame;
   track.addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>mark(Math.round(track.scrollLeft/track.clientWidth)));},{passive:true});
 }
-initFilters();initGallery();
+function initHeader() {
+  const header=document.querySelector('.site-header');if(!header)return;
+  const update=()=>header.classList.toggle('is-scrolled',scrollY>8);
+  addEventListener('scroll',update,{passive:true});update();
+}
+initHeader();initFilters();initGallery();
 try {
   const responses=await Promise.all([fetch('/data/products.json'),fetch('/data/store.json')]);
   if(responses.some(r=>!r.ok))throw new Error('Data unavailable');

@@ -59,6 +59,10 @@ try {
   await screenshot('test-results/product-desktop.png');
   await page.getByRole('spinbutton').fill('2');
   await page.getByRole('button',{name:'Add to request cart'}).click();
+  await page.getByRole('button',{name:'Added to cart ✓'}).waitFor();
+  await page.getByRole('status').filter({hasText:'Baymax Figure added to your request cart.'}).waitFor();
+  assert.equal(await page.getByTestId('cart-count').textContent(),'2');
+  await page.getByRole('button',{name:'Add to request cart'}).waitFor();
   await page.getByRole('link',{name:'View your request cart'}).click();
   await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
   assert.equal(await page.getByRole('spinbutton').inputValue(),'2');

@@ -126,7 +126,8 @@ export function detail(p,products,store) {
   const ordering=store.mode==='live'&&store.whatsappVerified;
   const crumbs='<nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/shop/">Shop</a></li><li><a href="/shop/?category='+encodeURIComponent(p.category)+'">'+e(p.category)+'</a></li><li><span aria-current="page">'+e(p.name)+'</span></li></ol></nav>';
   const facts=[['Category',e(p.category)],['Price',e(price(p))],['Availability',availability(p)],['Reference',e(p.id)]];
-  if(p.tags?.length)facts.splice(1,0,['Themes',p.tags.map(e).join(', ')]);
+  const themes=(p.tags||[]).filter(t=>t!==p.category);
+  if(themes.length)facts.splice(1,0,['Themes',themes.map(e).join(', ')]);
   const more=products.filter(x=>x.id!==p.id).slice(0,4);
   const share=p.imageVariants?.at(-1)||{src:p.image,width:p.imageWidth,height:p.imageHeight};
   // Structured data: name, photos and the LKR price only (no availability, ratings or reviews).
