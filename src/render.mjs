@@ -15,11 +15,11 @@ export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}
     ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'"' : '';
   return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'"'+(priority?' fetchpriority="high"':'')+'>';
 }
-export function card(p, {headingLevel=3}={}) {
+export function card(p, {headingLevel=3, loading='lazy'}={}) {
   const heading=headingLevel===2?'h2':'h3';
   // One link per card; its ::after stretches over the whole card so the photo is clickable too.
   return '<article class="product-card" data-product-card data-testid="product-card" data-category="' + e(p.category) + '" data-search="' + e([p.name,p.category,...p.tags].join(' ').toLowerCase()) + '" data-tags="' + e(p.tags.join('|')) + '">' +
-    '<div class="product-image">' + picture(p) + '</div>' +
+    '<div class="product-image">' + picture(p,{loading}) + '</div>' +
     '<div class="card-copy"><p class="eyebrow">' + e(p.category) + '</p><'+heading+'><a class="card-link" href="/products/' + e(p.slug) + '/">' + e(p.name) + '</a></'+heading+'><p class="price" data-testid="product-price">' + e(price(p)) + '</p><p class="card-status">' + availability(p) + '</p></div></article>';
 }
 function availability(p) {
@@ -109,7 +109,7 @@ export function shop(products,store) {
     chips('category','Category',[['all','All'],...categories.map(c=>[c,c])]) +
     (themes.length?chips('theme','Theme',[['any','Any theme'],...themes.map(t=>[t,t])]):'') +
     '</form><div class="results-bar"><p class="muted" role="status" id="result-count">'+products.length+' designs</p><button class="text-button" id="reset-filters" type="button" hidden>Clear filters</button></div>' +
-    '<div class="product-grid">'+products.map(p=>card(p,{headingLevel:2})).join('')+'</div><div class="empty state-panel" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><div class="actions"><a class="button secondary" href="/custom/">Ask about a custom print</a></div></div><noscript><p>All designs are shown. Enable JavaScript to use search and filters.</p></noscript></section>',store,'shop','',{description:'Explore the designs. Ask about colours, sizes and finishes. 3D-printed keychains, figures and props, priced in LKR.',path:'/shop/'});
+    '<div class="product-grid">'+products.map((p,i)=>card(p,{headingLevel:2,loading:i<2?'eager':'lazy'})).join('')+'</div><div class="empty state-panel" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><div class="actions"><a class="button secondary" href="/custom/">Ask about a custom print</a></div></div><noscript><p>All designs are shown. Enable JavaScript to use search and filters.</p></noscript></section>',store,'shop','',{description:'Explore the designs. Ask about colours, sizes and finishes. 3D-printed keychains, figures and props, priced in LKR.',path:'/shop/'});
 }
 function gallerySlides(p) {
   return [{src:p.image,alt:p.imageAlt,width:p.imageWidth,height:p.imageHeight,variants:p.imageVariants||[]},...(p.gallery||[])];
