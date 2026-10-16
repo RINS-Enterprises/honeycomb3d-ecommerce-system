@@ -221,6 +221,19 @@ See owner decisions §5. Also unknown: whether the EasyWP site, its database, `w
 | D-3 price | Airtable is the source | The prices are in §3.2 and `qa/owner-catalog-airtable.json`. | Descriptions, size, material and lead time. SKU conflict D-11. |
 | D-8 stock | Airtable is the source | Airtable has **no per-product stock** (§3.2). QA recommends no counts on the site and an owner-chosen `availability` value per product. | The owner picks `availability` per product, and a lead time if any product is `made-to-order`. |
 
+
+### 5b. Owner decisions, 2026-10-16
+- **New products:** "now, we should add all the products" and "list those" (the 10 verified photos). The builder needs the owner's confirmation in its own session before it writes the data.
+- **MakerWorld sourcing:** the owner will buy commercial licences where required and check each model by hand. They want photos and details from MakerWorld model pages saved into Drive.
+  - QA advised against scraping MakerWorld and against using designers' photos.
+  - The owner decided to go ahead. QA delivered a user-driven "Save to Drive" bookmark plus a Google Apps Script web app (`/home/user/makerworld-to-drive/` in this session). It saves the page's photos, title, designer, licence and link into `My Drive/MakerWorld imports/`, with a log sheet that flags models whose licence box was not ticked.
+  - It is not an automated crawler, and it runs in the owner's browser and Google account.
+- **AI-edited photos (Nano Banana) on the website:** allowed under QA's recommended conditions, applied because the owner stated no preference:
+  - each product also keeps at least one real photo of the shop's own print;
+  - AI-edited images are labelled on the page, e.g. "Colour preview";
+  - provenance records them with `aiEdited: true` and their source.
+  - QA's AI-marker check will then accept AI-marked files only when they are recorded that way.
+  - This replaces the earlier blanket "no AI images" rule (F-21 still applies to unlabelled AI images).
 ## 6. Findings
 
 ### F-01 · Closed 2026-10-09 · Target repository was a proposal; work moved to this repo
