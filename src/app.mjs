@@ -157,7 +157,7 @@ function initReveal() {
 let altLoader=null;
 function loadAltPhoto(frame) {
   if(frame.dataset.altLoaded)return;frame.dataset.altLoaded='1';altLoader?.unobserve(frame);
-  const img=new Image();img.className='card-alt';img.alt='';img.decoding='async';
+  const img=new Image();img.className='card-alt';img.alt='';img.setAttribute('aria-hidden','true');img.decoding='async';
   img.sizes=frame.querySelector('img')?.sizes||'';img.srcset=frame.dataset.altSrcset;img.src=frame.dataset.altSrc;
   img.width=640;img.height=640;
   img.addEventListener('load',()=>frame.classList.add('has-alt'),{once:true});

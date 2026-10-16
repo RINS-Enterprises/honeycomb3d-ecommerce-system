@@ -33,12 +33,14 @@ try {
       const file=new Image();file.src=img.currentSrc;await file.decode();
       return {src:new URL(img.currentSrc).pathname,width:file.naturalWidth,height:file.naturalHeight,
               attrWidth:Number(img.getAttribute('width')),attrHeight:Number(img.getAttribute('height')),
-              responsive:!!img.getAttribute('srcset'),alt:img.alt};
+              responsive:!!img.getAttribute('srcset'),alt:img.alt,
+              decorative:img.classList.contains('card-alt')&&img.alt===''&&img.getAttribute('aria-hidden')==='true'};
     })));
     const bytes=new Map();
     for(const r of responses){assert.equal(r.status(),200);bytes.set(new URL(r.url()).pathname,(await r.body()).length);}
     for(const img of imgs) {
-      assert(img.alt&&img.width&&img.height,'Photo decodes with alt text');
+      // Only the card hover photo (a second view of a product already described by the card's main photo) is decorative.
+      assert((img.alt||img.decorative)&&img.width&&img.height,'Photo decodes with alt text: '+img.src);
       assert(Math.abs(img.attrWidth/img.attrHeight-img.width/img.height)/(img.width/img.height)<.01,'Intrinsic proportions match: '+img.src);
       if(img.src.endsWith('.webp'))assert(img.responsive,'Responsive photo');
     }
