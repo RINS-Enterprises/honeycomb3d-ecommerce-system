@@ -141,9 +141,11 @@ const recentRow=(current='')=>'<section class="wrap section recent-section" data
 export function detail(p,products,store) {
   const ordering=store.mode==='live'&&store.whatsappVerified;
   const crumbs='<nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/shop/">Shop</a></li><li><a href="/shop/?category='+encodeURIComponent(p.category)+'">'+e(p.category)+'</a></li><li><span aria-current="page">'+e(p.name)+'</span></li></ol></nav>';
-  const facts=[['Category',e(p.category)],['Price',e(price(p))],['Availability',availability(p)],['Reference',e(p.id)]];
+  // Price and availability already lead the page; the facts link onward to the matching shop views instead.
+  const shopLink=(key,value)=>'<a href="/shop/?'+key+'='+encodeURIComponent(value)+'">'+e(value)+'</a>';
+  const facts=[['Category',shopLink('category',p.category)],['Reference',e(p.id)]];
   const themes=(p.tags||[]).filter(t=>t!==p.category);
-  if(themes.length)facts.splice(1,0,['Themes',themes.map(e).join(', ')]);
+  if(themes.length)facts.splice(1,0,['Themes',themes.map(t=>shopLink('theme',t)).join(', ')]);
   // Same category first, then shared themes, then the rest; catalogue order breaks ties.
   const themesOf=x=>new Set((x.tags||[]).filter(t=>t!==x.category));
   const mine=themesOf(p);

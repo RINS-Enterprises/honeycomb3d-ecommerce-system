@@ -291,6 +291,8 @@ textarea{resize:vertical;line-height:1.5}
 .detail-facts div{display:grid;grid-template-columns:120px 1fr;gap:var(--space-4);padding:12px 0;border-bottom:1px solid var(--line);font-size:var(--step--1)}
 .detail-facts dt{color:var(--muted)}
 .detail-facts dd{margin:0;color:var(--text-soft)}
+.detail-facts a{color:var(--text);text-decoration:underline;text-decoration-color:rgba(251,163,27,.55);text-underline-offset:3px}
+.detail-facts a:hover{color:var(--accent)}
 .more-section{border-top:1px solid var(--line)}
 .recent-section{border-top:1px solid var(--line)}
 .grid-cta{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-2);padding:var(--space-5);border:1px dashed rgba(251,163,27,.45);border-radius:var(--radius-md);background:radial-gradient(120% 80% at 100% 0,rgba(251,163,27,.12),transparent 60%),var(--panel);color:var(--text);text-decoration:none;min-height:100%}

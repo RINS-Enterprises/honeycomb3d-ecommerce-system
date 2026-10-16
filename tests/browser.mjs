@@ -309,6 +309,12 @@ try {
   await screenshot('test-results/home-mobile.png');
   await page.keyboard.press('Tab');assert.equal(await page.locator(':focus').textContent(),'Skip to content');
   await page.keyboard.press('Enter');assert.equal(await page.locator(':focus').getAttribute('id'),'main');
+  // Product facts link onward: the Naruto theme opens the shop already filtered.
+  await page.goto('http://127.0.0.1:4173/products/minato-kunai/');
+  await page.locator('.detail-facts').getByRole('link',{name:'Naruto'}).click();
+  await page.waitForURL(/\/shop\/\?theme=Naruto/);
+  await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===4);
+  assert.equal(await page.getByRole('radio',{name:/^Naruto/}).isChecked(),true,'Theme chip selected from the link');
   const missing=await page.goto('http://127.0.0.1:4173/not-found/');
   assert.equal(missing.status(),404);
   assert.equal(await page.getByTestId('notfound-picks').getByTestId('product-card').count(),4,'404 offers four designs');

@@ -156,3 +156,15 @@ test('shop chips show design counts and list themes largest first',async()=>{
   const count=t=>visible.filter(p=>p.tags.includes(t)).length;
   assert(themes.every((t,i)=>!i||count(themes[i-1])>=count(t)),'Themes ordered by size: '+themes);
 });
+
+test('product facts link to the matching shop views and do not repeat price or availability',async()=>{
+  const {detail}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const html=detail(visible.find(p=>p.id==='HC-MINATO'),visible,store);
+  const facts=html.match(/<dl class="detail-facts">.*?<\/dl>/)[0];
+  assert.match(facts,/<dt>Category<\/dt><dd><a href="\/shop\/\?category=Props">Props<\/a><\/dd>/);
+  assert.match(facts,/<a href="\/shop\/\?theme=Naruto">Naruto<\/a>/);
+  assert.match(facts,/<dt>Reference<\/dt><dd>HC-MINATO<\/dd>/);
+  assert(!/<dt>(?:Price|Availability)<\/dt>/.test(facts));
+  assert.equal([...html.matchAll(/data-testid="product-price"/g)].length>=1,true,'Price still shown at the top');
+});
