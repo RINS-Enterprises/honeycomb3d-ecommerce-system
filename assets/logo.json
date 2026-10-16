@@ -1,0 +1,39 @@
+{
+  "id": "brand-logo-dark",
+  "sourceTitle": "HONEYCOMB Logo in Black Background.pdf",
+  "sourceDriveId": "1pIsPgG9hIyL3ox8ocN9arP65yd6asYF7",
+  "sourceSha256": "c56586348b8cba098db3b75a7c63731974b5810035c23863b85ee3005a289a20",
+  "input": "assets/brand-sources/honeycomb-logo-black.pdf",
+  "inputSha256": "c56586348b8cba098db3b75a7c63731974b5810035c23863b85ee3005a289a20",
+  "sourcePage": 1,
+  "renderScale": 2,
+  "renderSize": [
+    6000,
+    6000
+  ],
+  "removed": "full-page background fill rgb(35,31,32) only",
+  "cropBox": [
+    454,
+    2307,
+    5738,
+    3842
+  ],
+  "outputs": [
+    {
+      "src": "/assets/honeycomb-logo-dark-264.png",
+      "width": 264,
+      "height": 77,
+      "bytes": 11548,
+      "sha256": "b7f4354fe4ae2563be13a9eced8e2bfcbc8bdec0f7f28e4d132df1375abb99df",
+      "quality": null
+    },
+    {
+      "src": "/assets/honeycomb-logo-dark-660.png",
+      "width": 660,
+      "height": 192,
+      "bytes": 32682,
+      "sha256": "121f1640d6c7bb6c167c0c592068ed607358dc2e4a7764b34c89336f5a6831fd",
+      "quality": null
+    }
+  ]
+}
