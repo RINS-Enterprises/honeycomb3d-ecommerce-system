@@ -41,6 +41,24 @@ touch.alpha_composite(symbol, ((180 - symbol.width) // 2, (180 - symbol.height) 
 touch = Image.frombytes("RGB", touch.size, touch.convert("RGB").tobytes())
 touch_target = ROOT / "public/apple-touch-icon.png"
 touch.save(touch_target, "PNG", optimize=True)
+# SVG favicon: the PDF's own vector paths, copied verbatim (no redrawing). PyMuPDF wraps each path in a
+# clip that is the whole page; those clips are no-ops and are dropped. The viewBox is the artwork's
+# bounding box, centred on a square.
+import re
+page_svg = page.get_svg_image(text_as_path=True)
+clips = re.findall(r'<clipPath id="(clip_\d+)">\s*<path d="([^"]+)"/>\s*</clipPath>', page_svg)
+full_page = "M0 0H%gV%gH0Z" % (page.rect.width, page.rect.height)
+assert clips and all(d == full_page for _, d in clips), "Every clip must be the full page"
+paths = re.findall(r'<g clip-path="url\(#clip_\d+\)">\s*(<path d="[^"]+" fill="#[0-9a-f]{6}"/>)\s*</g>', page_svg)
+assert len(paths) == len(page.get_drawings()) == len(clips), "Every drawing is one filled path"
+bbox = fitz.Rect()
+for drawing in page.get_drawings(): bbox |= drawing["rect"]
+side = max(bbox.width, bbox.height)
+x0, y0 = bbox.x0 - (side - bbox.width) / 2, bbox.y0 - (side - bbox.height) / 2
+svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="%.3f %.3f %.3f %.3f">' % (x0, y0, side, side)
+       + "".join(paths) + "</svg>\n")
+svg_target = ROOT / "public/favicon.svg"
+svg_target.write_text(svg)
 record = {"sourceDriveId":"1AOoBNTsdAzj_getImty-054LJWxjzfFq","sourceTitle":"HONEYCOMB Symbol.pdf",
           "sourceSha256":sha(raw),"sourcePage":1,"renderScale":2,
           "renderSize":list(im.size),"cropBox":list(box),"squarePadding":"centered, white",
@@ -48,7 +66,11 @@ record = {"sourceDriveId":"1AOoBNTsdAzj_getImty-054LJWxjzfFq","sourceTitle":"HON
           "outputSha256":sha(target.read_bytes()),
           "appleTouchIcon":{"output":"/apple-touch-icon.png","size":[180,180],"background":"#0c0b0a",
                             "symbolSize":list(symbol.size),"bytes":touch_target.stat().st_size,
-                            "sha256":sha(touch_target.read_bytes())}}
+                            "sha256":sha(touch_target.read_bytes())},
+          "svgIcon":{"output":"/favicon.svg","method":"PDF vector paths copied verbatim; full-page clips dropped",
+                     "paths":len(paths),"fills":sorted(set(re.findall(r'fill="(#[0-9a-f]{6})"', svg))),
+                     "viewBox":[round(x0,3),round(y0,3),round(side,3),round(side,3)],"background":"transparent",
+                     "bytes":svg_target.stat().st_size,"sha256":sha(svg_target.read_bytes())}}
 (ROOT / "assets/favicon.json").write_text(json.dumps(record,indent=2)+"\n")
 (ROOT / "docs/FAVICON-PROVENANCE.md").write_text(
     "# Brand symbol favicon\n\nExported directly from the owner's HONEYCOMB Symbol.pdf; no generated artwork.\n\n"
@@ -56,5 +78,7 @@ record = {"sourceDriveId":"1AOoBNTsdAzj_getImty-054LJWxjzfFq","sourceTitle":"HON
     + "\n\nCrop coordinates refer to the 2x rendered first PDF page. Aspect ratio is preserved on a centered white square. "
     "ICO contains 16, 32 and 48 pixel frames; no EXIF/XMP/ICC metadata is copied. "
     "The 180 x 180 apple-touch-icon.png renders the same page on transparency, fits the symbol in 136 px and centres it on #0c0b0a. "
+    "favicon.svg keeps the PDF's own vector paths and fills unchanged (PyMuPDF get_svg_image, text as paths), drops only the "
+    "full-page clip wrappers, and sets a square viewBox around the artwork on a transparent background; favicon.ico stays as the fallback. "
     "Reproduce with python scripts/prepare-favicon.py using Pillow 11.3.0 and PyMuPDF 1.26.5.\n")
 print(json.dumps(record))

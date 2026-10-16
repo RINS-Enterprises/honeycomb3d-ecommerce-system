@@ -44,6 +44,13 @@ const fontBytes=await readFile(join(root,'dist',fontRecord.output));
 assert.equal(createHash('sha256').update(fontBytes).digest('hex'),fontRecord.sha256,'Font hash');
 assert(fontBytes.length<=100_000,'Fonts stay under 100 KB');
 assert.match(await readFile(join(root,'dist/fonts/OFL.txt'),'utf8'),/SIL OPEN FONT LICENSE Version 1\.1/);
+// SVG favicon: the recorded export, plain vector paths only, linked from every page beside the ICO fallback.
+const faviconRecord=JSON.parse(await readFile(join(root,'assets/favicon.json'),'utf8')).svgIcon;
+const faviconSvg=await readFile(join(root,'dist/favicon.svg'));
+assert.equal(createHash('sha256').update(faviconSvg).digest('hex'),faviconRecord.sha256,'favicon.svg matches its provenance record');
+assert(!/<script|<image|<foreignObject|on\w+=|href=/i.test(faviconSvg.toString()),'favicon.svg is plain vector paths');
+for(const path of paths){const html=await readFile(join(root,'dist',path),'utf8');
+  assert(html.includes('<link rel="icon" href="/favicon.ico"')&&html.includes('<link rel="icon" href="/favicon.svg" type="image/svg+xml">'),'Both favicons linked: '+path);}
 // Brand texture: tiny, same-origin, referenced by the stylesheet, and free of scripts.
 const hex=await readFile(join(root,'dist/hex.svg'),'utf8');
 assert(Buffer.byteLength(hex)<=1024,'Hex texture stays at or under 1 KB');

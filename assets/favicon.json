@@ -36,5 +36,24 @@
     ],
     "bytes": 11526,
     "sha256": "4fbdf6ba7c6fe532e639b0307a77daeb09efc5ab6a7116756a6d73dcdbe86e0e"
+  },
+  "svgIcon": {
+    "output": "/favicon.svg",
+    "method": "PDF vector paths copied verbatim; full-page clips dropped",
+    "paths": 25,
+    "fills": [
+      "#231f20",
+      "#faa31b",
+      "#ffffff"
+    ],
+    "viewBox": [
+      532.114,
+      534.602,
+      1900.351,
+      1900.351
+    ],
+    "background": "transparent",
+    "bytes": 8130,
+    "sha256": "04a20ddb596f0b0df7e7b874b1feedfb5e8eb89cdc52f46db5dc5f14b2a04fcd"
   }
 }

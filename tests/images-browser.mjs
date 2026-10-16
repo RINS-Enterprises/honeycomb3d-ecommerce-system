@@ -18,6 +18,14 @@ try {
   assert.equal(icon.readUInt16LE(4),3,'Three favicon frames');
   const iconSizes=Array.from({length:3},(_,i)=>icon[6+i*16]).sort((a,b)=>a-b);
   assert.deepEqual(iconSizes,[16,32,48]);
+  const svgIcon=await fetch('http://127.0.0.1:4173/favicon.svg');
+  assert.equal(svgIcon.status,200,'SVG favicon route');
+  assert.match(svgIcon.headers.get('content-type'),/image\/svg\+xml/);
+  const iconPage=await browser.newPage();
+  await iconPage.goto('http://127.0.0.1:4173/favicon.svg');
+  const iconBox=await iconPage.evaluate(()=>{const s=document.querySelector('svg');return {paths:s.querySelectorAll('path').length,box:s.viewBox.baseVal.width===s.viewBox.baseVal.height};});
+  assert(iconBox.paths>0&&iconBox.box,'SVG favicon renders a square vector symbol');
+  await iconPage.close();
   const report=[];
   for(const route of ['/','/shop/','/cart/','/custom/','/privacy/',...products.map(p=>'/products/'+p.slug+'/')]) {
     const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:3,isMobile:true});

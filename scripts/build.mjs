@@ -38,6 +38,7 @@ for(const asset of assets) {
   await copyFile(join(root,'public',asset),join(dist,asset));
 }
 await copyFile(join(root,'public/favicon.ico'),join(dist,'favicon.ico'));
+await copyFile(join(root,'public/favicon.svg'),join(dist,'favicon.svg'));
 // Brand texture used by styles.css (same-origin; the CSP allows no data: images).
 await copyFile(join(root,'public/hex.svg'),join(dist,'hex.svg'));
 await copyFile(join(root,'public/apple-touch-icon.png'),join(dist,'apple-touch-icon.png'));
