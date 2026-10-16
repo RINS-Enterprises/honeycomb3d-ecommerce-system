@@ -744,5 +744,310 @@
       "width": 1200,
       "height": 1200
     }
+  },
+  {
+    "id": "HNYCMB505",
+    "slug": "bridgerton-bookmark",
+    "name": "Bridgerton Bookmark",
+    "category": "Bookmarks",
+    "tags": [
+      "Bridgerton"
+    ],
+    "description": "A Bridgerton bookmark to keep your place. Confirm the size and colour with us.",
+    "priceLkr": 300,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recdDPCKdRlekdkRF, Status Active). Airtable name \"Bridgerton Bookmark\", category \"Bookmark\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Bridgerton Bookmark",
+    "sourceCategory": "Bookmark",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recdDPCKdRlekdkRF",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
+  },
+  {
+    "id": "HNYCMB506",
+    "slug": "flexi-derpy-kpop-demon-hunters",
+    "name": "Flexi Derpy (Kpop Demon Hunters)",
+    "category": "Figures",
+    "tags": [
+      "Kpop Demon Hunters"
+    ],
+    "description": "A Flexi Derpy figure from Kpop Demon Hunters. Confirm the size, colour and finish with us.",
+    "priceLkr": 500,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recFEK7J2SeYp25so, Status Active). Airtable name \"Flexi Derpy (Kpop Demon Hunters)\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Flexi Derpy (Kpop Demon Hunters)",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recFEK7J2SeYp25so",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
+  },
+  {
+    "id": "HNYCMB507",
+    "slug": "office-desk-organizer-with-phone-holder",
+    "name": "Office Desk Organizer with Phone Holder",
+    "category": "Desk Organizers",
+    "tags": [],
+    "description": "A desk organizer with a phone holder for your workspace. Confirm the size and colour with us.",
+    "priceLkr": 2000,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recCcuDJYbdNWR4CV, Status Active). Airtable name \"Office Desk Organizer With Phone Holder\", category \"Desk Organizer\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Office Desk Organizer With Phone Holder",
+    "sourceCategory": "Desk Organizer",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recCcuDJYbdNWR4CV",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
+  },
+  {
+    "id": "HNYCMB510",
+    "slug": "light-fury-big-wings",
+    "name": "Light Fury Big Wings",
+    "category": "Figures",
+    "tags": [
+      "Dragons"
+    ],
+    "description": "A Light Fury figure with big wings for your desk or shelf. Confirm the size, colour and finish with us.",
+    "priceLkr": 600,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recKOLhc0zDkYrVBf, Status Active). Airtable name \"Light Fury Big Wings\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Light Fury Big Wings",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recKOLhc0zDkYrVBf",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
+  },
+  {
+    "id": "HNYCMB512",
+    "slug": "urban-spider-man",
+    "name": "Urban Spider-Man",
+    "category": "Figures",
+    "tags": [
+      "Marvel",
+      "Spider-Man"
+    ],
+    "description": "An Urban Spider-Man figure for your desk or shelf. Confirm the size, colour and finish with us.",
+    "priceLkr": 1750,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record rec6SmgSi62ShemTW, Status Active). Airtable name \"Urban Spider Man\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Urban Spider Man",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "rec6SmgSi62ShemTW",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
+  },
+  {
+    "id": "HNYCMB513",
+    "slug": "stormtrooper-keychain",
+    "name": "Stormtrooper Keychain (Star Wars)",
+    "category": "Keychains",
+    "tags": [
+      "Star Wars"
+    ],
+    "description": "A Stormtrooper keychain for your keys or bag. Confirm the size and colour with us.",
+    "priceLkr": 500,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recWAVV09ernSDOm0, Status Active). Airtable name \"Stormtrooper Star Wars keychain\", category \"Keytag\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Stormtrooper Star Wars keychain",
+    "sourceCategory": "Keytag",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recWAVV09ernSDOm0",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
+  },
+  {
+    "id": "HNYCMB514",
+    "slug": "shuriken-ninja-star",
+    "name": "Shuriken Ninja Star",
+    "category": "Props",
+    "tags": [],
+    "description": "A shuriken ninja star prop for your collection. Confirm the size, colour and finish with us.",
+    "priceLkr": 500,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recjektyNRVkTaogy, Status Active). Airtable name \"Shuriken Ninja Star\", category \"Weapon\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Shuriken Ninja Star",
+    "sourceCategory": "Weapon",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recjektyNRVkTaogy",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
+  },
+  {
+    "id": "HNYCMB515",
+    "slug": "grogu-baby-yoda-keychain",
+    "name": "Grogu Baby Yoda Keychain",
+    "category": "Keychains",
+    "tags": [
+      "Star Wars"
+    ],
+    "description": "A Grogu keychain for your keys or bag. Confirm the size and colour with us.",
+    "priceLkr": 500,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recCQZOXNRK5YUqlL, Status Active). Airtable name \"Gorgu Baby Yoda keychain\", category \"Keytag\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Gorgu Baby Yoda keychain",
+    "sourceCategory": "Keytag",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recCQZOXNRK5YUqlL",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
+  },
+  {
+    "id": "HNYCMB516",
+    "slug": "dummy-13-iron-man",
+    "name": "Dummy 13 Iron Man",
+    "category": "Figures",
+    "tags": [
+      "Marvel",
+      "Iron Man"
+    ],
+    "description": "A Dummy 13 figure styled as Iron Man. Confirm the size, colour and finish with us.",
+    "priceLkr": 1500,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recAr4pXP6kkpzPZ8, Status Active). Airtable name \"Dummy13 Iron Man\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Dummy13 Iron Man",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recAr4pXP6kkpzPZ8",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
+  },
+  {
+    "id": "HNYCMB517",
+    "slug": "dummy-13-spider-man",
+    "name": "Dummy 13 Spider-Man",
+    "category": "Figures",
+    "tags": [
+      "Marvel",
+      "Spider-Man"
+    ],
+    "description": "A Dummy 13 figure styled as Spider-Man. Confirm the size, colour and finish with us.",
+    "priceLkr": 1500,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record rec444U7FQYCpPSG9, Status Active). Airtable name \"Dummy 13 Spider Man\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Dummy 13 Spider Man",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "rec444U7FQYCpPSG9",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
+  },
+  {
+    "id": "HNYCMB518",
+    "slug": "horse-figurine",
+    "name": "Horse Figurine",
+    "category": "Figures",
+    "tags": [],
+    "description": "A horse figurine for your desk or shelf. Confirm the size, colour and finish with us.",
+    "priceLkr": 1600,
+    "availability": "unconfirmed",
+    "image": null,
+    "approved": false,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record rec2M4tmBzDXd1sxm, Status Active). Airtable name \"Horse figurine\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "draft-needs-owner-approval",
+    "sourceName": "Horse figurine",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "rec2M4tmBzDXd1sxm",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    }
   }
 ]
