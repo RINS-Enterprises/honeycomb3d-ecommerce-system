@@ -260,6 +260,9 @@ textarea{resize:vertical;line-height:1.5}
 .detail-facts dt{color:var(--muted)}
 .detail-facts dd{margin:0;color:var(--text-soft)}
 .more-section{border-top:1px solid var(--line)}
+.recent-section{border-top:1px solid var(--line)}
+.recent-section .section-heading{display:flex;align-items:center}
+.recent-section .section-heading .text-button{margin:0;white-space:nowrap}
 @media(min-width:701px){.detail-info{position:sticky;top:calc(var(--header-h) + 24px)}}
 
 /* Cart and enquiry */

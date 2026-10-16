@@ -1,3 +1,4 @@
+import {card} from './card.mjs';
 import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, visibleProducts} from './domain.mjs';
 
 const status=document.querySelector('#status');
@@ -84,6 +85,25 @@ function initFilters() {
   reset.addEventListener('click',()=>{form.reset();if(sort)sort.value='featured';filter('push');search.focus();});
   window.addEventListener('popstate',()=>{readUrl();filter();});
   readUrl();filter();
+}
+// Recently viewed: the last few product ids on this device, newest first.
+const RECENT_KEY='honeycomb-recent-v1',RECENT_SHOWN=4,RECENT_KEPT=5;
+function initRecent() {
+  const section=document.querySelector('[data-recent]');if(!section||!storage)return;
+  const current=section.dataset.recentCurrent||'';
+  let ids=[];
+  try{const saved=JSON.parse(storage.getItem(RECENT_KEY)||'[]');if(Array.isArray(saved))ids=saved.filter(id=>typeof id==='string');}catch{}
+  const known=new Set(products.map(p=>p.id));
+  ids=ids.filter(id=>known.has(id));
+  const shown=ids.filter(id=>id!==current).slice(0,RECENT_SHOWN).map(id=>products.find(p=>p.id===id));
+  if(current){try{storage.setItem(RECENT_KEY,JSON.stringify([current,...ids.filter(id=>id!==current)].slice(0,RECENT_KEPT)));}catch{}}
+  if(!shown.length)return;
+  section.querySelector('[data-recent-list]').innerHTML=shown.map(p=>card(p)).join('');
+  section.hidden=false;
+  section.querySelector('[data-recent-clear]').addEventListener('click',()=>{
+    try{storage.setItem(RECENT_KEY,JSON.stringify(current?[current]:[]));}catch{}
+    section.hidden=true;announce('Recently viewed list cleared.');
+  });
 }
 // Shared by the product page form and the cards' quick-add buttons.
 function addToCart(product,quantity) {
@@ -275,7 +295,7 @@ try {
   const saved=readCart(storage,products);cart=saved.items;
   if(saved.error)announce('Saved cart unavailable. You can start a new request here.');
   updateCount();
-  initAdd();initQuickAdd();initCart();initCustom();
+  initRecent();initAdd();initQuickAdd();initCart();initCustom();
   document.querySelectorAll('[data-enable="true"]').forEach(button=>button.disabled=false);
 } catch {
   announce('We could not load ordering details. Please reload the page to try again.');

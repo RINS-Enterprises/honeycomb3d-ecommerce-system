@@ -126,3 +126,12 @@ test('home has a three-step how-it-works band without timings or promises',()=>{
   assert.deepEqual([...band.matchAll(/<h3>([^<]+)<\/h3>/g)].map(m=>m[1]),['Browse the designs','Add them to your request cart','We confirm the details with you']);
   assert(!/\b(?:day|days|hour|hours|week|weeks|guarantee|fast|free)\b/i.test(band.replace(/<[^>]+>/g,' ')));
 });
+
+test('recently viewed row ships hidden, names the current product and renders nothing server-side',async()=>{
+  const {detail,cartPage}=await import('../src/render.mjs');
+  const p=products[0];
+  const html=detail(p,products,store);
+  assert.match(html,new RegExp('data-recent data-recent-current="'+p.id+'" data-testid="recently-viewed" aria-labelledby="recent-title" hidden>'));
+  assert.match(html,/<div class="product-grid" data-recent-list><\/div>/);
+  assert.match(cartPage(store),/data-recent data-testid="recently-viewed"[^>]* hidden>/);
+});

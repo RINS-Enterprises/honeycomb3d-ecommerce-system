@@ -29,7 +29,7 @@ await page('custom/index.html',customPage(site));
 await page('privacy/index.html',privacyPage(site));
 await page('404.html',layout('Page not found','<section class="wrap section narrow state-page"><div class="state-mark" aria-hidden="true">404</div><p class="eyebrow">Page not found</p><h1>This page wandered off.</h1><p class="lead">The design you are looking for may have moved.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/">Back to home</a></div></section>',site,'','',{description:'This page could not be found. Explore the HoneyComb 3D collection instead.'}));
 for(const p of products)await page('products/'+p.slug+'/index.html',detail(p,products,site));
-for(const name of ['app.mjs','domain.mjs','styles.css'])await copyFile(join(root,'src',name),join(dist,name));
+for(const name of ['app.mjs','card.mjs','domain.mjs','styles.css'])await copyFile(join(root,'src',name),join(dist,name));
 // Copy only explicitly referenced derivatives. Source images and unused assets never ship.
 const assets=new Set([store.logo,...(store.logoVariants||[]).map(v=>v.src),...heroVariants.map(v=>v.src),...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src),...(p.gallery||[]).flatMap(g=>g.variants.map(v=>v.src)),p.shareImage?.src])].filter(Boolean));
 await mkdir(join(dist,'assets'),{recursive:true});

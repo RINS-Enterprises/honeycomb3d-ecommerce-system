@@ -1,7 +1,7 @@
 import {escapeHtml as e, money} from './domain.mjs';
+import {price, CARD_SIZES, picture, card, availability} from './card.mjs';
+export {price, CARD_SIZES, picture, card};
 
-export const price = p => p.priceLkr === null ? 'Price on enquiry' : money(p.priceLkr);
-export const CARD_SIZES = '(max-width: 700px) calc((100vw - 52px) / 2), (max-width: 1000px) calc((100vw - 124px) / 3), (max-width: 1280px) calc((100vw - 146px) / 4), 284px';
 // Every photo slot is a square frame filled by a square derivative (object-fit: cover).
 const DETAIL_SIZES = '(max-width: 700px) 100vw, (max-width: 1280px) calc((100vw - 144px) * .584), 664px';
 const THUMB_SIZES = '72px';
@@ -9,23 +9,6 @@ const TILE_SIZES = '(max-width: 700px) 88px, (max-width: 1280px) calc((100vw - 1
 const HERO_LANDSCAPE = '(min-width: 700px)';
 const srcset = variants => variants.map(v=>v.src+' '+v.width+'w').join(', ');
 
-export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}) {
-  if (!p.image) return '';
-  const responsive=p.imageVariants?.length ?
-    ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'"' : '';
-  return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'"'+(priority?' fetchpriority="high"':'')+'>';
-}
-export function card(p, {headingLevel=3, loading='lazy'}={}) {
-  const heading=headingLevel===2?'h2':'h3';
-  // One link per card; its ::after stretches over the whole card so the photo is clickable too.
-  return '<article class="product-card" data-product-card data-testid="product-card" data-category="' + e(p.category) + '" data-search="' + e([p.name,p.category,...p.tags].join(' ').toLowerCase()) + '" data-tags="' + e(p.tags.join('|')) + '" data-name="' + e(p.name) + '" data-price="' + (p.priceLkr===null?'':p.priceLkr) + '">' +
-    '<div class="product-image">' + picture(p,{loading}) + '</div>' +
-    '<div class="card-copy"><p class="eyebrow">' + e(p.category) + '</p><'+heading+'><a class="card-link" href="/products/' + e(p.slug) + '/">' + e(p.name) + '</a></'+heading+'><p class="price" data-testid="product-price">' + e(price(p)) + '</p><div class="card-foot"><p class="card-status">' + availability(p) + '</p>' +
-    (p.availability==='unavailable'?'':'<button type="button" class="quick-add" data-quick-add="' + e(p.id) + '" data-testid="quick-add" aria-label="Add ' + e(p.name) + ' to request cart" hidden><span aria-hidden="true">+</span> Add</button>') + '</div></div></article>';
-}
-function availability(p) {
-  return ({unconfirmed:'Availability to confirm',available:'Available',unavailable:'Currently unavailable','made-to-order':'Made to order'})[p.availability];
-}
 const LOGO_SIZES = '(max-width: 700px) 150px, 180px';
 function brand(store) {
   if (!store.logo) return 'HONEYCOMB<span>3D PRINT STUDIO</span>';
@@ -138,6 +121,8 @@ function gallery(p) {
     slides.map((g,i)=>'<figure class="gallery-slide" id="photo-'+(i+1)+'" data-gallery-slide>'+img(g,i,DETAIL_SIZES)+'</figure>').join('')+'</div>'+
     zoom+'<div class="gallery-thumbs" role="group" aria-label="Choose a photo">'+slides.map((g,i)=>'<button type="button" class="gallery-thumb" data-gallery-thumb="'+i+'" aria-label="Show photo '+(i+1)+' of '+slides.length+'"'+(i===0?' aria-current="true"':'')+'>'+img(g,1,THUMB_SIZES)+'</button>').join('')+'</div></div>';
 }
+// Filled in the browser from this device's history; stays hidden when empty or storage is blocked.
+const recentRow=(current='')=>'<section class="wrap section recent-section" data-recent'+(current?' data-recent-current="'+e(current)+'"':'')+' data-testid="recently-viewed" aria-labelledby="recent-title" hidden><div class="section-heading"><h2 id="recent-title">Recently viewed</h2><button type="button" class="text-button" data-recent-clear data-testid="recently-viewed-clear">Clear</button></div><div class="product-grid" data-recent-list></div></section>';
 export function detail(p,products,store) {
   const ordering=store.mode==='live'&&store.whatsappVerified;
   const crumbs='<nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/shop/">Shop</a></li><li><a href="/shop/?category='+encodeURIComponent(p.category)+'">'+e(p.category)+'</a></li><li><span aria-current="page">'+e(p.name)+'</span></li></ol></nav>';
@@ -166,10 +151,10 @@ export function detail(p,products,store) {
     '<p class="fine">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
     '<a class="text-link" href="/cart/">View your request cart →</a>'+shareRow(p,store)+'</div></div></section>' +
     (p.availability==='unavailable'?'':'<div class="sticky-buy" data-sticky-buy data-testid="sticky-buy" hidden><div class="sticky-buy-copy"><strong>'+e(p.name)+'</strong><span>'+e(price(p))+'</span></div><button type="button" class="button" data-sticky-add>Add to request cart</button></div>') +
-    (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+more.map(p=>card(p)).join('')+'</div></section>':''),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
+    (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+more.map(p=>card(p)).join('')+'</div></section>':'')+recentRow(p.id),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
 }
 export function cartPage(store) {
-  return layout('Your request cart','<section class="wrap section cart-section"><p class="eyebrow">YOUR SELECTION</p><h1>Request cart.</h1><p class="lead">A starting point for your order. We’ll confirm the details together.</p><div id="cart-body"><p>Loading your cart…</p></div><noscript><p>Enable JavaScript to access the cart saved on this device.</p></noscript></section>',store,'cart');
+  return layout('Your request cart','<section class="wrap section cart-section"><p class="eyebrow">YOUR SELECTION</p><h1>Request cart.</h1><p class="lead">A starting point for your order. We’ll confirm the details together.</p><div id="cart-body"><p>Loading your cart…</p></div><noscript><p>Enable JavaScript to access the cart saved on this device.</p></noscript></section>'+recentRow(),store,'cart');
 }
 export function customPage(store) {
   const attachmentNote=store.mode==='live'&&store.whatsappVerified?'You can attach photos or model files in WhatsApp after opening the conversation. Nothing is uploaded by this form.':'Review and copy your enquiry below. Nothing is uploaded by this form.';
@@ -180,5 +165,5 @@ export function customPage(store) {
     '<div class="form-panel"><form id="custom-form" class="enquiry-form"><label>Your idea <span>(required)</span><textarea name="idea" rows="5" maxlength="1200" required placeholder="What would you like to make?"></textarea></label><label>Model or reference link <span>(optional)</span><input name="reference" type="url" maxlength="500" placeholder="https://"></label><div class="field-row"><label>Quantity<input name="quantity" type="number" value="1" min="1" max="1000" step="1" required></label><label>Approximate size <span>(optional)</span><input name="size" maxlength="100" placeholder="For example, 15 cm tall"></label></div><label>Colour / finish <span>(optional)</span><input name="finish" maxlength="150" placeholder="Tell us what you have in mind"></label><p class="fine">'+attachmentNote+'</p><button class="button" type="submit" disabled data-enable="true">Preview enquiry →</button></form><noscript><p>Enable JavaScript to prepare your enquiry.</p></noscript><div id="custom-result"></div></div></div></section>',store,'custom','',{description:'Start a custom 3D-print enquiry with HoneyComb 3D. Share an idea, a model link, size and finish, then review your enquiry before sending it.',path:'/custom/'});
 }
 export function privacyPage(store) {
-  return layout('How this site handles your data','<section class="wrap section narrow prose-page"><p class="eyebrow">PRIVACY</p><h1>Your data on this site.</h1><p>The request cart stores product identifiers and quantities in this browser’s local storage. Remove the items or clear site data to delete it. Cart notes and custom-enquiry fields are not saved by the application.</p><p>This storefront has no account system, payment processing or application analytics. It does not submit your enquiry to a server.</p><p>If you choose to open WhatsApp, your prepared message is included in a link to WhatsApp. Review it there and choose whether to send it. WhatsApp handles that interaction under its own terms.</p><p>Your hosting provider may process ordinary request logs. Business shipping, returns and order terms must be confirmed before purchase.</p></section>',store,'','',{description:'How the HoneyComb 3D storefront handles your data: a request cart in your browser, no accounts, payments or analytics.',path:'/privacy/'});
+  return layout('How this site handles your data','<section class="wrap section narrow prose-page"><p class="eyebrow">PRIVACY</p><h1>Your data on this site.</h1><p>The request cart stores product identifiers and quantities in this browser’s local storage, and a short list of the last products you viewed is kept there too. Remove the items, use “Clear” under Recently viewed, or clear site data to delete them. Cart notes and custom-enquiry fields are not saved by the application.</p><p>This storefront has no account system, payment processing or application analytics. It does not submit your enquiry to a server.</p><p>If you choose to open WhatsApp, your prepared message is included in a link to WhatsApp. Review it there and choose whether to send it. WhatsApp handles that interaction under its own terms.</p><p>Your hosting provider may process ordinary request logs. Business shipping, returns and order terms must be confirmed before purchase.</p></section>',store,'','',{description:'How the HoneyComb 3D storefront handles your data: a request cart in your browser, no accounts, payments or analytics.',path:'/privacy/'});
 }
