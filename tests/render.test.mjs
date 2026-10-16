@@ -119,3 +119,10 @@ test('product pages offer sharing without a phone number or external script',asy
   assert.match(row,/rel="noopener noreferrer"/);
   assert(!/<script(?! type="application\/ld\+json")/.test(html.replace(/<script type="module" src="\/app\.mjs"><\/script>/,'')));
 });
+
+test('home has a three-step how-it-works band without timings or promises',()=>{
+  const html=home(visibleProducts(products,store),store);
+  const band=html.match(/<section class="wrap section how-it-works".*?<\/section>/)[0];
+  assert.deepEqual([...band.matchAll(/<h3>([^<]+)<\/h3>/g)].map(m=>m[1]),['Browse the designs','Add them to your request cart','We confirm the details with you']);
+  assert(!/\b(?:day|days|hour|hours|week|weeks|guarantee|fast|free)\b/i.test(band.replace(/<[^>]+>/g,' ')));
+});
