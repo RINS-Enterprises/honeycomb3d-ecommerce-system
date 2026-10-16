@@ -1,0 +1,7 @@
+reviewed_ref: 2b0f4b4
+reviewed_sha: 2b0f4b4e74f60b5a614adb4813a31b586e6daa97
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T13:45:04Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T13:41:51+00:00
+subject: Home: "Or shop by theme" row under the category tiles
