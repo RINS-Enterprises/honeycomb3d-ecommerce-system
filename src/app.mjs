@@ -85,18 +85,30 @@ function initFilters() {
   window.addEventListener('popstate',()=>{readUrl();filter();});
   readUrl();filter();
 }
+// Shared by the product page form and the cards' quick-add buttons.
+function addToCart(product,quantity) {
+  if(!product||product.availability==='unavailable'){announce('This item is not available for a request.');return false;}
+  const existing=cart.find(x=>x.id===product.id);
+  if(!existing&&cart.length>=MAX_LINES){announce('Your request is full. Remove an item before adding another.');return false;}
+  if((existing?.quantity||0)+quantity>MAX_QUANTITY){announce('You can request up to '+MAX_QUANTITY+' of this design. Adjust the quantity in your cart.');return false;}
+  if(existing)existing.quantity+=quantity;else cart.push({id:product.id,quantity});
+  announce(product.name+' added to your request cart.');saveCart();return true;
+}
+function initQuickAdd() {
+  document.querySelectorAll('[data-quick-add]').forEach(button=>{
+    const product=products.find(p=>p.id===button.dataset.quickAdd);
+    if(!product||product.availability==='unavailable')return;
+    button.hidden=false;
+    button.addEventListener('click',()=>{if(addToCart(product,1)){button.classList.remove('is-added');void button.offsetWidth;button.classList.add('is-added');}});
+  });
+}
 function initAdd() {
   const form=document.querySelector('#add-form');if(!form)return;
   form.addEventListener('submit',event=>{
     event.preventDefault();if(!form.reportValidity())return;
     const quantity=Number(form.elements.quantity.value);
     const product=products.find(p=>p.id===form.dataset.productId);
-    if(!product||product.availability==='unavailable')return announce('This item is not available for a request.');
-    const existing=cart.find(x=>x.id===product.id);
-    if(!existing&&cart.length>=MAX_LINES)return announce('Your request is full. Remove an item before adding another.');
-    if((existing?.quantity||0)+quantity>MAX_QUANTITY)return announce('You can request up to '+MAX_QUANTITY+' of this design. Adjust the quantity in your cart.');
-    if(existing)existing.quantity+=quantity;else cart.push({id:product.id,quantity});
-    announce(product.name+' added to your request cart.');saveCart();
+    if(!addToCart(product,quantity))return;
     const button=form.querySelector('button[type="submit"]');
     clearTimeout(button.resetTimer);button.dataset.state='added';button.textContent='Added to cart ✓';
     button.resetTimer=setTimeout(()=>{button.textContent='Add to request cart';delete button.dataset.state;},1800);
@@ -263,7 +275,7 @@ try {
   const saved=readCart(storage,products);cart=saved.items;
   if(saved.error)announce('Saved cart unavailable. You can start a new request here.');
   updateCount();
-  initAdd();initCart();initCustom();
+  initAdd();initQuickAdd();initCart();initCustom();
   document.querySelectorAll('[data-enable="true"]').forEach(button=>button.disabled=false);
 } catch {
   announce('We could not load ordering details. Please reload the page to try again.');

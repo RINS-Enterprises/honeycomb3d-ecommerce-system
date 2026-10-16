@@ -50,6 +50,14 @@ try {
   await page.goBack();
   await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===7);
   assert.equal(await page.getByRole('radio',{name:'Any theme'}).isChecked(),true,'Back restores the previous filter');
+  const kuramaCard=page.locator('[data-product-card]').filter({hasText:'Kurama Figure'});
+  await kuramaCard.getByTestId('quick-add').click();
+  await page.getByRole('status').filter({hasText:'Kurama Figure added to your request cart.'}).waitFor();
+  assert.equal(await page.getByTestId('cart-count').textContent(),'1','Quick add adds one');
+  assert.match(page.url(),/\/shop\//,'Quick add stays on the page');
+  assert.equal(await kuramaCard.getByRole('link').count(),1,'Quick add is not a link and not nested in one');
+  await page.evaluate(()=>localStorage.clear());
+  await page.reload();
   const firstVisible=()=>page.locator('[data-product-card]:visible .card-link').first().textContent();
   await page.getByTestId('sort').selectOption('price-asc');
   assert.equal(await firstVisible(),'Hidden Leaf Keychain','Cheapest first (LKR 400)');

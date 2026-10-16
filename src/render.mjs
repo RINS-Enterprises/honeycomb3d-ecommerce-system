@@ -20,7 +20,8 @@ export function card(p, {headingLevel=3, loading='lazy'}={}) {
   // One link per card; its ::after stretches over the whole card so the photo is clickable too.
   return '<article class="product-card" data-product-card data-testid="product-card" data-category="' + e(p.category) + '" data-search="' + e([p.name,p.category,...p.tags].join(' ').toLowerCase()) + '" data-tags="' + e(p.tags.join('|')) + '" data-name="' + e(p.name) + '" data-price="' + (p.priceLkr===null?'':p.priceLkr) + '">' +
     '<div class="product-image">' + picture(p,{loading}) + '</div>' +
-    '<div class="card-copy"><p class="eyebrow">' + e(p.category) + '</p><'+heading+'><a class="card-link" href="/products/' + e(p.slug) + '/">' + e(p.name) + '</a></'+heading+'><p class="price" data-testid="product-price">' + e(price(p)) + '</p><p class="card-status">' + availability(p) + '</p></div></article>';
+    '<div class="card-copy"><p class="eyebrow">' + e(p.category) + '</p><'+heading+'><a class="card-link" href="/products/' + e(p.slug) + '/">' + e(p.name) + '</a></'+heading+'><p class="price" data-testid="product-price">' + e(price(p)) + '</p><div class="card-foot"><p class="card-status">' + availability(p) + '</p>' +
+    (p.availability==='unavailable'?'':'<button type="button" class="quick-add" data-quick-add="' + e(p.id) + '" data-testid="quick-add" aria-label="Add ' + e(p.name) + ' to request cart" hidden><span aria-hidden="true">+</span> Add</button>') + '</div></div></article>';
 }
 function availability(p) {
   return ({unconfirmed:'Availability to confirm',available:'Available',unavailable:'Currently unavailable','made-to-order':'Made to order'})[p.availability];
