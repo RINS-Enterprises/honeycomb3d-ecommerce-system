@@ -167,8 +167,8 @@ try {
   assert.equal(await page.locator('.lightbox-stage.is-zoomed').count(),1,'Tap zooms');
   await page.keyboard.press('Escape');
   await page.getByRole('dialog').waitFor({state:'hidden'});
-  assert.equal(await page.evaluate(()=>document.activeElement?.dataset.testid),'zoom-open','Focus returns to the opener');
-  assert.equal(await page.locator('.lightbox-stage img').count(),0,'Lightbox image is removed on close');
+  // The dialog's close event (focus return and image removal) fires as a task after it hides.
+  await page.waitForFunction(()=>document.activeElement?.dataset.testid==='zoom-open'&&!document.querySelector('.lightbox-stage img'),null,{timeout:5000});
   const shareShown=await page.getByTestId('share-button').isVisible(), copyShown=await page.getByTestId('share-copy').isVisible();
   assert(shareShown!==copyShown||!copyShown,'Either the native share button or the copy-link fallback is offered');
   if(copyShown) {
