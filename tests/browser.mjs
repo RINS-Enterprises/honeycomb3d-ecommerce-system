@@ -325,6 +325,17 @@ try {
   await page.waitForURL(/\/shop\/\?theme=Naruto/);
   await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===4);
   assert.equal(await page.getByRole('radio',{name:/^Naruto/}).isChecked(),true,'Theme chip selected from the link');
+  // "Ask about a variation" opens the custom enquiry with the design named (as a value, not markup).
+  await page.goto('http://127.0.0.1:4173/products/horse-figurine/');
+  await page.getByTestId('ask-variation').click();
+  await page.waitForURL(/\/custom\/\?design=HNYCMB518/);
+  await page.getByTestId('design-note').waitFor();
+  assert.equal(await page.getByLabel('Your idea',{exact:false}).inputValue(),'A variation of Horse Figurine (HNYCMB518): ');
+  assert.equal(await page.getByTestId('design-note').getByRole('link').getAttribute('href'),'/products/horse-figurine/');
+  await page.goto('http://127.0.0.1:4173/custom/?design=%3Cimg%20src%3Dx%3E');
+  await page.waitForFunction(()=>!document.querySelector('#custom-form button').disabled);
+  assert.equal(await page.getByTestId('design-note').isHidden(),true,'Unknown design ids are ignored');
+  assert.equal(await page.getByLabel('Your idea',{exact:false}).inputValue(),'');
   const missing=await page.goto('http://127.0.0.1:4173/not-found/');
   assert.equal(missing.status(),404);
   assert.equal(await page.getByTestId('notfound-picks').getByTestId('product-card').count(),4,'404 offers four designs');

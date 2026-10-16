@@ -279,6 +279,13 @@ function initCart() {
 function initCustom() {
   const form=document.querySelector('#custom-form');if(!form)return;
   const result=document.querySelector('#custom-result');
+  // Arriving from a product page (?design=ID) starts the idea with that design; values only, never markup.
+  const design=products.find(p=>p.id===new URLSearchParams(location.search).get('design'));
+  if(design&&!form.elements.idea.value){
+    form.elements.idea.value='A variation of '+design.name+' ('+design.id+'): ';
+    const note=document.querySelector('[data-design-note]');
+    if(note){note.querySelector('a').href='/products/'+design.slug+'/';note.querySelector('a').textContent=design.name;note.hidden=false;}
+  }
   form.addEventListener('input',()=>{result.replaceChildren();});
   form.addEventListener('submit',event=>{
     event.preventDefault();if(!form.reportValidity())return;

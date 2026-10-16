@@ -486,4 +486,9 @@ a,button,.button,input,select,textarea{transition:color var(--dur) var(--ease),b
 .theme-row-label{margin:0;font-size:var(--step--1);color:var(--muted);font-weight:600}
 .theme-links{justify-content:flex-start}
 a.try-chip{text-decoration:none}
+/* Product page: route variations to the custom enquiry, prefilled */
+.variation-note{margin:var(--space-3) 0 0;font-size:var(--step--1);color:var(--muted)}
+.variation-note a{color:var(--text);font-weight:600;text-underline-offset:3px}
+.design-note{margin:0 0 var(--space-4);padding:var(--space-3) var(--space-4);border-radius:var(--radius-md);background:var(--panel-2);border:1px solid var(--line);font-size:var(--step--1);color:var(--text-soft)}
+.design-note a{color:var(--accent);font-weight:700}
 
