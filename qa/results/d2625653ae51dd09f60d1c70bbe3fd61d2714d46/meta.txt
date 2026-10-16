@@ -1,0 +1,7 @@
+reviewed_ref: d2625653ae51dd09f60d1c70bbe3fd61d2714d46
+reviewed_sha: d2625653ae51dd09f60d1c70bbe3fd61d2714d46
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T02:44:47Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T02:44:01+00:00
+subject: Add JPEG link-preview images for WhatsApp and social shares
