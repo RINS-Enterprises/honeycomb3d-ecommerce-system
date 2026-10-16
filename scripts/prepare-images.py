@@ -248,7 +248,7 @@ for entry in SPECS["assets"]:
             product.update(image=fallback["src"], imageAlt=entry["alt"],
                            imageWidth=fallback["width"], imageHeight=fallback["height"],
                            imageVariants=[variant(o) for o in shown],
-                           imageSource=entry["sourceTitle"], imageApprovedAt=SPECS["ownerApprovalDate"])
+                           imageSource=entry["sourceTitle"], imageApprovedAt=entry.get("ownerApprovalDate", SPECS["ownerApprovalDate"]))
             product.pop("imageStatus", None)
             product["gallery"] = []
             for frame, outs in gallery_outputs:

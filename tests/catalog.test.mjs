@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {filterProducts,visibleProducts} from '../src/domain.mjs';
 const products=JSON.parse(await readFile(new URL('../data/products.json',import.meta.url),'utf8'));
-test('all three recovered keychains appear under the keychain category',()=>{
+test('the keychain category lists the three recovered keychains and Grogu',()=>{
   const shown=visibleProducts(products,{mode:'preview'});
-  assert.equal(filterProducts(shown,'','Keychains').length,3);
+  assert.equal(filterProducts(shown,'','Keychains').length,4);
   assert.equal(filterProducts(shown,'dragons','Keychains').length,2);
 });
 test('draft descriptions are explicitly attributed and remain unapproved',()=>{
@@ -46,7 +46,8 @@ test('every product with a photo has responsive square frames with real dimensio
 test('Kurama and Classic Kunai return with their imported photos and unchanged data',()=>{
   const shown=visibleProducts(products,{mode:'preview'}).map(p=>p.id);
   assert(shown.includes('HC-KURAMA')&&shown.includes('HC-KUNAI'));
-  assert.equal(shown.length,7,'Products without a photo stay hidden');
+  assert.equal(shown.length,17,'Every product with a photo is shown; Stormtrooper (no photo) stays hidden');
+  assert(!shown.includes('HNYCMB513'));
   for(const id of ['HC-KURAMA','HC-KUNAI']) {
     const p=products.find(x=>x.id===id);
     assert.equal(p.availability,'unconfirmed');assert.equal(p.approved,false);
@@ -54,7 +55,7 @@ test('Kurama and Classic Kunai return with their imported photos and unchanged d
   }
 });
 
-test('the 11 Airtable products added 2026-10-16 keep their Airtable identity and stay hidden without a photo',()=>{
+test('the 11 Airtable products added 2026-10-16 keep their Airtable identity; only Stormtrooper lacks a photo',()=>{
   const added=products.filter(p=>p.priceSource.readAt==='2026-10-16');
   assert.equal(added.length,11);
   const categoryMap={Keytag:'Keychains',Figurine:'Figures',Weapon:'Props',Bookmark:'Bookmarks','Desk Organizer':'Desk Organizers'};
@@ -63,7 +64,9 @@ test('the 11 Airtable products added 2026-10-16 keep their Airtable identity and
     assert(p.sourceName&&p.sourceCategory,'Airtable name and category recorded: '+p.id);
     assert.equal(p.category,categoryMap[p.sourceCategory],'Category mapping: '+p.id);
     assert.match(p.priceSource.recordId,/^rec[A-Za-z0-9]{14}$/);
-    assert.equal(p.image,null);assert.equal(p.approved,false);assert.equal(p.availability,'unconfirmed');
+    assert.equal(p.approved,false);assert.equal(p.availability,'unconfirmed');
+    if(p.id==='HNYCMB513')assert.equal(p.image,null,'No verifiable real photo for Stormtrooper');
+    else {assert.equal(p.imageApprovedAt,'2026-10-16');assert(p.imageAlt.length>20);}
     assert.match(p.description,/Confirm the size/);
     assert(!/\b(?:PLA|resin|cm|mm|durable|in stock|delivery|ships?|quality)\b/i.test(p.description),'No material, size, stock or delivery claims: '+p.id);
   }
@@ -71,6 +74,6 @@ test('the 11 Airtable products added 2026-10-16 keep their Airtable identity and
   assert.equal(products.find(p=>p.id==='HNYCMB515').name,'Grogu Baby Yoda Keychain');
   assert.deepEqual([...new Set(products.map(p=>p.category))].sort(),['Bookmarks','Desk Organizers','Figures','Keychains','Props']);
   const shown=visibleProducts(products,{mode:'preview'});
-  assert(!shown.some(p=>added.includes(p)),'No photo, not shown');
-  assert.deepEqual([...new Set(shown.map(p=>p.category))].sort(),['Figures','Keychains','Props'],'Chips and tiles still list only visible categories');
+  assert.deepEqual(added.filter(p=>!shown.includes(p)).map(p=>p.id),['HNYCMB513'],'Only the photo-less product is hidden');
+  assert.deepEqual([...new Set(shown.map(p=>p.category))].sort(),['Bookmarks','Desk Organizers','Figures','Keychains','Props'],'Five visible categories');
 });

@@ -353,6 +353,336 @@ This is the allowed raster option: the verified HC_WhiteBK-1.png artwork is crop
 |---|---:|---|---:|---:|---|
 | `/assets/honeycomb-logo-web.png` | 660 | 660 × 198 | 42747 | PNG | `e959b5e60bec3285396e419f8623a43208260257b25b2ebd7f0055c7f45d3421` |
 
+## HNYCMB505
+
+- Source title: `HNYCMB505-bridgerton-bookmark.jpg`
+- Source Drive ID: `12iD2dbrjeeKNhat0ns5d6ArSze5gSMKE`
+- Drive original SHA-256: `f7e859a647dc21012d1168391d6d649a3110e3a3451852f0117296acb8709283`
+- Metadata-clean source input: `assets/photo-sources/bridgerton-bookmark.jpg`
+- Input SHA-256: `1c79679510a3d9e90af4b78ee39d7a1ba2cbb26a29f2da8a366b44f56a4cdc0a`
+- Handoff: QA branch claude/photo-handoff commit fe19da8 (HNYCMB505-bridgerton-bookmark.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said "list those" on 2026-10-16. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 1920 × 1581; EXIF orientation 1.
+- Applied crop box after orientation: `(90, 0, 1920, 1581)`.
+- Square storefront frame: the whole applied crop centred on a 1830 × 1830 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#2b2728`), with a 73 px edge fade. The whole bookmark, tip to cameo, on its black leather backdrop.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/bridgerton-bookmark-480.webp` | 480 | 480 × 415 | 70212 | 82 | `4de09ef2ab0a14835072d543fefb78c1dc49d0447d02b821f6cfbed5bd261687` |
+| `/assets/bridgerton-bookmark-480.avif` | 480 | 480 × 415 | 61952 | AVIF 60 | `3dee00cd47985271723b16cdb753ff733d363f4023e731ec6a468679dcf4b529` |
+| `/assets/bridgerton-bookmark-960.webp` | 960 | 960 × 829 | 251490 | 82 | `215012fca19554142d7ec9e6b66ba8b19b875809b6d7998addc44e7366b0cd38` |
+| `/assets/bridgerton-bookmark-960.avif` | 960 | 960 × 829 | 222313 | AVIF 60 | `b9cbc8f9cf5d7c13476719251dcaf5f48333991a670fb239006fee0d445200e6` |
+| `/assets/bridgerton-bookmark-sq-160.webp` | 160 | 160 × 160 | 6060 | 82 | `57e02d2853b20a2d9dce86afdeb972eb5de31b7a696a8271414d5324c42a101f` |
+| `/assets/bridgerton-bookmark-sq-160.avif` | 160 | 160 × 160 | 5034 | AVIF 60 | `5a526d447f906d4df535038d772ee7f7781ef6f97e64daff9d3b9e89910783d9` |
+| `/assets/bridgerton-bookmark-sq-320.webp` | 320 | 320 × 320 | 28424 | 82 | `aedb1b6ef2cd5967d855d18bf7690fe44c3fa14fb3d8d2c42f790470e3c75840` |
+| `/assets/bridgerton-bookmark-sq-320.avif` | 320 | 320 × 320 | 24872 | AVIF 60 | `a4585e49675158fc762bbc52bcde398a9c13ae2b6f2abb808cb3b915a302d5ec` |
+| `/assets/bridgerton-bookmark-sq-480.webp` | 480 | 480 × 480 | 65466 | 82 | `565cd145e5b574a8614eb1b5d387ed8af8f9b87cc0f4f4d2d13839f078d2cfbe` |
+| `/assets/bridgerton-bookmark-sq-480.avif` | 480 | 480 × 480 | 59231 | AVIF 60 | `a49e20eb8ef432ee9f777acb1c5e9d6993df7de9679ac5b9e15ec95dd8dc63a7` |
+| `/assets/bridgerton-bookmark-sq-640.webp` | 640 | 640 × 640 | 114590 | 82 | `81c318ac454e15179c52b184fdb691eebc9d8f6401b35347d23e219feab14455` |
+| `/assets/bridgerton-bookmark-sq-640.avif` | 640 | 640 × 640 | 106654 | AVIF 60 | `0d6875aa0db52935f73430ce47d5e041e905289f57b62325a54675f9a9e43716` |
+| `/assets/bridgerton-bookmark-sq-960.webp` | 960 | 960 × 960 | 232554 | 82 | `972566933806a0b764576f42928a2d28754f2fbca078ef537fd4d9a2946842bb` |
+| `/assets/bridgerton-bookmark-sq-960.avif` | 960 | 960 × 960 | 210772 | AVIF 60 | `78e8849b2b5772140f68d20578d8f98cf8072a6a6b3e2a6cf22499100a693710` |
+| `/assets/bridgerton-bookmark-sq-1200.webp` | 1200 | 1200 × 1200 | 330212 | 82 | `f71a45f31ba7a0905b35386b11f5b066a1e52d0fd24bf7585bfb6acb8a7571aa` |
+| `/assets/bridgerton-bookmark-sq-1200.avif` | 1200 | 1200 × 1200 | 289273 | AVIF 60 | `ca9199bc74a235182c49bf78164fe837a15025014d7b16394bab393ac3677083` |
+| `/assets/bridgerton-bookmark-share.jpg` | 1200 | 1200 × 1200 | 279641 | JPEG 66 | `a50b41185959bb81c4f2ecd3e4eef0aee67caf6da46d2f0a1ed3c6be4e9a89f4` |
+
+## HNYCMB506
+
+- Source title: `HNYCMB506-flexi-derpy.jpg`
+- Source Drive ID: `1xKvveU7RYKISIkPpaq1ZqP3rSQPEzLZa`
+- Drive original SHA-256: `2e329ecfaccae167f3a1ab4bebba2577c2666cd6bc43d9837a71c450db7cfd34`
+- Metadata-clean source input: `assets/photo-sources/flexi-derpy.jpg`
+- Input SHA-256: `6d2d0fdc9dc0c88901a7bcb3ec11a7543d653f41e23ba9b47cfb936d805f5f0d`
+- Handoff: QA branch claude/photo-handoff commit fe19da8 (HNYCMB506-flexi-derpy.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said "list those" on 2026-10-16. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 1920 × 2560; EXIF orientation 1.
+- Applied crop box after orientation: `(300, 640, 1560, 1900)`.
+- Square storefront frame (inside the applied crop): `(300, 640, 1560, 1900)`. The Derpy figures without the basket rim.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/flexi-derpy-480.webp` | 480 | 480 × 480 | 46210 | 82 | `89ccc84c5b2bb936656bdd7ceb420e0a28ae4a39bdd45997cbe7b6cc7ac0b30f` |
+| `/assets/flexi-derpy-480.avif` | 480 | 480 × 480 | 37044 | AVIF 60 | `5a415ad234f7bbed5d710d2e2f3bf9f2ec0108e9e254e07f2826a3f5d5a882f1` |
+| `/assets/flexi-derpy-960.webp` | 960 | 960 × 960 | 117042 | 82 | `cebd17ed736467567f8f3a4c1d2d9d532271848d65c9948c74478e20530b68a9` |
+| `/assets/flexi-derpy-960.avif` | 960 | 960 × 960 | 83012 | AVIF 60 | `989223f321205480c46b218f3547a51b9bdba523c1d890e0a171d167cc0b45c6` |
+| `/assets/flexi-derpy-sq-160.webp` | 160 | 160 × 160 | 9880 | 82 | `0eb5b577ca52535041368e968be557d274c6900d38831ecef5f130da034f32e9` |
+| `/assets/flexi-derpy-sq-160.avif` | 160 | 160 × 160 | 8841 | AVIF 60 | `264481a4e8a8284388dfb3bea8cf6083a19b23db5bc9796583ca63c5aee4bd7e` |
+| `/assets/flexi-derpy-sq-320.webp` | 320 | 320 × 320 | 25830 | 82 | `946167de8df9db0b4526436b2fddb5602def59f12165c2120c2bc73d9a006259` |
+| `/assets/flexi-derpy-sq-320.avif` | 320 | 320 × 320 | 22112 | AVIF 60 | `823a29e53f3fade96dbdc18e608993bbc7a2ee4b528a681fa167da3b5960c4f4` |
+| `/assets/flexi-derpy-sq-480.webp` | 480 | 480 × 480 | 46210 | 82 | `89ccc84c5b2bb936656bdd7ceb420e0a28ae4a39bdd45997cbe7b6cc7ac0b30f` |
+| `/assets/flexi-derpy-sq-480.avif` | 480 | 480 × 480 | 37044 | AVIF 60 | `5a415ad234f7bbed5d710d2e2f3bf9f2ec0108e9e254e07f2826a3f5d5a882f1` |
+| `/assets/flexi-derpy-sq-640.webp` | 640 | 640 × 640 | 69626 | 82 | `3d9b1780ce6f9df49480f96e3c4539fc98580c54a7dc9d9c5002914222c0730c` |
+| `/assets/flexi-derpy-sq-640.avif` | 640 | 640 × 640 | 52860 | AVIF 60 | `063b81ad83706e0116bf0fefcede4b66d9276fa2db09f57796a5f52ae3110192` |
+| `/assets/flexi-derpy-sq-960.webp` | 960 | 960 × 960 | 117042 | 82 | `cebd17ed736467567f8f3a4c1d2d9d532271848d65c9948c74478e20530b68a9` |
+| `/assets/flexi-derpy-sq-960.avif` | 960 | 960 × 960 | 83012 | AVIF 60 | `989223f321205480c46b218f3547a51b9bdba523c1d890e0a171d167cc0b45c6` |
+| `/assets/flexi-derpy-sq-1200.webp` | 1200 | 1200 × 1200 | 158268 | 82 | `46f465386967b6b8a9d83dd9bf0fe26c2864d67c73555d6671da689227e82c2a` |
+| `/assets/flexi-derpy-sq-1200.avif` | 1200 | 1200 × 1200 | 105420 | AVIF 60 | `70a366ffe8ba9fac34c95c8a0abbb6dcb061db37c5e3f8842ff63e679d61cb7b` |
+| `/assets/flexi-derpy-share.jpg` | 1200 | 1200 × 1200 | 271677 | JPEG 84 | `bb9750d9eeb5e5c7a4ed2e0874a207fdedf7763474397de71cb350a99efce2fc` |
+
+## HNYCMB507
+
+- Source title: `HNYCMB507-desk-organizer.jpg`
+- Source Drive ID: `1vmZYNsrB7_JkNByGhegptecoZoPbLmqg`
+- Drive original SHA-256: `6ad682b24ca487a50394bd5b7e5f1382f192347f0bad47fff55a2d0a748b6b92`
+- Metadata-clean source input: `assets/photo-sources/desk-organizer.jpg`
+- Input SHA-256: `00a7ae74f2ee0519820bc81a766d0b3b3dd7a83fc2238529c8cafae5f794ee45`
+- Handoff: QA branch claude/photo-handoff commit fe19da8 (HNYCMB507-desk-organizer.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said "list those" on 2026-10-16. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 4608 × 3456; EXIF orientation 6.
+- Applied crop box after orientation: `(0, 1050, 3456, 4506)`.
+- Square storefront frame (inside the applied crop): `(0, 1050, 3456, 4506)`. The whole organizer, framed low to leave out the printer behind it.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/desk-organizer-480.webp` | 480 | 480 × 480 | 30176 | 82 | `4bfa1e6de2163d4f71e4c6281a9a4d1d2e27678a0a958ffffb044fd4d5cc1b2c` |
+| `/assets/desk-organizer-480.avif` | 480 | 480 × 480 | 21086 | AVIF 60 | `dffc23551b2282bff5a91130c3372fc7748682611d3a17d638f3f109c765719f` |
+| `/assets/desk-organizer-960.webp` | 960 | 960 × 960 | 91422 | 82 | `96e7fdc3607f5a517646d8a33f6a43c2bc018de70e4a630a2d9ba8eb909186b7` |
+| `/assets/desk-organizer-960.avif` | 960 | 960 × 960 | 62129 | AVIF 60 | `d123dd412dabe1dba4a30e29b0302595e35af6efde5e2e54180834f76cbd0b6b` |
+| `/assets/desk-organizer-sq-160.webp` | 160 | 160 × 160 | 4516 | 82 | `663acb234c98a933a4196ffd4d99005ef5051f2540ae37430bc2de8c3d0c9e55` |
+| `/assets/desk-organizer-sq-160.avif` | 160 | 160 × 160 | 3277 | AVIF 60 | `491d5fe9f449f64fbfc8b49c5c561467867272201a436927790267706d40026b` |
+| `/assets/desk-organizer-sq-320.webp` | 320 | 320 × 320 | 15040 | 82 | `e8021fafd11ac773bb4dbce7e8f63bc77eb96980b12da3ce045c059bf0f0db10` |
+| `/assets/desk-organizer-sq-320.avif` | 320 | 320 × 320 | 10687 | AVIF 60 | `360df7c391beb8519ff566a61c575333573f51123ac3fdbf8b414cafb9b03ac6` |
+| `/assets/desk-organizer-sq-480.webp` | 480 | 480 × 480 | 30176 | 82 | `4bfa1e6de2163d4f71e4c6281a9a4d1d2e27678a0a958ffffb044fd4d5cc1b2c` |
+| `/assets/desk-organizer-sq-480.avif` | 480 | 480 × 480 | 21086 | AVIF 60 | `dffc23551b2282bff5a91130c3372fc7748682611d3a17d638f3f109c765719f` |
+| `/assets/desk-organizer-sq-640.webp` | 640 | 640 × 640 | 47816 | 82 | `db5ffe4bb9d0ac560151a35c5218e0397449adb22eedfeaea7e75fc25eada65e` |
+| `/assets/desk-organizer-sq-640.avif` | 640 | 640 × 640 | 34218 | AVIF 60 | `d6af25b0597b5cb60ef722c10db06c674f55b64adb7343ad7f07a38a7ba81cc8` |
+| `/assets/desk-organizer-sq-960.webp` | 960 | 960 × 960 | 91422 | 82 | `96e7fdc3607f5a517646d8a33f6a43c2bc018de70e4a630a2d9ba8eb909186b7` |
+| `/assets/desk-organizer-sq-960.avif` | 960 | 960 × 960 | 62129 | AVIF 60 | `d123dd412dabe1dba4a30e29b0302595e35af6efde5e2e54180834f76cbd0b6b` |
+| `/assets/desk-organizer-sq-1200.webp` | 1200 | 1200 × 1200 | 129228 | 82 | `b5bca12032acb712d2c3398f8888f660ed7f9fb6f69881eb61ecc6909b31e6b7` |
+| `/assets/desk-organizer-sq-1200.avif` | 1200 | 1200 × 1200 | 87026 | AVIF 60 | `f7591d94c917cf8c8200e6b5b86dcd3e2453621b269af7f3447a849a8a4c71ed` |
+| `/assets/desk-organizer-share.jpg` | 1200 | 1200 × 1200 | 224829 | JPEG 84 | `a889ca7446625968eaee063cb3c685faf95c3d14ca01cecb54972ab558c10d67` |
+
+## HNYCMB510
+
+- Source title: `HNYCMB510-light-fury-big-wings.jpg`
+- Source Drive ID: `1KQeczUTxcbbVstTYWVDgL6epTOeyWqsF`
+- Drive original SHA-256: `cdb3293ee1faa7d75e67a520b87842ecbb6371d915b884d2523fe1e7662e461e`
+- Metadata-clean source input: `assets/photo-sources/light-fury-big-wings.jpg`
+- Input SHA-256: `bf34ba465b80c3fd68413d8af1ae4522bbcd9c09bf6a0029d374051456c57b84`
+- Handoff: QA branch claude/photo-handoff commit fe19da8 (HNYCMB510-light-fury-big-wings.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said "list those" on 2026-10-16. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 3264 × 2448; EXIF orientation 1.
+- Applied crop box after orientation: `(80, 0, 3264, 2448)`.
+- Square storefront frame: the whole applied crop centred on a 3184 × 3184 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#0a1016`), with a 127 px edge fade. The whole dragon, wing tip to tail, on its dark fabric.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/light-fury-big-wings-480.webp` | 480 | 480 × 369 | 38814 | 82 | `3ef527a695c3c85bd325b9a8d3ee4f1adc415744e5272506e5a6b34779061636` |
+| `/assets/light-fury-big-wings-480.avif` | 480 | 480 × 369 | 31969 | AVIF 60 | `2d7a40e4d7cacbcd3da7f2c87235c54c2afeb96a51eb0824e461dffe3fd4b895` |
+| `/assets/light-fury-big-wings-960.webp` | 960 | 960 × 738 | 112102 | 82 | `25744f78a49a8a0d575cbf758b837a2192d1b35c9ed6216d449a6e901b297bdc` |
+| `/assets/light-fury-big-wings-960.avif` | 960 | 960 × 738 | 78053 | AVIF 60 | `5e8746be021ce29ef87ad3069d7fb29ab43f59c58b095542e6d25c8f329dac31` |
+| `/assets/light-fury-big-wings-sq-160.webp` | 160 | 160 × 160 | 4192 | 82 | `93a28abedd609eab812e5fc7016866922ad5a74d807ec574a061b4fd12186eae` |
+| `/assets/light-fury-big-wings-sq-160.avif` | 160 | 160 × 160 | 3881 | AVIF 60 | `5bc5e97e8a05350bef4d3c3157f354360de26649647cd06cdb16d709efa055be` |
+| `/assets/light-fury-big-wings-sq-320.webp` | 320 | 320 × 320 | 16048 | 82 | `928575b85a4812e3b8bb7a5d404baf1b6d681368bc676bbae0d28bb1be1d81e7` |
+| `/assets/light-fury-big-wings-sq-320.avif` | 320 | 320 × 320 | 14270 | AVIF 60 | `531729ecfcdd7d85e099710827bc9e545550e608833ebb6438c6adcfcfee6405` |
+| `/assets/light-fury-big-wings-sq-480.webp` | 480 | 480 × 480 | 36688 | 82 | `4325ca6d3547e2b2f11e48e370c72df6dbbfd052e80b0c779c513da7e118f99a` |
+| `/assets/light-fury-big-wings-sq-480.avif` | 480 | 480 × 480 | 30371 | AVIF 60 | `07d3292c7a30a1b69106b6870db1808ea1c45a923c3f6671ecfc3cdf85f5c9cd` |
+| `/assets/light-fury-big-wings-sq-640.webp` | 640 | 640 × 640 | 59394 | 82 | `a09852d3f9dba4020462e6073239987663cc073a8623f791811f19f1f4271370` |
+| `/assets/light-fury-big-wings-sq-640.avif` | 640 | 640 × 640 | 47708 | AVIF 60 | `77be32fc84db2371b9d15f6584a20dbd84e974791b7c9012408190e1495b62ff` |
+| `/assets/light-fury-big-wings-sq-960.webp` | 960 | 960 × 960 | 105590 | 82 | `94a1dcaf9b0b2bc892b1fda670175c6b413b0f03abde0d07292fd7c48f496efa` |
+| `/assets/light-fury-big-wings-sq-960.avif` | 960 | 960 × 960 | 73974 | AVIF 60 | `b0e50cd8bea4a4b9dc5a59a882b21440033ea7acc05eb67dae8ecf40dd8a6cb0` |
+| `/assets/light-fury-big-wings-sq-1200.webp` | 1200 | 1200 × 1200 | 137616 | 82 | `6ea0654254fc435beff75a42120c420afaf6b1b10f2caf520b32edb0dd4d6c34` |
+| `/assets/light-fury-big-wings-sq-1200.avif` | 1200 | 1200 × 1200 | 90502 | AVIF 60 | `d112aaf1773f9e992e0855c8abbb3d1f863cdc18eefb3cf30b9ab6c17586a71f` |
+| `/assets/light-fury-big-wings-share.jpg` | 1200 | 1200 × 1200 | 212878 | JPEG 84 | `fd9ed8d63441982f8dfb1e7db3e8780bfabcd003b3aaf0efc254180ecf46573c` |
+
+## HNYCMB512
+
+- Source title: `HNYCMB512-urban-spider-man.jpg`
+- Source Drive ID: `120w4276bAIJL7o9LX3m2SSlXjDW9qs53`
+- Drive original SHA-256: `8978e4307d61023d802dd213ce20e9e6601df22186396ed04903599c4739f7eb`
+- Metadata-clean source input: `assets/photo-sources/urban-spider-man.jpg`
+- Input SHA-256: `ed5e48f8ef92d64fac025b1da2513ebe40880621aec9da68086cbfe68cd463d7`
+- Handoff: QA branch claude/photo-handoff commit fe19da8 (HNYCMB512-urban-spider-man.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said "list those" on 2026-10-16. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 1920 × 2560; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 180, 1920, 2300)`.
+- Square storefront frame: the whole applied crop centred on a 2120 × 2120 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#683a12`), with a 85 px edge fade. The whole figure, hood to sneakers.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/urban-spider-man-480.webp` | 480 | 480 × 530 | 33728 | 82 | `be3091a7cd19b532b40669366188b803a1d30bad0044b4bbc0461c01b80aa604` |
+| `/assets/urban-spider-man-480.avif` | 480 | 480 × 530 | 23725 | AVIF 60 | `e2f0c8ce138daffa907a2e84d01f3909b848d9423000d5ae83c10920cb6d70ce` |
+| `/assets/urban-spider-man-960.webp` | 960 | 960 × 1060 | 86984 | 82 | `5ec74535e9a292cb7a45c57d434f14085523334f3b907e432262a7ae4a254430` |
+| `/assets/urban-spider-man-960.avif` | 960 | 960 × 1060 | 52153 | AVIF 60 | `dd5e36e345b4c22766c7ebb77dc47f183401f78128a19810e21307fdf6fad3d9` |
+| `/assets/urban-spider-man-sq-160.webp` | 160 | 160 × 160 | 5814 | 82 | `3e6e7364aa4f51ddcbfd6f1d8e3681dc9b1d68d3732e3a145b5b7742d2c75ba3` |
+| `/assets/urban-spider-man-sq-160.avif` | 160 | 160 × 160 | 4849 | AVIF 60 | `0a2199a278cd757216673ee2d1e642d8d29dd1b0b815da7bd4e4e49b4adafcba` |
+| `/assets/urban-spider-man-sq-320.webp` | 320 | 320 × 320 | 16560 | 82 | `2d9fe615408fb3062514742484c4c4026b6a9c4afd2779934bb61cb35a49215f` |
+| `/assets/urban-spider-man-sq-320.avif` | 320 | 320 × 320 | 12368 | AVIF 60 | `fbdc7ae5a1ae4668e9613f42c7ee4cfe9aca28c24ba8be06c9c8681aecd9a05e` |
+| `/assets/urban-spider-man-sq-480.webp` | 480 | 480 × 480 | 28696 | 82 | `567cdcdb05a891424ae6e6ca4ba02b468dc492ee4511ed5ca2048b3b7b00d3b4` |
+| `/assets/urban-spider-man-sq-480.avif` | 480 | 480 × 480 | 20359 | AVIF 60 | `5dd2bbdfe292b18cdd16e8aa8d664b03d739aea7921419ac0ad04d0712d246bc` |
+| `/assets/urban-spider-man-sq-640.webp` | 640 | 640 × 640 | 41848 | 82 | `c48c30952cf1f277fd757f55f530eb295ce6e3cd8ffbc2ba910b1aedac5010fd` |
+| `/assets/urban-spider-man-sq-640.avif` | 640 | 640 × 640 | 28855 | AVIF 60 | `8dc88ab2cf2e7b1f6db07b00856b1e7eee9ead551ed8a11878144a8230c563ff` |
+| `/assets/urban-spider-man-sq-960.webp` | 960 | 960 × 960 | 72182 | 82 | `732dea6bbfa6d2a534771623119b561f8d8c2f93968acc18bc734f78541d62d9` |
+| `/assets/urban-spider-man-sq-960.avif` | 960 | 960 × 960 | 44474 | AVIF 60 | `154d2ae90bc1beffc03dc9f664468357ee126c7a1206e164edc47c9c1c5c914e` |
+| `/assets/urban-spider-man-sq-1200.webp` | 1200 | 1200 × 1200 | 98266 | 82 | `374b98e951c77198e6d31187ea3a95e6a499a996e3f0f2cb7e2db9e9a9c68ac4` |
+| `/assets/urban-spider-man-sq-1200.avif` | 1200 | 1200 × 1200 | 58558 | AVIF 60 | `d61ad2b69eabc1de36cc4d4559c69283dbc7c4c76557d17f8caf3db453b66a9f` |
+| `/assets/urban-spider-man-share.jpg` | 1200 | 1200 × 1200 | 191038 | JPEG 84 | `50fadd10f993bd05b88c0113e36ec68315873386b64d2e652d8679e5ba9192e1` |
+
+## HNYCMB514
+
+- Source title: `HNYCMB514-shuriken.jpg`
+- Source Drive ID: `1vlDR1GAuyCUVawoikmyb6-IDCmg0J62Q`
+- Drive original SHA-256: `17e2e2cd44ecd9bc9bc8df6684fec4760bfbe6d85346151691ca13935f67ac4e`
+- Metadata-clean source input: `assets/photo-sources/shuriken.jpg`
+- Input SHA-256: `21766fcaa5d766f36e874c1382b779e6c96e30e974162671ea06fd3fbcdbb878`
+- Handoff: QA branch claude/photo-handoff commit fe19da8 (HNYCMB514-shuriken.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said "list those" on 2026-10-16. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 2736 × 3648; EXIF orientation 1.
+- Applied crop box after orientation: `(400, 790, 2470, 2860)`.
+- Square storefront frame (inside the applied crop): `(400, 790, 2470, 2860)`. The whole star; only the fingertips holding it remain, the box edges are cut.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/shuriken-480.webp` | 480 | 480 × 480 | 10598 | 82 | `ac619be0253f84318d54ddef3542835b8878e9d0e5a83ad6b573ef2345f0429e` |
+| `/assets/shuriken-480.avif` | 480 | 480 × 480 | 6383 | AVIF 60 | `b44819a5ce011f22399039de5e75f0372aac85b18b7b02099de8663ac626f9a4` |
+| `/assets/shuriken-960.webp` | 960 | 960 × 960 | 26752 | 82 | `2e5fb950399b9e772513d4cd3328cca8686768f0188f539284c93a459bbb0c73` |
+| `/assets/shuriken-960.avif` | 960 | 960 × 960 | 13587 | AVIF 60 | `22c930ef74c44c5c95c767cbeea517a6a6a8af32884f9568441ff5d7e66266a6` |
+| `/assets/shuriken-sq-160.webp` | 160 | 160 × 160 | 2838 | 82 | `cfad9ee5ea242c052fab746e2d1ace71ed8dd0dba29053806aa5f92da85632f3` |
+| `/assets/shuriken-sq-160.avif` | 160 | 160 × 160 | 2302 | AVIF 60 | `a1185d1df98e8c18bc29066981795f2aa33d2a2e1fee56d188cb44a5db0398da` |
+| `/assets/shuriken-sq-320.webp` | 320 | 320 × 320 | 6420 | 82 | `e43600ffa45984f20889316fbb250c622e95a685813043596f57bb09f078940b` |
+| `/assets/shuriken-sq-320.avif` | 320 | 320 × 320 | 4280 | AVIF 60 | `6272e1daae7c65edc70beb9988fa109e5223d93bdcd65f2e20dad0dbf55e32a7` |
+| `/assets/shuriken-sq-480.webp` | 480 | 480 × 480 | 10598 | 82 | `ac619be0253f84318d54ddef3542835b8878e9d0e5a83ad6b573ef2345f0429e` |
+| `/assets/shuriken-sq-480.avif` | 480 | 480 × 480 | 6383 | AVIF 60 | `b44819a5ce011f22399039de5e75f0372aac85b18b7b02099de8663ac626f9a4` |
+| `/assets/shuriken-sq-640.webp` | 640 | 640 × 640 | 15312 | 82 | `d26a74c6a9bc85e200e5c2d50743515bf14b74dc2c81496e693793e0f38c0446` |
+| `/assets/shuriken-sq-640.avif` | 640 | 640 × 640 | 8641 | AVIF 60 | `b88d56c533faf4c7c8e5329c2adfbe37a207558c7f74dc0019a423ba60c83484` |
+| `/assets/shuriken-sq-960.webp` | 960 | 960 × 960 | 26752 | 82 | `2e5fb950399b9e772513d4cd3328cca8686768f0188f539284c93a459bbb0c73` |
+| `/assets/shuriken-sq-960.avif` | 960 | 960 × 960 | 13587 | AVIF 60 | `22c930ef74c44c5c95c767cbeea517a6a6a8af32884f9568441ff5d7e66266a6` |
+| `/assets/shuriken-sq-1200.webp` | 1200 | 1200 × 1200 | 37880 | 82 | `ffffe0768b1885c7baf9a5a05bb752ff3fc1c218ced7c574bd0654cffe88b92b` |
+| `/assets/shuriken-sq-1200.avif` | 1200 | 1200 × 1200 | 17496 | AVIF 60 | `48b834b6807a655346246fa91403b38aa038299571d6a3193a86544bdb364207` |
+| `/assets/shuriken-share.jpg` | 1200 | 1200 × 1200 | 110461 | JPEG 84 | `db884b7aa4202d68633958ff918dbafb8b31fadadb1f5fdeab253cad182184c9` |
+
+## HNYCMB515
+
+- Source title: `HNYCMB515-grogu-keychain.jpg`
+- Source Drive ID: `1OL98LhZBjTEKJ8swbXjxrEzVQFJqa2iN`
+- Drive original SHA-256: `2d4c5b10d455750c9e27f51e1146dcf43b37ce5558696fd360c66e3cac32b7eb`
+- Metadata-clean source input: `assets/photo-sources/grogu-keychain.jpg`
+- Input SHA-256: `ed1aa1466287a31fbc59a4b564155eb7e0cf77947f2bd28802cd5422d71d2553`
+- Handoff: QA branch claude/photo-handoff commit fe19da8 (HNYCMB515-grogu-keychain.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said "list those" on 2026-10-16. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 3024 × 4032; EXIF orientation 1.
+- Applied crop box after orientation: `(605, 1075, 2505, 2975)`.
+- Square storefront frame (inside the applied crop): `(605, 1075, 2505, 2975)`. The whole keychain, ring included.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/grogu-keychain-480.webp` | 480 | 480 × 480 | 25230 | 82 | `7d50afc20826162ebc3eb24f511d3304dbbed3c33feaae84991b8091de6f10e7` |
+| `/assets/grogu-keychain-480.avif` | 480 | 480 × 480 | 18331 | AVIF 60 | `b7981d23260ddcc94f78728f04e5e47f268ff95763c04ebd3640de93ee4e2a08` |
+| `/assets/grogu-keychain-960.webp` | 960 | 960 × 960 | 59008 | 82 | `c2c90f2b6aec2331838bef342b96888bf9453edb3230365ba1ef0c94184b095b` |
+| `/assets/grogu-keychain-960.avif` | 960 | 960 × 960 | 36861 | AVIF 60 | `4f8114ccd306ade2f43bfe0b92d6bd0d243b4e7e3a23cc736a78236dea8b8a47` |
+| `/assets/grogu-keychain-sq-160.webp` | 160 | 160 × 160 | 4470 | 82 | `8f9c60bafb0af07e8d2496130fa14a151843cc67b94c892a03442c6ac93bbb8f` |
+| `/assets/grogu-keychain-sq-160.avif` | 160 | 160 × 160 | 3918 | AVIF 60 | `ddda76aad52050f23e549ccfcf195fd9dc6ceac232626fe8253139a2f6f0ae2f` |
+| `/assets/grogu-keychain-sq-320.webp` | 320 | 320 × 320 | 14122 | 82 | `3294dc5774829c7a19ce2109676d7b9c6316b77609934b5d6f528a3292fb5bd5` |
+| `/assets/grogu-keychain-sq-320.avif` | 320 | 320 × 320 | 10948 | AVIF 60 | `79969b01dc3df41dfc8d40f05b3cdcc240ce4475cadb054e5b6113628ff1912d` |
+| `/assets/grogu-keychain-sq-480.webp` | 480 | 480 × 480 | 25230 | 82 | `7d50afc20826162ebc3eb24f511d3304dbbed3c33feaae84991b8091de6f10e7` |
+| `/assets/grogu-keychain-sq-480.avif` | 480 | 480 × 480 | 18331 | AVIF 60 | `b7981d23260ddcc94f78728f04e5e47f268ff95763c04ebd3640de93ee4e2a08` |
+| `/assets/grogu-keychain-sq-640.webp` | 640 | 640 × 640 | 35876 | 82 | `d4c78341894be18f90fd6a933ce83c7568cdba62a0153e2c20488852bc410996` |
+| `/assets/grogu-keychain-sq-640.avif` | 640 | 640 × 640 | 25181 | AVIF 60 | `e761e2669b32ae34c736eb4999f48d0f60537234f234275a7387f9626f2d928b` |
+| `/assets/grogu-keychain-sq-960.webp` | 960 | 960 × 960 | 59008 | 82 | `c2c90f2b6aec2331838bef342b96888bf9453edb3230365ba1ef0c94184b095b` |
+| `/assets/grogu-keychain-sq-960.avif` | 960 | 960 × 960 | 36861 | AVIF 60 | `4f8114ccd306ade2f43bfe0b92d6bd0d243b4e7e3a23cc736a78236dea8b8a47` |
+| `/assets/grogu-keychain-sq-1200.webp` | 1200 | 1200 × 1200 | 76468 | 82 | `13d124e446692b35ca909bf3b0b37b59b2d9d73a4cf71bb7b23e3eb61a4c2eea` |
+| `/assets/grogu-keychain-sq-1200.avif` | 1200 | 1200 × 1200 | 45068 | AVIF 60 | `253559225a3e804fefc6b11a2d6cd07da796bada7ba566d1ae75642731ffc90f` |
+| `/assets/grogu-keychain-share.jpg` | 1200 | 1200 × 1200 | 169854 | JPEG 84 | `5eeaab9ae8dc92a3f1cc28b42f42673625023a16b563a6c9cc6b363faa9bf022` |
+
+## HNYCMB516
+
+- Source title: `HNYCMB516-dummy13-iron-man.jpg`
+- Source Drive ID: `1o6V86ZMTo3Syo0Jom4cXwqGGflYVc98a`
+- Drive original SHA-256: `8754c67c2808981032178fe165aab49aa9fe20eff72f95850f529c1a7fc03641`
+- Metadata-clean source input: `assets/photo-sources/dummy-13-iron-man.jpg`
+- Input SHA-256: `74d2bd9e740761a7af4e9248bb07dd427ea812775592a7f1d86e76d2f6d7ca2c`
+- Handoff: QA branch claude/photo-handoff commit fe19da8 (HNYCMB516-dummy13-iron-man.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said "list those" on 2026-10-16. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 1398 × 2603; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 180, 1398, 2603)`.
+- Square storefront frame: the whole applied crop centred on a 2423 × 2423 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#6d6d66`), with a 97 px edge fade. The whole figure, hands to feet, with the carpet above its head cut away.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/dummy-13-iron-man-480.webp` | 480 | 480 × 832 | 42026 | 82 | `aadc2248e4ff7941eb9341605f82441bc76fedf1e7e611849d8e231336a3f40f` |
+| `/assets/dummy-13-iron-man-480.avif` | 480 | 480 × 832 | 25820 | AVIF 60 | `7f841e0761c323d7bec28c09aa460cf15a091cb2b4695d0dca619753d4a45daa` |
+| `/assets/dummy-13-iron-man-960.webp` | 960 | 960 × 1664 | 143884 | 82 | `1e27bc62651ec6dfa7e0c34ca30ff0971721c7afd686ac2d4a05af22b86d73dc` |
+| `/assets/dummy-13-iron-man-960.avif` | 960 | 960 × 1664 | 82258 | AVIF 60 | `726fe6146c49a036ea32849bf4bae2186963181b9e16d5f519b3a71818fc2359` |
+| `/assets/dummy-13-iron-man-sq-160.webp` | 160 | 160 × 160 | 4194 | 82 | `b2c197db382ff51e730adf8f4f2576c93652a956eab9be152bb1dc00a68b808b` |
+| `/assets/dummy-13-iron-man-sq-160.avif` | 160 | 160 × 160 | 3831 | AVIF 60 | `ca2943a248373aff0a238337b5006800aec78a46bd1c21147eba0452a8ef843b` |
+| `/assets/dummy-13-iron-man-sq-320.webp` | 320 | 320 × 320 | 11488 | 82 | `5456b769d1c518020ccde07c462e6274dec3d4a8baebb305f62fbfa7c3b73b4d` |
+| `/assets/dummy-13-iron-man-sq-320.avif` | 320 | 320 × 320 | 9170 | AVIF 60 | `ee0b76584269513775e6ec6b576935ceedd55b187db042151f67360365f042c2` |
+| `/assets/dummy-13-iron-man-sq-480.webp` | 480 | 480 × 480 | 18418 | 82 | `784000c284f2641753762ff8d4cce244058f1936018a5a87d6d22290ee812e3b` |
+| `/assets/dummy-13-iron-man-sq-480.avif` | 480 | 480 × 480 | 13627 | AVIF 60 | `f14cfec476b9ac85912334a8289e7bee9822a840bf52da52c4c427530cb8da58` |
+| `/assets/dummy-13-iron-man-sq-640.webp` | 640 | 640 × 640 | 25800 | 82 | `9a1c05cead9eda41c3aa2fb19f99fb0b6f44373d029661e500f02a5046b11434` |
+| `/assets/dummy-13-iron-man-sq-640.avif` | 640 | 640 × 640 | 18354 | AVIF 60 | `c1b017804cd61eaee11ca7df826fe188e02a292684d3abbb1c3f1ed79afd04d3` |
+| `/assets/dummy-13-iron-man-sq-960.webp` | 960 | 960 × 960 | 44136 | 82 | `9e2b059e71b6aa51727cb17f90a6dabb09abcec19d3ca55bf24a2257da6911f6` |
+| `/assets/dummy-13-iron-man-sq-960.avif` | 960 | 960 × 960 | 27528 | AVIF 60 | `168bb70aed75dae3378d512a76b777e6d695ee9932e8ef71d28f48dab806c030` |
+| `/assets/dummy-13-iron-man-sq-1200.webp` | 1200 | 1200 × 1200 | 62754 | 82 | `61407093adb17b9895144007acbff4a09eb52cf11f00ed09aa386e5f01b7fde5` |
+| `/assets/dummy-13-iron-man-sq-1200.avif` | 1200 | 1200 × 1200 | 36605 | AVIF 60 | `fa647196efb8ace353958cbde649fe631dabfb2a5f22a65590a98b4c883a701d` |
+| `/assets/dummy-13-iron-man-share.jpg` | 1200 | 1200 × 1200 | 144338 | JPEG 84 | `69c06d4df8f0609c4b7a2dabcb77ae4eb79dd521ebf1a1183859b1ef6b6d5a6c` |
+
+## HNYCMB517
+
+- Source title: `HNYCMB517-dummy13-spider-man.jpg`
+- Source Drive ID: `1TcA-A9JgUxGpfvv4Jff77SavaMoKTBMi`
+- Drive original SHA-256: `6512bc5d620a1a8a4e9e353ef0ab2b3a6335d8ebdb336b47d3d26847544e57a7`
+- Metadata-clean source input: `assets/photo-sources/dummy-13-spider-man.jpg`
+- Input SHA-256: `bfe5057f493dbe26f8487c77521eb2692b74aa96685718534c14e87568ee4bc5`
+- Handoff: QA branch claude/photo-handoff commit fe19da8 (HNYCMB517-dummy13-spider-man.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said "list those" on 2026-10-16. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 1920 × 1920; EXIF orientation 1.
+- Applied crop box after orientation: `(219, 200, 1619, 1600)`.
+- Square storefront frame (inside the applied crop): `(219, 200, 1619, 1600)`. The whole crouching figure.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/dummy-13-spider-man-480.webp` | 480 | 480 × 480 | 15208 | 82 | `866a2f968436f2004148086ea3a5890f40ad1d2a812a2d1cbcb079e21de1c787` |
+| `/assets/dummy-13-spider-man-480.avif` | 480 | 480 × 480 | 10521 | AVIF 60 | `8e235e73779df3498c0a6ecf732ca3d015e0829b3668e4121478ca471d1600dd` |
+| `/assets/dummy-13-spider-man-960.webp` | 960 | 960 × 960 | 37456 | 82 | `6fb9304e63f1cff159ce1ac522d261607060da6432ad80d028f59bc7c6df8857` |
+| `/assets/dummy-13-spider-man-960.avif` | 960 | 960 × 960 | 23272 | AVIF 60 | `92cf8ebcabb520caec248bc5ae68ee6af52e03ff16c3e42cc49bbc05566146e0` |
+| `/assets/dummy-13-spider-man-sq-160.webp` | 160 | 160 × 160 | 3888 | 82 | `9651c554031446c2c5408a617c9af4bdca6ed2b8fe1bf31c756749bcb9b3cf2e` |
+| `/assets/dummy-13-spider-man-sq-160.avif` | 160 | 160 × 160 | 3259 | AVIF 60 | `92a7eb8c18f3c12cffa55b498eeab4d723591420365ae06397209d19b283edd4` |
+| `/assets/dummy-13-spider-man-sq-320.webp` | 320 | 320 × 320 | 9314 | 82 | `5fde2de48a056bccd10db88998260ddb09b9e60144a8f344939403b9d556b630` |
+| `/assets/dummy-13-spider-man-sq-320.avif` | 320 | 320 × 320 | 6812 | AVIF 60 | `ec908a818ebb18487f19ddf968440f22c514dd2eba165220b91ff5ca8d211c88` |
+| `/assets/dummy-13-spider-man-sq-480.webp` | 480 | 480 × 480 | 15208 | 82 | `866a2f968436f2004148086ea3a5890f40ad1d2a812a2d1cbcb079e21de1c787` |
+| `/assets/dummy-13-spider-man-sq-480.avif` | 480 | 480 × 480 | 10521 | AVIF 60 | `8e235e73779df3498c0a6ecf732ca3d015e0829b3668e4121478ca471d1600dd` |
+| `/assets/dummy-13-spider-man-sq-640.webp` | 640 | 640 × 640 | 21724 | 82 | `68e4e6864f19f5f2a6d1fc91b72215250c926b1f109afa4eb9bfbe196744b715` |
+| `/assets/dummy-13-spider-man-sq-640.avif` | 640 | 640 × 640 | 14654 | AVIF 60 | `f45ed7ec079c6396478da23c7c86b53c5ab7a9943731bfd2de35c8278d236cee` |
+| `/assets/dummy-13-spider-man-sq-960.webp` | 960 | 960 × 960 | 37456 | 82 | `6fb9304e63f1cff159ce1ac522d261607060da6432ad80d028f59bc7c6df8857` |
+| `/assets/dummy-13-spider-man-sq-960.avif` | 960 | 960 × 960 | 23272 | AVIF 60 | `92cf8ebcabb520caec248bc5ae68ee6af52e03ff16c3e42cc49bbc05566146e0` |
+| `/assets/dummy-13-spider-man-sq-1200.webp` | 1200 | 1200 × 1200 | 49952 | 82 | `7a548920ffa55617d443542b60f297463af62645d07e06fd5c64cad9cccc615c` |
+| `/assets/dummy-13-spider-man-sq-1200.avif` | 1200 | 1200 × 1200 | 30009 | AVIF 60 | `5aeddf32cc8bd6d24e2c72e21ed243eef62677bec6239171ef43cfb876af4392` |
+| `/assets/dummy-13-spider-man-share.jpg` | 1200 | 1200 × 1200 | 107345 | JPEG 84 | `c6721cbd8c3a45b23b0c6cfc022525b7ce9be4a1210907513290594898d9305b` |
+
+## HNYCMB518
+
+- Source title: `HNYCMB518-horse-figurine.jpg`
+- Source Drive ID: `1R7Pk1CEex_vlpISjuao7VyQZI_C8vDOU`
+- Drive original SHA-256: `0ca883d8de5de9fa5412fc861bc219cc70772766b11c008aa8a4098076ba54ca`
+- Metadata-clean source input: `assets/photo-sources/horse-figurine.jpg`
+- Input SHA-256: `d3302a60cd6e3a4a3758d5d31b6bf2106609ef1d0c80e81fdfc912f6567563b4`
+- Handoff: QA branch claude/photo-handoff commit fe19da8 (HNYCMB518-horse-figurine.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said "list those" on 2026-10-16. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 1920 × 2560; EXIF orientation 1.
+- Applied crop box after orientation: `(144, 730, 1794, 2380)`.
+- Square storefront frame (inside the applied crop): `(144, 730, 1794, 2380)`. The whole horse and base.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/horse-figurine-480.webp` | 480 | 480 × 480 | 18722 | 82 | `f53f00b71775847d09cf63788f4d8ab0eb7b75a39b522e04e4a533c629a7ec8d` |
+| `/assets/horse-figurine-480.avif` | 480 | 480 × 480 | 12849 | AVIF 60 | `bc8ffc5f209cde99032c53fa44cdda54e731ce8fd1caa1f48cb89a71438a1ff8` |
+| `/assets/horse-figurine-960.webp` | 960 | 960 × 960 | 42240 | 82 | `c0353471f246a1c525cfe326b956bdfda8968fb0ba2a3ea4792c2e531d3bcb71` |
+| `/assets/horse-figurine-960.avif` | 960 | 960 × 960 | 26202 | AVIF 60 | `c42b75f83b9420f8c57ec51eb99336bd21e0b2fbbdc890dbdc5fa05ee5b4f666` |
+| `/assets/horse-figurine-sq-160.webp` | 160 | 160 × 160 | 4160 | 82 | `099d5cb195dce3dc22aa7320cf310050c98e018f486e88bdbb92e2dbd18702ea` |
+| `/assets/horse-figurine-sq-160.avif` | 160 | 160 × 160 | 3747 | AVIF 60 | `cdf2dee3423825a292815083bc47787b8d2df945f77d9186e9550cd3be919aff` |
+| `/assets/horse-figurine-sq-320.webp` | 320 | 320 × 320 | 10848 | 82 | `66446902b731388151ae1482f0dd183c48344afbde2441d6aeb77d2778c1b8ea` |
+| `/assets/horse-figurine-sq-320.avif` | 320 | 320 × 320 | 8464 | AVIF 60 | `08e695180cd5fb10e13fab15aef2295cc66bb3a1b834317be0c25f5ed69c512b` |
+| `/assets/horse-figurine-sq-480.webp` | 480 | 480 × 480 | 18722 | 82 | `f53f00b71775847d09cf63788f4d8ab0eb7b75a39b522e04e4a533c629a7ec8d` |
+| `/assets/horse-figurine-sq-480.avif` | 480 | 480 × 480 | 12849 | AVIF 60 | `bc8ffc5f209cde99032c53fa44cdda54e731ce8fd1caa1f48cb89a71438a1ff8` |
+| `/assets/horse-figurine-sq-640.webp` | 640 | 640 × 640 | 25650 | 82 | `89bcce6fb4bead364861bdeb2f12cec2682ef00ac38aa0e80bf9ef66019ccfdc` |
+| `/assets/horse-figurine-sq-640.avif` | 640 | 640 × 640 | 17655 | AVIF 60 | `29c338682fa82782a7e25f87e386048ebcf46cf9a76b9005fddd75e7988c7b0e` |
+| `/assets/horse-figurine-sq-960.webp` | 960 | 960 × 960 | 42240 | 82 | `c0353471f246a1c525cfe326b956bdfda8968fb0ba2a3ea4792c2e531d3bcb71` |
+| `/assets/horse-figurine-sq-960.avif` | 960 | 960 × 960 | 26202 | AVIF 60 | `c42b75f83b9420f8c57ec51eb99336bd21e0b2fbbdc890dbdc5fa05ee5b4f666` |
+| `/assets/horse-figurine-sq-1200.webp` | 1200 | 1200 × 1200 | 55280 | 82 | `6589c86362e913b566029f9523693fed351bd53c277315338f2259fe2ec8f820` |
+| `/assets/horse-figurine-sq-1200.avif` | 1200 | 1200 × 1200 | 32762 | AVIF 60 | `2c533533a3c831cc73d224eb1ce09a183af1e3e112b745d387acecb605fc99d8` |
+| `/assets/horse-figurine-share.jpg` | 1200 | 1200 × 1200 | 130548 | JPEG 84 | `e73b979a984b8ef3f40bbf9485a39eeef09098a7365399ca73e2bc26c1136f4b` |
+
 ## Pending approved originals
 
 None. Kurama and Classic Kunai were imported on 16 October 2026 from the QA handoff branch; both original SHA-256 hashes matched the owner-approved files before import.

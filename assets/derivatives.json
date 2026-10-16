@@ -2136,6 +2136,1846 @@
           "quality": null
         }
       ]
+    },
+    {
+      "id": "HNYCMB505",
+      "stem": "bridgerton-bookmark",
+      "input": "assets/photo-sources/bridgerton-bookmark.jpg",
+      "sourceTitle": "HNYCMB505-bridgerton-bookmark.jpg",
+      "sourceDriveId": "12iD2dbrjeeKNhat0ns5d6ArSze5gSMKE",
+      "sourceSha256": "f7e859a647dc21012d1168391d6d649a3110e3a3451852f0117296acb8709283",
+      "inputSha256": "1c79679510a3d9e90af4b78ee39d7a1ba2cbb26a29f2da8a366b44f56a4cdc0a",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1920,
+        1581
+      ],
+      "cropBox": [
+        90,
+        0,
+        1920,
+        1581
+      ],
+      "alt": "White 3D-printed Bridgerton bookmark with raised lettering and an ornate cameo silhouette end, on black leather",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole bookmark, tip to cameo, on its black leather backdrop.",
+        "padding": {
+          "backdrop": "#2b2728",
+          "feather": 73,
+          "side": 1830
+        }
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB505-bridgerton-bookmark.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16",
+      "orientedSize": [
+        1920,
+        1581
+      ],
+      "appliedCropBox": [
+        90,
+        0,
+        1920,
+        1581
+      ],
+      "outputs": [
+        {
+          "src": "/assets/bridgerton-bookmark-480.webp",
+          "width": 480,
+          "height": 415,
+          "bytes": 70212,
+          "sha256": "4de09ef2ab0a14835072d543fefb78c1dc49d0447d02b821f6cfbed5bd261687",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/bridgerton-bookmark-480.avif",
+            "bytes": 61952,
+            "sha256": "3dee00cd47985271723b16cdb753ff733d363f4023e731ec6a468679dcf4b529",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/bridgerton-bookmark-960.webp",
+          "width": 960,
+          "height": 829,
+          "bytes": 251490,
+          "sha256": "215012fca19554142d7ec9e6b66ba8b19b875809b6d7998addc44e7366b0cd38",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/bridgerton-bookmark-960.avif",
+            "bytes": 222313,
+            "sha256": "b9cbc8f9cf5d7c13476719251dcaf5f48333991a670fb239006fee0d445200e6",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/bridgerton-bookmark-sq-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 6060,
+          "sha256": "57e02d2853b20a2d9dce86afdeb972eb5de31b7a696a8271414d5324c42a101f",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/bridgerton-bookmark-sq-160.avif",
+            "bytes": 5034,
+            "sha256": "5a526d447f906d4df535038d772ee7f7781ef6f97e64daff9d3b9e89910783d9",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/bridgerton-bookmark-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 28424,
+          "sha256": "aedb1b6ef2cd5967d855d18bf7690fe44c3fa14fb3d8d2c42f790470e3c75840",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/bridgerton-bookmark-sq-320.avif",
+            "bytes": 24872,
+            "sha256": "a4585e49675158fc762bbc52bcde398a9c13ae2b6f2abb808cb3b915a302d5ec",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/bridgerton-bookmark-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 65466,
+          "sha256": "565cd145e5b574a8614eb1b5d387ed8af8f9b87cc0f4f4d2d13839f078d2cfbe",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/bridgerton-bookmark-sq-480.avif",
+            "bytes": 59231,
+            "sha256": "a49e20eb8ef432ee9f777acb1c5e9d6993df7de9679ac5b9e15ec95dd8dc63a7",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/bridgerton-bookmark-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 114590,
+          "sha256": "81c318ac454e15179c52b184fdb691eebc9d8f6401b35347d23e219feab14455",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/bridgerton-bookmark-sq-640.avif",
+            "bytes": 106654,
+            "sha256": "0d6875aa0db52935f73430ce47d5e041e905289f57b62325a54675f9a9e43716",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/bridgerton-bookmark-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 232554,
+          "sha256": "972566933806a0b764576f42928a2d28754f2fbca078ef537fd4d9a2946842bb",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/bridgerton-bookmark-sq-960.avif",
+            "bytes": 210772,
+            "sha256": "78e8849b2b5772140f68d20578d8f98cf8072a6a6b3e2a6cf22499100a693710",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/bridgerton-bookmark-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 330212,
+          "sha256": "f71a45f31ba7a0905b35386b11f5b066a1e52d0fd24bf7585bfb6acb8a7571aa",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/bridgerton-bookmark-sq-1200.avif",
+            "bytes": 289273,
+            "sha256": "ca9199bc74a235182c49bf78164fe837a15025014d7b16394bab393ac3677083",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/bridgerton-bookmark-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 279641,
+          "sha256": "a50b41185959bb81c4f2ecd3e4eef0aee67caf6da46d2f0a1ed3c6be4e9a89f4",
+          "quality": 66,
+          "frame": "share"
+        }
+      ]
+    },
+    {
+      "id": "HNYCMB506",
+      "stem": "flexi-derpy",
+      "input": "assets/photo-sources/flexi-derpy.jpg",
+      "sourceTitle": "HNYCMB506-flexi-derpy.jpg",
+      "sourceDriveId": "1xKvveU7RYKISIkPpaq1ZqP3rSQPEzLZa",
+      "sourceSha256": "2e329ecfaccae167f3a1ab4bebba2577c2666cd6bc43d9837a71c450db7cfd34",
+      "inputSha256": "6d2d0fdc9dc0c88901a7bcb3ec11a7543d653f41e23ba9b47cfb936d805f5f0d",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1920,
+        2560
+      ],
+      "cropBox": [
+        300,
+        640,
+        1560,
+        1900
+      ],
+      "alt": "A group of blue 3D-printed flexi Derpy figures with yellow eyes and cream joints",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          300,
+          640,
+          1560,
+          1900
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The Derpy figures without the basket rim."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB506-flexi-derpy.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16",
+      "orientedSize": [
+        1920,
+        2560
+      ],
+      "appliedCropBox": [
+        300,
+        640,
+        1560,
+        1900
+      ],
+      "outputs": [
+        {
+          "src": "/assets/flexi-derpy-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 46210,
+          "sha256": "89ccc84c5b2bb936656bdd7ceb420e0a28ae4a39bdd45997cbe7b6cc7ac0b30f",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/flexi-derpy-480.avif",
+            "bytes": 37044,
+            "sha256": "5a415ad234f7bbed5d710d2e2f3bf9f2ec0108e9e254e07f2826a3f5d5a882f1",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/flexi-derpy-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 117042,
+          "sha256": "cebd17ed736467567f8f3a4c1d2d9d532271848d65c9948c74478e20530b68a9",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/flexi-derpy-960.avif",
+            "bytes": 83012,
+            "sha256": "989223f321205480c46b218f3547a51b9bdba523c1d890e0a171d167cc0b45c6",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/flexi-derpy-sq-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 9880,
+          "sha256": "0eb5b577ca52535041368e968be557d274c6900d38831ecef5f130da034f32e9",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/flexi-derpy-sq-160.avif",
+            "bytes": 8841,
+            "sha256": "264481a4e8a8284388dfb3bea8cf6083a19b23db5bc9796583ca63c5aee4bd7e",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/flexi-derpy-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 25830,
+          "sha256": "946167de8df9db0b4526436b2fddb5602def59f12165c2120c2bc73d9a006259",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/flexi-derpy-sq-320.avif",
+            "bytes": 22112,
+            "sha256": "823a29e53f3fade96dbdc18e608993bbc7a2ee4b528a681fa167da3b5960c4f4",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/flexi-derpy-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 46210,
+          "sha256": "89ccc84c5b2bb936656bdd7ceb420e0a28ae4a39bdd45997cbe7b6cc7ac0b30f",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/flexi-derpy-sq-480.avif",
+            "bytes": 37044,
+            "sha256": "5a415ad234f7bbed5d710d2e2f3bf9f2ec0108e9e254e07f2826a3f5d5a882f1",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/flexi-derpy-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 69626,
+          "sha256": "3d9b1780ce6f9df49480f96e3c4539fc98580c54a7dc9d9c5002914222c0730c",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/flexi-derpy-sq-640.avif",
+            "bytes": 52860,
+            "sha256": "063b81ad83706e0116bf0fefcede4b66d9276fa2db09f57796a5f52ae3110192",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/flexi-derpy-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 117042,
+          "sha256": "cebd17ed736467567f8f3a4c1d2d9d532271848d65c9948c74478e20530b68a9",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/flexi-derpy-sq-960.avif",
+            "bytes": 83012,
+            "sha256": "989223f321205480c46b218f3547a51b9bdba523c1d890e0a171d167cc0b45c6",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/flexi-derpy-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 158268,
+          "sha256": "46f465386967b6b8a9d83dd9bf0fe26c2864d67c73555d6671da689227e82c2a",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/flexi-derpy-sq-1200.avif",
+            "bytes": 105420,
+            "sha256": "70a366ffe8ba9fac34c95c8a0abbb6dcb061db37c5e3f8842ff63e679d61cb7b",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/flexi-derpy-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 271677,
+          "sha256": "bb9750d9eeb5e5c7a4ed2e0874a207fdedf7763474397de71cb350a99efce2fc",
+          "quality": 84,
+          "frame": "share"
+        }
+      ]
+    },
+    {
+      "id": "HNYCMB507",
+      "stem": "desk-organizer",
+      "input": "assets/photo-sources/desk-organizer.jpg",
+      "sourceTitle": "HNYCMB507-desk-organizer.jpg",
+      "sourceDriveId": "1vmZYNsrB7_JkNByGhegptecoZoPbLmqg",
+      "sourceSha256": "6ad682b24ca487a50394bd5b7e5f1382f192347f0bad47fff55a2d0a748b6b92",
+      "inputSha256": "00a7ae74f2ee0519820bc81a766d0b3b3dd7a83fc2238529c8cafae5f794ee45",
+      "exifOrientation": 6,
+      "sourceSize": [
+        4608,
+        3456
+      ],
+      "cropBox": [
+        0,
+        1050,
+        3456,
+        4506
+      ],
+      "alt": "Black textured 3D-printed desk organizer with two yellow-lined pen cups and a phone stand slot, on a wooden floor",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          0,
+          1050,
+          3456,
+          4506
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole organizer, framed low to leave out the printer behind it."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB507-desk-organizer.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16",
+      "orientedSize": [
+        3456,
+        4608
+      ],
+      "appliedCropBox": [
+        0,
+        1050,
+        3456,
+        4506
+      ],
+      "outputs": [
+        {
+          "src": "/assets/desk-organizer-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 30176,
+          "sha256": "4bfa1e6de2163d4f71e4c6281a9a4d1d2e27678a0a958ffffb044fd4d5cc1b2c",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/desk-organizer-480.avif",
+            "bytes": 21086,
+            "sha256": "dffc23551b2282bff5a91130c3372fc7748682611d3a17d638f3f109c765719f",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/desk-organizer-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 91422,
+          "sha256": "96e7fdc3607f5a517646d8a33f6a43c2bc018de70e4a630a2d9ba8eb909186b7",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/desk-organizer-960.avif",
+            "bytes": 62129,
+            "sha256": "d123dd412dabe1dba4a30e29b0302595e35af6efde5e2e54180834f76cbd0b6b",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/desk-organizer-sq-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 4516,
+          "sha256": "663acb234c98a933a4196ffd4d99005ef5051f2540ae37430bc2de8c3d0c9e55",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/desk-organizer-sq-160.avif",
+            "bytes": 3277,
+            "sha256": "491d5fe9f449f64fbfc8b49c5c561467867272201a436927790267706d40026b",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/desk-organizer-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 15040,
+          "sha256": "e8021fafd11ac773bb4dbce7e8f63bc77eb96980b12da3ce045c059bf0f0db10",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/desk-organizer-sq-320.avif",
+            "bytes": 10687,
+            "sha256": "360df7c391beb8519ff566a61c575333573f51123ac3fdbf8b414cafb9b03ac6",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/desk-organizer-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 30176,
+          "sha256": "4bfa1e6de2163d4f71e4c6281a9a4d1d2e27678a0a958ffffb044fd4d5cc1b2c",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/desk-organizer-sq-480.avif",
+            "bytes": 21086,
+            "sha256": "dffc23551b2282bff5a91130c3372fc7748682611d3a17d638f3f109c765719f",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/desk-organizer-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 47816,
+          "sha256": "db5ffe4bb9d0ac560151a35c5218e0397449adb22eedfeaea7e75fc25eada65e",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/desk-organizer-sq-640.avif",
+            "bytes": 34218,
+            "sha256": "d6af25b0597b5cb60ef722c10db06c674f55b64adb7343ad7f07a38a7ba81cc8",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/desk-organizer-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 91422,
+          "sha256": "96e7fdc3607f5a517646d8a33f6a43c2bc018de70e4a630a2d9ba8eb909186b7",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/desk-organizer-sq-960.avif",
+            "bytes": 62129,
+            "sha256": "d123dd412dabe1dba4a30e29b0302595e35af6efde5e2e54180834f76cbd0b6b",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/desk-organizer-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 129228,
+          "sha256": "b5bca12032acb712d2c3398f8888f660ed7f9fb6f69881eb61ecc6909b31e6b7",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/desk-organizer-sq-1200.avif",
+            "bytes": 87026,
+            "sha256": "f7591d94c917cf8c8200e6b5b86dcd3e2453621b269af7f3447a849a8a4c71ed",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/desk-organizer-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 224829,
+          "sha256": "a889ca7446625968eaee063cb3c685faf95c3d14ca01cecb54972ab558c10d67",
+          "quality": 84,
+          "frame": "share"
+        }
+      ]
+    },
+    {
+      "id": "HNYCMB510",
+      "stem": "light-fury-big-wings",
+      "input": "assets/photo-sources/light-fury-big-wings.jpg",
+      "sourceTitle": "HNYCMB510-light-fury-big-wings.jpg",
+      "sourceDriveId": "1KQeczUTxcbbVstTYWVDgL6epTOeyWqsF",
+      "sourceSha256": "cdb3293ee1faa7d75e67a520b87842ecbb6371d915b884d2523fe1e7662e461e",
+      "inputSha256": "bf34ba465b80c3fd68413d8af1ae4522bbcd9c09bf6a0029d374051456c57b84",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3264,
+        2448
+      ],
+      "cropBox": [
+        80,
+        0,
+        3264,
+        2448
+      ],
+      "alt": "White articulated 3D-printed Light Fury dragon with large wings and blue eyes, lying on dark fabric",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole dragon, wing tip to tail, on its dark fabric.",
+        "padding": {
+          "backdrop": "#0a1016",
+          "feather": 127,
+          "side": 3184
+        }
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB510-light-fury-big-wings.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16",
+      "orientedSize": [
+        3264,
+        2448
+      ],
+      "appliedCropBox": [
+        80,
+        0,
+        3264,
+        2448
+      ],
+      "outputs": [
+        {
+          "src": "/assets/light-fury-big-wings-480.webp",
+          "width": 480,
+          "height": 369,
+          "bytes": 38814,
+          "sha256": "3ef527a695c3c85bd325b9a8d3ee4f1adc415744e5272506e5a6b34779061636",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/light-fury-big-wings-480.avif",
+            "bytes": 31969,
+            "sha256": "2d7a40e4d7cacbcd3da7f2c87235c54c2afeb96a51eb0824e461dffe3fd4b895",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/light-fury-big-wings-960.webp",
+          "width": 960,
+          "height": 738,
+          "bytes": 112102,
+          "sha256": "25744f78a49a8a0d575cbf758b837a2192d1b35c9ed6216d449a6e901b297bdc",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/light-fury-big-wings-960.avif",
+            "bytes": 78053,
+            "sha256": "5e8746be021ce29ef87ad3069d7fb29ab43f59c58b095542e6d25c8f329dac31",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/light-fury-big-wings-sq-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 4192,
+          "sha256": "93a28abedd609eab812e5fc7016866922ad5a74d807ec574a061b4fd12186eae",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/light-fury-big-wings-sq-160.avif",
+            "bytes": 3881,
+            "sha256": "5bc5e97e8a05350bef4d3c3157f354360de26649647cd06cdb16d709efa055be",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-big-wings-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 16048,
+          "sha256": "928575b85a4812e3b8bb7a5d404baf1b6d681368bc676bbae0d28bb1be1d81e7",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/light-fury-big-wings-sq-320.avif",
+            "bytes": 14270,
+            "sha256": "531729ecfcdd7d85e099710827bc9e545550e608833ebb6438c6adcfcfee6405",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-big-wings-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 36688,
+          "sha256": "4325ca6d3547e2b2f11e48e370c72df6dbbfd052e80b0c779c513da7e118f99a",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/light-fury-big-wings-sq-480.avif",
+            "bytes": 30371,
+            "sha256": "07d3292c7a30a1b69106b6870db1808ea1c45a923c3f6671ecfc3cdf85f5c9cd",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-big-wings-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 59394,
+          "sha256": "a09852d3f9dba4020462e6073239987663cc073a8623f791811f19f1f4271370",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/light-fury-big-wings-sq-640.avif",
+            "bytes": 47708,
+            "sha256": "77be32fc84db2371b9d15f6584a20dbd84e974791b7c9012408190e1495b62ff",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-big-wings-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 105590,
+          "sha256": "94a1dcaf9b0b2bc892b1fda670175c6b413b0f03abde0d07292fd7c48f496efa",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/light-fury-big-wings-sq-960.avif",
+            "bytes": 73974,
+            "sha256": "b0e50cd8bea4a4b9dc5a59a882b21440033ea7acc05eb67dae8ecf40dd8a6cb0",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-big-wings-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 137616,
+          "sha256": "6ea0654254fc435beff75a42120c420afaf6b1b10f2caf520b32edb0dd4d6c34",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/light-fury-big-wings-sq-1200.avif",
+            "bytes": 90502,
+            "sha256": "d112aaf1773f9e992e0855c8abbb3d1f863cdc18eefb3cf30b9ab6c17586a71f",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-big-wings-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 212878,
+          "sha256": "fd9ed8d63441982f8dfb1e7db3e8780bfabcd003b3aaf0efc254180ecf46573c",
+          "quality": 84,
+          "frame": "share"
+        }
+      ]
+    },
+    {
+      "id": "HNYCMB512",
+      "stem": "urban-spider-man",
+      "input": "assets/photo-sources/urban-spider-man.jpg",
+      "sourceTitle": "HNYCMB512-urban-spider-man.jpg",
+      "sourceDriveId": "120w4276bAIJL7o9LX3m2SSlXjDW9qs53",
+      "sourceSha256": "8978e4307d61023d802dd213ce20e9e6601df22186396ed04903599c4739f7eb",
+      "inputSha256": "ed5e48f8ef92d64fac025b1da2513ebe40880621aec9da68086cbfe68cd463d7",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1920,
+        2560
+      ],
+      "cropBox": [
+        0,
+        180,
+        1920,
+        2300
+      ],
+      "alt": "3D-printed Spider-Man figure in a black hooded jacket with a red web-pattern mask and white sneakers, standing on a wooden table",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole figure, hood to sneakers.",
+        "padding": {
+          "backdrop": "#683a12",
+          "feather": 85,
+          "side": 2120
+        }
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB512-urban-spider-man.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16",
+      "orientedSize": [
+        1920,
+        2560
+      ],
+      "appliedCropBox": [
+        0,
+        180,
+        1920,
+        2300
+      ],
+      "outputs": [
+        {
+          "src": "/assets/urban-spider-man-480.webp",
+          "width": 480,
+          "height": 530,
+          "bytes": 33728,
+          "sha256": "be3091a7cd19b532b40669366188b803a1d30bad0044b4bbc0461c01b80aa604",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/urban-spider-man-480.avif",
+            "bytes": 23725,
+            "sha256": "e2f0c8ce138daffa907a2e84d01f3909b848d9423000d5ae83c10920cb6d70ce",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/urban-spider-man-960.webp",
+          "width": 960,
+          "height": 1060,
+          "bytes": 86984,
+          "sha256": "5ec74535e9a292cb7a45c57d434f14085523334f3b907e432262a7ae4a254430",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/urban-spider-man-960.avif",
+            "bytes": 52153,
+            "sha256": "dd5e36e345b4c22766c7ebb77dc47f183401f78128a19810e21307fdf6fad3d9",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/urban-spider-man-sq-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 5814,
+          "sha256": "3e6e7364aa4f51ddcbfd6f1d8e3681dc9b1d68d3732e3a145b5b7742d2c75ba3",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/urban-spider-man-sq-160.avif",
+            "bytes": 4849,
+            "sha256": "0a2199a278cd757216673ee2d1e642d8d29dd1b0b815da7bd4e4e49b4adafcba",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/urban-spider-man-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 16560,
+          "sha256": "2d9fe615408fb3062514742484c4c4026b6a9c4afd2779934bb61cb35a49215f",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/urban-spider-man-sq-320.avif",
+            "bytes": 12368,
+            "sha256": "fbdc7ae5a1ae4668e9613f42c7ee4cfe9aca28c24ba8be06c9c8681aecd9a05e",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/urban-spider-man-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 28696,
+          "sha256": "567cdcdb05a891424ae6e6ca4ba02b468dc492ee4511ed5ca2048b3b7b00d3b4",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/urban-spider-man-sq-480.avif",
+            "bytes": 20359,
+            "sha256": "5dd2bbdfe292b18cdd16e8aa8d664b03d739aea7921419ac0ad04d0712d246bc",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/urban-spider-man-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 41848,
+          "sha256": "c48c30952cf1f277fd757f55f530eb295ce6e3cd8ffbc2ba910b1aedac5010fd",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/urban-spider-man-sq-640.avif",
+            "bytes": 28855,
+            "sha256": "8dc88ab2cf2e7b1f6db07b00856b1e7eee9ead551ed8a11878144a8230c563ff",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/urban-spider-man-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 72182,
+          "sha256": "732dea6bbfa6d2a534771623119b561f8d8c2f93968acc18bc734f78541d62d9",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/urban-spider-man-sq-960.avif",
+            "bytes": 44474,
+            "sha256": "154d2ae90bc1beffc03dc9f664468357ee126c7a1206e164edc47c9c1c5c914e",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/urban-spider-man-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 98266,
+          "sha256": "374b98e951c77198e6d31187ea3a95e6a499a996e3f0f2cb7e2db9e9a9c68ac4",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/urban-spider-man-sq-1200.avif",
+            "bytes": 58558,
+            "sha256": "d61ad2b69eabc1de36cc4d4559c69283dbc7c4c76557d17f8caf3db453b66a9f",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/urban-spider-man-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 191038,
+          "sha256": "50fadd10f993bd05b88c0113e36ec68315873386b64d2e652d8679e5ba9192e1",
+          "quality": 84,
+          "frame": "share"
+        }
+      ]
+    },
+    {
+      "id": "HNYCMB514",
+      "stem": "shuriken",
+      "input": "assets/photo-sources/shuriken.jpg",
+      "sourceTitle": "HNYCMB514-shuriken.jpg",
+      "sourceDriveId": "1vlDR1GAuyCUVawoikmyb6-IDCmg0J62Q",
+      "sourceSha256": "17e2e2cd44ecd9bc9bc8df6684fec4760bfbe6d85346151691ca13935f67ac4e",
+      "inputSha256": "21766fcaa5d766f36e874c1382b779e6c96e30e974162671ea06fd3fbcdbb878",
+      "exifOrientation": 1,
+      "sourceSize": [
+        2736,
+        3648
+      ],
+      "cropBox": [
+        400,
+        790,
+        2470,
+        2860
+      ],
+      "alt": "White six-pointed 3D-printed shuriken ninja star held in a hand in front of cardboard",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          400,
+          790,
+          2470,
+          2860
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole star; only the fingertips holding it remain, the box edges are cut."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB514-shuriken.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16",
+      "orientedSize": [
+        2736,
+        3648
+      ],
+      "appliedCropBox": [
+        400,
+        790,
+        2470,
+        2860
+      ],
+      "outputs": [
+        {
+          "src": "/assets/shuriken-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 10598,
+          "sha256": "ac619be0253f84318d54ddef3542835b8878e9d0e5a83ad6b573ef2345f0429e",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/shuriken-480.avif",
+            "bytes": 6383,
+            "sha256": "b44819a5ce011f22399039de5e75f0372aac85b18b7b02099de8663ac626f9a4",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/shuriken-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 26752,
+          "sha256": "2e5fb950399b9e772513d4cd3328cca8686768f0188f539284c93a459bbb0c73",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/shuriken-960.avif",
+            "bytes": 13587,
+            "sha256": "22c930ef74c44c5c95c767cbeea517a6a6a8af32884f9568441ff5d7e66266a6",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/shuriken-sq-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 2838,
+          "sha256": "cfad9ee5ea242c052fab746e2d1ace71ed8dd0dba29053806aa5f92da85632f3",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/shuriken-sq-160.avif",
+            "bytes": 2302,
+            "sha256": "a1185d1df98e8c18bc29066981795f2aa33d2a2e1fee56d188cb44a5db0398da",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/shuriken-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 6420,
+          "sha256": "e43600ffa45984f20889316fbb250c622e95a685813043596f57bb09f078940b",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/shuriken-sq-320.avif",
+            "bytes": 4280,
+            "sha256": "6272e1daae7c65edc70beb9988fa109e5223d93bdcd65f2e20dad0dbf55e32a7",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/shuriken-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 10598,
+          "sha256": "ac619be0253f84318d54ddef3542835b8878e9d0e5a83ad6b573ef2345f0429e",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/shuriken-sq-480.avif",
+            "bytes": 6383,
+            "sha256": "b44819a5ce011f22399039de5e75f0372aac85b18b7b02099de8663ac626f9a4",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/shuriken-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 15312,
+          "sha256": "d26a74c6a9bc85e200e5c2d50743515bf14b74dc2c81496e693793e0f38c0446",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/shuriken-sq-640.avif",
+            "bytes": 8641,
+            "sha256": "b88d56c533faf4c7c8e5329c2adfbe37a207558c7f74dc0019a423ba60c83484",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/shuriken-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 26752,
+          "sha256": "2e5fb950399b9e772513d4cd3328cca8686768f0188f539284c93a459bbb0c73",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/shuriken-sq-960.avif",
+            "bytes": 13587,
+            "sha256": "22c930ef74c44c5c95c767cbeea517a6a6a8af32884f9568441ff5d7e66266a6",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/shuriken-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 37880,
+          "sha256": "ffffe0768b1885c7baf9a5a05bb752ff3fc1c218ced7c574bd0654cffe88b92b",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/shuriken-sq-1200.avif",
+            "bytes": 17496,
+            "sha256": "48b834b6807a655346246fa91403b38aa038299571d6a3193a86544bdb364207",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/shuriken-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 110461,
+          "sha256": "db884b7aa4202d68633958ff918dbafb8b31fadadb1f5fdeab253cad182184c9",
+          "quality": 84,
+          "frame": "share"
+        }
+      ]
+    },
+    {
+      "id": "HNYCMB515",
+      "stem": "grogu-keychain",
+      "input": "assets/photo-sources/grogu-keychain.jpg",
+      "sourceTitle": "HNYCMB515-grogu-keychain.jpg",
+      "sourceDriveId": "1OL98LhZBjTEKJ8swbXjxrEzVQFJqa2iN",
+      "sourceSha256": "2d4c5b10d455750c9e27f51e1146dcf43b37ce5558696fd360c66e3cac32b7eb",
+      "inputSha256": "ed1aa1466287a31fbc59a4b564155eb7e0cf77947f2bd28802cd5422d71d2553",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3024,
+        4032
+      ],
+      "cropBox": [
+        605,
+        1075,
+        2505,
+        2975
+      ],
+      "alt": "Flat 3D-printed Grogu keychain in green, white and brown with a silver keyring, on a black surface",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          605,
+          1075,
+          2505,
+          2975
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole keychain, ring included."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB515-grogu-keychain.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16",
+      "orientedSize": [
+        3024,
+        4032
+      ],
+      "appliedCropBox": [
+        605,
+        1075,
+        2505,
+        2975
+      ],
+      "outputs": [
+        {
+          "src": "/assets/grogu-keychain-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 25230,
+          "sha256": "7d50afc20826162ebc3eb24f511d3304dbbed3c33feaae84991b8091de6f10e7",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/grogu-keychain-480.avif",
+            "bytes": 18331,
+            "sha256": "b7981d23260ddcc94f78728f04e5e47f268ff95763c04ebd3640de93ee4e2a08",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/grogu-keychain-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 59008,
+          "sha256": "c2c90f2b6aec2331838bef342b96888bf9453edb3230365ba1ef0c94184b095b",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/grogu-keychain-960.avif",
+            "bytes": 36861,
+            "sha256": "4f8114ccd306ade2f43bfe0b92d6bd0d243b4e7e3a23cc736a78236dea8b8a47",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/grogu-keychain-sq-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 4470,
+          "sha256": "8f9c60bafb0af07e8d2496130fa14a151843cc67b94c892a03442c6ac93bbb8f",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/grogu-keychain-sq-160.avif",
+            "bytes": 3918,
+            "sha256": "ddda76aad52050f23e549ccfcf195fd9dc6ceac232626fe8253139a2f6f0ae2f",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/grogu-keychain-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 14122,
+          "sha256": "3294dc5774829c7a19ce2109676d7b9c6316b77609934b5d6f528a3292fb5bd5",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/grogu-keychain-sq-320.avif",
+            "bytes": 10948,
+            "sha256": "79969b01dc3df41dfc8d40f05b3cdcc240ce4475cadb054e5b6113628ff1912d",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/grogu-keychain-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 25230,
+          "sha256": "7d50afc20826162ebc3eb24f511d3304dbbed3c33feaae84991b8091de6f10e7",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/grogu-keychain-sq-480.avif",
+            "bytes": 18331,
+            "sha256": "b7981d23260ddcc94f78728f04e5e47f268ff95763c04ebd3640de93ee4e2a08",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/grogu-keychain-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 35876,
+          "sha256": "d4c78341894be18f90fd6a933ce83c7568cdba62a0153e2c20488852bc410996",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/grogu-keychain-sq-640.avif",
+            "bytes": 25181,
+            "sha256": "e761e2669b32ae34c736eb4999f48d0f60537234f234275a7387f9626f2d928b",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/grogu-keychain-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 59008,
+          "sha256": "c2c90f2b6aec2331838bef342b96888bf9453edb3230365ba1ef0c94184b095b",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/grogu-keychain-sq-960.avif",
+            "bytes": 36861,
+            "sha256": "4f8114ccd306ade2f43bfe0b92d6bd0d243b4e7e3a23cc736a78236dea8b8a47",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/grogu-keychain-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 76468,
+          "sha256": "13d124e446692b35ca909bf3b0b37b59b2d9d73a4cf71bb7b23e3eb61a4c2eea",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/grogu-keychain-sq-1200.avif",
+            "bytes": 45068,
+            "sha256": "253559225a3e804fefc6b11a2d6cd07da796bada7ba566d1ae75642731ffc90f",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/grogu-keychain-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 169854,
+          "sha256": "5eeaab9ae8dc92a3f1cc28b42f42673625023a16b563a6c9cc6b363faa9bf022",
+          "quality": 84,
+          "frame": "share"
+        }
+      ]
+    },
+    {
+      "id": "HNYCMB516",
+      "stem": "dummy-13-iron-man",
+      "input": "assets/photo-sources/dummy-13-iron-man.jpg",
+      "sourceTitle": "HNYCMB516-dummy13-iron-man.jpg",
+      "sourceDriveId": "1o6V86ZMTo3Syo0Jom4cXwqGGflYVc98a",
+      "sourceSha256": "8754c67c2808981032178fe165aab49aa9fe20eff72f95850f529c1a7fc03641",
+      "inputSha256": "74d2bd9e740761a7af4e9248bb07dd427ea812775592a7f1d86e76d2f6d7ca2c",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1398,
+        2603
+      ],
+      "cropBox": [
+        0,
+        180,
+        1398,
+        2603
+      ],
+      "alt": "Red and yellow articulated 3D-printed Dummy 13 figure styled as Iron Man, held up in a hand",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole figure, hands to feet, with the carpet above its head cut away.",
+        "padding": {
+          "backdrop": "#6d6d66",
+          "feather": 97,
+          "side": 2423
+        }
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB516-dummy13-iron-man.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16",
+      "orientedSize": [
+        1398,
+        2603
+      ],
+      "appliedCropBox": [
+        0,
+        180,
+        1398,
+        2603
+      ],
+      "outputs": [
+        {
+          "src": "/assets/dummy-13-iron-man-480.webp",
+          "width": 480,
+          "height": 832,
+          "bytes": 42026,
+          "sha256": "aadc2248e4ff7941eb9341605f82441bc76fedf1e7e611849d8e231336a3f40f",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-iron-man-480.avif",
+            "bytes": 25820,
+            "sha256": "7f841e0761c323d7bec28c09aa460cf15a091cb2b4695d0dca619753d4a45daa",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/dummy-13-iron-man-960.webp",
+          "width": 960,
+          "height": 1664,
+          "bytes": 143884,
+          "sha256": "1e27bc62651ec6dfa7e0c34ca30ff0971721c7afd686ac2d4a05af22b86d73dc",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-iron-man-960.avif",
+            "bytes": 82258,
+            "sha256": "726fe6146c49a036ea32849bf4bae2186963181b9e16d5f519b3a71818fc2359",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/dummy-13-iron-man-sq-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 4194,
+          "sha256": "b2c197db382ff51e730adf8f4f2576c93652a956eab9be152bb1dc00a68b808b",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-iron-man-sq-160.avif",
+            "bytes": 3831,
+            "sha256": "ca2943a248373aff0a238337b5006800aec78a46bd1c21147eba0452a8ef843b",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-iron-man-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 11488,
+          "sha256": "5456b769d1c518020ccde07c462e6274dec3d4a8baebb305f62fbfa7c3b73b4d",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-iron-man-sq-320.avif",
+            "bytes": 9170,
+            "sha256": "ee0b76584269513775e6ec6b576935ceedd55b187db042151f67360365f042c2",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-iron-man-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 18418,
+          "sha256": "784000c284f2641753762ff8d4cce244058f1936018a5a87d6d22290ee812e3b",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-iron-man-sq-480.avif",
+            "bytes": 13627,
+            "sha256": "f14cfec476b9ac85912334a8289e7bee9822a840bf52da52c4c427530cb8da58",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-iron-man-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 25800,
+          "sha256": "9a1c05cead9eda41c3aa2fb19f99fb0b6f44373d029661e500f02a5046b11434",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-iron-man-sq-640.avif",
+            "bytes": 18354,
+            "sha256": "c1b017804cd61eaee11ca7df826fe188e02a292684d3abbb1c3f1ed79afd04d3",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-iron-man-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 44136,
+          "sha256": "9e2b059e71b6aa51727cb17f90a6dabb09abcec19d3ca55bf24a2257da6911f6",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-iron-man-sq-960.avif",
+            "bytes": 27528,
+            "sha256": "168bb70aed75dae3378d512a76b777e6d695ee9932e8ef71d28f48dab806c030",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-iron-man-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 62754,
+          "sha256": "61407093adb17b9895144007acbff4a09eb52cf11f00ed09aa386e5f01b7fde5",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-iron-man-sq-1200.avif",
+            "bytes": 36605,
+            "sha256": "fa647196efb8ace353958cbde649fe631dabfb2a5f22a65590a98b4c883a701d",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-iron-man-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 144338,
+          "sha256": "69c06d4df8f0609c4b7a2dabcb77ae4eb79dd521ebf1a1183859b1ef6b6d5a6c",
+          "quality": 84,
+          "frame": "share"
+        }
+      ]
+    },
+    {
+      "id": "HNYCMB517",
+      "stem": "dummy-13-spider-man",
+      "input": "assets/photo-sources/dummy-13-spider-man.jpg",
+      "sourceTitle": "HNYCMB517-dummy13-spider-man.jpg",
+      "sourceDriveId": "1TcA-A9JgUxGpfvv4Jff77SavaMoKTBMi",
+      "sourceSha256": "6512bc5d620a1a8a4e9e353ef0ab2b3a6335d8ebdb336b47d3d26847544e57a7",
+      "inputSha256": "bfe5057f493dbe26f8487c77521eb2692b74aa96685718534c14e87568ee4bc5",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1920,
+        1920
+      ],
+      "cropBox": [
+        219,
+        200,
+        1619,
+        1600
+      ],
+      "alt": "Red and blue articulated 3D-printed Dummy 13 figure styled as Spider-Man in a crouching pose on a white background",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          219,
+          200,
+          1619,
+          1600
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole crouching figure."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB517-dummy13-spider-man.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16",
+      "orientedSize": [
+        1920,
+        1920
+      ],
+      "appliedCropBox": [
+        219,
+        200,
+        1619,
+        1600
+      ],
+      "outputs": [
+        {
+          "src": "/assets/dummy-13-spider-man-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 15208,
+          "sha256": "866a2f968436f2004148086ea3a5890f40ad1d2a812a2d1cbcb079e21de1c787",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-spider-man-480.avif",
+            "bytes": 10521,
+            "sha256": "8e235e73779df3498c0a6ecf732ca3d015e0829b3668e4121478ca471d1600dd",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/dummy-13-spider-man-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 37456,
+          "sha256": "6fb9304e63f1cff159ce1ac522d261607060da6432ad80d028f59bc7c6df8857",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-spider-man-960.avif",
+            "bytes": 23272,
+            "sha256": "92cf8ebcabb520caec248bc5ae68ee6af52e03ff16c3e42cc49bbc05566146e0",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/dummy-13-spider-man-sq-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 3888,
+          "sha256": "9651c554031446c2c5408a617c9af4bdca6ed2b8fe1bf31c756749bcb9b3cf2e",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-spider-man-sq-160.avif",
+            "bytes": 3259,
+            "sha256": "92a7eb8c18f3c12cffa55b498eeab4d723591420365ae06397209d19b283edd4",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-spider-man-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 9314,
+          "sha256": "5fde2de48a056bccd10db88998260ddb09b9e60144a8f344939403b9d556b630",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-spider-man-sq-320.avif",
+            "bytes": 6812,
+            "sha256": "ec908a818ebb18487f19ddf968440f22c514dd2eba165220b91ff5ca8d211c88",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-spider-man-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 15208,
+          "sha256": "866a2f968436f2004148086ea3a5890f40ad1d2a812a2d1cbcb079e21de1c787",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-spider-man-sq-480.avif",
+            "bytes": 10521,
+            "sha256": "8e235e73779df3498c0a6ecf732ca3d015e0829b3668e4121478ca471d1600dd",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-spider-man-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 21724,
+          "sha256": "68e4e6864f19f5f2a6d1fc91b72215250c926b1f109afa4eb9bfbe196744b715",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-spider-man-sq-640.avif",
+            "bytes": 14654,
+            "sha256": "f45ed7ec079c6396478da23c7c86b53c5ab7a9943731bfd2de35c8278d236cee",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-spider-man-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 37456,
+          "sha256": "6fb9304e63f1cff159ce1ac522d261607060da6432ad80d028f59bc7c6df8857",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-spider-man-sq-960.avif",
+            "bytes": 23272,
+            "sha256": "92cf8ebcabb520caec248bc5ae68ee6af52e03ff16c3e42cc49bbc05566146e0",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-spider-man-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 49952,
+          "sha256": "7a548920ffa55617d443542b60f297463af62645d07e06fd5c64cad9cccc615c",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/dummy-13-spider-man-sq-1200.avif",
+            "bytes": 30009,
+            "sha256": "5aeddf32cc8bd6d24e2c72e21ed243eef62677bec6239171ef43cfb876af4392",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/dummy-13-spider-man-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 107345,
+          "sha256": "c6721cbd8c3a45b23b0c6cfc022525b7ce9be4a1210907513290594898d9305b",
+          "quality": 84,
+          "frame": "share"
+        }
+      ]
+    },
+    {
+      "id": "HNYCMB518",
+      "stem": "horse-figurine",
+      "input": "assets/photo-sources/horse-figurine.jpg",
+      "sourceTitle": "HNYCMB518-horse-figurine.jpg",
+      "sourceDriveId": "1R7Pk1CEex_vlpISjuao7VyQZI_C8vDOU",
+      "sourceSha256": "0ca883d8de5de9fa5412fc861bc219cc70772766b11c008aa8a4098076ba54ca",
+      "inputSha256": "d3302a60cd6e3a4a3758d5d31b6bf2106609ef1d0c80e81fdfc912f6567563b4",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1920,
+        2560
+      ],
+      "cropBox": [
+        144,
+        730,
+        1794,
+        2380
+      ],
+      "alt": "White low-poly 3D-printed horse figurine galloping on a rock base, on a grey stone table",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          144,
+          730,
+          1794,
+          2380
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole horse and base."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB518-horse-figurine.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16",
+      "orientedSize": [
+        1920,
+        2560
+      ],
+      "appliedCropBox": [
+        144,
+        730,
+        1794,
+        2380
+      ],
+      "outputs": [
+        {
+          "src": "/assets/horse-figurine-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 18722,
+          "sha256": "f53f00b71775847d09cf63788f4d8ab0eb7b75a39b522e04e4a533c629a7ec8d",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/horse-figurine-480.avif",
+            "bytes": 12849,
+            "sha256": "bc8ffc5f209cde99032c53fa44cdda54e731ce8fd1caa1f48cb89a71438a1ff8",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/horse-figurine-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 42240,
+          "sha256": "c0353471f246a1c525cfe326b956bdfda8968fb0ba2a3ea4792c2e531d3bcb71",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/horse-figurine-960.avif",
+            "bytes": 26202,
+            "sha256": "c42b75f83b9420f8c57ec51eb99336bd21e0b2fbbdc890dbdc5fa05ee5b4f666",
+            "quality": 60
+          }
+        },
+        {
+          "src": "/assets/horse-figurine-sq-160.webp",
+          "width": 160,
+          "height": 160,
+          "bytes": 4160,
+          "sha256": "099d5cb195dce3dc22aa7320cf310050c98e018f486e88bdbb92e2dbd18702ea",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/horse-figurine-sq-160.avif",
+            "bytes": 3747,
+            "sha256": "cdf2dee3423825a292815083bc47787b8d2df945f77d9186e9550cd3be919aff",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/horse-figurine-sq-320.webp",
+          "width": 320,
+          "height": 320,
+          "bytes": 10848,
+          "sha256": "66446902b731388151ae1482f0dd183c48344afbde2441d6aeb77d2778c1b8ea",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/horse-figurine-sq-320.avif",
+            "bytes": 8464,
+            "sha256": "08e695180cd5fb10e13fab15aef2295cc66bb3a1b834317be0c25f5ed69c512b",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/horse-figurine-sq-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 18722,
+          "sha256": "f53f00b71775847d09cf63788f4d8ab0eb7b75a39b522e04e4a533c629a7ec8d",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/horse-figurine-sq-480.avif",
+            "bytes": 12849,
+            "sha256": "bc8ffc5f209cde99032c53fa44cdda54e731ce8fd1caa1f48cb89a71438a1ff8",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/horse-figurine-sq-640.webp",
+          "width": 640,
+          "height": 640,
+          "bytes": 25650,
+          "sha256": "89bcce6fb4bead364861bdeb2f12cec2682ef00ac38aa0e80bf9ef66019ccfdc",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/horse-figurine-sq-640.avif",
+            "bytes": 17655,
+            "sha256": "29c338682fa82782a7e25f87e386048ebcf46cf9a76b9005fddd75e7988c7b0e",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/horse-figurine-sq-960.webp",
+          "width": 960,
+          "height": 960,
+          "bytes": 42240,
+          "sha256": "c0353471f246a1c525cfe326b956bdfda8968fb0ba2a3ea4792c2e531d3bcb71",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/horse-figurine-sq-960.avif",
+            "bytes": 26202,
+            "sha256": "c42b75f83b9420f8c57ec51eb99336bd21e0b2fbbdc890dbdc5fa05ee5b4f666",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/horse-figurine-sq-1200.webp",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 55280,
+          "sha256": "6589c86362e913b566029f9523693fed351bd53c277315338f2259fe2ec8f820",
+          "quality": 82,
+          "avif": {
+            "src": "/assets/horse-figurine-sq-1200.avif",
+            "bytes": 32762,
+            "sha256": "2c533533a3c831cc73d224eb1ce09a183af1e3e112b745d387acecb605fc99d8",
+            "quality": 60
+          },
+          "frame": "square"
+        },
+        {
+          "src": "/assets/horse-figurine-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 130548,
+          "sha256": "e73b979a984b8ef3f40bbf9485a39eeef09098a7365399ca73e2bc26c1136f4b",
+          "quality": 84,
+          "frame": "share"
+        }
+      ]
     }
   ],
   "pending": []

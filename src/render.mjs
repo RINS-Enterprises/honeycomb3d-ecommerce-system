@@ -71,11 +71,13 @@ export function home(products,store) {
     (featured?'<a class="hero-credit" href="/products/'+e(featured.slug)+'/">Pictured <b>'+e(featured.name)+'</b> <span aria-hidden="true">→</span></a>':'')+'</div></section>' +
     '<div class="studio-strip"><span>COLLECTIBLES</span><span>KEYCHAINS</span><span>CUSTOM PRINTS</span><span>YOUR NEXT IDEA</span></div>' +
     (categories.length?'<section class="wrap section category-section" aria-labelledby="corner-title"><div class="section-heading"><div><p class="eyebrow">FIND YOUR CORNER</p><h2 id="corner-title">Shop by category</h2></div></div><div class="collection-links">' +
-    categories.map(c=>{
+    categories.map((c,i)=>{
+      // Rows of three on desktop; a short last row of two (or 2 + 2 when one would be left over) is centred.
+      const n=categories.length, tail=n%3===2?2:n%3===1&&n>=4?4:0, centre=i>=n-tail&&(i-(n-tail))%2===0;
       // Each tile shows the most recently listed product in its category and a factual design count.
       const inCategory=products.filter(p=>p.category===c), cover=inCategory.at(-1);
       const count=inCategory.length+' '+(inCategory.length===1?'design':'designs');
-      return '<a class="category-tile" href="/shop/?category='+encodeURIComponent(c)+'" aria-label="'+e(c)+', '+count+'"><span class="category-photo">'+picture(cover,{sizes:TILE_SIZES})+'</span><span class="category-copy"><strong>'+e(c)+'</strong><span>'+count+'</span></span><span class="category-arrow" aria-hidden="true">→</span></a>';
+      return '<a class="category-tile'+(centre?' is-centred':'')+'" href="/shop/?category='+encodeURIComponent(c)+'" aria-label="'+e(c)+', '+count+'"><span class="category-photo">'+picture(cover,{sizes:TILE_SIZES})+'</span><span class="category-copy"><strong>'+e(c)+'</strong><span>'+count+'</span></span><span class="category-arrow" aria-hidden="true">→</span></a>';
     }).join('') + '</div></section>':'') +
     '<section class="wrap section featured-section" aria-labelledby="featured-title"><div class="section-heading"><div><p class="eyebrow">THE COLLECTION</p><h2 id="featured-title">Small objects. Big character.</h2></div><a href="/shop/">View collection →</a></div>' +
     '<div class="product-grid">' + products.slice(0,4).map(p=>card(p)).join('') + (products.length?'':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</div></section>' +

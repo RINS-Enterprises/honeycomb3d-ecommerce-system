@@ -30,7 +30,7 @@ try {
   await page.getByRole('complementary',{name:'Store preview notice'}).waitFor();
   await screenshot('test-results/home-desktop.png');
   await page.getByRole('link',{name:'Shop the collection'}).click();
-  assert.equal(await page.locator('[data-product-card]').count(),7,'Every product with an approved photo is shown');
+  assert.equal(await page.locator('[data-product-card]').count(),17,'Every product with an approved photo is shown (Stormtrooper has none)');
   assert.equal(await page.locator('.photo-placeholder').count(),0);
   for(const card of await page.locator('[data-product-card]').all()) {
     assert.equal(await card.getByRole('link').count(),1,'One accessible link per product card');
@@ -45,12 +45,12 @@ try {
   await page.getByTestId('filter-figures').click();
   assert.equal(await page.getByRole('radio',{name:'Figures'}).isChecked(),true);
   assert.match(page.url(),/category=Figures/);
-  assert.equal(await page.locator('[data-product-card]:visible').count(),2,'Figures: Baymax and Kurama');
+  assert.equal(await page.locator('[data-product-card]:visible').count(),8,'Figures: Baymax, Kurama and the six new figures');
   await page.getByTestId('filter-all').click();
   await page.getByTestId('filter-naruto').click();
   assert.equal(await page.locator('[data-product-card]:visible').count(),4,'Theme chip: Hidden Leaf, Kurama, Minato and Classic Kunai');
   await page.goBack();
-  await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===7);
+  await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===17);
   assert.equal(await page.getByRole('radio',{name:'Any theme'}).isChecked(),true,'Back restores the previous filter');
   // Hover photo: gallery products get a decorative second photo, loaded lazily; size never changes.
   const leafCard=page.locator('[data-product-card]').filter({hasText:'Hidden Leaf Keychain'});
@@ -125,14 +125,14 @@ try {
   await page.reload();
   const firstVisible=()=>page.locator('[data-product-card]:visible .card-link').first().textContent();
   await page.getByTestId('sort').selectOption('price-asc');
-  assert.equal(await firstVisible(),'Hidden Leaf Keychain','Cheapest first (LKR 400)');
+  assert.equal(await firstVisible(),'Bridgerton Bookmark','Cheapest first (LKR 300)');
   assert.match(page.url(),/sort=price-asc/);
   await page.getByTestId('sort').selectOption('price-desc');
-  assert.equal(await firstVisible(),'Kurama Figure','Most expensive first (LKR 1,500)');
+  assert.equal(await firstVisible(),'Office Desk Organizer with Phone Holder','Most expensive first (LKR 2,000)');
   await page.getByTestId('filter-keychains').click();
-  assert.deepEqual(await page.locator('[data-product-card]:visible .card-link').allTextContents(),['Night Fury Keychain','Light Fury Keychain','Hidden Leaf Keychain'],'Sort works with category chips');
+  assert.deepEqual(await page.locator('[data-product-card]:visible .card-link').allTextContents(),['Night Fury Keychain','Light Fury Keychain','Grogu Baby Yoda Keychain','Hidden Leaf Keychain'],'Sort works with category chips; equal prices keep catalogue order');
   await page.getByTestId('sort').selectOption('name');
-  assert.equal(await firstVisible(),'Hidden Leaf Keychain');
+  assert.equal(await firstVisible(),'Grogu Baby Yoda Keychain');
   assert.equal(await page.locator('.product-grid > :last-child').getAttribute('data-testid'),'shop-custom-tile','Custom tile stays last after sorting');
   await page.getByTestId('sort').selectOption('featured');
   await page.getByTestId('filter-all').click();
@@ -143,7 +143,7 @@ try {
   assert.equal(await page.evaluate(()=>document.activeElement.id),'search','"/" focuses search');
   assert.equal(await page.getByRole('searchbox').inputValue(),'','"/" is not typed into the box');
   await page.keyboard.type('fig');
-  assert.deepEqual(await page.locator('[data-product-card]:visible .card-link mark').allTextContents(),['Fig','Fig'],'Matches marked in names');
+  assert.deepEqual(await page.locator('[data-product-card]:visible .card-link mark').allTextContents(),['Fig','Fig','Fig'],'Matches marked in names (Baymax, Kurama, Horse)');
   await page.getByTestId('search-clear').click();
   assert.equal(await page.getByRole('searchbox').inputValue(),'');
   assert.equal(await page.getByTestId('search-clear').isHidden(),true);

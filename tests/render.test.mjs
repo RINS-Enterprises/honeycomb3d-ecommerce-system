@@ -103,8 +103,8 @@ test('"More from HoneyComb 3D" puts the same category and shared themes first',a
   const html=detail(visible.find(p=>p.id==='HC-MINATO'),visible,store);
   const more=html.slice(html.indexOf('More from HoneyComb 3D'));
   const names=[...more.matchAll(/class="card-link" href="[^"]+">([^<]+)</g)].map(m=>m[1]);
-  assert.equal(names[0],'Classic Kunai','Same category first');
-  assert(names.slice(1,3).every(n=>['Hidden Leaf Keychain','Kurama Figure'].includes(n)),'Then shared Naruto theme: '+names);
+  assert.deepEqual(names.slice(0,2),['Classic Kunai','Shuriken Ninja Star'],'Same category first, in catalogue order');
+  assert(names.slice(2,4).every(n=>['Hidden Leaf Keychain','Kurama Figure'].includes(n)),'Then shared Naruto theme: '+names);
 });
 
 test('product pages offer sharing without a phone number or external script',async()=>{

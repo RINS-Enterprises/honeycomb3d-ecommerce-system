@@ -756,7 +756,7 @@
     "description": "A Bridgerton bookmark to keep your place. Confirm the size and colour with us.",
     "priceLkr": 300,
     "availability": "unconfirmed",
-    "image": null,
+    "image": "/assets/bridgerton-bookmark-sq-640.webp",
     "approved": false,
     "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recdDPCKdRlekdkRF, Status Active). Airtable name \"Bridgerton Bookmark\", category \"Bookmark\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
     "copyStatus": "draft-needs-owner-approval",
@@ -771,6 +771,55 @@
       "field": "Selling Price (LKR)",
       "readAt": "2026-10-16",
       "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "White 3D-printed Bridgerton bookmark with raised lettering and an ornate cameo silhouette end, on black leather",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/bridgerton-bookmark-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/bridgerton-bookmark-sq-160.avif"
+      },
+      {
+        "src": "/assets/bridgerton-bookmark-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/bridgerton-bookmark-sq-320.avif"
+      },
+      {
+        "src": "/assets/bridgerton-bookmark-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/bridgerton-bookmark-sq-480.avif"
+      },
+      {
+        "src": "/assets/bridgerton-bookmark-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/bridgerton-bookmark-sq-640.avif"
+      },
+      {
+        "src": "/assets/bridgerton-bookmark-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/bridgerton-bookmark-sq-960.avif"
+      },
+      {
+        "src": "/assets/bridgerton-bookmark-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/bridgerton-bookmark-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB505-bridgerton-bookmark.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/bridgerton-bookmark-share.jpg",
+      "width": 1200,
+      "height": 1200
     }
   },
   {
@@ -784,7 +833,7 @@
     "description": "A Flexi Derpy figure from Kpop Demon Hunters. Confirm the size, colour and finish with us.",
     "priceLkr": 500,
     "availability": "unconfirmed",
-    "image": null,
+    "image": "/assets/flexi-derpy-sq-640.webp",
     "approved": false,
     "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recFEK7J2SeYp25so, Status Active). Airtable name \"Flexi Derpy (Kpop Demon Hunters)\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
     "copyStatus": "draft-needs-owner-approval",
@@ -799,6 +848,55 @@
       "field": "Selling Price (LKR)",
       "readAt": "2026-10-16",
       "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "A group of blue 3D-printed flexi Derpy figures with yellow eyes and cream joints",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/flexi-derpy-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/flexi-derpy-sq-160.avif"
+      },
+      {
+        "src": "/assets/flexi-derpy-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/flexi-derpy-sq-320.avif"
+      },
+      {
+        "src": "/assets/flexi-derpy-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/flexi-derpy-sq-480.avif"
+      },
+      {
+        "src": "/assets/flexi-derpy-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/flexi-derpy-sq-640.avif"
+      },
+      {
+        "src": "/assets/flexi-derpy-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/flexi-derpy-sq-960.avif"
+      },
+      {
+        "src": "/assets/flexi-derpy-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/flexi-derpy-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB506-flexi-derpy.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/flexi-derpy-share.jpg",
+      "width": 1200,
+      "height": 1200
     }
   },
   {
@@ -810,7 +908,7 @@
     "description": "A desk organizer with a phone holder for your workspace. Confirm the size and colour with us.",
     "priceLkr": 2000,
     "availability": "unconfirmed",
-    "image": null,
+    "image": "/assets/desk-organizer-sq-640.webp",
     "approved": false,
     "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recCcuDJYbdNWR4CV, Status Active). Airtable name \"Office Desk Organizer With Phone Holder\", category \"Desk Organizer\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
     "copyStatus": "draft-needs-owner-approval",
@@ -825,6 +923,55 @@
       "field": "Selling Price (LKR)",
       "readAt": "2026-10-16",
       "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "Black textured 3D-printed desk organizer with two yellow-lined pen cups and a phone stand slot, on a wooden floor",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/desk-organizer-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/desk-organizer-sq-160.avif"
+      },
+      {
+        "src": "/assets/desk-organizer-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/desk-organizer-sq-320.avif"
+      },
+      {
+        "src": "/assets/desk-organizer-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/desk-organizer-sq-480.avif"
+      },
+      {
+        "src": "/assets/desk-organizer-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/desk-organizer-sq-640.avif"
+      },
+      {
+        "src": "/assets/desk-organizer-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/desk-organizer-sq-960.avif"
+      },
+      {
+        "src": "/assets/desk-organizer-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/desk-organizer-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB507-desk-organizer.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/desk-organizer-share.jpg",
+      "width": 1200,
+      "height": 1200
     }
   },
   {
@@ -838,7 +985,7 @@
     "description": "A Light Fury figure with big wings for your desk or shelf. Confirm the size, colour and finish with us.",
     "priceLkr": 600,
     "availability": "unconfirmed",
-    "image": null,
+    "image": "/assets/light-fury-big-wings-sq-640.webp",
     "approved": false,
     "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recKOLhc0zDkYrVBf, Status Active). Airtable name \"Light Fury Big Wings\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
     "copyStatus": "draft-needs-owner-approval",
@@ -853,6 +1000,55 @@
       "field": "Selling Price (LKR)",
       "readAt": "2026-10-16",
       "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "White articulated 3D-printed Light Fury dragon with large wings and blue eyes, lying on dark fabric",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/light-fury-big-wings-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/light-fury-big-wings-sq-160.avif"
+      },
+      {
+        "src": "/assets/light-fury-big-wings-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/light-fury-big-wings-sq-320.avif"
+      },
+      {
+        "src": "/assets/light-fury-big-wings-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/light-fury-big-wings-sq-480.avif"
+      },
+      {
+        "src": "/assets/light-fury-big-wings-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/light-fury-big-wings-sq-640.avif"
+      },
+      {
+        "src": "/assets/light-fury-big-wings-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/light-fury-big-wings-sq-960.avif"
+      },
+      {
+        "src": "/assets/light-fury-big-wings-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/light-fury-big-wings-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB510-light-fury-big-wings.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/light-fury-big-wings-share.jpg",
+      "width": 1200,
+      "height": 1200
     }
   },
   {
@@ -867,7 +1063,7 @@
     "description": "An Urban Spider-Man figure for your desk or shelf. Confirm the size, colour and finish with us.",
     "priceLkr": 1750,
     "availability": "unconfirmed",
-    "image": null,
+    "image": "/assets/urban-spider-man-sq-640.webp",
     "approved": false,
     "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record rec6SmgSi62ShemTW, Status Active). Airtable name \"Urban Spider Man\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
     "copyStatus": "draft-needs-owner-approval",
@@ -882,6 +1078,55 @@
       "field": "Selling Price (LKR)",
       "readAt": "2026-10-16",
       "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "3D-printed Spider-Man figure in a black hooded jacket with a red web-pattern mask and white sneakers, standing on a wooden table",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/urban-spider-man-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/urban-spider-man-sq-160.avif"
+      },
+      {
+        "src": "/assets/urban-spider-man-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/urban-spider-man-sq-320.avif"
+      },
+      {
+        "src": "/assets/urban-spider-man-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/urban-spider-man-sq-480.avif"
+      },
+      {
+        "src": "/assets/urban-spider-man-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/urban-spider-man-sq-640.avif"
+      },
+      {
+        "src": "/assets/urban-spider-man-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/urban-spider-man-sq-960.avif"
+      },
+      {
+        "src": "/assets/urban-spider-man-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/urban-spider-man-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB512-urban-spider-man.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/urban-spider-man-share.jpg",
+      "width": 1200,
+      "height": 1200
     }
   },
   {
@@ -921,7 +1166,7 @@
     "description": "A shuriken ninja star prop for your collection. Confirm the size, colour and finish with us.",
     "priceLkr": 500,
     "availability": "unconfirmed",
-    "image": null,
+    "image": "/assets/shuriken-sq-640.webp",
     "approved": false,
     "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recjektyNRVkTaogy, Status Active). Airtable name \"Shuriken Ninja Star\", category \"Weapon\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
     "copyStatus": "draft-needs-owner-approval",
@@ -936,6 +1181,55 @@
       "field": "Selling Price (LKR)",
       "readAt": "2026-10-16",
       "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "White six-pointed 3D-printed shuriken ninja star held in a hand in front of cardboard",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/shuriken-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/shuriken-sq-160.avif"
+      },
+      {
+        "src": "/assets/shuriken-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/shuriken-sq-320.avif"
+      },
+      {
+        "src": "/assets/shuriken-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/shuriken-sq-480.avif"
+      },
+      {
+        "src": "/assets/shuriken-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/shuriken-sq-640.avif"
+      },
+      {
+        "src": "/assets/shuriken-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/shuriken-sq-960.avif"
+      },
+      {
+        "src": "/assets/shuriken-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/shuriken-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB514-shuriken.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/shuriken-share.jpg",
+      "width": 1200,
+      "height": 1200
     }
   },
   {
@@ -949,7 +1243,7 @@
     "description": "A Grogu keychain for your keys or bag. Confirm the size and colour with us.",
     "priceLkr": 500,
     "availability": "unconfirmed",
-    "image": null,
+    "image": "/assets/grogu-keychain-sq-640.webp",
     "approved": false,
     "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recCQZOXNRK5YUqlL, Status Active). Airtable name \"Gorgu Baby Yoda keychain\", category \"Keytag\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
     "copyStatus": "draft-needs-owner-approval",
@@ -964,6 +1258,55 @@
       "field": "Selling Price (LKR)",
       "readAt": "2026-10-16",
       "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "Flat 3D-printed Grogu keychain in green, white and brown with a silver keyring, on a black surface",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/grogu-keychain-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/grogu-keychain-sq-160.avif"
+      },
+      {
+        "src": "/assets/grogu-keychain-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/grogu-keychain-sq-320.avif"
+      },
+      {
+        "src": "/assets/grogu-keychain-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/grogu-keychain-sq-480.avif"
+      },
+      {
+        "src": "/assets/grogu-keychain-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/grogu-keychain-sq-640.avif"
+      },
+      {
+        "src": "/assets/grogu-keychain-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/grogu-keychain-sq-960.avif"
+      },
+      {
+        "src": "/assets/grogu-keychain-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/grogu-keychain-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB515-grogu-keychain.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/grogu-keychain-share.jpg",
+      "width": 1200,
+      "height": 1200
     }
   },
   {
@@ -978,7 +1321,7 @@
     "description": "A Dummy 13 figure styled as Iron Man. Confirm the size, colour and finish with us.",
     "priceLkr": 1500,
     "availability": "unconfirmed",
-    "image": null,
+    "image": "/assets/dummy-13-iron-man-sq-640.webp",
     "approved": false,
     "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recAr4pXP6kkpzPZ8, Status Active). Airtable name \"Dummy13 Iron Man\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
     "copyStatus": "draft-needs-owner-approval",
@@ -993,6 +1336,55 @@
       "field": "Selling Price (LKR)",
       "readAt": "2026-10-16",
       "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "Red and yellow articulated 3D-printed Dummy 13 figure styled as Iron Man, held up in a hand",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/dummy-13-iron-man-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/dummy-13-iron-man-sq-160.avif"
+      },
+      {
+        "src": "/assets/dummy-13-iron-man-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/dummy-13-iron-man-sq-320.avif"
+      },
+      {
+        "src": "/assets/dummy-13-iron-man-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/dummy-13-iron-man-sq-480.avif"
+      },
+      {
+        "src": "/assets/dummy-13-iron-man-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/dummy-13-iron-man-sq-640.avif"
+      },
+      {
+        "src": "/assets/dummy-13-iron-man-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/dummy-13-iron-man-sq-960.avif"
+      },
+      {
+        "src": "/assets/dummy-13-iron-man-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/dummy-13-iron-man-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB516-dummy13-iron-man.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/dummy-13-iron-man-share.jpg",
+      "width": 1200,
+      "height": 1200
     }
   },
   {
@@ -1007,7 +1399,7 @@
     "description": "A Dummy 13 figure styled as Spider-Man. Confirm the size, colour and finish with us.",
     "priceLkr": 1500,
     "availability": "unconfirmed",
-    "image": null,
+    "image": "/assets/dummy-13-spider-man-sq-640.webp",
     "approved": false,
     "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record rec444U7FQYCpPSG9, Status Active). Airtable name \"Dummy 13 Spider Man\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
     "copyStatus": "draft-needs-owner-approval",
@@ -1022,6 +1414,55 @@
       "field": "Selling Price (LKR)",
       "readAt": "2026-10-16",
       "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "Red and blue articulated 3D-printed Dummy 13 figure styled as Spider-Man in a crouching pose on a white background",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/dummy-13-spider-man-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/dummy-13-spider-man-sq-160.avif"
+      },
+      {
+        "src": "/assets/dummy-13-spider-man-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/dummy-13-spider-man-sq-320.avif"
+      },
+      {
+        "src": "/assets/dummy-13-spider-man-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/dummy-13-spider-man-sq-480.avif"
+      },
+      {
+        "src": "/assets/dummy-13-spider-man-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/dummy-13-spider-man-sq-640.avif"
+      },
+      {
+        "src": "/assets/dummy-13-spider-man-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/dummy-13-spider-man-sq-960.avif"
+      },
+      {
+        "src": "/assets/dummy-13-spider-man-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/dummy-13-spider-man-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB517-dummy13-spider-man.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/dummy-13-spider-man-share.jpg",
+      "width": 1200,
+      "height": 1200
     }
   },
   {
@@ -1033,7 +1474,7 @@
     "description": "A horse figurine for your desk or shelf. Confirm the size, colour and finish with us.",
     "priceLkr": 1600,
     "availability": "unconfirmed",
-    "image": null,
+    "image": "/assets/horse-figurine-sq-640.webp",
     "approved": false,
     "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record rec2M4tmBzDXd1sxm, Status Active). Airtable name \"Horse figurine\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
     "copyStatus": "draft-needs-owner-approval",
@@ -1048,6 +1489,55 @@
       "field": "Selling Price (LKR)",
       "readAt": "2026-10-16",
       "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "White low-poly 3D-printed horse figurine galloping on a rock base, on a grey stone table",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/horse-figurine-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/horse-figurine-sq-160.avif"
+      },
+      {
+        "src": "/assets/horse-figurine-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/horse-figurine-sq-320.avif"
+      },
+      {
+        "src": "/assets/horse-figurine-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/horse-figurine-sq-480.avif"
+      },
+      {
+        "src": "/assets/horse-figurine-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/horse-figurine-sq-640.avif"
+      },
+      {
+        "src": "/assets/horse-figurine-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/horse-figurine-sq-960.avif"
+      },
+      {
+        "src": "/assets/horse-figurine-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/horse-figurine-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB518-horse-figurine.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/horse-figurine-share.jpg",
+      "width": 1200,
+      "height": 1200
     }
   }
 ]
