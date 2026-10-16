@@ -365,6 +365,24 @@ See owner decisions §5. Also unknown: whether the EasyWP site, its database, `w
 - **Shared model link:** HNYCMB505 Bridgerton Bookmark and HNYCMB506 Flexi Derpy point to the same MakerWorld link (`models/1710900`).
 - **Impact:** None on the storefront today. It matters if colour swatches, availability or sourcing are ever generated from Airtable.
 
+
+### F-21 · High (blocker for those images) · AI-generated and AI-edited images sit in the product photo folders
+- **Context:** on 2026-10-16 the owner asked for all products to be added. QA searched the 11 new SKU folders under Drive parent `1iDDWx-h_51OYEgNx8OPz4c50ghuh34m9`, read-only, and downloaded 46 files.
+- **Folders with AI images:** 8 of the 11.
+  - Gemini edits or generations with Google C2PA (visible watermark, `algorithmicallyEnhanced` or `trainedAlgorithmicMedia`): 510, 515 and 517.
+  - Images that are visibly AI or rendered but carry no metadata: 506 (AI-upscaled), 507, 513, 514 (recoloured), 516 (watermark painted out) and 518 (three 1024² renders).
+  - The legacy "Asuma Blade" folder holds a Google "Created by Google Generative AI" + SynthID image.
+- **Rule:** none of these may be used as product photos.
+- **QA tool fix:** `qa/scripts/image-provenance.py` only matched the text "Created by Google Generative AI", so it missed the Gemini edits. It now also flags `trainedAlgorithmicMedia`, `algorithmicallyEnhanced` and "Added visible watermark" (exit 1), and reports Canva exports. AI images with no metadata can still only be caught by looking.
+
+### F-22 · Medium (owner) · New products: photo authorship and the SKU set
+- **Photos:**
+  - 10 of the 11 new products have at least one real photo of a print.
+  - HNYCMB513 Stormtrooper has none that QA can verify.
+  - Several best picks may be the model designer's photos rather than the shop's: app-saved file names, and Spanish or French context in some shots. The owner must confirm which photos are theirs to use.
+- **SKU conflict:** HNYCMB510 is "Light Fury Big Wings" in Airtable and in the shop's folder. A legacy "Asuma Blade (Legacy HNYCMB510 - Needs New SKU)" folder needs its own SKU before it can be listed.
+- **Not in Airtable:** SKU folders HNYCMB519–524 (Pikachu, Dobby, Skeleton, Panda, Twilight Nazgul, Black Panther), created 2026-09-30 to 10-15 by another account. They are not in Airtable, so they are not listed.
+- **Airtable spelling:** "Gorgu Baby Yoda keychain" (HNYCMB515) should read "Grogu".
 ## 7. Implementation review: `codex/storefront-mvp`
 
 ### Run 1: 2026-10-09 · `codex/storefront-mvp` @ `f801d314663470d5d4539f594e80acc0d63418e8`
