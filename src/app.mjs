@@ -169,6 +169,39 @@ function initGallery() {
   let frame;
   track.addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>mark(Math.round(track.scrollLeft/track.clientWidth)));},{passive:true});
 }
+function initLightbox() {
+  // Larger photos in a native <dialog>: tap or click to zoom 2x and pan by scrolling; arrows step through.
+  const root=document.querySelector('[data-photos]');if(!root||!window.HTMLDialogElement)return;
+  const photos=JSON.parse(root.dataset.photos), opener=root.querySelector('[data-zoom-open]');
+  const track=root.querySelector('[data-gallery-track]');
+  const dialog=document.createElement('dialog');dialog.className='lightbox';dialog.setAttribute('aria-label','Product photos');
+  dialog.innerHTML='<div class="lightbox-bar"><p class="lightbox-count" aria-live="polite"></p><button type="button" class="lightbox-close" data-close>Close</button></div><div class="lightbox-stage" data-stage></div>'+
+    (photos.length>1?'<div class="lightbox-nav"><button type="button" data-step="-1">Previous photo</button><button type="button" data-step="1">Next photo</button></div>':'')+
+    '<p class="lightbox-hint">Tap the photo to zoom. Press Esc to close.</p>';
+  document.body.append(dialog);
+  const stage=dialog.querySelector('[data-stage]');let index=0;
+  function show(i) {
+    index=(i+photos.length)%photos.length;const photo=photos[index];
+    const img=document.createElement('img');img.srcset=photo.srcset;img.src=photo.src;img.alt=photo.alt;img.sizes='min(100vw, 1200px)';
+    stage.classList.remove('is-zoomed');stage.replaceChildren(img);
+    dialog.querySelector('.lightbox-count').textContent='Photo '+(index+1)+' of '+photos.length;
+  }
+  const current=()=>track?Math.round(track.scrollLeft/track.clientWidth):0;
+  const open=()=>{show(current());dialog.showModal();dialog.querySelector('[data-close]').focus();};
+  opener.hidden=false;opener.addEventListener('click',open);
+  root.querySelectorAll('.detail-image img').forEach(img=>{img.style.cursor='zoom-in';img.addEventListener('click',open);});
+  stage.addEventListener('click',event=>{
+    const zoomed=stage.classList.toggle('is-zoomed');
+    if(zoomed){const r=stage.getBoundingClientRect();stage.scrollTo((event.clientX-r.left)/r.width*stage.scrollWidth-r.width/2,(event.clientY-r.top)/r.height*stage.scrollHeight-r.height/2);}
+  });
+  dialog.addEventListener('click',event=>{
+    if(event.target.closest('[data-close]'))dialog.close();
+    const step=event.target.closest('[data-step]');if(step)show(index+Number(step.dataset.step));
+    if(event.target===dialog)dialog.close();
+  });
+  dialog.addEventListener('keydown',event=>{if(photos.length>1&&(event.key==='ArrowRight'||event.key==='ArrowLeft')){event.preventDefault();show(index+(event.key==='ArrowRight'?1:-1));}});
+  dialog.addEventListener('close',()=>{stage.replaceChildren();opener.focus();});
+}
 function initShare() {
   const row=document.querySelector('[data-share-row]');if(!row)return;
   const {url,title}=row.dataset;
@@ -186,7 +219,7 @@ function initHeader() {
   const update=()=>header.classList.toggle('is-scrolled',scrollY>8);
   addEventListener('scroll',update,{passive:true});update();
 }
-initHeader();initFilters();initGallery();initShare();
+initHeader();initFilters();initGallery();initShare();initLightbox();
 try {
   const responses=await Promise.all([fetch('/data/products.json'),fetch('/data/store.json')]);
   if(responses.some(r=>!r.ok))throw new Error('Data unavailable');

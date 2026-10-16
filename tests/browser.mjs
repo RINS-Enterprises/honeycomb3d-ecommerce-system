@@ -157,6 +157,18 @@ try {
   assert.equal(await page.getByRole('button',{name:'Show photo 3 of 4'}).getAttribute('aria-current'),'true');
   assert.equal(await page.locator('[data-gallery-thumb][aria-current]').count(),1,'Exactly one current thumbnail');
   assert.equal(await page.getByRole('button',{name:'Ordering opens soon'}).isDisabled(),true);
+  await page.getByTestId('zoom-open').click();
+  await page.getByRole('dialog',{name:'Product photos'}).waitFor();
+  assert.match(await page.locator('.lightbox-count').textContent(),/^Photo 3 of 4$/,'Lightbox opens on the current gallery photo');
+  await page.keyboard.press('ArrowRight');
+  assert.equal(await page.locator('.lightbox-count').textContent(),'Photo 4 of 4');
+  await page.waitForFunction(()=>{const i=document.querySelector('.lightbox-stage img');return i&&i.complete&&i.naturalWidth>0;});
+  await page.locator('.lightbox-stage').click();
+  assert.equal(await page.locator('.lightbox-stage.is-zoomed').count(),1,'Tap zooms');
+  await page.keyboard.press('Escape');
+  await page.getByRole('dialog').waitFor({state:'hidden'});
+  assert.equal(await page.evaluate(()=>document.activeElement?.dataset.testid),'zoom-open','Focus returns to the opener');
+  assert.equal(await page.locator('.lightbox-stage img').count(),0,'Lightbox image is removed on close');
   const shareShown=await page.getByTestId('share-button').isVisible(), copyShown=await page.getByTestId('share-copy').isVisible();
   assert(shareShown!==copyShown||!copyShown,'Either the native share button or the copy-link fallback is offered');
   if(copyShown) {

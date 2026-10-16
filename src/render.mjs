@@ -120,16 +120,20 @@ function shareRow(p, store) {
     '<a class="button ghost" data-share-fallback data-testid="share-whatsapp" href="https://wa.me/?text='+e(encodeURIComponent(text+' '+url))+'" target="_blank" rel="noopener noreferrer">WhatsApp<span class="sr-only"> (opens a share screen)</span></a>' +
     '<button type="button" class="button ghost" data-copy-link data-share-fallback hidden data-testid="share-copy">Copy link</button></div>';
 }
+const ZOOM_ICON = '<svg class="icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/></svg>';
 function gallerySlides(p) {
   return [{src:p.image,alt:p.imageAlt,width:p.imageWidth,height:p.imageHeight,variants:p.imageVariants||[]},...(p.gallery||[])];
 }
 function gallery(p) {
   const slides=gallerySlides(p);
   const img=(g,i,sizes)=>'<img src="'+e(g.src)+'" srcset="'+e(srcset(g.variants))+'" sizes="'+sizes+'" alt="'+e(g.alt)+'" width="'+g.width+'" height="'+g.height+'" loading="eager"'+(i===0?' fetchpriority="high"':'')+'>';
-  if(slides.length===1)return '<div class="detail-gallery"><div class="detail-image">'+img(slides[0],0,DETAIL_SIZES)+'</div></div>';
-  return '<div class="detail-gallery" data-gallery><div class="gallery-track detail-image" tabindex="0" role="region" aria-label="'+e(p.name)+' photos, '+slides.length+' images" data-gallery-track>'+
+  // Photos for the lightbox, which builds its <img> only when opened.
+  const photos=e(JSON.stringify(slides.map(g=>({srcset:srcset(g.variants),src:(g.variants.at(-1)||g).src,alt:g.alt}))));
+  const zoom='<button type="button" class="zoom-trigger" data-zoom-open hidden data-testid="zoom-open">'+ZOOM_ICON+'<span>View larger</span></button>';
+  if(slides.length===1)return '<div class="detail-gallery" data-photos="'+photos+'"><div class="detail-image">'+img(slides[0],0,DETAIL_SIZES)+'</div>'+zoom+'</div>';
+  return '<div class="detail-gallery" data-gallery data-photos="'+photos+'"><div class="gallery-track detail-image" tabindex="0" role="region" aria-label="'+e(p.name)+' photos, '+slides.length+' images" data-gallery-track>'+
     slides.map((g,i)=>'<figure class="gallery-slide" id="photo-'+(i+1)+'" data-gallery-slide>'+img(g,i,DETAIL_SIZES)+'</figure>').join('')+'</div>'+
-    '<div class="gallery-thumbs" role="group" aria-label="Choose a photo">'+slides.map((g,i)=>'<button type="button" class="gallery-thumb" data-gallery-thumb="'+i+'" aria-label="Show photo '+(i+1)+' of '+slides.length+'"'+(i===0?' aria-current="true"':'')+'>'+img(g,1,THUMB_SIZES)+'</button>').join('')+'</div></div>';
+    zoom+'<div class="gallery-thumbs" role="group" aria-label="Choose a photo">'+slides.map((g,i)=>'<button type="button" class="gallery-thumb" data-gallery-thumb="'+i+'" aria-label="Show photo '+(i+1)+' of '+slides.length+'"'+(i===0?' aria-current="true"':'')+'>'+img(g,1,THUMB_SIZES)+'</button>').join('')+'</div></div>';
 }
 export function detail(p,products,store) {
   const ordering=store.mode==='live'&&store.whatsappVerified;
