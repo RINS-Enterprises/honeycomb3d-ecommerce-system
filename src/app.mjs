@@ -100,10 +100,37 @@ function initRecent() {
   if(!shown.length)return;
   section.querySelector('[data-recent-list]').innerHTML=shown.map(p=>card(p)).join('');
   section.hidden=false;
+  reveal(section);
   section.querySelector('[data-recent-clear]').addEventListener('click',()=>{
     try{storage.setItem(RECENT_KEY,JSON.stringify(current?[current]:[]));}catch{}
     section.hidden=true;announce('Recently viewed list cleared.');
   });
+}
+// Reveal: content below the first screen fades up 8px the first time it scrolls into view.
+// Transform and opacity only (no layout shift); skipped under reduced motion or without IntersectionObserver.
+const REVEAL='.product-card,.category-tile,.how-steps>li,.section-heading,.custom-banner,.studio-strip>*';
+let revealer=null;
+function reveal(root=document) {
+  if(!revealer)return;
+  const fold=innerHeight;
+  root.querySelectorAll(REVEAL).forEach(el=>{
+    if(el.dataset.revealed||el.getBoundingClientRect().top<fold)return;
+    el.dataset.revealed='pending';el.classList.add('reveal');revealer.observe(el);
+  });
+}
+function initReveal() {
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  revealer=new IntersectionObserver(entries=>{
+    const batch=entries.filter(x=>x.isIntersecting).map(x=>x.target);
+    batch.forEach((el,i)=>{
+      revealer.unobserve(el);el.dataset.revealed='done';
+      el.style.transitionDelay=Math.min(i,5)*60+'ms';
+      el.classList.add('is-in');
+      const done=()=>{el.classList.remove('reveal','is-in');el.style.transitionDelay='';};
+      el.addEventListener('transitionend',done,{once:true});setTimeout(done,1200);
+    });
+  },{rootMargin:'0px 0px -6% 0px'});
+  reveal();
 }
 // Shared by the product page form and the cards' quick-add buttons.
 function addToCart(product,quantity) {
@@ -285,7 +312,7 @@ function initHeader() {
   const update=()=>header.classList.toggle('is-scrolled',scrollY>8);
   addEventListener('scroll',update,{passive:true});update();
 }
-initHeader();initFilters();initGallery();initShare();initLightbox();initStickyBuy();
+initHeader();initFilters();initGallery();initShare();initLightbox();initStickyBuy();initReveal();
 try {
   const responses=await Promise.all([fetch('/data/products.json'),fetch('/data/store.json')]);
   if(responses.some(r=>!r.ok))throw new Error('Data unavailable');

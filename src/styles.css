@@ -415,3 +415,9 @@ body.has-sticky-buy .toast{bottom:84px}
 a,button,.button,input,select,textarea{transition:color var(--dur) var(--ease),background-color var(--dur) var(--ease),border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease)}
 .button:active{transform:translateY(1px)}
 }
+
+/* Reveal on first view (set by app.mjs only below the fold, never under reduced motion). */
+@media(prefers-reduced-motion:no-preference){
+.reveal{opacity:0;transform:translateY(8px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.reveal.is-in{opacity:1;transform:none}
+}

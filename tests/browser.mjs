@@ -14,7 +14,8 @@ try {
   const page=await browser.newPage({viewport:{width:1440,height:1000}});
   const errors=[];page.on('pageerror',error=>errors.push(error.message));
   async function screenshot(path) {
-    await page.evaluate(()=>{for(const img of document.images)img.loading='eager';});
+    // Full-page captures do not scroll, so settle reveal motion first.
+    await page.evaluate(()=>{for(const img of document.images)img.loading='eager';document.querySelectorAll('.reveal').forEach(el=>el.classList.remove('reveal','is-in'));});
     await page.waitForFunction(()=>[...document.images].every(img=>img.complete));
     await page.evaluate(async()=>{
       for(const img of document.images) {
@@ -56,6 +57,18 @@ try {
   assert.equal(await page.getByTestId('cart-count').textContent(),'1','Quick add adds one');
   assert.match(page.url(),/\/shop\//,'Quick add stays on the page');
   assert.equal(await kuramaCard.getByRole('link').count(),1,'Quick add is not a link and not nested in one');
+  // Reveal motion: below-the-fold content only, settles after scrolling, off under reduced motion.
+  const motion=await browser.newPage({viewport:{width:390,height:844}});
+  await motion.goto('http://127.0.0.1:4173/');
+  await motion.waitForFunction(()=>document.querySelectorAll('.reveal').length>0);
+  assert.equal(await motion.evaluate(()=>[...document.querySelectorAll('.reveal')].some(el=>el.getBoundingClientRect().top<innerHeight-60)),false,'Nothing on the first screen is hidden');
+  for(let y=0;y<await motion.evaluate(()=>document.body.scrollHeight);y+=400){await motion.evaluate(y=>scrollTo(0,y),y);await motion.waitForTimeout(60);}
+  await motion.waitForFunction(()=>!document.querySelector('.reveal'),null,{timeout:5000});
+  await motion.close();
+  const still=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});
+  await still.goto('http://127.0.0.1:4173/');await still.waitForLoadState('networkidle');
+  assert.equal(await still.locator('.reveal').count(),0,'Reduced motion: no reveal');
+  await still.close();
   // Recently viewed: newest first, never the current product, hidden when empty or when storage is blocked.
   await page.evaluate(()=>localStorage.clear());
   await page.goto('http://127.0.0.1:4173/products/baymax-figure/');
