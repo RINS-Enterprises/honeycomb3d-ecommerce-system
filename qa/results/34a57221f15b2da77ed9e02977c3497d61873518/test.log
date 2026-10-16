@@ -1,0 +1,188 @@
+
+> honeycomb3d-storefront@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: all three recovered keychains appear under the keychain category
+ok 1 - all three recovered keychains appear under the keychain category
+  ---
+  duration_ms: 1.676982
+  type: 'test'
+  ...
+# Subtest: draft descriptions are explicitly attributed and remain unapproved
+ok 2 - draft descriptions are explicitly attributed and remain unapproved
+  ---
+  duration_ms: 0.323525
+  type: 'test'
+  ...
+# Subtest: owner prices preserve storefront IDs, provenance and unconfirmed approval
+ok 3 - owner prices preserve storefront IDs, provenance and unconfirmed approval
+  ---
+  duration_ms: 2.242022
+  type: 'test'
+  ...
+# Subtest: every product has an approved photo as responsive square frames with real dimensions
+ok 4 - every product has an approved photo as responsive square frames with real dimensions
+  ---
+  duration_ms: 0.691963
+  type: 'test'
+  ...
+# Subtest: Kurama and Classic Kunai return with their imported photos and unchanged data
+ok 5 - Kurama and Classic Kunai return with their imported photos and unchanged data
+  ---
+  duration_ms: 0.332863
+  type: 'test'
+  ...
+# Subtest: restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+ok 6 - restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+  ---
+  duration_ms: 3.514349
+  type: 'test'
+  ...
+# Subtest: money is computed in cents and unknown prices remain explicit
+ok 7 - money is computed in cents and unknown prices remain explicit
+  ---
+  duration_ms: 50.512089
+  type: 'test'
+  ...
+# Subtest: bad storage and invalid JSON are recoverable
+ok 8 - bad storage and invalid JSON are recoverable
+  ---
+  duration_ms: 0.427011
+  type: 'test'
+  ...
+# Subtest: WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+ok 9 - WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+  ---
+  duration_ms: 0.642891
+  type: 'test'
+  ...
+# Subtest: all search words and category must match
+ok 10 - all search words and category must match
+  ---
+  duration_ms: 0.524533
+  type: 'test'
+  ...
+# Subtest: live build requires verified contact, approvals, original photos and availability
+ok 11 - live build requires verified contact, approvals, original photos and availability
+  ---
+  duration_ms: 1.258609
+  type: 'test'
+  ...
+# Subtest: escaping prevents catalogue text from becoming markup
+ok 12 - escaping prevents catalogue text from becoming markup
+  ---
+  duration_ms: 0.517148
+  type: 'test'
+  ...
+# Subtest: decimal prices accept normal currency and reject sub-cent values
+ok 13 - decimal prices accept normal currency and reject sub-cent values
+  ---
+  duration_ms: 0.89376
+  type: 'test'
+  ...
+# Subtest: live-visible catalogue strips unapproved items from every cart operation
+ok 14 - live-visible catalogue strips unapproved items from every cart operation
+  ---
+  duration_ms: 0.743138
+  type: 'test'
+  ...
+# Subtest: products without an approved photo are hidden in preview and live
+ok 15 - products without an approved photo are hidden in preview and live
+  ---
+  duration_ms: 0.936455
+  type: 'test'
+  ...
+# Subtest: LKR amounts use one format: whole rupees without decimals, otherwise two decimals
+ok 16 - LKR amounts use one format: whole rupees without decimals, otherwise two decimals
+  ---
+  duration_ms: 1.220402
+  type: 'test'
+  ...
+# Subtest: the home hero only links to a product included in the live-visible catalogue
+ok 17 - the home hero only links to a product included in the live-visible catalogue
+  ---
+  duration_ms: 56.751836
+  type: 'test'
+  ...
+# Subtest: an empty live catalogue has no dead product link or unapproved hero photo
+ok 18 - an empty live catalogue has no dead product link or unapproved hero photo
+  ---
+  duration_ms: 0.504984
+  type: 'test'
+  ...
+# Subtest: photos decode synchronously so off-screen cards never paint as empty frames
+ok 19 - photos decode synchronously so off-screen cards never paint as empty frames
+  ---
+  duration_ms: 1.254364
+  type: 'test'
+  ...
+# Subtest: the full-bleed hero photo is the preloaded, eager, high-priority LCP image
+ok 20 - the full-bleed hero photo is the preloaded, eager, high-priority LCP image
+  ---
+  duration_ms: 3.096415
+  type: 'test'
+  ...
+# Subtest: preview mode shows a slim, plainly worded ordering notice without dates
+ok 21 - preview mode shows a slim, plainly worded ordering notice without dates
+  ---
+  duration_ms: 1.684
+  type: 'test'
+  ...
+# Subtest: every page has the sticky header cart hooks and a footer with real links
+ok 22 - every page has the sticky header cart hooks and a footer with real links
+  ---
+  duration_ms: 0.773619
+  type: 'test'
+  ...
+# Subtest: cards are one link with a clean LKR price and test hooks
+ok 23 - cards are one link with a clean LKR price and test hooks
+  ---
+  duration_ms: 1.216229
+  type: 'test'
+  ...
+# Subtest: product page: gallery only with several photos, clear price, availability and an inline ordering note
+ok 24 - product page: gallery only with several photos, clear price, availability and an inline ordering note
+  ---
+  duration_ms: 2.772632
+  type: 'test'
+  ...
+# Subtest: pages carry share metadata, theme colour, touch icon and price-only Product JSON-LD
+ok 25 - pages carry share metadata, theme colour, touch icon and price-only Product JSON-LD
+  ---
+  duration_ms: 4.013132
+  type: 'test'
+  ...
+# Subtest: "More from HoneyComb 3D" puts the same category and shared themes first
+ok 26 - "More from HoneyComb 3D" puts the same category and shared themes first
+  ---
+  duration_ms: 2.145261
+  type: 'test'
+  ...
+# Subtest: product pages offer sharing without a phone number or external script
+ok 27 - product pages offer sharing without a phone number or external script
+  ---
+  duration_ms: 1.56957
+  type: 'test'
+  ...
+# Subtest: home has a three-step how-it-works band without timings or promises
+ok 28 - home has a three-step how-it-works band without timings or promises
+  ---
+  duration_ms: 0.923577
+  type: 'test'
+  ...
+# Subtest: recently viewed row ships hidden, names the current product and renders nothing server-side
+ok 29 - recently viewed row ships hidden, names the current product and renders nothing server-side
+  ---
+  duration_ms: 0.862785
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 209.410727
