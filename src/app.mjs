@@ -270,7 +270,11 @@ function initGallery() {
   const root=document.querySelector('[data-gallery]');if(!root)return;
   const track=root.querySelector('[data-gallery-track]'), thumbs=[...root.querySelectorAll('[data-gallery-thumb]')];
   const reduce=matchMedia('(prefers-reduced-motion: reduce)');
-  const mark=index=>thumbs.forEach((t,i)=>{if(i===index)t.setAttribute('aria-current','true');else t.removeAttribute('aria-current');});
+  const dots=[...root.querySelectorAll('[data-gallery-dots] > span:not(.gallery-count)')], index=root.querySelector('[data-gallery-index]');
+  const mark=current=>{
+    thumbs.forEach((t,i)=>{if(i===current)t.setAttribute('aria-current','true');else t.removeAttribute('aria-current');});
+    dots.forEach((d,i)=>d.classList.toggle('is-current',i===current));if(index)index.textContent=String(current+1);
+  };
   thumbs.forEach((thumb,index)=>thumb.addEventListener('click',()=>{
     track.scrollTo({left:index*track.clientWidth,behavior:reduce.matches?'auto':'smooth'});mark(index);
   }));

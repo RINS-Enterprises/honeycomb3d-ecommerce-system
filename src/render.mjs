@@ -121,6 +121,8 @@ function gallery(p) {
   if(slides.length===1)return '<div class="detail-gallery" data-photos="'+photos+'"><div class="detail-image">'+img(slides[0],0,DETAIL_SIZES)+'</div>'+zoom+'</div>';
   return '<div class="detail-gallery" data-gallery data-photos="'+photos+'"><div class="gallery-track detail-image" tabindex="0" role="region" aria-label="'+e(p.name)+' photos, '+slides.length+' images" data-gallery-track>'+
     slides.map((g,i)=>'<figure class="gallery-slide" id="photo-'+(i+1)+'" data-gallery-slide>'+img(g,i,DETAIL_SIZES)+'</figure>').join('')+'</div>'+
+    // Phone-only position indicator; decorative because the thumbnails carry the labels.
+    '<div class="gallery-dots" aria-hidden="true" data-gallery-dots data-testid="gallery-position">'+slides.map((g,i)=>'<span'+(i===0?' class="is-current"':'')+'></span>').join('')+'<span class="gallery-count"><b data-gallery-index>1</b> / '+slides.length+'</span></div>'+
     zoom+'<div class="gallery-thumbs" role="group" aria-label="Choose a photo">'+slides.map((g,i)=>'<button type="button" class="gallery-thumb" data-gallery-thumb="'+i+'" aria-label="Show photo '+(i+1)+' of '+slides.length+'"'+(i===0?' aria-current="true"':'')+'>'+img(g,1,THUMB_SIZES)+'</button>').join('')+'</div></div>';
 }
 // Filled in the browser from this device's history; stays hidden when empty or storage is blocked.

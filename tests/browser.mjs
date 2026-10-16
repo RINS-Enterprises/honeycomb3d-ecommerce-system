@@ -235,7 +235,18 @@ try {
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at 320 with a wide font: '+path);
   }
   await page.unroute('**/styles.css');
+  // Phone gallery position: decorative dots plus "n / N", following the swipe.
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('http://127.0.0.1:4173/products/minato-kunai/');
+  await page.getByTestId('gallery-position').waitFor();
+  assert.equal(await page.getByTestId('gallery-position').getAttribute('aria-hidden'),'true');
+  assert.equal(await page.locator('[data-gallery-index]').textContent(),'1');
+  await page.evaluate(()=>{const t=document.querySelector('[data-gallery-track]');t.scrollTo({left:t.clientWidth,behavior:'instant'});});
+  await page.waitForFunction(()=>document.querySelector('[data-gallery-index]').textContent==='2');
+  assert.equal(await page.locator('[data-gallery-dots] .is-current').count(),1);
   await page.setViewportSize({width:1280,height:900});
+  await page.goto('http://127.0.0.1:4173/products/minato-kunai/');
+  assert.equal(await page.getByTestId('gallery-position').isHidden(),true,'Desktop uses the thumbnails only');
   await page.goto('http://127.0.0.1:4173/products/minato-kunai/');
   await page.getByRole('button',{name:'Show photo 3 of 4'}).click();
   await page.waitForFunction(()=>{const t=document.querySelector('[data-gallery-track]');return Math.round(t.scrollLeft/t.clientWidth)===2;});
