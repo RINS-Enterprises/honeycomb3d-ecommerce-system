@@ -38,6 +38,8 @@ for(const asset of assets) {
   await copyFile(join(root,'public',asset),join(dist,asset));
 }
 await copyFile(join(root,'public/favicon.ico'),join(dist,'favicon.ico'));
+// Brand texture used by styles.css (same-origin; the CSP allows no data: images).
+await copyFile(join(root,'public/hex.svg'),join(dist,'hex.svg'));
 await copyFile(join(root,'public/apple-touch-icon.png'),join(dist,'apple-touch-icon.png'));
 await mkdir(join(dist,'fonts'),{recursive:true});
 for(const name of ['bricolage-grotesque-display.woff2','OFL.txt'])await copyFile(join(root,'public/fonts',name),join(dist,'fonts',name));

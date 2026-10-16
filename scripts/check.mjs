@@ -44,4 +44,9 @@ const fontBytes=await readFile(join(root,'dist',fontRecord.output));
 assert.equal(createHash('sha256').update(fontBytes).digest('hex'),fontRecord.sha256,'Font hash');
 assert(fontBytes.length<=100_000,'Fonts stay under 100 KB');
 assert.match(await readFile(join(root,'dist/fonts/OFL.txt'),'utf8'),/SIL OPEN FONT LICENSE Version 1\.1/);
+// Brand texture: tiny, same-origin, referenced by the stylesheet, and free of scripts.
+const hex=await readFile(join(root,'dist/hex.svg'),'utf8');
+assert(Buffer.byteLength(hex)<=1024,'Hex texture stays at or under 1 KB');
+assert(!/<script|on\w+=|href=/i.test(hex),'Hex texture is plain vector paths');
+assert.match(await readFile(join(root,'dist/styles.css'),'utf8'),/url\(\/hex\.svg\)/);
 console.log('Verified '+paths.length+' generated pages and their local links/assets.');
