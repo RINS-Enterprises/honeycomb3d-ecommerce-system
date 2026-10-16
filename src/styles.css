@@ -442,6 +442,11 @@ body.has-sticky-buy .toast{bottom:84px}
 .state-mark{display:grid;place-items:center;width:84px;height:96px;margin:0 auto var(--space-4);color:var(--accent);background:var(--panel-2);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);font-weight:900;letter-spacing:-.02em;font-size:1.3rem}
 .state-page{text-align:center}
 .state-page .lead{margin-inline:auto}
+.nf-search{max-width:520px;margin:var(--space-7) auto 0;text-align:left}
+.nf-search-row{display:flex;gap:var(--space-2);margin-top:var(--space-2)}
+.nf-search-row input{margin:0;flex:1;min-width:0;border-radius:var(--radius-pill);padding-inline:20px}
+.nf-search-row .button{flex:none}
+.nf-picks{border-top:1px solid var(--line);padding-top:var(--space-7)}
 
 #add-form .button[data-state="added"]{background:var(--panel-3);border-color:var(--accent);color:var(--accent-soft)}
 

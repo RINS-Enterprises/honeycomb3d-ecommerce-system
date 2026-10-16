@@ -135,3 +135,12 @@ test('recently viewed row ships hidden, names the current product and renders no
   assert.match(html,/<div class="product-grid" data-recent-list><\/div>/);
   assert.match(cartPage(store),/data-recent data-testid="recently-viewed"[^>]* hidden>/);
 });
+
+test('404 keeps its message and adds a no-JS search to the shop plus four designs',async()=>{
+  const {notFound}=await import('../src/render.mjs');
+  const html=notFound(visibleProducts(products,store),store);
+  assert.match(html,/<h1>This page wandered off\.<\/h1>/);
+  assert.match(html,/<form class="nf-search" action="\/shop\/" method="get" role="search"/);
+  assert.match(html,/name="q"/);
+  assert.equal([...html.matchAll(/data-testid="product-card"/g)].length,4);
+});

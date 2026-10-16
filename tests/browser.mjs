@@ -311,6 +311,12 @@ try {
   await page.keyboard.press('Enter');assert.equal(await page.locator(':focus').getAttribute('id'),'main');
   const missing=await page.goto('http://127.0.0.1:4173/not-found/');
   assert.equal(missing.status(),404);
+  assert.equal(await page.getByTestId('notfound-picks').getByTestId('product-card').count(),4,'404 offers four designs');
+  await page.getByTestId('notfound-search').fill('kunai');
+  await page.getByTestId('notfound-search').press('Enter');
+  await page.waitForURL(/\/shop\/\?q=kunai/);
+  await page.waitForFunction(()=>document.querySelector('#result-count').textContent==='2 designs');
+  assert.equal(await page.getByRole('searchbox').inputValue(),'kunai','Search carries over to the shop');
   await page.route('**/data/products.json',route=>route.fulfill({status:503,body:'Unavailable'}));
   await page.goto('http://127.0.0.1:4173/cart/');
   await page.getByRole('heading',{name:'Your cart could not load'}).waitFor();

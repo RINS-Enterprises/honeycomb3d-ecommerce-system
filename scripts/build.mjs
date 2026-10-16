@@ -2,7 +2,7 @@ import {readFile,writeFile,mkdir,copyFile,rm,access} from 'node:fs/promises';
 import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateData,visibleProducts} from '../src/domain.mjs';
-import {layout,home,shop,detail,cartPage,customPage,privacyPage} from '../src/render.mjs';
+import {layout,home,shop,detail,cartPage,customPage,privacyPage,notFound} from '../src/render.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const dist=resolve(root,'dist');
@@ -27,7 +27,7 @@ await page('shop/index.html',shop(products,site));
 await page('cart/index.html',cartPage(site));
 await page('custom/index.html',customPage(site));
 await page('privacy/index.html',privacyPage(site));
-await page('404.html',layout('Page not found','<section class="wrap section narrow state-page"><div class="state-mark" aria-hidden="true">404</div><p class="eyebrow">Page not found</p><h1>This page wandered off.</h1><p class="lead">The design you are looking for may have moved.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/">Back to home</a></div></section>',site,'','',{description:'This page could not be found. Explore the HoneyComb 3D collection instead.'}));
+await page('404.html',notFound(products,site));
 for(const p of products)await page('products/'+p.slug+'/index.html',detail(p,products,site));
 for(const name of ['app.mjs','card.mjs','domain.mjs','styles.css'])await copyFile(join(root,'src',name),join(dist,name));
 // Copy only explicitly referenced derivatives. Source images and unused assets never ship.
