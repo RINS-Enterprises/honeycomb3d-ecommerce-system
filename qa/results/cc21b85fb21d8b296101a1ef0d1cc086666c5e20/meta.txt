@@ -1,0 +1,7 @@
+reviewed_ref: cc21b85
+reviewed_sha: cc21b85fb21d8b296101a1ef0d1cc086666c5e20
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T13:58:37Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T13:55:40+00:00
+subject: Product pages: "Ask about a variation" opens the custom enquiry prefilled
