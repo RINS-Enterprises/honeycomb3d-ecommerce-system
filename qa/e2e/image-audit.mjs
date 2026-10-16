@@ -58,7 +58,10 @@ for (const [vp, size, dpr] of [['mobile', { width: 390, height: 844 }, 3], ['des
       if (img.srcset && img.currentSrc) {
         try { const probe = new Image(); probe.src = img.currentSrc; await probe.decode(); pw = probe.naturalWidth; ph = probe.naturalHeight; } catch {}
       }
-      return { src: new URL(img.currentSrc || img.src).pathname, alt: img.getAttribute('alt'), complete: img.complete, decodeOk,
+      // alt="" is right for a decorative duplicate, e.g. a card's hover photo next to the main photo that
+      // carries the real alt text. Count it as decorative when a sibling image in the same frame has alt text.
+      const siblingAlt = [...(img.parentElement?.querySelectorAll('img') || [])].some((o) => o !== img && (o.getAttribute('alt') || '').trim());
+      return { src: new URL(img.currentSrc || img.src).pathname, alt: img.getAttribute('alt'), siblingAlt, complete: img.complete, decodeOk,
         nw: pw, nh: ph, densityW: img.naturalWidth, srcset: !!img.srcset, sizes: img.getAttribute('sizes'),
         rw: Math.round(r.width), rh: Math.round(r.height), fit: cs.objectFit,
         loading: img.getAttribute('loading'), attrW: img.getAttribute('width'), attrH: img.getAttribute('height'), visible: r.width > 0 && r.height > 0 };
@@ -71,7 +74,11 @@ for (const [vp, size, dpr] of [['mobile', { width: 390, height: 844 }, 3], ['des
       const b = bytes.get(im.src) ?? 0; pageBytes += b;
       const id = `${tag} ${im.src}`;
       if (!im.complete || !im.decodeOk || !im.nw) rec('FAIL', id, `did not decode (complete=${im.complete}, decode=${im.decodeOk}, natural=${im.nw}x${im.nh})`);
-      if (im.alt === null || (im.alt.trim() === '' && !/logo|brand/i.test(im.src))) rec('FAIL', id, `missing/empty alt`);
+      if (im.alt === null) rec('FAIL', id, 'missing alt attribute');
+      else if (im.alt.trim() === '' && !/logo|brand/i.test(im.src)) {
+        if (im.siblingAlt) rec('INFO', id, 'decorative (alt="") beside an image with alt text');
+        else rec('FAIL', id, 'empty alt on an image with no described sibling');
+      }
       if (!im.visible) continue;
       const over = Math.max(im.nw / (im.rw * dpr), im.nh / (im.rh * dpr));
       const mp = (im.nw * im.nh) / 1e6;

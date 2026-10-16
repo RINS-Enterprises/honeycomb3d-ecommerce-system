@@ -1,0 +1,487 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "reviewed_sha": "2ec9e8a0b8d0a0fd9b4c096ed8e2fc8727966193",
+  "axe": "node_modules/axe-core/axe.min.js",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa",
+    "wcag22aa",
+    "best-practice"
+  ],
+  "report": [
+    {
+      "page": "/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "aside > a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".hero-content > .eyebrow",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+            },
+            {
+              "target": "h1",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+            },
+            {
+              "target": "em",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+            },
+            {
+              "target": ".lead",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+            }
+          ],
+          "count": 10
+        }
+      ]
+    },
+    {
+      "page": "/shop/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "page": "/cart/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "aside > a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".button[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "/custom/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": "textarea",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "/privacy/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "page": "/products/hidden-leaf-keychain/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "page": "/qa-missing-page/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "aside > a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".button[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "cart-filled",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": "#order-notes",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            },
+            {
+              "target": ".message-preview",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 3
+        }
+      ]
+    },
+    {
+      "page": "custom-preview",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".cart-label",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            },
+            {
+              "target": "textarea[name=\"idea\"]",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            },
+            {
+              "target": ".message-preview",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 4
+        }
+      ]
+    },
+    {
+      "page": "shop-no-results",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "page": "/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "aside > a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".hero-content > .eyebrow",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+            },
+            {
+              "target": "h1",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+            },
+            {
+              "target": "em",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+            },
+            {
+              "target": ".button[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 6
+        }
+      ]
+    },
+    {
+      "page": "/shop/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "page": "/cart/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "aside > a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".button[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "/custom/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": "textarea",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "/privacy/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "page": "/products/hidden-leaf-keychain/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "page": "/qa-missing-page/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "aside > a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".button[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "cart-filled",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": "#order-notes",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            },
+            {
+              "target": ".message-preview",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 3
+        }
+      ]
+    },
+    {
+      "page": "custom-preview",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": "textarea[name=\"idea\"]",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            },
+            {
+              "target": ".message-preview",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 3
+        }
+      ]
+    },
+    {
+      "page": "shop-no-results",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "a[href$=\"shop/\"] > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

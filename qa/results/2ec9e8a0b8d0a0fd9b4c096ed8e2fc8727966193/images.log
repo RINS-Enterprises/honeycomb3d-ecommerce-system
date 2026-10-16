@@ -1,0 +1,39 @@
+PASS    home@mobile page-image-bytes - 0.26 MB of images on / (limit 1.5 MB); LCP 92 ms (/assets/night-fury-hero-portrait-1065.webp) on local server
+PASS    shop@mobile page-image-bytes - 0.20 MB of images on /shop/ (limit 1.5 MB); LCP 80 ms (/assets/hidden-leaf-sq-640.webp) on local server
+PASS    products-hidden-leaf-keychain@mobile page-image-bytes - 0.32 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 88 ms (/assets/hidden-leaf-sq-1200.webp) on local server
+PASS    products-baymax-figure@mobile page-image-bytes - 0.28 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 72 ms (/assets/baymax-sq-1200.webp) on local server
+PASS    products-kurama-figure@mobile page-image-bytes - 0.24 MB of images on /products/kurama-figure/ (limit 1.5 MB); LCP 104 ms (/assets/kurama-sq-1200.webp) on local server
+PASS    products-night-fury-keychain@mobile page-image-bytes - 0.30 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 72 ms (/assets/night-fury-sq-1200.webp) on local server
+PASS    products-minato-kunai@mobile page-image-bytes - 0.54 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 128 ms (/assets/minato-kunai-sq-1200.webp) on local server
+PASS    products-light-fury-keychain@mobile page-image-bytes - 0.31 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 80 ms (/assets/light-fury-sq-1200.webp) on local server
+PASS    products-classic-kunai@mobile page-image-bytes - 0.24 MB of images on /products/classic-kunai/ (limit 1.5 MB); LCP 92 ms (/assets/classic-kunai-sq-1200.webp) on local server
+INFO    home@desktop /assets/night-fury-hero-landscape-1280.webp - width/height attrs 960x1280 disagree with intrinsic ratio 2.00
+FAIL    home@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+PASS    home@desktop page-image-bytes - 0.15 MB of images on / (limit 1.5 MB); LCP 108 ms (/assets/night-fury-hero-landscape-1280.webp) on local server
+FAIL    shop@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+FAIL    shop@desktop /assets/minato-kunai-g2-320.webp - missing/empty alt
+PASS    shop@desktop page-image-bytes - 0.09 MB of images on /shop/ (limit 1.5 MB); LCP 80 ms (text) on local server
+FAIL    products-hidden-leaf-keychain@desktop /assets/minato-kunai-g2-320.webp - missing/empty alt
+PASS    products-hidden-leaf-keychain@desktop page-image-bytes - 0.20 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 76 ms (/assets/hidden-leaf-sq-960.webp) on local server
+FAIL    products-baymax-figure@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+FAIL    products-baymax-figure@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+PASS    products-baymax-figure@desktop page-image-bytes - 0.16 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 68 ms (/assets/baymax-sq-960.webp) on local server
+FAIL    products-kurama-figure@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+FAIL    products-kurama-figure@desktop /assets/minato-kunai-g2-320.webp - missing/empty alt
+FAIL    products-kurama-figure@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+PASS    products-kurama-figure@desktop page-image-bytes - 0.12 MB of images on /products/kurama-figure/ (limit 1.5 MB); LCP 68 ms (/assets/kurama-sq-960.webp) on local server
+FAIL    products-night-fury-keychain@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+FAIL    products-night-fury-keychain@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+PASS    products-night-fury-keychain@desktop page-image-bytes - 0.15 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 68 ms (/assets/night-fury-sq-960.webp) on local server
+FAIL    products-minato-kunai@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+FAIL    products-minato-kunai@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+PASS    products-minato-kunai@desktop page-image-bytes - 0.27 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 76 ms (/assets/minato-kunai-sq-960.webp) on local server
+FAIL    products-light-fury-keychain@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+FAIL    products-light-fury-keychain@desktop /assets/minato-kunai-g2-320.webp - missing/empty alt
+PASS    products-light-fury-keychain@desktop page-image-bytes - 0.14 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 64 ms (/assets/light-fury-sq-960.webp) on local server
+FAIL    products-classic-kunai@desktop /assets/minato-kunai-g2-320.webp - missing/empty alt
+FAIL    products-classic-kunai@desktop /assets/hidden-leaf-g2-320.webp - missing/empty alt
+FAIL    products-classic-kunai@desktop /assets/minato-kunai-g2-320.webp - missing/empty alt
+PASS    products-classic-kunai@desktop page-image-bytes - 0.11 MB of images on /products/classic-kunai/ (limit 1.5 MB); LCP 72 ms (/assets/classic-kunai-sq-960.webp) on local server
+
+{"PASS":18,"INFO":1,"FAIL":18} -> /home/user/honeycomb3d-ecommerce-system/qa/results/2ec9e8a0b8d0a0fd9b4c096ed8e2fc8727966193/images
