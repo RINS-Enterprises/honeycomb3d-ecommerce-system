@@ -55,7 +55,8 @@ try {
   // Hover photo: gallery products get a decorative second photo, loaded lazily; size never changes.
   const leafCard=page.locator('[data-product-card]').filter({hasText:'Hidden Leaf Keychain'});
   await leafCard.locator('.has-alt .card-alt').waitFor({state:'attached'});
-  assert.equal(await leafCard.locator('.card-alt').getAttribute('alt'),'');
+  assert.equal(await leafCard.locator('.card-alt').getAttribute('aria-hidden'),'true','Hover photo is hidden from assistive tech');
+  assert.match(await leafCard.locator('.card-alt').getAttribute('alt'),/\S/,'Hover photo still carries its gallery alt text');
   assert.equal(await page.locator('[data-product-card]').filter({hasText:'Baymax Figure'}).locator('.card-alt').count(),0,'No gallery, no hover photo');
   const before=await leafCard.boundingBox();
   await leafCard.hover();

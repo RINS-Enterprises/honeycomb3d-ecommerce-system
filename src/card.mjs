@@ -9,10 +9,10 @@ export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}
     ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'"' : '';
   return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'"'+(priority?' fetchpriority="high"':'')+'>';
 }
-// Second gallery photo for the hover cross-fade; the browser builds the <img> lazily (decorative, alt="").
+// Second gallery photo for the hover cross-fade; the browser builds the <img> lazily (aria-hidden, so its alt never reaches assistive tech).
 function altPhoto(p) {
   const g=p.gallery?.[0];if(!g?.variants?.length)return '';
-  return ' data-alt-srcset="'+e(g.variants.map(v=>v.src+' '+v.width+'w').join(', '))+'" data-alt-src="'+e(g.src)+'"';
+  return ' data-alt-srcset="'+e(g.variants.map(v=>v.src+' '+v.width+'w').join(', '))+'" data-alt-src="'+e(g.src)+'" data-alt-text="'+e(g.alt||'')+'"';
 }
 export function card(p, {headingLevel=3, loading='lazy'}={}) {
   const heading=headingLevel===2?'h2':'h3';
