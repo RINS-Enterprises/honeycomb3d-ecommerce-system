@@ -151,6 +151,9 @@ export function detail(p,products,store) {
   const mine=themesOf(p);
   const score=x=>(x.category===p.category?2:0)+([...themesOf(x)].some(t=>mine.has(t))?1:0);
   const more=products.filter(x=>x.id!==p.id).map((x,i)=>({x,i,s:score(x)})).sort((a,b)=>b.s-a.s||a.i-b.i).slice(0,4).map(o=>o.x);
+  // The row's link goes to the rest of this category when there is more than this one design in it.
+  const inCategory=products.filter(x=>x.category===p.category).length;
+  const moreLink=inCategory>1?'<a href="/shop/?category='+encodeURIComponent(p.category)+'" data-testid="more-category">All '+e(p.category)+' ('+inCategory+') →</a>':'<a href="/shop/">View collection →</a>';
   // JPEG link preview (WhatsApp and other crawlers that skip WebP).
   const share=p.shareImage||{};
   // Structured data: name, photos and the LKR price only (no availability, ratings or reviews).
@@ -168,7 +171,7 @@ export function detail(p,products,store) {
     '<p class="fine">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
     '<a class="text-link" href="/cart/">View your request cart →</a>'+shareRow(p,store)+'</div></div></section>' +
     (p.availability==='unavailable'?'':'<div class="sticky-buy" data-sticky-buy data-testid="sticky-buy" hidden><div class="sticky-buy-copy"><strong>'+e(p.name)+'</strong><span>'+e(price(p))+'</span></div><button type="button" class="button" data-sticky-add>Add to request cart</button></div>') +
-    (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+more.map(p=>card(p)).join('')+'</div></section>':'')+recentRow(p.id),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
+    (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2>'+moreLink+'</div><div class="product-grid">'+more.map(p=>card(p)).join('')+'</div></section>':'')+recentRow(p.id),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
 }
 export function cartPage(store) {
   return layout('Your request cart','<section class="wrap section cart-section"><p class="eyebrow">YOUR SELECTION</p><h1>Request cart.</h1><p class="lead">A starting point for your order. We’ll confirm the details together.</p><div id="cart-body"><p>Loading your cart…</p></div><noscript><p>Enable JavaScript to access the cart saved on this device.</p></noscript></section>'+recentRow(),store,'cart');

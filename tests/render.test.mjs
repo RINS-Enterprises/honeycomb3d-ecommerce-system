@@ -168,3 +168,13 @@ test('product facts link to the matching shop views and do not repeat price or a
   assert(!/<dt>(?:Price|Availability)<\/dt>/.test(facts));
   assert.equal([...html.matchAll(/data-testid="product-price"/g)].length>=1,true,'Price still shown at the top');
 });
+
+test('the related row links to the rest of the category, or the collection when the category has one design',async()=>{
+  const {detail}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const minato=detail(visible.find(p=>p.id==='HC-MINATO'),visible,store);
+  const props=visible.filter(p=>p.category==='Props').length;
+  assert.match(minato,new RegExp('<a href="/shop/\\?category=Props" data-testid="more-category">All Props \\('+props+'\\) →</a>'));
+  const single=visible.find(p=>visible.filter(x=>x.category===p.category).length===1);
+  if(single)assert.match(detail(single,visible,store),/<h2>More from HoneyComb 3D<\/h2><a href="\/shop\/">View collection →<\/a>/);
+});
