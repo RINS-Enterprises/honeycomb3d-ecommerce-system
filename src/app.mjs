@@ -202,6 +202,27 @@ function initLightbox() {
   dialog.addEventListener('keydown',event=>{if(photos.length>1&&(event.key==='ArrowRight'||event.key==='ArrowLeft')){event.preventDefault();show(index+(event.key==='ArrowRight'?1:-1));}});
   dialog.addEventListener('close',()=>{stage.replaceChildren();opener.focus();});
 }
+function initStickyBuy() {
+  // Phones: when the main add button scrolls away, a bottom bar keeps name, price and the add button in reach.
+  const bar=document.querySelector('[data-sticky-buy]'), form=document.querySelector('#add-form');
+  if(!bar||!form)return;
+  const footer=document.querySelector('.site-footer'), narrow=matchMedia('(max-width: 699px)');
+  bar.hidden=false;
+  // Positions, not IntersectionObserver: a fast fling can jump the form from below to above the
+  // viewport without it ever intersecting, and the observer would then never report.
+  function update() {
+    const scrolledPast=form.getBoundingClientRect().bottom<0;
+    const footerShown=footer?footer.getBoundingClientRect().top<innerHeight:false;
+    const show=narrow.matches&&scrolledPast&&!footerShown&&!form.querySelector('button[type="submit"]').disabled;
+    bar.classList.toggle('is-visible',show);bar.inert=!show;document.body.classList.toggle('has-sticky-buy',show);
+  }
+  let frame;
+  addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(update);},{passive:true});
+  addEventListener('resize',update);
+  narrow.addEventListener('change',update);
+  bar.querySelector('[data-sticky-add]').addEventListener('click',()=>form.requestSubmit());
+  update();
+}
 function initShare() {
   const row=document.querySelector('[data-share-row]');if(!row)return;
   const {url,title}=row.dataset;
@@ -219,7 +240,7 @@ function initHeader() {
   const update=()=>header.classList.toggle('is-scrolled',scrollY>8);
   addEventListener('scroll',update,{passive:true});update();
 }
-initHeader();initFilters();initGallery();initShare();initLightbox();
+initHeader();initFilters();initGallery();initShare();initLightbox();initStickyBuy();
 try {
   const responses=await Promise.all([fetch('/data/products.json'),fetch('/data/store.json')]);
   if(responses.some(r=>!r.ok))throw new Error('Data unavailable');

@@ -344,6 +344,17 @@ textarea{resize:vertical;line-height:1.5}
 @media(min-width:901px){.form-panel{position:sticky;top:calc(var(--header-h) + 24px)}}
 @media(max-width:900px){.custom-layout{grid-template-columns:minmax(0,1fr)}.mini-steps{display:none}}
 
+/* Sticky buy bar (phones) */
+.sticky-buy{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));background:rgba(18,16,14,.96);border-top:1px solid var(--line-strong);box-shadow:0 -12px 30px -16px rgba(0,0,0,.9);transform:translateY(110%);visibility:hidden}
+.sticky-buy.is-visible{transform:none;visibility:visible}
+.sticky-buy-copy{display:grid;min-width:0}
+.sticky-buy-copy strong{font-family:var(--font-display);font-size:var(--step-0);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sticky-buy-copy span{color:var(--accent-soft);font-weight:700;font-size:var(--step--1)}
+.sticky-buy .button{flex:none;min-height:44px;padding-inline:18px}
+body.has-sticky-buy .toast{bottom:84px}
+@media(min-width:700px){.sticky-buy{display:none}}
+@media(prefers-reduced-motion:no-preference){.sticky-buy{transition:transform .28s var(--ease),visibility .28s}}
+
 /* Lightbox */
 .detail-gallery{position:relative}
 .zoom-trigger{position:absolute;top:var(--space-3);right:var(--space-3);z-index:2;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:8px 14px;border-radius:var(--radius-pill);border:1px solid rgba(255,255,255,.18);background:rgba(12,11,10,.62);color:var(--text);font-size:var(--step--1);font-weight:600;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}

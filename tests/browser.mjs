@@ -179,6 +179,16 @@ try {
     assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),'https://honeycomb3d.store/products/minato-kunai/');
   }
   await page.setViewportSize({width:390,height:844});
+  await page.goto('http://127.0.0.1:4173/products/kurama-figure/');
+  await page.waitForFunction(()=>!document.querySelector('#add-form button').disabled);
+  assert.equal(await page.getByTestId('sticky-buy').isVisible(),false,'No buy bar while the add button is on screen or below');
+  await page.evaluate(()=>{const f=document.querySelector('#add-form');scrollTo(0,f.getBoundingClientRect().bottom+scrollY+200);});
+  await page.waitForFunction(()=>document.querySelector('[data-sticky-buy]').classList.contains('is-visible'));
+  await page.getByTestId('sticky-buy').getByRole('button',{name:'Add to request cart'}).click();
+  await page.getByRole('status').filter({hasText:'Kurama Figure added to your request cart.'}).waitFor();
+  await page.evaluate(()=>document.querySelector('.site-footer').scrollIntoView());
+  await page.waitForFunction(()=>!document.querySelector('[data-sticky-buy]').classList.contains('is-visible'));
+  await page.evaluate(()=>localStorage.clear());
   for(const [route,name] of [['/shop/','shop'],['/products/baymax-figure/','product'],['/custom/','custom']]) {
     await page.goto('http://127.0.0.1:4173'+route);
     await screenshot('test-results/'+name+'-mobile.png');
