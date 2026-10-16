@@ -74,6 +74,7 @@ digest = lambda b: hashlib.sha256(b).hexdigest()
 products = json.loads((ROOT / "data/products.json").read_text())
 records = []
 hero = None
+site_share_ref = None
 for entry in SPECS["assets"]:
     source = (ROOT / entry["input"]).resolve()
     if not source.is_relative_to(ROOT / "assets/photo-sources"):
@@ -104,6 +105,28 @@ for entry in SPECS["assets"]:
             if alpha is not None:
                 im.putalpha(alpha)
         im = im.convert("RGBA" if alpha is not None else "RGB")
+        def render_share(source_im, size, name):
+            # Link-preview image (WhatsApp, social): baseline JPEG, no metadata, <= 300 KB.
+            resized = source_im.convert("RGB").resize(size, Image.Resampling.LANCZOS)
+            clean = Image.frombytes("RGB", resized.size, resized.tobytes())
+            output = f"/assets/{name}.jpg"
+            target = (ROOT / "public" / output.lstrip("/")).resolve()
+            if target.parent != OUT.resolve():
+                raise ValueError("Unsafe output path")
+            for quality in [84, 78, 72, 66]:
+                clean.save(target, "JPEG", quality=quality, optimize=True, progressive=False,
+                           subsampling="4:2:0", exif=b"", icc_profile=None)
+                if target.stat().st_size <= 300_000:
+                    break
+            data = target.read_bytes()
+            if len(data) > 300_000:
+                raise ValueError("Share image exceeds 300 KB: " + output)
+            with Image.open(target) as check:
+                check.load()
+                if check.size != size or check.getexif() or any(k in check.info for k in ("exif", "icc_profile")):
+                    raise ValueError("Share image size or metadata problem: " + output)
+            return {"src": output, "width": size[0], "height": size[1], "bytes": len(data),
+                    "sha256": digest(data), "quality": quality, "frame": "share"}
         def render(source_im, widths, stem):
             outputs = []
             for width in widths:
@@ -140,6 +163,14 @@ for entry in SPECS["assets"]:
         outputs = render(im, entry["widths"], entry["stem"])
         square = entry.get("square")
         square_outputs = []
+        share_output = None
+        site_share = None
+        if entry.get("siteShare"):
+            # 1200 x 630 link preview for home and shop pages, cut inside the approved crop.
+            fl, ft, fr, fb = entry["siteShare"]["box"]
+            if not (left <= fl < fr <= right and top <= ft < fb <= bottom):
+                raise ValueError("Share frame must sit inside the approved crop: " + entry["id"])
+            site_share = render_share(im.crop((fl - left, ft - top, fr - left, fb - top)), (1200, 630), "site-share")
         if square:
             # Square frames for cards and the product page. The box is in oriented
             # source pixels and must sit inside the approved crop, so it never widens it.
@@ -148,6 +179,7 @@ for entry in SPECS["assets"]:
                 padded, pad_info = pad_to_square(im)
                 square["padding"] = pad_info
                 square_outputs = render(padded, square["widths"], entry["stem"] + "-sq")
+                share_output = render_share(padded, (1200, 1200), entry["stem"] + "-share")
             else:
                 sl, st, sr, sb = square["box"]
                 if sr - sl != sb - st or not (left <= sl < sr <= right and top <= st < sb <= bottom):
@@ -156,6 +188,8 @@ for entry in SPECS["assets"]:
                     raise ValueError("Minato square frame includes a neighbour or clips its wing")
                 square_outputs = render(im.crop((sl - left, st - top, sr - left, sb - top)),
                                         square["widths"], entry["stem"] + "-sq")
+                share_output = render_share(im.crop((sl - left, st - top, sr - left, sb - top)),
+                                            (1200, 1200), entry["stem"] + "-share")
         gallery_outputs = []
         for index, frame in enumerate(entry.get("gallery") or [], start=2):
             # Extra square detail frames for the product-page gallery, inside the approved crop.
@@ -177,7 +211,8 @@ for entry in SPECS["assets"]:
         record = {**entry, "orientedSize": oriented_size, "appliedCropBox": crop,
                   "outputs": outputs + [{**o, "frame": "square"} for o in square_outputs]
                   + [{**o, "frame": "hero-" + shape} for shape, outs in hero_outputs.items() for o in outs]
-                  + [{**o, "frame": f"gallery-{i}"} for i, (_, outs) in enumerate(gallery_outputs, start=2) for o in outs]}
+                  + [{**o, "frame": f"gallery-{i}"} for i, (_, outs) in enumerate(gallery_outputs, start=2) for o in outs]
+                  + [o for o in (share_output, site_share) if o]}
         records.append(record)
         if entry["id"] != "brand-logo":
             product = next(p for p in products if p["id"] == entry["id"])
@@ -195,6 +230,10 @@ for entry in SPECS["assets"]:
                 product["gallery"].append({"src": g_fallback["src"], "alt": frame["alt"],
                                            "width": g_fallback["width"], "height": g_fallback["height"],
                                            "variants": [{k: o[k] for k in ("src", "width", "height")} for o in outs]})
+            if share_output:
+                product["shareImage"] = {k: share_output[k] for k in ("src", "width", "height")}
+            if site_share:
+                site_share_ref = {k: site_share[k] for k in ("src", "width", "height")}
             if hero_outputs:
                 hero = {"product": entry["id"]}
                 for shape, outs in hero_outputs.items():
@@ -209,6 +248,8 @@ metadata = {"version": 1, "importedAt": SPECS["importedAt"],
 store_path = ROOT / "data/store.json"
 store = json.loads(store_path.read_text())
 store["hero"] = hero
+if hero and site_share_ref:
+    store["hero"]["share"] = site_share_ref
 store_path.write_text(json.dumps(store, indent=2) + "\n")
 
 bt = chr(96)
@@ -239,6 +280,10 @@ for rec in records:
         doc += [f'- Square storefront frame (inside the applied crop): {code(tuple(rec["square"]["box"]))}. {rec["square"]["note"]}']
     for i, frame in enumerate(rec.get("gallery") or [], start=2):
         doc += [f'- Product-page gallery image {i} (inside the applied crop): {code(tuple(frame["box"]))}. {frame["note"]}']
+    if rec.get("siteShare"):
+        doc += [f'- Home and shop link-preview frame (inside the applied crop): {code(tuple(rec["siteShare"]["box"]))}, 1200 × 630 JPEG.']
+    if any(o.get("frame") == "share" and o["src"].endswith("-share.jpg") and "site-share" not in o["src"] for o in rec["outputs"]):
+        doc += ['- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.']
     for shape, frame in (rec.get("hero") or {}).items():
         doc += [f'- Home hero {shape} frame (inside the applied crop): {code(tuple(frame["box"]))}. {frame["note"]}']
     doc += [""]
@@ -248,10 +293,11 @@ for rec in records:
         doc += ["The crop selects only the upper Hidden Leaf headband plate, including its keyring loop and shadow; the other three village plates are outside the crop.", ""]
     if rec["id"] == "brand-logo":
         doc += ["This is the allowed raster option: the verified HC_WhiteBK-1.png artwork is cropped to the same established logo box and resized to 660 × 198 PNG. The former 7435 × 2229 web crop and the full 8334 × 8334 original are not served.", ""]
-    doc += ["| Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |",
+    doc += ["| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |",
             "|---|---:|---|---:|---:|---|"]
     for o in rec["outputs"]:
-        doc += [f'| {code(o["src"])} | {o["width"]} | {o["width"]} × {o["height"]} | {o["bytes"]} | {o["quality"] if o["quality"] is not None else "PNG"} | {code(o["sha256"])} |']
+        fmt = "PNG" if o["quality"] is None else ("JPEG " if o["src"].endswith(".jpg") else "") + str(o["quality"])
+        doc += [f'| {code(o["src"])} | {o["width"]} | {o["width"]} × {o["height"]} | {o["bytes"]} | {fmt} | {code(o["sha256"])} |']
     doc += [""]
 
 doc += ["## Pending approved originals", "",

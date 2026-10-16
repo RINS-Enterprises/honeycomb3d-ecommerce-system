@@ -20,10 +20,11 @@ Reproduce with python -m pip install Pillow==11.3.0 and python scripts/prepare-i
 - Square storefront frame: the whole applied crop centred on a 1750 × 1750 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#d8d2d2`), with a 70 px edge fade. Shows the whole plate, keyring loop to right end.
 - Product-page gallery image 2 (inside the applied crop): `(1640, 1660, 2410, 2430)`. Detail: Centres the Hidden Leaf emblem and the plate's left rivets; the approved crop is too shallow for a square of the whole plate.
 - Product-page gallery image 3 (inside the applied crop): `(1250, 1660, 2020, 2430)`. Keyring loop and rivets.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
 
 The crop selects only the upper Hidden Leaf headband plate, including its keyring loop and shadow; the other three village plates are outside the crop.
 
-| Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
 | `/assets/hidden-leaf-480.webp` | 480 | 480 × 211 | 9786 | 82 | `a11f9205ab677bf93b12e72f75b823b9ce0d2f9254d04badbeb2cefbad6f5bda` |
 | `/assets/hidden-leaf-960.webp` | 960 | 960 × 422 | 38452 | 82 | `784dbe7234ac62af94f162c336a0031c7ec5eac014b8da942a3de8fcf6fc3614` |
@@ -44,6 +45,7 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 | `/assets/hidden-leaf-g3-480.webp` | 480 | 480 × 480 | 20920 | 82 | `f2acd171b23fb158dbe96c6c20e718e34763ad16190f3f331786b0cfa48eea99` |
 | `/assets/hidden-leaf-g3-640.webp` | 640 | 640 × 640 | 35736 | 82 | `16913d3621c7ea263ad7ebf57326e5bee374dc7a8b53c9b953c8d0d15713e9a5` |
 | `/assets/hidden-leaf-g3-770.webp` | 770 | 770 × 770 | 51844 | 82 | `5eb860918aa32d0325f6d90cb4f87da7715135d3b4781c47b311744272c96cbe` |
+| `/assets/hidden-leaf-share.jpg` | 1200 | 1200 × 1200 | 109561 | JPEG 84 | `4ca91333d306d0ef63c26d7f60074ba6e8b22ff3c5e29e6e41cacb678ba72d76` |
 
 ## HC-BAYMAX
 
@@ -55,8 +57,9 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 - Source dimensions: 1536 × 2048; EXIF orientation 1.
 - Applied crop box after orientation: `(0, 0, 1536, 2048)`.
 - Square storefront frame (inside the applied crop): `(0, 400, 1536, 1936)`. Keeps both figures; trims the empty wall above and part of the grass below.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
 
-| Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
 | `/assets/baymax-480.webp` | 480 | 480 × 640 | 28300 | 82 | `250873e25a2a5060e8b62bf90093cd3ad84356ea5f2f96800995e0e9c2354d93` |
 | `/assets/baymax-960.webp` | 960 | 960 × 1280 | 91622 | 82 | `72e907f1342fbb8e4e489114a48109874a0b19c36071d5643a3250c21565106f` |
@@ -67,6 +70,7 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 | `/assets/baymax-sq-640.webp` | 640 | 640 × 640 | 41458 | 82 | `856ec11c7318be0a618482c94d0bafd0c5aa3a9bfe4c3f5c0550b3d6fc738101` |
 | `/assets/baymax-sq-960.webp` | 960 | 960 × 960 | 82492 | 82 | `42e3d86e2a3f4e947119e5a955831adb5c702474ee0a229dd3cd7a469a56523c` |
 | `/assets/baymax-sq-1200.webp` | 1200 | 1200 × 1200 | 119270 | 82 | `52b777d3455d694898a299b4f5440e97f9af86729a689e19f02e2c42d2968182` |
+| `/assets/baymax-share.jpg` | 1200 | 1200 × 1200 | 193534 | JPEG 84 | `4c974fe51963ac1d4df374c14ec0a06cc0f104a19a14295c7a2ec4a8768d636b` |
 
 ## HNYCMB501
 
@@ -78,10 +82,12 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 - Source dimensions: 1893 × 1420; EXIF orientation 1.
 - Applied crop box after orientation: `(0, 0, 1893, 1420)`.
 - Square storefront frame (inside the applied crop): `(236, 0, 1656, 1420)`. Centres the figure and the holding hand.
+- Home and shop link-preview frame (inside the applied crop): `(0, 176, 1893, 1170)`, 1200 × 630 JPEG.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
 - Home hero landscape frame (inside the applied crop): `(0, 200, 1893, 1146)`. 2:1 desktop hero; the dragon sits just right of centre so the headline can sit on the darkened left.
 - Home hero portrait frame (inside the applied crop): `(480, 0, 1545, 1420)`. 3:4 mobile hero; head, wings and tail.
 
-| Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
 | `/assets/night-fury-480.webp` | 480 | 480 × 360 | 14324 | 82 | `7e480852833cecbdf57660165d7a6a3ad44296980114f566f72db051f6c0a9d8` |
 | `/assets/night-fury-960.webp` | 960 | 960 × 720 | 37432 | 82 | `2071959e347554061056f0c997e4834b37519adb10c4b609ccfce9bf7867bb70` |
@@ -100,6 +106,8 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 | `/assets/night-fury-hero-portrait-720.webp` | 720 | 720 × 960 | 45514 | 82 | `870734819b4708c1c26a2db7c8e9e427ffb693da6826b630eccef58b5126122a` |
 | `/assets/night-fury-hero-portrait-960.webp` | 960 | 960 × 1280 | 68160 | 82 | `8bfe5b8bc444125d725952a43eee1b880ffa33167c4814d5251eb70447f2dee3` |
 | `/assets/night-fury-hero-portrait-1065.webp` | 1065 | 1065 × 1420 | 74826 | 82 | `b717079dd6f830bc1b91141bf70d690b5983a33489769f12365134d233656788` |
+| `/assets/night-fury-share.jpg` | 1200 | 1200 × 1200 | 144615 | JPEG 84 | `80651a466a29fc6120975a1bd28325894b8db07cc0031ffc52fe5ad71034367c` |
+| `/assets/site-share.jpg` | 1200 | 1200 × 630 | 87696 | JPEG 84 | `5e911c76bd703b74ecc83912363e3e2f6eee17fadf0cc3b5c31bbc7ae626e058` |
 
 ## HC-MINATO
 
@@ -114,10 +122,11 @@ The crop selects only the upper Hidden Leaf headband plate, including its keyrin
 - Product-page gallery image 2 (inside the applied crop): `(2770, 2950, 4600, 4780)`. Detail: Shows the engraved handle and full wings; the ring and blade tip fall outside the square.
 - Product-page gallery image 3 (inside the applied crop): `(2770, 2200, 4600, 4030)`. Ring and engraved grip.
 - Product-page gallery image 4 (inside the applied crop): `(2770, 4320, 4600, 6150)`. Wings and blade to the tip.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
 
 The left edge is x=2770, within the required x=2756…2794 bounds. The crop isolates the tan engraved handle, black blade, silver edge bevels and black ring. The full crop is not widened to include the adjacent blade. Its square storefront frame is cut from inside this crop.
 
-| Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
 | `/assets/minato-kunai-160.webp` | 160 | 160 × 358 | 3536 | 82 | `2ea7980f03aa5e465e3f9e07d64ae8c59a745b7c7f4324a9ab3744b4684cf83e` |
 | `/assets/minato-kunai-240.webp` | 240 | 240 × 538 | 6474 | 82 | `7fd13d17c5885ef58d47711bf43b0e44457dcd07300459433d59d34e90c0820e` |
@@ -148,6 +157,7 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 | `/assets/minato-kunai-g4-640.webp` | 640 | 640 × 640 | 13626 | 82 | `6db0cb17d88c0cf3337df6dc16562d1d2fae3bf7049e283eb86933e525016742` |
 | `/assets/minato-kunai-g4-960.webp` | 960 | 960 × 960 | 35852 | 82 | `8b6cc1f54ab8103ce8841db455895ebf12abf62ea4ae81c023caf9026ee77d5a` |
 | `/assets/minato-kunai-g4-1200.webp` | 1200 | 1200 × 1200 | 65284 | 82 | `4843e447aca750e4e4ed8e19bc09da5c11318dde882698f555c9b72b07ad913b` |
+| `/assets/minato-kunai-share.jpg` | 1200 | 1200 × 1200 | 67370 | JPEG 84 | `5f1de431c8b0bb514075909ba2f44fd9334262ee1687d7c0c8b23b722745d14d` |
 
 ## HC-LIGHTFURY
 
@@ -159,8 +169,9 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 - Source dimensions: 1500 × 2000; EXIF orientation 1.
 - Applied crop box after orientation: `(0, 0, 1500, 2000)`.
 - Square storefront frame (inside the applied crop): `(0, 300, 1500, 1800)`. Centres the figure and its tail.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
 
-| Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
 | `/assets/light-fury-480.webp` | 480 | 480 × 640 | 10204 | 82 | `b3f42484e301ce003661b4fbb88a6693514483b2aac08158eeb5aef79b119a60` |
 | `/assets/light-fury-960.webp` | 960 | 960 × 1280 | 28132 | 82 | `e108d5ac558aca70ca553bdcf48d9ee310da6d878b7d3ac076520acc2568b7a6` |
@@ -171,6 +182,7 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 | `/assets/light-fury-sq-640.webp` | 640 | 640 × 640 | 14648 | 82 | `ee003266d74ee4a289856d6834023e769ef6986b81f9634e083148ff674d6ba0` |
 | `/assets/light-fury-sq-960.webp` | 960 | 960 × 960 | 26680 | 82 | `932a58d7c4ff151959b893d0431c9a3a6c3f73782259fdf5f33dfb0508260f27` |
 | `/assets/light-fury-sq-1200.webp` | 1200 | 1200 × 1200 | 36326 | 82 | `13bc15075daccfb24a45c562fcba908cf2b4dc017289bc2f9548d77f26a6ca77` |
+| `/assets/light-fury-share.jpg` | 1200 | 1200 × 1200 | 98869 | JPEG 84 | `5f5606ffc28d374fd73d323a2722a356d9aebdd4ee4255f25f9fe7b77806bf33` |
 
 ## brand-logo
 
@@ -184,7 +196,7 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 
 This is the allowed raster option: the verified HC_WhiteBK-1.png artwork is cropped to the same established logo box and resized to 660 × 198 PNG. The former 7435 × 2229 web crop and the full 8334 × 8334 original are not served.
 
-| Output | Resize width | Actual dimensions | Bytes | WebP quality | Output SHA-256 |
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
 |---|---:|---|---:|---:|---|
 | `/assets/honeycomb-logo-web.png` | 660 | 660 × 198 | 42747 | PNG | `e959b5e60bec3285396e419f8623a43208260257b25b2ebd7f0055c7f45d3421` |
 

@@ -266,6 +266,15 @@
           "sha256": "5eb860918aa32d0325f6d90cb4f87da7715135d3b4781c47b311744272c96cbe",
           "quality": 82,
           "frame": "gallery-3"
+        },
+        {
+          "src": "/assets/hidden-leaf-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 109561,
+          "sha256": "4ca91333d306d0ef63c26d7f60074ba6e8b22ff3c5e29e6e41cacb678ba72d76",
+          "quality": 84,
+          "frame": "share"
         }
       ]
     },
@@ -395,6 +404,15 @@
           "sha256": "52b777d3455d694898a299b4f5440e97f9af86729a689e19f02e2c42d2968182",
           "quality": 82,
           "frame": "square"
+        },
+        {
+          "src": "/assets/baymax-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 193534,
+          "sha256": "4c974fe51963ac1d4df374c14ec0a06cc0f104a19a14295c7a2ec4a8768d636b",
+          "quality": 84,
+          "frame": "share"
         }
       ]
     },
@@ -467,6 +485,14 @@
           ],
           "note": "3:4 mobile hero; head, wings and tail."
         }
+      },
+      "siteShare": {
+        "box": [
+          0,
+          176,
+          1893,
+          1170
+        ]
       },
       "orientedSize": [
         1893,
@@ -628,6 +654,24 @@
           "sha256": "b717079dd6f830bc1b91141bf70d690b5983a33489769f12365134d233656788",
           "quality": 82,
           "frame": "hero-portrait"
+        },
+        {
+          "src": "/assets/night-fury-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 144615,
+          "sha256": "80651a466a29fc6120975a1bd28325894b8db07cc0031ffc52fe5ad71034367c",
+          "quality": 84,
+          "frame": "share"
+        },
+        {
+          "src": "/assets/site-share.jpg",
+          "width": 1200,
+          "height": 630,
+          "bytes": 87696,
+          "sha256": "5e911c76bd703b74ecc83912363e3e2f6eee17fadf0cc3b5c31bbc7ae626e058",
+          "quality": 84,
+          "frame": "share"
         }
       ]
     },
@@ -998,6 +1042,15 @@
           "sha256": "4843e447aca750e4e4ed8e19bc09da5c11318dde882698f555c9b72b07ad913b",
           "quality": 82,
           "frame": "gallery-4"
+        },
+        {
+          "src": "/assets/minato-kunai-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 67370,
+          "sha256": "5f1de431c8b0bb514075909ba2f44fd9334262ee1687d7c0c8b23b722745d14d",
+          "quality": 84,
+          "frame": "share"
         }
       ]
     },
@@ -1127,6 +1180,15 @@
           "sha256": "13bc15075daccfb24a45c562fcba908cf2b4dc017289bc2f9548d77f26a6ca77",
           "quality": 82,
           "frame": "square"
+        },
+        {
+          "src": "/assets/light-fury-share.jpg",
+          "width": 1200,
+          "height": 1200,
+          "bytes": 98869,
+          "sha256": "5f5606ffc28d374fd73d323a2722a356d9aebdd4ee4255f25f9fe7b77806bf33",
+          "quality": 84,
+          "frame": "share"
         }
       ]
     },

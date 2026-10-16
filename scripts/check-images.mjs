@@ -6,6 +6,17 @@ import assert from 'node:assert/strict';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const sha=b=>createHash('sha256').update(b).digest('hex');
 function dimensions(b,src) {
+  if(src.endsWith('.jpg')) {
+    // Baseline JPEG link-preview images: walk the markers, refuse EXIF/XMP (APP1) and ICC (APP2), read SOF0.
+    assert.equal(b.readUInt16BE(0),0xFFD8,'JPEG start: '+src);
+    for(let p=2;p<b.length;) {
+      const marker=b.readUInt16BE(p);
+      assert(marker!==0xFFE1&&marker!==0xFFE2,'JPEG metadata: '+src);
+      if(marker===0xFFC0||marker===0xFFC2)return [b.readUInt16BE(p+7),b.readUInt16BE(p+5)];
+      p+=2+b.readUInt16BE(p+2);
+    }
+    assert.fail('Missing JPEG frame header: '+src);
+  }
   if(src.endsWith('.png')) {
     assert.equal(b.subarray(1,4).toString(),'PNG');
     for(let p=8;p<b.length;) {
@@ -42,7 +53,7 @@ export async function checkImageOutputs(paths) {
     for(const output of asset.outputs) {
       const b=await readFile(join(root,'public',output.src));
       assert.equal(sha(b),output.sha256,'Derivative hash: '+output.src);
-      assert.equal(b.length,output.bytes);assert(b.length<=500_000,'500 KB image limit');
+      assert.equal(b.length,output.bytes);assert(b.length<=(output.src.endsWith('.jpg')?300_000:500_000),'500 KB image limit (300 KB for share JPEGs)');
       assert.deepEqual(dimensions(b,output.src),[output.width,output.height]);
       assert(provenance.includes(output.sha256),'Derivative missing from provenance');
       outputs.set(output.src,output);
@@ -50,8 +61,8 @@ export async function checkImageOutputs(paths) {
   }
   const config=JSON.parse(await readFile(join(root,'dist/data/store.json'),'utf8'));
   const products=JSON.parse(await readFile(join(root,'dist/data/products.json'),'utf8'));
-  const heroSrcs=config.hero?[...config.hero.portrait,...config.hero.landscape].map(v=>v.src):[];
-  const referenced=new Set([config.logo,...(config.logoVariants||[]).map(v=>v.src),...heroSrcs,...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src),...(p.gallery||[]).flatMap(g=>g.variants.map(v=>v.src))])].filter(Boolean));
+  const heroSrcs=config.hero?[...config.hero.portrait,...config.hero.landscape,...(config.hero.share?[config.hero.share]:[])].map(v=>v.src):[];
+  const referenced=new Set([config.logo,...(config.logoVariants||[]).map(v=>v.src),...heroSrcs,...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src),...(p.gallery||[]).flatMap(g=>g.variants.map(v=>v.src)),p.shareImage?.src])].filter(Boolean));
   const shipped=(await readdir(join(root,'dist/assets'))).map(name=>'/assets/'+name);
   assert.deepEqual([...shipped].sort(),[...referenced].sort(),'Only referenced derivatives belong in dist/');
   for(const src of shipped) {
@@ -79,6 +90,11 @@ export async function checkImageOutputs(paths) {
       ceiling+=Math.max(...candidates.map(src=>outputs.get(src).bytes));
     }
     assert(ceiling<=1_500_000,'Conservative page image budget: '+path);
+    for(const [,url] of html.matchAll(/<meta property="og:image" content="([^"]+)"/g)) {
+      const share=outputs.get(new URL(url).pathname);
+      assert(share&&share.src.endsWith('.jpg')&&referenced.has(share.src),'og:image is a shipped JPEG: '+path);
+      assert(html.includes('og:image:width" content="'+share.width+'"')&&html.includes('og:image:height" content="'+share.height+'"'),'og:image dimensions: '+path);
+    }
     report.pages.push({path,conservativeImageBytes:ceiling});
   }
   await mkdir(join(root,'test-results'),{recursive:true});

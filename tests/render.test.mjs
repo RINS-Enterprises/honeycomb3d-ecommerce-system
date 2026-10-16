@@ -86,7 +86,7 @@ test('pages carry share metadata, theme colour, touch icon and price-only Produc
   const leaf=visible.find(p=>p.id==='HC-LEAF');
   const html=detail(leaf,visible,store);
   assert.match(html,/<meta name="description" content="A Hidden Leaf design for your keyring\./);
-  assert.match(html,/<meta property="og:image" content="https:\/\/honeycomb3d\.store\/assets\/hidden-leaf-sq-1200\.webp">/);
+  assert.match(html,/<meta property="og:image" content="https:\/\/honeycomb3d\.store\/assets\/hidden-leaf-share\.jpg">/);
   assert.match(html,/<meta name="twitter:card" content="summary_large_image">/);
   assert.match(html,/<meta name="theme-color" content="#0c0b0a">/);
   assert.match(html,/<link rel="apple-touch-icon" href="\/apple-touch-icon\.png">/);

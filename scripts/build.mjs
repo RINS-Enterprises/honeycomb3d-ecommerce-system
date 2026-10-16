@@ -15,7 +15,7 @@ for(const product of products) {
   if(product.image)await access(join(root,'public',product.image));
 }
 // The hero (and its share image) is used only when its product is visible, so pages never reference unshipped files.
-const heroVariants=store.hero&&products.some(p=>p.id===store.hero.product)?[...store.hero.portrait,...store.hero.landscape]:[];
+const heroVariants=store.hero&&products.some(p=>p.id===store.hero.product)?[...store.hero.portrait,...store.hero.landscape,...(store.hero.share?[store.hero.share]:[])]:[];
 const site={...store,hero:heroVariants.length?store.hero:null};
 await rm(dist,{recursive:true,force:true});
 await mkdir(dist,{recursive:true});
@@ -31,7 +31,7 @@ await page('404.html',layout('Page not found','<section class="wrap section narr
 for(const p of products)await page('products/'+p.slug+'/index.html',detail(p,products,site));
 for(const name of ['app.mjs','domain.mjs','styles.css'])await copyFile(join(root,'src',name),join(dist,name));
 // Copy only explicitly referenced derivatives. Source images and unused assets never ship.
-const assets=new Set([store.logo,...(store.logoVariants||[]).map(v=>v.src),...heroVariants.map(v=>v.src),...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src),...(p.gallery||[]).flatMap(g=>g.variants.map(v=>v.src))])].filter(Boolean));
+const assets=new Set([store.logo,...(store.logoVariants||[]).map(v=>v.src),...heroVariants.map(v=>v.src),...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src),...(p.gallery||[]).flatMap(g=>g.variants.map(v=>v.src)),p.shareImage?.src])].filter(Boolean));
 await mkdir(join(dist,'assets'),{recursive:true});
 for(const asset of assets) {
   if(!/^\/assets\/[a-zA-Z0-9_-]+\.(?:png|jpg|jpeg|webp|svg)$/.test(asset))throw new Error('Invalid public derivative: '+asset);

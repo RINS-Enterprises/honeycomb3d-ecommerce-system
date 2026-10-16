@@ -44,7 +44,7 @@ function footer(store) {
 const DEFAULT_DESCRIPTION = 'Explore HoneyComb 3D collectibles and custom prints. Request a quote and confirm the details before ordering.';
 const absolute = (store, path) => (store.siteUrl || '').replace(/\/$/, '') + path;
 function socialMeta(title, store, {description=DEFAULT_DESCRIPTION, path='/', image, imageAlt, imageWidth, imageHeight}={}) {
-  const fallback = store.hero?.landscape?.find(v=>v.width===1280);
+  const fallback = store.hero?.share;
   if (!image && fallback) ({src:image, width:imageWidth, height:imageHeight} = fallback), imageAlt = 'HoneyComb 3D Night Fury keychain held between two fingers';
   const tags = [['description',description]].map(([n,c])=>'<meta name="'+n+'" content="'+e(c)+'">').join('') +
     '<meta property="og:site_name" content="HoneyComb 3D"><meta property="og:type" content="website"><meta property="og:title" content="'+e(title)+'"><meta property="og:description" content="'+e(description)+'">' +
@@ -129,7 +129,8 @@ export function detail(p,products,store) {
   const themes=(p.tags||[]).filter(t=>t!==p.category);
   if(themes.length)facts.splice(1,0,['Themes',themes.map(e).join(', ')]);
   const more=products.filter(x=>x.id!==p.id).slice(0,4);
-  const share=p.imageVariants?.at(-1)||{src:p.image,width:p.imageWidth,height:p.imageHeight};
+  // JPEG link preview (WhatsApp and other crawlers that skip WebP).
+  const share=p.shareImage||{};
   // Structured data: name, photos and the LKR price only (no availability, ratings or reviews).
   const ld={'@context':'https://schema.org','@type':'Product',name:p.name,image:gallerySlides(p).map(g=>absolute(store,(g.variants.at(-1)||g).src)),...(p.priceLkr===null?{}:{offers:{'@type':'Offer',price:String(p.priceLkr),priceCurrency:'LKR'}})};
   const head='<script type="application/ld+json">'+JSON.stringify(ld).replace(/</g,'\\u003c')+'</script>';

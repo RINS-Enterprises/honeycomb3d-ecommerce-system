@@ -34,6 +34,7 @@ export function validateData(products, store) {
         if (!g.alt || !Array.isArray(g.variants) || !g.variants.some(v=>v.src===g.src && v.width===g.width && v.height===g.height) || g.variants.some(v=>!/^\/assets\/[a-zA-Z0-9/_-]+\.webp$/.test(v.src))) throw new Error('Invalid gallery image: '+p.id);
       }
     }
+    if (p.shareImage !== undefined && (!/^\/assets\/[a-zA-Z0-9_-]+\.jpg$/.test(p.shareImage.src) || !Number.isInteger(p.shareImage.width) || !Number.isInteger(p.shareImage.height))) throw new Error('Invalid share image: '+p.id);
     if (typeof p.approved !== 'boolean') throw new Error('Missing approval state');
     if (store.mode === 'live' && p.approved && (!p.image || p.availability === 'unconfirmed')) throw new Error(`Approved live product needs an original photo and confirmed availability: ${p.id}`);
   }

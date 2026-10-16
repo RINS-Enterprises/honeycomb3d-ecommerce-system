@@ -129,7 +129,12 @@
           }
         ]
       }
-    ]
+    ],
+    "shareImage": {
+      "src": "/assets/hidden-leaf-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
   },
   {
     "id": "HC-BAYMAX",
@@ -194,7 +199,12 @@
     "imageHeight": 640,
     "imageSource": "HNYCMB504 (1).png",
     "imageApprovedAt": "2026-10-11",
-    "gallery": []
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/baymax-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
   },
   {
     "id": "HC-KURAMA",
@@ -291,7 +301,12 @@
     "imageHeight": 640,
     "imageSource": "20260301_152139.jpg",
     "imageApprovedAt": "2026-10-11",
-    "gallery": []
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/night-fury-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
   },
   {
     "id": "HC-MINATO",
@@ -471,7 +486,12 @@
           }
         ]
       }
-    ]
+    ],
+    "shareImage": {
+      "src": "/assets/minato-kunai-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
   },
   {
     "id": "HC-LIGHTFURY",
@@ -538,7 +558,12 @@
     "imageHeight": 640,
     "imageSource": "Variation 1 (2).jpg",
     "imageApprovedAt": "2026-10-11",
-    "gallery": []
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/light-fury-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
   },
   {
     "id": "HC-KUNAI",
