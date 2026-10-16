@@ -128,7 +128,11 @@ export function detail(p,products,store) {
   const facts=[['Category',e(p.category)],['Price',e(price(p))],['Availability',availability(p)],['Reference',e(p.id)]];
   const themes=(p.tags||[]).filter(t=>t!==p.category);
   if(themes.length)facts.splice(1,0,['Themes',themes.map(e).join(', ')]);
-  const more=products.filter(x=>x.id!==p.id).slice(0,4);
+  // Same category first, then shared themes, then the rest; catalogue order breaks ties.
+  const themesOf=x=>new Set((x.tags||[]).filter(t=>t!==x.category));
+  const mine=themesOf(p);
+  const score=x=>(x.category===p.category?2:0)+([...themesOf(x)].some(t=>mine.has(t))?1:0);
+  const more=products.filter(x=>x.id!==p.id).map((x,i)=>({x,i,s:score(x)})).sort((a,b)=>b.s-a.s||a.i-b.i).slice(0,4).map(o=>o.x);
   // JPEG link preview (WhatsApp and other crawlers that skip WebP).
   const share=p.shareImage||{};
   // Structured data: name, photos and the LKR price only (no availability, ratings or reviews).

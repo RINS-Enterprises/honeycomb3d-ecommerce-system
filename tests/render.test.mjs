@@ -95,3 +95,13 @@ test('pages carry share metadata, theme colour, touch icon and price-only Produc
   assert.deepEqual(ld.offers,{'@type':'Offer',price:'400',priceCurrency:'LKR'});
   assert(!/availability|rating|review/i.test(JSON.stringify(ld)));
 });
+
+test('"More from HoneyComb 3D" puts the same category and shared themes first',async()=>{
+  const {detail}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const html=detail(visible.find(p=>p.id==='HC-MINATO'),visible,store);
+  const more=html.slice(html.indexOf('More from HoneyComb 3D'));
+  const names=[...more.matchAll(/class="card-link" href="[^"]+">([^<]+)</g)].map(m=>m[1]);
+  assert.equal(names[0],'Classic Kunai','Same category first');
+  assert(names.slice(1,3).every(n=>['Hidden Leaf Keychain','Kurama Figure'].includes(n)),'Then shared Naruto theme: '+names);
+});
