@@ -139,14 +139,21 @@ function addToCart(product,quantity) {
   if(!existing&&cart.length>=MAX_LINES){announce('Your request is full. Remove an item before adding another.');return false;}
   if((existing?.quantity||0)+quantity>MAX_QUANTITY){announce('You can request up to '+MAX_QUANTITY+' of this design. Adjust the quantity in your cart.');return false;}
   if(existing)existing.quantity+=quantity;else cart.push({id:product.id,quantity});
-  announce(product.name+' added to your request cart.');saveCart();return true;
+  announce(product.name+' added to your request cart.');saveCart();
+  document.dispatchEvent(new CustomEvent('cart:change',{detail:{id:product.id}}));return true;
+}
+// Quick add is delegated so cards rendered later (recently viewed, empty-cart picks) work too.
+function armQuickAdd(root=document) {
+  root.querySelectorAll('[data-quick-add]').forEach(button=>{
+    const product=products.find(p=>p.id===button.dataset.quickAdd);
+    if(product&&product.availability!=='unavailable')button.hidden=false;
+  });
 }
 function initQuickAdd() {
-  document.querySelectorAll('[data-quick-add]').forEach(button=>{
-    const product=products.find(p=>p.id===button.dataset.quickAdd);
-    if(!product||product.availability==='unavailable')return;
-    button.hidden=false;
-    button.addEventListener('click',()=>{if(addToCart(product,1)){button.classList.remove('is-added');void button.offsetWidth;button.classList.add('is-added');}});
+  armQuickAdd();
+  document.addEventListener('click',event=>{
+    const button=event.target.closest('[data-quick-add]');if(!button||button.hidden)return;
+    if(addToCart(products.find(p=>p.id===button.dataset.quickAdd),1)){button.classList.remove('is-added');void button.offsetWidth;button.classList.add('is-added');}
   });
 }
 function initAdd() {
@@ -168,6 +175,12 @@ function initCart() {
     const s=cartSummary(cart,products);
     if(!s.lines.length) {
       root.innerHTML='<div class="empty state-panel"><div class="state-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></div><h2>Your cart is empty</h2><p>Find a design you like and add it to start a request.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/custom/">Start a custom enquiry</a></div></div>';
+      // Nothing in the cart and no recently viewed row: offer a few designs to start from.
+      const recent=document.querySelector('[data-recent]');
+      if((!recent||recent.hidden)&&products.length){
+        root.insertAdjacentHTML('beforeend','<section class="empty-picks" aria-labelledby="picks-title" data-testid="cart-picks"><div class="section-heading"><h2 id="picks-title">A few to start with</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+products.filter(p=>p.availability!=='unavailable').slice(0,4).map(p=>card(p)).join('')+'</div></section>');
+        armQuickAdd(root);reveal(root);
+      }
       if(focusKey)root.querySelector('a').focus();return;
     }
     const hasPriced=s.lines.some(x=>x.product.priceLkr!==null);
@@ -195,6 +208,7 @@ function initCart() {
       root.querySelector('#order-handoff').innerHTML=handoff(orderMessage(cart,products,notes));
     });
   }
+  document.addEventListener('cart:change',event=>render(event.detail.id));
   root.addEventListener('change',event=>{
     const input=event.target.closest('[data-quantity]');if(!input)return;
     const item=cart.find(x=>x.id===input.dataset.quantity);

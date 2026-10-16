@@ -152,7 +152,7 @@ em{color:var(--accent);font-style:normal}
 .category-arrow{position:absolute;right:var(--space-5);bottom:var(--space-5);z-index:1;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(246,241,232,.14);color:var(--text);font-weight:700;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .category-tile:hover .category-arrow{background:var(--accent);color:var(--on-accent)}
 .category-tile:hover{color:var(--text)}
-.featured-section{padding-top:0}
+.featured-section,.how-it-works{padding-top:0}
 .banner-wrap{padding-block:var(--space-5)}
 .custom-banner{position:relative;overflow:hidden;background:var(--accent);color:var(--on-accent);border-radius:var(--radius-lg);padding:clamp(28px,5vw,56px)}
 .custom-banner::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:320px;background:rgba(22,17,10,.07);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);pointer-events:none}
@@ -261,6 +261,7 @@ textarea{resize:vertical;line-height:1.5}
 .detail-facts dd{margin:0;color:var(--text-soft)}
 .more-section{border-top:1px solid var(--line)}
 .recent-section{border-top:1px solid var(--line)}
+.empty-picks{margin-top:var(--space-8)}
 .recent-section .section-heading{display:flex;align-items:center}
 .recent-section .section-heading .text-button{margin:0;white-space:nowrap}
 @media(min-width:701px){.detail-info{position:sticky;top:calc(var(--header-h) + 24px)}}

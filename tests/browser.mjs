@@ -71,6 +71,15 @@ try {
   await still.close();
   // Recently viewed: newest first, never the current product, hidden when empty or when storage is blocked.
   await page.evaluate(()=>localStorage.clear());
+  // Empty cart with no history offers a few designs; quick add from there fills the cart in place.
+  await page.goto('http://127.0.0.1:4173/cart/');
+  await page.getByTestId('cart-picks').waitFor();
+  assert.equal(await page.getByTestId('cart-picks').getByTestId('product-card').count(),4);
+  await page.getByTestId('cart-picks').getByTestId('quick-add').first().click();
+  await page.getByTestId('cart-line').waitFor();
+  assert.equal(await page.getByTestId('cart-picks').count(),0,'Picks go once the cart has a line');
+  assert.equal(await page.evaluate(()=>document.activeElement?.dataset.quantity),'HC-LEAF','Focus lands on the new line');
+  await page.evaluate(()=>localStorage.clear());
   await page.goto('http://127.0.0.1:4173/products/baymax-figure/');
   await page.waitForFunction(()=>localStorage.getItem('honeycomb-recent-v1')!==null);
   assert.equal(await page.getByTestId('recently-viewed').isHidden(),true,'Empty history stays hidden');
