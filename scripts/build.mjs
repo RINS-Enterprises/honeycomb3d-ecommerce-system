@@ -45,5 +45,8 @@ await mkdir(join(dist,'data'),{recursive:true});
 // Approval stays in the payload for client-side live filtering. Recovery and copy-workflow metadata do not.
 await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,copyStatus,imageSource,priceSource,imageApprovedAt,imageStatus,...p})=>({...p,source:'Public catalog'}))));
 await writeFile(join(dist,'data/store.json'),JSON.stringify({name:store.name,currency:store.currency,country:store.country,mode:store.mode,whatsappNumber:store.whatsappVerified?store.whatsappNumber:null,whatsappVerified:store.whatsappVerified,logo:store.logo,logoWidth:store.logoWidth,logoHeight:store.logoHeight,logoVariants:store.logoVariants,hero:heroVariants.length?store.hero:null}));
-await writeFile(join(dist,'robots.txt'),store.mode==='preview'?'User-agent: *\nDisallow: /\n':'User-agent: *\nAllow: /\n');
+// Preview: search engines stay out (with noindex on every page), but link-preview crawlers may fetch
+// pages and share images so shared links show a card. WhatsApp builds previews on the sender's phone.
+const PREVIEW_BOTS=['Twitterbot','facebookexternalhit','Facebot','LinkedInBot','Slackbot','Slackbot-LinkExpanding','TelegramBot','Discordbot','WhatsApp'];
+await writeFile(join(dist,'robots.txt'),store.mode==='preview'?PREVIEW_BOTS.map(bot=>'User-agent: '+bot+'\nAllow: /\n').join('\n')+'\nUser-agent: *\nDisallow: /\n':'User-agent: *\nAllow: /\n');
 console.log('Built '+(products.length+6)+' static pages into dist/ ('+store.mode+' mode).');

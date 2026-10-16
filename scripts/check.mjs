@@ -31,6 +31,13 @@ for(const path of paths) {
   }
 }
 await checkImageOutputs(paths);
+if(store.mode==='preview') {
+  const robots=await readFile(join(root,'dist/robots.txt'),'utf8');
+  assert.match(robots,/User-agent: \*\nDisallow: \/\n$/,'Search engines stay out in preview');
+  for(const bot of ['Twitterbot','facebookexternalhit','LinkedInBot','Slackbot','TelegramBot','Discordbot'])assert.match(robots,new RegExp('User-agent: '+bot+'\nAllow: /'),'Link-preview crawler allowed: '+bot);
+  for(const path of paths)assert.match(await readFile(join(root,'dist',path),'utf8'),/<meta name="robots" content="noindex,nofollow">/,'noindex in preview: '+path);
+  assert(!(await readdir(join(root,'dist'))).includes('sitemap.xml'),'No sitemap until the owner decides on indexing');
+}
 // Self-hosted heading font: hash matches its provenance record, licence ships with it, total stays under ~100 KB.
 const fontRecord=JSON.parse(await readFile(join(root,'assets/font.json'),'utf8'));
 const fontBytes=await readFile(join(root,'dist',fontRecord.output));
