@@ -102,7 +102,7 @@ function initRecent() {
   if(!shown.length)return;
   section.querySelector('[data-recent-list]').innerHTML=shown.map(p=>card(p)).join('');
   section.hidden=false;
-  reveal(section);
+  reveal(section);armAltPhotos(section);
   section.querySelector('[data-recent-clear]').addEventListener('click',()=>{
     try{storage.setItem(RECENT_KEY,JSON.stringify(current?[current]:[]));}catch{}
     section.hidden=true;announce('Recently viewed list cleared.');
@@ -133,6 +133,26 @@ function initReveal() {
     });
   },{rootMargin:'0px 0px -6% 0px'});
   reveal();
+}
+// Card hover photo: on hover-capable devices, cards with a gallery cross-fade to their second photo.
+// The <img> is created only when the card nears the viewport or is first hovered.
+let altLoader=null;
+function loadAltPhoto(frame) {
+  if(frame.dataset.altLoaded)return;frame.dataset.altLoaded='1';altLoader?.unobserve(frame);
+  const img=new Image();img.className='card-alt';img.alt='';img.decoding='async';
+  img.sizes=frame.querySelector('img')?.sizes||'';img.srcset=frame.dataset.altSrcset;img.src=frame.dataset.altSrc;
+  img.width=640;img.height=640;
+  img.addEventListener('load',()=>frame.classList.add('has-alt'),{once:true});
+  frame.append(img);
+}
+function armAltPhotos(root=document) {
+  if(!matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches)return;
+  if(!altLoader&&'IntersectionObserver' in window)altLoader=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting)loadAltPhoto(x.target);}),{rootMargin:'200px 0px'});
+  root.querySelectorAll('[data-alt-srcset]:not([data-alt-armed])').forEach(frame=>{
+    frame.dataset.altArmed='1';
+    frame.closest('.product-card')?.addEventListener('pointerenter',()=>loadAltPhoto(frame),{once:true});
+    altLoader?.observe(frame);
+  });
 }
 // Shared by the product page form and the cards' quick-add buttons.
 function addToCart(product,quantity) {
@@ -181,7 +201,7 @@ function initCart() {
       const recent=document.querySelector('[data-recent]');
       if((!recent||recent.hidden)&&products.length){
         root.insertAdjacentHTML('beforeend','<section class="empty-picks" aria-labelledby="picks-title" data-testid="cart-picks"><div class="section-heading"><h2 id="picks-title">A few to start with</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+products.filter(p=>p.availability!=='unavailable').slice(0,4).map(p=>card(p)).join('')+'</div></section>');
-        armQuickAdd(root);reveal(root);
+        armQuickAdd(root);reveal(root);armAltPhotos(root);
       }
       if(focusKey)root.querySelector('a').focus();return;
     }
@@ -335,7 +355,7 @@ function initChipFades() {
     row.addEventListener('scroll',update,{passive:true});addEventListener('resize',update);update();
   });
 }
-initHeader();initChipFades();initFilters();initGallery();initShare();initLightbox();initStickyBuy();initReveal();
+initHeader();initChipFades();armAltPhotos();initFilters();initGallery();initShare();initLightbox();initStickyBuy();initReveal();
 try {
   const responses=await Promise.all([fetch('/data/products.json'),fetch('/data/store.json')]);
   if(responses.some(r=>!r.ok))throw new Error('Data unavailable');

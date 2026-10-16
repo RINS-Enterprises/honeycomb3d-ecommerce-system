@@ -9,11 +9,16 @@ export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}
     ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'"' : '';
   return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'"'+(priority?' fetchpriority="high"':'')+'>';
 }
+// Second gallery photo for the hover cross-fade; the browser builds the <img> lazily (decorative, alt="").
+function altPhoto(p) {
+  const g=p.gallery?.[0];if(!g?.variants?.length)return '';
+  return ' data-alt-srcset="'+e(g.variants.map(v=>v.src+' '+v.width+'w').join(', '))+'" data-alt-src="'+e(g.src)+'"';
+}
 export function card(p, {headingLevel=3, loading='lazy'}={}) {
   const heading=headingLevel===2?'h2':'h3';
   // One link per card; its ::after stretches over the whole card so the photo is clickable too.
   return '<article class="product-card" data-product-card data-testid="product-card" data-category="' + e(p.category) + '" data-search="' + e([p.name,p.category,...p.tags].join(' ').toLowerCase()) + '" data-tags="' + e(p.tags.join('|')) + '" data-name="' + e(p.name) + '" data-price="' + (p.priceLkr===null?'':p.priceLkr) + '">' +
-    '<div class="product-image">' + picture(p,{loading}) + '</div>' +
+    '<div class="product-image"' + altPhoto(p) + '>' + picture(p,{loading}) + '</div>' +
     '<div class="card-copy"><p class="eyebrow">' + e(p.category) + '</p><'+heading+'><a class="card-link" href="/products/' + e(p.slug) + '/">' + e(p.name) + '</a></'+heading+'><p class="price" data-testid="product-price">' + e(price(p)) + '</p><div class="card-foot"><p class="card-status">' + availability(p) + '</p>' +
     (p.availability==='unavailable'?'':'<button type="button" class="quick-add" data-quick-add="' + e(p.id) + '" data-testid="quick-add" aria-label="Add ' + e(p.name) + ' to request cart" hidden><span aria-hidden="true">+</span> Add</button>') + '</div></div></article>';
 }

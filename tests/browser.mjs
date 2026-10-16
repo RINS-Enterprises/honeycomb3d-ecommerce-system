@@ -52,6 +52,21 @@ try {
   await page.goBack();
   await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===7);
   assert.equal(await page.getByRole('radio',{name:'Any theme'}).isChecked(),true,'Back restores the previous filter');
+  // Hover photo: gallery products get a decorative second photo, loaded lazily; size never changes.
+  const leafCard=page.locator('[data-product-card]').filter({hasText:'Hidden Leaf Keychain'});
+  await leafCard.locator('.has-alt .card-alt').waitFor({state:'attached'});
+  assert.equal(await leafCard.locator('.card-alt').getAttribute('alt'),'');
+  assert.equal(await page.locator('[data-product-card]').filter({hasText:'Baymax Figure'}).locator('.card-alt').count(),0,'No gallery, no hover photo');
+  const before=await leafCard.boundingBox();
+  await leafCard.hover();
+  await page.waitForFunction(()=>getComputedStyle(document.querySelector('.has-alt .card-alt')).opacity==='1');
+  const after=await leafCard.boundingBox();
+  assert.equal(Math.round(after.height),Math.round(before.height),'Hover photo does not resize the card');
+  await page.mouse.move(0,0);
+  const touch=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+  await touch.goto('http://127.0.0.1:4173/shop/');await touch.waitForLoadState('networkidle');
+  assert.equal(await touch.locator('.card-alt').count(),0,'No hover photo without hover');
+  await touch.close();
   const kuramaCard=page.locator('[data-product-card]').filter({hasText:'Kurama Figure'});
   await kuramaCard.getByTestId('quick-add').click();
   await page.getByRole('status').filter({hasText:'Kurama Figure added to your request cart.'}).waitFor();
