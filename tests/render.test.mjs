@@ -178,3 +178,14 @@ test('the related row links to the rest of the category, or the collection when 
   const single=visible.find(p=>visible.filter(x=>x.category===p.category).length===1);
   if(single)assert.match(detail(single,visible,store),/<h2>More from HoneyComb 3D<\/h2><a href="\/shop\/">View collection →<\/a>/);
 });
+
+test('home lists up to eight themes, largest first, linking to the filtered shop',async()=>{
+  const visible=visibleProducts(products,store);
+  const html=home(visible,store);
+  const row=html.match(/<div class="theme-row" data-testid="home-themes">.*?<\/div><\/div>/)[0];
+  const links=[...row.matchAll(/href="\/shop\/\?theme=([^"]+)">([^<]+)<span class="chip-count"><span class="sr-only">, <\/span>(\d+)/g)].map(m=>({t:decodeURIComponent(m[1]),n:+m[3]}));
+  assert(links.length>0&&links.length<=8);
+  for(const {t,n} of links)assert.equal(n,visible.filter(p=>p.tags.includes(t)).length,t);
+  assert(links.every((l,i)=>!i||links[i-1].n>=l.n),'Largest first');
+});
+

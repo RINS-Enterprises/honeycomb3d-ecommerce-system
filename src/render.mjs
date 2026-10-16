@@ -58,6 +58,11 @@ const preload=(variants,media)=>variants.every(v=>v.avif)?
   '<link rel="preload" as="image" imagesrcset="'+e(srcset(variants))+'" imagesizes="100vw" media="'+media+'" fetchpriority="high">';
 export function home(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];
+  // Themes as a second way in: the largest first (ties keep catalogue order), each with its design count.
+  const themeCounts=[...new Set(products.flatMap(p=>p.tags))].filter(t=>!categories.includes(t))
+    .map((t,i)=>({t,i,n:products.filter(p=>p.tags.includes(t)).length})).sort((a,b)=>b.n-a.n||a.i-b.i).slice(0,8);
+  const themeRow=themeCounts.length?'<div class="theme-row" data-testid="home-themes"><p class="theme-row-label">Or shop by theme</p><div class="try-chips theme-links">'+
+    themeCounts.map(({t,n})=>'<a class="try-chip" href="/shop/?theme='+encodeURIComponent(t)+'">'+e(t)+'<span class="chip-count"><span class="sr-only">, </span>'+n+'</span></a>').join('')+'</div></div>':'';
   const featured=store.hero&&products.find(p=>p.id===store.hero.product&&p.image);
   // The LCP photo: preloaded per art-directed frame, eager, high priority.
   const fallback=featured&&(store.hero.portrait.find(v=>v.width===960)||store.hero.portrait.at(-1));
@@ -78,7 +83,7 @@ export function home(products,store) {
       const inCategory=products.filter(p=>p.category===c), cover=inCategory.at(-1);
       const count=inCategory.length+' '+(inCategory.length===1?'design':'designs');
       return '<a class="category-tile'+(centre?' is-centred':'')+'" href="/shop/?category='+encodeURIComponent(c)+'" aria-label="'+e(c)+', '+count+'"><span class="category-photo">'+picture(cover,{sizes:TILE_SIZES})+'</span><span class="category-copy"><strong>'+e(c)+'</strong><span>'+count+'</span></span><span class="category-arrow" aria-hidden="true">→</span></a>';
-    }).join('') + '</div></section>':'') +
+    }).join('') + '</div>'+themeRow+'</section>':'') +
     '<section class="wrap section featured-section" aria-labelledby="featured-title"><div class="section-heading"><div><p class="eyebrow">THE COLLECTION</p><h2 id="featured-title">Small objects. Big character.</h2></div><a href="/shop/">View collection →</a></div>' +
     '<div class="product-grid">' + products.slice(0,4).map(p=>card(p)).join('') + (products.length?'':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</div></section>' +
     '<section class="wrap section how-it-works" aria-labelledby="how-title" data-testid="how-it-works"><div class="section-heading"><div><p class="eyebrow">HOW IT WORKS</p><h2 id="how-title">From favourite to yours</h2></div></div><ol class="how-steps">' +

@@ -481,3 +481,9 @@ a,button,.button,input,select,textarea{transition:color var(--dur) var(--ease),b
 .try-chip{display:inline-flex;align-items:center;min-height:40px;padding:8px 16px;border-radius:var(--radius-pill);border:1px solid var(--line-strong);background:var(--panel-2);color:var(--text-soft);font:inherit;font-size:var(--step--1);font-weight:600;cursor:pointer}
 .try-chip:hover{border-color:var(--accent);color:var(--text)}
 .try-chip:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+/* Home: themes under the category tiles */
+.theme-row{margin-top:var(--space-6);display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3) var(--space-4)}
+.theme-row-label{margin:0;font-size:var(--step--1);color:var(--muted);font-weight:600}
+.theme-links{justify-content:flex-start}
+a.try-chip{text-decoration:none}
+
