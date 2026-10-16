@@ -1,0 +1,8 @@
+PASS    xss-params             search box shows text; no injected img; category=all
+PASS    url-restore-combined   ["Night Fury Keychain","Light Fury Keychain"]
+PASS    tampered-storage       ["HC-LEAF=20"]
+PASS    add-over-max           You can request up to 20 of this design. Adjust the quantity in your cart.
+PASS    notes-escaping         notes rendered as text
+PASS    storage-blocked        Your cart works for this page, but this browser could not save it. Keep this page open to copy your request. errors:0
+PASS    card-tab-stops         5 focusable links for 5 cards
+PASS    page-errors            none
