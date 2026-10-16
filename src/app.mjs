@@ -45,7 +45,8 @@ function initFilters() {
     'price-desc':(a,b)=>(b.dataset.price===''?-Infinity:+b.dataset.price)-(a.dataset.price===''?-Infinity:+a.dataset.price)||a.dataset.order-b.dataset.order,
     name:(a,b)=>a.dataset.name.localeCompare(b.dataset.name,'en')||a.dataset.order-b.dataset.order,
   };
-  function applySort(){const order=SORTS[sort?.value]||SORTS.featured;grid.append(...cards.slice().sort(order));}
+  const tile=grid.querySelector('[data-grid-cta]');
+  function applySort(){const order=SORTS[sort?.value]||SORTS.featured;grid.append(...cards.slice().sort(order));if(tile)grid.append(tile);}
   const choice=name=>form.elements[name]?.value;
   const set=(name,value)=>{const group=form.elements[name];if(!group)return;const fallback=group[0]?.value??group.value;
     group.value=[...(group.length?group:[group])].some(x=>x.value===value)?value:fallback;};
@@ -65,6 +66,7 @@ function initFilters() {
     });
     document.querySelector('#result-count').textContent=count+' '+(count===1?'design':'designs');
     document.querySelector('#no-results').hidden=count>0;
+    if(tile)tile.hidden=count===0;
     const active=words.length>0||category!=='all'||theme!=='any';
     reset.hidden=!active;
     if(history) {
@@ -108,7 +110,7 @@ function initRecent() {
 }
 // Reveal: content below the first screen fades up 8px the first time it scrolls into view.
 // Transform and opacity only (no layout shift); skipped under reduced motion or without IntersectionObserver.
-const REVEAL='.product-card,.category-tile,.how-steps>li,.section-heading,.custom-banner,.studio-strip>*';
+const REVEAL='.product-card,.grid-cta,.category-tile,.how-steps>li,.section-heading,.custom-banner,.studio-strip>*';
 let revealer=null;
 function reveal(root=document) {
   if(!revealer)return;
@@ -326,7 +328,14 @@ function initHeader() {
   const update=()=>header.classList.toggle('is-scrolled',scrollY>8);
   addEventListener('scroll',update,{passive:true});update();
 }
-initHeader();initFilters();initGallery();initShare();initLightbox();initStickyBuy();initReveal();
+// Scrollable chip rows fade at whichever edge has more chips beyond it.
+function initChipFades() {
+  document.querySelectorAll('.chips').forEach(row=>{
+    const update=()=>{const max=row.scrollWidth-row.clientWidth;row.classList.toggle('fade-start',row.scrollLeft>2);row.classList.toggle('fade-end',max>2&&row.scrollLeft<max-2);};
+    row.addEventListener('scroll',update,{passive:true});addEventListener('resize',update);update();
+  });
+}
+initHeader();initChipFades();initFilters();initGallery();initShare();initLightbox();initStickyBuy();initReveal();
 try {
   const responses=await Promise.all([fetch('/data/products.json'),fetch('/data/store.json')]);
   if(responses.some(r=>!r.ok))throw new Error('Data unavailable');

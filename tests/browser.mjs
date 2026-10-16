@@ -39,6 +39,7 @@ try {
   await screenshot('test-results/shop-desktop.png');
   await page.getByRole('searchbox').fill('no-match-here');
   await page.waitForFunction(()=>document.querySelector('#no-results').hidden===false);
+  assert.equal(await page.getByTestId('shop-custom-tile').isHidden(),true,'No results: the empty state carries the custom link instead');
   await page.getByRole('button',{name:'Clear filters'}).click();
   assert.equal(await page.getByRole('button',{name:'Clear filters'}).isHidden(),true,'Clear filters only shows for active filters');
   await page.getByTestId('filter-figures').click();
@@ -116,6 +117,7 @@ try {
   assert.deepEqual(await page.locator('[data-product-card]:visible .card-link').allTextContents(),['Night Fury Keychain','Light Fury Keychain','Hidden Leaf Keychain'],'Sort works with category chips');
   await page.getByTestId('sort').selectOption('name');
   assert.equal(await firstVisible(),'Hidden Leaf Keychain');
+  assert.equal(await page.locator('.product-grid > :last-child').getAttribute('data-testid'),'shop-custom-tile','Custom tile stays last after sorting');
   await page.getByTestId('sort').selectOption('featured');
   await page.getByTestId('filter-all').click();
   await page.getByTestId('filter-figures').click();

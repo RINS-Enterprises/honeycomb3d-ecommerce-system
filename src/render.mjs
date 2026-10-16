@@ -85,6 +85,8 @@ function chips(name, legend, options) {
   return '<fieldset class="chip-group"><legend>'+legend+'</legend><div class="chips">'+options.map(([value,label],i)=>
     '<label class="chip" data-testid="filter-'+slug(value)+'"><input type="radio" name="'+name+'" value="'+e(value)+'"'+(i===0?' checked':'')+'><span>'+e(label)+'</span></label>').join('')+'</div></fieldset>';
 }
+// Last cell of the shop grid: a custom-print prompt that also fills the gap after an odd row.
+const customTile='<a class="grid-cta" href="/custom/" data-grid-cta data-testid="shop-custom-tile"><span class="grid-cta-mark" aria-hidden="true">+</span><span class="eyebrow">CUSTOM PRINTS</span><h2>Don’t see it?</h2><span class="grid-cta-copy">Send a model link or describe your idea. We’ll confirm what’s possible.</span><span class="grid-cta-link">Start a custom enquiry <span aria-hidden="true">→</span></span></a>';
 export function shop(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];
   // Themes come from the tags, minus tags that only repeat a category name.
@@ -95,7 +97,7 @@ export function shop(products,store) {
     (themes.length?chips('theme','Theme',[['any','Any theme'],...themes.map(t=>[t,t])]):'') +
     '</form><div class="results-bar"><p class="muted" role="status" id="result-count">'+products.length+' designs</p><button class="text-button" id="reset-filters" type="button" hidden>Clear filters</button>' +
     '<label class="sort-field">Sort by<select id="sort" name="sort" form="filters" data-testid="sort"><option value="featured">Featured</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name">Name: A to Z</option></select></label></div>' +
-    '<div class="product-grid">'+products.map((p,i)=>card(p,{headingLevel:2,loading:i<2?'eager':'lazy'})).join('')+'</div><div class="empty state-panel" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><div class="actions"><a class="button secondary" href="/custom/">Ask about a custom print</a></div></div><noscript><p>All designs are shown. Enable JavaScript to use search and filters.</p></noscript></section>',store,'shop','',{description:'Explore the designs. Ask about colours, sizes and finishes. 3D-printed keychains, figures and props, priced in LKR.',path:'/shop/'});
+    '<div class="product-grid">'+products.map((p,i)=>card(p,{headingLevel:2,loading:i<2?'eager':'lazy'})).join('')+customTile+'</div><div class="empty state-panel" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><div class="actions"><a class="button secondary" href="/custom/">Ask about a custom print</a></div></div><noscript><p>All designs are shown. Enable JavaScript to use search and filters.</p></noscript></section>',store,'shop','',{description:'Explore the designs. Ask about colours, sizes and finishes. 3D-printed keychains, figures and props, priced in LKR.',path:'/shop/'});
 }
 const SHARE_ICON = '<svg class="icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>';
 // Share a product: the Web Share sheet where available, otherwise WhatsApp's share screen (no number) and copy link.
