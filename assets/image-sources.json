@@ -338,6 +338,86 @@
       }
     },
     {
+      "id": "HC-KURAMA",
+      "stem": "kurama",
+      "input": "assets/photo-sources/kurama.png",
+      "sourceTitle": "1.png",
+      "sourceDriveId": "1wkBiKm7ZUMRYRpHJojCI9YPhv3ePKIXn",
+      "sourceSha256": "d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494",
+      "inputSha256": "c245fbe4383675aedf68570a02299177fe9ef69dadbc33456eb0af35cd4eabcf",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3415,
+        5120
+      ],
+      "cropBox": [
+        487,
+        1228,
+        2937,
+        3876
+      ],
+      "alt": "Orange 3D-printed nine-tailed fox (Kurama) figure with black eye markings, crouching with its tails raised, on a white background",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Shows the whole figure, tail tips to paws, on its white Canva background."
+      },
+      "handoff": "QA branch claude/photo-handoff commit 4cefd25 (kurama-1.png), SHA-256 verified before import; Drive copy in the owner's HoneyComb folder."
+    },
+    {
+      "id": "HC-KUNAI",
+      "stem": "classic-kunai",
+      "input": "assets/photo-sources/classic-kunai.jpg",
+      "sourceTitle": "Copy of RAV_4322.jpg",
+      "sourceDriveId": "1PaOuVcZ82ij2vV2hq08fiFC42_w9iKua",
+      "sourceSha256": "f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722",
+      "inputSha256": "091db23cdc9f942d12aafe1478de6514177b2aa0657da3e30c1ab91f949b602c",
+      "exifOrientation": 1,
+      "sourceSize": [
+        4912,
+        7360
+      ],
+      "cropBox": [
+        627,
+        1370,
+        4205,
+        6142
+      ],
+      "alt": "Black 3D-printed kunai with a white wrapped handle and a black ring, on a light grey backdrop",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Shows the whole kunai, ring to tip, with a margin."
+      },
+      "handoff": "QA branch claude/photo-handoff commit 4cefd25 (classic-kunai-RAV_4322.jpg), SHA-256 verified before import; Drive copy in the owner's HoneyComb folder."
+    },
+    {
       "id": "brand-logo",
       "stem": "honeycomb-logo",
       "input": "assets/photo-sources/honeycomb-logo.png",
@@ -364,20 +444,5 @@
       "output": "/assets/honeycomb-logo-web.png"
     }
   ],
-  "pending": [
-    {
-      "id": "HC-KUNAI",
-      "sourceTitle": "RAV_4322.jpg",
-      "expectedSourceSha256": "f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722",
-      "referenceDriveId": "1mx3YRM6o4CrGZtIl6TX2ZqnG8cacFDQo",
-      "state": "awaiting-owner-copy-into-HoneyComb"
-    },
-    {
-      "id": "HC-KURAMA",
-      "sourceTitle": "1.png",
-      "expectedSourceSha256": "d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494",
-      "referenceDriveId": "1nQvOC8nPm9BNK496GZveJEim2dspvYwN",
-      "state": "awaiting-owner-copy-into-HoneyComb"
-    }
-  ]
+  "pending": []
 }

@@ -25,12 +25,11 @@ test('owner prices preserve storefront IDs, provenance and unconfirmed approval'
     for(const key of ['compareAtPrice','compareAtLkr','stock','stockCount','stockQuantity'])assert.equal(p[key],undefined);
   }
 });
-test('pending owner copies use placeholders; approved photos are responsive square frames with real dimensions',()=>{
+test('every product has an approved photo as responsive square frames with real dimensions',()=>{
   for(const p of products) {
-    if(['HC-KURAMA','HC-KUNAI'].includes(p.id)) {
-      assert.equal(p.image,null);assert.deepEqual(p.imageVariants,[]);
-    } else {
+    {
       assert.match(p.image,/^\/assets\/.+-sq-640\.webp$/);
+      assert.match(p.shareImage.src,/^\/assets\/.+-share\.jpg$/);
       const widths=p.imageVariants.map(v=>v.width);
       assert([320,480,640].every(w=>widths.includes(w)),'Core responsive widths remain available');
       assert(p.imageVariants.every(v=>v.width===v.height),'Storefront frames are square');
@@ -41,8 +40,13 @@ test('pending owner copies use placeholders; approved photos are responsive squa
   assert.match(products.find(p=>p.id==='HC-MINATO').imageAlt,/tan engraved handle/);
   assert(!products.find(p=>p.id==='HC-MINATO').imageAlt.includes('white handle'));
 });
-test('Kurama and Classic Kunai stay off the storefront until their photos are imported',()=>{
+test('Kurama and Classic Kunai return with their imported photos and unchanged data',()=>{
   const shown=visibleProducts(products,{mode:'preview'}).map(p=>p.id);
-  assert(!shown.includes('HC-KURAMA')&&!shown.includes('HC-KUNAI'));
-  assert.equal(shown.length,5);
+  assert(shown.includes('HC-KURAMA')&&shown.includes('HC-KUNAI'));
+  assert.equal(shown.length,7);
+  for(const id of ['HC-KURAMA','HC-KUNAI']) {
+    const p=products.find(x=>x.id===id);
+    assert.equal(p.availability,'unconfirmed');assert.equal(p.approved,false);
+    assert(p.imageAlt.length>20);
+  }
 });

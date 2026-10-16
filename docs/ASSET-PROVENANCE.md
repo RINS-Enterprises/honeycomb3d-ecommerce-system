@@ -184,6 +184,58 @@ The left edge is x=2770, within the required x=2756…2794 bounds. The crop isol
 | `/assets/light-fury-sq-1200.webp` | 1200 | 1200 × 1200 | 36326 | 82 | `13bc15075daccfb24a45c562fcba908cf2b4dc017289bc2f9548d77f26a6ca77` |
 | `/assets/light-fury-share.jpg` | 1200 | 1200 × 1200 | 98869 | JPEG 84 | `5f5606ffc28d374fd73d323a2722a356d9aebdd4ee4255f25f9fe7b77806bf33` |
 
+## HC-KURAMA
+
+- Source title: `1.png`
+- Source Drive ID: `1wkBiKm7ZUMRYRpHJojCI9YPhv3ePKIXn`
+- Drive original SHA-256: `d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494`
+- Metadata-clean source input: `assets/photo-sources/kurama.png`
+- Input SHA-256: `c245fbe4383675aedf68570a02299177fe9ef69dadbc33456eb0af35cd4eabcf`
+- Handoff: QA branch claude/photo-handoff commit 4cefd25 (kurama-1.png), SHA-256 verified before import; Drive copy in the owner's HoneyComb folder. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 3415 × 5120; EXIF orientation 1.
+- Applied crop box after orientation: `(487, 1228, 2937, 3876)`.
+- Square storefront frame: the whole applied crop centred on a 2648 × 2648 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#ffffff`), with a 106 px edge fade. Shows the whole figure, tail tips to paws, on its white Canva background.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/kurama-480.webp` | 480 | 480 × 519 | 15700 | 82 | `d015f554b36069edc56dec09fb18dbc2434329c6a1f6e5e0de7d19ce1dbebc56` |
+| `/assets/kurama-960.webp` | 960 | 960 × 1038 | 36632 | 82 | `54ffe8463ff6dba5ae69bc8f079f76d6755b5982f0b4d68c010d9a8571c9e3b9` |
+| `/assets/kurama-1440.webp` | 1440 | 1440 × 1556 | 60714 | 82 | `f1c01067235f43de0ef79d3c8ef02dd56a9347217d4e1266d76ef20db632d6bf` |
+| `/assets/kurama-sq-160.webp` | 160 | 160 × 160 | 3724 | 82 | `160260fcc2b5b216345e06a040fdb6140066a668f1fb3a2320b8fc8db6bee691` |
+| `/assets/kurama-sq-320.webp` | 320 | 320 × 320 | 8662 | 82 | `8fe39c9487aea459c1e998dfe215a575b399a0524c599b90740a40a02fe9c4fc` |
+| `/assets/kurama-sq-480.webp` | 480 | 480 × 480 | 14288 | 82 | `5ba4cc4d020359dc5a736416529f2eb81eda343c27c08759282c13d7505df349` |
+| `/assets/kurama-sq-640.webp` | 640 | 640 × 640 | 20192 | 82 | `91dd9585f75d7b19941d2902d40dc9aad64afe264d17f27d84fdcdfda0db9a54` |
+| `/assets/kurama-sq-960.webp` | 960 | 960 × 960 | 33118 | 82 | `c40ad6713361f745eee8f178223aaf631b2830e87128fc0ff3576419b12225ba` |
+| `/assets/kurama-sq-1200.webp` | 1200 | 1200 × 1200 | 43602 | 82 | `81c750aba6661de079013390f9fb6e6a0df61cc73a905992dd167a45c1fef3d1` |
+| `/assets/kurama-share.jpg` | 1200 | 1200 × 1200 | 92388 | JPEG 84 | `f09f3fb3759f0d0fb4103c86af7083b6a7999e1210c195a8248201cdf4019ce1` |
+
+## HC-KUNAI
+
+- Source title: `Copy of RAV_4322.jpg`
+- Source Drive ID: `1PaOuVcZ82ij2vV2hq08fiFC42_w9iKua`
+- Drive original SHA-256: `f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722`
+- Metadata-clean source input: `assets/photo-sources/classic-kunai.jpg`
+- Input SHA-256: `091db23cdc9f942d12aafe1478de6514177b2aa0657da3e30c1ab91f949b602c`
+- Handoff: QA branch claude/photo-handoff commit 4cefd25 (classic-kunai-RAV_4322.jpg), SHA-256 verified before import; Drive copy in the owner's HoneyComb folder. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 4912 × 7360; EXIF orientation 1.
+- Applied crop box after orientation: `(627, 1370, 4205, 6142)`.
+- Square storefront frame: the whole applied crop centred on a 4772 × 4772 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#ccc6c8`), with a 191 px edge fade. Shows the whole kunai, ring to tip, with a margin.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/classic-kunai-480.webp` | 480 | 480 × 640 | 5208 | 82 | `8b257a95c1941045c9b83df817f15f3c1441e058a0634fa078ae7d1aa6928519` |
+| `/assets/classic-kunai-960.webp` | 960 | 960 × 1280 | 24286 | 82 | `806ef8226020740e948d744f712445195ab7e357d43c785d776a1547d8170931` |
+| `/assets/classic-kunai-1440.webp` | 1440 | 1440 × 1921 | 78478 | 82 | `e10e91f8d8793d468cf2563ed0475eeeec60499027bf8dc93dfef8ad19d2c519` |
+| `/assets/classic-kunai-sq-160.webp` | 160 | 160 × 160 | 880 | 82 | `36777924393ca8f0034b9166c38e7d39241b1b1122c1fd1dbfa8406ba6b73c4d` |
+| `/assets/classic-kunai-sq-320.webp` | 320 | 320 × 320 | 1984 | 82 | `0496a54fd6fd7ca523ca989dca6b7cbdc52b69a1c11788bb3f802c5f45b0fea1` |
+| `/assets/classic-kunai-sq-480.webp` | 480 | 480 × 480 | 3530 | 82 | `b6f26cb313a0ad0d89f677a1ff292ca5a5f709a9a078127d2c2f797e3618a764` |
+| `/assets/classic-kunai-sq-640.webp` | 640 | 640 × 640 | 5592 | 82 | `4e7159e8795c2d4153dbf35d4e95982108f261ffa502d840cd2399600aa01512` |
+| `/assets/classic-kunai-sq-960.webp` | 960 | 960 × 960 | 11926 | 82 | `4dbed4a9e8a89f3b4dac25e0cae22e6512e375451f45610e3313a01c2af799e9` |
+| `/assets/classic-kunai-sq-1200.webp` | 1200 | 1200 × 1200 | 19376 | 82 | `f26de487e3b16b6838e6e35e775e6b8dbedfa0ced4ec50b2680db0367f1557ab` |
+| `/assets/classic-kunai-share.jpg` | 1200 | 1200 × 1200 | 84702 | JPEG 84 | `5ef3e7401105cf6e78a22ac5bc0d84a224e2fcb18ed521dfba688fc057e2c4d8` |
+
 ## brand-logo
 
 - Source title: `HC_WhiteBK-1.png`
@@ -202,13 +254,7 @@ This is the allowed raster option: the verified HC_WhiteBK-1.png artwork is crop
 
 ## Pending approved originals
 
-Classic Kunai and Kurama are hidden from the storefront until their approved originals are imported. Their former AI images have been removed from the served assets. Neither pending source below has been imported.
-The owner first copies each original into the supplied HoneyComb folder. Verify the new copy against the expected original SHA-256 before adding it to the source manifest.
-
-| Product | Approved source title | Reference Drive ID outside HoneyComb | Expected original SHA-256 |
-|---|---|---|---|
-| HC-KUNAI | `RAV_4322.jpg` | `1mx3YRM6o4CrGZtIl6TX2ZqnG8cacFDQo` | `f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722` |
-| HC-KURAMA | `1.png` | `1nQvOC8nPm9BNK496GZveJEim2dspvYwN` | `d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494` |
+None. Kurama and Classic Kunai were imported on 16 October 2026 from the QA handoff branch; both original SHA-256 hashes matched the owner-approved files before import.
 
 ## Superseded imports (not served)
 

@@ -271,6 +271,7 @@ for rec in records:
             f'- Drive original SHA-256: {code(rec["sourceSha256"])}',
             f'- Metadata-clean source input: {code(rec["input"])}',
             f'- Input SHA-256: {code(rec["inputSha256"])}',
+            *( [f'- Handoff: {rec["handoff"]} Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.'] if rec.get("handoff") else [] ),
             f'- Source dimensions: {rec["sourceSize"][0]} × {rec["sourceSize"][1]}; EXIF orientation {rec["exifOrientation"]}.',
             f'- Applied crop box after orientation: {code(tuple(rec["appliedCropBox"]))}.']
     if rec.get("square", {}).get("mode") == "pad":
@@ -300,13 +301,16 @@ for rec in records:
         doc += [f'| {code(o["src"])} | {o["width"]} | {o["width"]} × {o["height"]} | {o["bytes"]} | {fmt} | {code(o["sha256"])} |']
     doc += [""]
 
-doc += ["## Pending approved originals", "",
-        "Classic Kunai and Kurama are hidden from the storefront until their approved originals are imported. Their former AI images have been removed from the served assets. Neither pending source below has been imported.",
-        "The owner first copies each original into the supplied HoneyComb folder. Verify the new copy against the expected original SHA-256 before adding it to the source manifest.", "",
-        "| Product | Approved source title | Reference Drive ID outside HoneyComb | Expected original SHA-256 |",
-        "|---|---|---|---|"]
-for p in SPECS["pending"]:
-    doc += [f'| {p["id"]} | {code(p["sourceTitle"])} | {code(p["referenceDriveId"])} | {code(p["expectedSourceSha256"])} |']
+doc += ["## Pending approved originals", ""]
+if SPECS["pending"]:
+    doc += ["The products below stay hidden from the storefront until their approved originals are imported.",
+            "Verify each copy against the expected original SHA-256 before adding it to the source manifest.", "",
+            "| Product | Approved source title | Reference Drive ID outside HoneyComb | Expected original SHA-256 |",
+            "|---|---|---|---|"]
+    for p in SPECS["pending"]:
+        doc += [f'| {p["id"]} | {code(p["sourceTitle"])} | {code(p["referenceDriveId"])} | {code(p["expectedSourceSha256"])} |']
+else:
+    doc += ["None. Kurama and Classic Kunai were imported on 16 October 2026 from the QA handoff branch; both original SHA-256 hashes matched the owner-approved files before import."]
 doc += ["", "## Superseded imports (not served)", "",
         "These exact source titles correct the extra .jpg suffixes recorded in the former provenance document.", "",
         "| Former asset | Exact source title | Drive ID | QA classification |",

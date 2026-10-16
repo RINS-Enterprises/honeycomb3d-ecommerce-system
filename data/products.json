@@ -218,8 +218,8 @@
     "description": "A Kurama figure for your collection. Ask about available sizes, colours and finishing options.",
     "priceLkr": 1500,
     "availability": "unconfirmed",
-    "image": null,
-    "imageAlt": null,
+    "image": "/assets/kurama-sq-640.webp",
+    "imageAlt": "Orange 3D-printed nine-tailed fox (Kurama) figure with black eye markings, crouching with its tails raised, on a white background",
     "approved": false,
     "source": "Product identity: recovery brief and April storefront screenshots. Price: owner's chosen Airtable Products source, read 2026-10-11 (record recIEe7aBzmZkPiIQ). Description remains newly drafted and needs owner approval. Availability unconfirmed; storefront ID retained pending the Baymax/Kurama SKU conflict (QA F-17).",
     "copyStatus": "draft-needs-owner-approval",
@@ -233,8 +233,48 @@
       "readAt": "2026-10-11",
       "ownerDesignatedAt": "2026-10-11"
     },
-    "imageVariants": [],
-    "imageStatus": "awaiting-owner-source-copy"
+    "imageVariants": [
+      {
+        "src": "/assets/kurama-sq-160.webp",
+        "width": 160,
+        "height": 160
+      },
+      {
+        "src": "/assets/kurama-sq-320.webp",
+        "width": 320,
+        "height": 320
+      },
+      {
+        "src": "/assets/kurama-sq-480.webp",
+        "width": 480,
+        "height": 480
+      },
+      {
+        "src": "/assets/kurama-sq-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/assets/kurama-sq-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/assets/kurama-sq-1200.webp",
+        "width": 1200,
+        "height": 1200
+      }
+    ],
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageSource": "1.png",
+    "imageApprovedAt": "2026-10-11",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/kurama-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
   },
   {
     "id": "HNYCMB501",
@@ -577,8 +617,8 @@
     "description": "A classic kunai display prop. Tell us the size and colour you have in mind when requesting a quote.",
     "priceLkr": 1000,
     "availability": "unconfirmed",
-    "image": null,
-    "imageAlt": null,
+    "image": "/assets/classic-kunai-sq-640.webp",
+    "imageAlt": "Black 3D-printed kunai with a white wrapped handle and a black ring, on a light grey backdrop",
     "approved": false,
     "source": "Product identity: recovery brief and April storefront screenshots. Price: owner's chosen Airtable Products source, read 2026-10-11 (record recXi9upTrq3CYmlF). Description remains newly drafted and needs owner approval. Availability unconfirmed; storefront ID retained pending the Baymax/Kurama SKU conflict (QA F-17).",
     "copyStatus": "draft-needs-owner-approval",
@@ -592,7 +632,47 @@
       "readAt": "2026-10-11",
       "ownerDesignatedAt": "2026-10-11"
     },
-    "imageVariants": [],
-    "imageStatus": "awaiting-owner-source-copy"
+    "imageVariants": [
+      {
+        "src": "/assets/classic-kunai-sq-160.webp",
+        "width": 160,
+        "height": 160
+      },
+      {
+        "src": "/assets/classic-kunai-sq-320.webp",
+        "width": 320,
+        "height": 320
+      },
+      {
+        "src": "/assets/classic-kunai-sq-480.webp",
+        "width": 480,
+        "height": 480
+      },
+      {
+        "src": "/assets/classic-kunai-sq-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/assets/classic-kunai-sq-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/assets/classic-kunai-sq-1200.webp",
+        "width": 1200,
+        "height": 1200
+      }
+    ],
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageSource": "Copy of RAV_4322.jpg",
+    "imageApprovedAt": "2026-10-11",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/classic-kunai-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
   }
 ]

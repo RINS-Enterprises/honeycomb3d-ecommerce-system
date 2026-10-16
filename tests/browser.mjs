@@ -29,7 +29,7 @@ try {
   await page.getByRole('complementary',{name:'Store preview notice'}).waitFor();
   await screenshot('test-results/home-desktop.png');
   await page.getByRole('link',{name:'Shop the collection'}).click();
-  assert.equal(await page.locator('[data-product-card]').count(),5,'Products without an approved photo stay hidden');
+  assert.equal(await page.locator('[data-product-card]').count(),7,'Every product with an approved photo is shown');
   assert.equal(await page.locator('.photo-placeholder').count(),0);
   for(const card of await page.locator('[data-product-card]').all()) {
     assert.equal(await card.getByRole('link').count(),1,'One accessible link per product card');
@@ -43,12 +43,12 @@ try {
   await page.getByTestId('filter-figures').click();
   assert.equal(await page.getByRole('radio',{name:'Figures'}).isChecked(),true);
   assert.match(page.url(),/category=Figures/);
-  assert.equal(await page.locator('[data-product-card]:visible').count(),1);
+  assert.equal(await page.locator('[data-product-card]:visible').count(),2,'Figures: Baymax and Kurama');
   await page.getByTestId('filter-all').click();
   await page.getByTestId('filter-naruto').click();
-  assert.equal(await page.locator('[data-product-card]:visible').count(),2,'Theme chip: Hidden Leaf and Minato');
+  assert.equal(await page.locator('[data-product-card]:visible').count(),4,'Theme chip: Hidden Leaf, Kurama, Minato and Classic Kunai');
   await page.goBack();
-  await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===5);
+  await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===7);
   assert.equal(await page.getByRole('radio',{name:'Any theme'}).isChecked(),true,'Back restores the previous filter');
   await page.getByTestId('filter-figures').click();
   await page.getByRole('searchbox').fill('Baymax');
