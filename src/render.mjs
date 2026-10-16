@@ -92,7 +92,7 @@ export function shop(products,store) {
   // Themes come from the tags, minus tags that only repeat a category name.
   const themes=[...new Set(products.flatMap(p=>p.tags))].filter(t=>!categories.includes(t));
   return layout('Shop','<section class="wrap section shop-section"><p class="eyebrow">THE COLLECTION</p><h1>Find your next favourite.</h1><p class="lead">Explore the designs. Ask about colours, sizes and finishes.</p>' +
-    '<form class="filters" id="filters" role="search" aria-label="Filter the collection"><label class="search-field">Search the collection<input type="search" id="search" name="q" placeholder="Try dragons, Naruto, keychains…" maxlength="100" autocomplete="off"></label>' +
+    '<form class="filters" id="filters" role="search" aria-label="Filter the collection"><div class="search-field"><label for="search">Search the collection</label><div class="search-box"><input type="search" id="search" name="q" placeholder="Try dragons, Naruto, keychains…" maxlength="100" autocomplete="off" aria-keyshortcuts="/"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" data-search-clear data-testid="search-clear" aria-label="Clear search" hidden><span aria-hidden="true">×</span></button></div></div>' +
     chips('category','Category',[['all','All'],...categories.map(c=>[c,c])]) +
     (themes.length?chips('theme','Theme',[['any','Any theme'],...themes.map(t=>[t,t])]):'') +
     '</form><div class="results-bar"><p class="muted" role="status" id="result-count">'+products.length+' designs</p><button class="text-button" id="reset-filters" type="button" hidden>Clear filters</button>' +

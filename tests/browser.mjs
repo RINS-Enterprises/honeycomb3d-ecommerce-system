@@ -136,6 +136,21 @@ try {
   await page.getByTestId('sort').selectOption('featured');
   await page.getByTestId('filter-all').click();
   await page.getByTestId('filter-figures').click();
+  // Search polish: "/" focuses search, matches are marked (escaped), the × clears it.
+  await page.locator('body').click({position:{x:5,y:300}});
+  await page.keyboard.press('/');
+  assert.equal(await page.evaluate(()=>document.activeElement.id),'search','"/" focuses search');
+  assert.equal(await page.getByRole('searchbox').inputValue(),'','"/" is not typed into the box');
+  await page.keyboard.type('fig');
+  assert.deepEqual(await page.locator('[data-product-card]:visible .card-link mark').allTextContents(),['Fig','Fig'],'Matches marked in names');
+  await page.getByTestId('search-clear').click();
+  assert.equal(await page.getByRole('searchbox').inputValue(),'');
+  assert.equal(await page.getByTestId('search-clear').isHidden(),true);
+  assert.equal(await page.locator('.card-link mark').count(),0,'Marks cleared');
+  assert.equal(await page.evaluate(()=>document.activeElement.id),'search','Focus stays in search');
+  await page.getByRole('searchbox').fill('<b>');
+  assert.equal(await page.locator('.card-link b').count(),0,'Search text is never parsed as HTML');
+  assert.equal(await page.locator('#result-count').getAttribute('role'),'status','Result count is a polite live region');
   await page.getByRole('searchbox').fill('Baymax');
   assert.equal(await page.locator('[data-product-card]:visible').count(),1);
   await page.getByRole('heading',{name:'Baymax Figure'}).getByRole('link').click();

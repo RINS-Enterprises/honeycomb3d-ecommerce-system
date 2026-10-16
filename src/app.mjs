@@ -33,6 +33,14 @@ document.addEventListener('click',async event=>{
   try { await navigator.clipboard.writeText(area.value); announce('Message copied.'); }
   catch { area.focus();area.select();announce('Automatic copying is unavailable. Copy the selected text manually.'); }
 });
+// Wrap the parts of a name that match the search words in <mark>; every piece is escaped.
+function highlight(name,words) {
+  const lower=name.toLowerCase(), hit=new Array(name.length).fill(false);
+  for(const w of words){let i=lower.indexOf(w);while(w&&i>=0){hit.fill(true,i,i+w.length);i=lower.indexOf(w,i+1);}}
+  let html='',i=0;
+  while(i<name.length){let j=i;while(j<name.length&&hit[j]===hit[i])j++;html+=hit[i]?'<mark>'+e(name.slice(i,j))+'</mark>':e(name.slice(i,j));i=j;}
+  return html;
+}
 function initFilters() {
   const form=document.querySelector('#filters');if(!form)return;
   const search=form.querySelector('#search'), reset=document.querySelector('#reset-filters'), sort=document.querySelector('#sort');
@@ -63,6 +71,7 @@ function initFilters() {
     document.querySelectorAll('[data-product-card]').forEach(card=>{
       const matches=(category==='all'||card.dataset.category===category)&&(theme==='any'||card.dataset.tags.split('|').includes(theme))&&words.every(w=>card.dataset.search.includes(w));
       card.hidden=!matches;if(matches)count++;
+      const link=card.querySelector('.card-link');if(link)link.innerHTML=highlight(card.dataset.name,matches?words:[]);
     });
     document.querySelector('#result-count').textContent=count+' '+(count===1?'design':'designs');
     document.querySelector('#no-results').hidden=count>0;
@@ -80,13 +89,22 @@ function initFilters() {
       try { if(url!==location.pathname+location.search)window.history[history==='push'?'pushState':'replaceState'](null,'',url); } catch {}
     }
   }
+  const clear=form.querySelector('[data-search-clear]'), box=search.closest('.search-box');
+  const syncClear=()=>{const filled=search.value!=='';clear.hidden=!filled;box.classList.toggle('is-filled',filled);};
   form.addEventListener('submit',event=>{event.preventDefault();filter('replace');});
-  search.addEventListener('input',()=>filter('replace'));
+  search.addEventListener('input',()=>{syncClear();filter('replace');});
+  clear.addEventListener('click',()=>{search.value='';syncClear();filter('replace');search.focus();});
+  // "/" jumps to search unless you are already typing somewhere.
+  document.addEventListener('keydown',event=>{
+    if(event.key!=='/'||event.ctrlKey||event.metaKey||event.altKey||event.defaultPrevented)return;
+    const t=event.target;if(t.closest?.('input,textarea,select,[contenteditable=""],[contenteditable="true"]'))return;
+    event.preventDefault();search.focus();search.select();
+  });
   form.addEventListener('change',event=>{if(event.target.type==='radio')filter('push');});
   sort?.addEventListener('change',()=>filter('push'));
-  reset.addEventListener('click',()=>{form.reset();if(sort)sort.value='featured';filter('push');search.focus();});
-  window.addEventListener('popstate',()=>{readUrl();filter();});
-  readUrl();filter();
+  reset.addEventListener('click',()=>{form.reset();if(sort)sort.value='featured';syncClear();filter('push');search.focus();});
+  window.addEventListener('popstate',()=>{readUrl();syncClear();filter();});
+  readUrl();syncClear();filter();
 }
 // Recently viewed: the last few product ids on this device, newest first.
 const RECENT_KEY='honeycomb-recent-v1',RECENT_SHOWN=4,RECENT_KEPT=5;
