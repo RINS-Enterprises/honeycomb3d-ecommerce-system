@@ -1,0 +1,218 @@
+
+> honeycomb3d-storefront@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: the keychain category lists the three recovered keychains and Grogu
+ok 1 - the keychain category lists the three recovered keychains and Grogu
+  ---
+  duration_ms: 1.542944
+  type: 'test'
+  ...
+# Subtest: draft descriptions are explicitly attributed and remain unapproved
+ok 2 - draft descriptions are explicitly attributed and remain unapproved
+  ---
+  duration_ms: 0.715884
+  type: 'test'
+  ...
+# Subtest: owner prices preserve storefront IDs, provenance and unconfirmed approval
+ok 3 - owner prices preserve storefront IDs, provenance and unconfirmed approval
+  ---
+  duration_ms: 2.283064
+  type: 'test'
+  ...
+# Subtest: every product with a photo has responsive square frames with real dimensions
+ok 4 - every product with a photo has responsive square frames with real dimensions
+  ---
+  duration_ms: 0.801098
+  type: 'test'
+  ...
+# Subtest: Kurama and Classic Kunai return with their imported photos and unchanged data
+ok 5 - Kurama and Classic Kunai return with their imported photos and unchanged data
+  ---
+  duration_ms: 0.348956
+  type: 'test'
+  ...
+# Subtest: the 11 Airtable products added 2026-10-16 keep their Airtable identity; only Stormtrooper lacks a photo
+ok 6 - the 11 Airtable products added 2026-10-16 keep their Airtable identity; only Stormtrooper lacks a photo
+  ---
+  duration_ms: 0.999589
+  type: 'test'
+  ...
+# Subtest: restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+ok 7 - restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+  ---
+  duration_ms: 2.432922
+  type: 'test'
+  ...
+# Subtest: money is computed in cents and unknown prices remain explicit
+ok 8 - money is computed in cents and unknown prices remain explicit
+  ---
+  duration_ms: 54.969437
+  type: 'test'
+  ...
+# Subtest: bad storage and invalid JSON are recoverable
+ok 9 - bad storage and invalid JSON are recoverable
+  ---
+  duration_ms: 0.422819
+  type: 'test'
+  ...
+# Subtest: WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+ok 10 - WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+  ---
+  duration_ms: 0.537486
+  type: 'test'
+  ...
+# Subtest: all search words and category must match
+ok 11 - all search words and category must match
+  ---
+  duration_ms: 0.490506
+  type: 'test'
+  ...
+# Subtest: live build requires verified contact, approvals, original photos and availability
+ok 12 - live build requires verified contact, approvals, original photos and availability
+  ---
+  duration_ms: 1.320054
+  type: 'test'
+  ...
+# Subtest: escaping prevents catalogue text from becoming markup
+ok 13 - escaping prevents catalogue text from becoming markup
+  ---
+  duration_ms: 0.501349
+  type: 'test'
+  ...
+# Subtest: decimal prices accept normal currency and reject sub-cent values
+ok 14 - decimal prices accept normal currency and reject sub-cent values
+  ---
+  duration_ms: 0.594033
+  type: 'test'
+  ...
+# Subtest: live-visible catalogue strips unapproved items from every cart operation
+ok 15 - live-visible catalogue strips unapproved items from every cart operation
+  ---
+  duration_ms: 0.60735
+  type: 'test'
+  ...
+# Subtest: products without an approved photo are hidden in preview and live
+ok 16 - products without an approved photo are hidden in preview and live
+  ---
+  duration_ms: 0.720943
+  type: 'test'
+  ...
+# Subtest: LKR amounts use one format: whole rupees without decimals, otherwise two decimals
+ok 17 - LKR amounts use one format: whole rupees without decimals, otherwise two decimals
+  ---
+  duration_ms: 0.687647
+  type: 'test'
+  ...
+# Subtest: the home hero only links to a product included in the live-visible catalogue
+ok 18 - the home hero only links to a product included in the live-visible catalogue
+  ---
+  duration_ms: 19.488
+  type: 'test'
+  ...
+# Subtest: an empty live catalogue has no dead product link or unapproved hero photo
+ok 19 - an empty live catalogue has no dead product link or unapproved hero photo
+  ---
+  duration_ms: 0.53523
+  type: 'test'
+  ...
+# Subtest: photos decode synchronously so off-screen cards never paint as empty frames
+ok 20 - photos decode synchronously so off-screen cards never paint as empty frames
+  ---
+  duration_ms: 2.680255
+  type: 'test'
+  ...
+# Subtest: the full-bleed hero photo is the preloaded, eager, high-priority LCP image
+ok 21 - the full-bleed hero photo is the preloaded, eager, high-priority LCP image
+  ---
+  duration_ms: 1.076938
+  type: 'test'
+  ...
+# Subtest: preview mode shows a slim, plainly worded ordering notice without dates
+ok 22 - preview mode shows a slim, plainly worded ordering notice without dates
+  ---
+  duration_ms: 1.364735
+  type: 'test'
+  ...
+# Subtest: every page has the sticky header cart hooks and a footer with real links
+ok 23 - every page has the sticky header cart hooks and a footer with real links
+  ---
+  duration_ms: 0.812241
+  type: 'test'
+  ...
+# Subtest: cards are one link with a clean LKR price and test hooks
+ok 24 - cards are one link with a clean LKR price and test hooks
+  ---
+  duration_ms: 0.858273
+  type: 'test'
+  ...
+# Subtest: product page: gallery only with several photos, clear price, availability and an inline ordering note
+ok 25 - product page: gallery only with several photos, clear price, availability and an inline ordering note
+  ---
+  duration_ms: 3.106518
+  type: 'test'
+  ...
+# Subtest: pages carry share metadata, theme colour, touch icon and price-only Product JSON-LD
+ok 26 - pages carry share metadata, theme colour, touch icon and price-only Product JSON-LD
+  ---
+  duration_ms: 2.593783
+  type: 'test'
+  ...
+# Subtest: "More from HoneyComb 3D" puts the same category and shared themes first
+ok 27 - "More from HoneyComb 3D" puts the same category and shared themes first
+  ---
+  duration_ms: 1.245432
+  type: 'test'
+  ...
+# Subtest: product pages offer sharing without a phone number or external script
+ok 28 - product pages offer sharing without a phone number or external script
+  ---
+  duration_ms: 1.31142
+  type: 'test'
+  ...
+# Subtest: home has a three-step how-it-works band without timings or promises
+ok 29 - home has a three-step how-it-works band without timings or promises
+  ---
+  duration_ms: 1.068572
+  type: 'test'
+  ...
+# Subtest: recently viewed row ships hidden, names the current product and renders nothing server-side
+ok 30 - recently viewed row ships hidden, names the current product and renders nothing server-side
+  ---
+  duration_ms: 0.999654
+  type: 'test'
+  ...
+# Subtest: 404 keeps its message and adds a no-JS search to the shop plus four designs
+ok 31 - 404 keeps its message and adds a no-JS search to the shop plus four designs
+  ---
+  duration_ms: 1.016338
+  type: 'test'
+  ...
+# Subtest: shop chips show design counts and list themes largest first
+ok 32 - shop chips show design counts and list themes largest first
+  ---
+  duration_ms: 2.58942
+  type: 'test'
+  ...
+# Subtest: product facts link to the matching shop views and do not repeat price or availability
+ok 33 - product facts link to the matching shop views and do not repeat price or availability
+  ---
+  duration_ms: 1.073606
+  type: 'test'
+  ...
+# Subtest: the related row links to the rest of the category, or the collection when the category has one design
+ok 34 - the related row links to the rest of the category, or the collection when the category has one design
+  ---
+  duration_ms: 1.890793
+  type: 'test'
+  ...
+1..34
+# tests 34
+# suites 0
+# pass 34
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 213.054709

@@ -1,0 +1,7 @@
+reviewed_ref: 8e854d7
+reviewed_sha: 8e854d7938601fdc90e9cff134d478b7be0ec23b
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T13:32:25Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T13:29:17+00:00
+subject: Shop empty state names the search and offers categories to browse
