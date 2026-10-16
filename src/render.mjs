@@ -156,7 +156,7 @@ export function detail(p,products,store) {
     '<p class="status-chip status-'+e(p.availability)+'" data-testid="availability"><span aria-hidden="true"></span>'+availability(p)+'</p>' +
     '<p class="lead">'+e(p.description)+'</p>' +
     '<form id="add-form" data-product-id="'+e(p.id)+'"><label>Quantity<input name="quantity" type="number" min="1" max="20" step="1" value="1" required></label><button class="button" type="submit" disabled data-enable="'+(p.availability!=='unavailable')+'" data-testid="add-to-cart">'+(p.availability==='unavailable'?'Currently unavailable':'Add to request cart')+'</button></form>' +
-    (ordering?'':'<button class="button secondary order-soon" type="button" disabled data-testid="order-button">Ordering opens soon</button>') +
+    (ordering?'':'<p class="order-note" data-testid="order-status"><span class="order-dot" aria-hidden="true"></span>Online ordering opens soon. Save your picks in the request cart.</p>') +
     '<noscript><p>Enable JavaScript to build a request cart.</p></noscript>' +
     '<p class="fine">The request cart saves a list on your device. It does not reserve stock or complete a purchase.</p>' +
     '<dl class="detail-facts">'+facts.map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('')+'</dl>' +

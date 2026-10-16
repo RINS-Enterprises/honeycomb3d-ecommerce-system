@@ -156,7 +156,8 @@ try {
   await page.waitForFunction(()=>{const t=document.querySelector('[data-gallery-track]');return Math.round(t.scrollLeft/t.clientWidth)===2;});
   assert.equal(await page.getByRole('button',{name:'Show photo 3 of 4'}).getAttribute('aria-current'),'true');
   assert.equal(await page.locator('[data-gallery-thumb][aria-current]').count(),1,'Exactly one current thumbnail');
-  assert.equal(await page.getByRole('button',{name:'Ordering opens soon'}).isDisabled(),true);
+  assert.match(await page.getByTestId('order-status').textContent(),/Online ordering opens soon\./);
+  assert.equal(await page.getByRole('button',{name:/Ordering opens soon/}).count(),0,'No disabled order button');
   await page.getByTestId('zoom-open').click();
   await page.getByRole('dialog',{name:'Product photos'}).waitFor();
   assert.match(await page.locator('.lightbox-count').textContent(),/^Photo 3 of 4$/,'Lightbox opens on the current gallery photo');
