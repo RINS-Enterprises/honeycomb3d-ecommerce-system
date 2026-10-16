@@ -71,7 +71,11 @@ SPECS = json.loads((ROOT / "assets/image-sources.json").read_text())
 OUT = ROOT / "public/assets"
 OUT.mkdir(parents=True, exist_ok=True)
 digest = lambda b: hashlib.sha256(b).hexdigest()
+AVIF_QUALITY, AVIF_SPEED = 60, 4
+if not features.check("avif"):
+    raise SystemExit("This Pillow build cannot encode AVIF")
 products = json.loads((ROOT / "data/products.json").read_text())
+variant = lambda o: {**{k: o[k] for k in ("src", "width", "height")}, **({"avif": o["avif"]["src"]} if o.get("avif") else {})}
 records = []
 hero = None
 site_share_ref = None
@@ -157,8 +161,30 @@ for entry in SPECS["assets"]:
                         raise ValueError("Incorrect output size")
                     if check.getexif() or any(k in check.info for k in ("exif", "xmp", "icc_profile")):
                         raise ValueError("Output retains metadata")
-                outputs.append({"src": output, "width": width, "height": height,
-                                "bytes": len(data), "sha256": digest(data), "quality": quality})
+                record_out = {"src": output, "width": width, "height": height,
+                              "bytes": len(data), "sha256": digest(data), "quality": quality}
+                if entry["format"] != "png":
+                    # AVIF twin of the same resized pixels for <picture>; WebP stays the fallback.
+                    # Kept only when it is smaller than the WebP. Encoding is deterministic.
+                    avif_output = output[:-len(".webp")] + ".avif"
+                    avif_target = (ROOT / "public" / avif_output.lstrip("/")).resolve()
+                    if avif_target.parent != OUT.resolve():
+                        raise ValueError("Unsafe output path")
+                    clean.convert("RGB").save(avif_target, "AVIF", quality=AVIF_QUALITY, speed=AVIF_SPEED,
+                                              exif=b"", xmp=b"", icc_profile=None)
+                    avif_data = avif_target.read_bytes()
+                    with Image.open(avif_target) as check:
+                        check.load()
+                        if check.size != (width, height):
+                            raise ValueError("Incorrect AVIF size: " + avif_output)
+                        if check.getexif() or any(check.info.get(k) for k in ("exif", "xmp", "icc_profile")):
+                            raise ValueError("AVIF retains metadata: " + avif_output)
+                    if len(avif_data) < len(data):
+                        record_out["avif"] = {"src": avif_output, "bytes": len(avif_data),
+                                              "sha256": digest(avif_data), "quality": AVIF_QUALITY}
+                    else:
+                        avif_target.unlink()
+                outputs.append(record_out)
             return outputs
         outputs = render(im, entry["widths"], entry["stem"])
         square = entry.get("square")
@@ -221,7 +247,7 @@ for entry in SPECS["assets"]:
             fallback = next((o for o in shown if o["width"] == 640), shown[-1])
             product.update(image=fallback["src"], imageAlt=entry["alt"],
                            imageWidth=fallback["width"], imageHeight=fallback["height"],
-                           imageVariants=[{k: o[k] for k in ("src", "width", "height")} for o in shown],
+                           imageVariants=[variant(o) for o in shown],
                            imageSource=entry["sourceTitle"], imageApprovedAt=SPECS["ownerApprovalDate"])
             product.pop("imageStatus", None)
             product["gallery"] = []
@@ -229,7 +255,7 @@ for entry in SPECS["assets"]:
                 g_fallback = next((o for o in outs if o["width"] == 640), outs[-1])
                 product["gallery"].append({"src": g_fallback["src"], "alt": frame["alt"],
                                            "width": g_fallback["width"], "height": g_fallback["height"],
-                                           "variants": [{k: o[k] for k in ("src", "width", "height")} for o in outs]})
+                                           "variants": [variant(o) for o in outs]})
             if share_output:
                 product["shareImage"] = {k: share_output[k] for k in ("src", "width", "height")}
             if site_share:
@@ -237,10 +263,11 @@ for entry in SPECS["assets"]:
             if hero_outputs:
                 hero = {"product": entry["id"]}
                 for shape, outs in hero_outputs.items():
-                    hero[shape] = [{k: o[k] for k in ("src", "width", "height")} for o in outs]
+                    hero[shape] = [variant(o) for o in outs]
 
 metadata = {"version": 1, "importedAt": SPECS["importedAt"],
             "encoder": {"Pillow": PIL.__version__, "libwebp": features.version("webp"),
+                        "libavif": features.version("avif"), "avif": {"quality": AVIF_QUALITY, "speed": AVIF_SPEED},
                         "resize": "Lanczos", "colourSpace": "sRGB", "metadata": "stripped"},
             "assets": records, "pending": SPECS["pending"]}
 (ROOT / "assets/derivatives.json").write_text(json.dumps(metadata, indent=2) + "\n")
@@ -260,7 +287,7 @@ doc = [
     "Drive originals were SHA-256 checked against Claude's qa/asset-recommendations.json before import.",
     "Camera, timestamp, GPS and text metadata were removed from the source containers without changing their compressed image pixels. Rendering colour profiles are retained only in the source files. Original EXIF orientation is recorded below and applied before cropping.",
     "Source inputs stay under assets/photo-sources/, outside public/ and dist/. The build copies only the catalog's referenced derivatives.",
-    "Outputs use Lanczos resizing, sRGB, WebP (quality shown below) or PNG for the logo. EXIF, XMP and ICC metadata are stripped from every output. No artwork was generated, retouched or reconstructed.",
+    "Outputs use Lanczos resizing, sRGB, WebP (quality shown below) or PNG for the logo. Each WebP photo also has an AVIF twin encoded from the same resized pixels (quality 60, speed 4), kept only when smaller; pages offer it first in <picture> with the WebP as fallback. EXIF, XMP and ICC metadata are stripped from every output. No artwork was generated, retouched or reconstructed.",
     "All dimensions and crops use pixels; crop boxes are (left, top, right, bottom), with exclusive right/bottom edges. Width and height attributes use the fallback derivative's actual dimensions.",
     "Reproduce with python -m pip install Pillow==11.3.0 and python scripts/prepare-images.py. assets/image-sources.json stores the input hashes and crop specifications; assets/derivatives.json stores machine-readable output hashes.", "",
 ]
@@ -299,6 +326,9 @@ for rec in records:
     for o in rec["outputs"]:
         fmt = "PNG" if o["quality"] is None else ("JPEG " if o["src"].endswith(".jpg") else "") + str(o["quality"])
         doc += [f'| {code(o["src"])} | {o["width"]} | {o["width"]} × {o["height"]} | {o["bytes"]} | {fmt} | {code(o["sha256"])} |']
+        if o.get("avif"):
+            a = o["avif"]
+            doc += [f'| {code(a["src"])} | {o["width"]} | {o["width"]} × {o["height"]} | {a["bytes"]} | AVIF {a["quality"]} | {code(a["sha256"])} |']
     doc += [""]
 
 doc += ["## Pending approved originals", ""]

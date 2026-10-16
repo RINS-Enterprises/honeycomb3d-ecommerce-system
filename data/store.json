@@ -27,44 +27,52 @@
       {
         "src": "/assets/night-fury-hero-landscape-960.webp",
         "width": 960,
-        "height": 480
+        "height": 480,
+        "avif": "/assets/night-fury-hero-landscape-960.avif"
       },
       {
         "src": "/assets/night-fury-hero-landscape-1280.webp",
         "width": 1280,
-        "height": 640
+        "height": 640,
+        "avif": "/assets/night-fury-hero-landscape-1280.avif"
       },
       {
         "src": "/assets/night-fury-hero-landscape-1600.webp",
         "width": 1600,
-        "height": 800
+        "height": 800,
+        "avif": "/assets/night-fury-hero-landscape-1600.avif"
       },
       {
         "src": "/assets/night-fury-hero-landscape-1893.webp",
         "width": 1893,
-        "height": 946
+        "height": 946,
+        "avif": "/assets/night-fury-hero-landscape-1893.avif"
       }
     ],
     "portrait": [
       {
         "src": "/assets/night-fury-hero-portrait-480.webp",
         "width": 480,
-        "height": 640
+        "height": 640,
+        "avif": "/assets/night-fury-hero-portrait-480.avif"
       },
       {
         "src": "/assets/night-fury-hero-portrait-720.webp",
         "width": 720,
-        "height": 960
+        "height": 960,
+        "avif": "/assets/night-fury-hero-portrait-720.avif"
       },
       {
         "src": "/assets/night-fury-hero-portrait-960.webp",
         "width": 960,
-        "height": 1280
+        "height": 1280,
+        "avif": "/assets/night-fury-hero-portrait-960.avif"
       },
       {
         "src": "/assets/night-fury-hero-portrait-1065.webp",
         "width": 1065,
-        "height": 1420
+        "height": 1420,
+        "avif": "/assets/night-fury-hero-portrait-1065.avif"
       }
     ],
     "share": {

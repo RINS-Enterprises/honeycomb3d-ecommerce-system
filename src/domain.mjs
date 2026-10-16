@@ -22,7 +22,7 @@ export function validateData(products, store) {
       if (!Array.isArray(p.imageVariants)) throw new Error('Image variants must be an array');
       let previousWidth=0;
       for (const v of p.imageVariants) {
-        if (!/^\/assets\/[a-zA-Z0-9/_-]+\.(?:jpg|jpeg|png|webp)$/.test(v.src) || !Number.isInteger(v.width) || !Number.isInteger(v.height) || v.width<=previousWidth || v.height<1) throw new Error('Invalid responsive image variant');
+        if (!/^\/assets\/[a-zA-Z0-9/_-]+\.(?:jpg|jpeg|png|webp)$/.test(v.src) || (v.avif!==undefined && !/^\/assets\/[a-zA-Z0-9/_-]+\.avif$/.test(v.avif)) || !Number.isInteger(v.width) || !Number.isInteger(v.height) || v.width<=previousWidth || v.height<1) throw new Error('Invalid responsive image variant');
         previousWidth=v.width;
       }
       if (p.image && (!p.imageVariants.length || !p.imageVariants.some(v=>v.src===p.image && v.width===p.imageWidth && v.height===p.imageHeight))) throw new Error('Image dimensions must match its fallback variant');
@@ -31,7 +31,7 @@ export function validateData(products, store) {
     if (p.gallery !== undefined) {
       if (!Array.isArray(p.gallery) || (!p.image && p.gallery.length)) throw new Error('Invalid gallery');
       for (const g of p.gallery) {
-        if (!g.alt || !Array.isArray(g.variants) || !g.variants.some(v=>v.src===g.src && v.width===g.width && v.height===g.height) || g.variants.some(v=>!/^\/assets\/[a-zA-Z0-9/_-]+\.webp$/.test(v.src))) throw new Error('Invalid gallery image: '+p.id);
+        if (!g.alt || !Array.isArray(g.variants) || !g.variants.some(v=>v.src===g.src && v.width===g.width && v.height===g.height) || g.variants.some(v=>!/^\/assets\/[a-zA-Z0-9/_-]+\.webp$/.test(v.src)||(v.avif!==undefined&&!/^\/assets\/[a-zA-Z0-9/_-]+\.avif$/.test(v.avif)))) throw new Error('Invalid gallery image: '+p.id);
       }
     }
     if (p.shareImage !== undefined && (!/^\/assets\/[a-zA-Z0-9_-]+\.jpg$/.test(p.shareImage.src) || !Number.isInteger(p.shareImage.width) || !Number.isInteger(p.shareImage.height))) throw new Error('Invalid share image: '+p.id);

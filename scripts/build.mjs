@@ -31,10 +31,11 @@ await page('404.html',notFound(products,site));
 for(const p of products)await page('products/'+p.slug+'/index.html',detail(p,products,site));
 for(const name of ['app.mjs','card.mjs','domain.mjs','styles.css'])await copyFile(join(root,'src',name),join(dist,name));
 // Copy only explicitly referenced derivatives. Source images and unused assets never ship.
-const assets=new Set([store.logo,...(store.logoVariants||[]).map(v=>v.src),...heroVariants.map(v=>v.src),...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src),...(p.gallery||[]).flatMap(g=>g.variants.map(v=>v.src)),p.shareImage?.src])].filter(Boolean));
+const srcs=v=>[v.src,v.avif];
+const assets=new Set([store.logo,...(store.logoVariants||[]).map(v=>v.src),...heroVariants.flatMap(srcs),...products.flatMap(p=>[p.image,...(p.imageVariants||[]).flatMap(srcs),...(p.gallery||[]).flatMap(g=>g.variants.flatMap(srcs)),p.shareImage?.src])].filter(Boolean));
 await mkdir(join(dist,'assets'),{recursive:true});
 for(const asset of assets) {
-  if(!/^\/assets\/[a-zA-Z0-9_-]+\.(?:png|jpg|jpeg|webp|svg)$/.test(asset))throw new Error('Invalid public derivative: '+asset);
+  if(!/^\/assets\/[a-zA-Z0-9_-]+\.(?:png|jpg|jpeg|webp|avif|svg)$/.test(asset))throw new Error('Invalid public derivative: '+asset);
   await copyFile(join(root,'public',asset),join(dist,asset));
 }
 await copyFile(join(root,'public/favicon.ico'),join(dist,'favicon.ico'));

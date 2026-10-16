@@ -1,5 +1,5 @@
 import {escapeHtml as e, money} from './domain.mjs';
-import {price, CARD_SIZES, picture, card, availability} from './card.mjs';
+import {price, CARD_SIZES, picture, card, availability, avifSource, withPicture} from './card.mjs';
 export {price, CARD_SIZES, picture, card};
 
 // Every photo slot is a square frame filled by a square derivative (object-fit: cover).
@@ -52,17 +52,20 @@ export function layout(title, body, store, current='', head='', meta={}) {
     '<main id="main" tabindex="-1">' + body + '</main>' + footer(store) +
     '<div class="toast" role="status" aria-live="polite" id="status"></div></body></html>';
 }
+// Hero preload matches what <picture> will pick: the AVIF set when available (typed, so other browsers skip it).
+const preload=(variants,media)=>variants.every(v=>v.avif)?
+  '<link rel="preload" as="image" type="image/avif" imagesrcset="'+e(variants.map(v=>v.avif+' '+v.width+'w').join(', '))+'" imagesizes="100vw" media="'+media+'" fetchpriority="high">':
+  '<link rel="preload" as="image" imagesrcset="'+e(srcset(variants))+'" imagesizes="100vw" media="'+media+'" fetchpriority="high">';
 export function home(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];
   const featured=store.hero&&products.find(p=>p.id===store.hero.product&&p.image);
   // The LCP photo: preloaded per art-directed frame, eager, high priority.
   const fallback=featured&&(store.hero.portrait.find(v=>v.width===960)||store.hero.portrait.at(-1));
   const head=featured?
-    '<link rel="preload" as="image" imagesrcset="'+e(srcset(store.hero.portrait))+'" imagesizes="100vw" media="(max-width: 699px)" fetchpriority="high">'+
-    '<link rel="preload" as="image" imagesrcset="'+e(srcset(store.hero.landscape))+'" imagesizes="100vw" media="'+HERO_LANDSCAPE+'" fetchpriority="high">':'';
+    preload(store.hero.portrait,'(max-width: 699px)')+preload(store.hero.landscape,HERO_LANDSCAPE):'';
   const visual=featured?
-    '<div class="hero-visual"><picture><source media="'+HERO_LANDSCAPE+'" srcset="'+e(srcset(store.hero.landscape))+'" sizes="100vw" width="'+store.hero.landscape[0].width+'" height="'+store.hero.landscape[0].height+'">'+
-    '<img src="'+e(fallback.src)+'" srcset="'+e(srcset(store.hero.portrait))+'" sizes="100vw" alt="'+e(featured.imageAlt)+'" width="'+fallback.width+'" height="'+fallback.height+'" loading="eager" fetchpriority="high"></picture></div>':'';
+    '<div class="hero-visual"><picture>'+avifSource(store.hero.landscape,'100vw',HERO_LANDSCAPE)+'<source media="'+HERO_LANDSCAPE+'" srcset="'+e(srcset(store.hero.landscape))+'" sizes="100vw" width="'+store.hero.landscape[0].width+'" height="'+store.hero.landscape[0].height+'">'+
+    avifSource(store.hero.portrait,'100vw')+'<img src="'+e(fallback.src)+'" srcset="'+e(srcset(store.hero.portrait))+'" sizes="100vw" alt="'+e(featured.imageAlt)+'" width="'+fallback.width+'" height="'+fallback.height+'" loading="eager" fetchpriority="high"></picture></div>':'';
   return layout('Collectibles & custom prints',
     '<section class="hero'+(featured?'':' hero--plain')+'" data-testid="hero">'+visual+'<div class="hero-content wrap"><p class="eyebrow">HONEYCOMB 3D / SRI LANKA</p><h1>Make room for <em>something you.</em></h1><p class="lead">A little character for your desk. A favourite for your collection. An idea brought to life, layer by layer.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/custom/">Bring your own idea</a></div>'+
     (featured?'<a class="hero-credit" href="/products/'+e(featured.slug)+'/">Pictured <b>'+e(featured.name)+'</b> <span aria-hidden="true">→</span></a>':'')+'</div></section>' +
@@ -114,7 +117,10 @@ function gallerySlides(p) {
 }
 function gallery(p) {
   const slides=gallerySlides(p);
-  const img=(g,i,sizes)=>'<img src="'+e(g.src)+'" srcset="'+e(srcset(g.variants))+'" sizes="'+sizes+'" alt="'+e(g.alt)+'" width="'+g.width+'" height="'+g.height+'" loading="eager"'+(i===0?' fetchpriority="high"':'')+'>';
+  // Thumbnails stay plain WebP <img>: inside <picture> Chrome reuses an already cached large file for a
+  // 72px slot and decodes it at more than 3x its size; AVIF goes to the large photos, where the bytes are.
+  const thumb=g=>'<img src="'+e(g.src)+'" srcset="'+e(srcset(g.variants))+'" sizes="'+THUMB_SIZES+'" alt="'+e(g.alt)+'" width="'+g.width+'" height="'+g.height+'" loading="eager">';
+  const img=(g,i,sizes)=>withPicture(avifSource(g.variants,sizes),'<img src="'+e(g.src)+'" srcset="'+e(srcset(g.variants))+'" sizes="'+sizes+'" alt="'+e(g.alt)+'" width="'+g.width+'" height="'+g.height+'" loading="eager"'+(i===0?' fetchpriority="high"':'')+'>');
   // Photos for the lightbox, which builds its <img> only when opened.
   const photos=e(JSON.stringify(slides.map(g=>({srcset:srcset(g.variants),src:(g.variants.at(-1)||g).src,alt:g.alt}))));
   const zoom='<button type="button" class="zoom-trigger" data-zoom-open hidden data-testid="zoom-open">'+ZOOM_ICON+'<span>View larger</span></button>';
@@ -123,7 +129,7 @@ function gallery(p) {
     slides.map((g,i)=>'<figure class="gallery-slide" id="photo-'+(i+1)+'" data-gallery-slide>'+img(g,i,DETAIL_SIZES)+'</figure>').join('')+'</div>'+
     // Phone-only position indicator; decorative because the thumbnails carry the labels.
     '<div class="gallery-dots" aria-hidden="true" data-gallery-dots data-testid="gallery-position">'+slides.map((g,i)=>'<span'+(i===0?' class="is-current"':'')+'></span>').join('')+'<span class="gallery-count"><b data-gallery-index>1</b> / '+slides.length+'</span></div>'+
-    zoom+'<div class="gallery-thumbs" role="group" aria-label="Choose a photo">'+slides.map((g,i)=>'<button type="button" class="gallery-thumb" data-gallery-thumb="'+i+'" aria-label="Show photo '+(i+1)+' of '+slides.length+'"'+(i===0?' aria-current="true"':'')+'>'+img(g,1,THUMB_SIZES)+'</button>').join('')+'</div></div>';
+    zoom+'<div class="gallery-thumbs" role="group" aria-label="Choose a photo">'+slides.map((g,i)=>'<button type="button" class="gallery-thumb" data-gallery-thumb="'+i+'" aria-label="Show photo '+(i+1)+' of '+slides.length+'"'+(i===0?' aria-current="true"':'')+'>'+thumb(g)+'</button>').join('')+'</div></div>';
 }
 // Filled in the browser from this device's history; stays hidden when empty or storage is blocked.
 const recentRow=(current='')=>'<section class="wrap section recent-section" data-recent'+(current?' data-recent-current="'+e(current)+'"':'')+' data-testid="recently-viewed" aria-labelledby="recent-title" hidden><div class="section-heading"><h2 id="recent-title">Recently viewed</h2><button type="button" class="text-button" data-recent-clear data-testid="recently-viewed-clear">Clear</button></div><div class="product-grid" data-recent-list></div></section>';

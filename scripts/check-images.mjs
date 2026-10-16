@@ -26,6 +26,16 @@ function dimensions(b,src) {
     }
     return [b.readUInt32BE(16),b.readUInt32BE(20)];
   }
+  if(src.endsWith('.avif')) {
+    // ISOBMFF: an 'ftyp' with the avif brand, no Exif or XMP items, no embedded ICC profile, and the 'ispe' size.
+    assert.equal(b.toString('ascii',4,8),'ftyp','AVIF ftyp: '+src);
+    assert(/avif|avis/.test(b.toString('ascii',8,32)),'AVIF brand: '+src);
+    const head=b.subarray(0,Math.min(b.length,4096)).toString('latin1');
+    assert(!/Exif|application\/rdf\+xml/.test(head),'AVIF metadata: '+src);
+    const colr=head.indexOf('colr');assert(colr<0||!['prof','rICC'].includes(head.slice(colr+4,colr+8)),'AVIF ICC profile: '+src);
+    const ispe=head.indexOf('ispe');assert(ispe>0,'Missing AVIF ispe: '+src);
+    return [b.readUInt32BE(ispe+8),b.readUInt32BE(ispe+12)];
+  }
   assert.equal(b.toString('ascii',0,4),'RIFF');assert.equal(b.toString('ascii',8,12),'WEBP');
   let size;
   for(let p=12;p+8<=b.length;) {
@@ -57,12 +67,22 @@ export async function checkImageOutputs(paths) {
       assert.deepEqual(dimensions(b,output.src),[output.width,output.height]);
       assert(provenance.includes(output.sha256),'Derivative missing from provenance');
       outputs.set(output.src,output);
+      if(output.avif) {
+        // AVIF twin: same pixels and size as its WebP, smaller, hashed and documented.
+        const a=await readFile(join(root,'public',output.avif.src));
+        assert.equal(sha(a),output.avif.sha256,'AVIF hash: '+output.avif.src);
+        assert.equal(a.length,output.avif.bytes);assert(a.length<output.bytes,'AVIF smaller than its WebP: '+output.avif.src);
+        assert.deepEqual(dimensions(a,output.avif.src),[output.width,output.height]);
+        assert(provenance.includes(output.avif.sha256),'AVIF missing from provenance');
+        outputs.set(output.avif.src,{...output.avif,width:output.width,height:output.height});
+      }
     }
   }
   const config=JSON.parse(await readFile(join(root,'dist/data/store.json'),'utf8'));
   const products=JSON.parse(await readFile(join(root,'dist/data/products.json'),'utf8'));
-  const heroSrcs=config.hero?[...config.hero.portrait,...config.hero.landscape,...(config.hero.share?[config.hero.share]:[])].map(v=>v.src):[];
-  const referenced=new Set([config.logo,...(config.logoVariants||[]).map(v=>v.src),...heroSrcs,...products.flatMap(p=>[p.image,...(p.imageVariants||[]).map(v=>v.src),...(p.gallery||[]).flatMap(g=>g.variants.map(v=>v.src)),p.shareImage?.src])].filter(Boolean));
+  const srcs=v=>[v.src,v.avif].filter(Boolean);
+  const heroSrcs=config.hero?[...config.hero.portrait,...config.hero.landscape,...(config.hero.share?[config.hero.share]:[])].flatMap(srcs):[];
+  const referenced=new Set([config.logo,...(config.logoVariants||[]).map(v=>v.src),...heroSrcs,...products.flatMap(p=>[p.image,...(p.imageVariants||[]).flatMap(srcs),...(p.gallery||[]).flatMap(g=>g.variants.flatMap(srcs)),p.shareImage?.src])].filter(Boolean));
   const shipped=(await readdir(join(root,'dist/assets'))).map(name=>'/assets/'+name);
   assert.deepEqual([...shipped].sort(),[...referenced].sort(),'Only referenced derivatives belong in dist/');
   for(const src of shipped) {
@@ -74,6 +94,14 @@ export async function checkImageOutputs(paths) {
   const report={largestImageBytes:Math.max(...[...outputs.values()].map(o=>o.bytes)),pages:[]};
   for(const path of paths) {
     const html=await readFile(join(root,'dist',path),'utf8');let ceiling=0;
+    const pictures=[...html.matchAll(/<picture\b[^>]*>([\s\S]*?)<\/picture>/g)].map(m=>m[1]);
+    const largest=tag=>{const set=tag.match(/srcset="([^"]*)"/);const list=set?set[1].split(',').map(x=>x.trim().split(/\s+/)[0]):[tag.match(/src="([^"]*)"/)[1]];
+      for(const src of list)assert(outputs.has(src)&&referenced.has(src),'Unknown candidate: '+src);return Math.max(...list.map(src=>outputs.get(src).bytes));};
+    // A <picture> downloads one candidate: count the largest across its <source>s and <img> once.
+    for(const inner of pictures)ceiling+=Math.max(...[...inner.matchAll(/<(?:source|img)\b[^>]*>/g)].map(m=>largest(m[0])));
+    for(const inner of pictures)for(const [tag] of inner.matchAll(/<source\b[^>]*>/g))
+      if(/type="image\/avif"/.test(tag))for(const src of tag.match(/srcset="([^"]*)"/)[1].split(',').map(x=>x.trim().split(/\s+/)[0]))assert(src.endsWith('.avif'),'AVIF source lists only AVIF files');
+    const outside=html.replace(/<picture\b[^>]*>[\s\S]*?<\/picture>/g,'');
     for(const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
       const attrs=Object.fromEntries([...tag.matchAll(/([a-z]+)="([^"]*)"/g)].map(m=>[m[1],m[2]]));
       const fallback=outputs.get(attrs.src);assert(fallback,'Unknown image: '+attrs.src);
@@ -82,13 +110,8 @@ export async function checkImageOutputs(paths) {
       const candidates=attrs.srcset?attrs.srcset.split(',').map(x=>x.trim().split(/\s+/)[0]):[attrs.src];
       if(attrs.src.endsWith('.webp'))assert(attrs.srcset&&attrs.sizes,'Responsive product photo');
       for(const src of candidates)assert(outputs.has(src)&&referenced.has(src),'Unknown srcset candidate: '+src);
-      ceiling+=Math.max(...candidates.map(src=>outputs.get(src).bytes));
     }
-    for(const [tag] of html.matchAll(/<source\b[^>]*>/g)) {
-      const candidates=tag.match(/srcset="([^"]*)"/)[1].split(',').map(x=>x.trim().split(/\s+/)[0]);
-      for(const src of candidates)assert(outputs.has(src)&&referenced.has(src),'Unknown <source> candidate: '+src);
-      ceiling+=Math.max(...candidates.map(src=>outputs.get(src).bytes));
-    }
+    for(const [tag] of outside.matchAll(/<img\b[^>]*>/g))ceiling+=largest(tag);
     assert(ceiling<=1_500_000,'Conservative page image budget: '+path);
     for(const [,url] of html.matchAll(/<meta property="og:image" content="([^"]+)"/g)) {
       const share=outputs.get(new URL(url).pathname);

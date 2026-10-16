@@ -30,32 +30,38 @@
       {
         "src": "/assets/hidden-leaf-sq-160.webp",
         "width": 160,
-        "height": 160
+        "height": 160,
+        "avif": "/assets/hidden-leaf-sq-160.avif"
       },
       {
         "src": "/assets/hidden-leaf-sq-320.webp",
         "width": 320,
-        "height": 320
+        "height": 320,
+        "avif": "/assets/hidden-leaf-sq-320.avif"
       },
       {
         "src": "/assets/hidden-leaf-sq-480.webp",
         "width": 480,
-        "height": 480
+        "height": 480,
+        "avif": "/assets/hidden-leaf-sq-480.avif"
       },
       {
         "src": "/assets/hidden-leaf-sq-640.webp",
         "width": 640,
-        "height": 640
+        "height": 640,
+        "avif": "/assets/hidden-leaf-sq-640.avif"
       },
       {
         "src": "/assets/hidden-leaf-sq-960.webp",
         "width": 960,
-        "height": 960
+        "height": 960,
+        "avif": "/assets/hidden-leaf-sq-960.avif"
       },
       {
         "src": "/assets/hidden-leaf-sq-1200.webp",
         "width": 1200,
-        "height": 1200
+        "height": 1200,
+        "avif": "/assets/hidden-leaf-sq-1200.avif"
       }
     ],
     "imageWidth": 640,
@@ -72,27 +78,32 @@
           {
             "src": "/assets/hidden-leaf-g2-160.webp",
             "width": 160,
-            "height": 160
+            "height": 160,
+            "avif": "/assets/hidden-leaf-g2-160.avif"
           },
           {
             "src": "/assets/hidden-leaf-g2-320.webp",
             "width": 320,
-            "height": 320
+            "height": 320,
+            "avif": "/assets/hidden-leaf-g2-320.avif"
           },
           {
             "src": "/assets/hidden-leaf-g2-480.webp",
             "width": 480,
-            "height": 480
+            "height": 480,
+            "avif": "/assets/hidden-leaf-g2-480.avif"
           },
           {
             "src": "/assets/hidden-leaf-g2-640.webp",
             "width": 640,
-            "height": 640
+            "height": 640,
+            "avif": "/assets/hidden-leaf-g2-640.avif"
           },
           {
             "src": "/assets/hidden-leaf-g2-770.webp",
             "width": 770,
-            "height": 770
+            "height": 770,
+            "avif": "/assets/hidden-leaf-g2-770.avif"
           }
         ]
       },
@@ -105,27 +116,32 @@
           {
             "src": "/assets/hidden-leaf-g3-160.webp",
             "width": 160,
-            "height": 160
+            "height": 160,
+            "avif": "/assets/hidden-leaf-g3-160.avif"
           },
           {
             "src": "/assets/hidden-leaf-g3-320.webp",
             "width": 320,
-            "height": 320
+            "height": 320,
+            "avif": "/assets/hidden-leaf-g3-320.avif"
           },
           {
             "src": "/assets/hidden-leaf-g3-480.webp",
             "width": 480,
-            "height": 480
+            "height": 480,
+            "avif": "/assets/hidden-leaf-g3-480.avif"
           },
           {
             "src": "/assets/hidden-leaf-g3-640.webp",
             "width": 640,
-            "height": 640
+            "height": 640,
+            "avif": "/assets/hidden-leaf-g3-640.avif"
           },
           {
             "src": "/assets/hidden-leaf-g3-770.webp",
             "width": 770,
-            "height": 770
+            "height": 770,
+            "avif": "/assets/hidden-leaf-g3-770.avif"
           }
         ]
       }
@@ -167,32 +183,38 @@
       {
         "src": "/assets/baymax-sq-160.webp",
         "width": 160,
-        "height": 160
+        "height": 160,
+        "avif": "/assets/baymax-sq-160.avif"
       },
       {
         "src": "/assets/baymax-sq-320.webp",
         "width": 320,
-        "height": 320
+        "height": 320,
+        "avif": "/assets/baymax-sq-320.avif"
       },
       {
         "src": "/assets/baymax-sq-480.webp",
         "width": 480,
-        "height": 480
+        "height": 480,
+        "avif": "/assets/baymax-sq-480.avif"
       },
       {
         "src": "/assets/baymax-sq-640.webp",
         "width": 640,
-        "height": 640
+        "height": 640,
+        "avif": "/assets/baymax-sq-640.avif"
       },
       {
         "src": "/assets/baymax-sq-960.webp",
         "width": 960,
-        "height": 960
+        "height": 960,
+        "avif": "/assets/baymax-sq-960.avif"
       },
       {
         "src": "/assets/baymax-sq-1200.webp",
         "width": 1200,
-        "height": 1200
+        "height": 1200,
+        "avif": "/assets/baymax-sq-1200.avif"
       }
     ],
     "imageWidth": 640,
@@ -237,32 +259,38 @@
       {
         "src": "/assets/kurama-sq-160.webp",
         "width": 160,
-        "height": 160
+        "height": 160,
+        "avif": "/assets/kurama-sq-160.avif"
       },
       {
         "src": "/assets/kurama-sq-320.webp",
         "width": 320,
-        "height": 320
+        "height": 320,
+        "avif": "/assets/kurama-sq-320.avif"
       },
       {
         "src": "/assets/kurama-sq-480.webp",
         "width": 480,
-        "height": 480
+        "height": 480,
+        "avif": "/assets/kurama-sq-480.avif"
       },
       {
         "src": "/assets/kurama-sq-640.webp",
         "width": 640,
-        "height": 640
+        "height": 640,
+        "avif": "/assets/kurama-sq-640.avif"
       },
       {
         "src": "/assets/kurama-sq-960.webp",
         "width": 960,
-        "height": 960
+        "height": 960,
+        "avif": "/assets/kurama-sq-960.avif"
       },
       {
         "src": "/assets/kurama-sq-1200.webp",
         "width": 1200,
-        "height": 1200
+        "height": 1200,
+        "avif": "/assets/kurama-sq-1200.avif"
       }
     ],
     "imageWidth": 640,
@@ -309,32 +337,38 @@
       {
         "src": "/assets/night-fury-sq-160.webp",
         "width": 160,
-        "height": 160
+        "height": 160,
+        "avif": "/assets/night-fury-sq-160.avif"
       },
       {
         "src": "/assets/night-fury-sq-320.webp",
         "width": 320,
-        "height": 320
+        "height": 320,
+        "avif": "/assets/night-fury-sq-320.avif"
       },
       {
         "src": "/assets/night-fury-sq-480.webp",
         "width": 480,
-        "height": 480
+        "height": 480,
+        "avif": "/assets/night-fury-sq-480.avif"
       },
       {
         "src": "/assets/night-fury-sq-640.webp",
         "width": 640,
-        "height": 640
+        "height": 640,
+        "avif": "/assets/night-fury-sq-640.avif"
       },
       {
         "src": "/assets/night-fury-sq-960.webp",
         "width": 960,
-        "height": 960
+        "height": 960,
+        "avif": "/assets/night-fury-sq-960.avif"
       },
       {
         "src": "/assets/night-fury-sq-1200.webp",
         "width": 1200,
-        "height": 1200
+        "height": 1200,
+        "avif": "/assets/night-fury-sq-1200.avif"
       }
     ],
     "imageWidth": 640,
@@ -379,32 +413,38 @@
       {
         "src": "/assets/minato-kunai-sq-160.webp",
         "width": 160,
-        "height": 160
+        "height": 160,
+        "avif": "/assets/minato-kunai-sq-160.avif"
       },
       {
         "src": "/assets/minato-kunai-sq-320.webp",
         "width": 320,
-        "height": 320
+        "height": 320,
+        "avif": "/assets/minato-kunai-sq-320.avif"
       },
       {
         "src": "/assets/minato-kunai-sq-480.webp",
         "width": 480,
-        "height": 480
+        "height": 480,
+        "avif": "/assets/minato-kunai-sq-480.avif"
       },
       {
         "src": "/assets/minato-kunai-sq-640.webp",
         "width": 640,
-        "height": 640
+        "height": 640,
+        "avif": "/assets/minato-kunai-sq-640.avif"
       },
       {
         "src": "/assets/minato-kunai-sq-960.webp",
         "width": 960,
-        "height": 960
+        "height": 960,
+        "avif": "/assets/minato-kunai-sq-960.avif"
       },
       {
         "src": "/assets/minato-kunai-sq-1200.webp",
         "width": 1200,
-        "height": 1200
+        "height": 1200,
+        "avif": "/assets/minato-kunai-sq-1200.avif"
       }
     ],
     "imageWidth": 640,
@@ -421,32 +461,38 @@
           {
             "src": "/assets/minato-kunai-g2-160.webp",
             "width": 160,
-            "height": 160
+            "height": 160,
+            "avif": "/assets/minato-kunai-g2-160.avif"
           },
           {
             "src": "/assets/minato-kunai-g2-320.webp",
             "width": 320,
-            "height": 320
+            "height": 320,
+            "avif": "/assets/minato-kunai-g2-320.avif"
           },
           {
             "src": "/assets/minato-kunai-g2-480.webp",
             "width": 480,
-            "height": 480
+            "height": 480,
+            "avif": "/assets/minato-kunai-g2-480.avif"
           },
           {
             "src": "/assets/minato-kunai-g2-640.webp",
             "width": 640,
-            "height": 640
+            "height": 640,
+            "avif": "/assets/minato-kunai-g2-640.avif"
           },
           {
             "src": "/assets/minato-kunai-g2-960.webp",
             "width": 960,
-            "height": 960
+            "height": 960,
+            "avif": "/assets/minato-kunai-g2-960.avif"
           },
           {
             "src": "/assets/minato-kunai-g2-1200.webp",
             "width": 1200,
-            "height": 1200
+            "height": 1200,
+            "avif": "/assets/minato-kunai-g2-1200.avif"
           }
         ]
       },
@@ -459,32 +505,38 @@
           {
             "src": "/assets/minato-kunai-g3-160.webp",
             "width": 160,
-            "height": 160
+            "height": 160,
+            "avif": "/assets/minato-kunai-g3-160.avif"
           },
           {
             "src": "/assets/minato-kunai-g3-320.webp",
             "width": 320,
-            "height": 320
+            "height": 320,
+            "avif": "/assets/minato-kunai-g3-320.avif"
           },
           {
             "src": "/assets/minato-kunai-g3-480.webp",
             "width": 480,
-            "height": 480
+            "height": 480,
+            "avif": "/assets/minato-kunai-g3-480.avif"
           },
           {
             "src": "/assets/minato-kunai-g3-640.webp",
             "width": 640,
-            "height": 640
+            "height": 640,
+            "avif": "/assets/minato-kunai-g3-640.avif"
           },
           {
             "src": "/assets/minato-kunai-g3-960.webp",
             "width": 960,
-            "height": 960
+            "height": 960,
+            "avif": "/assets/minato-kunai-g3-960.avif"
           },
           {
             "src": "/assets/minato-kunai-g3-1200.webp",
             "width": 1200,
-            "height": 1200
+            "height": 1200,
+            "avif": "/assets/minato-kunai-g3-1200.avif"
           }
         ]
       },
@@ -497,32 +549,38 @@
           {
             "src": "/assets/minato-kunai-g4-160.webp",
             "width": 160,
-            "height": 160
+            "height": 160,
+            "avif": "/assets/minato-kunai-g4-160.avif"
           },
           {
             "src": "/assets/minato-kunai-g4-320.webp",
             "width": 320,
-            "height": 320
+            "height": 320,
+            "avif": "/assets/minato-kunai-g4-320.avif"
           },
           {
             "src": "/assets/minato-kunai-g4-480.webp",
             "width": 480,
-            "height": 480
+            "height": 480,
+            "avif": "/assets/minato-kunai-g4-480.avif"
           },
           {
             "src": "/assets/minato-kunai-g4-640.webp",
             "width": 640,
-            "height": 640
+            "height": 640,
+            "avif": "/assets/minato-kunai-g4-640.avif"
           },
           {
             "src": "/assets/minato-kunai-g4-960.webp",
             "width": 960,
-            "height": 960
+            "height": 960,
+            "avif": "/assets/minato-kunai-g4-960.avif"
           },
           {
             "src": "/assets/minato-kunai-g4-1200.webp",
             "width": 1200,
-            "height": 1200
+            "height": 1200,
+            "avif": "/assets/minato-kunai-g4-1200.avif"
           }
         ]
       }
@@ -566,32 +624,38 @@
       {
         "src": "/assets/light-fury-sq-160.webp",
         "width": 160,
-        "height": 160
+        "height": 160,
+        "avif": "/assets/light-fury-sq-160.avif"
       },
       {
         "src": "/assets/light-fury-sq-320.webp",
         "width": 320,
-        "height": 320
+        "height": 320,
+        "avif": "/assets/light-fury-sq-320.avif"
       },
       {
         "src": "/assets/light-fury-sq-480.webp",
         "width": 480,
-        "height": 480
+        "height": 480,
+        "avif": "/assets/light-fury-sq-480.avif"
       },
       {
         "src": "/assets/light-fury-sq-640.webp",
         "width": 640,
-        "height": 640
+        "height": 640,
+        "avif": "/assets/light-fury-sq-640.avif"
       },
       {
         "src": "/assets/light-fury-sq-960.webp",
         "width": 960,
-        "height": 960
+        "height": 960,
+        "avif": "/assets/light-fury-sq-960.avif"
       },
       {
         "src": "/assets/light-fury-sq-1200.webp",
         "width": 1200,
-        "height": 1200
+        "height": 1200,
+        "avif": "/assets/light-fury-sq-1200.avif"
       }
     ],
     "imageWidth": 640,
@@ -636,32 +700,38 @@
       {
         "src": "/assets/classic-kunai-sq-160.webp",
         "width": 160,
-        "height": 160
+        "height": 160,
+        "avif": "/assets/classic-kunai-sq-160.avif"
       },
       {
         "src": "/assets/classic-kunai-sq-320.webp",
         "width": 320,
-        "height": 320
+        "height": 320,
+        "avif": "/assets/classic-kunai-sq-320.avif"
       },
       {
         "src": "/assets/classic-kunai-sq-480.webp",
         "width": 480,
-        "height": 480
+        "height": 480,
+        "avif": "/assets/classic-kunai-sq-480.avif"
       },
       {
         "src": "/assets/classic-kunai-sq-640.webp",
         "width": 640,
-        "height": 640
+        "height": 640,
+        "avif": "/assets/classic-kunai-sq-640.avif"
       },
       {
         "src": "/assets/classic-kunai-sq-960.webp",
         "width": 960,
-        "height": 960
+        "height": 960,
+        "avif": "/assets/classic-kunai-sq-960.avif"
       },
       {
         "src": "/assets/classic-kunai-sq-1200.webp",
         "width": 1200,
-        "height": 1200
+        "height": 1200,
+        "avif": "/assets/classic-kunai-sq-1200.avif"
       }
     ],
     "imageWidth": 640,

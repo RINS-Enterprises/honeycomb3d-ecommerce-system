@@ -3,11 +3,17 @@ import {escapeHtml as e, money} from './domain.mjs';
 
 export const price = p => p.priceLkr === null ? 'Price on enquiry' : money(p.priceLkr);
 export const CARD_SIZES = '(max-width: 700px) calc((100vw - 52px) / 2), (max-width: 1000px) calc((100vw - 124px) / 3), (max-width: 1280px) calc((100vw - 146px) / 4), 284px';
+// AVIF first inside <picture> when every variant has an AVIF twin; the WebP <img> stays the fallback.
+export function avifSource(variants, sizes, media='') {
+  if (!variants?.length || !variants.every(v=>v.avif)) return '';
+  return '<source type="image/avif"'+(media?' media="'+e(media)+'"':'')+' srcset="'+e(variants.map(v=>v.avif+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'">';
+}
+export const withPicture = (source, img) => source ? '<picture>'+source+img+'</picture>' : img;
 export function picture(p, {sizes=CARD_SIZES, loading='lazy', priority=false}={}) {
   if (!p.image) return '';
   const responsive=p.imageVariants?.length ?
     ' srcset="'+e(p.imageVariants.map(v=>v.src+' '+v.width+'w').join(', '))+'" sizes="'+e(sizes)+'"' : '';
-  return '<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'"'+(priority?' fetchpriority="high"':'')+'>';
+  return withPicture(avifSource(p.imageVariants,sizes),'<img src="'+e(p.image)+'"'+responsive+' alt="'+e(p.imageAlt)+'" width="'+(p.imageWidth||640)+'" height="'+(p.imageHeight||640)+'" loading="'+loading+'"'+(priority?' fetchpriority="high"':'')+'>');
 }
 // Second gallery photo for the hover cross-fade; the browser builds the <img> lazily (aria-hidden, so its alt never reaches assistive tech).
 function altPhoto(p) {
