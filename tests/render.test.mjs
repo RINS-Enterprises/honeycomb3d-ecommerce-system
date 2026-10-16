@@ -144,3 +144,15 @@ test('404 keeps its message and adds a no-JS search to the shop plus four design
   assert.match(html,/name="q"/);
   assert.equal([...html.matchAll(/data-testid="product-card"/g)].length,4);
 });
+
+test('shop chips show design counts and list themes largest first',async()=>{
+  const {shop}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const html=shop(visible,store);
+  const chip=value=>html.match(new RegExp('value="'+value+'"[^>]*><span>[^<]*(?:<span class="chip-count"><span class="sr-only">, </span>(\\d+)</span>)?'))?.[1];
+  assert.equal(Number(chip('Keychains')),visible.filter(p=>p.category==='Keychains').length);
+  assert.equal(chip('all'),undefined,'"All" carries no count');
+  const themes=[...html.matchAll(/name="theme" value="([^"]+)"/g)].map(m=>m[1]).filter(v=>v!=='any');
+  const count=t=>visible.filter(p=>p.tags.includes(t)).length;
+  assert(themes.every((t,i)=>!i||count(themes[i-1])>=count(t)),'Themes ordered by size: '+themes);
+});

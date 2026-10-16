@@ -87,19 +87,22 @@ export function home(products,store) {
 }
 const slug = value => value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 function chips(name, legend, options) {
-  return '<fieldset class="chip-group"><legend>'+legend+'</legend><div class="chips">'+options.map(([value,label],i)=>
-    '<label class="chip" data-testid="filter-'+slug(value)+'"><input type="radio" name="'+name+'" value="'+e(value)+'"'+(i===0?' checked':'')+'><span>'+e(label)+'</span></label>').join('')+'</div></fieldset>';
+  return '<fieldset class="chip-group"><legend>'+legend+'</legend><div class="chips">'+options.map(([value,label,count],i)=>
+    '<label class="chip" data-testid="filter-'+slug(value)+'"><input type="radio" name="'+name+'" value="'+e(value)+'"'+(i===0?' checked':'')+'><span>'+e(label)+(count?'<span class="chip-count"><span class="sr-only">, </span>'+count+'</span>':'')+'</span></label>').join('')+'</div></fieldset>';
 }
 // Last cell of the shop grid: a custom-print prompt that also fills the gap after an odd row.
 const customTile='<a class="grid-cta" href="/custom/" data-grid-cta data-testid="shop-custom-tile"><span class="grid-cta-mark" aria-hidden="true">+</span><span class="eyebrow">CUSTOM PRINTS</span><h2>Don’t see it?</h2><span class="grid-cta-copy">Send a model link or describe your idea. We’ll confirm what’s possible.</span><span class="grid-cta-link">Start a custom enquiry <span aria-hidden="true">→</span></span></a>';
 export function shop(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];
   // Themes come from the tags, minus tags that only repeat a category name.
-  const themes=[...new Set(products.flatMap(p=>p.tags))].filter(t=>!categories.includes(t));
+  // Chips show how many designs each holds; themes are ordered largest first (ties keep catalogue order).
+  const countOf=test=>products.filter(test).length;
+  const themes=[...new Set(products.flatMap(p=>p.tags))].filter(t=>!categories.includes(t))
+    .map((t,i)=>({t,i,n:countOf(p=>p.tags.includes(t))})).sort((a,b)=>b.n-a.n||a.i-b.i).map(x=>x.t);
   return layout('Shop','<section class="wrap section shop-section"><p class="eyebrow">THE COLLECTION</p><h1>Find your next favourite.</h1><p class="lead">Explore the designs. Ask about colours, sizes and finishes.</p>' +
     '<form class="filters" id="filters" role="search" aria-label="Filter the collection"><div class="search-field"><label for="search">Search the collection</label><div class="search-box"><input type="search" id="search" name="q" placeholder="Try dragons, Naruto, keychains…" maxlength="100" autocomplete="off" aria-keyshortcuts="/"><kbd class="search-key" aria-hidden="true">/</kbd><button type="button" class="search-clear" data-search-clear data-testid="search-clear" aria-label="Clear search" hidden><span aria-hidden="true">×</span></button></div></div>' +
-    chips('category','Category',[['all','All'],...categories.map(c=>[c,c])]) +
-    (themes.length?chips('theme','Theme',[['any','Any theme'],...themes.map(t=>[t,t])]):'') +
+    chips('category','Category',[['all','All'],...categories.map(c=>[c,c,countOf(p=>p.category===c)])]) +
+    (themes.length?chips('theme','Theme',[['any','Any theme'],...themes.map(t=>[t,t,countOf(p=>p.tags.includes(t))])]):'') +
     '</form><div class="results-bar"><p class="muted" role="status" id="result-count">'+products.length+' designs</p><button class="text-button" id="reset-filters" type="button" hidden>Clear filters</button>' +
     '<label class="sort-field">Sort by<select id="sort" name="sort" form="filters" data-testid="sort"><option value="featured">Featured</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name">Name: A to Z</option></select></label></div>' +
     '<div class="product-grid">'+products.map((p,i)=>card(p,{headingLevel:2,loading:i<2?'eager':'lazy'})).join('')+customTile+'</div><div class="empty state-panel" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><div class="actions"><a class="button secondary" href="/custom/">Ask about a custom print</a></div></div><noscript><p>All designs are shown. Enable JavaScript to use search and filters.</p></noscript></section>',store,'shop','',{description:'Explore the designs. Ask about colours, sizes and finishes. 3D-printed keychains, figures and props, priced in LKR.',path:'/shop/'});
