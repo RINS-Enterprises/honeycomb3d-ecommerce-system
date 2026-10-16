@@ -1,0 +1,7 @@
+reviewed_ref: 341fc3c271ba76a97f06e46830a5befc6896c0f0
+reviewed_sha: 341fc3c271ba76a97f06e46830a5befc6896c0f0
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-15T20:13:02Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-15T20:08:56+00:00
+subject: Use the owner's dark-background logo on transparency instead of the white box

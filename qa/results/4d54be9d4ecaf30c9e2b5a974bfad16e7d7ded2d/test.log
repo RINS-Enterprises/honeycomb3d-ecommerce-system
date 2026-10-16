@@ -1,0 +1,122 @@
+
+> honeycomb3d-storefront@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: all three recovered keychains appear under the keychain category
+ok 1 - all three recovered keychains appear under the keychain category
+  ---
+  duration_ms: 0.922127
+  type: 'test'
+  ...
+# Subtest: draft descriptions are explicitly attributed and remain unapproved
+ok 2 - draft descriptions are explicitly attributed and remain unapproved
+  ---
+  duration_ms: 1.021036
+  type: 'test'
+  ...
+# Subtest: owner prices preserve storefront IDs, provenance and unconfirmed approval
+ok 3 - owner prices preserve storefront IDs, provenance and unconfirmed approval
+  ---
+  duration_ms: 1.610673
+  type: 'test'
+  ...
+# Subtest: pending owner copies use placeholders; approved photos are responsive square frames with real dimensions
+ok 4 - pending owner copies use placeholders; approved photos are responsive square frames with real dimensions
+  ---
+  duration_ms: 0.442647
+  type: 'test'
+  ...
+# Subtest: Kurama and Classic Kunai stay off the storefront until their photos are imported
+ok 5 - Kurama and Classic Kunai stay off the storefront until their photos are imported
+  ---
+  duration_ms: 0.172631
+  type: 'test'
+  ...
+# Subtest: restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+ok 6 - restored cart rejects tampering, unavailable and unknown IDs and clamps duplicates
+  ---
+  duration_ms: 2.082443
+  type: 'test'
+  ...
+# Subtest: money is computed in cents and unknown prices remain explicit
+ok 7 - money is computed in cents and unknown prices remain explicit
+  ---
+  duration_ms: 16.133118
+  type: 'test'
+  ...
+# Subtest: bad storage and invalid JSON are recoverable
+ok 8 - bad storage and invalid JSON are recoverable
+  ---
+  duration_ms: 0.244417
+  type: 'test'
+  ...
+# Subtest: WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+ok 9 - WhatsApp gate rejects missing contacts; message round trips Unicode and symbols
+  ---
+  duration_ms: 0.320982
+  type: 'test'
+  ...
+# Subtest: all search words and category must match
+ok 10 - all search words and category must match
+  ---
+  duration_ms: 0.323784
+  type: 'test'
+  ...
+# Subtest: live build requires verified contact, approvals, original photos and availability
+ok 11 - live build requires verified contact, approvals, original photos and availability
+  ---
+  duration_ms: 0.676775
+  type: 'test'
+  ...
+# Subtest: escaping prevents catalogue text from becoming markup
+ok 12 - escaping prevents catalogue text from becoming markup
+  ---
+  duration_ms: 0.277143
+  type: 'test'
+  ...
+# Subtest: decimal prices accept normal currency and reject sub-cent values
+ok 13 - decimal prices accept normal currency and reject sub-cent values
+  ---
+  duration_ms: 0.267064
+  type: 'test'
+  ...
+# Subtest: live-visible catalogue strips unapproved items from every cart operation
+ok 14 - live-visible catalogue strips unapproved items from every cart operation
+  ---
+  duration_ms: 0.302293
+  type: 'test'
+  ...
+# Subtest: products without an approved photo are hidden in preview and live
+ok 15 - products without an approved photo are hidden in preview and live
+  ---
+  duration_ms: 0.462866
+  type: 'test'
+  ...
+# Subtest: the home hero only links to a product included in the live-visible catalogue
+ok 16 - the home hero only links to a product included in the live-visible catalogue
+  ---
+  duration_ms: 15.279006
+  type: 'test'
+  ...
+# Subtest: an empty live catalogue has no dead product link or unapproved hero photo
+ok 17 - an empty live catalogue has no dead product link or unapproved hero photo
+  ---
+  duration_ms: 0.232735
+  type: 'test'
+  ...
+# Subtest: photos decode synchronously so off-screen cards never paint as empty frames
+ok 18 - photos decode synchronously so off-screen cards never paint as empty frames
+  ---
+  duration_ms: 0.480572
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 113.241765

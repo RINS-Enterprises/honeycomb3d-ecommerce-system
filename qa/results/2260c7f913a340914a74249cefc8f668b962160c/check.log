@@ -1,0 +1,5 @@
+
+> honeycomb3d-storefront@0.1.0 check
+> node scripts/check.mjs
+
+Verified 13 generated pages and their local links/assets.

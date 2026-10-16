@@ -1,0 +1,7 @@
+reviewed_ref: 02746d7bddcaee883a121600f7253352ccd23bf3
+reviewed_sha: 02746d7bddcaee883a121600f7253352ccd23bf3
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T02:49:48Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T02:49:10+00:00
+subject: Related products: same category first, then shared themes

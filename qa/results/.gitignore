@@ -1,0 +1,3 @@
+# Full-size browser screenshots stay in the QA working copy. Commit downscaled copies as evidence
+# when a finding needs them.
+*.png

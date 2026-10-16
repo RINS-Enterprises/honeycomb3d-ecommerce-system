@@ -1,0 +1,7 @@
+reviewed_ref: 060ae0c3b095cfaf6672744f670a06dd15758850
+reviewed_sha: 060ae0c3b095cfaf6672744f670a06dd15758850
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T07:36:22Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T07:35:54+00:00
+subject: Fix CI: the card hover photo carries its gallery alt text

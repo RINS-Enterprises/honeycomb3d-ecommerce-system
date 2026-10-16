@@ -1,0 +1,97 @@
+# Browser smoke results
+
+- Reviewed commit: `2ae5546a50a69eeb3e653a754dc0ad24107316da`
+- Base URL: http://127.0.0.1:4173
+- Run: 2026-10-16T02:56:15.531Z -> 2026-10-16T02:56:33.840Z
+- Counts: {"PASS":88}
+
+| Status | Check | AC | Detail |
+|---|---|---|---|
+| PASS | home-load-mobile | AC-NAV-1 | GET / -> 200 |
+| PASS | lang-home@mobile | AC-A11Y-1 | html lang="en" |
+| PASS | title-home@mobile | AC-A11Y-1 | title "Collectibles & custom prints \| HoneyComb 3D" |
+| PASS | h1-home@mobile | AC-A11Y-2 | 1 visible h1 |
+| PASS | overflow-home@mobile | AC-NAV-3 | horizontal overflow 0px |
+| PASS | img-alt-home@mobile | AC-A11Y-3 | 0 img without alt attribute |
+| PASS | button-name-home@mobile | AC-A11Y-4 | 0 buttons without accessible name |
+| PASS | js-errors-home@mobile | AC-FAIL-4 | no console/page errors |
+| PASS | http-errors-home@mobile | AC-FAIL-4 | no same-origin 4xx/5xx |
+| PASS | nav-mobile | AC-NAV-2 | no menu toggle; 3 nav links visible directly (overflow checked separately) |
+| PASS | home-load-small | AC-NAV-1 | GET / -> 200 |
+| PASS | lang-home@small | AC-A11Y-1 | html lang="en" |
+| PASS | title-home@small | AC-A11Y-1 | title "Collectibles & custom prints \| HoneyComb 3D" |
+| PASS | h1-home@small | AC-A11Y-2 | 1 visible h1 |
+| PASS | overflow-home@small | AC-NAV-3 | horizontal overflow 0px |
+| PASS | img-alt-home@small | AC-A11Y-3 | 0 img without alt attribute |
+| PASS | button-name-home@small | AC-A11Y-4 | 0 buttons without accessible name |
+| PASS | js-errors-home@small | AC-FAIL-4 | no console/page errors |
+| PASS | http-errors-home@small | AC-FAIL-4 | no same-origin 4xx/5xx |
+| PASS | nav-small | AC-NAV-2 | no menu toggle; 3 nav links visible directly (overflow checked separately) |
+| PASS | home-load-desktop | AC-NAV-1 | GET / -> 200 |
+| PASS | lang-home@desktop | AC-A11Y-1 | html lang="en" |
+| PASS | title-home@desktop | AC-A11Y-1 | title "Collectibles & custom prints \| HoneyComb 3D" |
+| PASS | h1-home@desktop | AC-A11Y-2 | 1 visible h1 |
+| PASS | overflow-home@desktop | AC-NAV-3 | horizontal overflow 0px |
+| PASS | img-alt-home@desktop | AC-A11Y-3 | 0 img without alt attribute |
+| PASS | button-name-home@desktop | AC-A11Y-4 | 0 buttons without accessible name |
+| PASS | js-errors-home@desktop | AC-FAIL-4 | no console/page errors |
+| PASS | http-errors-home@desktop | AC-FAIL-4 | no same-origin 4xx/5xx |
+| PASS | nav-desktop | AC-NAV-1 | 3 visible links in first navigation landmark |
+| PASS | kbd-skip-link | AC-A11Y-5 | first Tab stop: A "Skip to content" |
+| PASS | kbd-focus-indicator | AC-A11Y-5 | 0/12 focused elements without outline/box-shadow |
+| PASS | catalog-desktop | AC-CAT-1 | 7 product links on /shop/ |
+| PASS | lang-catalog@desktop | AC-A11Y-1 | html lang="en" |
+| PASS | title-catalog@desktop | AC-A11Y-1 | title "Shop \| HoneyComb 3D" |
+| PASS | h1-catalog@desktop | AC-A11Y-2 | 1 visible h1 |
+| PASS | overflow-catalog@desktop | AC-NAV-3 | horizontal overflow 0px |
+| PASS | img-alt-catalog@desktop | AC-A11Y-3 | 0 img without alt attribute |
+| PASS | button-name-catalog@desktop | AC-A11Y-4 | 0 buttons without accessible name |
+| PASS | js-errors-catalog@desktop | AC-FAIL-4 | no console/page errors |
+| PASS | http-errors-catalog@desktop | AC-FAIL-4 | no same-origin 4xx/5xx |
+| PASS | filter-apply | AC-CAT-2 | filter (LABEL) -> 7 to 3 visible products, url changed |
+| PASS | pdp-desktop | AC-PDP-1 | /products/hidden-leaf-keychain/ -> 200, name "Hidden Leaf Keychain", price 400 |
+| PASS | lang-pdp@desktop | AC-A11Y-1 | html lang="en" |
+| PASS | title-pdp@desktop | AC-A11Y-1 | title "Hidden Leaf Keychain \| HoneyComb 3D" |
+| PASS | h1-pdp@desktop | AC-A11Y-2 | 1 visible h1 |
+| PASS | overflow-pdp@desktop | AC-NAV-3 | horizontal overflow 0px |
+| PASS | img-alt-pdp@desktop | AC-A11Y-3 | 0 img without alt attribute |
+| PASS | button-name-pdp@desktop | AC-A11Y-4 | 0 buttons without accessible name |
+| PASS | js-errors-pdp@desktop | AC-FAIL-4 | no console/page errors |
+| PASS | http-errors-pdp@desktop | AC-FAIL-4 | no same-origin 4xx/5xx |
+| PASS | add-to-cart-desktop | AC-CART-1 | cart count 0 -> 1 |
+| PASS | add-to-cart-announce-desktop | AC-A11Y-7 | live region text: ["Hidden Leaf Keychain added to your request cart."] |
+| PASS | cart-line-desktop | AC-CART-2 | qty 1, subtotal 400, expected 1 x 400 |
+| PASS | cart-qty-inc-desktop | AC-CART-3 | via + button: qty 2, subtotal 800, expected 2 x 400 = 800 |
+| PASS | cart-qty-invalid-desktop | AC-CART-3 | after entering 0, 21, 1.5: qty 2 (expected to stay 2) |
+| PASS | cart-persist-desktop | AC-CART-5 | after reload qty 2 (was 2) |
+| PASS | whatsapp-handoff | AC-PREV-3 | preview: no WhatsApp link, "not open yet" notice shown (run with QA_LIVE_FIXTURE=1 to test the handoff) |
+| PASS | cart-remove-desktop | AC-CART-4 | empty-state shown, WhatsApp checkout unavailable, cart count 0 |
+| PASS | catalog-mobile | AC-CAT-1 | 7 product links on /shop/ |
+| PASS | lang-catalog@mobile | AC-A11Y-1 | html lang="en" |
+| PASS | title-catalog@mobile | AC-A11Y-1 | title "Shop \| HoneyComb 3D" |
+| PASS | h1-catalog@mobile | AC-A11Y-2 | 1 visible h1 |
+| PASS | overflow-catalog@mobile | AC-NAV-3 | horizontal overflow 0px |
+| PASS | img-alt-catalog@mobile | AC-A11Y-3 | 0 img without alt attribute |
+| PASS | button-name-catalog@mobile | AC-A11Y-4 | 0 buttons without accessible name |
+| PASS | js-errors-catalog@mobile | AC-FAIL-4 | no console/page errors |
+| PASS | http-errors-catalog@mobile | AC-FAIL-4 | no same-origin 4xx/5xx |
+| PASS | pdp-mobile | AC-PDP-1 | /products/hidden-leaf-keychain/ -> 200, name "Hidden Leaf Keychain", price 400 |
+| PASS | lang-pdp@mobile | AC-A11Y-1 | html lang="en" |
+| PASS | title-pdp@mobile | AC-A11Y-1 | title "Hidden Leaf Keychain \| HoneyComb 3D" |
+| PASS | h1-pdp@mobile | AC-A11Y-2 | 1 visible h1 |
+| PASS | overflow-pdp@mobile | AC-NAV-3 | horizontal overflow 0px |
+| PASS | img-alt-pdp@mobile | AC-A11Y-3 | 0 img without alt attribute |
+| PASS | button-name-pdp@mobile | AC-A11Y-4 | 0 buttons without accessible name |
+| PASS | js-errors-pdp@mobile | AC-FAIL-4 | no console/page errors |
+| PASS | http-errors-pdp@mobile | AC-FAIL-4 | no same-origin 4xx/5xx |
+| PASS | add-to-cart-mobile | AC-CART-1 | cart count 0 -> 1 |
+| PASS | add-to-cart-announce-mobile | AC-A11Y-7 | live region text: ["Hidden Leaf Keychain added to your request cart."] |
+| PASS | cart-line-mobile | AC-CART-2 | qty 1, subtotal 400, expected 1 x 400 |
+| PASS | cart-qty-inc-mobile | AC-CART-3 | via + button: qty 2, subtotal 800, expected 2 x 400 = 800 |
+| PASS | cart-qty-invalid-mobile | AC-CART-3 | after entering 0, 21, 1.5: qty 2 (expected to stay 2) |
+| PASS | cart-persist-mobile | AC-CART-5 | after reload qty 2 (was 2) |
+| PASS | cart-remove-mobile | AC-CART-4 | empty-state shown, WhatsApp checkout unavailable, cart count 0 |
+| PASS | unknown-product | AC-FAIL-1 | status 404, not-found text yes, recovery link yes |
+| PASS | corrupt-cart-storage | AC-FAIL-2 | keys honeycomb.cart.v1; page errors: none |
+| PASS | no-js-catalog | AC-FAIL-5 | 7 product links rendered without JavaScript |
+| PASS | security-headers | AC-SEC-3 | present |

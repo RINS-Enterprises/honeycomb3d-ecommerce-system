@@ -1,0 +1,7 @@
+reviewed_ref: 2173682591d7c1afc9a81a681ef9c01b19469a55
+reviewed_sha: 2173682591d7c1afc9a81a681ef9c01b19469a55
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T07:40:15Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T07:39:57+00:00
+subject: SVG favicon from the brand-symbol vectors; favicon.ico stays as fallback

@@ -1,0 +1,28 @@
+OK      home@small 200   
+OK      shop@small 200   
+OK      products-hidden-leaf-keychain@small 200   
+OK      products-baymax-figure@small 200   
+OK      products-night-fury-keychain@small 200   
+OK      products-minato-kunai@small 200   
+OK      products-light-fury-keychain@small 200   
+OK      cart@small 200   
+OK      qa-missing-page@small 404   console: Failed to load resource: the server responded with a status of 404 (Not Found)
+OK      home@mobile 200   
+OK      shop@mobile 200   
+OK      products-hidden-leaf-keychain@mobile 200   
+OK      products-baymax-figure@mobile 200   
+OK      products-night-fury-keychain@mobile 200   
+OK      products-minato-kunai@mobile 200   
+OK      products-light-fury-keychain@mobile 200   
+OK      cart@mobile 200   
+OK      qa-missing-page@mobile 404   console: Failed to load resource: the server responded with a status of 404 (Not Found)
+OK      home@desktop 200   
+OK      shop@desktop 200   
+OK      products-hidden-leaf-keychain@desktop 200   
+OK      products-baymax-figure@desktop 200   
+OK      products-night-fury-keychain@desktop 200   
+OK      products-minato-kunai@desktop 200   console: request failed: /assets/honeycomb-logo-dark-264.png
+OK      products-light-fury-keychain@desktop 200   
+OK      cart@desktop 200   
+OK      qa-missing-page@desktop 404   console: Failed to load resource: the server responded with a status of 404 (Not Found)
+all pages captured, no blank images -> /tmp/claude-0/-home-user/60c97030-e9e1-5c3b-a7ae-5fe64c98386a/scratchpad/qa-review/screens-cc01cb76267b

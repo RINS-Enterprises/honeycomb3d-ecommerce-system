@@ -1,0 +1,17 @@
+PASS    home@mobile page-image-bytes - 0.26 MB of images on / (limit 1.5 MB); LCP 84 ms (/assets/night-fury-hero-portrait-1065.webp) on local server
+PASS    shop@mobile page-image-bytes - 0.17 MB of images on /shop/ (limit 1.5 MB); LCP 60 ms (/assets/hidden-leaf-sq-640.webp) on local server
+PASS    products-hidden-leaf-keychain@mobile page-image-bytes - 0.34 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 68 ms (/assets/hidden-leaf-sq-1200.webp) on local server
+PASS    products-baymax-figure@mobile page-image-bytes - 0.25 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 72 ms (/assets/baymax-sq-1200.webp) on local server
+PASS    products-night-fury-keychain@mobile page-image-bytes - 0.21 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 68 ms (/assets/night-fury-sq-1200.webp) on local server
+PASS    products-minato-kunai@mobile page-image-bytes - 0.45 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 80 ms (/assets/minato-kunai-sq-1200.webp) on local server
+PASS    products-light-fury-keychain@mobile page-image-bytes - 0.20 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 72 ms (/assets/light-fury-sq-1200.webp) on local server
+INFO    home@desktop /assets/night-fury-hero-landscape-1280.webp - width/height attrs 960x1280 disagree with intrinsic ratio 2.00
+PASS    home@desktop page-image-bytes - 0.14 MB of images on / (limit 1.5 MB); LCP 84 ms (/assets/night-fury-hero-landscape-1280.webp) on local server
+PASS    shop@desktop page-image-bytes - 0.06 MB of images on /shop/ (limit 1.5 MB); LCP 56 ms (text) on local server
+PASS    products-hidden-leaf-keychain@desktop page-image-bytes - 0.20 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 76 ms (/assets/hidden-leaf-sq-960.webp) on local server
+PASS    products-baymax-figure@desktop page-image-bytes - 0.13 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 60 ms (/assets/baymax-sq-960.webp) on local server
+PASS    products-night-fury-keychain@desktop page-image-bytes - 0.10 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 84 ms (/assets/night-fury-sq-960.webp) on local server
+PASS    products-minato-kunai@desktop page-image-bytes - 0.22 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 84 ms (/assets/minato-kunai-sq-960.webp) on local server
+PASS    products-light-fury-keychain@desktop page-image-bytes - 0.08 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 64 ms (/assets/light-fury-sq-960.webp) on local server
+
+{"PASS":14,"INFO":1} -> /home/user/honeycomb3d-ecommerce-system/qa/results/c8d8220b021ca71ee1c1a8a71cdccbffc37c44a5/images

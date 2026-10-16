@@ -1,0 +1,7 @@
+reviewed_ref: cc01cb76267bd19bd16680b118042eb3353709e7
+reviewed_sha: cc01cb76267bd19bd16680b118042eb3353709e7
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-15T20:37:54Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-15T20:33:39+00:00
+subject: Shop filters: category and theme chips with URL history and live search

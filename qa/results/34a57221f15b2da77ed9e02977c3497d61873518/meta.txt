@@ -1,0 +1,7 @@
+reviewed_ref: 34a57221f15b2da77ed9e02977c3497d61873518
+reviewed_sha: 34a57221f15b2da77ed9e02977c3497d61873518
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T04:34:37Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T04:09:24+00:00
+subject: Shop: a custom-print tile closes the grid; chip rows fade at their scroll edges

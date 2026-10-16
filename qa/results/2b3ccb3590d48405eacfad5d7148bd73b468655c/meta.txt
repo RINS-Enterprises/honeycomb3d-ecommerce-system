@@ -1,0 +1,7 @@
+reviewed_ref: 2b3ccb3590d48405eacfad5d7148bd73b468655c
+reviewed_sha: 2b3ccb3590d48405eacfad5d7148bd73b468655c
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-15T19:56:42Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-15T19:56:16+00:00
+subject: Fill every photo frame with square derivatives instead of letterboxing

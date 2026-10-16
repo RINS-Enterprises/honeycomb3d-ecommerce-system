@@ -1,0 +1,7 @@
+reviewed_ref: 4501811
+reviewed_sha: 45018114a3c6b21d3c43a5acf90686868feb8c99
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T12:57:16Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T12:51:05+00:00
+subject: Product facts link onward instead of repeating price and availability

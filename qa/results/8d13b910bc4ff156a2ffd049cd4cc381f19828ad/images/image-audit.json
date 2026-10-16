@@ -1,0 +1,3592 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "reviewed_sha": "8d13b910bc4ff156a2ffd049cd4cc381f19828ad",
+  "thresholds": {
+    "MAX_OVERSAMPLE": 3,
+    "MAX_IMAGE_BYTES": 500000,
+    "MAX_PAGE_IMAGE_BYTES": 1500000,
+    "MAX_DECODED_MP": 12
+  },
+  "counts": {
+    "FAIL": 188,
+    "INFO": 96
+  },
+  "results": [
+    {
+      "status": "FAIL",
+      "id": "home@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "home@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "home@mobile /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "INFO",
+      "id": "home@mobile /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "home@mobile /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "home@mobile /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 167x167 CSS px at DPR 3 (4.1x needed resolution)",
+      "over": 4.087824351297405,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "home@mobile /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "home@mobile /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "home@mobile /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "home@mobile /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "home@mobile /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 167x167 CSS px at DPR 3 (8.0x needed resolution)",
+      "over": 7.984031936127744,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "home@mobile /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "home@mobile /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "home@mobile /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "home@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "home@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "home@mobile page-image-bytes",
+      "detail": "7.27 MB of images on / (limit 1.5 MB); LCP 160 ms (text) on local server",
+      "pageBytes": 7272861,
+      "lcp": {
+        "t": 160,
+        "url": "",
+        "size": 54448
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 348,
+          "rh": 348,
+          "fit": "contain",
+          "loading": null,
+          "attrW": "1024",
+          "attrH": "1024",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "INFO",
+      "id": "shop@mobile /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "shop@mobile /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@mobile /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 167x167 CSS px at DPR 3 (4.1x needed resolution)",
+      "over": 4.087824351297405,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@mobile /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "shop@mobile /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "shop@mobile /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@mobile /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@mobile /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 167x167 CSS px at DPR 3 (8.0x needed resolution)",
+      "over": 7.984031936127744,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@mobile /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "shop@mobile /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "shop@mobile /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@mobile page-image-bytes",
+      "detail": "7.87 MB of images on /shop/ (limit 1.5 MB); LCP 144 ms (text) on local server",
+      "pageBytes": 7869514,
+      "lcp": {
+        "t": 144,
+        "url": "",
+        "size": 22962
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/minato-kunai.jpg",
+          "alt": "Black three-pronged Minato kunai prop with a white handle held in a hand",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/light-fury.jpg",
+          "alt": "White articulated Light Fury keychain with blue eyes and a metal keyring",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/classic-kunai.jpg",
+          "alt": "Black classic kunai prop with a white handle against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@mobile /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@mobile /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@mobile /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 167x167 CSS px at DPR 3 (4.1x needed resolution)",
+      "over": 4.087824351297405,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@mobile /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@mobile /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@mobile /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@mobile /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@mobile /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 167x167 CSS px at DPR 3 (8.0x needed resolution)",
+      "over": 7.984031936127744,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@mobile /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@mobile /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@mobile /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@mobile page-image-bytes",
+      "detail": "6.75 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 128 ms (/assets/hidden-leaf.jpg) on local server",
+      "pageBytes": 6750258,
+      "lcp": {
+        "t": 128,
+        "url": "http://127.0.0.1:4173/assets/hidden-leaf.jpg",
+        "size": 91593
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 350,
+          "rh": 350,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@mobile /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@mobile /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@mobile /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@mobile /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@mobile /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@mobile /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@mobile /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 167x167 CSS px at DPR 3 (8.0x needed resolution)",
+      "over": 7.984031936127744,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@mobile /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@mobile /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@mobile /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@mobile page-image-bytes",
+      "detail": "6.75 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 204 ms (/assets/baymax.png) on local server",
+      "pageBytes": 6750258,
+      "lcp": {
+        "t": 204,
+        "url": "http://127.0.0.1:4173/assets/baymax.png",
+        "size": 91593
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 350,
+          "rh": 350,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@mobile /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@mobile /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@mobile /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@mobile /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 167x167 CSS px at DPR 3 (4.1x needed resolution)",
+      "over": 4.087824351297405,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@mobile /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@mobile /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@mobile /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@mobile /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 167x167 CSS px at DPR 3 (8.0x needed resolution)",
+      "over": 7.984031936127744,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@mobile /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@mobile /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@mobile /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@mobile page-image-bytes",
+      "detail": "6.75 MB of images on /products/kurama-figure/ (limit 1.5 MB); LCP 120 ms (/assets/kurama.jpg) on local server",
+      "pageBytes": 6750258,
+      "lcp": {
+        "t": 120,
+        "url": "http://127.0.0.1:4173/assets/kurama.jpg",
+        "size": 122357
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 350,
+          "rh": 350,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@mobile /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 350x350 CSS px at DPR 3 (3.8x needed resolution)",
+      "over": 3.8095238095238093,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@mobile /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@mobile /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@mobile /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@mobile /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@mobile /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@mobile /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 167x167 CSS px at DPR 3 (4.1x needed resolution)",
+      "over": 4.087824351297405,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@mobile /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@mobile /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@mobile /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@mobile /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@mobile page-image-bytes",
+      "detail": "6.75 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 592 ms (/assets/night-fury.jpg) on local server",
+      "pageBytes": 6750258,
+      "lcp": {
+        "t": 592,
+        "url": "http://127.0.0.1:4173/assets/night-fury.jpg",
+        "size": 91593
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 350,
+          "rh": 350,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "INFO",
+      "id": "products-minato-kunai@mobile /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-minato-kunai@mobile /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@mobile /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 167x167 CSS px at DPR 3 (4.1x needed resolution)",
+      "over": 4.087824351297405,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@mobile /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-minato-kunai@mobile /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-minato-kunai@mobile /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@mobile /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@mobile page-image-bytes",
+      "detail": "4.81 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 116 ms (/assets/minato-kunai.jpg) on local server",
+      "pageBytes": 4812144,
+      "lcp": {
+        "t": 116,
+        "url": "http://127.0.0.1:4173/assets/minato-kunai.jpg",
+        "size": 122357
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/minato-kunai.jpg",
+          "alt": "Black three-pronged Minato kunai prop with a white handle held in a hand",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 350,
+          "rh": 350,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "INFO",
+      "id": "products-light-fury-keychain@mobile /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-light-fury-keychain@mobile /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@mobile /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 167x167 CSS px at DPR 3 (4.1x needed resolution)",
+      "over": 4.087824351297405,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@mobile /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-light-fury-keychain@mobile /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-light-fury-keychain@mobile /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@mobile /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@mobile page-image-bytes",
+      "detail": "4.68 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 108 ms (/assets/light-fury.jpg) on local server",
+      "pageBytes": 4684908,
+      "lcp": {
+        "t": 108,
+        "url": "http://127.0.0.1:4173/assets/light-fury.jpg",
+        "size": 122357
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/light-fury.jpg",
+          "alt": "White articulated Light Fury keychain with blue eyes and a metal keyring",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 350,
+          "rh": 350,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "INFO",
+      "id": "products-classic-kunai@mobile /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-classic-kunai@mobile /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@mobile /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 167x167 CSS px at DPR 3 (4.1x needed resolution)",
+      "over": 4.087824351297405,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@mobile /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-classic-kunai@mobile /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-classic-kunai@mobile /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@mobile /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@mobile /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 200x60 CSS px at DPR 3 (12.4x needed resolution)",
+      "over": 12.391666666666667,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@mobile /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@mobile page-image-bytes",
+      "detail": "4.65 MB of images on /products/classic-kunai/ (limit 1.5 MB); LCP 112 ms (/assets/classic-kunai.jpg) on local server",
+      "pageBytes": 4648831,
+      "lcp": {
+        "t": 112,
+        "url": "http://127.0.0.1:4173/assets/classic-kunai.jpg",
+        "size": 122357
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/classic-kunai.jpg",
+          "alt": "Black classic kunai prop with a white handle against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 350,
+          "rh": 350,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 167,
+          "rh": 167,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 200,
+          "rh": 60,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/hidden-leaf.jpg",
+      "detail": "oversized: 960x1280 natural for 282x282 CSS px at DPR 1 (4.5x needed resolution)",
+      "over": 4.539007092198582,
+      "mp": 1.2288
+    },
+    {
+      "status": "INFO",
+      "id": "home@desktop /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "home@desktop /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 282x282 CSS px at DPR 1 (7.3x needed resolution)",
+      "over": 7.26241134751773,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "home@desktop /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "home@desktop /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/kurama.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 282x282 CSS px at DPR 1 (14.2x needed resolution)",
+      "over": 14.184397163120567,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "home@desktop /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "home@desktop /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "home@desktop page-image-bytes",
+      "detail": "7.27 MB of images on / (limit 1.5 MB); LCP 128 ms (/assets/kurama.jpg) on local server",
+      "pageBytes": 7272861,
+      "lcp": {
+        "t": 128,
+        "url": "http://127.0.0.1:4173/assets/kurama.jpg",
+        "size": 266256
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 516,
+          "rh": 516,
+          "fit": "contain",
+          "loading": null,
+          "attrW": "1024",
+          "attrH": "1024",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/hidden-leaf.jpg",
+      "detail": "oversized: 960x1280 natural for 282x282 CSS px at DPR 1 (4.5x needed resolution)",
+      "over": 4.539007092198582,
+      "mp": 1.2288
+    },
+    {
+      "status": "INFO",
+      "id": "shop@desktop /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "shop@desktop /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 282x282 CSS px at DPR 1 (7.3x needed resolution)",
+      "over": 7.26241134751773,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "shop@desktop /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "shop@desktop /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/kurama.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 282x282 CSS px at DPR 1 (14.2x needed resolution)",
+      "over": 14.184397163120567,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "shop@desktop /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "shop@desktop /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/minato-kunai.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/light-fury.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/classic-kunai.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "shop@desktop page-image-bytes",
+      "detail": "7.87 MB of images on /shop/ (limit 1.5 MB); LCP 328 ms (/assets/kurama.jpg) on local server",
+      "pageBytes": 7869514,
+      "lcp": {
+        "t": 328,
+        "url": "http://127.0.0.1:4173/assets/kurama.jpg",
+        "size": 62422
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/minato-kunai.jpg",
+          "alt": "Black three-pronged Minato kunai prop with a white handle held in a hand",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/light-fury.jpg",
+          "alt": "White articulated Light Fury keychain with blue eyes and a metal keyring",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/classic-kunai.jpg",
+          "alt": "Black classic kunai prop with a white handle against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@desktop /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@desktop /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 282x282 CSS px at DPR 1 (7.3x needed resolution)",
+      "over": 7.26241134751773,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@desktop /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@desktop /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop /assets/kurama.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 282x282 CSS px at DPR 1 (14.2x needed resolution)",
+      "over": 14.184397163120567,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@desktop /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-hidden-leaf-keychain@desktop /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-hidden-leaf-keychain@desktop page-image-bytes",
+      "detail": "6.75 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 128 ms (/assets/hidden-leaf.jpg) on local server",
+      "pageBytes": 6750258,
+      "lcp": {
+        "t": 128,
+        "url": "http://127.0.0.1:4173/assets/hidden-leaf.jpg",
+        "size": 214856
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 570,
+          "rh": 570,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 570x570 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.592982456140351,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@desktop /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@desktop /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/hidden-leaf.jpg",
+      "detail": "oversized: 960x1280 natural for 282x282 CSS px at DPR 1 (4.5x needed resolution)",
+      "over": 4.539007092198582,
+      "mp": 1.2288
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@desktop /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@desktop /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/kurama.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 282x282 CSS px at DPR 1 (14.2x needed resolution)",
+      "over": 14.184397163120567,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@desktop /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-baymax-figure@desktop /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-baymax-figure@desktop page-image-bytes",
+      "detail": "6.75 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 164 ms (/assets/baymax.png) on local server",
+      "pageBytes": 6750258,
+      "lcp": {
+        "t": 164,
+        "url": "http://127.0.0.1:4173/assets/baymax.png",
+        "size": 214856
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 570,
+          "rh": 570,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop /assets/hidden-leaf.jpg",
+      "detail": "oversized: 960x1280 natural for 282x282 CSS px at DPR 1 (4.5x needed resolution)",
+      "over": 4.539007092198582,
+      "mp": 1.2288
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@desktop /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@desktop /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 282x282 CSS px at DPR 1 (7.3x needed resolution)",
+      "over": 7.26241134751773,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@desktop /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@desktop /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 282x282 CSS px at DPR 1 (14.2x needed resolution)",
+      "over": 14.184397163120567,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@desktop /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-kurama-figure@desktop /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-kurama-figure@desktop page-image-bytes",
+      "detail": "6.75 MB of images on /products/kurama-figure/ (limit 1.5 MB); LCP 116 ms (/assets/kurama.jpg) on local server",
+      "pageBytes": 6750258,
+      "lcp": {
+        "t": 116,
+        "url": "http://127.0.0.1:4173/assets/kurama.jpg",
+        "size": 286140
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 570,
+          "rh": 570,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/night-fury.jpg",
+      "detail": "oversized: 3000x4000 natural for 570x570 CSS px at DPR 1 (7.0x needed resolution)",
+      "over": 7.017543859649122,
+      "mp": 12
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/night-fury.jpg",
+      "detail": "2.41 MB transferred (limit 0.5 MB)",
+      "bytes": 2408049
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@desktop /assets/night-fury.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@desktop /assets/night-fury.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/hidden-leaf.jpg",
+      "detail": "oversized: 960x1280 natural for 282x282 CSS px at DPR 1 (4.5x needed resolution)",
+      "over": 4.539007092198582,
+      "mp": 1.2288
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@desktop /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@desktop /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 282x282 CSS px at DPR 1 (7.3x needed resolution)",
+      "over": 7.26241134751773,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@desktop /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-night-fury-keychain@desktop /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/kurama.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-night-fury-keychain@desktop page-image-bytes",
+      "detail": "6.75 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 560 ms (/assets/night-fury.jpg) on local server",
+      "pageBytes": 6750258,
+      "lcp": {
+        "t": 560,
+        "url": "http://127.0.0.1:4173/assets/night-fury.jpg",
+        "size": 214856
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/night-fury.jpg",
+          "alt": "Black articulated Night Fury keychains with yellow eyes on a blue surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 3000,
+          "nh": 4000,
+          "rw": 570,
+          "rh": 570,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@desktop /assets/hidden-leaf.jpg",
+      "detail": "oversized: 960x1280 natural for 282x282 CSS px at DPR 1 (4.5x needed resolution)",
+      "over": 4.539007092198582,
+      "mp": 1.2288
+    },
+    {
+      "status": "INFO",
+      "id": "products-minato-kunai@desktop /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-minato-kunai@desktop /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@desktop /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 282x282 CSS px at DPR 1 (7.3x needed resolution)",
+      "over": 7.26241134751773,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@desktop /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-minato-kunai@desktop /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-minato-kunai@desktop /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@desktop /assets/kurama.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@desktop /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-minato-kunai@desktop page-image-bytes",
+      "detail": "4.81 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 132 ms (/assets/minato-kunai.jpg) on local server",
+      "pageBytes": 4812144,
+      "lcp": {
+        "t": 132,
+        "url": "http://127.0.0.1:4173/assets/minato-kunai.jpg",
+        "size": 286140
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/minato-kunai.jpg",
+          "alt": "Black three-pronged Minato kunai prop with a white handle held in a hand",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 570,
+          "rh": 570,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@desktop /assets/hidden-leaf.jpg",
+      "detail": "oversized: 960x1280 natural for 282x282 CSS px at DPR 1 (4.5x needed resolution)",
+      "over": 4.539007092198582,
+      "mp": 1.2288
+    },
+    {
+      "status": "INFO",
+      "id": "products-light-fury-keychain@desktop /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-light-fury-keychain@desktop /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@desktop /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 282x282 CSS px at DPR 1 (7.3x needed resolution)",
+      "over": 7.26241134751773,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@desktop /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-light-fury-keychain@desktop /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-light-fury-keychain@desktop /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@desktop /assets/kurama.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@desktop /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-light-fury-keychain@desktop page-image-bytes",
+      "detail": "4.68 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 132 ms (/assets/light-fury.jpg) on local server",
+      "pageBytes": 4684908,
+      "lcp": {
+        "t": 132,
+        "url": "http://127.0.0.1:4173/assets/light-fury.jpg",
+        "size": 286140
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/light-fury.jpg",
+          "alt": "White articulated Light Fury keychain with blue eyes and a metal keyring",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 570,
+          "rh": 570,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@desktop /assets/hidden-leaf.jpg",
+      "detail": "oversized: 960x1280 natural for 282x282 CSS px at DPR 1 (4.5x needed resolution)",
+      "over": 4.539007092198582,
+      "mp": 1.2288
+    },
+    {
+      "status": "INFO",
+      "id": "products-classic-kunai@desktop /assets/hidden-leaf.jpg",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-classic-kunai@desktop /assets/hidden-leaf.jpg",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@desktop /assets/baymax.png",
+      "detail": "oversized: 1536x2048 natural for 282x282 CSS px at DPR 1 (7.3x needed resolution)",
+      "over": 7.26241134751773,
+      "mp": 3.145728
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@desktop /assets/baymax.png",
+      "detail": "3.23 MB transferred (limit 0.5 MB)",
+      "bytes": 3230970
+    },
+    {
+      "status": "INFO",
+      "id": "products-classic-kunai@desktop /assets/baymax.png",
+      "detail": "letterboxed (contain): image 0.75 in box 1.00"
+    },
+    {
+      "status": "INFO",
+      "id": "products-classic-kunai@desktop /assets/baymax.png",
+      "detail": "width/height attrs 640x640 disagree with intrinsic ratio 0.75"
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@desktop /assets/kurama.jpg",
+      "detail": "oversized: 1024x1024 natural for 282x282 CSS px at DPR 1 (3.6x needed resolution)",
+      "over": 3.631205673758865,
+      "mp": 1.048576
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@desktop /assets/kurama.jpg",
+      "detail": "0.52 MB transferred (limit 0.5 MB)",
+      "bytes": 522603
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@desktop /assets/honeycomb-logo-web.png",
+      "detail": "oversized: 7435x2229 natural for 220x66 CSS px at DPR 1 (33.8x needed resolution)",
+      "over": 33.79545454545455,
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@desktop /assets/honeycomb-logo-web.png",
+      "detail": "decodes to 16.6 MP (~66 MB RGBA)",
+      "mp": 16.572615
+    },
+    {
+      "status": "FAIL",
+      "id": "products-classic-kunai@desktop page-image-bytes",
+      "detail": "4.65 MB of images on /products/classic-kunai/ (limit 1.5 MB); LCP 124 ms (/assets/classic-kunai.jpg) on local server",
+      "pageBytes": 4648831,
+      "lcp": {
+        "t": 124,
+        "url": "http://127.0.0.1:4173/assets/classic-kunai.jpg",
+        "size": 286140
+      },
+      "httpStatus": 200,
+      "imgs": [
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        },
+        {
+          "src": "/assets/classic-kunai.jpg",
+          "alt": "Black classic kunai prop with a white handle against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 570,
+          "rh": 570,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/hidden-leaf.jpg",
+          "alt": "Black-and-white Hidden Leaf keychain with a metal ring on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 960,
+          "nh": 1280,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/baymax.png",
+          "alt": "White 3D-printed Baymax figures photographed on a green display surface",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1536,
+          "nh": 2048,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/kurama.jpg",
+          "alt": "Orange Kurama figure with nine raised tails against a dark background",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 1024,
+          "nh": 1024,
+          "rw": 282,
+          "rh": 282,
+          "fit": "contain",
+          "loading": "lazy",
+          "attrW": "640",
+          "attrH": "640",
+          "visible": true
+        },
+        {
+          "src": "/assets/honeycomb-logo-web.png",
+          "alt": "HoneyComb",
+          "complete": true,
+          "decodeOk": true,
+          "nw": 7435,
+          "nh": 2229,
+          "rw": 220,
+          "rh": 66,
+          "fit": "cover",
+          "loading": null,
+          "attrW": "220",
+          "attrH": "66",
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

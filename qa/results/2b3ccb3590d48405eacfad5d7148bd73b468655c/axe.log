@@ -1,0 +1,22 @@
+PASS   desktop  /                            no violations | needs review: color-contrast
+PASS   desktop  /shop/                       no violations | needs review: color-contrast
+PASS   desktop  /cart/                       no violations 
+PASS   desktop  /custom/                     no violations | needs review: color-contrast
+PASS   desktop  /privacy/                    no violations 
+PASS   desktop  /products/kurama-figure/     no violations | needs review: color-contrast
+PASS   desktop  /qa-missing-page/            no violations 
+PASS   desktop  cart-filled                  no violations | needs review: color-contrast
+PASS   desktop  custom-preview               no violations | needs review: color-contrast
+PASS   desktop  shop-no-results              no violations 
+PASS   mobile   /                            no violations | needs review: color-contrast
+PASS   mobile   /shop/                       no violations | needs review: color-contrast
+PASS   mobile   /cart/                       no violations 
+PASS   mobile   /custom/                     no violations | needs review: color-contrast
+PASS   mobile   /privacy/                    no violations 
+PASS   mobile   /products/kurama-figure/     no violations | needs review: color-contrast
+PASS   mobile   /qa-missing-page/            no violations 
+PASS   mobile   cart-filled                  no violations | needs review: color-contrast
+PASS   mobile   custom-preview               no violations | needs review: color-contrast
+PASS   mobile   shop-no-results              no violations 
+
+serious/critical: 0, minor/moderate: 0, errors: 0 -> /home/user/honeycomb3d-ecommerce-system/qa/results/2b3ccb3590d48405eacfad5d7148bd73b468655c/axe

@@ -1,0 +1,355 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "reviewed_sha": "2b3ccb3590d48405eacfad5d7148bd73b468655c",
+  "axe": "node_modules/axe-core/axe.min.js",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa",
+    "wcag22aa",
+    "best-practice"
+  ],
+  "report": [
+    {
+      "page": "/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": ".hero-photo > span",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+            },
+            {
+              "target": ".photo-placeholder > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".photo-placeholder > span:nth-child(2)",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            }
+          ],
+          "count": 3
+        }
+      ]
+    },
+    {
+      "page": "/shop/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": ".product-image[href$=\"kurama-figure/\"][aria-hidden=\"true\"] > .photo-placeholder > span:nth-child(1)",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".product-image[href$=\"kurama-figure/\"][aria-hidden=\"true\"] > .photo-placeholder > span:nth-child(2)",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            },
+            {
+              "target": ".product-image[href$=\"classic-kunai/\"][aria-hidden=\"true\"] > .photo-placeholder > span:nth-child(1)",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".product-image[href$=\"classic-kunai/\"][aria-hidden=\"true\"] > .photo-placeholder > span:nth-child(2)",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            }
+          ],
+          "count": 4
+        }
+      ]
+    },
+    {
+      "page": "/cart/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "page": "/custom/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "textarea",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "page": "/privacy/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "page": "/products/kurama-figure/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": ".photo-placeholder > span:nth-child(1)",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": "span:nth-child(2)",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "/qa-missing-page/",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "page": "cart-filled",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "#order-notes",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            },
+            {
+              "target": ".message-preview",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "custom-preview",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "textarea[name=\"idea\"]",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            },
+            {
+              "target": ".message-preview",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "shop-no-results",
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "page": "/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": ".hero-photo > span",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+            },
+            {
+              "target": ".photo-placeholder > span[aria-hidden=\"true\"]",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".photo-placeholder > span:nth-child(2)",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            }
+          ],
+          "count": 3
+        }
+      ]
+    },
+    {
+      "page": "/shop/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": ".product-image[href$=\"kurama-figure/\"][aria-hidden=\"true\"] > .photo-placeholder > span:nth-child(1)",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".product-image[href$=\"kurama-figure/\"][aria-hidden=\"true\"] > .photo-placeholder > span:nth-child(2)",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            },
+            {
+              "target": ".product-image[href$=\"classic-kunai/\"][aria-hidden=\"true\"] > .photo-placeholder > span:nth-child(1)",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": ".product-image[href$=\"classic-kunai/\"][aria-hidden=\"true\"] > .photo-placeholder > span:nth-child(2)",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            }
+          ],
+          "count": 4
+        }
+      ]
+    },
+    {
+      "page": "/cart/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "page": "/custom/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "textarea",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "page": "/privacy/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "page": "/products/kurama-figure/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": ".photo-placeholder > span:nth-child(1)",
+              "summary": "Fix any of the following:\n  Element content contains only non-text characters"
+            },
+            {
+              "target": "span:nth-child(2)",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "/qa-missing-page/",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "page": "cart-filled",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "#order-notes",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            },
+            {
+              "target": ".message-preview",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "custom-preview",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": "textarea[name=\"idea\"]",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            },
+            {
+              "target": ".message-preview",
+              "summary": "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+            }
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "page": "shop-no-results",
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": []
+    }
+  ]
+}

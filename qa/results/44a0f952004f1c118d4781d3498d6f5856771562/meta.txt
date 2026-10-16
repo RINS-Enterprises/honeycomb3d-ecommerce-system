@@ -1,0 +1,7 @@
+reviewed_ref: 44a0f952004f1c118d4781d3498d6f5856771562
+reviewed_sha: 44a0f952004f1c118d4781d3498d6f5856771562
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T07:57:45Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T07:50:17+00:00
+subject: AVIF photos inside <picture>, WebP stays the fallback
