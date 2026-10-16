@@ -34,7 +34,17 @@ document.addEventListener('click',async event=>{
 });
 function initFilters() {
   const form=document.querySelector('#filters');if(!form)return;
-  const search=form.querySelector('#search'), reset=document.querySelector('#reset-filters');
+  const search=form.querySelector('#search'), reset=document.querySelector('#reset-filters'), sort=document.querySelector('#sort');
+  const grid=document.querySelector('.product-grid'), cards=[...document.querySelectorAll('[data-product-card]')];
+  cards.forEach((card,i)=>card.dataset.order=i);
+  const SORTS={
+    featured:(a,b)=>a.dataset.order-b.dataset.order,
+    // Numeric prices; items without a price always go last.
+    'price-asc':(a,b)=>(a.dataset.price===''?Infinity:+a.dataset.price)-(b.dataset.price===''?Infinity:+b.dataset.price)||a.dataset.order-b.dataset.order,
+    'price-desc':(a,b)=>(b.dataset.price===''?-Infinity:+b.dataset.price)-(a.dataset.price===''?-Infinity:+a.dataset.price)||a.dataset.order-b.dataset.order,
+    name:(a,b)=>a.dataset.name.localeCompare(b.dataset.name,'en')||a.dataset.order-b.dataset.order,
+  };
+  function applySort(){const order=SORTS[sort?.value]||SORTS.featured;grid.append(...cards.slice().sort(order));}
   const choice=name=>form.elements[name]?.value;
   const set=(name,value)=>{const group=form.elements[name];if(!group)return;const fallback=group[0]?.value??group.value;
     group.value=[...(group.length?group:[group])].some(x=>x.value===value)?value:fallback;};
@@ -42,11 +52,12 @@ function initFilters() {
     const params=new URLSearchParams(location.search);
     search.value=(params.get('q')||'').slice(0,100);
     set('category',params.get('category')||'all');set('theme',params.get('theme')||'any');
+    if(sort)sort.value=SORTS[params.get('sort')]?params.get('sort'):'featured';
   }
   function filter(history='') {
     const words=search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
     const category=choice('category')||'all', theme=choice('theme')||'any';
-    let count=0;
+    let count=0;applySort();
     document.querySelectorAll('[data-product-card]').forEach(card=>{
       const matches=(category==='all'||card.dataset.category===category)&&(theme==='any'||card.dataset.tags.split('|').includes(theme))&&words.every(w=>card.dataset.search.includes(w));
       card.hidden=!matches;if(matches)count++;
@@ -60,6 +71,7 @@ function initFilters() {
       if(search.value.trim())query.set('q',search.value.trim());
       if(category!=='all')query.set('category',category);
       if(theme!=='any')query.set('theme',theme);
+      if(sort&&sort.value!=='featured')query.set('sort',sort.value);
       const url=location.pathname+(query.size?'?'+query:'');
       // Chip changes add a history entry (Back restores them); typing replaces it.
       try { if(url!==location.pathname+location.search)window.history[history==='push'?'pushState':'replaceState'](null,'',url); } catch {}
@@ -68,7 +80,8 @@ function initFilters() {
   form.addEventListener('submit',event=>{event.preventDefault();filter('replace');});
   search.addEventListener('input',()=>filter('replace'));
   form.addEventListener('change',event=>{if(event.target.type==='radio')filter('push');});
-  reset.addEventListener('click',()=>{form.reset();filter('push');search.focus();});
+  sort?.addEventListener('change',()=>filter('push'));
+  reset.addEventListener('click',()=>{form.reset();if(sort)sort.value='featured';filter('push');search.focus();});
   window.addEventListener('popstate',()=>{readUrl();filter();});
   readUrl();filter();
 }

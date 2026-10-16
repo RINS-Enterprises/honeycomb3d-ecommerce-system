@@ -50,6 +50,18 @@ try {
   await page.goBack();
   await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===7);
   assert.equal(await page.getByRole('radio',{name:'Any theme'}).isChecked(),true,'Back restores the previous filter');
+  const firstVisible=()=>page.locator('[data-product-card]:visible .card-link').first().textContent();
+  await page.getByTestId('sort').selectOption('price-asc');
+  assert.equal(await firstVisible(),'Hidden Leaf Keychain','Cheapest first (LKR 400)');
+  assert.match(page.url(),/sort=price-asc/);
+  await page.getByTestId('sort').selectOption('price-desc');
+  assert.equal(await firstVisible(),'Kurama Figure','Most expensive first (LKR 1,500)');
+  await page.getByTestId('filter-keychains').click();
+  assert.deepEqual(await page.locator('[data-product-card]:visible .card-link').allTextContents(),['Night Fury Keychain','Light Fury Keychain','Hidden Leaf Keychain'],'Sort works with category chips');
+  await page.getByTestId('sort').selectOption('name');
+  assert.equal(await firstVisible(),'Hidden Leaf Keychain');
+  await page.getByTestId('sort').selectOption('featured');
+  await page.getByTestId('filter-all').click();
   await page.getByTestId('filter-figures').click();
   await page.getByRole('searchbox').fill('Baymax');
   assert.equal(await page.locator('[data-product-card]:visible').count(),1);

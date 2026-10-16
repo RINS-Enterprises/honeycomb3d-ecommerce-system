@@ -205,8 +205,11 @@ em{color:var(--accent);font-style:normal}
 .chip:hover span{border-color:rgba(255,236,210,.36);color:var(--text)}
 .chip input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .chip input:focus-visible+span{outline:3px solid var(--accent);outline-offset:3px}
-.results-bar{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:44px;margin-bottom:var(--space-4)}
+.results-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-2) var(--space-4);min-height:44px;margin-bottom:var(--space-4)}
 .results-bar p{margin:0}
+.results-bar #reset-filters{margin-right:auto}
+.sort-field{display:inline-flex;align-items:center;gap:var(--space-2);margin-left:auto;font-size:var(--step--1);color:var(--muted);font-weight:600}
+.sort-field select{width:auto;min-height:40px;margin:0;padding:6px 32px 6px 14px;border-radius:var(--radius-pill);font-size:var(--step--1);font-weight:600;color:var(--text)}
 label{display:block;font-weight:700;font-size:var(--step--1)}
 label span{font-weight:400;color:var(--muted)}
 input,select,textarea{display:block;width:100%;font-weight:400;background:var(--panel);color:var(--text);border:1px solid var(--line-strong);border-radius:var(--radius-sm);padding:12px 14px;margin-top:var(--space-2);min-height:48px}
