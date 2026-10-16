@@ -343,6 +343,12 @@ textarea{resize:vertical;line-height:1.5}
 @media(min-width:901px){.form-panel{position:sticky;top:calc(var(--header-h) + 24px)}}
 @media(max-width:900px){.custom-layout{grid-template-columns:minmax(0,1fr)}.mini-steps{display:none}}
 
+/* Share row on product pages */
+.share-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-2) var(--space-3);margin-top:var(--space-5);padding-top:var(--space-4);border-top:1px solid var(--line)}
+.share-label{font-size:var(--step--1);color:var(--muted);margin-right:auto}
+.share-row .button{min-height:40px;padding:8px 14px;font-size:var(--step--1);border-color:var(--line-strong);gap:8px}
+.share-row .button:hover{border-color:var(--accent)}
+
 /* Text pages */
 .prose-page p:not(.eyebrow){max-width:68ch;color:var(--text-soft);font-size:var(--step-1);line-height:1.7;margin-bottom:var(--space-5)}
 .form-panel .request-preview h2{font-size:var(--step-2)}

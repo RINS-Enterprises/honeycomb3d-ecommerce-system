@@ -111,6 +111,15 @@ export function shop(products,store) {
     '</form><div class="results-bar"><p class="muted" role="status" id="result-count">'+products.length+' designs</p><button class="text-button" id="reset-filters" type="button" hidden>Clear filters</button></div>' +
     '<div class="product-grid">'+products.map((p,i)=>card(p,{headingLevel:2,loading:i<2?'eager':'lazy'})).join('')+'</div><div class="empty state-panel" id="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p>Try a different search or clear your filters.</p><div class="actions"><a class="button secondary" href="/custom/">Ask about a custom print</a></div></div><noscript><p>All designs are shown. Enable JavaScript to use search and filters.</p></noscript></section>',store,'shop','',{description:'Explore the designs. Ask about colours, sizes and finishes. 3D-printed keychains, figures and props, priced in LKR.',path:'/shop/'});
 }
+const SHARE_ICON = '<svg class="icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>';
+// Share a product: the Web Share sheet where available, otherwise WhatsApp's share screen (no number) and copy link.
+function shareRow(p, store) {
+  const url=absolute(store,'/products/'+p.slug+'/'), text=p.name+' by HoneyComb 3D';
+  return '<div class="share-row" data-share-row data-url="'+e(url)+'" data-title="'+e(text)+'"><span class="share-label">Share this design</span>' +
+    '<button type="button" class="button ghost share-native" data-share hidden data-testid="share-button">'+SHARE_ICON+'Share</button>' +
+    '<a class="button ghost" data-share-fallback data-testid="share-whatsapp" href="https://wa.me/?text='+e(encodeURIComponent(text+' '+url))+'" target="_blank" rel="noopener noreferrer">WhatsApp<span class="sr-only"> (opens a share screen)</span></a>' +
+    '<button type="button" class="button ghost" data-copy-link data-share-fallback hidden data-testid="share-copy">Copy link</button></div>';
+}
 function gallerySlides(p) {
   return [{src:p.image,alt:p.imageAlt,width:p.imageWidth,height:p.imageHeight,variants:p.imageVariants||[]},...(p.gallery||[])];
 }
@@ -148,7 +157,7 @@ export function detail(p,products,store) {
     '<p class="fine">The request cart saves a list on your device. It does not reserve stock or complete a purchase.</p>' +
     '<dl class="detail-facts">'+facts.map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('')+'</dl>' +
     '<p class="fine">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
-    '<a class="text-link" href="/cart/">View your request cart →</a></div></div></section>' +
+    '<a class="text-link" href="/cart/">View your request cart →</a>'+shareRow(p,store)+'</div></div></section>' +
     (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+more.map(p=>card(p)).join('')+'</div></section>':''),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
 }
 export function cartPage(store) {

@@ -105,3 +105,16 @@ test('"More from HoneyComb 3D" puts the same category and shared themes first',a
   assert.equal(names[0],'Classic Kunai','Same category first');
   assert(names.slice(1,3).every(n=>['Hidden Leaf Keychain','Kurama Figure'].includes(n)),'Then shared Naruto theme: '+names);
 });
+
+test('product pages offer sharing without a phone number or external script',async()=>{
+  const {detail}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const html=detail(visible.find(p=>p.id==='HC-KURAMA'),visible,store);
+  const row=html.match(/<div class="share-row"[^>]*>.*?<\/div>/)[0];
+  assert.match(row,/data-url="https:\/\/honeycomb3d\.store\/products\/kurama-figure\/"/);
+  const wa=row.match(/href="(https:\/\/wa\.me\/[^"]+)"/)[1].replace(/&amp;/g,'&');
+  assert.equal(new URL(wa).pathname,'/','No WhatsApp number in the share link');
+  assert.equal(new URL(wa).searchParams.get('text'),'Kurama Figure by HoneyComb 3D https://honeycomb3d.store/products/kurama-figure/');
+  assert.match(row,/rel="noopener noreferrer"/);
+  assert(!/<script(?! type="application\/ld\+json")/.test(html.replace(/<script type="module" src="\/app\.mjs"><\/script>/,'')));
+});

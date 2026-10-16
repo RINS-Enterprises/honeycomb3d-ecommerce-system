@@ -169,12 +169,24 @@ function initGallery() {
   let frame;
   track.addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>mark(Math.round(track.scrollLeft/track.clientWidth)));},{passive:true});
 }
+function initShare() {
+  const row=document.querySelector('[data-share-row]');if(!row)return;
+  const {url,title}=row.dataset;
+  const native=row.querySelector('[data-share]'), copy=row.querySelector('[data-copy-link]');
+  if(navigator.share) {
+    native.hidden=false;row.querySelectorAll('[data-share-fallback]').forEach(el=>el.hidden=true);
+    native.addEventListener('click',async()=>{try{await navigator.share({title,text:title,url});}catch(error){if(error?.name!=='AbortError')announce('Sharing is unavailable here. Copy the address bar link instead.');}});
+  } else if(navigator.clipboard) {
+    copy.hidden=false;
+    copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(url);announce('Link copied. Paste it anywhere to share this design.');}catch{announce('Copying is unavailable here. Copy the address bar link instead.');}});
+  }
+}
 function initHeader() {
   const header=document.querySelector('.site-header');if(!header)return;
   const update=()=>header.classList.toggle('is-scrolled',scrollY>8);
   addEventListener('scroll',update,{passive:true});update();
 }
-initHeader();initFilters();initGallery();
+initHeader();initFilters();initGallery();initShare();
 try {
   const responses=await Promise.all([fetch('/data/products.json'),fetch('/data/store.json')]);
   if(responses.some(r=>!r.ok))throw new Error('Data unavailable');

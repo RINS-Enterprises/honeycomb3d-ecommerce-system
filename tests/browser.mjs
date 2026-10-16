@@ -157,6 +157,14 @@ try {
   assert.equal(await page.getByRole('button',{name:'Show photo 3 of 4'}).getAttribute('aria-current'),'true');
   assert.equal(await page.locator('[data-gallery-thumb][aria-current]').count(),1,'Exactly one current thumbnail');
   assert.equal(await page.getByRole('button',{name:'Ordering opens soon'}).isDisabled(),true);
+  const shareShown=await page.getByTestId('share-button').isVisible(), copyShown=await page.getByTestId('share-copy').isVisible();
+  assert(shareShown!==copyShown||!copyShown,'Either the native share button or the copy-link fallback is offered');
+  if(copyShown) {
+    await page.context().grantPermissions(['clipboard-read','clipboard-write']);
+    await page.getByTestId('share-copy').click();
+    await page.getByRole('status').filter({hasText:'Link copied.'}).waitFor();
+    assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),'https://honeycomb3d.store/products/minato-kunai/');
+  }
   await page.setViewportSize({width:390,height:844});
   for(const [route,name] of [['/shop/','shop'],['/products/baymax-figure/','product'],['/custom/','custom']]) {
     await page.goto('http://127.0.0.1:4173'+route);
