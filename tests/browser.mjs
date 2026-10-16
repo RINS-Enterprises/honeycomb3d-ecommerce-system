@@ -39,6 +39,16 @@ try {
   await screenshot('test-results/shop-desktop.png');
   await page.getByRole('searchbox').fill('no-match-here');
   await page.waitForFunction(()=>document.querySelector('#no-results').hidden===false);
+  assert.equal(await page.locator('[data-no-results-text]').textContent(),'Nothing matches “no-match-here”. Try another word, or browse a category.');
+  await page.getByRole('searchbox').fill('<img src=x onerror=alert(1)>');
+  assert.equal(await page.locator('#no-results img').count(),0,'The query is shown as text, never markup');
+  await page.getByTestId('try-props').click();
+  await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===3);
+  assert.equal(await page.getByRole('searchbox').inputValue(),'','Browsing a category clears the search');
+  assert.match(page.url(),/category=Props/);
+  assert.equal(await page.evaluate(()=>document.activeElement.classList.contains('card-link')),true,'Focus moves to the first result');
+  await page.getByRole('searchbox').fill('no-match-here');
+  await page.waitForFunction(()=>document.querySelector('#no-results').hidden===false);
   assert.equal(await page.getByTestId('shop-custom-tile').isHidden(),true,'No results: the empty state carries the custom link instead');
   await page.getByRole('button',{name:'Clear filters'}).click();
   assert.equal(await page.getByRole('button',{name:'Clear filters'}).isHidden(),true,'Clear filters only shows for active filters');

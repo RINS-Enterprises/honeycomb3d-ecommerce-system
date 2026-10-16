@@ -75,6 +75,8 @@ function initFilters() {
     });
     document.querySelector('#result-count').textContent=count+' '+(count===1?'design':'designs');
     document.querySelector('#no-results').hidden=count>0;
+    // Empty state names what was searched (as text, never markup) and offers the categories to browse instead.
+    if(!count&&noResultsText)noResultsText.textContent=search.value.trim()?'Nothing matches “'+search.value.trim()+'”'+(category!=='all'||theme!=='any'?' with these filters':'')+'. Try another word, or browse a category.':'No designs match these filters. Clear them, or browse a category.';
     if(tile)tile.hidden=count===0;
     const active=words.length>0||category!=='all'||theme!=='any';
     reset.hidden=!active;
@@ -90,6 +92,11 @@ function initFilters() {
     }
   }
   const clear=form.querySelector('[data-search-clear]'), box=search.closest('.search-box');
+  const noResultsText=document.querySelector('[data-no-results-text]');
+  document.querySelectorAll('[data-try-category]').forEach(button=>button.addEventListener('click',()=>{
+    search.value='';set('category',button.dataset.tryCategory);set('theme','any');syncClear();filter('push');
+    document.querySelector('[data-product-card]:not([hidden]) .card-link')?.focus();
+  }));
   const syncClear=()=>{const filled=search.value!=='';clear.hidden=!filled;box.classList.toggle('is-filled',filled);};
   form.addEventListener('submit',event=>{event.preventDefault();filter('replace');});
   search.addEventListener('input',()=>{syncClear();filter('replace');});
