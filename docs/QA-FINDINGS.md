@@ -228,6 +228,7 @@ See owner decisions §5. Also unknown: whether the EasyWP site, its database, `w
   - QA advised against scraping MakerWorld and against using designers' photos.
   - The owner decided to go ahead. QA delivered a user-driven "Save to Drive" bookmark plus a Google Apps Script web app (`/home/user/makerworld-to-drive/` in this session). It saves the page's photos, title, designer, licence and link into `My Drive/MakerWorld imports/`, with a log sheet that flags models whose licence box was not ticked.
   - It is not an automated crawler, and it runs in the owner's browser and Google account.
+  - **Superseded 2026-10-16 (v3, team version):** it now saves into the shared folder HoneyComb / MakerWorld imports (`1qGplQuyLmQIW_yI9TRlxS68jwYdYSqtI`), runs as each signed-in user, adds paste-a-link mode for Android and device uploads, and its code is preserved at `ops/makerworld-to-drive/`. It is not installed yet. See `docs/handoffs/recovery-qa-deploy-and-makerworld-tool.md`.
 - **AI-edited photos (Nano Banana) on the website:** allowed under QA's recommended conditions, applied because the owner stated no preference:
   - each product also keeps at least one real photo of the shop's own print;
   - AI-edited images are labelled on the page, e.g. "Colour preview";
