@@ -12,7 +12,7 @@ test('draft descriptions are explicitly attributed and remain unapproved',()=>{
   for(const p of products)if(p.copyStatus==='draft-needs-owner-approval')assert.equal(p.approved,false);
 });
 
-test('owner prices preserve storefront IDs, provenance and unconfirmed approval',()=>{
+test('owner prices preserve storefront IDs and provenance; photographed designs are owner-approved as made to order',()=>{
   const prices={'HC-LEAF':400,'HC-BAYMAX':1000,'HC-KURAMA':1500,'HNYCMB501':500,'HC-MINATO':1000,'HC-LIGHTFURY':500,'HC-KUNAI':1000,
     HNYCMB505:300,HNYCMB506:500,HNYCMB507:2000,HNYCMB510:600,HNYCMB512:1750,HNYCMB513:500,HNYCMB514:500,HNYCMB515:500,HNYCMB516:1500,HNYCMB517:1500,HNYCMB518:1600};
   assert.deepEqual(Object.fromEntries(products.map(p=>[p.id,p.priceLkr])),prices);
@@ -22,8 +22,9 @@ test('owner prices preserve storefront IDs, provenance and unconfirmed approval'
     assert.equal(p.priceSource.field,'Selling Price (LKR)');
     assert.equal(p.priceSource.readAt,p.id.startsWith('HNYCMB5')&&p.id!=='HNYCMB501'?'2026-10-16':'2026-10-11');
     assert.match(p.priceSource.recordId,/^rec/);
-    assert.equal(p.approved,false);
-    assert.equal(p.availability,'unconfirmed');
+    // Owner, 2026-10-18: "approve all 17 designs as Made to order". Only photographed designs are approved.
+    if(p.image){assert.equal(p.approved,true);assert.equal(p.availability,'made-to-order');assert.equal(p.copyStatus,'owner-approved');}
+    else {assert.equal(p.approved,false);assert.equal(p.availability,'unconfirmed');assert.equal(p.copyStatus,'draft-needs-owner-approval');}
     for(const key of ['compareAtPrice','compareAtLkr','stock','stockCount','stockQuantity'])assert.equal(p[key],undefined);
   }
 });
@@ -50,7 +51,7 @@ test('Kurama and Classic Kunai return with their imported photos and unchanged d
   assert(!shown.includes('HNYCMB513'));
   for(const id of ['HC-KURAMA','HC-KUNAI']) {
     const p=products.find(x=>x.id===id);
-    assert.equal(p.availability,'unconfirmed');assert.equal(p.approved,false);
+    assert.equal(p.availability,'made-to-order');assert.equal(p.approved,true);
     assert(p.imageAlt.length>20);
   }
 });
@@ -64,7 +65,8 @@ test('the 11 Airtable products added 2026-10-16 keep their Airtable identity; on
     assert(p.sourceName&&p.sourceCategory,'Airtable name and category recorded: '+p.id);
     assert.equal(p.category,categoryMap[p.sourceCategory],'Category mapping: '+p.id);
     assert.match(p.priceSource.recordId,/^rec[A-Za-z0-9]{14}$/);
-    assert.equal(p.approved,false);assert.equal(p.availability,'unconfirmed');
+    if(p.id==='HNYCMB513'){assert.equal(p.approved,false);assert.equal(p.availability,'unconfirmed');}
+    else {assert.equal(p.approved,true);assert.equal(p.availability,'made-to-order');}
     if(p.id==='HNYCMB513')assert.equal(p.image,null,'No verifiable real photo for Stormtrooper');
     else {assert.equal(p.imageApprovedAt,'2026-10-16');assert(p.imageAlt.length>20);}
     assert.match(p.description,/Confirm the size/);
@@ -76,4 +78,11 @@ test('the 11 Airtable products added 2026-10-16 keep their Airtable identity; on
   const shown=visibleProducts(products,{mode:'preview'});
   assert.deepEqual(added.filter(p=>!shown.includes(p)).map(p=>p.id),['HNYCMB513'],'Only the photo-less product is hidden');
   assert.deepEqual([...new Set(shown.map(p=>p.category))].sort(),['Bookmarks','Desk Organizers','Figures','Keychains','Props'],'Five visible categories');
+});
+
+test('live mode shows every photographed design, and only those (an empty shop must never ship)',()=>{
+  const live=visibleProducts(products,{mode:'live'});
+  assert.equal(live.length,17);
+  assert.deepEqual(live.map(p=>p.id),visibleProducts(products,{mode:'preview'}).map(p=>p.id));
+  assert(!live.some(p=>p.id==='HNYCMB513'));
 });

@@ -18,7 +18,7 @@ test('the home hero only links to a product included in the live-visible catalog
 });
 
 test('an empty live catalogue has no dead product link or unapproved hero photo',()=>{
-  const html=home(visibleProducts(products,live),live);
+  const html=home(visibleProducts(products.map(p=>({...p,approved:false})),live),live);
   assert(!html.includes('href="/products/'));
   assert(!html.includes('class="hero-visual"'));
   assert(!/rel="preload" as="image"/.test(html),'No hero image preload without a visible hero product');
@@ -42,11 +42,12 @@ test('the full-bleed hero photo is the preloaded, eager, high-priority LCP image
 });
 
 test('preview mode shows a slim, plainly worded ordering notice without dates',()=>{
-  const html=home(visibleProducts(products,store),store);
+  const preview={...store,mode:'preview'};
+  const html=home(visibleProducts(products,preview),preview);
   const notice=html.match(/<aside class="preview-notice"[^>]*>(.*?)<\/aside>/)[1];
   assert.match(notice,/Online ordering opens soon\./);
   assert(!/\d{4}|\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/.test(notice.replace(/<[^>]+>/g,'')));
-  assert(!home(visibleProducts(products,store),{...store,mode:'live'}).includes('preview-notice'));
+  assert(!home(visibleProducts(products,preview),{...store,...live}).includes('preview-notice'));
 });
 
 test('every page has the sticky header cart hooks and a footer with real links',()=>{
@@ -68,15 +69,22 @@ test('cards are one link with a clean LKR price and test hooks',async()=>{
 
 test('product page: gallery only with several photos, clear price, availability and an inline ordering note',async()=>{
   const {detail}=await import('../src/render.mjs');
-  const visible=visibleProducts(products,store);
-  const minato=detail(visible.find(p=>p.id==='HC-MINATO'),visible,store);
+  const preview={...store,mode:'preview'};
+  const visible=visibleProducts(products,preview);
+  const closedMinato={...visible.find(p=>p.id==='HC-MINATO'),availability:'unconfirmed'};
+  const minato=detail(closedMinato,visible,preview);
   assert.equal([...minato.matchAll(/data-gallery-thumb=/g)].length,4);
   assert.match(minato,/<p class="detail-price" data-testid="product-price">LKR\s1,000<\/p>/);
   assert.match(minato,/data-testid="availability"><span aria-hidden="true"><\/span>Availability to confirm/);
   assert.match(minato,/<p class="order-note" data-testid="order-status">.*Online ordering opens soon\. Save your picks in the request cart\.<\/p>/);
   assert(!minato.includes('order-button'),'The disabled order button is gone');
   assert.match(minato,/<h2>More from HoneyComb 3D<\/h2>/);
-  const baymax=detail(visible.find(p=>p.id==='HC-BAYMAX'),visible,store);
+  // Once ordering is open the note goes; the made-to-order status takes its place.
+  const open=detail({...closedMinato,availability:'made-to-order'},visible,{...store,...live});
+  assert.match(open,/data-testid="availability"><span aria-hidden="true"><\/span>Made to order/);
+  assert(!open.includes('data-testid="order-status"'),'No "opens soon" note once ordering is open');
+  assert(!open.includes('order-button'));
+  const baymax=detail(visible.find(p=>p.id==='HC-BAYMAX'),visible,preview);
   assert(!baymax.includes('data-gallery-thumb'));
   assert.equal([...baymax.matchAll(/fetchpriority="high"/g)].length,1);
 });

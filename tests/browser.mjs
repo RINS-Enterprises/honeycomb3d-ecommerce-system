@@ -1,8 +1,11 @@
 import {chromium} from 'playwright';
 import {spawn} from 'node:child_process';
 import assert from 'node:assert/strict';
-import {mkdir} from 'node:fs/promises';
+import {mkdir,readFile} from 'node:fs/promises';
 import {money} from '../src/domain.mjs';
+// Assertions follow the built configuration: preview (ordering closed) or live (WhatsApp order requests open).
+const builtStore=JSON.parse(await readFile('dist/data/store.json','utf8'));
+const ordering=builtStore.mode==='live'&&builtStore.whatsappVerified;
 const server=spawn(process.execPath,['scripts/serve.mjs'],{stdio:'inherit'});
 let browser;
 try {
@@ -27,7 +30,8 @@ try {
     await page.screenshot({path,fullPage:true});
   }
   await page.goto('http://127.0.0.1:4173/');
-  await page.getByRole('complementary',{name:'Store preview notice'}).waitFor();
+  if(ordering)assert.equal(await page.getByRole('complementary',{name:'Store preview notice'}).count(),0,'No preview notice once ordering is open');
+  else await page.getByRole('complementary',{name:'Store preview notice'}).waitFor();
   await screenshot('test-results/home-desktop.png');
   await page.getByRole('link',{name:'Shop the collection'}).click();
   assert.equal(await page.locator('[data-product-card]').count(),17,'Every product with an approved photo is shown (Stormtrooper has none)');
@@ -187,8 +191,15 @@ try {
   await page.getByTestId('cart-qty-increase').click();
   await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
   assert.equal(await page.getByTestId('cart-line').count(),1);
-  assert.equal(await page.locator('a[href^="https://wa.me/"]').count(),0);
-  assert(!await page.locator('#order-handoff').textContent().then(t=>t.includes('Opening WhatsApp')));
+  if(ordering) {
+    const url=new URL(await page.getByRole('link',{name:'Open WhatsApp request'}).getAttribute('href'));
+    assert.equal(url.origin+url.pathname,'https://wa.me/'+builtStore.whatsappNumber,'Order requests go to the configured business number');
+    assert.match(url.searchParams.get('text'),/Baymax Figure \[HC-BAYMAX\] x 2/);
+    assert.match(await page.locator('#order-handoff').textContent(),/Opening WhatsApp does not send/);
+  } else {
+    assert.equal(await page.locator('a[href^="https://wa.me/"]').count(),0);
+    assert(!await page.locator('#order-handoff').textContent().then(t=>t.includes('Opening WhatsApp')));
+  }
   assert.match(await page.locator('.message-preview').inputValue(),/Baymax Figure \[HC-BAYMAX\] x 2/);
   await screenshot('test-results/cart-desktop.png');
   await page.setViewportSize({width:390,height:844});
@@ -210,7 +221,8 @@ try {
   await page.getByRole('button',{name:'Preview enquiry'}).click();
   assert.match(await page.locator('.message-preview').inputValue(),/<script>alert\(1\)<\/script>/);
   assert.equal(await page.locator('#custom-result script').count(),0);
-  assert(!await page.locator('#custom-result').textContent().then(t=>t.includes('Opening WhatsApp')));
+  if(ordering)assert.equal(new URL(await page.getByRole('link',{name:'Open WhatsApp request'}).getAttribute('href')).pathname,'/'+builtStore.whatsappNumber);
+  else assert(!await page.locator('#custom-result').textContent().then(t=>t.includes('Opening WhatsApp')));
   // Contact handoff is tested with an intercepted fixture only; no message is sent.
   await page.route('**/data/store.json',async route=>{
     const response=await route.fetch();const data=await response.json();
@@ -278,7 +290,8 @@ try {
   await page.waitForFunction(()=>{const t=document.querySelector('[data-gallery-track]');return Math.round(t.scrollLeft/t.clientWidth)===2;});
   assert.equal(await page.getByRole('button',{name:'Show photo 3 of 4'}).getAttribute('aria-current'),'true');
   assert.equal(await page.locator('[data-gallery-thumb][aria-current]').count(),1,'Exactly one current thumbnail');
-  assert.match(await page.getByTestId('order-status').textContent(),/Online ordering opens soon\./);
+  if(ordering)assert.equal(await page.getByTestId('order-status').count(),0,'No "opens soon" note once ordering is open');
+  else assert.match(await page.getByTestId('order-status').textContent(),/Online ordering opens soon\./);
   assert.equal(await page.getByRole('button',{name:/Ordering opens soon/}).count(),0,'No disabled order button');
   await page.getByTestId('zoom-open').click();
   await page.getByRole('dialog',{name:'Product photos'}).waitFor();
@@ -348,5 +361,5 @@ try {
   await page.goto('http://127.0.0.1:4173/cart/');
   await page.getByRole('heading',{name:'Your cart could not load'}).waitFor();
   assert.equal(errors.length,0,errors.join('\n'));
-  console.log('PASS: original image decoding, accessible cards/headings/preview landmark, catalogue filters, cart persistence/update/removal, owner-sourced pricing, custom enquiry, mixed-price WhatsApp fixture, 320/390/768/1440px layouts, keyboard skip link, 404, network failure and no page errors. No message was sent.');
+  console.log('PASS: original image decoding, accessible cards/headings/preview landmark or live WhatsApp handoff ('+builtStore.mode+' build), catalogue filters, cart persistence/update/removal, owner-sourced pricing, custom enquiry, mixed-price WhatsApp fixture, 320/390/768/1440px layouts, keyboard skip link, 404, network failure and no page errors. No message was sent.');
 } finally {if(browser)await browser.close();server.kill();}
