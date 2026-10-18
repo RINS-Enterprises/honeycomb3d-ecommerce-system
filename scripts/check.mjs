@@ -56,8 +56,9 @@ const hex=await readFile(join(root,'dist/hex.svg'),'utf8');
 assert(Buffer.byteLength(hex)<=1024,'Hex texture stays at or under 1 KB');
 assert(!/<script|on\w+=|href=/i.test(hex),'Hex texture is plain vector paths');
 assert.match(await readFile(join(root,'dist/styles.css'),'utf8'),/url\(\/hex\.svg\)/);
-// Numbers that must never ship (owner, 2026-10-18: held by a former business partner), in any spacing or format.
-const forbiddenNumbers=['703009064','774919109'].map(d=>new RegExp(d.split('').join('(?:[^0-9A-Za-z]|%[0-9A-Fa-f]{2}|&#?\\w+;){0,3}')));
+// Numbers that must never ship, in any spacing or format (owner, 2026-10-18): two held by a former business
+// partner, and 0710559815, a mistyped copy of the business number that was live for a few hours.
+const forbiddenNumbers=['703009064','774919109','710559815'].map(d=>new RegExp(d.split('').join('(?:[^0-9A-Za-z]|%[0-9A-Fa-f]{2}|&#?\\w+;){0,3}')));
 async function scanText(dir){for(const entry of await readdir(dir,{withFileTypes:true})){
   const full=join(dir,entry.name);
   if(entry.isDirectory()){await scanText(full);continue;}

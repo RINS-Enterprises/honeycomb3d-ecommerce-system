@@ -41,7 +41,7 @@ Give one line, e.g. "Islandwide by courier, LKR ___, usually ___ working days af
 
 ## 4. Brand accounts you control (owner, see register W-15)
 
-- Instagram, Google Maps listing, Facebook and email: make sure each is yours and shows **071 055 9815** only.
+- Instagram, Google Maps listing, Facebook and email: make sure each is yours and shows **071 059 9815** only.
 - If the old accounts are with your former partner, start fresh ones and link them from the site footer (Claude adds the links).
 
 ## 5. Get found: search indexing (owner yes/no, then about 1 hour of build)

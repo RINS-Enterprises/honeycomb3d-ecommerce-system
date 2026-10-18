@@ -28,13 +28,13 @@ Notifications: use Make's **Gmail › Send an email** module to `isurusandaruwan
 3. **Router** with one route, filter "something is wrong", where ANY of these is true:
    - Status code ≠ 200
    - `mode` ≠ `live`
-   - `whatsappNumber` ≠ `94710559815`
+   - `whatsappNumber` ≠ `94710599815`
    - `whatsappVerified` ≠ `true`
 4. **Gmail › Send an email:** subject `⚠ HoneyComb site check failed`. Body: status code, mode and number, plus "Open honeycomb3d.store and tell Claude: roll back to the last good deployment."
 
 It stays silent when everything is fine.
 
-**Hard rule:** the guard must also alert if the number is either of the former partner's numbers. The `≠ 94710559815` check already covers that.
+**Hard rule:** the guard must also alert if the number is either of the former partner's numbers. The `≠ 94710599815` check already covers that.
 
 ## 2. Price drift check
 
@@ -75,7 +75,7 @@ Note: 9 of the 16 filament rows have no stock value (QA finding F-20), so the re
    - Any new prints to photograph? (Use the photo guide in `docs/pm/NEXT-PHASE.md`.)
    - Prices changed in Airtable? Run the price check.
    - Any product sold out or discontinued? Tell Claude to mark it unavailable.
-   - Instagram and Google Maps still show only 071 055 9815?
+   - Instagram and Google Maps still show only 071 059 9815?
 
 ---
 
