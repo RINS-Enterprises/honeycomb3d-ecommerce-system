@@ -4,7 +4,7 @@ import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {validateData,visibleProducts} from '../src/domain.mjs';
+import {validateData,visibleProducts,searchIndexing} from '../src/domain.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 assert((await readdir(join(root,'tests'))).some(name=>name.endsWith('.test.mjs')), 'At least one unit-test file must exist');
 const all=JSON.parse(await readFile(join(root,'data/products.json'),'utf8'));
@@ -31,11 +31,11 @@ for(const path of paths) {
   }
 }
 await checkImageOutputs(paths);
-if(store.mode==='preview') {
+if(!searchIndexing(store)) {
   const robots=await readFile(join(root,'dist/robots.txt'),'utf8');
-  assert.match(robots,/User-agent: \*\nDisallow: \/\n$/,'Search engines stay out in preview');
+  assert.match(robots,/User-agent: \*\nDisallow: \/\n$/,'Search engines stay out until searchIndexing is on');
   for(const bot of ['Twitterbot','facebookexternalhit','LinkedInBot','Slackbot','TelegramBot','Discordbot'])assert.match(robots,new RegExp('User-agent: '+bot+'\nAllow: /'),'Link-preview crawler allowed: '+bot);
-  for(const path of paths)assert.match(await readFile(join(root,'dist',path),'utf8'),/<meta name="robots" content="noindex,nofollow">/,'noindex in preview: '+path);
+  for(const path of paths)assert.match(await readFile(join(root,'dist',path),'utf8'),/<meta name="robots" content="noindex,nofollow">/,'noindex while searchIndexing is off: '+path);
   assert(!(await readdir(join(root,'dist'))).includes('sitemap.xml'),'No sitemap until the owner decides on indexing');
 }
 // Self-hosted heading font: hash matches its provenance record, licence ships with it, total stays under ~100 KB.

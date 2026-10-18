@@ -189,3 +189,11 @@ test('home lists up to eight themes, largest first, linking to the filtered shop
   assert(links.every((l,i)=>!i||links[i-1].n>=l.n),'Largest first');
 });
 
+test('noindex follows searchIndexing, not ordering: turning ordering on keeps search engines out',()=>{
+  const noindex='<meta name="robots" content="noindex,nofollow">';
+  const visible=products.map(p=>({...p,approved:true,availability:'made-to-order'}));
+  assert(home(visibleProducts(products,store),store).includes(noindex));
+  assert(home(visibleProducts(visible,live),live).includes(noindex));
+  assert(home(visibleProducts(visible,live),{...live,searchIndexing:false}).includes(noindex));
+  assert(!home(visibleProducts(visible,live),{...live,searchIndexing:true}).includes(noindex));
+});

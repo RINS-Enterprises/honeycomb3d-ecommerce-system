@@ -9,9 +9,9 @@ The PM sends them with `send_message` when the task starts, or the owner pastes 
 
 > PM here. The PM session `session_01R5ExKrg6wn9ckahNmypHvG` now coordinates HoneyComb; QA still runs QA and deploys. Task register: `docs/pm/PROJECT-REGISTER.md` on `claude/funny-albattani-c5a91a`.
 >
-> One bundled round on `codex/storefront-mvp`, tasks W-02 + W-03 (+ W-07 and W-09 if listed below):
+> One bundled round on `codex/storefront-mvp`, tasks W-03 on top of W-02 (+ W-07 and W-09 if listed below):
 >
-> 1. **W-02.** Add a store setting for indexing, separate from `mode`, defaulting to off. With indexing off, keep `noindex,nofollow` on every page, `robots.txt` `Disallow: /` with the link-preview bots allowed, and no sitemap, in **both** preview and live mode. `check.mjs` and the tests follow the setting, not `mode`.
+> 1. **W-02 is already done** on `claude/funny-albattani-c5a91a` (PM, reviewed; see register W-02). Start by fast-forwarding `codex/storefront-mvp` to that branch (`git merge --ff-only origin/claude/funny-albattani-c5a91a`; it is `cc21b85` + docs + W-02). Run the full gate on it.
 > 2. **W-03.** Apply the owner's ordering answers exactly as recorded in register §6: the WhatsApp number (`whatsappVerified: true`), `mode: live`, `approved` and `availability` per OD-4, and payment/delivery wording per OD-3/OD-5. Remove the "opens soon" copy. In live mode all 17 photographed designs must stay visible; `visibleProducts()` hides unapproved ones.
 > 3. If listed: W-07 re-pin CI QA scripts to `3b91946` (owner approved it); W-09 refresh `BUILD-STATUS.md` and `RUN-AND-RELEASE.md`.
 >

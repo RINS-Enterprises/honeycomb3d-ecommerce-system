@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml} from '../src/domain.mjs';
+import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing} from '../src/domain.mjs';
 const p=(id,priceLkr=null,availability='unconfirmed')=>({id,slug:id.toLowerCase(),name:id,category:'Figures',tags:['Anime'],description:'Example',source:'Test fixture',priceLkr,availability,image:null,imageAlt:null,approved:false});
 const products=[p('A',10.25),p('B'),p('C',10,'unavailable')];
 const preview={mode:'preview',whatsappVerified:false,whatsappNumber:null};
@@ -64,4 +64,11 @@ test('LKR amounts use one format: whole rupees without decimals, otherwise two d
   assert.match(money(4500),/^LKR\s4,500$/);
   assert.match(money(19.99),/^LKR\s19\.99$/);
   assert.match(money(39.98),/^LKR\s39\.98$/);
+});
+test('search indexing is a separate setting: off unless explicitly true, in preview and live alike',()=>{
+  const live={mode:'live',whatsappVerified:true,whatsappNumber:'94700000000'};
+  for(const store of [preview,live,{...live,searchIndexing:false}])assert.equal(searchIndexing(store),false);
+  assert.equal(searchIndexing({...live,searchIndexing:true}),true);
+  for(const value of ['true',1,null])assert.throws(()=>validateData(products,{...preview,searchIndexing:value}),/searchIndexing/);
+  validateData(products,{...preview,searchIndexing:true});
 });

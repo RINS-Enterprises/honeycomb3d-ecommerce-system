@@ -7,6 +7,7 @@ export const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':
 export function validateData(products, store) {
   if (!Array.isArray(products)) throw new Error('Catalog must be an array');
   if (!['preview','live'].includes(store.mode)) throw new Error('Invalid store mode');
+  if (store.searchIndexing !== undefined && typeof store.searchIndexing !== 'boolean') throw new Error('searchIndexing must be true or false');
   if (store.whatsappVerified && !/^[1-9]\d{7,14}$/.test(store.whatsappNumber || '')) throw new Error('Use a verified international WhatsApp number, digits only');
   const ids = new Set(), slugs = new Set();
   for (const p of products) {
@@ -40,6 +41,8 @@ export function validateData(products, store) {
   }
   if (store.mode === 'live' && !store.whatsappVerified) throw new Error('Live ordering requires a verified WhatsApp contact');
 }
+// Search indexing is its own owner decision, separate from ordering (mode): off unless explicitly true.
+export const searchIndexing = store => store.searchIndexing === true;
 // Products without an approved original photo stay hidden until their photo is imported.
 export const visibleProducts = (products, store) => products.filter(p => p.image && (store.mode !== 'live' || p.approved));
 export function filterProducts(products, query='', category='all') {
