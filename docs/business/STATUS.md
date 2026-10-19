@@ -5,7 +5,7 @@ Branch `claude/payments-delivery` (from `claude/funny-albattani-c5a91a`, merged 
 | # | Document | State | Commit |
 |---|---|---|---|
 | 3 | `delivery.md` | done, fact-checked (6 corrections applied) | `b98a711` |
-| 1 | `payments.md` | draft, fact-check running | (see git log) |
+| 1 | `payments.md` | done, fact-checked (corrections applied) | `0548554` |
 | 2 | `register-business.md` | researching | – |
 | 4 | `paypal.md` | researching | – |
 | 5 | `OWNER-DECISIONS.md` (also the config values for session B's delivery and payment switches, plan item C5) | not started | – |
