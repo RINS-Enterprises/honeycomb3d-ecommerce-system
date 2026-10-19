@@ -10,11 +10,11 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 | 2 | Cart bundle suggestions | Done, QA fixed | `9a7f1e4` + QA-fix commit |
 | 3 | FAQ page | Done, QA fixed | `4c32420` + QA-fix commit |
 | 4 | Delivery line (switch) | Done, QA fixed | `2c7b46b` |
-| 5 | Payment methods (switch) | Done, QA in progress | `6e49d2c` |
-| 6 | Social links | Done, QA in progress | `10aae7f` |
-| 7 | Trust pages | Done, QA in progress | `b5c2e3f` |
-| 8 | Indexing prep | Not started | |
-| 9 | Testing and docs | Not started | |
+| 5 | Payment methods (switch) | Done, QA fixed | `6e49d2c`, `a651d24`, `d4e0c19` |
+| 6 | Social links | Done, QA fixed | `10aae7f`, `d4e0c19` |
+| 7 | Trust pages | Done, QA fixed | `b5c2e3f`, `d4e0c19` |
+| 8 | Indexing prep | Done, QA in progress | `7881dcc` |
+| 9 | Testing and docs | Done, QA in progress | `ad6f20f` |
 
 ## 1. Order button on shop cards
 
@@ -148,7 +148,19 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
     - Without the PayPal switch there are three choices.
     - Preview mode shows no choice.
 - **Screenshots checked:** cart at 320, 390 and 1440px with methods and PayPal on. The legend was restyled to match the Notes label.
-- **Waits on owner fact:** which payment methods the owner accepts (session C, item 5).
+- **Follow-up `a651d24` (PM request, session C's proposal):**
+  - `paymentMethods` also accepts the ids `lankaqr`, `bank-transfer` and `cash-on-delivery`, shown as "LankaQR", "Bank transfer" and "Cash on delivery". An id and its label count as the same method.
+  - New `paymentNote` (null): the owner's line under the cart's payment choice, shown only when methods are set.
+  - `tests/fixtures/store-session-c-proposal.json` holds session C's proposed delivery (LKR 400) and payment values; `npm run gate:proposal` tests them.
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, fixed in `d4e0c19`.
+  - Should-fix, fixed: an owner method named "paypal" collided with the PayPal choice: picking it wrote the overseas PayPal line and the selection jumped on re-render. Methods matching "PayPal" are now rejected with a pointer to `paypalOverseas`.
+  - Nits, fixed:
+    - Names must be single-line and visible; a zero-width-only name is rejected. Limits count trimmed text, and errors name the bad value.
+    - The PayPal caveat is now the radio's description, not part of its name.
+    - The FAQ list uses `Intl.ListFormat`.
+  - Nit, kept: the radios are native circles; a radio group is the right control for one choice.
+  - Verified OK: keyboard and arrow keys, the choice surviving notes, quantity changes and suggestions, message order, escaping (hostile names and Sinhala), no payment promises.
+- **Waits on owner fact:** which payment methods the owner accepts (session C, decision 2).
 
 ## 6. Social links (empty by default)
 
@@ -161,6 +173,10 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 - **Off = unchanged:** generated pages are byte-identical (diffed).
 - **Tests:** unit tests for validation (it rejects http, javascript:, bare domains and credentials) and for the footer markup (escaping, every page, absent when empty). The browser test checks the Follow block follows the switch.
 - **Screenshots checked:** footer at 390 and 1440px with two links.
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, fixed in `d4e0c19`.
+  - Should-fix, fixed: `https:example.com/fb` passed validation, and on the https site it would have become a relative link to a 404. URLs must now start `https://`, and the published href is normalised.
+  - Nits, fixed: duplicates, extra keys, and newlines or control characters in labels and URLs are rejected. The footer grid uses `minmax(min(100%,9.5rem),1fr)` with `overflow-wrap:anywhere`, so large text no longer widens the page.
+  - Verified OK: javascript:, data:, protocol-relative, http and credential URLs are rejected; everything is escaped; rel and the new-tab note are present; four-column footers at 320–1440px.
 - **Waits on owner fact:** accounts the owner controls (session D, item 1).
 
 ## 7. Trust pages: Shipping, Returns, About (hidden until written)
@@ -176,6 +192,11 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 - **Off = unchanged:** generated pages are byte-identical (diffed); still 24 pages.
 - **Tests:** unit tests for validation, paragraphs and line breaks, escaping (including the meta description, escaped once), footer links and noindex. The browser test follows each built page's footer link and checks that unbuilt ones aren't linked.
 - **Screenshots checked:** an About page with placeholder text at 390 and 1440px (never committed).
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, fixed in `d4e0c19`.
+  - Should-fix, fixed: the meta and link-preview description was cut at 155 characters mid-word. A cut-off sentence can read as a different promise, and the cut could also split an emoji. It now ends on a whole word with "…" and counts characters, not code units.
+  - Nits, fixed: CRLF text is normalised (no stray `\r`), invisible-only text is rejected, and limits count trimmed text.
+  - Nit, consistent with the site: no `aria-current` on the footer link to the current page (FAQ and privacy don't have one either).
+  - Verified OK: built and linked only with text, footer order, title, H1, noindex, escaping (including `<script>`), paragraphs, the length limit, and check.mjs failing on a stale page.
 - **Waits on owner fact:** the owner's shipping, returns and about text.
 
 ## Gate for items 5–7 together
@@ -186,4 +207,49 @@ Each state ran `npm test` (52 pass), `build` + `check`, `browser.mjs` and `image
 - **All switches on at once:** PayPal, a delivery line with a 450.5 fee, two payment methods, one social link and all three trust pages; 27 pages.
 
 The switched states were temporary local edits, never committed.
+
+## 8. Indexing prep (only when `searchIndexing` is true; it stays false)
+
+- **Commit:** `7881dcc`
+- **What changed (only with `searchIndexing: true`):**
+  - **Sitemap:** `dist/sitemap.xml` lists exactly the public pages: home, shop, custom, FAQ, privacy, any written trust pages and every product. It leaves out the cart and 404, and carries no `lastmod` or `priority`, so nothing is invented.
+  - **robots.txt:** `Allow: /` plus `Sitemap: https://honeycomb3d.store/sitemap.xml`.
+  - **Breadcrumb data:** product pages carry BreadcrumbList JSON-LD that mirrors the visible breadcrumb (Shop › category › design).
+  - **Validation:** turning indexing on requires an https `siteUrl`; the old unit test was updated to cover both sides.
+- **check.mjs, both states:**
+  - Off: no sitemap, and no BreadcrumbList on any page. These join the existing robots and noindex checks.
+  - On: the exact robots.txt, a sitemap that equals the public pages, no noindex anywhere, and BreadcrumbList on product pages only.
+  - Negative checks confirmed each new assertion fails when broken: a dropped sitemap entry, a missing breadcrumb, a stray breadcrumb, a stray sitemap.
+- **Off = unchanged:** every generated page is byte-identical (diffed).
+- **Tests:** a render unit test (breadcrumb structure, sitemap contents, nothing invented) and `npm run check:indexing`, which builds and checks the on state from a fixture.
+- **Waits on owner fact:** D-12, the owner's decision to allow search indexing. Nothing here turns it on.
+
+## 9. Testing and docs
+
+- **Commit:** `ad6f20f`
+- **Fixtures:**
+  - `scripts/store.mjs`: `build.mjs` and `check.mjs` load the store through it. `STORE_PATCH=path` merges a JSON fixture over `data/store.json` for that build only and prints "Store patch (test fixture, not for release)". Release builds never set it.
+  - `tests/fixtures/`:
+    - `store-preview.json`: preview mode.
+    - `store-all-on.json`: every switch on, with texts marked "Test fixture… not an owner fact".
+    - `store-indexing.json`: indexing on.
+    - `store-session-c-proposal.json`: added in `a651d24`.
+- **npm scripts:** `gate` (unit, build, check, both browser tests), `gate:preview`, `gate:all-on`, `gate:proposal`, `check:indexing` and `test:browser`.
+- **`tests/store.test.mjs`:** checks the loader, that every fixture validates and switches only what it names, and that every owner-fact switch is off in the committed data.
+- **Docs:** `docs/BUILD-STATUS.md`, `docs/RUN-AND-RELEASE.md` and the README's status sections are rewritten to describe the live site, the session and release flow, every switch and the gates. They previously described the 13 October preview checkpoint.
+- **For the PM (outside my files):**
+  - CI (`.github/workflows/storefront.yml`) still builds only the committed state. Adding `npm run gate:preview` and `npm run gate:all-on` would test the switched states on every PR.
+  - `package.json` gained the npm scripts above.
+
+## Gate at `d4e0c19` (items 5–9 with QA fixes)
+
+| Gate | Pages | Result |
+|---|---|---|
+| `npm run gate` (committed state; 60 unit tests) | 24 | pass |
+| `npm run gate:preview` | 24 | pass |
+| `npm run gate:all-on` | 27 | pass |
+| `npm run gate:proposal` | 24 | pass |
+| `npm run check:indexing` | 24 | pass |
+
+Each gate except `check:indexing` covers build, check, `browser.mjs` and `images-browser.mjs`; `check:indexing` is build and check only. The all-on footer was also checked at 390px (100% and 200% text) and 1440px.
 
