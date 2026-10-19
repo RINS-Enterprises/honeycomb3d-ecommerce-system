@@ -1,0 +1,21 @@
+PASS    home@mobile page-image-bytes - 0.20 MB of images on / (limit 1.5 MB); LCP 116 ms (/assets/night-fury-hero-portrait-1065.avif) on local server
+PASS    shop@mobile page-image-bytes - 0.16 MB of images on /shop/ (limit 1.5 MB); LCP 108 ms (/assets/hidden-leaf-sq-640.avif) on local server
+PASS    products-hidden-leaf-keychain@mobile page-image-bytes - 0.24 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 68 ms (/assets/hidden-leaf-sq-1200.avif) on local server
+PASS    products-baymax-figure@mobile page-image-bytes - 0.21 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 72 ms (/assets/baymax-sq-1200.avif) on local server
+PASS    products-kurama-figure@mobile page-image-bytes - 0.18 MB of images on /products/kurama-figure/ (limit 1.5 MB); LCP 80 ms (/assets/kurama-sq-1200.avif) on local server
+PASS    products-night-fury-keychain@mobile page-image-bytes - 0.22 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 64 ms (/assets/night-fury-sq-1200.avif) on local server
+PASS    products-minato-kunai@mobile page-image-bytes - 0.37 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 80 ms (/assets/minato-kunai-sq-1200.avif) on local server
+PASS    products-light-fury-keychain@mobile page-image-bytes - 0.23 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 84 ms (/assets/light-fury-sq-1200.avif) on local server
+PASS    products-classic-kunai@mobile page-image-bytes - 0.18 MB of images on /products/classic-kunai/ (limit 1.5 MB); LCP 128 ms (/assets/classic-kunai-sq-1200.avif) on local server
+INFO    home@desktop /assets/night-fury-hero-landscape-1280.avif - width/height attrs 960x1280 disagree with intrinsic ratio 2.00
+PASS    home@desktop page-image-bytes - 0.11 MB of images on / (limit 1.5 MB); LCP 124 ms (/assets/night-fury-hero-landscape-1280.avif) on local server
+PASS    shop@desktop page-image-bytes - 0.07 MB of images on /shop/ (limit 1.5 MB); LCP 80 ms (text) on local server
+PASS    products-hidden-leaf-keychain@desktop page-image-bytes - 0.15 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 100 ms (/assets/hidden-leaf-sq-960.avif) on local server
+PASS    products-baymax-figure@desktop page-image-bytes - 0.13 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 108 ms (/assets/baymax-sq-960.avif) on local server
+PASS    products-kurama-figure@desktop page-image-bytes - 0.10 MB of images on /products/kurama-figure/ (limit 1.5 MB); LCP 76 ms (/assets/kurama-sq-960.avif) on local server
+PASS    products-night-fury-keychain@desktop page-image-bytes - 0.12 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 80 ms (/assets/night-fury-sq-960.avif) on local server
+PASS    products-minato-kunai@desktop page-image-bytes - 0.19 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 116 ms (/assets/minato-kunai-sq-960.avif) on local server
+PASS    products-light-fury-keychain@desktop page-image-bytes - 0.11 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 64 ms (/assets/light-fury-sq-960.avif) on local server
+PASS    products-classic-kunai@desktop page-image-bytes - 0.09 MB of images on /products/classic-kunai/ (limit 1.5 MB); LCP 80 ms (/assets/classic-kunai-sq-960.avif) on local server
+
+{"PASS":18,"INFO":1} -> /home/user/honeycomb3d-ecommerce-system/qa/results/44a0f952004f1c118d4781d3498d6f5856771562/images

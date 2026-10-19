@@ -1,0 +1,7 @@
+reviewed_ref: cad746d4f9ef034691d002fd3a25d0890e153675
+reviewed_sha: cad746d4f9ef034691d002fd3a25d0890e153675
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T05:11:30Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T05:10:39+00:00
+subject: Fix CI: allow only the decorative card hover photo to have empty alt

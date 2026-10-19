@@ -1,0 +1,7 @@
+reviewed_ref: 144febcee3b522cdac627755f5b65f823978cf16
+reviewed_sha: 144febcee3b522cdac627755f5b65f823978cf16
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T03:24:40Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T03:05:17+00:00
+subject: Browser test: wait for the lightbox close handler instead of racing it

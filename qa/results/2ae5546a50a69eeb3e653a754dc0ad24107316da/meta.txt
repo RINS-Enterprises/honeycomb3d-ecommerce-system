@@ -1,0 +1,7 @@
+reviewed_ref: 2ae5546a50a69eeb3e653a754dc0ad24107316da
+reviewed_sha: 2ae5546a50a69eeb3e653a754dc0ad24107316da
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T02:56:12Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T02:55:26+00:00
+subject: robots.txt: let link-preview crawlers fetch pages while search stays blocked

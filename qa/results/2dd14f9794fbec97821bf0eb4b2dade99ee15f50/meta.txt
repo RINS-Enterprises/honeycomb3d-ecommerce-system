@@ -1,0 +1,7 @@
+reviewed_ref: 2dd14f9794fbec97821bf0eb4b2dade99ee15f50
+reviewed_sha: 2dd14f9794fbec97821bf0eb4b2dade99ee15f50
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-15T21:01:05Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-15T20:55:50+00:00
+subject: Show the whole Minato kunai and Hidden Leaf plate; tight crops move to the gallery

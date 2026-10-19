@@ -1,0 +1,41 @@
+PASS    home@mobile page-image-bytes - 0.24 MB of images on / (limit 1.5 MB); LCP 100 ms (/assets/night-fury-hero-portrait-1065.avif) on local server
+PASS    shop@mobile page-image-bytes - 0.51 MB of images on /shop/ (limit 1.5 MB); LCP 108 ms (/assets/hidden-leaf-sq-640.avif) on local server
+PASS    products-hidden-leaf-keychain@mobile page-image-bytes - 0.26 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 104 ms (/assets/hidden-leaf-sq-1200.avif) on local server
+PASS    products-baymax-figure@mobile page-image-bytes - 0.30 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 72 ms (/assets/baymax-sq-1200.avif) on local server
+PASS    products-kurama-figure@mobile page-image-bytes - 0.29 MB of images on /products/kurama-figure/ (limit 1.5 MB); LCP 88 ms (/assets/kurama-sq-1200.avif) on local server
+PASS    products-night-fury-keychain@mobile page-image-bytes - 0.24 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 96 ms (/assets/night-fury-sq-1200.avif) on local server
+PASS    products-minato-kunai@mobile page-image-bytes - 0.34 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 100 ms (/assets/minato-kunai-sq-1200.avif) on local server
+PASS    products-light-fury-keychain@mobile page-image-bytes - 0.24 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 88 ms (/assets/light-fury-sq-1200.avif) on local server
+PASS    products-classic-kunai@mobile page-image-bytes - 0.15 MB of images on /products/classic-kunai/ (limit 1.5 MB); LCP 88 ms (/assets/classic-kunai-sq-1200.avif) on local server
+PASS    products-bridgerton-bookmark@mobile page-image-bytes - 0.46 MB of images on /products/bridgerton-bookmark/ (limit 1.5 MB); LCP 92 ms (/assets/bridgerton-bookmark-sq-1200.avif) on local server
+PASS    products-flexi-derpy-kpop-demon-hunters@mobile page-image-bytes - 0.41 MB of images on /products/flexi-derpy-kpop-demon-hunters/ (limit 1.5 MB); LCP 104 ms (/assets/flexi-derpy-sq-1200.avif) on local server
+PASS    products-office-desk-organizer-with-phone-holder@mobile page-image-bytes - 0.40 MB of images on /products/office-desk-organizer-with-phone-holder/ (limit 1.5 MB); LCP 160 ms (/assets/desk-organizer-sq-1200.avif) on local server
+PASS    products-light-fury-big-wings@mobile page-image-bytes - 0.48 MB of images on /products/light-fury-big-wings/ (limit 1.5 MB); LCP 76 ms (/assets/light-fury-big-wings-sq-1200.avif) on local server
+PASS    products-urban-spider-man@mobile page-image-bytes - 0.44 MB of images on /products/urban-spider-man/ (limit 1.5 MB); LCP 92 ms (/assets/urban-spider-man-sq-1200.avif) on local server
+PASS    products-shuriken-ninja-star@mobile page-image-bytes - 0.30 MB of images on /products/shuriken-ninja-star/ (limit 1.5 MB); LCP 92 ms (/assets/shuriken-sq-1200.avif) on local server
+PASS    products-grogu-baby-yoda-keychain@mobile page-image-bytes - 0.30 MB of images on /products/grogu-baby-yoda-keychain/ (limit 1.5 MB); LCP 100 ms (/assets/grogu-keychain-sq-1200.avif) on local server
+PASS    products-dummy-13-iron-man@mobile page-image-bytes - 0.30 MB of images on /products/dummy-13-iron-man/ (limit 1.5 MB); LCP 88 ms (/assets/dummy-13-iron-man-sq-1200.avif) on local server
+PASS    products-dummy-13-spider-man@mobile page-image-bytes - 0.27 MB of images on /products/dummy-13-spider-man/ (limit 1.5 MB); LCP 100 ms (/assets/dummy-13-spider-man-sq-1200.avif) on local server
+PASS    products-horse-figurine@mobile page-image-bytes - 0.31 MB of images on /products/horse-figurine/ (limit 1.5 MB); LCP 112 ms (/assets/horse-figurine-sq-1200.avif) on local server
+INFO    home@desktop /assets/night-fury-hero-landscape-1280.avif - width/height attrs 960x1280 disagree with intrinsic ratio 2.00
+PASS    home@desktop page-image-bytes - 0.21 MB of images on / (limit 1.5 MB); LCP 140 ms (/assets/night-fury-hero-landscape-1280.avif) on local server
+PASS    shop@desktop page-image-bytes - 0.20 MB of images on /shop/ (limit 1.5 MB); LCP 128 ms (text) on local server
+PASS    products-hidden-leaf-keychain@desktop page-image-bytes - 0.15 MB of images on /products/hidden-leaf-keychain/ (limit 1.5 MB); LCP 92 ms (/assets/hidden-leaf-sq-960.avif) on local server
+PASS    products-baymax-figure@desktop page-image-bytes - 0.15 MB of images on /products/baymax-figure/ (limit 1.5 MB); LCP 76 ms (/assets/baymax-sq-960.avif) on local server
+PASS    products-kurama-figure@desktop page-image-bytes - 0.12 MB of images on /products/kurama-figure/ (limit 1.5 MB); LCP 76 ms (/assets/kurama-sq-960.avif) on local server
+PASS    products-night-fury-keychain@desktop page-image-bytes - 0.12 MB of images on /products/night-fury-keychain/ (limit 1.5 MB); LCP 76 ms (/assets/night-fury-sq-960.avif) on local server
+PASS    products-minato-kunai@desktop page-image-bytes - 0.19 MB of images on /products/minato-kunai/ (limit 1.5 MB); LCP 100 ms (/assets/minato-kunai-sq-960.avif) on local server
+PASS    products-light-fury-keychain@desktop page-image-bytes - 0.11 MB of images on /products/light-fury-keychain/ (limit 1.5 MB); LCP 72 ms (/assets/light-fury-sq-960.avif) on local server
+PASS    products-classic-kunai@desktop page-image-bytes - 0.09 MB of images on /products/classic-kunai/ (limit 1.5 MB); LCP 76 ms (/assets/classic-kunai-sq-960.avif) on local server
+PASS    products-bridgerton-bookmark@desktop page-image-bytes - 0.29 MB of images on /products/bridgerton-bookmark/ (limit 1.5 MB); LCP 80 ms (/assets/bridgerton-bookmark-sq-960.avif) on local server
+PASS    products-flexi-derpy-kpop-demon-hunters@desktop page-image-bytes - 0.19 MB of images on /products/flexi-derpy-kpop-demon-hunters/ (limit 1.5 MB); LCP 92 ms (/assets/flexi-derpy-sq-960.avif) on local server
+PASS    products-office-desk-organizer-with-phone-holder@desktop page-image-bytes - 0.18 MB of images on /products/office-desk-organizer-with-phone-holder/ (limit 1.5 MB); LCP 80 ms (/assets/desk-organizer-sq-960.avif) on local server
+PASS    products-light-fury-big-wings@desktop page-image-bytes - 0.21 MB of images on /products/light-fury-big-wings/ (limit 1.5 MB); LCP 68 ms (/assets/light-fury-big-wings-sq-960.avif) on local server
+PASS    products-urban-spider-man@desktop page-image-bytes - 0.17 MB of images on /products/urban-spider-man/ (limit 1.5 MB); LCP 80 ms (/assets/urban-spider-man-sq-960.avif) on local server
+PASS    products-shuriken-ninja-star@desktop page-image-bytes - 0.13 MB of images on /products/shuriken-ninja-star/ (limit 1.5 MB); LCP 80 ms (/assets/shuriken-sq-960.avif) on local server
+PASS    products-grogu-baby-yoda-keychain@desktop page-image-bytes - 0.14 MB of images on /products/grogu-baby-yoda-keychain/ (limit 1.5 MB); LCP 64 ms (/assets/grogu-keychain-sq-960.avif) on local server
+PASS    products-dummy-13-iron-man@desktop page-image-bytes - 0.13 MB of images on /products/dummy-13-iron-man/ (limit 1.5 MB); LCP 76 ms (/assets/dummy-13-iron-man-sq-960.avif) on local server
+PASS    products-dummy-13-spider-man@desktop page-image-bytes - 0.12 MB of images on /products/dummy-13-spider-man/ (limit 1.5 MB); LCP 76 ms (/assets/dummy-13-spider-man-sq-960.avif) on local server
+PASS    products-horse-figurine@desktop page-image-bytes - 0.13 MB of images on /products/horse-figurine/ (limit 1.5 MB); LCP 68 ms (/assets/horse-figurine-sq-960.avif) on local server
+
+{"PASS":38,"INFO":1} -> /home/user/honeycomb3d-ecommerce-system/qa/results/cc21b85fb21d8b296101a1ef0d1cc086666c5e20/images

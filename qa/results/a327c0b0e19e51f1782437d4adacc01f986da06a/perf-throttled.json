@@ -1,0 +1,141 @@
+{
+  "base": "http://127.0.0.1:4173",
+  "reviewed_sha": "a327c0b0e19e51f1782437d4adacc01f986da06a",
+  "note": "Emulated network and CPU against a local server; not a real device.",
+  "profiles": {
+    "slow-4g": {
+      "latency": 150,
+      "downloadThroughput": 188743.68000000002,
+      "uploadThroughput": 86400,
+      "cpu": 4
+    },
+    "3g": {
+      "latency": 300,
+      "downloadThroughput": 96000,
+      "uploadThroughput": 32000,
+      "cpu": 4
+    }
+  },
+  "rows": [
+    {
+      "profile": "slow-4g",
+      "path": "/",
+      "status": 200,
+      "fcpMs": 1388,
+      "lcpMs": 1416,
+      "loadMs": 1437,
+      "cls": 0,
+      "kb": 333,
+      "lcpGood": true,
+      "clsGood": true
+    },
+    {
+      "profile": "slow-4g",
+      "path": "/shop/",
+      "status": 200,
+      "fcpMs": 1552,
+      "lcpMs": 1624,
+      "loadMs": 1586,
+      "cls": 0,
+      "kb": 411,
+      "lcpGood": true,
+      "clsGood": true
+    },
+    {
+      "profile": "slow-4g",
+      "path": "/products/minato-kunai/",
+      "status": 200,
+      "fcpMs": 1596,
+      "lcpMs": 1596,
+      "loadMs": 2194,
+      "cls": 0,
+      "kb": 372,
+      "lcpGood": true,
+      "clsGood": true
+    },
+    {
+      "profile": "slow-4g",
+      "path": "/products/baymax-figure/",
+      "status": 200,
+      "fcpMs": 1360,
+      "lcpMs": 1808,
+      "loadMs": 2491,
+      "cls": 0,
+      "kb": 401,
+      "lcpGood": true,
+      "clsGood": true
+    },
+    {
+      "profile": "slow-4g",
+      "path": "/cart/",
+      "status": 200,
+      "fcpMs": 1100,
+      "lcpMs": 1100,
+      "loadMs": 1161,
+      "cls": 0,
+      "kb": 239,
+      "lcpGood": true,
+      "clsGood": true
+    },
+    {
+      "profile": "3g",
+      "path": "/",
+      "status": 200,
+      "fcpMs": 2544,
+      "lcpMs": 2644,
+      "loadMs": 2773,
+      "cls": 0,
+      "kb": 276,
+      "lcpGood": false,
+      "clsGood": true
+    },
+    {
+      "profile": "3g",
+      "path": "/shop/",
+      "status": 200,
+      "fcpMs": 2900,
+      "lcpMs": 3004,
+      "loadMs": 3008,
+      "cls": 0,
+      "kb": 298,
+      "lcpGood": false,
+      "clsGood": true
+    },
+    {
+      "profile": "3g",
+      "path": "/products/minato-kunai/",
+      "status": 200,
+      "fcpMs": 2976,
+      "lcpMs": 2976,
+      "loadMs": 4189,
+      "cls": 0,
+      "kb": 394,
+      "lcpGood": false,
+      "clsGood": true
+    },
+    {
+      "profile": "3g",
+      "path": "/products/baymax-figure/",
+      "status": 200,
+      "fcpMs": 2500,
+      "lcpMs": 3924,
+      "loadMs": 4847,
+      "cls": 0,
+      "kb": 401,
+      "lcpGood": false,
+      "clsGood": true
+    },
+    {
+      "profile": "3g",
+      "path": "/cart/",
+      "status": 200,
+      "fcpMs": 2048,
+      "lcpMs": 2048,
+      "loadMs": 2238,
+      "cls": 0.449,
+      "kb": 189,
+      "lcpGood": true,
+      "clsGood": false
+    }
+  ]
+}

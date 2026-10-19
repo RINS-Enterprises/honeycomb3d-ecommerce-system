@@ -1,0 +1,7 @@
+reviewed_ref: 19458c7aec6ebd004c92788d1c0c7a36b078d41a
+reviewed_sha: 19458c7aec6ebd004c92788d1c0c7a36b078d41a
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T03:01:27Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T02:56:45+00:00
+subject: Product pages: share via the Web Share sheet, WhatsApp or copy link

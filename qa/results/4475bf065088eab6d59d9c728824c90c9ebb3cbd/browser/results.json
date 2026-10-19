@@ -1,0 +1,616 @@
+{
+  "meta": {
+    "base": "http://127.0.0.1:4173",
+    "reviewed_sha": "4475bf065088eab6d59d9c728824c90c9ebb3cbd",
+    "whatsapp_expected": null,
+    "started": "2026-10-15T20:15:46.109Z",
+    "finished": "2026-10-15T20:16:04.136Z",
+    "counts": {
+      "PASS": 88
+    }
+  },
+  "results": [
+    {
+      "id": "home-load-mobile",
+      "ac": "AC-NAV-1",
+      "status": "PASS",
+      "detail": "GET / -> 200"
+    },
+    {
+      "id": "lang-home@mobile",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "html lang=\"en\""
+    },
+    {
+      "id": "title-home@mobile",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "title \"Collectibles & custom prints | HoneyComb 3D\""
+    },
+    {
+      "id": "h1-home@mobile",
+      "ac": "AC-A11Y-2",
+      "status": "PASS",
+      "detail": "1 visible h1"
+    },
+    {
+      "id": "overflow-home@mobile",
+      "ac": "AC-NAV-3",
+      "status": "PASS",
+      "detail": "horizontal overflow 0px"
+    },
+    {
+      "id": "img-alt-home@mobile",
+      "ac": "AC-A11Y-3",
+      "status": "PASS",
+      "detail": "0 img without alt attribute"
+    },
+    {
+      "id": "button-name-home@mobile",
+      "ac": "AC-A11Y-4",
+      "status": "PASS",
+      "detail": "0 buttons without accessible name"
+    },
+    {
+      "id": "js-errors-home@mobile",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no console/page errors"
+    },
+    {
+      "id": "http-errors-home@mobile",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no same-origin 4xx/5xx"
+    },
+    {
+      "id": "nav-mobile",
+      "ac": "AC-NAV-2",
+      "status": "PASS",
+      "detail": "no menu toggle; 3 nav links visible directly (overflow checked separately)"
+    },
+    {
+      "id": "home-load-small",
+      "ac": "AC-NAV-1",
+      "status": "PASS",
+      "detail": "GET / -> 200"
+    },
+    {
+      "id": "lang-home@small",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "html lang=\"en\""
+    },
+    {
+      "id": "title-home@small",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "title \"Collectibles & custom prints | HoneyComb 3D\""
+    },
+    {
+      "id": "h1-home@small",
+      "ac": "AC-A11Y-2",
+      "status": "PASS",
+      "detail": "1 visible h1"
+    },
+    {
+      "id": "overflow-home@small",
+      "ac": "AC-NAV-3",
+      "status": "PASS",
+      "detail": "horizontal overflow 0px"
+    },
+    {
+      "id": "img-alt-home@small",
+      "ac": "AC-A11Y-3",
+      "status": "PASS",
+      "detail": "0 img without alt attribute"
+    },
+    {
+      "id": "button-name-home@small",
+      "ac": "AC-A11Y-4",
+      "status": "PASS",
+      "detail": "0 buttons without accessible name"
+    },
+    {
+      "id": "js-errors-home@small",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no console/page errors"
+    },
+    {
+      "id": "http-errors-home@small",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no same-origin 4xx/5xx"
+    },
+    {
+      "id": "nav-small",
+      "ac": "AC-NAV-2",
+      "status": "PASS",
+      "detail": "no menu toggle; 3 nav links visible directly (overflow checked separately)"
+    },
+    {
+      "id": "home-load-desktop",
+      "ac": "AC-NAV-1",
+      "status": "PASS",
+      "detail": "GET / -> 200"
+    },
+    {
+      "id": "lang-home@desktop",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "html lang=\"en\""
+    },
+    {
+      "id": "title-home@desktop",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "title \"Collectibles & custom prints | HoneyComb 3D\""
+    },
+    {
+      "id": "h1-home@desktop",
+      "ac": "AC-A11Y-2",
+      "status": "PASS",
+      "detail": "1 visible h1"
+    },
+    {
+      "id": "overflow-home@desktop",
+      "ac": "AC-NAV-3",
+      "status": "PASS",
+      "detail": "horizontal overflow 0px"
+    },
+    {
+      "id": "img-alt-home@desktop",
+      "ac": "AC-A11Y-3",
+      "status": "PASS",
+      "detail": "0 img without alt attribute"
+    },
+    {
+      "id": "button-name-home@desktop",
+      "ac": "AC-A11Y-4",
+      "status": "PASS",
+      "detail": "0 buttons without accessible name"
+    },
+    {
+      "id": "js-errors-home@desktop",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no console/page errors"
+    },
+    {
+      "id": "http-errors-home@desktop",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no same-origin 4xx/5xx"
+    },
+    {
+      "id": "nav-desktop",
+      "ac": "AC-NAV-1",
+      "status": "PASS",
+      "detail": "3 visible links in first navigation landmark"
+    },
+    {
+      "id": "kbd-skip-link",
+      "ac": "AC-A11Y-5",
+      "status": "PASS",
+      "detail": "first Tab stop: A \"Skip to content\""
+    },
+    {
+      "id": "kbd-focus-indicator",
+      "ac": "AC-A11Y-5",
+      "status": "PASS",
+      "detail": "0/12 focused elements without outline/box-shadow",
+      "stops": [
+        {
+          "tag": "A",
+          "name": "Skip to content",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "HoneyComb 3D home",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "Shop",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "Custom prints",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "Cart 0",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "Shop the collection →",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "Bring your own idea",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "Pictured Night Fury Keychain →",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "View collection →",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "01Keychains↗",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "02Figures↗",
+          "visible": true,
+          "indicator": true
+        },
+        {
+          "tag": "A",
+          "name": "03Props↗",
+          "visible": true,
+          "indicator": true
+        }
+      ]
+    },
+    {
+      "id": "catalog-desktop",
+      "ac": "AC-CAT-1",
+      "status": "PASS",
+      "detail": "5 product links on /shop/"
+    },
+    {
+      "id": "lang-catalog@desktop",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "html lang=\"en\""
+    },
+    {
+      "id": "title-catalog@desktop",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "title \"Shop | HoneyComb 3D\""
+    },
+    {
+      "id": "h1-catalog@desktop",
+      "ac": "AC-A11Y-2",
+      "status": "PASS",
+      "detail": "1 visible h1"
+    },
+    {
+      "id": "overflow-catalog@desktop",
+      "ac": "AC-NAV-3",
+      "status": "PASS",
+      "detail": "horizontal overflow 0px"
+    },
+    {
+      "id": "img-alt-catalog@desktop",
+      "ac": "AC-A11Y-3",
+      "status": "PASS",
+      "detail": "0 img without alt attribute"
+    },
+    {
+      "id": "button-name-catalog@desktop",
+      "ac": "AC-A11Y-4",
+      "status": "PASS",
+      "detail": "0 buttons without accessible name"
+    },
+    {
+      "id": "js-errors-catalog@desktop",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no console/page errors"
+    },
+    {
+      "id": "http-errors-catalog@desktop",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no same-origin 4xx/5xx"
+    },
+    {
+      "id": "filter-apply",
+      "ac": "AC-CAT-2",
+      "status": "PASS",
+      "detail": "filter (SELECT) -> 5 to 3 visible products, url changed"
+    },
+    {
+      "id": "pdp-desktop",
+      "ac": "AC-PDP-1",
+      "status": "PASS",
+      "detail": "/products/hidden-leaf-keychain/ -> 200, name \"Hidden Leaf Keychain\", price 400"
+    },
+    {
+      "id": "lang-pdp@desktop",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "html lang=\"en\""
+    },
+    {
+      "id": "title-pdp@desktop",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "title \"Hidden Leaf Keychain | HoneyComb 3D\""
+    },
+    {
+      "id": "h1-pdp@desktop",
+      "ac": "AC-A11Y-2",
+      "status": "PASS",
+      "detail": "1 visible h1"
+    },
+    {
+      "id": "overflow-pdp@desktop",
+      "ac": "AC-NAV-3",
+      "status": "PASS",
+      "detail": "horizontal overflow 0px"
+    },
+    {
+      "id": "img-alt-pdp@desktop",
+      "ac": "AC-A11Y-3",
+      "status": "PASS",
+      "detail": "0 img without alt attribute"
+    },
+    {
+      "id": "button-name-pdp@desktop",
+      "ac": "AC-A11Y-4",
+      "status": "PASS",
+      "detail": "0 buttons without accessible name"
+    },
+    {
+      "id": "js-errors-pdp@desktop",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no console/page errors"
+    },
+    {
+      "id": "http-errors-pdp@desktop",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no same-origin 4xx/5xx"
+    },
+    {
+      "id": "add-to-cart-desktop",
+      "ac": "AC-CART-1",
+      "status": "PASS",
+      "detail": "cart count 0 -> 1"
+    },
+    {
+      "id": "add-to-cart-announce-desktop",
+      "ac": "AC-A11Y-7",
+      "status": "PASS",
+      "detail": "live region text: [\"Hidden Leaf Keychain added to your request cart.\"]"
+    },
+    {
+      "id": "cart-line-desktop",
+      "ac": "AC-CART-2",
+      "status": "PASS",
+      "detail": "qty 1, subtotal 400, expected 1 x 400"
+    },
+    {
+      "id": "cart-qty-inc-desktop",
+      "ac": "AC-CART-3",
+      "status": "PASS",
+      "detail": "via quantity input: qty 2, subtotal 800, expected 2 x 400 = 800"
+    },
+    {
+      "id": "cart-qty-invalid-desktop",
+      "ac": "AC-CART-3",
+      "status": "PASS",
+      "detail": "after entering 0, 21, 1.5: qty 2 (expected to stay 2)"
+    },
+    {
+      "id": "cart-persist-desktop",
+      "ac": "AC-CART-5",
+      "status": "PASS",
+      "detail": "after reload qty 2 (was 2)"
+    },
+    {
+      "id": "whatsapp-handoff",
+      "ac": "AC-PREV-3",
+      "status": "PASS",
+      "detail": "preview: no WhatsApp link, \"not open yet\" notice shown (run with QA_LIVE_FIXTURE=1 to test the handoff)"
+    },
+    {
+      "id": "cart-remove-desktop",
+      "ac": "AC-CART-4",
+      "status": "PASS",
+      "detail": "empty-state shown, WhatsApp checkout unavailable, cart count 0"
+    },
+    {
+      "id": "catalog-mobile",
+      "ac": "AC-CAT-1",
+      "status": "PASS",
+      "detail": "5 product links on /shop/"
+    },
+    {
+      "id": "lang-catalog@mobile",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "html lang=\"en\""
+    },
+    {
+      "id": "title-catalog@mobile",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "title \"Shop | HoneyComb 3D\""
+    },
+    {
+      "id": "h1-catalog@mobile",
+      "ac": "AC-A11Y-2",
+      "status": "PASS",
+      "detail": "1 visible h1"
+    },
+    {
+      "id": "overflow-catalog@mobile",
+      "ac": "AC-NAV-3",
+      "status": "PASS",
+      "detail": "horizontal overflow 0px"
+    },
+    {
+      "id": "img-alt-catalog@mobile",
+      "ac": "AC-A11Y-3",
+      "status": "PASS",
+      "detail": "0 img without alt attribute"
+    },
+    {
+      "id": "button-name-catalog@mobile",
+      "ac": "AC-A11Y-4",
+      "status": "PASS",
+      "detail": "0 buttons without accessible name"
+    },
+    {
+      "id": "js-errors-catalog@mobile",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no console/page errors"
+    },
+    {
+      "id": "http-errors-catalog@mobile",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no same-origin 4xx/5xx"
+    },
+    {
+      "id": "pdp-mobile",
+      "ac": "AC-PDP-1",
+      "status": "PASS",
+      "detail": "/products/hidden-leaf-keychain/ -> 200, name \"Hidden Leaf Keychain\", price 400"
+    },
+    {
+      "id": "lang-pdp@mobile",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "html lang=\"en\""
+    },
+    {
+      "id": "title-pdp@mobile",
+      "ac": "AC-A11Y-1",
+      "status": "PASS",
+      "detail": "title \"Hidden Leaf Keychain | HoneyComb 3D\""
+    },
+    {
+      "id": "h1-pdp@mobile",
+      "ac": "AC-A11Y-2",
+      "status": "PASS",
+      "detail": "1 visible h1"
+    },
+    {
+      "id": "overflow-pdp@mobile",
+      "ac": "AC-NAV-3",
+      "status": "PASS",
+      "detail": "horizontal overflow 0px"
+    },
+    {
+      "id": "img-alt-pdp@mobile",
+      "ac": "AC-A11Y-3",
+      "status": "PASS",
+      "detail": "0 img without alt attribute"
+    },
+    {
+      "id": "button-name-pdp@mobile",
+      "ac": "AC-A11Y-4",
+      "status": "PASS",
+      "detail": "0 buttons without accessible name"
+    },
+    {
+      "id": "js-errors-pdp@mobile",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no console/page errors"
+    },
+    {
+      "id": "http-errors-pdp@mobile",
+      "ac": "AC-FAIL-4",
+      "status": "PASS",
+      "detail": "no same-origin 4xx/5xx"
+    },
+    {
+      "id": "add-to-cart-mobile",
+      "ac": "AC-CART-1",
+      "status": "PASS",
+      "detail": "cart count 0 -> 1"
+    },
+    {
+      "id": "add-to-cart-announce-mobile",
+      "ac": "AC-A11Y-7",
+      "status": "PASS",
+      "detail": "live region text: [\"Hidden Leaf Keychain added to your request cart.\"]"
+    },
+    {
+      "id": "cart-line-mobile",
+      "ac": "AC-CART-2",
+      "status": "PASS",
+      "detail": "qty 1, subtotal 400, expected 1 x 400"
+    },
+    {
+      "id": "cart-qty-inc-mobile",
+      "ac": "AC-CART-3",
+      "status": "PASS",
+      "detail": "via quantity input: qty 2, subtotal 800, expected 2 x 400 = 800"
+    },
+    {
+      "id": "cart-qty-invalid-mobile",
+      "ac": "AC-CART-3",
+      "status": "PASS",
+      "detail": "after entering 0, 21, 1.5: qty 2 (expected to stay 2)"
+    },
+    {
+      "id": "cart-persist-mobile",
+      "ac": "AC-CART-5",
+      "status": "PASS",
+      "detail": "after reload qty 2 (was 2)"
+    },
+    {
+      "id": "cart-remove-mobile",
+      "ac": "AC-CART-4",
+      "status": "PASS",
+      "detail": "empty-state shown, WhatsApp checkout unavailable, cart count 0"
+    },
+    {
+      "id": "unknown-product",
+      "ac": "AC-FAIL-1",
+      "status": "PASS",
+      "detail": "status 404, not-found text yes, recovery link yes"
+    },
+    {
+      "id": "corrupt-cart-storage",
+      "ac": "AC-FAIL-2",
+      "status": "PASS",
+      "detail": "keys honeycomb.cart.v1; page errors: none"
+    },
+    {
+      "id": "no-js-catalog",
+      "ac": "AC-FAIL-5",
+      "status": "PASS",
+      "detail": "5 product links rendered without JavaScript"
+    },
+    {
+      "id": "security-headers",
+      "ac": "AC-SEC-3",
+      "status": "PASS",
+      "detail": "present"
+    }
+  ]
+}

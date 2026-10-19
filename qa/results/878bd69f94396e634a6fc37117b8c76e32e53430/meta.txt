@@ -1,0 +1,7 @@
+reviewed_ref: 878bd69f94396e634a6fc37117b8c76e32e53430
+reviewed_sha: 878bd69f94396e634a6fc37117b8c76e32e53430
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-15T20:23:39Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-15T20:21:21+00:00
+subject: Rebuild product cards: whole-card link, hover lift, clean LKR prices

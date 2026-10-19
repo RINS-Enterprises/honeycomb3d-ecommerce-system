@@ -1,0 +1,167 @@
+<title>MakerWorld to Drive</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+  /* Layout: one readable column, a sticky device switcher, numbered steps only where order matters. */
+  :root {
+    --bg: #fbf7ef; --surface: #fffdf8; --line: #e6dccb; --fg: #2a2117; --muted: #6d5f4d;
+    --accent: #a85f00; --accent-soft: #fbe6c2; --on-accent: #fffaf0; --warn-bg: #fff1e6; --warn-line: #e9b48c;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Atkinson Hyperlegible", "Segoe UI", Roboto, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #12100d; --surface: #1b1814; --line: #352e25; --fg: #f3ece1; --muted: #b5a893;
+    --accent: #fba31b; --accent-soft: #3a2a12; --on-accent: #1a1206; --warn-bg: #2a1c14; --warn-line: #7a4a2c; color-scheme: dark } }
+  :root[data-theme="dark"] {
+    --bg: #12100d; --surface: #1b1814; --line: #352e25; --fg: #f3ece1; --muted: #b5a893;
+    --accent: #fba31b; --accent-soft: #3a2a12; --on-accent: #1a1206; --warn-bg: #2a1c14; --warn-line: #7a4a2c; color-scheme: dark }
+
+  body { background: var(--bg); color: var(--fg); font: 17px/1.6 var(--body); }
+  .wrap { max-width: 680px; margin: 0 auto; padding-block: 28px 64px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.15; margin: 0; }
+  h1 { font-size: clamp(30px, 7vw, 42px); font-weight: 800; letter-spacing: -.01em; }
+  h2 { font-size: 24px; font-weight: 800; margin-top: 44px; scroll-margin-top: 72px; }
+  h3 { font-size: 18px; font-weight: 600; margin-top: 22px; }
+  p { margin: 10px 0 0; }
+  a { color: var(--accent); }
+  .eyebrow { font: 700 13px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+  .hex { width: 14px; height: 16px; background: var(--accent); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+  .lede { font-size: 19px; color: var(--muted); margin-top: 12px; }
+  .does { display: grid; gap: 10px; margin: 20px 0 0; padding: 0; list-style: none; }
+  .does li { display: grid; grid-template-columns: 14px 1fr; gap: 12px; align-items: start; }
+  .does li::before { content: ""; width: 10px; height: 11px; margin-top: 8px; background: var(--accent); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+
+  nav.devices { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 12px; margin-top: 24px; border-bottom: 1px solid var(--line); }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+  nav.devices div { display: flex; gap: 8px; flex-wrap: wrap; }
+  nav.devices a { text-decoration: none; color: var(--fg); border: 1px solid var(--line); background: var(--surface); padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: 15px; }
+  nav.devices a:hover { border-color: var(--accent); }
+
+  ol.steps { list-style: none; counter-reset: s; margin: 14px 0 0; padding: 0; display: grid; gap: 14px; }
+  ol.steps > li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 12px; min-width: 0; }
+  ol.steps > li::before { content: counter(s); width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font: 800 15px/30px var(--display); text-align: center; }
+  ol.steps > li > div { min-width: 0; }
+  ul.plain { margin: 8px 0 0; padding-left: 20px; } ul.plain li + li { margin-top: 4px; }
+  .ui { font-weight: 700; white-space: nowrap; }
+  .callout { margin-top: 18px; padding: 14px 16px; border: 1px solid var(--warn-line); background: var(--warn-bg); border-radius: 12px; }
+  .callout h3 { margin: 0; font-size: 17px; }
+  .tree { margin-top: 14px; overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font: 14px/1.7 var(--mono); white-space: pre; }
+  .table-wrap { margin-top: 14px; overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { font-size: 13px; color: var(--muted); font-weight: 700; } tr:last-child td { border-bottom: 0; }
+  .note { font-size: 14px; color: var(--muted); }
+  .presets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .presets span { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 3px 11px; font-size: 14px; }
+  dl.trouble { margin: 14px 0 0; display: grid; gap: 14px; }
+  dl.trouble dt { font-weight: 700; } dl.trouble dd { margin: 4px 0 0; color: var(--fg); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap">
+  <div class="eyebrow"><span class="hex" aria-hidden="true"></span>HoneyComb 3D · team guide</div>
+  <h1 style="margin-top:10px">MakerWorld to Drive</h1>
+  <p class="lede">Save a MakerWorld model into our shared Drive folder in one go, from a phone, tablet or computer.</p>
+  <ul class="does">
+    <li><span>The designer's photos and the community print photos from the comments.</span></li>
+    <li><span>Filament grams and print time from the print profile, with the suggested price worked out from our costs.</span></li>
+    <li><span>Your own print photos, and AI versions of any photo (new background, colour or finish).</span></li>
+  </ul>
+
+  <nav class="devices" aria-label="Jump to">
+    <div><a href="#first">First time</a><a href="#android">Android</a><a href="#windows">Windows</a><a href="#ai">AI versions</a><a href="#help">Problems</a></div>
+  </nav>
+
+  <h2 id="first">First time, on any device</h2>
+  <ol class="steps">
+    <li><div>Open the app link the owner sent you, signed in with the Google account the owner shared the folder with.</div></li>
+    <li><div>Google asks for permission once. Tap <span class="ui">Review permissions</span>, choose your account, then <span class="ui">Advanced</span> → <span class="ui">Go to MakerWorld to Drive (unsafe)</span> → <span class="ui">Allow</span>. The warning appears because the app is ours, not a published one.</div></li>
+    <li><div>At the top you should see <span class="ui">Signed in as</span> your address and a <span class="ui">Shared folder</span> link. The photos you save are added under your name.</div></li>
+  </ol>
+
+  <h2 id="android">Android phone or tablet</h2>
+  <ol class="steps">
+    <li><div>Open the app link in Chrome and tap <span class="ui">⋮</span> → <span class="ui">Add to Home screen</span>. From then on, open it like any app.</div></li>
+    <li><div>In the MakerWorld app or website, open the model and tap <span class="ui">Share</span> → <span class="ui">Copy link</span>.</div></li>
+    <li><div>Open <b>MakerWorld to Drive</b>, paste the link and tap <span class="ui">Get model</span>.</div></li>
+    <li><div>Check what it found:
+      <ul class="plain">
+        <li>the print profile fills in grams, hours and the price; pick another profile if you print it differently;</li>
+        <li>untick photos you don't want;</li>
+        <li>tap <span class="ui">Add photos…</span> for your own print photos;</li>
+        <li>tick the licence box only if we bought the commercial licence or the licence allows selling.</li>
+      </ul></div></li>
+    <li><div>Tap <span class="ui">Save to Drive</span>.</div></li>
+  </ol>
+  <div class="callout">
+    <h3>If it says "MakerWorld did not let Google's server read this page"</h3>
+    <p>MakerWorld sometimes blocks the automatic read. Tap <span class="ui">Fill in by hand</span>, then:</p>
+    <ul class="plain">
+      <li>in MakerWorld, long-press each photo you want and tap <span class="ui">Download image</span>;</li>
+      <li>back in the app, choose <span class="ui">Designer photos</span> or <span class="ui">Community prints</span> next to <span class="ui">Add photos…</span> and pick the downloaded photos;</li>
+      <li>type the grams and print time from the model's print profile and tap <span class="ui">Save to Drive</span>.</li>
+    </ul>
+  </div>
+
+  <h2 id="windows">Windows computer</h2>
+  <p>The paste-a-link page works the same in Chrome or Edge. The one-click bookmark is better on a computer, because it reads the page in your own browser and also catches the community photos and print profiles that only load while you scroll.</p>
+  <h3>Add the bookmark once</h3>
+  <ol class="steps">
+    <li><div>Show the bookmarks bar with <span class="ui">Ctrl+Shift+B</span>.</div></li>
+    <li><div>Right-click the bar → <span class="ui">Add page</span> (Chrome) or <span class="ui">Add favourite</span> (Edge).</div></li>
+    <li><div>Name it <b>Save to HoneyComb Drive</b> and paste the bookmark line the owner sent you (it starts with <code>javascript:</code>) as the URL.</div></li>
+  </ol>
+  <h3>Use it</h3>
+  <ol class="steps">
+    <li><div>On a MakerWorld model page, scroll through the photos, open the print profile list and scroll the comments and prints. Press "load more" for more community photos.</div></li>
+    <li><div>Click <b>Save to HoneyComb Drive</b>. A new tab opens with everything it found. If nothing opens, allow pop-ups for makerworld.com.</div></li>
+    <li><div>Check the details and photos as on Android, then click <span class="ui">Save to Drive</span>.</div></li>
+  </ol>
+
+  <h2 id="ai">AI versions</h2>
+  <p>Straight after saving, or later from <span class="ui">Recent imports</span> → <span class="ui">AI versions</span> on the start page.</p>
+  <ol class="steps">
+    <li><div>Pick up to 6 photos per run.</div></li>
+    <li><div>Pick a preset or write your own instructions. For a colour, change "red" or "gold" in the text.
+      <div class="presets" aria-label="Presets"><span>Studio</span><span>Wooden desk</span><span>Home shelf</span><span>Outdoors</span><span>New colour</span><span>Silk finish</span><span>Marble finish</span></div></div></li>
+    <li><div>Tap <span class="ui">Make AI versions</span>. Each photo takes 10–20 seconds and lands in <code>AI edited/</code> in that model's folder.</div></li>
+  </ol>
+
+  <h2>What lands in Drive</h2>
+  <div class="tree" role="img" aria-label="Folder layout">HoneyComb / MakerWorld imports /
+├── Cute Dragon (123456) - 2026-10-16 1800 /
+│   ├── Designer photos /     01-cute-dragon.jpg …
+│   ├── Community prints /    01-cute-dragon-by-printer-pat.jpg …
+│   ├── Own photos /          01-cute-dragon-own.jpg …
+│   ├── AI edited /           01-cute-dragon-ai-120412.png …
+│   └── model.json
+└── MakerWorld imports log  (one row per model)</div>
+  <p>Each save adds a row to the log sheet, for example:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Saved by</th><th>Title</th><th>Filament (g)</th><th>Print time (h)</th><th>Suggested price (LKR)</th><th>Licence</th><th>Status</th></tr></thead>
+      <tbody><tr><td>you@gmail.com</td><td>Cute Dragon</td><td>34.6</td><td>2.25</td><td>1,200</td><td>Yes</td><td>New</td></tr></tbody>
+    </table>
+  </div>
+  <p class="note">Example row, priced with the app's example cost settings. Real prices use the owner's saved settings: grams × (1 + waste) × filament cost per kg + hours × machine cost + labour + packaging, plus the markup, rounded up.</p>
+
+  <h2>House rules</h2>
+  <ul class="plain">
+    <li>Tick the licence box only when we really have the commercial licence or the licence allows selling. Unticked rows are marked "NO - check before listing".</li>
+    <li>Community photos belong to the people who posted them. Use them as reference and for AI edits, not as our product photos.</li>
+    <li>Every product on the website needs at least one real photo of our own print. AI images go up labelled, for example "Colour preview".</li>
+  </ul>
+
+  <h2 id="help">Problems</h2>
+  <dl class="trouble">
+    <div><dt>"You don't have access to the shared folder"</dt><dd>The folder isn't shared with the account you're signed in with. Ask the owner to share <b>MakerWorld imports</b> with that address as Editor.</dd></div>
+    <div><dt>An error right after opening, or the wrong account shows</dt><dd>You're signed in to more than one Google account in this browser. Open the app in a window signed in only to the shared account, for example an incognito window or your own Chrome profile.</dd></div>
+    <div><dt>Wrong title, grams or photos</dt><dd>Fix them on the page before saving; everything is editable. Tell the owner which model it was so the reader can be improved.</dd></div>
+    <div><dt>"Only the owner can save the pricing settings"</dt><dd>Prices use shared settings. You can try other numbers for one model, but only the owner saves them for everyone.</dd></div>
+  </dl>
+</div>

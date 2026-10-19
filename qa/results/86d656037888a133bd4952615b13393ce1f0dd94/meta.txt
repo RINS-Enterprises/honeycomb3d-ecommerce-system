@@ -1,0 +1,7 @@
+reviewed_ref: 86d6560
+reviewed_sha: 86d656037888a133bd4952615b13393ce1f0dd94
+source: https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system
+checked_out_at: 2026-10-16T13:12:35Z
+node: v22.22.0  npm: 10.9.4
+commit_date: 2026-10-16T13:09:13+00:00
+subject: Related row on product pages links to the rest of the category

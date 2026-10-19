@@ -1,0 +1,76 @@
+{
+  "_about": "Owner-designated catalogue data for the 7 storefront products, read without changes from the owner's Airtable on 2026-10-11. The owner named Airtable as the source for prices and stock in the QA chat that day (QA-FINDINGS.md E-12). This is a QA reference only: GPT owns data/products.json. Prices are LKR. Airtable has no compare-at prices and no per-product stock count. See QA-FINDINGS.md §3.2 and F-17 to F-20.",
+  "readAt": "2026-10-11",
+  "source": {
+    "baseId": "appTRxtdHRFH7mgLX",
+    "tables": {
+      "Products": "tblmUOdfunwP8iWKi",
+      "Filament Inventory": "tbl2kT7YFNC6Jm0Pk"
+    },
+    "fieldsRead": {
+      "Products": ["SKU", "Product Name", "Category", "Selling Price (LKR)", "Status", "Product Image / Asset", "Model/Source Link", "Notes", "Bill of Materials"],
+      "Filament Inventory": ["Filament ID", "Color Name", "Material", "Color Code", "Stock (kg)", "Reorder Threshold (kg)", "Status", "Last Purchased", "Notes", "Used In Products"]
+    },
+    "deliberatelyNotRead": "Cost and supplier fields, and all finance tables (Orders, Order Items, Financial Periods, Budgets, Capital Contributors, Capital Contributions, Agreements, Profit Distributions, Loans, Owner Withdrawals, Expenses, Purchase Requests). The storefront doesn't need them.",
+    "recordsCreated": "2026-08-23 (notes say 'original workbook'). The connector returns no last-modified time, so 'current' rests on the owner's word."
+  },
+  "products": [
+    { "storefrontId": "HC-LEAF", "airtableSku": "HNYCMB511", "recordId": "recgVDtQsRTEGSyzG", "airtableName": "Hidden Leaf Keychain Naruto", "airtableCategory": "Keytag", "priceLkr": 400, "status": "Active", "aprilSite": { "price": 400, "compareAt": 600 }, "modelSource": "https://makerworld.com/en/models/2282457-akatsuki-headband-keychains" },
+    { "storefrontId": "HC-BAYMAX", "airtableSku": "HNYCMB503", "recordId": "recIC7e7QDrEe31ac", "airtableName": "BayMax", "airtableCategory": "Figurine", "priceLkr": 1000, "status": "Active", "aprilSite": { "price": 800, "compareAt": 1200 }, "modelSource": "Drive Baymax.3mf (1SfuSyhm_kCdzrSHToEen4813earSuITj), designer not recorded", "skuConflict": "Drive folders and GPT's ASSET-PROVENANCE.md use HNYCMB504 for Baymax (F-17)" },
+    { "storefrontId": "HC-KURAMA", "airtableSku": "HNYCMB504", "recordId": "recIEe7aBzmZkPiIQ", "airtableName": "Kurama", "airtableCategory": "Figurine", "priceLkr": 1500, "status": "Active", "aprilSite": { "price": 1200, "compareAt": 1500 }, "modelSource": "https://makerworld.com/en/models/19101-nine-tailed-demon-fox", "skuConflict": "Drive folders in both accounts use HNYCMB503 for Kurama (F-17)" },
+    { "storefrontId": "HNYCMB501", "airtableSku": "HNYCMB501", "recordId": "rechNg8MzLC5lT3uu", "airtableName": "Night Fury Keytag", "airtableCategory": "Keytag", "priceLkr": 500, "status": "Active", "aprilSite": { "price": 500, "compareAt": 900 }, "modelSource": "https://makerworld.com/en/models/2465337-articulated-toothless-dragon-keychain" },
+    { "storefrontId": "HC-MINATO", "airtableSku": "HNYCMB508", "recordId": "recjsg5yUe8VJDPWl", "airtableName": "Minato Kunai (Naruto)", "airtableCategory": "Weapon", "priceLkr": 1000, "status": "Active", "aprilSite": { "price": 1000, "compareAt": 1500 }, "modelSource": "https://makerworld.com/en/models/814550-minato-kunai-fidget-spinner", "variant": "tan handle, black blade (owner, 2026-10-11)" },
+    { "storefrontId": "HC-LIGHTFURY", "airtableSku": "HNYCMB502", "recordId": "recI8XqnYur0JllUa", "airtableName": "Light Fury Keytag", "airtableCategory": "Keytag", "priceLkr": 500, "status": "Active", "aprilSite": { "price": 500, "compareAt": 900 }, "modelSource": "https://makerworld.com/en/models/2495866-articulated-light-fury-dragon-keychain" },
+    { "storefrontId": "HC-KUNAI", "airtableSku": "HNYCMB509", "recordId": "recXi9upTrq3CYmlF", "airtableName": "Classic Kunai (Naruto)", "airtableCategory": "Weapon", "priceLkr": 1000, "status": "Active", "aprilSite": { "price": 900, "compareAt": 1200 }, "modelSource": "https://makerworld.com/en/models/672914-kunai-fidget-spinner" }
+  ],
+  "otherActiveProductsNotOnStorefront": [
+    { "sku": "HNYCMB505", "name": "Bridgerton Bookmark", "category": "Bookmark", "priceLkr": 300 },
+    { "sku": "HNYCMB506", "name": "Flexi Derpy (Kpop Demon Hunters)", "category": "Figurine", "priceLkr": 500 },
+    { "sku": "HNYCMB507", "name": "Office Desk Organizer With Phone Holder", "category": "Desk Organizer", "priceLkr": 2000 },
+    { "sku": "HNYCMB510", "name": "Light Fury Big Wings", "category": "Figurine", "priceLkr": 600 },
+    { "sku": "HNYCMB512", "name": "Urban Spider Man", "category": "Figurine", "priceLkr": 1750 },
+    { "sku": "HNYCMB513", "name": "Stormtrooper Star Wars keychain", "category": "Keytag", "priceLkr": 500 },
+    { "sku": "HNYCMB514", "name": "Shuriken Ninja Star", "category": "Weapon", "priceLkr": 500 },
+    { "sku": "HNYCMB515", "name": "Gorgu Baby Yoda keychain", "category": "Keytag", "priceLkr": 500 },
+    { "sku": "HNYCMB516", "name": "Dummy13 Iron Man", "category": "Figurine", "priceLkr": 1500 },
+    { "sku": "HNYCMB517", "name": "Dummy 13 Spider Man", "category": "Figurine", "priceLkr": 1500 },
+    { "sku": "HNYCMB518", "name": "Horse figurine", "category": "Figurine", "priceLkr": 1600 }
+  ],
+  "stock": {
+    "perProductCountInAirtable": false,
+    "note": "Products.Status is a catalogue status (Active/Inactive/Discontinued), not availability. Filament Inventory tracks raw filament by weight, not finished units. Every Bill of Materials link is empty, so no product-to-filament mapping exists.",
+    "ownerBoxSheet": {
+      "file": "HC-BOX (Google Sheet 1qSC_e4OGonIkcnxZehLXo1bSWBQfQwAp4s8WOXmQTWQ), folder HoneyComb/Stock, modified 2026-10-10",
+      "entriesThatMayMatchStorefrontProducts": [
+        { "box": "HC-BOX-005", "text": "NightFury x3", "qaReading": "probably HNYCMB501" },
+        { "box": "HC-BOX-007", "text": "Lightfiry x5", "qaReading": "HNYCMB502 Light Fury Keytag or HNYCMB510 Light Fury Big Wings" },
+        { "box": "HC-BOX-008", "text": "Naruto Keytags", "qaReading": "possibly HNYCMB511; no count given" }
+      ],
+      "storefrontProductsNotInAnyBox": ["HC-KURAMA", "HC-BAYMAX", "HC-MINATO", "HC-KUNAI"],
+      "caveat": "Box-to-SKU mapping is QA's reading of free text, not confirmed by the owner."
+    },
+    "filament": [
+      { "id": "FIL-001", "color": "Red", "material": "PLA", "stockKg": 0.7, "status": "In Stock" },
+      { "id": "FIL-002", "color": "White", "material": "PLA", "stockKg": 0.6, "status": "In Stock", "dataNote": "colour code '##f6f8f9' (double #)" },
+      { "id": "FIL-003", "color": "Gray", "material": "PLA", "stockKg": 0.6, "status": "In Stock" },
+      { "id": "FIL-004", "color": "Yellow", "material": "PLA", "stockKg": 0.7, "status": "In Stock", "dataNote": "colour code #dbcea1 is beige" },
+      { "id": "FIL-005", "color": "Blue", "material": "PLA", "stockKg": 0.6, "status": "In Stock", "dataNote": "colour code #dcb3b7 is pink" },
+      { "id": "FIL-006", "color": "Green", "material": "PLA", "stockKg": 0.8, "status": "In Stock" },
+      { "id": "FIL-007", "color": "Beige", "material": "PLA", "stockKg": 0.1, "reorderThresholdKg": 0.2, "status": "Reorder Needed", "note": "may be the Minato tan handle colour; owner to confirm" },
+      { "id": "FIL-008", "color": "White", "material": "PLA", "stockKg": null, "status": null },
+      { "id": "FIL-009", "color": "Black", "material": "PLA", "stockKg": null, "status": null },
+      { "id": "FIL-010", "color": "Silver", "material": "PLA", "stockKg": null, "status": null },
+      { "id": "FIL-011", "color": "Gold Silk", "material": "PLA", "stockKg": null, "status": null },
+      { "id": "FIL-012", "color": "Clear", "material": "PLA", "stockKg": null, "status": null },
+      { "id": "FIL-013", "color": "Clear", "material": "PETG", "stockKg": null, "status": null },
+      { "id": "FIL-014", "color": "White", "material": "PETG", "stockKg": null, "status": null },
+      { "id": "FIL-015", "color": "Matte Light Yellow", "material": "PLA", "stockKg": null, "status": null },
+      { "id": "FIL-016", "color": "Orange", "material": "PLA", "stockKg": null, "status": null }
+    ]
+  },
+  "qaRecommendation": {
+    "prices": "Use priceLkr from 'products' above and record the Airtable source on each product. Show no compare-at or sale prices.",
+    "availability": "Show no stock counts. The owner picks one availability value per product (unconfirmed | available | unavailable | made-to-order, as supported by src/domain.mjs at 8d13b91), with a lead time for made-to-order. Keep 'unconfirmed' until then.",
+    "ids": "Don't switch product IDs to Airtable SKUs until F-17 (Baymax/Kurama 503/504) is settled."
+  }
+}

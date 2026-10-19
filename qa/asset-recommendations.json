@@ -1,0 +1,234 @@
+{
+  "_about": "QA asset recommendations for codex/storefront-mvp, reviewed at 8d13b910bc4ff156a2ffd049cd4cc381f19828ad. Source: docs/ASSET-AUDIT.md. The owner approved the recommended photos on 2026-10-11 (QA-FINDINGS.md §5a). Classic Kunai RAV_4322.jpg and Kurama 1.png are outside the supplied HoneyComb folder; the owner must copy them in first. Images do not establish price, availability or permission to sell.",
+  "generated": "2026-10-13",
+  "rules": [
+    "Use only real photographs (no C2PA 'Created by Google Generative AI' / SynthID).",
+    "Serve resized derivatives (srcset/sizes); keep originals out of dist/.",
+    "Record crop box, resize width, output SHA-256, source Drive ID and SHA-256 in docs/ASSET-PROVENANCE.md.",
+    "Re-run qa/scripts/image-provenance.py and qa/e2e/image-audit.mjs on the result."
+  ],
+  "products": {
+    "HC-KUNAI": {
+      "current": {
+        "file": "public/assets/classic-kunai.jpg",
+        "driveId": "1xgQx1gPc0au7Q4mNE_In0xrHmQC0JgFk",
+        "provenance": "AI (Google C2PA, validated signature)",
+        "sha256": "26d7c99758835b3009f9ea08203f2bd5eee412b0f81a43cf6c4d898631aa636f"
+      },
+      "recommended": {
+        "driveId": "1mx3YRM6o4CrGZtIl6TX2ZqnG8cacFDQo",
+        "title": "RAV_4322.jpg",
+        "bytes": 4887510,
+        "sha256": "f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722",
+        "size": "4912x7360",
+        "provenance": "professional photo (Nikon D810 shoot), light-grey backdrop",
+        "location": "owner Drive /Download (1X1vuCjd-d7qEwmaXammBkbJEcTjp6DnI), OUTSIDE supplied folder; business-account copy 1pXQXPxzZSGacNSmSVGp7z3-9Lp4SfiUF",
+        "honeyCombCopy": {
+          "driveId": "1PaOuVcZ82ij2vV2hq08fiFC42_w9iKua",
+          "title": "Copy of RAV_4322.jpg",
+          "bytes": 4887510,
+          "sha256": "f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722",
+          "path": "HoneyComb/Productions/Old list/Naruto-20260105T130713Z-3-001/Naruto/HNYCMB509 Kunai (1Wrc8Ir0j6mNNBErtH6WZI8fB6ndLqvw2)",
+          "verified": "2026-10-13: downloaded by QA; SHA-256 equals the approved original; no AI markers"
+        },
+        "suggestedCrop": {
+          "box": [
+            627,
+            1370,
+            4205,
+            6142
+          ],
+          "frame": "4912x7360",
+          "aspect": "3:4",
+          "basis": "kunai extent (dark parts) (2016,1832)-(2816,5680) plus ~12% margin, widened to 3:4; checked visually 2026-10-14",
+          "optional": true,
+          "note": "Full frame is acceptable; at full frame the kunai fills only ~52% of the image height."
+        }
+      },
+      "ownerDecision": "Approved 2026-10-11; copied into the HoneyComb folder 2026-10-13. Still open: photographer licence for the RAV_ shoot."
+    },
+    "HC-KURAMA": {
+      "current": {
+        "file": "public/assets/kurama.jpg",
+        "driveId": "147Cc7NRSivyNKzIixRkvvlI3OACsGVtR",
+        "provenance": "AI (4 chained Google C2PA manifests, validated)",
+        "sha256": "1069dc838bb311ee3408c59509c9bfc974315c54e3cb5e9e06c0722f144c8452"
+      },
+      "recommended": {
+        "driveId": "1nQvOC8nPm9BNK496GZveJEim2dspvYwN",
+        "title": "1.png",
+        "bytes": 2348045,
+        "size": "3415x5120",
+        "provenance": "real photo, background removed in Canva (XMP Canva Renderer); print stringing visible",
+        "location": "business account honeycomb.3d.sl@gmail.com, folder HNYCMB503 Kurama (1AV2PhFDGihCTDXph5SRToMQgZ4AwObJj), OUTSIDE supplied folder",
+        "alternatives": [
+          "1D9b0zNCxbFWZZh61be2XfldM4HC5bCeH (3.png)",
+          "1GlZ5wKITKKEUVVzQIut-JNmifF6Bwnm8 (5.png)"
+        ],
+        "sha256": "d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494",
+        "honeyCombCopy": {
+          "driveId": "1wkBiKm7ZUMRYRpHJojCI9YPhv3ePKIXn",
+          "title": "1.png",
+          "bytes": 2348045,
+          "sha256": "d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494",
+          "path": "HoneyComb/Productions/Old list/Naruto-20260105T130713Z-3-001/Naruto/HNYCMB503 Kurama (1a9HcP0gS5kuGiPzY0o6Dt1A2jePDzZFw)",
+          "verified": "2026-10-13: downloaded by QA; SHA-256 equals the approved original; Canva export, no AI markers",
+          "note": "A same-size duplicate also exists in the Untitled design subfolder (1icgn6MlRI_NzuiQScFc65tN9457JqqJq); QA did not hash it. Use the verified ID above."
+        },
+        "suggestedCrop": {
+          "box": [
+            487,
+            1228,
+            2937,
+            3876
+          ],
+          "frame": "3415x5120",
+          "basis": "figure extent on the white Canva background (656,1411)-(2768,3693) plus 8% margin; checked 2026-10-14",
+          "optional": true,
+          "note": "At full frame the figure fills ~62% x 45% of the image."
+        }
+      },
+      "ownerDecision": "Approved 2026-10-11; copied into the HoneyComb folder 2026-10-13. Still open: Canva account ownership.",
+      "skuNote": "SKU conflict 503/504 between Airtable and Drive: QA-FINDINGS.md F-17."
+    },
+    "HC-LIGHTFURY": {
+      "current": {
+        "file": "public/assets/light-fury.jpg",
+        "driveId": "1WtFmt7EJjed3Fmwpk7LUl_wiWT95DQzZ",
+        "provenance": "AI (Google C2PA, validated)",
+        "sha256": "a2e97be471c145eb58574e53602a613d1cce2732ba633117a9fa34e86bc20fbb"
+      },
+      "recommended": {
+        "driveId": "1pMK8OOE9bvE4WsKDRONnPk38k5HQbVaU",
+        "title": "Variation 1 (2).jpg",
+        "bytes": 1119729,
+        "size": "1500x2000",
+        "provenance": "real photo (layer lines at 1:1), no metadata",
+        "location": "HNYCMB502 Light Fury (1bVcPHq8OTZC5aKz7fuJAyURLBbidRzvd)",
+        "alternatives": [
+          "1Y0uSbSbmgCTsAWPfLz01BPkSatKxyJgw (Variation 1 (5).jpg, PNG content)",
+          "1RIgISQZuseq_Vr69vMqig1ztODPDmWwb (Variation 1 (1).jpg)"
+        ],
+        "sha256": "508c5590ee15f6f55c3db605080b0c8a8000e6c9758f0b61aad333786ee1c9e9"
+      },
+      "ownerDecision": "Approved 2026-10-11 (painted unit). Already inside the HoneyComb folder."
+    },
+    "HC-MINATO": {
+      "current": {
+        "file": "public/assets/minato-kunai.jpg",
+        "driveId": "12wvXum-YXjOK2RJmaCGEmRTJI1RIqRLm",
+        "provenance": "AI re-render of a real phone photo (Google C2PA, validated)",
+        "sha256": "c33cd7f2835166a3b0ac8901d72b520596d2743906ed1a58b3ef6977a014e69e"
+      },
+      "recommended": {
+        "variant": "tan handle with engraved characters, black blade",
+        "driveId": "1saPgsNnYGHltaJeXCLFe4w5pL48P4v9F",
+        "title": "Copy of RAV_4468.jpg",
+        "size": "4912x7360",
+        "provenance": "professional photo; group shot, needs documented crop",
+        "sha256": "6bed862cf24b3c9522222aa839198a94326ff1ca06c98f3dd0a43f9f24b02028",
+        "selected": true,
+        "driveFolder": "HoneyComb/Productions/Old list/Naruto-20260105T130713Z-3-001/Naruto (1OkxJXSmdwn7ec6uW_sqk_O-mnSl79y0o)",
+        "observed": "black blade with silver edge bevels, tan handle with engraved characters, black ring (Visual, 2026-10-11)",
+        "cropBox": {
+          "left": 2770,
+          "top": 2150,
+          "right": 4600,
+          "bottom": 6250,
+          "frame": "4912x7360",
+          "constraint": "left edge between x=2756 and x=2794: middle-blade notches end at x<=2754, Minato wing tip at x~2800"
+        },
+        "altTextNote": "replace the current alt (it describes a white handle)"
+      },
+      "doNotUse": [
+        {
+          "driveId": "1sBz3bH6mqjuY5YayCn3AbVGYKWKqh_OE",
+          "title": "Imagen de WhatsApp 2025-10-29 a las 21.34.01_cf2bbadf.jpg",
+          "reason": "Spanish-locale WhatsApp; possibly a third party's photo",
+          "sha256": "1b16242ba086364afdc17b6a2868598606e78a579d96f0ca418a78e22600cdb3"
+        }
+      ],
+      "ownerDecision": "Resolved 2026-10-11: tan handle, black blade. Still open: photographer licence for the RAV_ shoot.",
+      "notSelected": [
+        {
+          "variant": "white handle",
+          "driveId": "12KT8iT8zQ8iOOfAhFek8cqeYQJKzjF8n",
+          "title": "WhatsApp Image 2025-12-22 at 14.39.39.jpeg",
+          "size": "899x1599",
+          "provenance": "real phone photo (WhatsApp-recompressed)",
+          "sha256": "80805c0c5ba62ec2c3434e6d33bc7b71e374f9ee57181c1c0e8680b7f7f5342b",
+          "reason": "white-handle variant; owner chose tan on 2026-10-11"
+        }
+      ]
+    },
+    "HC-LEAF": {
+      "current": {
+        "file": "public/assets/hidden-leaf.jpg",
+        "driveId": "13NPWedcC7fSpsJZcGQqMb7ZtfOfGii9N",
+        "provenance": "real, low resolution (960x1280), product small in frame",
+        "sha256": "5cfaa3d98d6732491c5d9249178b0256cffb729577861f1421e8c2c83d58ce86"
+      },
+      "recommended": {
+        "driveId": "1rW98jCTB1kwWoP0gMThUrnWitqN8-q_v",
+        "title": "Copy of RAV_4459.jpg",
+        "size": "4299x6442",
+        "provenance": "professional photo, EXIF Nikon D810 + Lightroom Classic; 4 headband plates, needs documented crop",
+        "alternatives": [
+          "1NIqS9NGhOtB9AFwximWhxC5ZSUj9dWEG (Copy of RAV_4463.jpg, 6 plates)"
+        ],
+        "sha256": "d1f9cb985d101fde84d3decfb82c3b9ae8f90f67a2c82db03606b214ccef9b04"
+      },
+      "ownerDecision": "Approved 2026-10-11 (white headband plate, crop to one plate). Still open: photographer licence for the RAV_ shoot."
+    },
+    "HNYCMB501": {
+      "current": {
+        "file": "public/assets/night-fury.jpg",
+        "driveId": "1E35H6xX9rDcamwGPXUATv2MMyGIQNDN4",
+        "provenance": "real batch photo (~10 units)",
+        "sha256": "58f957a6b335db812cb393d7d2e1e88a262c2d119a0825dd51b4646bbf075d59"
+      },
+      "recommended": {
+        "driveId": "1w5Ulskt4b-WEdJkQLXcR52s3YucH5Rfg",
+        "title": "20260301_152139.jpg",
+        "size": "1893x1420",
+        "provenance": "real phone photo, single unit in hand",
+        "sha256": "408785f66536cca48db02286bdc9fdc50a3e246e4d69a6cd7f1343329f87807b"
+      },
+      "ownerDecision": "Approved 2026-10-11 (single-unit photo). Silver/glitter colourway (1JLAPvlSlaYNEA-jlr6yVN35MmoRoxlNn) not part of the approval."
+    },
+    "HC-BAYMAX": {
+      "current": {
+        "file": "public/assets/baymax.png",
+        "driveId": "1XGpES0PDcZuXp46hSPsD_gtHMsP_qVbY",
+        "provenance": "real photo exported via Canva",
+        "sha256": "d9c9b702a5af80a9019a2224dbd5e102e4f0afd4fef9cab4948e471ea0efcdb5"
+      },
+      "recommended": "keep (resize only)",
+      "ownerDecision": "Keep (resize only). Still open: Canva team ownership. SKU conflict 503/504: QA-FINDINGS.md F-17."
+    },
+    "brand-logo": {
+      "current": {
+        "file": "public/assets/honeycomb-logo-web.png",
+        "provenance": "pixel-identical crop of HC_WhiteBK-1.png, 7435x2229 (16.6 MP)"
+      },
+      "recommended": {
+        "driveId": "1D_VZuA8Lshe78K_Gz1qBmpYKS9tuLG8s",
+        "title": "HONEYCOMB Logo in White Background.pdf",
+        "bytes": 22183,
+        "provenance": "vector (Inkscape/cairo PDF); export SVG or <=660x198 PNG"
+      },
+      "ownerDecision": "Confirm logo agreement fully paid / signed copy (rights transfer on full payment)."
+    }
+  },
+  "ownerApproval": {
+    "date": "2026-10-11",
+    "source": "owner reply in the QA chat (QA-FINDINGS.md E-12)",
+    "scope": "the recommended photo for every product in this file; Minato variant: tan handle, black blade",
+    "stillOpen": [
+      "photographer licence for the RAV_ shoot",
+      "Canva team ownership",
+      "logo agreement payment/signature"
+    ],
+    "copiedIntoHoneyComb": "2026-10-13: owner copied RAV_4322.jpg and Kurama 1.png into the HoneyComb folder; QA verified SHA-256 of both copies."
+  }
+}

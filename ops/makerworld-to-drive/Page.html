@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base target="_top">
+  <style>
+    :root { color-scheme: dark; --bg: #0c0b0a; --panel: #191613; --line: #3a332b; --text: #f2ede4; --muted: #b9b0a3; --accent: #fba31b; --warn: #ffb4a2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    header { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+    header b { font-size: 17px; } header .muted { font-size: 14px; }
+    main { max-width: 980px; margin: 0 auto; padding: 16px 16px 48px; }
+    h1 { font-size: 22px; margin: 8px 0 4px; } h2 { font-size: 17px; margin: 28px 0 6px; }
+    .muted { color: var(--muted); } .small { font-size: 14px; } a { color: var(--accent); }
+    label { display: block; font-weight: 600; margin: 12px 0 4px; }
+    input[type=text], input[type=url], input[type=number], textarea, select { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--text); font: inherit; }
+    textarea { min-height: 80px; }
+    .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+    .inline { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; } .inline > input, .inline > select { flex: 1 1 220px; }
+    .card { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); margin-top: 10px; }
+    .card.warn { border-color: var(--warn); color: var(--warn); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-top: 8px; }
+    .shot { position: relative; border: 2px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--panel); cursor: pointer; margin: 0; font-weight: 400; }
+    .shot.on { border-color: var(--accent); }
+    .shot img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; background: #221e1a; }
+    .shot input { position: absolute; top: 8px; left: 8px; width: 22px; height: 22px; }
+    .shot small { display: block; padding: 4px 6px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .check { display: flex; gap: 10px; align-items: flex-start; }
+    .check input { width: 22px; height: 22px; margin-top: 2px; flex: none; }
+    table { width: 100%; border-collapse: collapse; } td { padding: 4px 0; } td:last-child { text-align: right; }
+    .big { font-size: 20px; font-weight: 700; color: var(--accent); }
+    button, .button { display: inline-block; margin-top: 14px; padding: 11px 20px; border: 0; border-radius: 999px; background: var(--accent); color: #1a1206; font: 700 15px system-ui, sans-serif; cursor: pointer; text-decoration: none; }
+    .inline button, .inline .button { margin-top: 0; }
+    button.secondary, .button.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    .tools { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tools button { margin-top: 6px; padding: 7px 13px; font-size: 14px; }
+    details summary { cursor: pointer; font-weight: 600; margin-top: 18px; }
+    .list { list-style: none; padding: 0; margin: 8px 0 0; }
+    .list li { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .list li button { margin: 0; padding: 7px 13px; font-size: 14px; }
+    .savebar { position: sticky; bottom: 0; padding: 18px 0 12px; background: linear-gradient(transparent, var(--bg) 35%); }
+    button, .button, .shot, summary { -webkit-tap-highlight-color: transparent; }
+    button:active:not(:disabled), .button:active { transform: scale(.97); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    #presets { margin-bottom: 10px; } #aiPrompt { min-height: 120px; }
+    #pricingInputs > div { display: flex; flex-direction: column; justify-content: flex-end; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<header>
+  <b>MakerWorld to Drive</b>
+  <span class="muted" id="who">Loading…</span>
+  <a id="folderLink" target="_blank" rel="noopener" hidden>Shared folder</a>
+</header>
+<main>
+  <div class="card warn" id="notice" role="alert" hidden></div>
+
+  <section id="start" hidden>
+    <h1>Add a model</h1>
+    <div class="card">
+      <label for="link">MakerWorld model link</label>
+      <div class="inline">
+        <input type="url" id="link" inputmode="url" autocomplete="off" placeholder="https://makerworld.com/en/models/…">
+        <button type="button" id="getModel">Get model</button>
+      </div>
+      <p class="muted small">On a phone or tablet: in MakerWorld tap <b>Share</b>, then <b>Copy link</b>, and paste it here.</p>
+      <p id="getStatus" role="status"></p>
+      <button type="button" class="secondary" id="byHand" hidden>Fill in by hand</button>
+    </div>
+
+    <h2>Recent imports</h2>
+    <p class="muted small">Open one to make AI versions of its photos.</p>
+    <ul class="list" id="recent"><li class="muted">Loading…</li></ul>
+
+    <details>
+      <summary>On a computer: one-click bookmark</summary>
+      <p class="muted">With the <b>Save to HoneyComb Drive</b> bookmark, your own browser reads the MakerWorld page, so it also
+        picks up community photos and print profiles that only load while you scroll. Ask the owner for the bookmark line.</p>
+    </details>
+  </section>
+
+  <form id="form" hidden>
+    <button type="button" class="secondary" id="back">← Another model</button>
+    <h1 id="heading">Save to Drive</h1>
+    <p class="muted small" id="source"></p>
+
+    <div class="row">
+      <div><label for="title">Title</label><input type="text" id="title" required></div>
+      <div><label for="designer">Designer</label><input type="text" id="designer"></div>
+    </div>
+    <label for="license">Licence (as shown on the page)</label>
+    <input type="text" id="license" placeholder="e.g. Standard Digital File License, CC BY, Commercial licence bought">
+    <label for="description">Description</label>
+    <textarea id="description"></textarea>
+
+    <h2>Print and price</h2>
+    <div class="card">
+      <label for="profile">Print profile found on the page</label>
+      <select id="profile"></select>
+      <div class="row">
+        <div><label for="grams">Filament (g)</label><input type="number" id="grams" min="0" step="0.1" inputmode="decimal"></div>
+        <div><label for="hours">Print time (hours)</label><input type="number" id="hours" min="0" step="0.05" inputmode="decimal"></div>
+        <div><label for="yourPrice">Your price (LKR)</label><input type="number" id="yourPrice" min="0" step="50" inputmode="numeric"></div>
+      </div>
+      <table id="breakdown"></table>
+      <p class="muted small" id="pricingNote"></p>
+      <details>
+        <summary>Pricing settings</summary>
+        <div class="row" id="pricingInputs"></div>
+        <button type="button" class="secondary" id="savePricing">Save pricing settings</button>
+        <span class="muted" id="pricingSaved" role="status"></span>
+      </details>
+    </div>
+
+    <h2>Designer photos <span class="muted" id="countDesigner"></span></h2>
+    <div class="tools"><button type="button" class="secondary" data-all="designer">Select all</button><button type="button" class="secondary" data-none="designer">Select none</button></div>
+    <div class="grid" id="designer-grid"></div>
+
+    <h2>Community prints <span class="muted" id="countCommunity"></span></h2>
+    <p class="muted small">Photos other people posted of their prints. They belong to them; use them as reference for your own photos and AI edits.</p>
+    <div class="tools"><button type="button" class="secondary" data-all="community">Select all</button><button type="button" class="secondary" data-none="community">Select none</button></div>
+    <div class="grid" id="community-grid"></div>
+
+    <h2>Photos from this device <span class="muted" id="countDevice"></span></h2>
+    <p class="muted small">Your own print photos, or photos you saved from MakerWorld on this phone or computer.</p>
+    <div class="inline">
+      <select id="deviceKind" aria-label="What these photos are">
+        <option value="own">My own print photos</option>
+        <option value="designer">Designer photos (saved from MakerWorld)</option>
+        <option value="community">Community prints (saved from MakerWorld)</option>
+      </select>
+      <label class="button secondary" for="deviceFiles" style="margin:0">Add photos…</label>
+      <input type="file" id="deviceFiles" class="sr-only" accept="image/*" multiple>
+    </div>
+    <div class="grid" id="device-grid"></div>
+
+    <div class="card check">
+      <input type="checkbox" id="licensed">
+      <label for="licensed" style="margin:0;font-weight:500">I have bought a commercial licence for this model, or its licence allows selling prints. Without this tick the log marks the row "NO - check before listing".</label>
+    </div>
+    <label for="notes">Notes (optional)</label>
+    <input type="text" id="notes" placeholder="e.g. order no., colours to offer">
+
+    <div class="savebar"><button type="submit" id="save">Save to Drive</button></div>
+    <div class="card" id="result" role="status" hidden></div>
+  </form>
+
+  <section id="ai" hidden>
+    <h2>Make AI versions <span class="muted small" id="aiTitle"></span></h2>
+    <div class="card">
+      <p class="muted small" id="aiNote"></p>
+      <label for="aiPrompt">Instructions for the AI</label>
+      <div class="tools" id="presets"></div>
+      <textarea id="aiPrompt"></textarea>
+      <div class="grid" id="ai-grid"></div>
+      <button type="button" id="aiGo">Make AI versions of the selected photos</button>
+      <div id="aiResult" class="muted" role="status"></div>
+    </div>
+  </section>
+</main>
+<script>
+  const $ = (id) => document.getElementById(id);
+  const run = (fn, ...args) => new Promise((ok, fail) => google.script.run.withSuccessHandler(ok).withFailureHandler(fail)[fn](...args));
+  const PRICING_LABELS = { filamentCostPerKg: 'Filament cost (LKR per kg)', wastePercent: 'Waste (%)', machineCostPerHour: 'Machine cost (LKR per hour)',
+    labourPerItem: 'Labour (LKR per item)', packagingPerItem: 'Packaging (LKR per item)', markupPercent: 'Markup (%)', roundTo: 'Round price up to (LKR)' };
+  const KIND_TEXT = { own: 'own photo', designer: 'designer photo', community: 'community print' };
+  const KEEP = ' Keep the object exactly as it is: same shape, proportions, layer lines and details. Do not add text, logos or other objects.';
+  const PRESETS = [
+    ['Studio', 'Place this 3D-printed object on a clean, softly lit studio background with a subtle shadow.' + KEEP.replace('same shape', 'same shape, colours')],
+    ['Wooden desk', 'Place this 3D-printed object on a light wooden desk in warm natural window light, with a softly blurred background.' + KEEP.replace('same shape', 'same shape, colours')],
+    ['Home shelf', 'Place this 3D-printed object on a shelf in a bright, modern living room, with a softly blurred background.' + KEEP.replace('same shape', 'same shape, colours')],
+    ['Outdoors', 'Place this 3D-printed object on a stone surface outdoors in soft daylight, with a blurred garden background.' + KEEP.replace('same shape', 'same shape, colours')],
+    ['New colour', 'Show this exact object printed in matte red PLA on a clean studio background. Change only the filament colour.' + KEEP],
+    ['Silk finish', 'Show this exact object printed in shiny silk gold PLA with a smooth, glossy surface, on a clean studio background. Change only the material and colour.' + KEEP],
+    ['Marble finish', 'Show this exact object printed in white marble-effect PLA on a clean studio background. Change only the material.' + KEEP],
+  ];
+  let data = null, settings = null, saved = null, priceTouched = false, deviceSeq = 0;
+  const deviceFiles = new Map();
+
+  Promise.all([run('getSettings'), new Promise((ok) => google.script.url.getLocation(ok))]).then(([s, loc]) => {
+    settings = s;
+    $('who').textContent = s.user ? `Signed in as ${s.user}` : '';
+    if (s.folderUrl) { $('folderLink').href = s.folderUrl; $('folderLink').hidden = false; }
+    if (s.folderError) notice(s.folderError);
+    pricingInputs();
+    let fromBookmark = null;
+    try { fromBookmark = loc.hash ? JSON.parse(decodeURIComponent(loc.hash)) : null; } catch (e) { fromBookmark = null; }
+    if (fromBookmark && fromBookmark.url) { open(fromBookmark); return; }
+    showStart();
+    const pasted = loc.parameter && loc.parameter.url;
+    if (pasted) { $('link').value = pasted; getModel(); }
+  }).catch((e) => { $('who').textContent = ''; notice(friendly(e)); });
+
+  function notice(text) { $('notice').textContent = text; $('notice').hidden = false; }
+  function friendly(e) {
+    const m = (e && e.message) || String(e);
+    return /authori[sz]|permission|server error|ScriptError/i.test(m)
+      ? `${m} If you are signed in to more than one Google account in this browser, open the tool in a window signed in only to the account the owner shared the folder with (for example an incognito window or a separate Chrome profile).`
+      : m;
+  }
+
+  // ---------- start: paste a link, recent imports ----------
+
+  function showStart() {
+    $('start').hidden = false; $('form').hidden = true; $('ai').hidden = true;
+    run('recentImports').then(renderRecent).catch((e) => { $('recent').innerHTML = ''; const li = document.createElement('li'); li.className = 'muted'; li.textContent = friendly(e); $('recent').appendChild(li); });
+  }
+  function renderRecent(list) {
+    const ul = $('recent'); ul.innerHTML = '';
+    if (!list.length) { const li = document.createElement('li'); li.className = 'muted'; li.textContent = 'Nothing saved yet.'; ul.appendChild(li); return; }
+    list.forEach((x) => {
+      const li = document.createElement('li');
+      li.innerHTML = '<div><div class="t"></div><div class="muted small"></div></div><div class="tools"><a class="small" target="_blank" rel="noopener">Folder</a> <button type="button" class="secondary">AI versions</button></div>';
+      li.querySelector('.t').textContent = x.title;
+      li.querySelector('.small').textContent = [x.savedAt, x.savedBy].filter(Boolean).join(' · ');
+      li.querySelector('a').href = x.folderUrl;
+      li.querySelector('button').addEventListener('click', (ev) => {
+        ev.target.disabled = true; ev.target.textContent = 'Opening…';
+        run('folderPhotos', x.folderId).then((f) => { ev.target.disabled = false; ev.target.textContent = 'AI versions';
+          showAi(f.folderId, f.title, f.files.map((p) => ({ ...p, thumb: `https://drive.google.com/thumbnail?id=${encodeURIComponent(p.id)}&sz=w320` })));
+        }).catch((e) => { ev.target.disabled = false; ev.target.textContent = 'AI versions'; notice(friendly(e)); });
+      });
+      ul.appendChild(li);
+    });
+  }
+
+  $('getModel').addEventListener('click', getModel);
+  $('link').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); getModel(); } });
+  function getModel() {
+    const text = $('link').value.trim();
+    if (!text) { $('getStatus').textContent = 'Paste a MakerWorld model link first.'; return; }
+    $('getModel').disabled = true; $('byHand').hidden = true;
+    $('getStatus').textContent = 'Reading the model page…';
+    run('fetchModel', text).then((d) => { $('getModel').disabled = false; $('getStatus').textContent = ''; open(d); })
+      .catch((e) => { $('getModel').disabled = false; $('getStatus').textContent = friendly(e); $('byHand').hidden = !/makerworld\.com/i.test(text); });
+  }
+  $('byHand').addEventListener('click', () => {
+    const m = $('link').value.match(/(?:https?:\/\/)?(?:[\w-]+\.)*makerworld\.com(?:\.cn)?\/[^\s"'<>#]*/i);
+    if (!m) return;
+    const url = m[0].replace(/^(?:https?:\/\/)?/i, 'https://');
+    const slug = (url.match(/models\/\d+-([^/?#]+)/) || [])[1] || '';
+    const title = decodeURIComponent(slug).replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+    open({ via: 'manual', url, title, designerImages: [], community: [], profiles: [] });
+  });
+
+  // ---------- the model form ----------
+
+  function open(d) {
+    data = d; saved = null; priceTouched = false;
+    $('start').hidden = true; $('ai').hidden = true; $('result').hidden = true; $('form').hidden = false;
+    ['designer-grid', 'community-grid', 'device-grid'].forEach((id) => { $(id).innerHTML = ''; });
+    deviceFiles.forEach((f) => URL.revokeObjectURL(f.url)); deviceFiles.clear();
+    $('save').disabled = false; $('save').textContent = 'Save to Drive';
+    $('source').textContent = d.url + (d.via === 'manual' ? '  (filled in by hand)' : d.via === 'link' ? '  (read from the link)' : '');
+    ['title', 'designer', 'license', 'description', 'notes'].forEach((k) => { $(k).value = d[k] || ''; });
+    $('licensed').checked = false; $('grams').value = ''; $('hours').value = '';
+    // Older bookmark versions send a flat image list.
+    (d.designerImages || d.images || []).forEach((src) => addShot('designer', src, '', true));
+    (d.community || []).forEach((c) => addShot('community', c.src, c.author, true));
+    profiles(); updateCounts(); recalc();
+    window.scrollTo(0, 0);
+  }
+  $('back').addEventListener('click', () => { data = null; showStart(); window.scrollTo(0, 0); });
+
+  function tile(gridId, value, thumb, caption, on) {
+    const box = document.createElement('label');
+    box.className = 'shot' + (on ? ' on' : '');
+    box.innerHTML = '<input type="checkbox"><img alt="" loading="lazy" referrerpolicy="no-referrer"><small></small>';
+    const input = box.querySelector('input');
+    input.checked = on; input.value = value;
+    const img = box.querySelector('img');
+    img.addEventListener('error', () => img.remove());
+    if (thumb) img.src = thumb; else img.remove();
+    box.querySelector('small').textContent = caption;
+    input.addEventListener('change', () => { box.classList.toggle('on', input.checked); updateCounts(); });
+    $(gridId).appendChild(box);
+    return input;
+  }
+  function addShot(kind, src, author, on) {
+    const input = tile(kind + '-grid', src, src, author ? 'by ' + author : KIND_TEXT[kind], on);
+    input.dataset.kind = kind; input.dataset.author = author || '';
+  }
+  document.querySelectorAll('[data-all],[data-none]').forEach((b) => b.addEventListener('click', () => {
+    const kind = b.dataset.all || b.dataset.none;
+    document.querySelectorAll(`#${kind}-grid input`).forEach((i) => { i.checked = !!b.dataset.all; i.closest('.shot').classList.toggle('on', i.checked); });
+    updateCounts();
+  }));
+  function picked(kind) { return [...document.querySelectorAll(`#${kind}-grid input:checked`)]; }
+  function updateCounts() {
+    [['designer', 'countDesigner'], ['community', 'countCommunity'], ['device', 'countDevice']].forEach(([kind, id]) => {
+      const all = document.querySelectorAll(`#${kind}-grid input`).length;
+      $(id).textContent = all ? `(${picked(kind).length} of ${all} selected)` : kind === 'device' ? '' : '(none found)';
+    });
+  }
+
+  $('deviceFiles').addEventListener('change', (e) => {
+    const kind = $('deviceKind').value;
+    [...e.target.files].forEach((file) => {
+      if (file.type && !file.type.startsWith('image/')) return;
+      const id = 'd' + (++deviceSeq);
+      const url = URL.createObjectURL(file);
+      deviceFiles.set(id, { file, kind, url });
+      tile('device-grid', id, url, `${KIND_TEXT[kind]} · ${file.name}`, true);
+    });
+    e.target.value = '';
+    updateCounts();
+  });
+
+  function hoursOf(p) {
+    if (p.hours) return p.hours;
+    const t = Number(p.timeRaw);
+    if (!t) return 0;
+    return t > 600 ? t / 3600 : t > 24 ? t / 60 : t; // seconds, minutes or hours
+  }
+  function profiles() {
+    const list = data.profiles || [];
+    const sel = $('profile');
+    sel.innerHTML = ''; sel.disabled = false;
+    if (!list.length) { sel.innerHTML = '<option>None found: enter grams and hours yourself</option>'; sel.disabled = true; return; }
+    list.forEach((p, i) => {
+      const o = document.createElement('option');
+      o.value = i; o.textContent = `${p.name || 'Profile ' + (i + 1)}: ${p.weightG} g, ${hoursOf(p).toFixed(1)} h`;
+      sel.appendChild(o);
+    });
+    useProfile();
+  }
+  $('profile').addEventListener('change', useProfile);
+  function useProfile() {
+    const p = ((data && data.profiles) || [])[Number($('profile').value)];
+    if (!p) return;
+    $('grams').value = p.weightG; $('hours').value = hoursOf(p).toFixed(2);
+    recalc();
+  }
+
+  function pricingInputs() {
+    const box = $('pricingInputs');
+    Object.keys(PRICING_LABELS).forEach((k) => {
+      const wrap = document.createElement('div');
+      wrap.innerHTML = '<label></label><input type="number" min="0" step="any" inputmode="decimal">';
+      wrap.querySelector('label').textContent = PRICING_LABELS[k];
+      wrap.querySelector('label').htmlFor = 'p_' + k;
+      const input = wrap.querySelector('input');
+      input.id = 'p_' + k; input.value = settings.pricing[k];
+      input.addEventListener('input', recalc);
+      box.appendChild(wrap);
+    });
+    $('savePricing').hidden = !settings.canEditPricing;
+    $('pricingNote').textContent = !settings.canEditPricing
+      ? `Pricing settings are shared and only ${settings.owner} can save them. Changes you type here only affect this calculation.`
+      : settings.pricingIsExample
+        ? 'These pricing settings are example values. Open "Pricing settings", enter your real costs and save them once.'
+        : 'Suggested price uses the saved pricing settings.';
+  }
+  function pricing() { const p = {}; Object.keys(PRICING_LABELS).forEach((k) => { p[k] = Number($('p_' + k).value) || 0; }); if (p.roundTo < 1) p.roundTo = 1; return p; }
+  function priceFor(g, h, p) { // same formula as Code.gs
+    const material = g * (1 + p.wastePercent / 100) * p.filamentCostPerKg / 1000, machine = h * p.machineCostPerHour;
+    const cost = material + machine + p.labourPerItem + p.packagingPerItem;
+    return { material, machine, labour: p.labourPerItem, packaging: p.packagingPerItem, cost, suggested: Math.ceil((cost * (1 + p.markupPercent / 100)) / p.roundTo) * p.roundTo };
+  }
+  const lkr = (n) => 'LKR ' + Math.round(n).toLocaleString('en-US');
+  function recalc() {
+    if (!settings) return;
+    const b = priceFor(Number($('grams').value) || 0, Number($('hours').value) || 0, pricing());
+    $('breakdown').innerHTML = [['Filament', b.material], ['Machine time', b.machine], ['Labour', b.labour], ['Packaging', b.packaging], ['Cost', b.cost]]
+      .map(([k, v]) => `<tr><td>${k}</td><td>${lkr(v)}</td></tr>`).join('') + `<tr><td>Suggested price</td><td class="big">${lkr(b.suggested)}</td></tr>`;
+    if (!priceTouched) $('yourPrice').value = b.suggested;
+  }
+  ['grams', 'hours'].forEach((id) => $(id).addEventListener('input', recalc));
+  $('yourPrice').addEventListener('input', () => { priceTouched = true; });
+  $('savePricing').addEventListener('click', () => {
+    $('pricingSaved').textContent = ' Saving…';
+    run('savePricing', pricing()).then(() => { $('pricingSaved').textContent = ' Saved for everyone.'; $('pricingNote').textContent = 'Suggested price uses the saved pricing settings.'; })
+      .catch((e) => { $('pricingSaved').textContent = ' ' + friendly(e); });
+  });
+
+  // ---------- save ----------
+
+  function readBase64(file) {
+    return new Promise((ok, fail) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1] || ''); r.onerror = () => fail(r.error); r.readAsDataURL(file); });
+  }
+  function mimeOf(file) {
+    if (file.type) return file.type;
+    const ext = (file.name.match(/\.([a-z0-9]+)$/i) || [])[1] || '';
+    return { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', heic: 'image/heic', heif: 'image/heif', gif: 'image/gif' }[ext.toLowerCase()] || 'image/jpeg';
+  }
+
+  $('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const photos = [...picked('designer'), ...picked('community')].map((i) => ({ src: i.value, kind: i.dataset.kind, author: i.dataset.author }));
+    const device = picked('device').map((i) => deviceFiles.get(i.value)).filter(Boolean);
+    if (!photos.length && !device.length) { message('Select at least one photo, or add photos from this device.'); return; }
+    const big = device.find((f) => f.file.size > 20 * 1024 * 1024);
+    if (big) { message(`${big.file.name} is larger than 20 MB. Untick it or use a smaller copy.`); return; }
+    const sel = (data.profiles || [])[Number($('profile').value)];
+    const payload = { url: data.url, via: data.via || 'bookmark', title: $('title').value, designer: $('designer').value, license: $('license').value,
+      description: $('description').value, notes: $('notes').value, licencePurchased: $('licensed').checked, photos, deviceCount: device.length,
+      filamentGrams: Number($('grams').value) || 0, printHours: Number($('hours').value) || 0, yourPrice: Number($('yourPrice').value) || 0,
+      profileName: sel ? sel.name : '', profiles: data.profiles || [] };
+    $('save').disabled = true; $('save').textContent = photos.length ? 'Saving… (large models take a minute)' : 'Saving…';
+    let r;
+    try { r = await run('saveImport', payload); } catch (err) {
+      $('save').disabled = false; $('save').textContent = 'Save to Drive'; message('Error: ' + friendly(err)); return;
+    }
+    const thumbs = new Map(photos.map((p) => [p.src, p.src]));
+    const files = r.files.map((f) => ({ ...f, thumb: thumbs.get(f.source) }));
+    for (let n = 0; n < device.length; n += 1) {
+      const f = device[n];
+      $('save').textContent = `Uploading photo ${n + 1} of ${device.length}…`;
+      try {
+        const x = await run('addPhoto', r.folderId, f.kind, f.file.name, mimeOf(f.file), await readBase64(f.file));
+        files.push({ ...x, thumb: f.url }); r.saved += 1;
+      } catch (err) { r.failed.push(`${f.file.name} (${(err && err.message) || err})`); }
+    }
+    saved = r;
+    $('save').textContent = 'Saved';
+    message(`Saved ${r.saved} photo(s). ` + (r.failed.length ? `${r.failed.length} could not be saved: ${r.failed.slice(0, 5).join('; ')}${r.failed.length > 5 ? '; …' : ''} ` : ''), r.folderUrl);
+    showAi(r.folderId, payload.title, files);
+  });
+
+  function message(text, link) {
+    const box = $('result'); box.hidden = false; box.textContent = text;
+    if (link) { const a = document.createElement('a'); a.href = link; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Open the Drive folder'; box.appendChild(a); }
+  }
+
+  // ---------- AI versions ----------
+
+  PRESETS.forEach(([name, text]) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'secondary'; b.textContent = name;
+    b.addEventListener('click', () => { $('aiPrompt').value = text; $('aiPrompt').scrollTop = 0; }); // no focus: it would open the phone keyboard
+    $('presets').appendChild(b);
+  });
+  let aiFolder = null;
+  function showAi(folderId, title, files) {
+    aiFolder = folderId;
+    $('ai').hidden = false;
+    $('aiTitle').textContent = title ? `· ${title}` : '';
+    if (!$('aiPrompt').value) $('aiPrompt').value = settings.aiPrompt;
+    $('aiNote').textContent = settings.aiReady
+      ? `Pick up to 6 photos per run. Results go into "AI edited" in the model's Drive folder (model: ${settings.aiModel}). Edit the instructions or start from a preset; change "red" or "gold" to the colour you want.`
+      : 'The Gemini API key is not added yet. The owner adds it once (README.md, owner setup step 4); then reload this page.';
+    $('aiGo').disabled = !settings.aiReady;
+    $('aiResult').textContent = '';
+    $('ai-grid').innerHTML = '';
+    if (!files.length) { $('aiResult').textContent = 'This import has no photos yet.'; }
+    files.forEach((f) => {
+      const input = tile('ai-grid', f.id, f.thumb, f.name, false);
+      input.addEventListener('change', () => input.closest('.shot').classList.toggle('on', input.checked));
+    });
+    if ($('form').hidden) $('ai').scrollIntoView({ behavior: 'smooth' });
+  }
+  $('aiGo').addEventListener('click', () => {
+    const ids = [...document.querySelectorAll('#ai-grid input:checked')].map((i) => i.value);
+    if (!ids.length) { $('aiResult').textContent = 'Select at least one photo.'; return; }
+    $('aiGo').disabled = true; $('aiResult').textContent = `Working on ${Math.min(ids.length, 6)} photo(s)… about 10–20 seconds each.`;
+    run('makeAiVersions', aiFolder, ids, $('aiPrompt').value)
+      .then((r) => {
+        $('aiGo').disabled = false;
+        $('aiResult').textContent = `Made ${r.made} AI version(s).` + (r.errors.length ? ` Problems: ${r.errors.join('; ')}` : '') + (ids.length > r.limit ? ` Only the first ${r.limit} were done; run again for the rest.` : ' ');
+        const a = document.createElement('a'); a.href = r.folderUrl; a.target = '_blank'; a.rel = 'noopener'; a.textContent = ' Open "AI edited"';
+        $('aiResult').appendChild(a);
+      })
+      .catch((e) => { $('aiGo').disabled = false; $('aiResult').textContent = 'Error: ' + friendly(e); });
+  });
+</script>
+</body>
+</html>

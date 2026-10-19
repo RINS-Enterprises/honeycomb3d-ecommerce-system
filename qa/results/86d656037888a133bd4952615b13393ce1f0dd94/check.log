@@ -1,0 +1,6 @@
+
+> honeycomb3d-storefront@0.1.0 check
+> node scripts/check.mjs
+
+Verified image hashes, metadata removal, dimensions, srcsets, exclusive derivative distribution and 500 KB / 1.5 MB budgets.
+Verified 23 generated pages and their local links/assets.

@@ -1,0 +1,21 @@
+reviewed: 4475bf065088eab6d59d9c728824c90c9ebb3cbd
+date: 2026-10-15T20:15:44Z
+install      exit=0   npm ci
+lint         NOT DEFINED
+typecheck    NOT DEFINED
+test         exit=0   npm run test
+build        exit=0   npm run build
+check        exit=0   npm run check
+test:e2e     NOT DEFINED
+audit        exit=0   npm audit --omit=dev --audit-level=high
+secret-scan  exit=0  
+domain       exit=0   # duration_ms 113.803477
+smoke        exit=0   {"PASS":88} -> /home/user/honeycomb3d-ecommerce-system/qa/results/4475bf065088eab6d59d9c728824c90c9ebb3cbd/browser
+smoke-live   exit=0   {"PASS":89} -> /home/user/honeycomb3d-ecommerce-system/qa/results/4475bf065088eab6d59d9c728824c90c9ebb3cbd/browser-live
+edge         exit=0   PASS    page-errors            none
+axe          exit=0   serious/critical: 0, minor/moderate: 0, errors: 0 -> /home/user/honeycomb3d-ecommerce-system/qa/results/4475bf065088eab6d59d9c728824c90c9ebb3cbd/axe
+images       exit=0   {"PASS":14,"INFO":1} -> /home/user/honeycomb3d-ecommerce-system/qa/results/4475bf065088eab6d59d9c728824c90c9ebb3cbd/images
+provenance   exit=0   night-fury-sq-960.webp                         (960, 960)     NO PROVENANCE METADATA                       cam='' sw='' date='' orient= c2pa=0 synthid
+perf         exit=0   └─────────┴───────────┴───────────────────────────
+screens      exit=0   all pages captured, no blank images -> /tmp/claude-0/-home-user/60c97030-e9e1-5c3b-a7ae-5fe64c98386a/scratchpad/qa-review/screens-4475bf065088
+overall: PASS

@@ -1,0 +1,23 @@
+reviewed: 878bd69f94396e634a6fc37117b8c76e32e53430
+date: 2026-10-15T20:23:40Z
+install      exit=0   npm ci
+lint         NOT DEFINED
+typecheck    NOT DEFINED
+test         exit=0   npm run test
+build        exit=0   npm run build
+check        exit=0   npm run check
+test:e2e     NOT DEFINED
+audit        exit=0   npm audit --omit=dev --audit-level=high
+secret-scan  exit=0  
+domain       exit=0   # duration_ms 127.34488
+smoke        exit=1   {"PASS":84,"FAIL":4} -> /home/user/honeycomb3d-ecommerce-system/qa/results/878bd69f94396e634a6fc37117b8c76e32e53430/browser
+smoke-live   exit=0   {"PASS":89} -> /home/user/honeycomb3d-ecommerce-system/qa/results/878bd69f94396e634a6fc37117b8c76e32e53430/browser-live
+edge         exit=0   PASS    page-errors            none
+axe          exit=0   serious/critical: 0, minor/moderate: 0, errors: 0 -> /home/user/honeycomb3d-ecommerce-system/qa/results/878bd69f94396e634a6fc37117b8c76e32e53430/axe
+images       exit=0   {"PASS":14,"INFO":1} -> /home/user/honeycomb3d-ecommerce-system/qa/results/878bd69f94396e634a6fc37117b8c76e32e53430/images
+provenance   exit=0   night-fury-sq-960.webp                         (960, 960)     NO PROVENANCE METADATA                       cam='' sw='' date='' orient= c2pa=0 synthid
+perf         exit=0   └─────────┴───────────┴───────────────────────────
+screens      exit=0   all pages captured, no blank images -> /tmp/claude-0/-home-user/60c97030-e9e1-5c3b-a7ae-5fe64c98386a/scratchpad/qa-review/screens-878bd69f9439
+overall: FAIL
+smoke-rerun  exit=0   {"PASS":88} after scoping the product-page price lookup outside related-product cards (QA harness fix; the app's cart totals were correct)
+overall: PASS (after QA harness fix)
