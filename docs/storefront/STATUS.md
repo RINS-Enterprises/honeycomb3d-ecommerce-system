@@ -7,7 +7,7 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 | # | Item | Status | Commit |
 |---|---|---|---|
 | 1 | Order button on shop cards | Done, QA fixed | `878df30`, `082d32c` |
-| 2 | Cart bundle suggestions | Done, QA in progress | `9a7f1e4` |
+| 2 | Cart bundle suggestions | Done, QA fixed | `9a7f1e4` + QA-fix commit |
 | 3 | FAQ page | Not started | |
 | 4 | Delivery line (switch) | Not started | |
 | 5 | Payment methods (switch) | Not started | |
@@ -38,19 +38,27 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 
 ## 2. Cart bundle suggestions
 
-- **Commit:** `9a7f1e4`
+- **Commits:** `9a7f1e4` (feature), plus the QA-fix commit that follows it.
 - **What changed:**
   - `src/domain.mjs`: `cartSuggestions(items, products, limit=3)`. It picks designs that share themes (tags other than the category) with what's in the cart. The most shared themes rank first; on a tie, another category comes before the same one (a kunai with a keychain, not a second keychain); catalogue order breaks any remaining tie.
     - It never suggests a design already in the cart, or an unavailable one.
     - A cart with no shared themes gets no suggestions.
-  - `src/app.mjs` / `src/styles.css`: the cart shows **"Goes well with your request"** under the cart lines. Each row has a thumbnail, the name linking to the product, the catalogue price (or "Price on enquiry"), and **+ Add**.
+  - `src/app.mjs` / `src/styles.css`: the cart shows **"Goes well with your request"** after the request's own fields (lines, notes, PayPal option). Each row has a thumbnail, the name linking to the product, the catalogue price (or "Price on enquiry"), and **+ Add**.
     - Add uses the existing quick-add path, so limits, announcements and focus on the new line are unchanged.
     - The order message only ever contains cart items.
 - **Wording:** the brief said "Often added together". There is no order history to support that claim, so the heading says "Goes well with your request". No discounts or bundle prices are shown.
 - **Example (live catalogue):** Hidden Leaf Keychain → Kurama Figure, Minato Kunai, Classic Kunai. Night Fury Keychain → Light Fury, Baymax, then a dragon figure.
 - **Tests:** a unit test covers ranking, exclusions, the limit, no-shared-theme and empty carts, and unknown prices. The browser test checks the heading, names and prices, Add from a suggestion (focus, cart line, message), and that the added design drops out of the list. It runs in both builds; suggestions don't depend on the mode.
-- **Local gate:** passed on live and preview builds: `npm test` (43 pass), `build` + `check` (23 pages), `browser.mjs`, `images-browser.mjs`.
+- **Local gate:** passed on live and preview builds (re-run after the QA fixes): `npm test` (43 pass), `build` + `check` (23 pages), `browser.mjs`, `images-browser.mjs`.
 - **Screenshots checked:** cart with one line at 320, 390 and 1440px (no overflow).
-- **QA verdict:** _in progress_
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, now fixed. No blockers.
+  - Should-fix, fixed: the block sat between the cart lines and the Notes / PayPal fields. It now comes after them, so the request's fields stay together for touch, keyboard and screen-reader users.
+  - Should-fix, fixed: a full cart (20 lines) shows no suggestions instead of Add buttons that can only fail. This can't happen yet, because there are only 17 visible designs.
+  - Nit, fixed: an unpriced suggestion reads "Price to confirm", like a cart line.
+  - Nit, fixed: suggestion Add buttons are 44px tall (touch target).
+  - Nit, fixed: the browser test checks that typed notes survive Add from suggestions, and that suggestions come after the notes. It runs on both the live and preview builds.
+  - Nit, accepted: broad genre tags such as "Movies" weigh the same as franchise tags (Baymax → dragon keychains). This is honest; worth revisiting if the owner adds tag tiers.
+  - Out of scope, existing before item 2: at 320/390px with 200% root text the cart scrolls sideways (`.cart-summary`, `.cart-line-total`). Removing the suggestions doesn't change it. Logged for a later fix.
+  - Verified OK: ranking and exclusions, escaping (hostile names), notes and PayPal state after Add, focus and announcement, message unaffected, preview mode, heading order, layout at 320–1440px (including 200% text inside the block), and the heading wording.
 - **Waits on owner fact:** none.
 
