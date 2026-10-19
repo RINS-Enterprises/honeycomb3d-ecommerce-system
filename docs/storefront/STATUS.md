@@ -6,8 +6,8 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 
 | # | Item | Status | Commit |
 |---|---|---|---|
-| 1 | Order button on shop cards | Done | see §1 |
-| 2 | Cart bundle suggestions | Not started | |
+| 1 | Order button on shop cards | Done, QA fixed | `878df30`, `082d32c` |
+| 2 | Cart bundle suggestions | Done, QA in progress | `9a7f1e4` |
 | 3 | FAQ page | Not started | |
 | 4 | Delivery line (switch) | Not started | |
 | 5 | Payment methods (switch) | Not started | |
@@ -35,3 +35,22 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
   - Nit, for the PM (out of my lane): the `source` note in `data/store.json` contains the typo number's digits. It is stripped from the published `dist/data/store.json`, so nothing ships, but the source data still breaks the "never in any format" rule. Suggest rewording it without the digits.
   - Verified OK: the number, the message text, gating, escaping (hostile names), click targets over the card-wide link, keyboard order and accessible names, client-rendered cards, the unchanged product-page Order now, and no-JS behaviour.
 - **Waits on owner fact:** none. It follows the existing live-ordering switch (`mode: live`, verified number).
+
+## 2. Cart bundle suggestions
+
+- **Commit:** `9a7f1e4`
+- **What changed:**
+  - `src/domain.mjs`: `cartSuggestions(items, products, limit=3)`. It picks designs that share themes (tags other than the category) with what's in the cart. The most shared themes rank first; on a tie, another category comes before the same one (a kunai with a keychain, not a second keychain); catalogue order breaks any remaining tie.
+    - It never suggests a design already in the cart, or an unavailable one.
+    - A cart with no shared themes gets no suggestions.
+  - `src/app.mjs` / `src/styles.css`: the cart shows **"Goes well with your request"** under the cart lines. Each row has a thumbnail, the name linking to the product, the catalogue price (or "Price on enquiry"), and **+ Add**.
+    - Add uses the existing quick-add path, so limits, announcements and focus on the new line are unchanged.
+    - The order message only ever contains cart items.
+- **Wording:** the brief said "Often added together". There is no order history to support that claim, so the heading says "Goes well with your request". No discounts or bundle prices are shown.
+- **Example (live catalogue):** Hidden Leaf Keychain → Kurama Figure, Minato Kunai, Classic Kunai. Night Fury Keychain → Light Fury, Baymax, then a dragon figure.
+- **Tests:** a unit test covers ranking, exclusions, the limit, no-shared-theme and empty carts, and unknown prices. The browser test checks the heading, names and prices, Add from a suggestion (focus, cart line, message), and that the added design drops out of the list. It runs in both builds; suggestions don't depend on the mode.
+- **Local gate:** passed on live and preview builds: `npm test` (43 pass), `build` + `check` (23 pages), `browser.mjs`, `images-browser.mjs`.
+- **Screenshots checked:** cart with one line at 320, 390 and 1440px (no overflow).
+- **QA verdict:** _in progress_
+- **Waits on owner fact:** none.
+
