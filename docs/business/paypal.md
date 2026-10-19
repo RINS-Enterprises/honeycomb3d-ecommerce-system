@@ -1,6 +1,6 @@
 # PayPal: getting paid from overseas
 
-For HoneyComb 3D: overseas buyers, such as Sri Lankans abroad buying a gift delivered here, paying in USD. Research date: **19 Oct 2026**. Nothing was signed up for or logged into.
+For HoneyComb 3D: overseas buyers, such as Sri Lankans abroad buying a gift delivered here, paying in USD. Research date: **19 Oct 2026**. Nothing was signed up for or logged into. Key numbers independently fact-checked against the sources on 19 Oct 2026; corrections applied.
 
 **How to read this:** ✅ official (PayPal's or the bank's own page) · 📰 news, with date · ❓ not published, ask.
 
@@ -64,9 +64,9 @@ Sampath can pay out to an **LKR or a USD** Sampath account.
 2. Check the payment shows in PayPal as **received**, not "pending" or "refused".
 3. Then try a **withdrawal** in the bank app.
 
-**About the USD 1 test:** USD 1 is enough to prove that **receiving works**. After PayPal's fee you would hold about **USD 0.66**, and ComBank's **minimum withdrawal fee is USD 3.50**, so you probably **can't withdraw** a USD 1 test at ComBank (our reading of the fee). Two options:
+**About the USD 1 test:** USD 1 is enough to prove that **receiving works**. After PayPal's fee you would hold about **USD 0.66**. ComBank's **minimum withdrawal amount is USD 3.50**, and its fixed fee alone is USD 3.00, so you **can't withdraw** a USD 1 test at ComBank. Two options:
 - **Test with USD 1** to prove receiving, and leave it in PayPal to withdraw later with real orders; **or**
-- **Test with USD 10** to prove receiving **and** withdrawal. You'd keep about USD 5.76 of it (our arithmetic).
+- **Test with USD 10** to prove receiving **and** withdrawal. You'd keep about USD 5.98 of it (our arithmetic).
 
 When it works, tell Claude: **"PayPal works, switch it on."**
 
@@ -89,17 +89,17 @@ PayPal treats these requests as **goods and services** ✅, which is what you wa
 ### PayPal ✅ ([merchant fees, updated 28 Sep 2026](https://www.paypal.com/lk/webapps/mpp/merchant-fees))
 - **Receiving** an international goods-and-services payment: **4.40% + USD 0.30**.
 - **Currency conversion** in PayPal: **3.0%** above the base rate. Whether this also applies when the bank converts your withdrawal isn't stated ❓.
-- Dispute fee **USD 8**; chargeback fee **USD 10**.
+- Dispute fee **USD 8** (USD 16 under PayPal's high-volume table); chargeback fee **USD 10**. The conversion spread is 3.5% for USD in some cases (e.g. refunds).
 
 ### Withdrawing to your bank
-- **Commercial Bank** ✅ ([FAQ](https://www.combank.lk/info/215)): **3% + USD 3.00** per withdrawal, **minimum USD 3.50**. Instant, and converted to LKR at ComBank's daily rate.
+- **Commercial Bank** ✅ ([FAQ](https://www.combank.lk/info/215)): fee **3% + USD 3.00** per withdrawal; **minimum withdrawal amount USD 3.50**. Instant, and converted to LKR at ComBank's daily rate. The FAQ doesn't say whether the fee comes out of the amount withdrawn or is added on top ❓ (the table below assumes it comes out).
 - **Sampath:** **not published** ❓. Its tariff (updated 4 Jun 2026) has no PayPal line. The app shows the fee before you confirm.
 
 ### What you keep (our arithmetic, ComBank, one withdrawal per order)
 
 | Order | After PayPal fee | After ComBank withdrawal | Lost |
 |---|---|---|---|
-| USD 10 | USD 9.26 | USD 5.76 | 42% |
+| USD 10 | USD 9.26 | USD 5.98 | 40% |
 | USD 20 | USD 18.82 | USD 15.26 | 24% |
 | USD 50 | USD 47.50 | USD 43.08 | 14% |
 | USD 100 | USD 95.30 | USD 89.44 | 11% |
