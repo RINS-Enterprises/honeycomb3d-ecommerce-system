@@ -290,7 +290,7 @@ test('the footer lists the owner\'s social accounts only when set, escaped, open
   for(const html of [cartPage(on),privacyPage(on),faqPage({...on,mode:'preview'})]) {
     const block=html.match(/<div data-testid="footer-social">.*?<\/div>/)[0];
     assert.match(block,/<h2>Follow<\/h2>/);
-    assert.match(block,/<a href="https:\/\/www\.instagram\.com\/example\?a=1&amp;b=&quot;2&quot;" target="_blank" rel="me noopener noreferrer">Instagram<span class="sr-only"> \(opens in a new tab\)<\/span><\/a>/);
+    assert.match(block,/<a href="https:\/\/www\.instagram\.com\/example\?a=1&amp;b=%222%22" target="_blank" rel="me noopener noreferrer">Instagram<span class="sr-only"> \(opens in a new tab\)<\/span><\/a>/,'Normalised and escaped');
     assert.match(block,/>Face&lt;b&gt;book</);
   }
 });
@@ -329,5 +329,21 @@ test('indexing prep: breadcrumb data and the sitemap exist only once searchIndex
   assert.equal(locs.length,6+visible.length);
   assert(!xml.includes('/cart/')&&!xml.includes('404'),'Cart and 404 are not listed');
   assert(!/lastmod|priority|changefreq/.test(xml),'No invented dates or priorities');
+});
+
+test('trust page descriptions end on a whole word; CRLF text renders cleanly; payment lists read naturally (QA, items 5-7)',async()=>{
+  const {trustPage,faqPage}=await import('../src/render.mjs');
+  const {trustPages}=await import('../src/domain.mjs');
+  const long='We accept returns of unused prints in their original packaging. '.repeat(4)+'Returns accepted within 7 days.';
+  const html=trustPage(trustPages({pages:{returns:long}})[0],live);
+  const description=html.match(/<meta name="description" content="([^"]*)">/)[1];
+  assert(description.endsWith('…')&&[...description].length<=156,description);
+  assert(long.replace(/\s+/g,' ').startsWith(description.slice(0,-1)),'A prefix of the owner text');
+  assert.match(description,/[a-z]…$/,'Cut at a word boundary');
+  const emoji=trustPage(trustPages({pages:{about:'😀'.repeat(200)}})[0],live);
+  assert(!emoji.includes('\ufffd'),'Never splits a character');
+  const crlf=trustPage(trustPages({pages:{about:'Line one\r\nline two\r\n\r\nPara two'}})[0],live);
+  assert.match(crlf,/<p>Line one<br>line two<\/p><p>Para two<\/p>/);
+  assert.match(faqPage({...live,paymentMethods:['Card, debit','Bank transfer']}),/how you would like to pay: Card, debit or Bank transfer\./);
 });
 

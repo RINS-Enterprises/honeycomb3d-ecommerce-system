@@ -171,3 +171,23 @@ test('payment method ids render as labels, and the owner\'s cart line shows only
   for(const value of ['',' ',5,'x'.repeat(201)])assert.throws(()=>validateData(products,{...preview,paymentNote:value}),/paymentNote/,JSON.stringify(value));
 });
 
+test('owner-text switches reject collisions, invisible or multi-line names and malformed links (QA, items 5-7)',()=>{
+  const ok=value=>assert.doesNotThrow(()=>validateData(products,{...preview,...value}),JSON.stringify(value));
+  const bad=(value,re)=>assert.throws(()=>validateData(products,{...preview,...value}),re,JSON.stringify(value));
+  bad({paymentMethods:['paypal','Bank transfer']},/use paypalOverseas/);
+  bad({paymentMethods:['PayPal']},/use paypalOverseas/);
+  bad({paymentMethods:['Bank\ntransfer']},/"Bank\\ntransfer"/);
+  bad({paymentMethods:['\u200b']},/paymentMethods/);
+  ok({paymentMethods:['  '+'x'.repeat(40)+'  ']});
+  ok({paymentMethods:['බැංකු මාරු']});
+  bad({paymentNote:'Line one\nline two'},/paymentNote/);
+  for(const url of ['https:example.com/fb','https:/example.com/fb',' https://example.com/fb','https://exa mple.com/','https://example.com/a\nb'])bad({social:[{label:'Facebook',url}]},/social/);
+  bad({social:[{label:'Facebook',url:'https://example.com/fb'},{label:'FB',url:'https://example.com/fb'}]},/social/);
+  bad({social:[{label:'Facebook',url:'https://example.com/fb',extra:1}]},/social/);
+  bad({social:[{label:'Face\nbook',url:'https://example.com/fb'}]},/social/);
+  bad({pages:{about:'\u200b\u200b'}},/pages/);
+  bad({pages:{about:'Bell\u0007'}},/pages/);
+  ok({pages:{about:'Line one\r\nline two\r\n\r\nPara two'}});
+  bad({delivery:{text:'\u200b'}},/delivery/);
+});
+

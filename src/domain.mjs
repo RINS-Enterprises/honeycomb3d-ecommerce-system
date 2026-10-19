@@ -4,7 +4,9 @@ export const CART_KEY = 'honeycomb.cart.v1';
 // One format everywhere (AC-DATA-3): whole rupees without decimals (LKR 4,500), otherwise two decimals (LKR 19.99).
 export const money = value => new Intl.NumberFormat('en-LK', {style:'currency',currency:'LKR',minimumFractionDigits:Number.isInteger(value)?0:2,maximumFractionDigits:2}).format(value);
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const isHttpsUrl = v => { try { const u=new URL(v); return u.protocol === 'https:' && !u.username && !u.password && v.length <= 200; } catch { return false; } };
+const isHttpsUrl = v => { if (!/^https:\/\/[^\s]+$/.test(v) || v.length > 200) return false; try { const u=new URL(v); return !u.username && !u.password; } catch { return false; } };
+// Owner text checks: no control or invisible-only content (a zero-width space is not a name); limits count the trimmed text.
+const ownerText = (v, max, {lines=false}={}) => typeof v === 'string' && v.trim().length > 0 && v.trim().length <= max && /[^\p{Cf}\p{Z}\s]/u.test(v) && !(lines ? /[\p{Cc}--[\n\r\t]]/v : /\p{Cc}/u).test(v.trim());
 // A positive LKR amount with at most two decimal places (prices and the delivery fee).
 const validLkr = v => Number.isFinite(v) && v > 0 && Number.isSafeInteger(Math.round(v*100)) && Math.abs(Math.round(v*100)-v*100) <= 1e-6;
 export function validateData(products, store) {
@@ -14,21 +16,27 @@ export function validateData(products, store) {
   if (store.paypalOverseas !== undefined && typeof store.paypalOverseas !== 'boolean') throw new Error('paypalOverseas must be true or false');
   if (store.delivery !== undefined && store.delivery !== null) {
     const d=store.delivery;
-    if (typeof d !== 'object' || Array.isArray(d) || Object.keys(d).some(k=>!['text','feeLkr'].includes(k)) || typeof d.text !== 'string' || !d.text.trim() || d.text.trim().length > 200) throw new Error('delivery must be null or {text, feeLkr} with a short owner-given text');
+    if (typeof d !== 'object' || Array.isArray(d) || Object.keys(d).some(k=>!['text','feeLkr'].includes(k)) || !ownerText(d.text,200)) throw new Error('delivery must be null or {text, feeLkr} with a short owner-given text');
     if (d.feeLkr !== undefined && d.feeLkr !== null && !validLkr(d.feeLkr)) throw new Error('delivery.feeLkr must be null or a positive LKR amount with at most two decimal places');
   }
   if (store.paymentMethods !== undefined) {
     const m=store.paymentMethods;
-    if (!Array.isArray(m) || m.length > 6 || m.some(x=>typeof x !== 'string' || !x.trim() || x.length > 40) || new Set(m.map(x=>paymentLabel(x).toLowerCase())).size !== m.length) throw new Error('paymentMethods must be a list of up to six distinct, short owner-confirmed names');
+    if (!Array.isArray(m) || m.length > 6) throw new Error('paymentMethods must be a list of up to six owner-confirmed names');
+    for (const x of m) {
+      if (!ownerText(x,40)) throw new Error('paymentMethods: '+JSON.stringify(x)+' must be a short, single-line name');
+      // PayPal is its own switch (paypalOverseas), so a method of that name would collide with it.
+      if (/paypal/i.test(x)) throw new Error('paymentMethods: '+JSON.stringify(x)+' — use paypalOverseas for PayPal, not a payment method');
+    }
+    if (new Set(m.map(x=>paymentLabel(x).toLowerCase())).size !== m.length) throw new Error('paymentMethods must not list the same method twice');
   }
-  if (store.paymentNote !== undefined && store.paymentNote !== null && (typeof store.paymentNote !== 'string' || !store.paymentNote.trim() || store.paymentNote.trim().length > 200)) throw new Error('paymentNote must be null or a short owner-given line');
+  if (store.paymentNote !== undefined && store.paymentNote !== null && !ownerText(store.paymentNote,200)) throw new Error('paymentNote must be null or a short owner-given line');
   if (store.social !== undefined) {
     const s=store.social;
-    if (!Array.isArray(s) || s.length > 6 || s.some(x=>!x || typeof x.label !== 'string' || !x.label.trim() || x.label.length > 30 || typeof x.url !== 'string' || !isHttpsUrl(x.url))) throw new Error('social must be a list of up to six {label, url} links with https URLs');
+    if (!Array.isArray(s) || s.length > 6 || s.some(x=>!x || typeof x !== 'object' || Object.keys(x).some(k=>!['label','url'].includes(k)) || !ownerText(x.label,30) || typeof x.url !== 'string' || !isHttpsUrl(x.url)) || new Set(s.map(x=>x.url)).size !== s.length) throw new Error('social must be a list of up to six distinct {label, url} links with full https:// URLs');
   }
   if (store.pages !== undefined) {
     const pg=store.pages;
-    if (!pg || typeof pg !== 'object' || Array.isArray(pg) || Object.keys(pg).some(k=>!TRUST_PAGES.some(t=>t.key===k)) || Object.values(pg).some(v=>v !== null && (typeof v !== 'string' || !v.trim() || v.length > 4000))) throw new Error('pages must map shipping, returns or about to null or the owner\'s text');
+    if (!pg || typeof pg !== 'object' || Array.isArray(pg) || Object.keys(pg).some(k=>!TRUST_PAGES.some(t=>t.key===k)) || Object.values(pg).some(v=>v !== null && !ownerText(v,4000,{lines:true}))) throw new Error('pages must map shipping, returns or about to null or the owner\'s text');
   }
   if (store.whatsappVerified && !/^[1-9]\d{7,14}$/.test(store.whatsappNumber || '')) throw new Error('Use a verified international WhatsApp number, digits only');
   const ids = new Set(), slugs = new Set();
@@ -81,10 +89,10 @@ export const paymentMethods = store => Array.isArray(store.paymentMethods) ? sto
 // The owner's own line for the cart's payment choice (e.g. how payment details are sent); null keeps the neutral default.
 export const paymentNote = store => paymentMethods(store).length && typeof store.paymentNote === 'string' && store.paymentNote.trim() ? store.paymentNote.trim() : null;
 // Social links: accounts the owner controls, empty (off) until given. Shown in the footer.
-export const socialLinks = store => Array.isArray(store.social) ? store.social.map(x=>({label:x.label.trim(),url:x.url})) : [];
+export const socialLinks = store => Array.isArray(store.social) ? store.social.map(x=>({label:x.label.trim(),url:new URL(x.url).href})) : [];
 // Trust pages: generated, and linked from the footer, only once the owner has written their text (store.pages.<key>).
 export const TRUST_PAGES = [{key:'shipping',slug:'shipping',title:'Shipping and delivery',eyebrow:'SHIPPING'},{key:'returns',slug:'returns',title:'Returns',eyebrow:'RETURNS'},{key:'about',slug:'about',title:'About HoneyComb 3D',eyebrow:'ABOUT'}];
-export const trustPages = store => TRUST_PAGES.filter(t=>typeof store.pages?.[t.key] === 'string' && store.pages[t.key].trim()).map(t=>({...t,text:store.pages[t.key].trim()}));
+export const trustPages = store => TRUST_PAGES.filter(t=>typeof store.pages?.[t.key] === 'string' && store.pages[t.key].trim()).map(t=>({...t,text:store.pages[t.key].replace(/\r\n?/g,'\n').trim()}));
 export const delivery = store => store.delivery?.text?.trim() ? {text:store.delivery.text.trim(),feeLkr:store.delivery.feeLkr ?? null} : null;
 export const visibleProducts = (products, store) => products.filter(p => p.image && (store.mode !== 'live' || p.approved));
 export function filterProducts(products, query='', category='all') {

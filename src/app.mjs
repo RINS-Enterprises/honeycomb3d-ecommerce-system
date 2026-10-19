@@ -245,7 +245,7 @@ function initCart() {
   const message=()=>orderMessage(cart,products,notes,{paypal:paypalOn&&(methods.length?payment==='paypal':paypal),payment:methods.includes(payment)?payment:'',deliveryFeeLkr:shipping?.feeLkr});
   const paymentChoice=()=>'<fieldset class="cart-payment" data-testid="cart-payment"><legend>How would you like to pay? <span>(optional)</span></legend>'+
     [['','Not sure yet',''],...methods.map(m=>[m,m,'']),...(paypalOn?[['paypal','PayPal link in USD, paying from outside Sri Lanka','We send it in WhatsApp after we confirm your total. Payments from Sri Lankan PayPal accounts are not supported.']]:[])].map(([value,label,help],i)=>
-    '<label class="cart-choice"><input type="radio" name="order-payment" data-payment-index="'+i+'"'+(payment===value?' checked':'')+'><span>'+e(label)+(help?'<small>'+e(help)+'</small>':'')+'</span></label>').join('')+
+    '<label class="cart-choice"><input type="radio" name="order-payment" data-payment-index="'+i+'"'+(help?' aria-describedby="payment-help-'+i+'"':'')+(payment===value?' checked':'')+'><span>'+e(label)+(help?'<small id="payment-help-'+i+'" aria-hidden="true">'+e(help)+'</small>':'')+'</span></label>').join('')+
     '<p class="fine" data-testid="cart-payment-note">'+e(paymentNote(store)||'Payment arrangements are confirmed with your quote.')+'</p></fieldset>';
   const paymentValues=()=>['',...methods,...(paypalOn?['paypal']:[])];
   function render(focusKey) {
