@@ -10,7 +10,7 @@
 
 ## The WhatsApp message
 
-Send it from **071 059 9815**, in the customer's existing chat. Fill in the [brackets]. Use version A until your Google profile is live (`google-business-profile.md`), then version B.
+Send it from **071 059 9815**, in the customer's existing chat. The Sinhala versions were checked by a Sinhala reviewer; adjust any word to how you'd normally say it. Fill in the [brackets]. Use version A until your Google profile is live (`google-business-profile.md`), then version B.
 
 ### Version A: before the Google profile exists (photo and feedback)
 
@@ -24,9 +24,9 @@ Thank you for ordering from us!
 
 **Sinhala**
 ```
-Hi [name], මේ HoneyComb 3D 🐝 ඔයාගේ [product] එකට කැමති කියලා හිතනවා!
-පොඩි වෙලාවක් තියෙනවා නම්, ඒක තියලා තියෙන තැන photo එකක් සහ ඔයා හිතන දේ ගැන පොඩි message එකක් එවන්න පුළුවන්ද?
-ඒක අපේ Instagram එකේ share කරන්න කැමති නම් කියන්න. ඔයාගේ මුල් නම විතරයි දාන්නේ, නැත්නම් නමක් නැතුව.
+Hi [name], මේ HoneyComb 3D එකෙන් 🐝 ඔයා [product] එකට කැමති ඇති කියලා හිතනවා!
+පොඩි වෙලාවක් තියෙනවා නම්, ඒක තියලා තියෙන තැන photo එකක් සහ ඒ ගැන ඔයා හිතන දේ කියලා පොඩි message එකක් එවන්න පුළුවන්ද?
+ඒක අපේ Instagram එකේ share කරන්න ඔයාට OK නම් අපිට කියන්න. අපි දාන්නේ ඔයාගේ මුල් නම විතරයි, නැත්නම් ඔයා කැමති නම් නමක් නැතුව.
 අපෙන් ඕඩර් කළාට ගොඩක් ස්තුතියි!
 ```
 
@@ -43,10 +43,10 @@ Thank you for ordering from us!
 
 **Sinhala**
 ```
-Hi [name], මේ HoneyComb 3D 🐝 ඔයාගේ [product] එකට කැමති කියලා හිතනවා!
-අපි එක්කෙනෙක් කරන පොඩි studio එකක්. ඔයාගේ ඇත්ත අදහස Google review එකක් විදියට දැම්මොත් අනිත් අයට අපිව හොයාගන්න ලොකු උදව්වක්:
+Hi [name], මේ HoneyComb 3D එකෙන් 🐝 ඔයා [product] එකට කැමති ඇති කියලා හිතනවා!
+අපි එක්කෙනෙක් කරන පොඩි studio එකක්. ඔයාගේ ඇත්ත අදහස Google review එකක් විදියට දැම්මොත්, අනිත් අයට අපිව හොයාගන්න ඒක ලොකු උදව්වක් වෙනවා:
 [Google review link]
-පුළුවන් නම් ඒක තියලා තියෙන තැන photo එකකුත් එවන්න. ඔයා කැමති නම් Instagram එකේ share කරනවා (මුල් නම විතරයි, නැත්නම් නමක් නැතුව).
+පුළුවන් නම් ඒක තියලා තියෙන තැන photo එකකුත් එවන්න. ඔයාට OK නම් ඒක අපේ Instagram එකේ share කරන්න අපි ගොඩක් කැමතියි (මුල් නම විතරයි, නැත්නම් නමක් නැතුව).
 අපෙන් ඕඩර් කළාට ගොඩක් ස්තුතියි!
 ```
 
