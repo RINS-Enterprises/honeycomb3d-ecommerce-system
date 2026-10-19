@@ -114,7 +114,7 @@ Status: `blocked` (waiting on a dependency), `ready`, `in progress`, `done`, `de
 | OPS-03 | First real-page test on Windows and Android | Owner/teammate; fixes by an ops implementer | ops QA | OPS-01 | One model saved from a live MakerWorld page; anything the real page breaks is fixed in `ops/makerworld-to-drive/` with tests updated | blocked |
 | OPS-04 | Give the tool a durable home: move `ops/makerworld-to-drive/` to `honeycomb3d-ops-system` (or keep it on its branch and later merge) | PM proposes, owner decides | – | – | Tool lives on a branch that is protected from cleanup and outside the website's release path | open |
 | OPS-05 | Listing pipeline (Drive import → Airtable → site) | Proposed only | – | OPS-03, D-10 licences | Defined by the owner later | deferred |
-| OPS-06 | Start an "Ops & Tools" session? | Owner | – | – | Yes/no recorded | open; QA asked 2026-10-16, no answer |
+| OPS-06 | Start an "Ops & Tools" session? | Owner | – | – | Yes/no recorded | **YES 2026-10-19** (owner: "lets create a new session for the automations. of makersworld to drive and stuff"). Session `session_013L9wyryuVwxe3a63LEWuHF`, branch `claude/ops-automations` from `0182080`; owns OPS-01…05 and the Make recipes (W-17). Website stays with the PM session |
 
 ---
 
