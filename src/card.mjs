@@ -1,5 +1,5 @@
 // Product card markup, shared by the static build and the browser (recently viewed).
-import {escapeHtml as e, money} from './domain.mjs';
+import {escapeHtml as e, money, orderNowUrl} from './domain.mjs';
 
 export const price = p => p.priceLkr === null ? 'Price on enquiry' : money(p.priceLkr);
 export const CARD_MAX_WIDTH = 960;
@@ -23,13 +23,16 @@ function altPhoto(p) {
   const g=p.gallery?.[0];if(!g?.variants?.length)return '';
   return ' data-alt-srcset="'+e(g.variants.map(v=>v.src+' '+v.width+'w').join(', '))+'" data-alt-src="'+e(g.src)+'" data-alt-text="'+e(g.alt||'')+'"';
 }
-export function card(p, {headingLevel=3, loading='lazy'}={}) {
+// Pass the store to add the one-tap WhatsApp Order link (live ordering only); it works without JavaScript.
+export function card(p, {headingLevel=3, loading='lazy', store=null}={}) {
   const heading=headingLevel===2?'h2':'h3';
+  const order=store?orderNowUrl(p,store):null;
   // One link per card; its ::after stretches over the whole card so the photo is clickable too.
   return '<article class="product-card" data-product-card data-testid="product-card" data-category="' + e(p.category) + '" data-search="' + e([p.name,p.category,...p.tags].join(' ').toLowerCase()) + '" data-tags="' + e(p.tags.join('|')) + '" data-name="' + e(p.name) + '" data-price="' + (p.priceLkr===null?'':p.priceLkr) + '">' +
     '<div class="product-image"' + altPhoto(p) + '>' + picture(p,{loading,maxWidth:CARD_MAX_WIDTH}) + '</div>' +
     '<div class="card-copy"><p class="eyebrow">' + e(p.category) + '</p><'+heading+'><a class="card-link" href="/products/' + e(p.slug) + '/">' + e(p.name) + '</a></'+heading+'><p class="price" data-testid="product-price">' + e(price(p)) + '</p><div class="card-foot"><p class="card-status">' + availability(p) + '</p>' +
-    (p.availability==='unavailable'?'':'<button type="button" class="quick-add" data-quick-add="' + e(p.id) + '" data-testid="quick-add" aria-label="Add ' + e(p.name) + ' to request cart" hidden><span aria-hidden="true">+</span> Add</button>') + '</div></div></article>';
+    (p.availability==='unavailable'?'':'<div class="card-actions'+(order?' has-order':'')+'"><button type="button" class="quick-add" data-quick-add="' + e(p.id) + '" data-testid="quick-add" aria-label="Add ' + e(p.name) + ' to request cart" hidden><span aria-hidden="true">+</span> Add</button>' +
+    (order?'<a class="quick-order" href="' + e(order) + '" target="_blank" rel="noopener noreferrer" data-card-order data-testid="card-order" aria-label="Order ' + e(p.name) + ' on WhatsApp (opens in a new tab)">Order <span aria-hidden="true">↗</span></a>':'') + '</div>') + '</div></div></article>';
 }
 export function availability(p) {
   return ({unconfirmed:'Availability to confirm',available:'Available',unavailable:'Currently unavailable','made-to-order':'Made to order'})[p.availability];

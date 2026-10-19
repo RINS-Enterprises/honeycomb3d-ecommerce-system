@@ -39,9 +39,29 @@ try {
   assert.equal(await page.locator('[data-product-card]').count(),17,'Every product with an approved photo is shown (Stormtrooper has none)');
   assert.equal(await page.locator('.photo-placeholder').count(),0);
   for(const card of await page.locator('[data-product-card]').all()) {
-    assert.equal(await card.getByRole('link').count(),1,'One accessible link per product card');
+    // One link to the product page per card; live ordering adds a separate one-tap Order link (nothing else).
+    assert.equal(await card.locator('a[href^="/products/"]').count(),1,'One product link per product card');
+    const orderable=ordering&&!/Currently unavailable/.test(await card.locator('.card-status').textContent());
+    assert.equal(await card.getByRole('link').count(),orderable?2:1,'Only the product link, plus Order when ordering is open and the design is available');
     assert.equal(await card.getByRole('heading',{level:2}).count(),1,'Shop heading hierarchy');
   }
+  if(ordering) {
+    // Card Order: this design at quantity 1, same business number, new tab, nothing added to the cart.
+    const leafOrder=page.locator('[data-product-card]').filter({hasText:'Hidden Leaf Keychain'}).getByRole('link',{name:'Order Hidden Leaf Keychain on WhatsApp (opens in a new tab)'});
+    const url=new URL(await leafOrder.getAttribute('href'));
+    assert.equal(url.origin+url.pathname,'https://wa.me/'+builtStore.whatsappNumber);
+    assert.equal(url.searchParams.get('text').split('\n')[1],'- Hidden Leaf Keychain [HC-LEAF] x 1: '+money(400));
+    assert.match(url.searchParams.get('text'),/not a confirmed purchase/);
+    assert.equal(await leafOrder.getAttribute('target'),'_blank');
+    assert.equal(await leafOrder.getAttribute('rel'),'noopener noreferrer');
+    // The new tab is stubbed at the context level so the test never reaches WhatsApp.
+    await page.context().route(/^https:\/\/(?:wa\.me|api\.whatsapp\.com)\//,route=>route.fulfill({body:'stub'}));
+    const [popup]=await Promise.all([page.waitForEvent('popup'),leafOrder.click()]);
+    assert.equal(popup.url(),url.href,'Order opens exactly that WhatsApp link in a new tab');
+    await popup.close();await page.context().unrouteAll();
+    assert.match(page.url(),/\/shop\//,'The shop stays open behind it');
+    assert.equal(await page.getByTestId('cart-count').textContent(),'0','Card Order does not touch the cart');
+  } else assert.equal(await page.getByTestId('card-order').count(),0,'No card Order link while ordering is closed');
   await screenshot('test-results/shop-desktop.png');
   await page.getByRole('searchbox').fill('no-match-here');
   await page.waitForFunction(()=>document.querySelector('#no-results').hidden===false);
@@ -89,7 +109,7 @@ try {
   await page.getByRole('status').filter({hasText:'Kurama Figure added to your request cart.'}).waitFor();
   assert.equal(await page.getByTestId('cart-count').textContent(),'1','Quick add adds one');
   assert.match(page.url(),/\/shop\//,'Quick add stays on the page');
-  assert.equal(await kuramaCard.getByRole('link').count(),1,'Quick add is not a link and not nested in one');
+  assert.equal(await kuramaCard.locator('a [data-quick-add], a[data-quick-add]').count(),0,'Quick add is not a link and not nested in one');
   // Reveal motion: below-the-fold content only, settles after scrolling, off under reduced motion.
   const motion=await browser.newPage({viewport:{width:390,height:844}});
   await motion.goto('http://127.0.0.1:4173/');

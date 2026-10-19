@@ -67,6 +67,27 @@ test('cards are one link with a clean LKR price and test hooks',async()=>{
   assert.match(html,/<p class="price" data-testid="product-price">LKR\s400<\/p>/);
 });
 
+test('live cards add a one-tap WhatsApp Order for that design at quantity 1; preview and unavailable cards do not',async()=>{
+  const {card,shop}=await import('../src/render.mjs');
+  const leaf=products.find(p=>p.id==='HC-LEAF');
+  const html=card(leaf,{store:live});
+  const href=html.match(/<a class="quick-order" href="([^"]+)"/)[1].replaceAll('&amp;','&');
+  const url=new URL(href);
+  assert.equal(url.origin+url.pathname,'https://wa.me/94700000000');
+  assert.match(url.searchParams.get('text'),/^Hello HoneyComb 3D, I would like to request an order\.\n- Hidden Leaf Keychain \[HC-LEAF\] x 1: LKR\s400\n/);
+  assert.match(html,/target="_blank" rel="noopener noreferrer" data-card-order data-testid="card-order" aria-label="Order Hidden Leaf Keychain on WhatsApp \(opens in a new tab\)"/);
+  assert.match(html,/data-quick-add="HC-LEAF"/,'Add stays beside Order');
+  assert.equal([...html.matchAll(/<a\b/g)].length,2,'The product link plus Order');
+  for(const closed of [{mode:'preview',whatsappVerified:true,whatsappNumber:'94700000000'},{...live,whatsappVerified:false},{...live,whatsappNumber:''}]) {
+    assert(!card(leaf,{store:closed}).includes('data-card-order'),'No Order link when ordering is closed: '+JSON.stringify(closed));
+  }
+  assert(!card({...leaf,availability:'unavailable'},{store:live}).includes('data-card-order'),'Never for an unavailable design');
+  assert(!card(leaf).includes('data-card-order'),'Cards rendered without a store stay as before');
+  const visible=visibleProducts(products,store);
+  assert.equal([...shop(visible,live).matchAll(/data-card-order/g)].length,visible.filter(p=>p.availability!=='unavailable').length,'Every orderable shop card');
+  assert.equal([...shop(visible,{...live,mode:'preview'}).matchAll(/data-card-order/g)].length,0,'Preview shop: none');
+});
+
 test('product page: gallery only with several photos, clear price, availability and an inline ordering note',async()=>{
   const {detail}=await import('../src/render.mjs');
   const preview={...store,mode:'preview'};

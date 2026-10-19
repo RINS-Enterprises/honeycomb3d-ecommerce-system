@@ -125,7 +125,7 @@ function initRecent() {
   const shown=ids.filter(id=>id!==current).slice(0,RECENT_SHOWN).map(id=>products.find(p=>p.id===id));
   if(current){try{storage.setItem(RECENT_KEY,JSON.stringify([current,...ids.filter(id=>id!==current)].slice(0,RECENT_KEPT)));}catch{}}
   if(!shown.length)return;
-  section.querySelector('[data-recent-list]').innerHTML=shown.map(p=>card(p)).join('');
+  section.querySelector('[data-recent-list]').innerHTML=shown.map(p=>card(p,{store})).join('');
   section.hidden=false;
   reveal(section);armAltPhotos(section);
   section.querySelector('[data-recent-clear]').addEventListener('click',()=>{
@@ -244,7 +244,7 @@ function initCart() {
       // Nothing in the cart and no recently viewed row: offer a few designs to start from.
       const recent=document.querySelector('[data-recent]');
       if((!recent||recent.hidden)&&products.length){
-        root.insertAdjacentHTML('beforeend','<section class="empty-picks" aria-labelledby="picks-title" data-testid="cart-picks"><div class="section-heading"><h2 id="picks-title">A few to start with</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+products.filter(p=>p.availability!=='unavailable').slice(0,4).map(p=>card(p)).join('')+'</div></section>');
+        root.insertAdjacentHTML('beforeend','<section class="empty-picks" aria-labelledby="picks-title" data-testid="cart-picks"><div class="section-heading"><h2 id="picks-title">A few to start with</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+products.filter(p=>p.availability!=='unavailable').slice(0,4).map(p=>card(p,{store})).join('')+'</div></section>');
         armQuickAdd(root);reveal(root);armAltPhotos(root);
       }
       if(focusKey)root.querySelector('a').focus();return;

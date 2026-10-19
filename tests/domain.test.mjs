@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas} from '../src/domain.mjs';
+import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl} from '../src/domain.mjs';
 const p=(id,priceLkr=null,availability='unconfirmed')=>({id,slug:id.toLowerCase(),name:id,category:'Figures',tags:['Anime'],description:'Example',source:'Test fixture',priceLkr,availability,image:null,imageAlt:null,approved:false});
 const products=[p('A',10.25),p('B'),p('C',10,'unavailable')];
 const preview={mode:'preview',whatsappVerified:false,whatsappNumber:null};
@@ -82,4 +82,16 @@ test('PayPal for overseas payers is off unless explicitly true and only adds a r
   assert.match(message,/PayPal payment link in USD once the total is confirmed/);
   assert.match(message,/not a confirmed purchase/);
   assert.equal(orderMessage([],products,'',{paypal:true}),'');
+});
+
+test('one-tap order links only open in live mode with a verified number and never for unavailable designs',()=>{
+  const p={id:'A',name:'Alpha',priceLkr:500,availability:'made-to-order'};
+  const live={mode:'live',whatsappVerified:true,whatsappNumber:'94700000000'};
+  assert.equal(orderingOpen(live),true);
+  for(const s of [{...live,mode:'preview'},{...live,whatsappVerified:false},{...live,whatsappVerified:'true'}])assert.equal(orderingOpen(s),false);
+  const url=new URL(orderNowUrl(p,live));
+  assert.equal(url.searchParams.get('text'),orderMessage([{id:'A',quantity:1}],[p]));
+  assert.match(new URL(orderNowUrl(p,live,3)).searchParams.get('text'),/Alpha \[A\] x 3/);
+  assert.equal(orderNowUrl(p,{...live,mode:'preview'}),null);
+  assert.equal(orderNowUrl({...p,availability:'unavailable'},live),null);
 });

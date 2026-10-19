@@ -199,6 +199,12 @@ picture{display:contents}
 .quick-add span{color:var(--accent);font-size:1.05em}
 .quick-add:hover{border-color:var(--accent);background:var(--panel-3)}
 .quick-add.is-added{border-color:var(--accent);color:var(--accent-soft)}
+.card-actions{display:flex;gap:var(--space-2)}
+/* Add and Order share the row and wrap onto two lines whenever they no longer fit (narrow cards, larger text). */
+.card-actions.has-order{flex:1 1 100%;flex-wrap:wrap}
+.card-actions.has-order>*{flex:1 0 auto;justify-content:center;padding-inline:8px}
+.quick-order{position:relative;z-index:2;display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:6px 12px;border-radius:var(--radius-sm);border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);font-size:var(--step--1);font-weight:700;text-decoration:none;white-space:nowrap}
+.quick-order:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--on-accent)}
 @supports selector(:has(*)){.card-link:focus-visible{outline:none}.product-card:has(.card-link:focus-visible){outline:3px solid var(--accent);outline-offset:3px}}
 @media(hover:hover) and (prefers-reduced-motion:no-preference){
 .category-photo img{transition:transform .5s var(--ease)}
