@@ -243,13 +243,15 @@ test('the FAQ covers ordering, made to order, colours and sizes, custom prints a
     assert.match(html,/Sri Lanka/);assert.match(html,/href="\/custom\/"/);
     const answers=text(html.slice(html.indexOf('data-testid="faq"'),html.indexOf('</main>'))).replaceAll('3D','');
     assert(!/\d/.test(answers),'No numbers (prices, days, phone numbers) in the answers');
-    assert(!/\b(?:free|guarantee\w*|days?|weeks?|hours?|refund\w*|cash on delivery|bank transfer)\b/i.test(answers),'No delivery-time or payment promises');
+    assert(!/\b(?:free|guarantee\w*|warrant\w*|days?|weeks?|fortnight|hours?|refund\w*|returns?|exchange\w*|money back|cash|cards?|cod|bank transfer|express|same[- ]day|within)\b/i.test(answers),'No delivery-time, returns or payment promises');
   }
   assert.match(liveHtml,/opens in WhatsApp, and nothing is sent until you send it/);
   assert.match(previewHtml,/Online ordering opens soon/);
-  assert(!previewHtml.includes('WhatsApp'),'Preview FAQ does not describe a WhatsApp flow that is not open');
+  for(const closed of [previewHtml,faqPage({...live,mode:'preview',paypalOverseas:true})])assert(!/WhatsApp|conversation|PayPal/.test(closed),'Preview FAQ does not describe a WhatsApp or PayPal flow that is not open');
+  assert.match(previewHtml,/use “Ask about a variation” on a design’s page/);
+  assert.match(liveHtml,/or ask in WhatsApp, and we confirm what is possible/);
   assert(!liveHtml.includes('PayPal')&&!faqPage({...live,mode:'preview',paypalOverseas:true}).includes('PayPal'));
-  assert.match(faqPage({...live,paypalOverseas:true}),/PayPal payment link in USD from your request cart/);
+  assert.match(faqPage({...live,paypalOverseas:true}),/PayPal payment link in USD from your request cart\. We send it in WhatsApp after we confirm your total\./);
   for(const html of [cartPage(live),cartPage({mode:'preview'})])assert.match(html,/<a href="\/faq\/">Questions and answers<\/a>/,'Footer links the FAQ');
 });
 

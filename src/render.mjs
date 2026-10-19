@@ -205,12 +205,12 @@ export function faqPage(store) {
   const qa=[
     ['How do I order?',ordering?'<p>Add designs to your <a href="/cart/">request cart</a>, or tap Order on a design, and review the message we prepare for you. It opens in WhatsApp, and nothing is sent until you send it there. We reply to confirm availability, options, delivery cost, the final total and payment arrangements.</p>':'<p>Online ordering opens soon. You can already save designs in your <a href="/cart/">request cart</a> and copy your request for later.</p>'],
     ['Is my request a confirmed purchase?','<p>No. A request is not a confirmed purchase. Your order is confirmed once we agree the details with you.</p>'],
-    ['What does “made to order” mean?','<p>Designs marked “Made to order” are printed for you once we confirm your order. Each design shows its availability on its page.</p>'],
-    ['Can I choose the colour or size?','<p>Ask us. Add a note in your request cart, or ask in the conversation, and we confirm what is possible with your quote. Please confirm size, material, colours and finish before ordering.</p>'],
+    ['What does “made to order” mean?','<p>Designs marked “Made to order” are printed for you after we confirm your order with you. Each design shows its availability on its page.</p>'],
+    ['Can I choose the colour or size?','<p>Ask us. Add a note in your request cart, or '+(ordering?'ask in WhatsApp':'use “Ask about a variation” on a design’s page')+', and we confirm what is possible with your quote.</p>'],
     ['Can you print something that is not in the shop?','<p>Yes, tell us your idea. <a href="/custom/">Start a custom enquiry</a> with a model link, a rough size and the finish you have in mind, and we confirm whether we can make it and what it costs.</p>'],
     ['How much is delivery, and how long does it take?','<p>Delivery cost and timing are included in your quote.</p>'],
-    ['How do I pay?','<p>Payment arrangements are confirmed with your quote.'+(ordering&&paypalOverseas(store)?' Paying from outside Sri Lanka? You can ask for a PayPal payment link in USD from your request cart.':'')+'</p>'],
-    ['Where are you based?','<p>We are a 3D print studio in Sri Lanka. Prices on this site are in Sri Lankan rupees (LKR).</p>']];
+    ['How do I pay?','<p>Payment arrangements are confirmed with your quote.'+(ordering&&paypalOverseas(store)?' Paying from outside Sri Lanka? You can ask for a PayPal payment link in USD from your request cart. We send it in WhatsApp after we confirm your total.':'')+'</p>'],
+    ['Where are you based?','<p>We are based in Sri Lanka, and our prints are made here. Prices on this site are in Sri Lankan rupees (LKR).</p>']];
   return layout('Questions and answers','<section class="wrap section narrow prose-page faq-page"><p class="eyebrow">QUESTIONS</p><h1>Questions and answers.</h1><div class="faq-list" data-testid="faq">'+qa.map(([q,a])=>'<section class="faq-item"><h2>'+q+'</h2>'+a+'</section>').join('')+'</div></section>',store,'','',{description:'How ordering works at HoneyComb 3D: '+(ordering?'request designs on WhatsApp':'the request cart')+', made-to-order prints, colours and sizes, and custom enquiries.',path:'/faq/'});
 }
 // 404: the original message, then a search that lands on the shop (works without JavaScript) and a few designs.

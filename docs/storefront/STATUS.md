@@ -8,7 +8,7 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 |---|---|---|---|
 | 1 | Order button on shop cards | Done, QA fixed | `878df30`, `082d32c` |
 | 2 | Cart bundle suggestions | Done, QA fixed | `9a7f1e4` + QA-fix commit |
-| 3 | FAQ page | Done, QA in progress | `4c32420` |
+| 3 | FAQ page | Done, QA fixed | `4c32420` + QA-fix commit |
 | 4 | Delivery line (switch) | Not started | |
 | 5 | Payment methods (switch) | Not started | |
 | 6 | Social links | Not started | |
@@ -64,17 +64,17 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 
 ## 3. FAQ page
 
-- **Commit:** `4c32420`
+- **Commits:** `4c32420` (feature), plus the QA-fix commit that follows it.
 - **What changed:**
   - `src/render.mjs`: `faqPage(store)` at `/faq/`, linked as "Questions and answers" in the footer's About column on every page. It has eight short answers, each built from wording the site already uses:
     - How ordering works.
     - A request is not a confirmed purchase.
     - What "made to order" means.
-    - Colours and sizes: ask us.
+    - Colours and sizes: ask us (in WhatsApp when live; through "Ask about a variation" in preview).
     - Custom prints, with a link to `/custom/`.
     - Delivery cost and timing come with the quote.
     - Payment arrangements come with the quote.
-    - We are a 3D print studio in Sri Lanka, with prices in LKR.
+    - We are based in Sri Lanka and our prints are made here, with prices in LKR.
   - Mode-aware:
     - Live: describes the WhatsApp request and that nothing is sent until you send it.
     - Preview: "Online ordering opens soon" and no mention of WhatsApp, including the meta description.
@@ -83,8 +83,15 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 - **Tests:**
   - A unit test runs live, preview and PayPal on/off. It checks the questions, the absence of any digits in the answers (no prices, days or phone numbers), and the absence of delivery-time and payment-promise words. It also checks the footer link.
   - The browser test follows the footer link to the page. `/faq/` is in the 320–1440px overflow and wide-font sweeps.
-- **Local gate:** passed on live and preview builds: `npm test` (44 pass), `build` + `check` (24 pages), `browser.mjs`, `images-browser.mjs`.
+- **Local gate:** passed on live and preview builds (re-run after the QA fixes): `npm test` (44 pass), `build` + `check` (24 pages), `browser.mjs`, `images-browser.mjs`.
 - **Screenshots checked:** 320, 390 and 1440px (no overflow).
-- **QA verdict:** _in progress_
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, now fixed. Every claim was checked against existing site copy, and no new promises were found.
+  - Should-fix, fixed: in preview mode the colour/size answer said "ask in the conversation", pointing at a WhatsApp flow that isn't open. It now says "ask in WhatsApp" when live and "use “Ask about a variation” on a design’s page" in preview. The trailing "Please confirm size… before ordering" was dropped, because it put the confirming back on the customer.
+  - Nit, fixed: "printed for you after we confirm your order with you" (was "once").
+  - Nit, fixed: "We are based in Sri Lanka, and our prints are made here", which echoes the hero's "made in Sri Lanka". "Studio" isn't used elsewhere.
+  - Nit, fixed: the PayPal sentence adds the cart's caveat, "We send it in WhatsApp after we confirm your total."
+  - Nit, fixed: the promise guard now also bans warranty, returns, exchange, money back, cash, card, COD, express, same-day and "within". There is a new preview + PayPal-on case, and preview is checked for "conversation" as well as WhatsApp and PayPal.
+  - Nit, kept: "tap Order on a design" matches the shop-card button label ("Order"). The product page's button reads "Order now on WhatsApp".
+  - Verified OK: the footer link on all 24 pages, check/build inclusion (check.mjs only extended), noindex, title and description, heading order and landmarks, layout at 320–1440px and 200% text, banned numbers absent.
 - **Waits on owner fact:** none. Delivery and payment answers will pick up items 4 and 5 once their switches are set.
 
