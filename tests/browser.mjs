@@ -345,7 +345,7 @@ try {
   await page.unroute('**/data/store.json');
   await page.route('**/data/store.json',async route=>{
     const response=await route.fetch();const data=await response.json();
-    await route.fulfill({json:{...data,mode:'live',whatsappVerified:true,whatsappNumber:'94700000000',paypalOverseas:true}});
+    await route.fulfill({json:{...data,mode:'live',whatsappVerified:true,whatsappNumber:'94700000000',paypalOverseas:true,paymentMethods:[]}});
   });
   await page.reload();
   await page.getByLabel(/Paying from outside Sri Lanka/).check();
@@ -364,6 +364,7 @@ try {
     await page.unroute('**/data/store.json');
     await page.route('**/data/store.json',async route=>{const data=await (await route.fetch()).json();await route.fulfill({json:{...data,mode:'live',whatsappVerified:true,whatsappNumber:'94700000000',paypalOverseas:true,paymentMethods:['Bank transfer','Cash on delivery'],...extra}});});
     await page.reload();
+    await page.getByTestId('cart-line').first().waitFor();
   };
   await withPayment({});
   const payment=page.getByTestId('cart-payment');
