@@ -25,6 +25,10 @@ export function validateData(products, store) {
     const s=store.social;
     if (!Array.isArray(s) || s.length > 6 || s.some(x=>!x || typeof x.label !== 'string' || !x.label.trim() || x.label.length > 30 || typeof x.url !== 'string' || !isHttpsUrl(x.url))) throw new Error('social must be a list of up to six {label, url} links with https URLs');
   }
+  if (store.pages !== undefined) {
+    const pg=store.pages;
+    if (!pg || typeof pg !== 'object' || Array.isArray(pg) || Object.keys(pg).some(k=>!TRUST_PAGES.some(t=>t.key===k)) || Object.values(pg).some(v=>v !== null && (typeof v !== 'string' || !v.trim() || v.length > 4000))) throw new Error('pages must map shipping, returns or about to null or the owner\'s text');
+  }
   if (store.whatsappVerified && !/^[1-9]\d{7,14}$/.test(store.whatsappNumber || '')) throw new Error('Use a verified international WhatsApp number, digits only');
   const ids = new Set(), slugs = new Set();
   for (const p of products) {
@@ -71,6 +75,9 @@ export const paypalOverseas = store => store.paypalOverseas === true;
 export const paymentMethods = store => Array.isArray(store.paymentMethods) ? store.paymentMethods.map(m=>m.trim()).filter(Boolean) : [];
 // Social links: accounts the owner controls, empty (off) until given. Shown in the footer.
 export const socialLinks = store => Array.isArray(store.social) ? store.social.map(x=>({label:x.label.trim(),url:x.url})) : [];
+// Trust pages: generated, and linked from the footer, only once the owner has written their text (store.pages.<key>).
+export const TRUST_PAGES = [{key:'shipping',slug:'shipping',title:'Shipping and delivery',eyebrow:'SHIPPING'},{key:'returns',slug:'returns',title:'Returns',eyebrow:'RETURNS'},{key:'about',slug:'about',title:'About HoneyComb 3D',eyebrow:'ABOUT'}];
+export const trustPages = store => TRUST_PAGES.filter(t=>typeof store.pages?.[t.key] === 'string' && store.pages[t.key].trim()).map(t=>({...t,text:store.pages[t.key].trim()}));
 export const delivery = store => store.delivery?.text?.trim() ? {text:store.delivery.text.trim(),feeLkr:store.delivery.feeLkr ?? null} : null;
 export const visibleProducts = (products, store) => products.filter(p => p.image && (store.mode !== 'live' || p.approved));
 export function filterProducts(products, query='', category='all') {

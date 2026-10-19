@@ -1,4 +1,4 @@
-import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl, delivery, paymentMethods, socialLinks} from './domain.mjs';
+import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl, delivery, paymentMethods, socialLinks, trustPages} from './domain.mjs';
 import {price, CARD_SIZES, picture, card, availability, avifSource, withPicture} from './card.mjs';
 export {price, CARD_SIZES, picture, card};
 
@@ -21,7 +21,7 @@ function footer(store) {
     '<div class="footer-brand"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a><p>3D prints, collectibles &amp; custom ideas.</p><p class="muted">Sri Lanka · Prices in LKR</p></div>' +
     '<nav class="footer-links" aria-label="Footer"><div><h2>Shop</h2><ul><li><a href="/shop/">The collection</a></li><li><a href="/cart/">Request cart</a></li></ul></div>' +
     '<div><h2>Make</h2><ul><li><a href="/custom/">Have something in mind? Tell us.</a></li></ul></div>' +
-    '<div><h2>About</h2><ul><li><a href="/faq/">Questions and answers</a></li><li><a href="/privacy/">How this site handles your data</a></li></ul></div>' +
+    '<div><h2>About</h2><ul>'+trustPages(store).map(t=>'<li><a href="/'+t.slug+'/">'+e(t.title)+'</a></li>').join('')+'<li><a href="/faq/">Questions and answers</a></li><li><a href="/privacy/">How this site handles your data</a></li></ul></div>' +
     (socialLinks(store).length?'<div data-testid="footer-social"><h2>Follow</h2><ul>'+socialLinks(store).map(x=>'<li><a href="'+e(x.url)+'" target="_blank" rel="me noopener noreferrer">'+e(x.label)+'<span class="sr-only"> (opens in a new tab)</span></a></li>').join('')+'</ul></div>':'')+'</nav>' +
     '<div class="footer-bottom"><p class="fine">An enquiry is not a confirmed purchase. Availability, delivery and payment arrangements are confirmed with your quote.</p>' +
     '<p class="fine">© '+new Date().getFullYear()+' '+e(store.name||'HoneyComb 3D')+'</p></div></div></footer>';
@@ -213,6 +213,10 @@ export function faqPage(store) {
     ['How do I pay?','<p>Payment arrangements are confirmed with your quote.'+(ordering&&paymentMethods(store).length?' In your request cart you can tell us how you would like to pay: '+e(paymentMethods(store).join(', ').replace(/, ([^,]*)$/,' or $1'))+'.':'')+(ordering&&paypalOverseas(store)?' Paying from outside Sri Lanka? You can ask for a PayPal payment link in USD from your request cart. We send it in WhatsApp after we confirm your total.':'')+'</p>'],
     ['Where are you based?','<p>We are based in Sri Lanka, and our prints are made here. Prices on this site are in Sri Lankan rupees (LKR).</p>']];
   return layout('Questions and answers','<section class="wrap section narrow prose-page faq-page"><p class="eyebrow">QUESTIONS</p><h1>Questions and answers.</h1><div class="faq-list" data-testid="faq">'+qa.map(([q,a])=>'<section class="faq-item"><h2>'+q+'</h2>'+a+'</section>').join('')+'</div></section>',store,'','',{description:'How ordering works at HoneyComb 3D: '+(ordering?'request designs on WhatsApp':'the request cart')+', made-to-order prints, colours and sizes, and custom enquiries.',path:'/faq/'});
+}
+// Shipping, Returns, About: the owner's own words, one paragraph per blank-line-separated block, nothing added.
+export function trustPage(page, store) {
+  return layout(page.title,'<section class="wrap section narrow prose-page" data-testid="trust-page"><p class="eyebrow">'+page.eyebrow+'</p><h1>'+e(page.title)+'.</h1>'+page.text.split(/\n\s*\n/).map(x=>'<p>'+e(x.trim()).replace(/\n/g,'<br>')+'</p>').join('')+'</section>',store,'','',{description:page.text.replace(/\s+/g,' ').slice(0,155),path:'/'+page.slug+'/'});
 }
 // 404: the original message, then a search that lands on the shop (works without JavaScript) and a few designs.
 export function notFound(products,store) {

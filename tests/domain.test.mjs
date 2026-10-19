@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl,cartSuggestions,delivery,money,paymentMethods,socialLinks} from '../src/domain.mjs';
+import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl,cartSuggestions,delivery,money,paymentMethods,socialLinks,trustPages} from '../src/domain.mjs';
 const p=(id,priceLkr=null,availability='unconfirmed')=>({id,slug:id.toLowerCase(),name:id,category:'Figures',tags:['Anime'],description:'Example',source:'Test fixture',priceLkr,availability,image:null,imageAlt:null,approved:false});
 const products=[p('A',10.25),p('B'),p('C',10,'unavailable')];
 const preview={mode:'preview',whatsappVerified:false,whatsappNumber:null};
@@ -148,5 +148,12 @@ test('social links are off unless the owner gives accounts, and only https links
   assert.deepEqual(socialLinks({social:[{label:' Instagram ',url:'https://www.instagram.com/example'}]}),[{label:'Instagram',url:'https://www.instagram.com/example'}]);
   assert.doesNotThrow(()=>validateData(products,{...preview,social:[{label:'Instagram',url:'https://www.instagram.com/example'},{label:'Facebook',url:'https://www.facebook.com/example'}]}));
   for(const value of [{},'https://instagram.com/x',[{label:'Instagram'}],[{url:'https://instagram.com/x'}],[{label:'',url:'https://instagram.com/x'}],[{label:'Instagram',url:'http://instagram.com/x'}],[{label:'Instagram',url:'javascript:alert(1)'}],[{label:'Instagram',url:'instagram.com/x'}],[{label:'Instagram',url:'https://user:pw@instagram.com/x'}],[{label:'x'.repeat(31),url:'https://instagram.com/x'}],Array(7).fill({label:'A',url:'https://a.example/'}),[null]])assert.throws(()=>validateData(products,{...preview,social:value}),/social/,JSON.stringify(value));
+});
+
+test('trust pages exist only once the owner has written them',()=>{
+  for(const value of [undefined,{},{shipping:null,returns:null,about:null},{about:'   '}])assert.deepEqual(trustPages({pages:value}),[]);
+  assert.deepEqual(trustPages({pages:{shipping:null,returns:' We accept returns when… ',about:null}}).map(t=>[t.slug,t.title,t.text]),[['returns','Returns','We accept returns when…']]);
+  assert.doesNotThrow(()=>validateData(products,{...preview,pages:{shipping:'Owner text',returns:null,about:null}}));
+  for(const value of [null,[],'text',{faq:'x'},{shipping:''},{shipping:5},{about:'x'.repeat(4001)}])assert.throws(()=>validateData(products,{...preview,pages:value}),/pages/,JSON.stringify(value));
 });
 

@@ -1,8 +1,8 @@
 import {readFile,writeFile,mkdir,copyFile,rm,access} from 'node:fs/promises';
 import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {validateData,visibleProducts,searchIndexing,delivery,paymentMethods,socialLinks} from '../src/domain.mjs';
-import {layout,home,shop,detail,cartPage,customPage,privacyPage,faqPage,notFound} from '../src/render.mjs';
+import {validateData,visibleProducts,searchIndexing,delivery,paymentMethods,socialLinks,trustPages} from '../src/domain.mjs';
+import {layout,home,shop,detail,cartPage,customPage,privacyPage,faqPage,trustPage,notFound} from '../src/render.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const dist=resolve(root,'dist');
@@ -28,6 +28,7 @@ await page('cart/index.html',cartPage(site));
 await page('custom/index.html',customPage(site));
 await page('privacy/index.html',privacyPage(site));
 await page('faq/index.html',faqPage(site));
+for(const t of trustPages(site))await page(t.slug+'/index.html',trustPage(t,site));
 await page('404.html',notFound(products,site));
 for(const p of products)await page('products/'+p.slug+'/index.html',detail(p,products,site));
 for(const name of ['app.mjs','card.mjs','domain.mjs','styles.css'])await copyFile(join(root,'src',name),join(dist,name));
@@ -54,4 +55,4 @@ await writeFile(join(dist,'data/store.json'),JSON.stringify({name:store.name,cur
 // pages and share images so shared links show a card. WhatsApp builds previews on the sender's phone.
 const PREVIEW_BOTS=['Twitterbot','facebookexternalhit','Facebot','LinkedInBot','Slackbot','Slackbot-LinkExpanding','TelegramBot','Discordbot','WhatsApp'];
 await writeFile(join(dist,'robots.txt'),!searchIndexing(store)?PREVIEW_BOTS.map(bot=>'User-agent: '+bot+'\nAllow: /\n').join('\n')+'\nUser-agent: *\nDisallow: /\n':'User-agent: *\nAllow: /\n');
-console.log('Built '+(products.length+7)+' static pages into dist/ ('+store.mode+' mode).');
+console.log('Built '+(products.length+7+trustPages(store).length)+' static pages into dist/ ('+store.mode+' mode).');

@@ -295,3 +295,17 @@ test('the footer lists the owner\'s social accounts only when set, escaped, open
   }
 });
 
+test('trust pages render the owner\'s words as paragraphs, escaped, and appear in the footer only when written',async()=>{
+  const {trustPage,cartPage}=await import('../src/render.mjs');
+  const {trustPages}=await import('../src/domain.mjs');
+  for(const slug of ['shipping','returns','about'])assert(!cartPage(live).includes('href="/'+slug+'/"'),'No link to an unwritten page: '+slug);
+  const on={...live,pages:{shipping:null,returns:'First <b>para</b>.\nSame para.\n\n  Second para.  ',about:'We print in Kegalle.'}};
+  const footer=cartPage(on);
+  assert.match(footer,/<li><a href="\/returns\/">Returns<\/a><\/li><li><a href="\/about\/">About HoneyComb 3D<\/a><\/li><li><a href="\/faq\/">/);
+  assert(!footer.includes('href="/shipping/"'));
+  const html=trustPage(trustPages(on).find(t=>t.key==='returns'),on);
+  assert.match(html,/<h1>Returns\.<\/h1><p>First &lt;b&gt;para&lt;\/b&gt;\.<br>Same para\.<\/p><p>Second para\.<\/p><\/section>/);
+  assert.match(html,/<meta name="description" content="First &lt;b&gt;para&lt;\/b&gt;\. Same para\. Second para\.">/,'Description escaped once');
+  assert.match(html,/<meta name="robots" content="noindex,nofollow">/);
+});
+

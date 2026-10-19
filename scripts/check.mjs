@@ -4,7 +4,7 @@ import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {validateData,visibleProducts,searchIndexing} from '../src/domain.mjs';
+import {validateData,visibleProducts,searchIndexing,trustPages,TRUST_PAGES} from '../src/domain.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 assert((await readdir(join(root,'tests'))).some(name=>name.endsWith('.test.mjs')), 'At least one unit-test file must exist');
 const all=JSON.parse(await readFile(join(root,'data/products.json'),'utf8'));
@@ -18,7 +18,13 @@ for(const p of publicProducts) {
   for(const key of ['priceSource','imageApprovedAt','imageStatus'])assert.equal(p[key],undefined,'Source workflow metadata must not be published');
   assert.equal(p.source,'Public catalog','Recovery evidence must stay in source data');
 }
-const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','faq/index.html','404.html',...products.map(p=>'products/'+p.slug+'/index.html')];
+const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','faq/index.html','404.html',...trustPages(store).map(t=>t.slug+'/index.html'),...products.map(p=>'products/'+p.slug+'/index.html')];
+// Trust pages exist, and are linked, only once the owner has written them.
+for(const t of TRUST_PAGES) {
+  const written=trustPages(store).some(x=>x.key===t.key);
+  assert.equal((await readdir(join(root,'dist'))).includes(t.slug),written,'Trust page '+t.slug+' is built only with owner text');
+  for(const path of ['index.html','404.html'])assert.equal((await readFile(join(root,'dist',path),'utf8')).includes('href="/'+t.slug+'/"'),written,'Footer links '+t.slug+' only with owner text');
+}
 for(const path of paths) {
   const html=await readFile(join(root,'dist',path),'utf8');
   assert.match(html,/<html lang="en">/);assert.match(html,/<main id="main"/);

@@ -1,7 +1,7 @@
 import {chromium} from 'playwright';
 import {spawn} from 'node:child_process';
 import assert from 'node:assert/strict';
-import {mkdir,readFile} from 'node:fs/promises';
+import {mkdir,readFile,readdir} from 'node:fs/promises';
 import {money} from '../src/domain.mjs';
 // Assertions follow the built configuration: preview (ordering closed) or live (WhatsApp order requests open).
 const builtStore=JSON.parse(await readFile('dist/data/store.json','utf8'));
@@ -131,6 +131,13 @@ try {
   // Empty cart with no history offers a few designs; quick add from there fills the cart in place.
   // FAQ from the footer: a plain page that works on every build.
   assert.equal(await page.getByTestId('footer-social').count(),builtStore.social.length?1:0,'Social links only when the owner has given accounts');
+  // Trust pages (Shipping, Returns, About) exist only when the owner wrote them; each built one is linked and opens.
+  const builtDirs=await readdir('dist');
+  for(const [slug,title] of [['shipping','Shipping and delivery'],['returns','Returns'],['about','About HoneyComb 3D']]) {
+    const link=page.getByRole('contentinfo').getByRole('link',{name:title,exact:true});
+    assert.equal(await link.count(),builtDirs.includes(slug)?1:0,'Footer link only for a written page: '+slug);
+    if(builtDirs.includes(slug)){await link.click();await page.getByRole('heading',{level:1,name:title+'.'}).waitFor();await page.goBack();}
+  }
   await page.getByRole('contentinfo').getByRole('link',{name:'Questions and answers'}).click();
   await page.getByRole('heading',{level:1,name:'Questions and answers.'}).waitFor();
   assert.equal(await page.getByTestId('faq').getByRole('heading',{level:2}).count(),8);
