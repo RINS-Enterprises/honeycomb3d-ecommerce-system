@@ -81,3 +81,6 @@ export function whatsappUrl(message, store) {
   if (!message || !store.whatsappVerified || !/^[1-9]\d{7,14}$/.test(store.whatsappNumber||'')) return null;
   return `https://wa.me/${store.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
+// One-tap order for a single design (product page and shop cards): live ordering only, never for unavailable designs.
+export const orderingOpen = store => store.mode === 'live' && store.whatsappVerified === true;
+export const orderNowUrl = (p, store, quantity=1) => orderingOpen(store) && p.availability !== 'unavailable' ? whatsappUrl(orderMessage([{id:p.id,quantity}],[p]),store) : null;

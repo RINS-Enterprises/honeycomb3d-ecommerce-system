@@ -1,4 +1,4 @@
-import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderMessage, whatsappUrl} from './domain.mjs';
+import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl} from './domain.mjs';
 import {price, CARD_SIZES, picture, card, availability, avifSource, withPicture} from './card.mjs';
 export {price, CARD_SIZES, picture, card};
 
@@ -85,7 +85,7 @@ export function home(products,store) {
       return '<a class="category-tile'+(centre?' is-centred':'')+'" href="/shop/?category='+encodeURIComponent(c)+'" aria-label="'+e(c)+', '+count+'"><span class="category-photo">'+picture(cover,{sizes:TILE_SIZES})+'</span><span class="category-copy"><strong>'+e(c)+'</strong><span>'+count+'</span></span><span class="category-arrow" aria-hidden="true">→</span></a>';
     }).join('') + '</div>'+themeRow+'</section>':'') +
     '<section class="wrap section featured-section" aria-labelledby="featured-title"><div class="section-heading"><div><p class="eyebrow">THE COLLECTION</p><h2 id="featured-title">Small objects. Big character.</h2></div><a href="/shop/">View collection →</a></div>' +
-    '<div class="product-grid">' + products.slice(0,4).map(p=>card(p)).join('') + (products.length?'':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</div></section>' +
+    '<div class="product-grid">' + products.slice(0,4).map(p=>card(p,{store})).join('') + (products.length?'':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</div></section>' +
     '<section class="wrap section how-it-works" aria-labelledby="how-title" data-testid="how-it-works"><div class="section-heading"><div><p class="eyebrow">HOW IT WORKS</p><h2 id="how-title">From favourite to yours</h2></div></div><ol class="how-steps">' +
     [['Browse the designs','Explore the collection, or bring an idea of your own.'],['Add them to your request cart','Choose quantities and add notes. Nothing is reserved or charged.'],['We confirm the details with you','Size, colour, price and delivery are agreed before anything is ordered.']].map(([t,d],i)=>'<li><span class="how-num" aria-hidden="true">0'+(i+1)+'</span><h3>'+t+'</h3><p>'+d+'</p></li>').join('') + '</ol></section>' +
     '<section class="wrap banner-wrap"><div class="custom-banner"><p class="eyebrow">YOUR IDEA, OUR NEXT PRINT</p><h2>Can’t find it?<br>Let’s talk about making it.</h2><p>Share a model link or describe your idea. We’ll confirm what is possible, the finish and the quote.</p><a class="button" href="/custom/">Start a custom enquiry <span aria-hidden="true">→</span></a></div></section>',store,'',head,{description:'3D-printed collectibles made in Sri Lanka: anime, film and comic figures, keychains and props, printed to order. Prices in LKR; order on WhatsApp.'});
@@ -110,7 +110,7 @@ export function shop(products,store) {
     (themes.length?chips('theme','Theme',[['any','Any theme'],...themes.map(t=>[t,t,countOf(p=>p.tags.includes(t))])]):'') +
     '</form><div class="results-bar"><p class="muted" role="status" id="result-count">'+products.length+' designs</p><button class="text-button" id="reset-filters" type="button" hidden>Clear filters</button>' +
     '<label class="sort-field">Sort by<select id="sort" name="sort" form="filters" data-testid="sort"><option value="featured">Featured</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="name">Name: A to Z</option></select></label></div>' +
-    '<div class="product-grid">'+products.map((p,i)=>card(p,{headingLevel:2,loading:i<2?'eager':'lazy'})).join('')+customTile+'</div><div class="empty state-panel" id="no-results" data-testid="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p data-no-results-text>Try a different search or clear your filters.</p>'+
+    '<div class="product-grid">'+products.map((p,i)=>card(p,{headingLevel:2,loading:i<2?'eager':'lazy',store})).join('')+customTile+'</div><div class="empty state-panel" id="no-results" data-testid="no-results"'+(products.length?' hidden':'')+'><h2>No matching designs</h2><p data-no-results-text>Try a different search or clear your filters.</p>'+
     (categories.length?'<div class="try-row"><p class="try-label">Browse a category instead</p><div class="try-chips">'+categories.map(c=>'<button type="button" class="try-chip" data-try-category="'+e(c)+'" data-testid="try-'+slug(c)+'">'+e(c)+'<span class="chip-count"><span class="sr-only">, </span>'+countOf(p=>p.category===c)+'</span></button>').join('')+'</div></div>':'')+
     '<div class="actions"><a class="button secondary" href="/custom/">Ask about a custom print</a></div></div><noscript><p>All designs are shown. Enable JavaScript to use search and filters.</p></noscript></section>',store,'shop','',{description:'Explore the designs. Ask about colours, sizes and finishes. 3D-printed keychains, figures and props, priced in LKR.',path:'/shop/'});
 }
@@ -146,9 +146,9 @@ function gallery(p) {
 // Filled in the browser from this device's history; stays hidden when empty or storage is blocked.
 const recentRow=(current='')=>'<section class="wrap section recent-section" data-recent'+(current?' data-recent-current="'+e(current)+'"':'')+' data-testid="recently-viewed" aria-labelledby="recent-title" hidden><div class="section-heading"><h2 id="recent-title">Recently viewed</h2><button type="button" class="text-button" data-recent-clear data-testid="recently-viewed-clear">Clear</button></div><div class="product-grid" data-recent-list></div></section>';
 export function detail(p,products,store) {
-  const ordering=store.mode==='live'&&store.whatsappVerified;
+  const ordering=orderingOpen(store);
   // One tap from product to WhatsApp, skipping the cart. app.mjs keeps the quantity in the link current.
-  const orderNow=ordering&&p.availability!=='unavailable'?whatsappUrl(orderMessage([{id:p.id,quantity:1}],[p]),store):null;
+  const orderNow=orderNowUrl(p,store);
   const orderNowLink=(label,testid)=>'<a class="button" href="'+e(orderNow)+'" target="_blank" rel="noopener noreferrer" data-order-now data-testid="'+testid+'">'+label+'<span class="sr-only"> (opens in a new tab)</span></a>';
   const crumbs='<nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/shop/">Shop</a></li><li><a href="/shop/?category='+encodeURIComponent(p.category)+'">'+e(p.category)+'</a></li><li><span aria-current="page">'+e(p.name)+'</span></li></ol></nav>';
   // Price and availability already lead the page; the facts link onward to the matching shop views instead.
@@ -183,7 +183,7 @@ export function detail(p,products,store) {
     '<a class="text-link" href="/cart/">View your request cart →</a>'+
     '<p class="variation-note">Want it in another size or colour? <a href="/custom/?design='+encodeURIComponent(p.id)+'" data-testid="ask-variation">Ask about a variation →</a></p>'+shareRow(p,store)+'</div></div></section>' +
     (p.availability==='unavailable'?'':'<div class="sticky-buy" data-sticky-buy data-testid="sticky-buy" hidden><div class="sticky-buy-copy"><strong>'+e(p.name)+'</strong><span>'+e(price(p))+'</span></div>'+(orderNow?orderNowLink('Order now<span class="sr-only"> on WhatsApp</span>','sticky-order-now'):'<button type="button" class="button" data-sticky-add>Add to request cart</button>')+'</div>') +
-    (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2>'+moreLink+'</div><div class="product-grid">'+more.map(p=>card(p)).join('')+'</div></section>':'')+recentRow(p.id),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
+    (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2>'+moreLink+'</div><div class="product-grid">'+more.map(p=>card(p,{store})).join('')+'</div></section>':'')+recentRow(p.id),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
 }
 export function cartPage(store) {
   return layout('Your request cart','<section class="wrap section cart-section"><p class="eyebrow">YOUR SELECTION</p><h1>Request cart.</h1><p class="lead">A starting point for your order. We’ll confirm the details together.</p><div id="cart-body"><p>Loading your cart…</p></div><noscript><p>Enable JavaScript to access the cart saved on this device.</p></noscript></section>'+recentRow(),store,'cart');
@@ -204,6 +204,6 @@ export function notFound(products,store) {
   const picks=products.filter(p=>p.availability!=='unavailable').slice(0,4);
   return layout('Page not found','<section class="wrap section narrow state-page"><div class="state-mark" aria-hidden="true">404</div><p class="eyebrow">Page not found</p><h1>This page wandered off.</h1><p class="lead">The design you are looking for may have moved.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/">Back to home</a></div>'+
     '<form class="nf-search" action="/shop/" method="get" role="search" aria-label="Search the collection"><label for="nf-search">Or search the collection</label><div class="nf-search-row"><input type="search" id="nf-search" name="q" placeholder="Try dragons, Naruto, keychains…" maxlength="100" autocomplete="off" data-testid="notfound-search"><button class="button secondary" type="submit">Search</button></div></form></section>'+
-    (picks.length?'<section class="wrap section nf-picks" aria-labelledby="nf-picks-title" data-testid="notfound-picks"><div class="section-heading"><h2 id="nf-picks-title">A few designs to explore</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+picks.map(p=>card(p)).join('')+'</div></section>':''),
+    (picks.length?'<section class="wrap section nf-picks" aria-labelledby="nf-picks-title" data-testid="notfound-picks"><div class="section-heading"><h2 id="nf-picks-title">A few designs to explore</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+picks.map(p=>card(p,{store})).join('')+'</div></section>':''),
     store,'','',{description:'This page could not be found. Explore the HoneyComb 3D collection instead.'});
 }
