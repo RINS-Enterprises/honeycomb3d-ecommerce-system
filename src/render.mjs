@@ -1,4 +1,4 @@
-import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl} from './domain.mjs';
+import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl, delivery} from './domain.mjs';
 import {price, CARD_SIZES, picture, card, availability, avifSource, withPicture} from './card.mjs';
 export {price, CARD_SIZES, picture, card};
 
@@ -179,7 +179,7 @@ export function detail(p,products,store) {
     '<noscript><p>Enable JavaScript to build a request cart.</p></noscript>' +
     '<p class="fine">The request cart saves a list on your device. It does not reserve stock or complete a purchase.</p>' +
     '<dl class="detail-facts">'+facts.map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('')+'</dl>' +
-    '<p class="fine">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
+    (delivery(store)?'<p class="fine">Confirm size, material, colours and finish before ordering.</p><p class="delivery-line" data-testid="delivery-line"><span>Delivery</span> '+e(delivery(store).text)+'</p>':'<p class="fine">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>') +
     '<a class="text-link" href="/cart/">View your request cart →</a>'+
     '<p class="variation-note">Want it in another size or colour? <a href="/custom/?design='+encodeURIComponent(p.id)+'" data-testid="ask-variation">Ask about a variation →</a></p>'+shareRow(p,store)+'</div></div></section>' +
     (p.availability==='unavailable'?'':'<div class="sticky-buy" data-sticky-buy data-testid="sticky-buy" hidden><div class="sticky-buy-copy"><strong>'+e(p.name)+'</strong><span>'+e(price(p))+'</span></div>'+(orderNow?orderNowLink('Order now<span class="sr-only"> on WhatsApp</span>','sticky-order-now'):'<button type="button" class="button" data-sticky-add>Add to request cart</button>')+'</div>') +
@@ -208,7 +208,7 @@ export function faqPage(store) {
     ['What does “made to order” mean?','<p>Designs marked “Made to order” are printed for you after we confirm your order with you. Each design shows its availability on its page.</p>'],
     ['Can I choose the colour or size?','<p>Ask us. Add a note in your request cart, or '+(ordering?'ask in WhatsApp':'use “Ask about a variation” on a design’s page')+', and we confirm what is possible with your quote.</p>'],
     ['Can you print something that is not in the shop?','<p>Yes, tell us your idea. <a href="/custom/">Start a custom enquiry</a> with a model link, a rough size and the finish you have in mind, and we confirm whether we can make it and what it costs.</p>'],
-    ['How much is delivery, and how long does it take?','<p>Delivery cost and timing are included in your quote.</p>'],
+    ['How much is delivery, and how long does it take?',delivery(store)?'<p>'+e(delivery(store).text.replace(/[.\s]+$/,''))+'. The final total is confirmed with your quote.</p>':'<p>Delivery cost and timing are included in your quote.</p>'],
     ['How do I pay?','<p>Payment arrangements are confirmed with your quote.'+(ordering&&paypalOverseas(store)?' Paying from outside Sri Lanka? You can ask for a PayPal payment link in USD from your request cart. We send it in WhatsApp after we confirm your total.':'')+'</p>'],
     ['Where are you based?','<p>We are based in Sri Lanka, and our prints are made here. Prices on this site are in Sri Lankan rupees (LKR).</p>']];
   return layout('Questions and answers','<section class="wrap section narrow prose-page faq-page"><p class="eyebrow">QUESTIONS</p><h1>Questions and answers.</h1><div class="faq-list" data-testid="faq">'+qa.map(([q,a])=>'<section class="faq-item"><h2>'+q+'</h2>'+a+'</section>').join('')+'</div></section>',store,'','',{description:'How ordering works at HoneyComb 3D: '+(ordering?'request designs on WhatsApp':'the request cart')+', made-to-order prints, colours and sizes, and custom enquiries.',path:'/faq/'});

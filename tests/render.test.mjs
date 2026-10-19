@@ -255,3 +255,22 @@ test('the FAQ covers ordering, made to order, colours and sizes, custom prints a
   for(const html of [cartPage(live),cartPage({mode:'preview'})])assert.match(html,/<a href="\/faq\/">Questions and answers<\/a>/,'Footer links the FAQ');
 });
 
+test('the delivery line shows on product pages and in the FAQ only when set, escaped, and the old wording stays when off',async()=>{
+  const {detail,faqPage}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const leaf=visible.find(p=>p.id==='HC-LEAF');
+  const off=detail(leaf,visible,live);
+  assert(!off.includes('data-testid="delivery-line"'));
+  assert.match(off,/Delivery cost and timing are included in your quote\./);
+  assert.match(faqPage(live),/<p>Delivery cost and timing are included in your quote\.<\/p>/);
+  const on={...live,delivery:{text:'Islandwide by courier <b>& more</b>',feeLkr:500}};
+  const html=detail(leaf,visible,on);
+  assert.match(html,/<p class="delivery-line" data-testid="delivery-line"><span>Delivery<\/span> Islandwide by courier &lt;b&gt;&amp; more&lt;\/b&gt;<\/p>/);
+  assert(!html.includes('Delivery cost and timing are included in your quote'));
+  const orderNow=new URL(html.match(/href="([^"]+)"[^>]*data-order-now/)[1].replaceAll('&amp;','&'));
+  assert.match(orderNow.searchParams.get('text'),/\nDelivery fee: LKR\s500\n/,'Order now carries the fee');
+  assert.match(faqPage(on),/Islandwide by courier &lt;b&gt;&amp; more&lt;\/b&gt;\. The final total is confirmed with your quote\./);
+  assert.match(detail(leaf,visible,{...on,mode:'preview'}),/data-testid="delivery-line"/,'Shown in preview too: it is store information, not ordering');
+  assert.match(faqPage({...live,delivery:{text:'Islandwide by courier.'}}),/<p>Islandwide by courier\. The final total is confirmed with your quote\.<\/p>/,'No doubled full stop');
+});
+

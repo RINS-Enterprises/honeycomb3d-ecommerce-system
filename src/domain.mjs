@@ -4,11 +4,18 @@ export const CART_KEY = 'honeycomb.cart.v1';
 // One format everywhere (AC-DATA-3): whole rupees without decimals (LKR 4,500), otherwise two decimals (LKR 19.99).
 export const money = value => new Intl.NumberFormat('en-LK', {style:'currency',currency:'LKR',minimumFractionDigits:Number.isInteger(value)?0:2,maximumFractionDigits:2}).format(value);
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// A positive LKR amount with at most two decimal places (prices and the delivery fee).
+const validLkr = v => Number.isFinite(v) && v > 0 && Number.isSafeInteger(Math.round(v*100)) && Math.abs(Math.round(v*100)-v*100) <= 1e-6;
 export function validateData(products, store) {
   if (!Array.isArray(products)) throw new Error('Catalog must be an array');
   if (!['preview','live'].includes(store.mode)) throw new Error('Invalid store mode');
   if (store.searchIndexing !== undefined && typeof store.searchIndexing !== 'boolean') throw new Error('searchIndexing must be true or false');
   if (store.paypalOverseas !== undefined && typeof store.paypalOverseas !== 'boolean') throw new Error('paypalOverseas must be true or false');
+  if (store.delivery !== undefined && store.delivery !== null) {
+    const d=store.delivery;
+    if (typeof d !== 'object' || Array.isArray(d) || typeof d.text !== 'string' || !d.text.trim() || d.text.length > 200) throw new Error('delivery must be null or {text, feeLkr} with a short owner-given text');
+    if (d.feeLkr !== undefined && d.feeLkr !== null && !validLkr(d.feeLkr)) throw new Error('delivery.feeLkr must be null or a positive LKR amount with at most two decimal places');
+  }
   if (store.whatsappVerified && !/^[1-9]\d{7,14}$/.test(store.whatsappNumber || '')) throw new Error('Use a verified international WhatsApp number, digits only');
   const ids = new Set(), slugs = new Set();
   for (const p of products) {
@@ -17,7 +24,7 @@ export function validateData(products, store) {
     ids.add(p.id); slugs.add(p.slug);
     for (const k of ['name','category','description','source']) if (typeof p[k] !== 'string' || !p[k].trim()) throw new Error(`Missing ${k}: ${p.id}`);
     if (!Array.isArray(p.tags) || p.tags.some(t=>typeof t !== 'string')) throw new Error('Invalid tags');
-    if (p.priceLkr !== null && (!Number.isFinite(p.priceLkr) || p.priceLkr <= 0 || (!Number.isSafeInteger(Math.round(p.priceLkr*100)) || Math.abs(Math.round(p.priceLkr*100)-p.priceLkr*100)>1e-6))) throw new Error('Price must be null or a positive LKR amount with at most two decimal places');
+    if (p.priceLkr !== null && !validLkr(p.priceLkr)) throw new Error('Price must be null or a positive LKR amount with at most two decimal places');
     if (!['unconfirmed','available','unavailable','made-to-order'].includes(p.availability)) throw new Error('Invalid availability');
     if (p.image !== null && (!/^\/assets\/[a-zA-Z0-9/_-]+\.(?:jpg|jpeg|png|webp|svg)$/.test(p.image) || !p.imageAlt)) throw new Error('Image must be local with alt text');
     if (p.imageVariants !== undefined) {
@@ -48,6 +55,9 @@ export const searchIndexing = store => store.searchIndexing === true;
 // PayPal (USD) only for payers outside Sri Lanka: Sri Lankan PayPal accounts can receive cross-border payments only
 // (partner-bank launch, May 2026). Off until the owner has proven a test payment arrives.
 export const paypalOverseas = store => store.paypalOverseas === true;
+// Delivery line: an owner fact, null (off) until the owner gives it. When set it shows on product pages and in the cart;
+// a fee, when given, rides as its own line in every order message. Off means the site reads exactly as before.
+export const delivery = store => store.delivery?.text?.trim() ? {text:store.delivery.text.trim(),feeLkr:store.delivery.feeLkr ?? null} : null;
 export const visibleProducts = (products, store) => products.filter(p => p.image && (store.mode !== 'live' || p.approved));
 export function filterProducts(products, query='', category='all') {
   const words = query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
@@ -81,10 +91,10 @@ export function cartSuggestions(items, products, limit=3) {
   return products.map((p,i)=>({p,i,shared:inCart.has(p.id)||p.availability==='unavailable'?0:lines.reduce((n,x)=>n+themesOf(x.product).filter(t=>themesOf(p).includes(t)).length,0)}))
     .filter(o=>o.shared).sort((a,b)=>b.shared-a.shared||categories.has(a.p.category)-categories.has(b.p.category)||a.i-b.i).slice(0,limit).map(o=>o.p);
 }
-export function orderMessage(items, products, notes='', {paypal=false}={}) {
+export function orderMessage(items, products, notes='', {paypal=false, deliveryFeeLkr=null}={}) {
   const s=cartSummary(items,products);
   if (!s.lines.length) return '';
-  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, 'Please confirm availability, options, delivery cost, final total and payment arrangements. This is an order request, not a confirmed purchase.',paypal?'Payment: I am paying from outside Sri Lanka. Please send a PayPal payment link in USD once the total is confirmed.':'',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
+  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, deliveryFeeLkr?`Delivery fee: ${money(deliveryFeeLkr)}`:'', 'Please confirm availability, options, delivery cost, final total and payment arrangements. This is an order request, not a confirmed purchase.',paypal?'Payment: I am paying from outside Sri Lanka. Please send a PayPal payment link in USD once the total is confirmed.':'',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
 }
 export function whatsappUrl(message, store) {
   if (!message || !store.whatsappVerified || !/^[1-9]\d{7,14}$/.test(store.whatsappNumber||'')) return null;
@@ -92,4 +102,4 @@ export function whatsappUrl(message, store) {
 }
 // One-tap order for a single design (product page and shop cards): live ordering only, never for unavailable designs.
 export const orderingOpen = store => store.mode === 'live' && store.whatsappVerified === true;
-export const orderNowUrl = (p, store, quantity=1) => orderingOpen(store) && p.availability !== 'unavailable' ? whatsappUrl(orderMessage([{id:p.id,quantity}],[p]),store) : null;
+export const orderNowUrl = (p, store, quantity=1) => orderingOpen(store) && p.availability !== 'unavailable' ? whatsappUrl(orderMessage([{id:p.id,quantity}],[p],'',{deliveryFeeLkr:delivery(store)?.feeLkr}),store) : null;

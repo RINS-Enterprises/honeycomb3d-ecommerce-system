@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl,cartSuggestions} from '../src/domain.mjs';
+import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl,cartSuggestions,delivery,money} from '../src/domain.mjs';
 const p=(id,priceLkr=null,availability='unconfirmed')=>({id,slug:id.toLowerCase(),name:id,category:'Figures',tags:['Anime'],description:'Example',source:'Test fixture',priceLkr,availability,image:null,imageAlt:null,approved:false});
 const products=[p('A',10.25),p('B'),p('C',10,'unavailable')];
 const preview={mode:'preview',whatsappVerified:false,whatsappNumber:null};
@@ -110,3 +110,22 @@ test('cart suggestions share the cart\'s themes, skip the cart and unavailable d
   assert.deepEqual(cartSuggestions([{id:'LEAF',quantity:1}],catalogue,1).map(p=>p.id),['KUNAI']);
   assert.equal(cartSuggestions([{id:'LEAF',quantity:1}],catalogue).find(p=>p.id==='ANIME').priceLkr,null,'Prices are the catalogue\'s own, even when unknown');
 });
+
+test('delivery is off unless the owner gives a line; a fee becomes its own message line',()=>{
+  for(const value of [undefined,null])assert.equal(delivery({delivery:value}),null);
+  assert.equal(delivery({delivery:{text:'   '}}),null);
+  assert.deepEqual(delivery({delivery:{text:' Islandwide by courier '}}),{text:'Islandwide by courier',feeLkr:null});
+  assert.deepEqual(delivery({delivery:{text:'Courier',feeLkr:500}}),{text:'Courier',feeLkr:500});
+  for(const value of [null,{text:'Courier'},{text:'Courier',feeLkr:null},{text:'Courier',feeLkr:450.5}])assert.doesNotThrow(()=>validateData(products,{...preview,delivery:value}));
+  for(const value of [{},{text:''},{text:'x'.repeat(201)},'Courier',['Courier'],{text:'Courier',feeLkr:0},{text:'Courier',feeLkr:-5},{text:'Courier',feeLkr:'500'},{text:'Courier',feeLkr:1.005}])assert.throws(()=>validateData(products,{...preview,delivery:value}),/delivery/,JSON.stringify(value));
+  const items=[{id:'A',quantity:2}];
+  const base=orderMessage(items,products);
+  assert.equal(orderMessage(items,products,'',{deliveryFeeLkr:null}),base,'No fee: the message is unchanged');
+  const lines=orderMessage(items,products,'',{deliveryFeeLkr:500}).split('\n');
+  assert.deepEqual(lines,[...base.split('\n').slice(0,3),'Delivery fee: '+money(500),...base.split('\n').slice(3)],'The fee is one extra line after the subtotal');
+  const live={mode:'live',whatsappVerified:true,whatsappNumber:'94700000000'};
+  const a={id:'A',name:'Alpha',priceLkr:500,availability:'made-to-order'};
+  assert.doesNotMatch(new URL(orderNowUrl(a,live)).searchParams.get('text'),/Delivery fee/);
+  assert.match(new URL(orderNowUrl(a,{...live,delivery:{text:'Courier',feeLkr:500}})).searchParams.get('text'),/\nDelivery fee: LKR\s500\n/);
+});
+

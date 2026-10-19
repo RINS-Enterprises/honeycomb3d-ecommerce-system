@@ -8,6 +8,9 @@ const builtStore=JSON.parse(await readFile('dist/data/store.json','utf8'));
 const ordering=builtStore.mode==='live'&&builtStore.whatsappVerified;
 // The cart reads the PayPal switch from the published store file, so the build must carry it.
 assert.equal(typeof builtStore.paypalOverseas,'boolean','Published store.json carries the PayPal switch');
+// Delivery line: null (off) until the owner gives it; when set, product pages and the cart show it and the fee rides in messages.
+assert('delivery' in builtStore,'Published store.json carries the delivery switch');
+const shipping=builtStore.delivery;
 const server=spawn(process.execPath,['scripts/serve.mjs'],{stdio:'inherit'});
 let browser;
 try {
@@ -232,6 +235,13 @@ try {
   await page.getByRole('status').filter({hasText:'Baymax Figure added to your request cart.'}).waitFor();
   assert.equal(await page.getByTestId('cart-count').textContent(),'2');
   await page.getByRole('button',{name:'Add to request cart'}).waitFor();
+  if(shipping) {
+    assert.equal(await page.getByTestId('delivery-line').textContent(),'Delivery '+shipping.text);
+    if(ordering&&shipping.feeLkr)assert.match(new URL(await page.getByTestId('order-now').getAttribute('href')).searchParams.get('text'),new RegExp('\nDelivery fee: '+money(shipping.feeLkr)+'\n'),'Order now carries the fee line');
+  } else {
+    assert.equal(await page.getByTestId('delivery-line').count(),0,'No delivery line while the switch is off');
+    assert.match(await page.locator('.buy-panel, main').first().textContent(),/Delivery cost and timing are included in your quote\./);
+  }
   await page.getByRole('link',{name:'View your request cart'}).click();
   await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
   assert.equal(await page.getByRole('spinbutton').inputValue(),'2');
@@ -245,6 +255,17 @@ try {
   await page.getByTestId('cart-qty-increase').click();
   await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
   assert.equal(await page.getByTestId('cart-line').count(),1);
+  const draft=await page.locator('.message-preview').inputValue();
+  if(shipping) {
+    assert.equal(await page.getByTestId('cart-delivery').textContent(),shipping.text);
+    assert.equal(await page.getByTestId('cart-delivery-fee').textContent(),shipping.feeLkr?money(shipping.feeLkr):'Confirmed with your quote');
+    if(shipping.feeLkr)assert.match(draft,new RegExp('Estimated items subtotal: '+money(2000)+'\nDelivery fee: '+money(shipping.feeLkr)+'\n'),'Fee is its own line, after the items subtotal');
+    else assert.doesNotMatch(draft,/Delivery fee/);
+  } else {
+    assert.equal(await page.getByTestId('cart-delivery').count(),0);
+    assert.equal(await page.getByTestId('cart-delivery-fee').textContent(),'Confirmed with your quote');
+    assert.doesNotMatch(draft,/Delivery fee/,'No fee line while the switch is off');
+  }
   if(ordering) {
     const url=new URL(await page.getByRole('link',{name:'Open WhatsApp request'}).getAttribute('href'));
     assert.equal(url.origin+url.pathname,'https://wa.me/'+builtStore.whatsappNumber,'Order requests go to the configured business number');
