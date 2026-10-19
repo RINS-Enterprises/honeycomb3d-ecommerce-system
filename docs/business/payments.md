@@ -1,6 +1,6 @@
 # Payments: how customers can pay you (Sri Lanka, 2026)
 
-For HoneyComb 3D: items cost LKR 300–2,000, orders come in by WhatsApp, the website is static, and there is **no registered business yet**. Research date: **19 Oct 2026**. Nobody was contacted and nothing was signed up for.
+For HoneyComb 3D: items cost LKR 300–2,000, orders come in by WhatsApp, the website is static, and there is **no registered business yet**. Research date: **19 Oct 2026**. Nobody was contacted and nothing was signed up for. Key numbers independently fact-checked against the sources on 19 Oct 2026; corrections applied.
 
 **How to read this:**
 - ✅ **Official**: read directly on the provider's own website.
@@ -24,7 +24,7 @@ For HoneyComb 3D: items cost LKR 300–2,000, orders come in by WhatsApp, the we
 
 ## The 2026 change that matters most 📰
 
-**Since 6 April 2026, merchants pay no fee on LankaQR payments up to Rs 5,000.** This is the government's National QR Payment Promotion Programme; banks and LankaPay absorb the cost. Every HoneyComb item is under Rs 5,000, so **a customer paying by QR costs you nothing**. Sources: [EconomyNext, 6 Apr 2026](https://economynext.com/fees-for-small-vendors-removed-on-lankaqr-person-to-person-transactions-enabled-266409/), [Newswire, 5 Apr 2026](https://www.newswire.lk/2026/04/05/govt-waives-lankaqr-merchant-fees-for-payments-under-rs-5000/) and [Onlanka, 5 Apr 2026](https://www.onlanka.com/news/sri-lanka-removes-lankaqr-merchant-fee-on-payments-up-to-rs-5000-from-april-6-2026.html). The Central Bank circular itself wasn't found; these are news reports.
+**Since 6 April 2026, merchants pay no fee on LankaQR payments up to Rs 5,000.** This is the government's National QR Payment Promotion Programme; financial institutions removed the fee ([President's Office, 5 Apr 2026](https://www.presidentsoffice.gov.lk/news/launch-of-the-national-qr-payment-promotion-programme-tomorrow/)). Every HoneyComb item is under Rs 5,000, so **a customer paying by QR costs you nothing**. Sources: [EconomyNext, 6 Apr 2026](https://economynext.com/fees-for-small-vendors-removed-on-lankaqr-person-to-person-transactions-enabled-266409/), [Newswire, 5 Apr 2026](https://www.newswire.lk/2026/04/05/govt-waives-lankaqr-merchant-fees-for-payments-under-rs-5000/) and [Onlanka, 5 Apr 2026](https://www.onlanka.com/news/sri-lanka-removes-lankaqr-merchant-fee-on-payments-up-to-rs-5000-from-april-6-2026.html). No Central Bank or LankaPay circular was found.
 
 ---
 
@@ -40,7 +40,7 @@ For HoneyComb 3D: items cost LKR 300–2,000, orders come in by WhatsApp, the we
 | **Mintpay** (pay later) | ❓ | ❓ | ❓ | ❓ | Weekly | No link found |
 | **HNB SOLO** (LankaQR) ✅ | **Yes**, "with and without a registration" | No fixed cost | No fixed cost | QR only (0% up to Rs 5,000) | ❓ | ✅ QR |
 | **Bank transfer** | Yes | Free | Free | Free to receive | Instant–1 day | ✅ Account number in WhatsApp |
-| **Cash on delivery** | Yes (SL Post at the counter) | Free | Free | SL Post: Rs 50 + money-order fee | Collect at post office | ✅ No code |
+| **Cash on delivery** | Appears yes (SL Post at the counter; confirm) | Free | Free | SL Post: Rs 50 + money-order fee | Collect at post office | ✅ No code |
 
 **Fee on a Rs 1,500 order** (our arithmetic): LankaQR Rs 0 · Dialog Pay link Rs 41.25 (+Rs 400/month) · PayHere Lite card Rs 49.50 · WEBXPAY card Rs 57 (+Rs 10,000/year) · SL Post COD about Rs 80 on top of postage (see [delivery.md](delivery.md)).
 
@@ -58,12 +58,12 @@ Same website ([geniebusiness.lk](https://www.geniebusiness.lk/pricing)) and same
 - **Static site:** ✅ Show the QR, or send a payment link in WhatsApp. No code needed.
 
 ### 2. PayHere ⚠️ (payhere.lk blocked our tool; everything here is from search summaries of PayHere's own pages)
-- **Plans** ([fees](https://www.payhere.lk/fees/)): **Lite** has no setup or monthly fee and charges **3.30%**, with limits of **Rs 50,000 per payment and Rs 200,000 per month**. Plus is Rs 3,990/month at 2.99%; Premium is Rs 9,990/month at 2.69%. Foreign cards **+1.0%**, Amex **+0.5%**, HelaPay **1.99%**. Some 2025 blogs quote 3.90%; those look out of date.
+- **Plans** ([fees](https://www.payhere.lk/fees/)): **Lite** has no setup or monthly fee and charges **3.30%**, with limits of **Rs 50,000 per payment and Rs 200,000 per month**. Plus is Rs 3,990/month at 2.99%; Premium is Rs 9,990/month at 2.69%. Foreign cards **+1.0%**, Amex **+0.5%**, HelaPay **1.99%** (from a PayHere blog post). Some 2025 blogs quote 3.90%; those look out of date.
 - **Unregistered sellers (sources disagree):**
-  - PayHere's current help page ([application process](https://support.payhere.lk/application-process)) says a business registration is "not required" for **home-based businesses**. Instead you need a "proof of business", for example **your active social media page or website**, and you can use a **personal bank account**.
+  - PayHere's current help page ([application process](https://support.payhere.lk/application-process)) says a business registration is "not required" for **home-based businesses**. Instead you need "a valid proof of business". Search summaries suggest an active social media page or website counts, and that a personal bank account is allowed, but **neither is confirmed**: a PayHere blog post says the account should be in the business name.
   - An older PayHere blog post (about 2021) says unregistered sellers get **HelaPay only** (the Helakuru wallet), with no cards.
   - **We could not confirm which applies today.** Ask PayHere (hotline 0115 339 339 or support@payhere.lk, as listed on their blog): "As a home-based seller without a BR, on Lite, can I accept Visa/Mastercard, or only HelaPay?"
-- **Payout:** "within 3 days from the payment authorized date" (PayHere terms).
+- **Payout:** "within 3 days from the payment authorized date" (PayHere terms, search summary; not confirmed).
 - **Static site:**
   - ✅ **PayHere Links** need no code. In the dashboard, go to **Payment Links → Create Link**, type the item and amount, and paste the link into WhatsApp ([help page](https://support.payhere.lk/links-&-buttons/payhere-links)).
   - ❌ The **checkout button on the website** needs a security **hash**, mandatory since 16 Jan 2023. The hash is made with your merchant secret, and PayHere says to make it **on a server, never in the browser**. Payment confirmations (`notify_url`) also go to a server. So a website checkout would need a small **serverless function** (for example on Vercel, where the site already runs). Links avoid all of this.
@@ -73,12 +73,12 @@ Same website ([geniebusiness.lk](https://www.geniebusiness.lk/pricing)) and same
 - **Payout:** next business day (LKR).
 - **Who can join:** the [sign-up form](https://signup.webxpay.com/wbx-merchant-signup) lists "Individual" as a business type, but the documents needed aren't published. ❓
 - **Static site:** it has a payment-link product (XPAYLINK), but it's unclear whether Starter includes it. ❓
-- **Verdict:** too expensive for small orders. It costs more than PayHere Lite per card payment (3.80% vs 3.30%) and up front (Rs 10,000 a year vs nothing), and LankaQR isn't free here (1%).
+- **Verdict:** too expensive for small orders. It costs more than PayHere Lite per card payment (3.80% vs 3.30%) and up front (Rs 10,000 a year vs nothing), and its price page still shows LankaQR at 1% (this may predate the national waiver; ask).
 
 ### 4. KOKO (pay in 3 instalments) — [paykoko.com](https://paykoko.com/business) (koko.lk is a different company)
 - Unregistered individuals **can** join with NIC plus 3 months of bank statements ([help article, 23 Sep 2024](https://kokolk.freshdesk.com/support/solutions/articles/80001082185)).
 - Fees are "processing fees and commission", with rates not published ❓. Through WEBXPAY Starter it costs 10%.
-- Paid twice a month (on the 15th and the last day).
+- Paid twice a month: sales from the 1st–15th are paid on the 16th–18th, the rest on the 1st–3rd of the next month, on working days ([help article, 19 Sep 2024](https://kokolk.freshdesk.com/support/solutions/articles/80001134170)).
 - **Verdict:** not worth it. Nobody needs instalments for a Rs 1,500 keychain.
 
 ### 5. Mintpay (pay in 3) — [mintpay.lk/business](https://mintpay.lk/business)
@@ -94,7 +94,7 @@ Same website ([geniebusiness.lk](https://www.geniebusiness.lk/pricing)) and same
 - **Bank transfer:** send your account number in WhatsApp. It's free to receive. The risk is fake payment screenshots, so **check your bank app before you start printing**.
 
 ### 7. Cash on delivery
-- The courier collects the cash and pays you later. **SL Post** lets anyone do this at the counter with no registration: Rs 50 + money-order fee, on top of postage. Private couriers charge a COD fee (not published; ask) and pay weekly to every 15 days.
+- The courier collects the cash and pays you later. **SL Post** COD appears to work at the counter with no registration (our reading of its manual; confirm at the counter): Rs 50 + money-order fee, on top of postage. Private couriers charge a COD fee (not published; ask) and pay weekly to every 15 days.
 - Risk: refused parcels come back and you pay the postage both ways. Consider COD only for repeat customers, or ask new customers for a small advance.
 - Full details: [delivery.md](delivery.md).
 
@@ -140,4 +140,5 @@ Same website ([geniebusiness.lk](https://www.geniebusiness.lk/pricing)) and same
 | [HNB SOLO merchants](https://www.getsolo.lk/merchants/) | ✅ official |
 | [Sampath WePay](https://www.sampath.lk/digital-banking/sampath-wepay), [ComBank QR](https://www.combank.lk/services/qr-payments), [DFCC QR](https://www.dfcc.lk/cards/digital-payment-solutions/qr-merchants) | ⚠️ official, via search summary |
 | [LankaPay LankaQR](https://www.lankapay.net/en/for-financial/lanka-qr) | ✅ official |
+| [President's Office](https://www.presidentsoffice.gov.lk/news/launch-of-the-national-qr-payment-promotion-programme-tomorrow/) (5 Apr 2026) | ✅ official |
 | [EconomyNext](https://economynext.com/fees-for-small-vendors-removed-on-lankaqr-person-to-person-transactions-enabled-266409/) (6 Apr 2026), [Newswire](https://www.newswire.lk/2026/04/05/govt-waives-lankaqr-merchant-fees-for-payments-under-rs-5000/) (5 Apr 2026), [Onlanka](https://www.onlanka.com/news/sri-lanka-removes-lankaqr-merchant-fee-on-payments-up-to-rs-5000-from-april-6-2026.html) (5 Apr 2026) | 📰 news |
