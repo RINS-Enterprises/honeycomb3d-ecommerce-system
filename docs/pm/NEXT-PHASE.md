@@ -31,7 +31,7 @@ The redesign makes the site calmer, but mixed photo backgrounds still give it aw
 | Bank transfer, agreed in WhatsApp | today, no setup | none, already works |
 | Cash on delivery through a courier | local trust | courier account |
 | **PayHere** payment links (cards, LKR) | the next step for local customers | merchant sign-up (business documents); Claude adds a "Pay by card" link step |
-| PayPal (USD, overseas payers only) | Sri Lankans abroad paying for a gift delivered here; overseas buyers | **built, switched off** (`paypalOverseas` in `data/store.json`). Turn on after a $1 test arrives; see below |
+| PayPal (USD, overseas payers only) | Sri Lankans abroad paying for a gift delivered here; overseas buyers | **built, switched off** (`paypalOverseas` in `data/store.json`). Turn on after a USD 10 test arrives; see below |
 
 Run the Gemini Deep Research prompt (section 1, payments) to confirm 2026 fees before choosing.
 
@@ -44,7 +44,7 @@ Run the Gemini Deep Research prompt (section 1, payments) to confirm 2026 fees b
 
 **To switch PayPal on:**
 1. In the Commercial Bank or Sampath app, link your PayPal account (or sign up through it).
-2. Ask someone abroad to pay you **USD 1** (a payment link, or "send to friends" to your PayPal email).
+2. Ask someone abroad to pay you **USD 10** (a payment link, or "send to friends" to your PayPal email). A USD 1 test can't be withdrawn: after PayPal's fee it is below Commercial Bank's USD 3.50 minimum withdrawal (Session C, `docs/business/paypal.md`). Plan a **USD 20 minimum** for PayPal orders.
 3. Withdraw it to your bank in the app. If it arrives, tell Claude **"PayPal works, switch it on"**. The cart then shows "Paying from outside Sri Lanka? Ask for a PayPal link in USD", and the WhatsApp request says so.
 4. For each overseas order: you agree the USD total in WhatsApp, then ask Claude for a payment link (Claude opens PayPal's link form for you to fill in) and send that link in the chat.
 
