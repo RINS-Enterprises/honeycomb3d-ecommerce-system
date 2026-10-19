@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {home} from '../src/render.mjs';
+import {home, privacyPage} from '../src/render.mjs';
 import {visibleProducts} from '../src/domain.mjs';
 
 const products=JSON.parse(await readFile(new URL('../data/products.json',import.meta.url),'utf8'));
@@ -204,4 +204,10 @@ test('noindex follows searchIndexing, not ordering: turning ordering on keeps se
   assert(home(visibleProducts(visible,live),live).includes(noindex));
   assert(home(visibleProducts(visible,live),{...live,searchIndexing:false}).includes(noindex));
   assert(!home(visibleProducts(visible,live),{...live,searchIndexing:true}).includes(noindex));
+});
+test('the privacy page mentions PayPal only when overseas PayPal is switched on in live mode',()=>{
+  const base={...store,...live};
+  assert.doesNotMatch(privacyPage({...base,paypalOverseas:false}),/PayPal/);
+  assert.doesNotMatch(privacyPage({...store,mode:'preview',paypalOverseas:true}),/PayPal/);
+  assert.match(privacyPage({...base,paypalOverseas:true}),/PayPal, which handles that payment under its own terms/);
 });

@@ -218,7 +218,7 @@ function initAdd() {
 function initCart() {
   const root=document.querySelector('#cart-body');if(!root)return;
   let notes='',paypal=false;
-  const message=()=>orderMessage(cart,products,notes,{paypal:paypal&&paypalOverseas(store)});
+  const message=()=>orderMessage(cart,products,notes,{paypal:paypal&&store.mode==='live'&&paypalOverseas(store)});
   function render(focusKey) {
     const s=cartSummary(cart,products);
     if(!s.lines.length) {
@@ -243,7 +243,7 @@ function initCart() {
       '<p class="cart-line-total">'+e(p.priceLkr===null?'To confirm':money(p.priceLkr*q))+'</p></div></article>').join('');
     root.innerHTML='<div class="cart-layout"><div class="cart-main"><div class="cart-lines">'+lines+'</div>'+
       '<label class="cart-notes">Notes <span>(optional)</span><textarea id="order-notes" maxlength="500" rows="3" placeholder="Colours, sizes or anything else we should know">'+e(notes)+'</textarea></label>'+
-      (paypalOverseas(store)?'<label class="cart-paypal"><input type="checkbox" id="order-paypal" data-testid="cart-paypal"'+(paypal?' checked':'')+'><span>Paying from outside Sri Lanka? Ask for a PayPal link in USD.<small>We send it in WhatsApp after we confirm your total. PayPal cannot take payments from Sri Lankan accounts.</small></span></label>':'')+'</div>'+
+      (store.mode==='live'&&paypalOverseas(store)?'<div class="cart-paypal"><input type="checkbox" id="order-paypal" data-testid="cart-paypal" aria-describedby="order-paypal-help"'+(paypal?' checked':'')+'><div><label for="order-paypal">Paying from outside Sri Lanka? Ask for a PayPal link in USD.</label><small id="order-paypal-help">We send it in WhatsApp after we confirm your total. Payments from Sri Lankan PayPal accounts are not supported.</small></div></div>':'')+'</div>'+
       '<aside class="cart-aside" aria-label="Request summary"><div class="cart-summary"><p class="eyebrow">Summary</p><dl class="summary-rows"><div><dt>Items</dt><dd>'+s.count+'</dd></div><div><dt>Delivery</dt><dd>Confirmed with your quote</dd></div></dl>'+
       '<h2 data-testid="cart-subtotal">'+(s.unpriced?(hasPriced?'Priced items subtotal: '+e(money(s.knownSubtotal)):'Quote required for all items'):'Estimated items subtotal: '+e(money(s.knownSubtotal)))+'</h2><p>'+(s.unpriced?'Unpriced items are not included in a subtotal. ':'')+'Delivery and the final total will be confirmed with your quote.</p></div>'+
       '<div id="order-handoff">'+handoff(message())+'</div></aside></div>';

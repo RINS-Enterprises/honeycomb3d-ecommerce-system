@@ -267,6 +267,11 @@ try {
   await page.getByLabel(/Paying from outside Sri Lanka/).check();
   const paypalHref=()=>page.getByRole('link',{name:'Open WhatsApp request'}).getAttribute('href').then(h=>new URL(h).searchParams.get('text'));
   assert.match(await paypalHref(),/PayPal payment link in USD once the total is confirmed/);
+  // The choice survives a cart re-render (quantity change).
+  await page.getByRole('button',{name:'Increase quantity of Baymax Figure'}).click();
+  await page.waitForFunction(()=>document.querySelector('.message-preview').value.includes('Baymax Figure [HC-BAYMAX] x 3'));
+  assert.equal(await page.getByLabel(/Paying from outside Sri Lanka/).isChecked(),true);
+  assert.match(await paypalHref(),/PayPal payment link in USD/);
   await page.getByLabel(/Paying from outside Sri Lanka/).uncheck();
   assert.doesNotMatch(await paypalHref(),/PayPal/);
   await page.evaluate(()=>localStorage.clear());
