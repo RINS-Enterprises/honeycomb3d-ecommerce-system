@@ -1,0 +1,59 @@
+{
+  "sourceDriveId": "1AOoBNTsdAzj_getImty-054LJWxjzfFq",
+  "sourceTitle": "HONEYCOMB Symbol.pdf",
+  "sourceSha256": "bbce8e132f6db89881698b75b664fd62555b59c398fdfcec940b5c33a267dcf3",
+  "sourcePage": 1,
+  "renderScale": 2,
+  "renderSize": [
+    6000,
+    6000
+  ],
+  "cropBox": [
+    1280,
+    1077,
+    4650,
+    4863
+  ],
+  "squarePadding": "centered, white",
+  "output": "/favicon.ico",
+  "sizes": [
+    16,
+    32,
+    48
+  ],
+  "bytes": 5500,
+  "outputSha256": "3784411f3db70b8e9ab6c209c4e472dac1b8c4ed4445b8fb142bf99ff893b0b6",
+  "appleTouchIcon": {
+    "output": "/apple-touch-icon.png",
+    "size": [
+      180,
+      180
+    ],
+    "background": "#0c0b0a",
+    "symbolSize": [
+      121,
+      136
+    ],
+    "bytes": 11526,
+    "sha256": "4fbdf6ba7c6fe532e639b0307a77daeb09efc5ab6a7116756a6d73dcdbe86e0e"
+  },
+  "svgIcon": {
+    "output": "/favicon.svg",
+    "method": "PDF vector paths copied verbatim; full-page clips dropped",
+    "paths": 25,
+    "fills": [
+      "#231f20",
+      "#faa31b",
+      "#ffffff"
+    ],
+    "viewBox": [
+      532.114,
+      534.602,
+      1900.351,
+      1900.351
+    ],
+    "background": "transparent",
+    "bytes": 8130,
+    "sha256": "04a20ddb596f0b0df7e7b874b1feedfb5e8eb89cdc52f46db5dc5f14b2a04fcd"
+  }
+}

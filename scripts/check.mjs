@@ -1,0 +1,70 @@
+import {checkImageOutputs} from './check-images.mjs';
+import {readFile,stat,readdir} from 'node:fs/promises';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {validateData,visibleProducts,searchIndexing} from '../src/domain.mjs';
+const root=fileURLToPath(new URL('../',import.meta.url));
+assert((await readdir(join(root,'tests'))).some(name=>name.endsWith('.test.mjs')), 'At least one unit-test file must exist');
+const all=JSON.parse(await readFile(join(root,'data/products.json'),'utf8'));
+const store=JSON.parse(await readFile(join(root,'data/store.json'),'utf8'));
+validateData(all,store);
+const products=visibleProducts(all,store);
+const publicProducts=JSON.parse(await readFile(join(root,'dist/data/products.json'),'utf8'));
+for(const p of publicProducts) {
+  assert.equal(p.copyStatus,undefined,'Copy approval workflow must not be published');
+  assert.equal(p.imageSource,undefined,'Recovery asset filenames must not be published');
+  for(const key of ['priceSource','imageApprovedAt','imageStatus'])assert.equal(p[key],undefined,'Source workflow metadata must not be published');
+  assert.equal(p.source,'Public catalog','Recovery evidence must stay in source data');
+}
+const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','404.html',...products.map(p=>'products/'+p.slug+'/index.html')];
+for(const path of paths) {
+  const html=await readFile(join(root,'dist',path),'utf8');
+  assert.match(html,/<html lang="en">/);assert.match(html,/<main id="main"/);
+  assert.match(html,/<title>[^<]+<\/title>/);
+  assert(!/\b(?:undefined|NaN)\b/.test(html),'Unexpected value: '+path);
+  for(const [,href] of html.matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
+    let local=decodeURIComponent(href.split('?')[0]);
+    if(local.endsWith('/'))local+='index.html';
+    await stat(join(root,'dist',local));
+  }
+}
+await checkImageOutputs(paths);
+if(!searchIndexing(store)) {
+  const robots=await readFile(join(root,'dist/robots.txt'),'utf8');
+  assert.match(robots,/User-agent: \*\nDisallow: \/\n$/,'Search engines stay out until searchIndexing is on');
+  for(const bot of ['Twitterbot','facebookexternalhit','LinkedInBot','Slackbot','TelegramBot','Discordbot'])assert.match(robots,new RegExp('User-agent: '+bot+'\nAllow: /'),'Link-preview crawler allowed: '+bot);
+  for(const path of paths)assert.match(await readFile(join(root,'dist',path),'utf8'),/<meta name="robots" content="noindex,nofollow">/,'noindex while searchIndexing is off: '+path);
+  assert(!(await readdir(join(root,'dist'))).includes('sitemap.xml'),'No sitemap until the owner decides on indexing');
+}
+// Self-hosted heading font: hash matches its provenance record, licence ships with it, total stays under ~100 KB.
+const fontRecord=JSON.parse(await readFile(join(root,'assets/font.json'),'utf8'));
+const fontBytes=await readFile(join(root,'dist',fontRecord.output));
+assert.equal(createHash('sha256').update(fontBytes).digest('hex'),fontRecord.sha256,'Font hash');
+assert(fontBytes.length<=100_000,'Fonts stay under 100 KB');
+assert.match(await readFile(join(root,'dist/fonts/OFL.txt'),'utf8'),/SIL OPEN FONT LICENSE Version 1\.1/);
+// SVG favicon: the recorded export, plain vector paths only, linked from every page beside the ICO fallback.
+const faviconRecord=JSON.parse(await readFile(join(root,'assets/favicon.json'),'utf8')).svgIcon;
+const faviconSvg=await readFile(join(root,'dist/favicon.svg'));
+assert.equal(createHash('sha256').update(faviconSvg).digest('hex'),faviconRecord.sha256,'favicon.svg matches its provenance record');
+assert(!/<script|<image|<foreignObject|on\w+=|href=/i.test(faviconSvg.toString()),'favicon.svg is plain vector paths');
+for(const path of paths){const html=await readFile(join(root,'dist',path),'utf8');
+  assert(html.includes('<link rel="icon" href="/favicon.ico"')&&html.includes('<link rel="icon" href="/favicon.svg" type="image/svg+xml">'),'Both favicons linked: '+path);}
+// Brand texture: tiny, same-origin, referenced by the stylesheet, and free of scripts.
+const hex=await readFile(join(root,'dist/hex.svg'),'utf8');
+assert(Buffer.byteLength(hex)<=1024,'Hex texture stays at or under 1 KB');
+assert(!/<script|on\w+=|href=/i.test(hex),'Hex texture is plain vector paths');
+assert.match(await readFile(join(root,'dist/styles.css'),'utf8'),/url\(\/hex\.svg\)/);
+// Numbers that must never ship, in any spacing or format (owner, 2026-10-18): two held by a former business
+// partner, and 0710559815, a mistyped copy of the business number that was live for a few hours.
+const forbiddenNumbers=['703009064','774919109','710559815'].map(d=>new RegExp(d.split('').join('(?:[^0-9A-Za-z]|%[0-9A-Fa-f]{2}|&#?\\w+;){0,3}')));
+async function scanText(dir){for(const entry of await readdir(dir,{withFileTypes:true})){
+  const full=join(dir,entry.name);
+  if(entry.isDirectory()){await scanText(full);continue;}
+  if(!/\.(?:html|json|mjs|js|css|txt|svg|xml)$/.test(entry.name))continue;
+  const text=await readFile(full,'utf8');
+  for(const re of forbiddenNumbers)assert(!re.test(text),'A former partner\'s number must never ship: '+full);
+}}
+await scanText(join(root,'dist'));
+console.log('Verified '+paths.length+' generated pages and their local links/assets.');
