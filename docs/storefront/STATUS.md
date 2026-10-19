@@ -8,7 +8,7 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 |---|---|---|---|
 | 1 | Order button on shop cards | Done, QA fixed | `878df30`, `082d32c` |
 | 2 | Cart bundle suggestions | Done, QA fixed | `9a7f1e4` + QA-fix commit |
-| 3 | FAQ page | Not started | |
+| 3 | FAQ page | Done, QA in progress | `4c32420` |
 | 4 | Delivery line (switch) | Not started | |
 | 5 | Payment methods (switch) | Not started | |
 | 6 | Social links | Not started | |
@@ -61,4 +61,30 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
   - Out of scope, existing before item 2: at 320/390px with 200% root text the cart scrolls sideways (`.cart-summary`, `.cart-line-total`). Removing the suggestions doesn't change it. Logged for a later fix.
   - Verified OK: ranking and exclusions, escaping (hostile names), notes and PayPal state after Add, focus and announcement, message unaffected, preview mode, heading order, layout at 320–1440px (including 200% text inside the block), and the heading wording.
 - **Waits on owner fact:** none.
+
+## 3. FAQ page
+
+- **Commit:** `4c32420`
+- **What changed:**
+  - `src/render.mjs`: `faqPage(store)` at `/faq/`, linked as "Questions and answers" in the footer's About column on every page. It has eight short answers, each built from wording the site already uses:
+    - How ordering works.
+    - A request is not a confirmed purchase.
+    - What "made to order" means.
+    - Colours and sizes: ask us.
+    - Custom prints, with a link to `/custom/`.
+    - Delivery cost and timing come with the quote.
+    - Payment arrangements come with the quote.
+    - We are a 3D print studio in Sri Lanka, with prices in LKR.
+  - Mode-aware:
+    - Live: describes the WhatsApp request and that nothing is sent until you send it.
+    - Preview: "Online ordering opens soon" and no mention of WhatsApp, including the meta description.
+    - The PayPal sentence appears only when `paypalOverseas` is on in live mode.
+  - `scripts/build.mjs` builds it (24 pages). `scripts/check.mjs` adds it to the verified pages (links, noindex, favicons). This only extends the check.
+- **Tests:**
+  - A unit test runs live, preview and PayPal on/off. It checks the questions, the absence of any digits in the answers (no prices, days or phone numbers), and the absence of delivery-time and payment-promise words. It also checks the footer link.
+  - The browser test follows the footer link to the page. `/faq/` is in the 320–1440px overflow and wide-font sweeps.
+- **Local gate:** passed on live and preview builds: `npm test` (44 pass), `build` + `check` (24 pages), `browser.mjs`, `images-browser.mjs`.
+- **Screenshots checked:** 320, 390 and 1440px (no overflow).
+- **QA verdict:** _in progress_
+- **Waits on owner fact:** none. Delivery and payment answers will pick up items 4 and 5 once their switches are set.
 
