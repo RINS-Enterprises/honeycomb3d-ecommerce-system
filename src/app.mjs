@@ -1,5 +1,5 @@
-import {card} from './card.mjs';
-import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, visibleProducts, paypalOverseas} from './domain.mjs';
+import {card, price} from './card.mjs';
+import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, visibleProducts, paypalOverseas, cartSuggestions} from './domain.mjs';
 
 const status=document.querySelector('#status');
 let toastTimer;
@@ -259,7 +259,10 @@ function initCart() {
       '<label><span class="sr-only">Quantity for '+e(p.name)+'</span><input data-quantity="'+e(p.id)+'" data-testid="cart-qty" type="number" inputmode="numeric" min="1" max="'+MAX_QUANTITY+'" step="1" value="'+q+'" required></label>'+
       '<button type="button" data-step="1" data-id="'+e(p.id)+'" data-testid="cart-qty-increase" aria-label="Increase quantity of '+e(p.name)+'"'+(q>=MAX_QUANTITY?' disabled':'')+'>+</button></div>'+
       '<p class="cart-line-total">'+e(p.priceLkr===null?'To confirm':money(p.priceLkr*q))+'</p></div></article>').join('');
-    root.innerHTML='<div class="cart-layout"><div class="cart-main"><div class="cart-lines">'+lines+'</div>'+
+    const picks=cartSuggestions(cart,products);
+    const suggest=picks.length?'<section class="cart-suggest" aria-labelledby="suggest-title" data-testid="cart-suggestions"><h2 id="suggest-title">Goes well with your request</h2><ul>'+picks.map(p=>'<li class="suggest-item" data-testid="cart-suggestion"><a class="cart-thumb" href="/products/'+e(p.slug)+'/" tabindex="-1" aria-hidden="true">'+thumb(p)+'</a><div><h3><a href="/products/'+e(p.slug)+'/">'+e(p.name)+'</a></h3><p class="muted">'+e(price(p))+'</p></div>'+
+      '<button type="button" class="quick-add" data-quick-add="'+e(p.id)+'" data-testid="suggestion-add" aria-label="Add '+e(p.name)+' to request cart"><span aria-hidden="true">+</span> Add</button></li>').join('')+'</ul></section>':'';
+    root.innerHTML='<div class="cart-layout"><div class="cart-main"><div class="cart-lines">'+lines+'</div>'+suggest+
       '<label class="cart-notes">Notes <span>(optional)</span><textarea id="order-notes" maxlength="500" rows="3" placeholder="Colours, sizes or anything else we should know">'+e(notes)+'</textarea></label>'+
       (store.mode==='live'&&paypalOverseas(store)?'<div class="cart-paypal"><input type="checkbox" id="order-paypal" data-testid="cart-paypal" aria-describedby="order-paypal-help"'+(paypal?' checked':'')+'><div><label for="order-paypal">Paying from outside Sri Lanka? Ask for a PayPal link in USD.</label><small id="order-paypal-help">We send it in WhatsApp after we confirm your total. Payments from Sri Lankan PayPal accounts are not supported.</small></div></div>':'')+'</div>'+
       '<aside class="cart-aside" aria-label="Request summary"><div class="cart-summary"><p class="eyebrow">Summary</p><dl class="summary-rows"><div><dt>Items</dt><dd>'+s.count+'</dd></div><div><dt>Delivery</dt><dd>Confirmed with your quote</dd></div></dl>'+

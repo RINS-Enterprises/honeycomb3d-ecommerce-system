@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl} from '../src/domain.mjs';
+import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl,cartSuggestions} from '../src/domain.mjs';
 const p=(id,priceLkr=null,availability='unconfirmed')=>({id,slug:id.toLowerCase(),name:id,category:'Figures',tags:['Anime'],description:'Example',source:'Test fixture',priceLkr,availability,image:null,imageAlt:null,approved:false});
 const products=[p('A',10.25),p('B'),p('C',10,'unavailable')];
 const preview={mode:'preview',whatsappVerified:false,whatsappNumber:null};
@@ -94,4 +94,19 @@ test('one-tap order links only open in live mode with a verified number and neve
   assert.match(new URL(orderNowUrl(p,live,3)).searchParams.get('text'),/Alpha \[A\] x 3/);
   assert.equal(orderNowUrl(p,{...live,mode:'preview'}),null);
   assert.equal(orderNowUrl({...p,availability:'unavailable'},live),null);
+});
+
+test('cart suggestions share the cart\'s themes, skip the cart and unavailable designs, and never invent anything',()=>{
+  const d=(id,category,tags,availability='made-to-order',priceLkr=100)=>({id,category,tags,availability,priceLkr,name:id});
+  const catalogue=[d('LEAF','Keychains',['Naruto','Anime']),d('KEY2','Keychains',['Naruto','Anime']),d('KUNAI','Props',['Naruto','Anime']),d('GONE','Props',['Naruto'],'unavailable'),
+    d('MOVIE','Figures',['Movies']),d('ANIME','Figures',['Anime'],'made-to-order',null),d('NONE','Props',[])];
+  const ids=items=>cartSuggestions(items,catalogue).map(p=>p.id);
+  assert.deepEqual(ids([{id:'LEAF',quantity:1}]),['KUNAI','KEY2','ANIME'],'Most shared themes first, another category before the same one, limit 3');
+  assert.deepEqual(ids([{id:'LEAF',quantity:1},{id:'KUNAI',quantity:1}]),['KEY2','ANIME'],'Nothing already in the cart; unavailable never');
+  assert.deepEqual(ids([{id:'MOVIE',quantity:1}]),[],'No shared theme, no suggestion');
+  assert.deepEqual(ids([{id:'NONE',quantity:1}]),[]);
+  assert.deepEqual(ids([]),[]);
+  assert.deepEqual(ids([{id:'GONE',quantity:1}]),[],'An unavailable item never makes it into the cart');
+  assert.deepEqual(cartSuggestions([{id:'LEAF',quantity:1}],catalogue,1).map(p=>p.id),['KUNAI']);
+  assert.equal(cartSuggestions([{id:'LEAF',quantity:1}],catalogue).find(p=>p.id==='ANIME').priceLkr,null,'Prices are the catalogue\'s own, even when unknown');
 });

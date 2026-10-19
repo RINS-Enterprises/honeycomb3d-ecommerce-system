@@ -72,6 +72,15 @@ export function cartSummary(items, products) {
   const lines=normalizeCart(items,products).map(item=>({...item,product:products.find(p=>p.id===item.id)}));
   return {lines,count:lines.reduce((n,x)=>n+x.quantity,0),knownSubtotal:lines.reduce((n,x)=>n+(x.product.priceLkr===null?0:Math.round(x.product.priceLkr*100)*x.quantity),0)/100,unpriced:lines.some(x=>x.product.priceLkr===null)};
 }
+// Cart suggestions: designs sharing themes with the cart (most shared themes first), never already in it and never unavailable.
+// On a tie, designs from another category come first (a kunai with a keychain, not a second keychain); catalogue order breaks ties.
+// Ranked from the catalogue's own themes only: there is no order history, so nothing here claims what others bought.
+export function cartSuggestions(items, products, limit=3) {
+  const lines=cartSummary(items,products).lines, inCart=new Set(lines.map(x=>x.id)), categories=new Set(lines.map(x=>x.product.category));
+  const themesOf=p=>(p.tags||[]).filter(t=>t!==p.category);
+  return products.map((p,i)=>({p,i,shared:inCart.has(p.id)||p.availability==='unavailable'?0:lines.reduce((n,x)=>n+themesOf(x.product).filter(t=>themesOf(p).includes(t)).length,0)}))
+    .filter(o=>o.shared).sort((a,b)=>b.shared-a.shared||categories.has(a.p.category)-categories.has(b.p.category)||a.i-b.i).slice(0,limit).map(o=>o.p);
+}
 export function orderMessage(items, products, notes='', {paypal=false}={}) {
   const s=cartSummary(items,products);
   if (!s.lines.length) return '';

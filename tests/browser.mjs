@@ -132,6 +132,16 @@ try {
   await page.getByTestId('cart-line').waitFor();
   assert.equal(await page.getByTestId('cart-picks').count(),0,'Picks go once the cart has a line');
   assert.equal(await page.evaluate(()=>document.activeElement?.dataset.quantity),'HC-LEAF','Focus lands on the new line');
+  // Suggestions: designs sharing the Hidden Leaf's Naruto theme, at their catalogue prices; Add fills the cart in place.
+  const suggestions=page.getByTestId('cart-suggestions');
+  assert.equal(await suggestions.getByRole('heading',{level:2}).textContent(),'Goes well with your request');
+  assert.deepEqual(await suggestions.locator('h3').allTextContents(),['Kurama Figure','Minato Kunai','Classic Kunai']);
+  assert.deepEqual(await suggestions.locator('.suggest-item p').allTextContents(),[money(1500),money(1000),money(1000)],'Existing prices only');
+  await suggestions.getByRole('button',{name:'Add Minato Kunai to request cart'}).click();
+  await page.waitForFunction(()=>document.querySelectorAll('[data-testid="cart-line"]').length===2);
+  assert.equal(await page.evaluate(()=>document.activeElement?.dataset.quantity),'HC-MINATO','Focus lands on the added line');
+  assert.deepEqual(await page.getByTestId('cart-suggestions').locator('h3').allTextContents(),['Kurama Figure','Classic Kunai'],'Never suggests what is already in the cart');
+  assert.match(await page.locator('.message-preview').inputValue(),/Minato Kunai \[HC-MINATO\] x 1/);
   await page.evaluate(()=>localStorage.clear());
   await page.goto('http://127.0.0.1:4173/products/baymax-figure/');
   await page.waitForFunction(()=>localStorage.getItem('honeycomb-recent-v1')!==null);
