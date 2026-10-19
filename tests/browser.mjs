@@ -6,6 +6,8 @@ import {money} from '../src/domain.mjs';
 // Assertions follow the built configuration: preview (ordering closed) or live (WhatsApp order requests open).
 const builtStore=JSON.parse(await readFile('dist/data/store.json','utf8'));
 const ordering=builtStore.mode==='live'&&builtStore.whatsappVerified;
+// The cart reads the PayPal switch from the published store file, so the build must carry it.
+assert.equal(typeof builtStore.paypalOverseas,'boolean','Published store.json carries the PayPal switch');
 const server=spawn(process.execPath,['scripts/serve.mjs'],{stdio:'inherit'});
 let browser;
 try {
