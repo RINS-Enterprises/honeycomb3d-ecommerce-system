@@ -4,7 +4,7 @@ Branch `claude/payments-delivery` (from `claude/funny-albattani-c5a91a`, merged 
 
 | # | Document | State | Commit |
 |---|---|---|---|
-| 3 | `delivery.md` | researching | – |
+| 3 | `delivery.md` | draft, fact-check running | (see git log) |
 | 1 | `payments.md` | researching | – |
 | 2 | `register-business.md` | not started | – |
 | 4 | `paypal.md` | not started | – |
