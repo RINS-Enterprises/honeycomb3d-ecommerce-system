@@ -89,7 +89,9 @@ We 3D-print figures, keychains and props to order in Kegalle. If you sent an ord
 Browse the designs: honeycomb3d.store
 
 HoneyComb 3D එකට message කළාට ස්තුතියි 🐝
-honeycomb3d.store එකෙන් ඕඩර් එකක් එව්වා නම්, අපි ඒක බලලා ඉක්මනින්ම details එක්ක reply කරනවා.
+අපි කෑගල්ලේ figures, keychains සහ props ඕඩර් එකට අනුව 3D print කරනවා.
+honeycomb3d.store එකෙන් ඕඩර් එකක් එව්වා නම්, අපි ඒක බලලා ඉක්මනින් details එක්ක reply කරනවා.
+Designs බලන්න: honeycomb3d.store
 ```
 
 Recipients: **Everyone not in address book** is a good default (friends and family won't get it).
@@ -102,11 +104,11 @@ Recipients: **Everyone not in address book** is a good default (friends and fami
 Thanks for your message 🐝 We're away right now and will reply when we're back {next working day / tomorrow morning}.
 Your order request is saved here, so there's no need to send it again.
 
-ඔයාගේ message එකට ස්තුතියි 🐝 අපි දැන් ළඟ නෑ, ආපහු ආවම reply කරනවා.
-ඔයාගේ ඕඩර් එක මෙතන save වෙලා තියෙනවා, ආයෙත් එවන්න ඕන නෑ.
+ඔයාගේ message එකට ස්තුතියි 🐝 අපි දැන් online නෑ, ආපහු ආවම reply කරනවා.
+ඔයාගේ ඕඩර් request එක මෙතන save වෙලා තියෙනවා, ආයෙත් එවන්න ඕන නෑ.
 ```
 
-Replace `{next working day / tomorrow morning}` with what's true for your hours, or delete that part.
+Replace `{next working day / tomorrow morning}` with what's true for your hours, or delete that part. If you fill it in, add the same in Sinhala, e.g. `ආපහු ආවම (හෙට උදේ) reply කරනවා`.
 
 ## 6. Quick replies
 

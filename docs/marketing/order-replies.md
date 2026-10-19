@@ -35,7 +35,7 @@ Anything in `{curly brackets}` must be filled in **before you send**. Some are f
 | `{courier}`, `{tracking}` | from the courier receipt | per order |
 | `{review_link}` | your Google review link | after the Google profile exists |
 
-**Never send a message that still has `{...}` in it.** Never promise a date you're not sure of.
+**Never send a message that still has `{...}` in it.** Never promise a date you're not sure of. In Sinhala replies, write times the Sinhala way (e.g. `දවස් 2–3`). The Sinhala templates were checked by a Sinhala reviewer.
 
 ---
 
@@ -84,7 +84,7 @@ Items: {items_total}
 Delivery: {delivery_fee}
 Total: {total}
 {ready_by} වෙද්දි print කරලා ඉවර කරන්න පුළුවන්. ඊට පස්සේ delivery එකට සාමාන්‍යයෙන් {delivery_time} යනවා.
-පටන් ගන්නද? YES කියලා reply කරන්න, අපි වැඩේ පටන් ගන්නම්.
+අපි පටන් ගමුද? YES කියලා reply කරන්න, අපි වැඩේ පටන් ගන්නම්.
 ```
 
 ## 3. Ask for the delivery address (`/address`)
@@ -102,7 +102,7 @@ Great, thank you! Please send:
 ගොඩක් ස්තුතියි! කරුණාකරලා මේවා එවන්න:
 • සම්පූර්ණ නම
 • Delivery address එක (ළඟම නගරයත් එක්ක)
-• Courier එකට call කරන්න phone number එකක්
+• Courier එකෙන් call කරන්න පුළුවන් phone number එකක්
 ```
 
 ## 4. Payment instructions (`/pay`)
@@ -137,10 +137,10 @@ It usually arrives in {delivery_time}. Let us know when it reaches you!
 
 **Sinhala**
 ```
-{name}, ඔයාගේ ඕඩර් එක එව්වා 📦
+Good news {name}! ඔයාගේ ඕඩර් එක එව්වා 📦
 Courier: {courier}
 Tracking: {tracking}
-සාමාන්‍යයෙන් {delivery_time} ඇතුළත ලැබෙනවා. ලැබුණාම අපිට කියන්න!
+සාමාන්‍යයෙන් ලැබෙන්න {delivery_time} විතර යනවා. ලැබුණාම අපිට කියන්න!
 ```
 
 ## 6. Thank you + review request (`/thanks`)
@@ -174,7 +174,7 @@ We'll check whether we can print it well and come back to you with a quote.
 **Sinhala**
 ```
 Idea එකට ස්තුතියි {name}! Model එකේ link එකක් (නැත්නම් photos ටිකක්) සහ ඔයාට ඕන size එක ආසන්න වශයෙන් එවන්න පුළුවන්ද?
-අපිට ඒක හොඳට print කරන්න පුළුවන්ද කියලා බලලා quote එකක් එක්ක reply කරන්නම්.
+අපි ඒක හොඳට print කරන්න පුළුවන්ද කියලා බලලා quote එකක් එක්ක reply කරන්නම්.
 ```
 
 ---
