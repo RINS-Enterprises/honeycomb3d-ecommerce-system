@@ -1,3 +1,4 @@
+import {loadStore} from './store.mjs';
 import {checkImageOutputs} from './check-images.mjs';
 import {readFile,stat,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
@@ -8,7 +9,7 @@ import {validateData,visibleProducts,searchIndexing,trustPages,TRUST_PAGES} from
 const root=fileURLToPath(new URL('../',import.meta.url));
 assert((await readdir(join(root,'tests'))).some(name=>name.endsWith('.test.mjs')), 'At least one unit-test file must exist');
 const all=JSON.parse(await readFile(join(root,'data/products.json'),'utf8'));
-const store=JSON.parse(await readFile(join(root,'data/store.json'),'utf8'));
+const store=await loadStore(root);
 validateData(all,store);
 const products=visibleProducts(all,store);
 const publicProducts=JSON.parse(await readFile(join(root,'dist/data/products.json'),'utf8'));

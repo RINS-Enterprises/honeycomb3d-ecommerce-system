@@ -2,13 +2,14 @@ import {readFile,writeFile,mkdir,copyFile,rm,access} from 'node:fs/promises';
 import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateData,visibleProducts,searchIndexing,delivery,paymentMethods,socialLinks,trustPages} from '../src/domain.mjs';
+import {loadStore} from './store.mjs';
 import {layout,home,shop,detail,cartPage,customPage,privacyPage,faqPage,trustPage,notFound,sitemap} from '../src/render.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const dist=resolve(root,'dist');
 if(dirname(dist)!==resolve(root)||!dist.endsWith('dist'))throw new Error('Unsafe output directory');
 const all=JSON.parse(await readFile(join(root,'data/products.json'),'utf8'));
-const store=JSON.parse(await readFile(join(root,'data/store.json'),'utf8'));
+const store=await loadStore(root);
 validateData(all,store);
 const products=visibleProducts(all,store);
 for(const product of products) {

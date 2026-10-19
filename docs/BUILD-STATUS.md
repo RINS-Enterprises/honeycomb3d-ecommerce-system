@@ -1,70 +1,56 @@
 # HoneyComb storefront build status
 
-Updated 13 October 2026. Branch: codex/storefront-mvp.
+Updated 19 October 2026 by the storefront features session (session B). This file describes what the code and data on the release line do today. Deployments, release evidence and owner decisions live in the PM's [project register](pm/PROJECT-REGISTER.md); the session plan is in [SESSIONS-PLAN.md](pm/SESSIONS-PLAN.md). The previous version of this file, last current on 13 October 2026, is in git history.
 
-## QA Run 5 follow-ups (I-21 / I-22)
+## Where the code lives
 
-- /favicon.ico now serves a 5,500-byte ICO containing 16, 32 and 48 px frames exported from the supplied HONEYCOMB Symbol.pdf (Drive 1AOoBNTsdAzj_getImty-054LJWxjzfFq). Every page declares it, and the local server sends image/vnd.microsoft.icon.
-- Portrait srcset sizes describe the contained image width within the square card, hero and detail boxes. Minato also has 160 px (3,536 bytes) and 240 px (6,474 bytes) derivatives from the unchanged approved source and crop.
-- Favicon source/output hashes and crop details are recorded in assets/favicon.json, docs/FAVICON-PROVENANCE.md and docs/ASSET-PROVENANCE.md. The PDF source stays outside dist/.
-- Independent CI scripts are pinned to QA Run 5, 97780b00907571e64703daa3adfd5f03d5d5263d, including real srcset-pixel measurement and failure on AI markers.
-- Browser regression checks cover favicon HTTP status/type/frames and actual Minato resource resolution in card/detail views at 320/390/768/1280 px, DPR 1 and 3.
-- Classic Kunai and Kurama are still placeholders: the latest Drive search found only the original Kunai outside HoneyComb and no matching Kurama copy.
-- Temporary asset-generation workflow removed. CI permissions are read-only.
+- **Release branch:** `claude/funny-albattani-c5a91a`. Only the PM session merges into it and deploys from it.
+- **Feature work:** session branches with their own draft PRs into `main`, for CI only. Storefront features are on `claude/storefront-features` (PR #8). Per-item status, commits, QA verdicts and the owner facts each switch waits on are in [storefront/STATUS.md](storefront/STATUS.md).
+- **`codex/storefront-mvp`:** the original builder branch. It is not where current work happens.
 
-## QA handoff implementation
+## What the site does
 
-Continued the existing application from 8d13b91 using the QA handoff on claude/recovery-qa at aedc1e4. That review branch and main were not changed.
+- **Mode:** `live`. Order requests go to the business WhatsApp, 94710599815 (`whatsappVerified: true`). Visitors review a prepared message and send it themselves; nothing is a confirmed purchase until the details are agreed.
+- **Catalogue:** 18 products in `data/products.json`. The 17 with an owner-approved photo are shown. All 17 are "Made to order", and all have an LKR price. Categories: Keychains, Figures, Props, Bookmarks, Desk Organizers.
+- **Pages:**
+  - Home, shop (search, category and theme filters, sort), one page per product, request cart, custom-print enquiry, FAQ (`/faq/`), privacy, and 404.
+  - Shipping, Returns and About are built only when the owner has written them (see below).
+- **Ordering paths:** the request cart (with notes); "Order now on WhatsApp" on product pages and their sticky bar; and a one-tap "Order" on every product card. All three use the same message format and number.
+- **Cart extras:**
+  - "Goes well with your request": up to three designs sharing the cart's themes, at catalogue prices.
+  - Recently viewed designs.
+  - A few picks when the cart is empty.
+- **Search engines:** kept out. `searchIndexing` is `false`, so every page is `noindex,nofollow`. `robots.txt` admits only link-preview crawlers, and there is no sitemap or breadcrumb data.
 
-- Prices are the owner's designated Airtable Products prices, read 11 October 2026: Hidden Leaf 400, Baymax 1000, Kurama 1500, Night Fury 500, Minato 1000, Light Fury 500 and Classic Kunai 1000 LKR. Each product records the Airtable base, table, record, field and read date in priceSource.
-- No compare-at prices, sale badges or stock counts. Availability remains unconfirmed and every catalog approval remains false.
-- Storefront IDs and slugs are unchanged. Baymax/Kurama SKUs are not migrated while QA F-17 remains unresolved.
-- Light Fury, Night Fury, Minato and Hidden Leaf use the approved real photos. Baymax keeps the same real source and is resized only.
-- Source originals matched the exact QA SHA-256 values. Camera/GPS/text metadata were removed from their containers without altering compressed image pixels; both hashes are recorded.
-- Hidden Leaf's crop isolates the upper white plate. Minato's crop is (2770, 2150, 4600, 6250), within the required left-edge bounds, and its alt text describes the tan engraved handle and black blade.
-- Sixteen outputs: five product photos at widths 480/960/1440, plus a 660 × 198 PNG logo. Images use real intrinsic width/height attributes; cards, hero and detail pages have responsive srcset/sizes.
-- The build copies only explicitly referenced derivatives into dist/. Full-size sources and unused images cannot ship.
-- Source Drive IDs, original and normalized SHA-256 hashes, orientation, crop boxes, resize widths, output dimensions, bytes and output hashes are in docs/ASSET-PROVENANCE.md and assets/derivatives.json.
-- Incorrect extra .jpg suffixes in historical source titles are corrected.
-- Former AI product images were removed. Classic Kunai and Kurama use placeholders pending their approved original copies into HoneyComb.
+## Owner-fact switches in `data/store.json`
+
+Each switch is off in the committed data. With a switch off, the site is exactly as it was before that feature (checked by diffing the built pages).
+
+| Key | Off value | When the owner sets it |
+|---|---|---|
+| `paypalOverseas` | `false` | The cart offers payers outside Sri Lanka a PayPal link in USD, which the owner sends after confirming the total. The privacy page and FAQ mention it. |
+| `delivery` | `null` | `{"text": "…", "feeLkr": 500}` (`feeLkr` optional). The owner's line shows on product pages, in the cart summary and in the FAQ. A fee becomes its own "Delivery fee" line in every order message. No total including delivery is computed. |
+| `paymentMethods` | `[]` | e.g. `["Bank transfer", "Cash on delivery"]`. The live cart offers an optional choice that adds "Preferred payment: …" to the request. With `paypalOverseas` on, PayPal becomes one of the choices. The FAQ names the methods. |
+| `social` | `[]` | `[{"label": "Instagram", "url": "https://…"}]`. The footer gains a Follow column. https links only. |
+| `pages` | `{"shipping": null, "returns": null, "about": null}` | The owner's text for a key builds `/shipping/`, `/returns/` or `/about/` and links it in the footer. Blank lines separate paragraphs. |
+| `searchIndexing` | `false` | Owner decision D-12. When true, pages lose `noindex`, `robots.txt` allows crawling and points to `sitemap.xml`, the sitemap lists the public pages, and product pages carry BreadcrumbList data. It requires an https `siteUrl`. |
+
+Every value is validated at build time; a malformed value fails the build instead of shipping.
 
 ## Verification
 
-Verified implementation: 692945e. The identical generated photo/data/provenance snapshot is committed at 838d0e1.
+- **Unit tests:** `npm test` runs domain, catalogue, render and store-loader tests.
+- **Build checks:** `npm run build && npm run check` verifies every generated page, local link and asset, image budgets and hashes, the font and favicons, `noindex` and the sitemap in both indexing states, and trust pages in both states. It also scans the output for the banned phone numbers in any format.
+- **Browser tests:** `tests/browser.mjs` (layouts at 320/390/768/1440 px, catalogue, cart, all ordering paths, FAQ, switches, 404, network failure, no page errors) and `tests/images-browser.mjs` (mobile image decoding and budgets). They follow whatever state was built.
+- **Fixtures:** `npm run gate:preview` and `npm run gate:all-on` build and test the preview state and every switch on, using fixtures in `tests/fixtures/`, without editing `data/`. `npm run check:indexing` builds and checks the indexing-on state. See [RUN-AND-RELEASE.md](RUN-AND-RELEASE.md).
 
-- [PR verification run](https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system/actions/runs/38340605075): passed.
-- [Push verification and snapshot run](https://github.com/RINS-Enterprises/honeycomb3d-ecommerce-system/actions/runs/38340699446): passed.
-- 15/15 unit tests; npm ci, build and checks passed for 13 generated pages.
-- Browser smoke passed at 320/390/768/1440 px, including prices in cart totals, cart persistence/updates/removal, custom enquiry, a mixed-price WhatsApp fixture, 404, network failure and zero page errors. No message was sent.
-- Source/output hashes, EXIF/XMP/ICC removal, actual dimensions, srcset candidates, the 660 × 198 logo, exclusive derivative distribution and both image budgets passed.
-- Independent QA image-provenance.py and image-audit.mjs from aedc1e4 passed. The browser image audit returned 18 PASS, 58 INFO (contain letterboxing), and zero failures across nine pages on mobile and desktop.
-- Largest output: 251,428 bytes (1440 px Minato). Real mobile DPR 3 transfers peaked at 424,249 bytes; the independent audit's more conservative per-image sum peaked at about 0.47 MB. Both are below 1.5 MB.
-- Leaf and Minato's committed crop outputs and the resized logo were visually inspected. No neighbouring product appears in either crop.
+## Still waiting on the owner
 
-| Mobile route (390 px, DPR 3) | Image transfer bytes |
-|---|---:|
-| / | 385,121 |
-| /shop/ | 331,603 |
-| /cart/ | 42,747 |
-| /custom/ | 42,747 |
-| /privacy/ | 42,747 |
-| /products/hidden-leaf-keychain/ | 250,939 |
-| /products/baymax-figure/ | 293,499 |
-| /products/kurama-figure/ | 210,253 |
-| /products/night-fury-keychain/ | 238,109 |
-| /products/minato-kunai/ | 424,249 |
-| /products/light-fury-keychain/ | 223,083 |
-| /products/classic-kunai/ | 172,821 |
+These are the facts the switches above wait for. The PM's register §5 is the master list.
 
-CI used pinned Pillow to create the derivatives and run the normal Node build. The final checkout contains the verified outputs, so ordinary npm ci / npm test / npm run build / npm run check needs no Python or image-processing dependency.
-
-Local execution became unavailable during this session; execution evidence comes from GitHub Actions.
-
-## Remaining owner actions
-
-- Copy Classic Kunai RAV_4322.jpg and the business-account Kurama 1.png into HoneyComb. Expected hashes and reference IDs are in the provenance document.
-- Reconcile Baymax/Kurama SKUs across Airtable and Drive before any ID migration.
-- Confirm availability and full listing/description approval, business WhatsApp and delivery/payment/return terms before launch.
-- Confirm previously flagged photo/Canva/logo rights.
-
-The store remains in preview mode, noindex, with external ordering disabled.
+- The delivery line and fee, and the payment methods accepted. Session C is preparing recommendations.
+- Social accounts the owner controls.
+- Shipping, returns and about text.
+- Whether and when to allow search indexing (D-12).
+- Whether to turn on PayPal for overseas payers, after a test payment arrives.
+- Real-phone check of the WhatsApp handoff. Firefox and Safari have not been tested by this session.

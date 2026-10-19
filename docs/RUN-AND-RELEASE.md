@@ -1,6 +1,6 @@
 # Run and release
 
-Requirements: Node.js 22 or newer. No application dependencies are required.
+Requires Node.js 22 or newer. There are no application dependencies.
 
     npm ci
     npm test
@@ -8,44 +8,88 @@ Requirements: Node.js 22 or newer. No application dependencies are required.
     npm run check
     npm start
 
-Open http://127.0.0.1:4173. npm run dev builds once and serves; it does not watch source changes.
+Open http://127.0.0.1:4173. `npm run dev` builds once and serves; it does not watch source changes. The generated site is in `dist/`.
 
-GitHub Actions also installs Playwright 1.56.1 without changing the lockfile and runs tests/browser.mjs. Its output artifact contains static dist/ and desktop/mobile screenshots. These tests cover a fixture WhatsApp URL; they never send messages.
+## Local gate
+
+Run this before pushing any change:
+
+    npm run gate            # npm test, build, check, then both browser tests
+
+The browser tests need Playwright and Chromium:
+
+- **In CI**, Playwright 1.56.1 is installed without changing the lockfile.
+- **In a Claude cloud session**, link the preinstalled copy instead: `ln -s /opt/node-tools/node_modules/playwright node_modules/playwright`, and the same for `playwright-core`.
+- **Port:** nothing else may be listening on port 4173, because the tests start their own server there.
+
+The tests use fixture WhatsApp numbers or stub the WhatsApp tab; they never send a message.
+
+## Switch states without editing data
+
+The browser tests follow whatever state was built, so a change behind a switch is tested in each state. Fixtures in `tests/fixtures/` are merged over `data/store.json` for one build through the `STORE_PATCH` environment variable. `data/` is never edited.
+
+    npm run gate:preview    # mode: preview (ordering closed)
+    npm run gate:all-on     # PayPal, delivery line and fee, payment methods, a social link, all three trust pages
+    npm run check:indexing  # searchIndexing on: robots.txt, sitemap and breadcrumb data (build and check only)
+
+The fixture texts say "Test fixture… not an owner fact" so they cannot pass for real copy. A fixture build prints `Store patch (test fixture, not for release)`. After running one, run `npm run build` again before looking at `dist/` as the real site. Production builds (`vercel.json` runs `npm run build`) never set `STORE_PATCH`.
+
+## Store settings (`data/store.json`)
+
+- **Ordering:** `mode` (`preview` or `live`), `whatsappNumber` (international digits only, no plus or spaces) and `whatsappVerified`. Live mode requires a verified number, and every approved product needs its original photo and confirmed availability.
+- **Owner-fact switches:** `paypalOverseas`, `delivery`, `paymentMethods`, `social` and `pages` stay off until the owner gives the fact. [BUILD-STATUS.md](BUILD-STATUS.md) describes the exact shape of each and what it changes. Change them only when the owner has given that fact, and record the decision in the PM's register.
+- **`searchIndexing`:** a separate owner decision (D-12), independent of ordering. It requires an https `siteUrl`.
+
+The build validates all of these and fails on a malformed value.
+
+The business WhatsApp is 94710599815. `scripts/check.mjs` fails the build if any of the banned numbers (a former partner's two numbers and a mistyped copy of the business number) appear in the output in any format. Never weaken that check.
 
 ## Catalogue
 
-Edit data/products.json, preserving IDs and slugs. Keep unknown prices null. Prices are positive LKR amounts with up to two decimal places. Never use zero to mean unknown. Supported availability: unconfirmed, available, unavailable, made-to-order.
+Edit `data/products.json`, preserving IDs and slugs.
 
-Keep photo source inputs outside public/ under assets/photo-sources/. Verify the original Drive SHA-256 before removing non-rendering source metadata, then record both hashes, the Drive ID, orientation and crop in assets/image-sources.json. Generate 480/960/1440 px WebP derivatives with python scripts/prepare-images.py (Pillow 11.3.0). It writes real dimensions and srcset variants into the catalog and records every output SHA-256 in docs/ASSET-PROVENANCE.md. Only derivatives referenced by the visible catalog are copied into dist/. Do not use AI-generated product photos. Set approved only after the owner verifies the full entry.
+- **Prices:** keep unknown prices `null`; never use zero to mean unknown. Prices are positive LKR amounts with up to two decimal places.
+- **Availability:** `unconfirmed`, `available`, `unavailable` or `made-to-order`.
+- **Approval:** set `approved` only after the owner verifies the full entry.
 
-## Contact and live mode
+Keep photo source inputs outside `public/`, under `assets/photo-sources/`.
 
-Confirm the current business contact. Set whatsappNumber to international digits only (no plus/spaces), whatsappVerified to true, and mode to live in data/store.json. Every approved live product must have its original photo and confirmed availability. Test with the real contact without sending an order unless requested.
+1. Verify the original's SHA-256 before removing non-rendering metadata.
+2. Record the hashes, source ID, orientation and crop in `assets/image-sources.json`.
+3. Generate derivatives with `python scripts/prepare-images.py` (Pillow 11.3.0). It writes real dimensions and srcset variants into the catalogue and records every output hash in [ASSET-PROVENANCE.md](ASSET-PROVENANCE.md).
 
-Preview uses noindex and disables external WhatsApp handoff. This is an indexing hint, not access control: keep preview hosting private if its contents should not be public.
+Only derivatives referenced by the visible catalogue are copied into `dist/`. Do not use AI-generated product photos.
+
+## Release
+
+The session plan is in [SESSIONS-PLAN.md](pm/SESSIONS-PLAN.md); the gate and deployment record are in the [project register](pm/PROJECT-REGISTER.md) §7.
+
+1. A session works on its own branch and opens a draft PR into `main`, so the "Storefront checks" workflow runs. Sessions never merge their own PR and never push to another session's branch.
+2. The PM session runs an independent QA review. The session fixes the findings.
+3. The PM merges into the release branch `claude/funny-albattani-c5a91a`, runs the full gate, and waits for green CI.
+4. The PM deploys to production and verifies the live site. Only the PM deploys, and never a commit whose CI is red.
 
 ## Hosting
 
-Deploy dist/ on a static host that supports directory index routes and a real 404 status for missing paths. vercel.json specifies the build output and security headers. An isolated preview project already exists: `honeycomb3d-storefront-preview`, project `prj_gpsHMSC2HZWoBOrx79ypk36O2rsS`, team `team_dErX7uzTIgpWT6SY1Syo3uxr`. Its initial deployment served the older `2260c7f` checkpoint. Consult BUILD-STATUS.md for the current tested deployment; do not create a second application or overwrite the business domain. Do not use a SPA wildcard that turns missing products into HTTP 200.
+Deploy `dist/` on a static host that supports directory index routes and a real 404 status for missing paths. Do not use a SPA wildcard that turns missing products into HTTP 200.
 
-Apply the same CSP and other headers as scripts/serve.mjs when using another host. Revalidate HTML/data rather than retaining old prices indefinitely. Use HTTPS. Keep custom domain/DNS changes separate from preview deployment. Confirm the hosting plan permits the intended commercial use before launch.
+- **Vercel:** `vercel.json` sets the build command, the output directory and the security headers. The Vercel project is `honeycomb3d-storefront-preview` (`prj_gpsHMSC2HZWoBOrx79ypk36O2rsS`, team `team_dErX7uzTIgpWT6SY1Syo3uxr`), aliased to `honeycomb3d.store`. Do not create a second project or change DNS outside the PM session.
+- **Another host:** apply the same CSP and other headers as `scripts/serve.mjs`.
+- **Caching and transport:** revalidate HTML and data rather than keeping old prices indefinitely, and use HTTPS.
 
-The former WooCommerce README is preserved in docs/LEGACY-WOOCOMMERCE-README.md. Its integrations are historical evidence, not active behavior. README.md describes this storefront.
+## Continue safely in a new session
 
-## Remaining human checks before opening orders
+- **Start from the plan:** read [SESSIONS-PLAN.md](pm/SESSIONS-PLAN.md) for your lane: the branch, the files you own and what you may not touch.
+- **Check the state:** read the register and this folder's status files, and inspect the latest remote commit before editing.
+- **Don't depend on old sessions:** clone fresh, and don't rely on another session's temporary files.
+- **Never** force-push, rewrite another session's history, merge your own PR, deploy, or change DNS or indexing from a feature session.
 
-Five approved real photos and a 660 × 198 logo are available. Classic Kunai and Kurama use placeholders pending the owner's source copies into HoneyComb. The seven LKR prices come from owner-designated Airtable Products data read 11 October 2026, with per-product provenance; no compare-at prices or stock counts are shown. Remaining owner checks: the two source copies, Baymax/Kurama SKU reconciliation, product identity and draft descriptions, and availability; business WhatsApp; actual delivery/payment/return terms; real-phone WhatsApp opening and assistive-technology review. Firefox and Safari have not been tested. A static page build does not verify any payment or order backend.
-
-## Continue safely in a new chat
-
-Use `RINS-Enterprises/honeycomb3d-ecommerce-system` and `codex/storefront-mvp`. Read BUILD-STATUS.md and inspect the latest remote commit before editing. Clone separately; do not depend on another chat’s temporary files. Claude’s actual QA branch is `claude/wizardly-mendel-73bkuw`, with draft PR #1. Implementation draft PR #2 already exists. Do not create a duplicate PR/application, edit Claude’s branch, force-push or merge into main.
-
-If a terminal lacks GitHub credentials but the GitHub connection permits writes, publish through that connection, then fetch and verify the branch head. Reject a changed expected head and reconcile it before retrying. Do not call a local commit “pushed” until the remote has been read back.
-
-If all remote write routes fail, keep local commits and export a complete source archive:
+If all remote write routes fail, keep the local commits and export a source archive:
 
 ```sh
 git archive --format=zip --prefix=honeycomb3d-storefront/ --output=../honeycomb3d-storefront-source.zip HEAD
 ```
 
-The archive includes source, original assets, data, tests and documentation. It excludes generated dist/ and credentials. Run the local commands above after extracting it. This is a source export, not an EasyWP/WordPress files-and-database backup.
+The archive includes source, original assets, data, tests and documentation. It excludes the generated `dist/` and credentials.
+
+The former WooCommerce README is preserved in [LEGACY-WOOCOMMERCE-README.md](LEGACY-WOOCOMMERCE-README.md) as historical evidence; its integrations are not active.
