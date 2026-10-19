@@ -130,6 +130,7 @@ try {
   await page.evaluate(()=>localStorage.clear());
   // Empty cart with no history offers a few designs; quick add from there fills the cart in place.
   // FAQ from the footer: a plain page that works on every build.
+  assert.equal(await page.getByTestId('footer-social').count(),builtStore.social.length?1:0,'Social links only when the owner has given accounts');
   await page.getByRole('contentinfo').getByRole('link',{name:'Questions and answers'}).click();
   await page.getByRole('heading',{level:1,name:'Questions and answers.'}).waitFor();
   assert.equal(await page.getByTestId('faq').getByRole('heading',{level:2}).count(),8);

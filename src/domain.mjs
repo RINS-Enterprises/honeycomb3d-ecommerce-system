@@ -4,6 +4,7 @@ export const CART_KEY = 'honeycomb.cart.v1';
 // One format everywhere (AC-DATA-3): whole rupees without decimals (LKR 4,500), otherwise two decimals (LKR 19.99).
 export const money = value => new Intl.NumberFormat('en-LK', {style:'currency',currency:'LKR',minimumFractionDigits:Number.isInteger(value)?0:2,maximumFractionDigits:2}).format(value);
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const isHttpsUrl = v => { try { const u=new URL(v); return u.protocol === 'https:' && !u.username && !u.password && v.length <= 200; } catch { return false; } };
 // A positive LKR amount with at most two decimal places (prices and the delivery fee).
 const validLkr = v => Number.isFinite(v) && v > 0 && Number.isSafeInteger(Math.round(v*100)) && Math.abs(Math.round(v*100)-v*100) <= 1e-6;
 export function validateData(products, store) {
@@ -19,6 +20,10 @@ export function validateData(products, store) {
   if (store.paymentMethods !== undefined) {
     const m=store.paymentMethods;
     if (!Array.isArray(m) || m.length > 6 || m.some(x=>typeof x !== 'string' || !x.trim() || x.length > 40) || new Set(m.map(x=>x.trim().toLowerCase())).size !== m.length) throw new Error('paymentMethods must be a list of up to six distinct, short owner-confirmed names');
+  }
+  if (store.social !== undefined) {
+    const s=store.social;
+    if (!Array.isArray(s) || s.length > 6 || s.some(x=>!x || typeof x.label !== 'string' || !x.label.trim() || x.label.length > 30 || typeof x.url !== 'string' || !isHttpsUrl(x.url))) throw new Error('social must be a list of up to six {label, url} links with https URLs');
   }
   if (store.whatsappVerified && !/^[1-9]\d{7,14}$/.test(store.whatsappNumber || '')) throw new Error('Use a verified international WhatsApp number, digits only');
   const ids = new Set(), slugs = new Set();
@@ -64,6 +69,8 @@ export const paypalOverseas = store => store.paypalOverseas === true;
 // Payment methods: owner-confirmed names (e.g. "Bank transfer"), empty (off) until the owner confirms them.
 // When set, the live cart offers an optional choice that is written into the order message.
 export const paymentMethods = store => Array.isArray(store.paymentMethods) ? store.paymentMethods.map(m=>m.trim()).filter(Boolean) : [];
+// Social links: accounts the owner controls, empty (off) until given. Shown in the footer.
+export const socialLinks = store => Array.isArray(store.social) ? store.social.map(x=>({label:x.label.trim(),url:x.url})) : [];
 export const delivery = store => store.delivery?.text?.trim() ? {text:store.delivery.text.trim(),feeLkr:store.delivery.feeLkr ?? null} : null;
 export const visibleProducts = (products, store) => products.filter(p => p.image && (store.mode !== 'live' || p.approved));
 export function filterProducts(products, query='', category='all') {

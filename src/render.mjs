@@ -1,4 +1,4 @@
-import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl, delivery, paymentMethods} from './domain.mjs';
+import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl, delivery, paymentMethods, socialLinks} from './domain.mjs';
 import {price, CARD_SIZES, picture, card, availability, avifSource, withPicture} from './card.mjs';
 export {price, CARD_SIZES, picture, card};
 
@@ -21,7 +21,8 @@ function footer(store) {
     '<div class="footer-brand"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a><p>3D prints, collectibles &amp; custom ideas.</p><p class="muted">Sri Lanka · Prices in LKR</p></div>' +
     '<nav class="footer-links" aria-label="Footer"><div><h2>Shop</h2><ul><li><a href="/shop/">The collection</a></li><li><a href="/cart/">Request cart</a></li></ul></div>' +
     '<div><h2>Make</h2><ul><li><a href="/custom/">Have something in mind? Tell us.</a></li></ul></div>' +
-    '<div><h2>About</h2><ul><li><a href="/faq/">Questions and answers</a></li><li><a href="/privacy/">How this site handles your data</a></li></ul></div></nav>' +
+    '<div><h2>About</h2><ul><li><a href="/faq/">Questions and answers</a></li><li><a href="/privacy/">How this site handles your data</a></li></ul></div>' +
+    (socialLinks(store).length?'<div data-testid="footer-social"><h2>Follow</h2><ul>'+socialLinks(store).map(x=>'<li><a href="'+e(x.url)+'" target="_blank" rel="me noopener noreferrer">'+e(x.label)+'<span class="sr-only"> (opens in a new tab)</span></a></li>').join('')+'</ul></div>':'')+'</nav>' +
     '<div class="footer-bottom"><p class="fine">An enquiry is not a confirmed purchase. Availability, delivery and payment arrangements are confirmed with your quote.</p>' +
     '<p class="fine">© '+new Date().getFullYear()+' '+e(store.name||'HoneyComb 3D')+'</p></div></div></footer>';
 }

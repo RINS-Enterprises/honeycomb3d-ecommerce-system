@@ -283,3 +283,15 @@ test('the FAQ names the owner\'s payment methods only when they are set and orde
   assert.doesNotMatch(faqPage({...live,mode:'preview',paymentMethods:['Bank transfer']}),/Bank transfer/,'Preview: ordering is closed');
 });
 
+test('the footer lists the owner\'s social accounts only when set, escaped, opening in a new tab',async()=>{
+  const {cartPage,faqPage,privacyPage}=await import('../src/render.mjs');
+  for(const html of [cartPage(live),faqPage({mode:'preview'})])assert(!html.includes('footer-social')&&!html.includes('<h2>Follow</h2>'));
+  const on={...live,social:[{label:'Instagram',url:'https://www.instagram.com/example?a=1&b="2"'},{label:'Face<b>book',url:'https://www.facebook.com/example'}]};
+  for(const html of [cartPage(on),privacyPage(on),faqPage({...on,mode:'preview'})]) {
+    const block=html.match(/<div data-testid="footer-social">.*?<\/div>/)[0];
+    assert.match(block,/<h2>Follow<\/h2>/);
+    assert.match(block,/<a href="https:\/\/www\.instagram\.com\/example\?a=1&amp;b=&quot;2&quot;" target="_blank" rel="me noopener noreferrer">Instagram<span class="sr-only"> \(opens in a new tab\)<\/span><\/a>/);
+    assert.match(block,/>Face&lt;b&gt;book</);
+  }
+});
+
