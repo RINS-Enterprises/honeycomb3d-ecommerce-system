@@ -1,5 +1,5 @@
 import {card} from './card.mjs';
-import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, visibleProducts, paypalOverseas, cartSuggestions, delivery, orderNowUrl, paymentMethods} from './domain.mjs';
+import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, visibleProducts, paypalOverseas, cartSuggestions, delivery, orderNowUrl, paymentMethods, paymentNote} from './domain.mjs';
 
 const status=document.querySelector('#status');
 let toastTimer;
@@ -246,7 +246,7 @@ function initCart() {
   const paymentChoice=()=>'<fieldset class="cart-payment" data-testid="cart-payment"><legend>How would you like to pay? <span>(optional)</span></legend>'+
     [['','Not sure yet',''],...methods.map(m=>[m,m,'']),...(paypalOn?[['paypal','PayPal link in USD, paying from outside Sri Lanka','We send it in WhatsApp after we confirm your total. Payments from Sri Lankan PayPal accounts are not supported.']]:[])].map(([value,label,help],i)=>
     '<label class="cart-choice"><input type="radio" name="order-payment" data-payment-index="'+i+'"'+(payment===value?' checked':'')+'><span>'+e(label)+(help?'<small>'+e(help)+'</small>':'')+'</span></label>').join('')+
-    '<p class="fine">Payment arrangements are confirmed with your quote.</p></fieldset>';
+    '<p class="fine" data-testid="cart-payment-note">'+e(paymentNote(store)||'Payment arrangements are confirmed with your quote.')+'</p></fieldset>';
   const paymentValues=()=>['',...methods,...(paypalOn?['paypal']:[])];
   function render(focusKey) {
     const s=cartSummary(cart,products);

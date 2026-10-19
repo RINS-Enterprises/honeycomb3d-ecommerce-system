@@ -370,6 +370,7 @@ try {
   const payment=page.getByTestId('cart-payment');
   assert.deepEqual(await payment.locator('.cart-choice > span').evaluateAll(ls=>ls.map(l=>l.firstChild.textContent)),['Not sure yet','Bank transfer','Cash on delivery','PayPal link in USD, paying from outside Sri Lanka']);
   assert.equal(await page.getByRole('radio',{name:'Not sure yet'}).isChecked(),true,'No choice is made for the customer');
+  assert.equal(await page.getByTestId('cart-payment-note').textContent(),builtStore.paymentNote||'Payment arrangements are confirmed with your quote.','The owner\'s line, or the neutral default');
   assert.equal(await page.getByTestId('cart-paypal').count(),0,'PayPal sits among the choices, not as a second control');
   assert.doesNotMatch(await paypalHref(),/Preferred payment|PayPal/);
   await page.getByRole('radio',{name:'Bank transfer'}).check();

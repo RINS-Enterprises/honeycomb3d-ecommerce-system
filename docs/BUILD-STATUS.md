@@ -30,7 +30,8 @@ Each switch is off in the committed data. With a switch off, the site is exactly
 |---|---|---|
 | `paypalOverseas` | `false` | The cart offers payers outside Sri Lanka a PayPal link in USD, which the owner sends after confirming the total. The privacy page and FAQ mention it. |
 | `delivery` | `null` | `{"text": "…", "feeLkr": 500}` (`feeLkr` optional). The owner's line shows on product pages, in the cart summary and in the FAQ. A fee becomes its own "Delivery fee" line in every order message. No total including delivery is computed. |
-| `paymentMethods` | `[]` | e.g. `["Bank transfer", "Cash on delivery"]`. The live cart offers an optional choice that adds "Preferred payment: …" to the request. With `paypalOverseas` on, PayPal becomes one of the choices. The FAQ names the methods. |
+| `paymentMethods` | `[]` | Names such as `"Bank transfer"`, or the ids `lankaqr`, `bank-transfer` and `cash-on-delivery`, which show as "LankaQR", "Bank transfer" and "Cash on delivery". The live cart offers an optional choice that adds "Preferred payment: …" to the request. With `paypalOverseas` on, PayPal becomes one of the choices. The FAQ names the methods. |
+| `paymentNote` | `null` | The owner's line under the cart's payment choice. It is shown only when methods are set; otherwise the cart says "Payment arrangements are confirmed with your quote". |
 | `social` | `[]` | `[{"label": "Instagram", "url": "https://…"}]`. The footer gains a Follow column. https links only. |
 | `pages` | `{"shipping": null, "returns": null, "about": null}` | The owner's text for a key builds `/shipping/`, `/returns/` or `/about/` and links it in the footer. Blank lines separate paragraphs. |
 | `searchIndexing` | `false` | Owner decision D-12. When true, pages lose `noindex`, `robots.txt` allows crawling and points to `sitemap.xml`, the sitemap lists the public pages, and product pages carry BreadcrumbList data. It requires an https `siteUrl`. |
@@ -42,13 +43,13 @@ Every value is validated at build time; a malformed value fails the build instea
 - **Unit tests:** `npm test` runs domain, catalogue, render and store-loader tests.
 - **Build checks:** `npm run build && npm run check` verifies every generated page, local link and asset, image budgets and hashes, the font and favicons, `noindex` and the sitemap in both indexing states, and trust pages in both states. It also scans the output for the banned phone numbers in any format.
 - **Browser tests:** `tests/browser.mjs` (layouts at 320/390/768/1440 px, catalogue, cart, all ordering paths, FAQ, switches, 404, network failure, no page errors) and `tests/images-browser.mjs` (mobile image decoding and budgets). They follow whatever state was built.
-- **Fixtures:** `npm run gate:preview` and `npm run gate:all-on` build and test the preview state and every switch on, using fixtures in `tests/fixtures/`, without editing `data/`. `npm run check:indexing` builds and checks the indexing-on state. See [RUN-AND-RELEASE.md](RUN-AND-RELEASE.md).
+- **Fixtures:** `npm run gate:preview`, `npm run gate:all-on` and `npm run gate:proposal` (session C's proposed delivery and payment values) build and test the preview state and every switch on, using fixtures in `tests/fixtures/`, without editing `data/`. `npm run check:indexing` builds and checks the indexing-on state. See [RUN-AND-RELEASE.md](RUN-AND-RELEASE.md).
 
 ## Still waiting on the owner
 
 These are the facts the switches above wait for. The PM's register §5 is the master list.
 
-- The delivery line and fee, and the payment methods accepted. Session C is preparing recommendations.
+- The delivery line and fee, and the payment methods accepted. Session C's proposed values are in `docs/business/OWNER-DECISIONS.md` on its branch, and `tests/fixtures/store-session-c-proposal.json` holds them for testing; they stay off in `data/` until the owner replies.
 - Social accounts the owner controls.
 - Shipping, returns and about text.
 - Whether and when to allow search indexing (D-12).

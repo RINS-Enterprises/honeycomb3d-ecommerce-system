@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {loadStore} from '../scripts/store.mjs';
-import {validateData,orderingOpen,delivery,paymentMethods,socialLinks,trustPages,searchIndexing} from '../src/domain.mjs';
+import {validateData,orderingOpen,delivery,paymentMethods,paymentNote,socialLinks,trustPages,searchIndexing} from '../src/domain.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const data=JSON.parse(await readFile(new URL('../data/store.json',import.meta.url),'utf8'));
@@ -17,6 +17,7 @@ test('without STORE_PATCH the build reads data/store.json unchanged',async()=>{
 test('the committed store keeps every owner-fact switch off',()=>{
   assert.equal(delivery(data),null);
   assert.deepEqual(paymentMethods(data),[]);
+  assert.equal(paymentNote(data),null);
   assert.deepEqual(socialLinks(data),[]);
   assert.deepEqual(trustPages(data),[]);
   assert.equal(searchIndexing(data),false);
@@ -39,3 +40,12 @@ test('fixtures merge over the store, validate, and switch exactly what they name
   assert.equal(searchIndexing(indexing),true);
   await assert.rejects(loadStore(root,'tests/fixtures/missing.json'));
 });
+
+test('session C\'s proposed delivery and payment values (PM, 2026-10-19) validate and render as intended',async()=>{
+  const proposal=await loadStore(root,'tests/fixtures/store-session-c-proposal.json');
+  validateData(products,proposal);
+  assert.deepEqual(delivery(proposal),{text:'Islandwide delivery by courier, LKR 400. Usually 2–4 working days after your order is printed.',feeLkr:400});
+  assert.deepEqual(paymentMethods(proposal),['LankaQR','Bank transfer','Cash on delivery']);
+  assert.match(paymentNote(proposal),/^Pay by LankaQR, bank transfer or cash on delivery\./);
+});
+

@@ -14,6 +14,7 @@
     "gate": "npm test && npm run build && npm run check && npm run test:browser",
     "gate:preview": "STORE_PATCH=tests/fixtures/store-preview.json npm run build && STORE_PATCH=tests/fixtures/store-preview.json npm run check && npm run test:browser",
     "gate:all-on": "STORE_PATCH=tests/fixtures/store-all-on.json npm run build && STORE_PATCH=tests/fixtures/store-all-on.json npm run check && npm run test:browser",
+    "gate:proposal": "STORE_PATCH=tests/fixtures/store-session-c-proposal.json npm run build && STORE_PATCH=tests/fixtures/store-session-c-proposal.json npm run check && npm run test:browser",
     "check:indexing": "STORE_PATCH=tests/fixtures/store-indexing.json npm run build && STORE_PATCH=tests/fixtures/store-indexing.json npm run check"
   }
 }

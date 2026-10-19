@@ -9,6 +9,7 @@
   "paypalOverseas": false,
   "delivery": null,
   "paymentMethods": [],
+  "paymentNote": null,
   "social": [],
   "pages": {
     "shipping": null,

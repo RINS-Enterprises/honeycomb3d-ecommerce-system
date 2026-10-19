@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl,cartSuggestions,delivery,money,paymentMethods,socialLinks,trustPages} from '../src/domain.mjs';
+import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl,cartSuggestions,delivery,money,paymentMethods,paymentNote,socialLinks,trustPages} from '../src/domain.mjs';
 const p=(id,priceLkr=null,availability='unconfirmed')=>({id,slug:id.toLowerCase(),name:id,category:'Figures',tags:['Anime'],description:'Example',source:'Test fixture',priceLkr,availability,image:null,imageAlt:null,approved:false});
 const products=[p('A',10.25),p('B'),p('C',10,'unavailable')];
 const preview={mode:'preview',whatsappVerified:false,whatsappNumber:null};
@@ -157,5 +157,17 @@ test('trust pages exist only once the owner has written them',()=>{
   assert.deepEqual(trustPages({pages:{shipping:null,returns:' We accept returns when… ',about:null}}).map(t=>[t.slug,t.title,t.text]),[['returns','Returns','We accept returns when…']]);
   assert.doesNotThrow(()=>validateData(products,{...preview,pages:{shipping:'Owner text',returns:null,about:null}}));
   for(const value of [null,[],'text',{faq:'x'},{shipping:''},{shipping:5},{about:'x'.repeat(4001)}])assert.throws(()=>validateData(products,{...preview,pages:value}),/pages/,JSON.stringify(value));
+});
+
+test('payment method ids render as labels, and the owner\'s cart line shows only with methods',()=>{
+  assert.deepEqual(paymentMethods({paymentMethods:['lankaqr','bank-transfer','cash-on-delivery']}),['LankaQR','Bank transfer','Cash on delivery']);
+  assert.deepEqual(paymentMethods({paymentMethods:['LANKAQR','Card at pickup']}),['LankaQR','Card at pickup'],'Unknown names stay as written');
+  assert.throws(()=>validateData(products,{...preview,paymentMethods:['bank-transfer','Bank transfer']}),/paymentMethods/,'An id and its label are the same method');
+  const note='Pay by LankaQR. We send payment details on WhatsApp.';
+  assert.equal(paymentNote({paymentMethods:['lankaqr'],paymentNote:'  '+note+' '}),note);
+  assert.equal(paymentNote({paymentMethods:[],paymentNote:note}),null,'No methods, no note');
+  assert.equal(paymentNote({paymentMethods:['lankaqr'],paymentNote:null}),null);
+  assert.doesNotThrow(()=>validateData(products,{...preview,paymentNote:null}));
+  for(const value of ['',' ',5,'x'.repeat(201)])assert.throws(()=>validateData(products,{...preview,paymentNote:value}),/paymentNote/,JSON.stringify(value));
 });
 

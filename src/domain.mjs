@@ -19,8 +19,9 @@ export function validateData(products, store) {
   }
   if (store.paymentMethods !== undefined) {
     const m=store.paymentMethods;
-    if (!Array.isArray(m) || m.length > 6 || m.some(x=>typeof x !== 'string' || !x.trim() || x.length > 40) || new Set(m.map(x=>x.trim().toLowerCase())).size !== m.length) throw new Error('paymentMethods must be a list of up to six distinct, short owner-confirmed names');
+    if (!Array.isArray(m) || m.length > 6 || m.some(x=>typeof x !== 'string' || !x.trim() || x.length > 40) || new Set(m.map(x=>paymentLabel(x).toLowerCase())).size !== m.length) throw new Error('paymentMethods must be a list of up to six distinct, short owner-confirmed names');
   }
+  if (store.paymentNote !== undefined && store.paymentNote !== null && (typeof store.paymentNote !== 'string' || !store.paymentNote.trim() || store.paymentNote.trim().length > 200)) throw new Error('paymentNote must be null or a short owner-given line');
   if (store.social !== undefined) {
     const s=store.social;
     if (!Array.isArray(s) || s.length > 6 || s.some(x=>!x || typeof x.label !== 'string' || !x.label.trim() || x.label.length > 30 || typeof x.url !== 'string' || !isHttpsUrl(x.url))) throw new Error('social must be a list of up to six {label, url} links with https URLs');
@@ -73,7 +74,12 @@ export const paypalOverseas = store => store.paypalOverseas === true;
 // a fee, when given, rides as its own line in every order message. Off means the site reads exactly as before.
 // Payment methods: owner-confirmed names (e.g. "Bank transfer"), empty (off) until the owner confirms them.
 // When set, the live cart offers an optional choice that is written into the order message.
-export const paymentMethods = store => Array.isArray(store.paymentMethods) ? store.paymentMethods.map(m=>m.trim()).filter(Boolean) : [];
+// Entries may be display names or these ids (session C's proposal); ids render as their label.
+const PAYMENT_LABELS = {'lankaqr':'LankaQR','bank-transfer':'Bank transfer','cash-on-delivery':'Cash on delivery'};
+const paymentLabel = m => PAYMENT_LABELS[m.trim().toLowerCase()] ?? m.trim();
+export const paymentMethods = store => Array.isArray(store.paymentMethods) ? store.paymentMethods.map(paymentLabel).filter(Boolean) : [];
+// The owner's own line for the cart's payment choice (e.g. how payment details are sent); null keeps the neutral default.
+export const paymentNote = store => paymentMethods(store).length && typeof store.paymentNote === 'string' && store.paymentNote.trim() ? store.paymentNote.trim() : null;
 // Social links: accounts the owner controls, empty (off) until given. Shown in the footer.
 export const socialLinks = store => Array.isArray(store.social) ? store.social.map(x=>({label:x.label.trim(),url:x.url})) : [];
 // Trust pages: generated, and linked from the footer, only once the owner has written their text (store.pages.<key>).

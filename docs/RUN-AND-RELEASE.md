@@ -30,14 +30,15 @@ The browser tests follow whatever state was built, so a change behind a switch i
 
     npm run gate:preview    # mode: preview (ordering closed)
     npm run gate:all-on     # PayPal, delivery line and fee, payment methods, a social link, all three trust pages
+    npm run gate:proposal   # session C's proposed delivery line (LKR 400) and payment methods, as the owner would set them
     npm run check:indexing  # searchIndexing on: robots.txt, sitemap and breadcrumb data (build and check only)
 
-The fixture texts say "Test fixture… not an owner fact" so they cannot pass for real copy. A fixture build prints `Store patch (test fixture, not for release)`. After running one, run `npm run build` again before looking at `dist/` as the real site. Production builds (`vercel.json` runs `npm run build`) never set `STORE_PATCH`.
+The all-on fixture's texts say "Test fixture… not an owner fact" so they cannot pass for real copy. The proposal fixture holds session C's proposed values; they are not owner facts until the owner replies. A fixture build prints `Store patch (test fixture, not for release)`. After running one, run `npm run build` again before looking at `dist/` as the real site. Production builds (`vercel.json` runs `npm run build`) never set `STORE_PATCH`.
 
 ## Store settings (`data/store.json`)
 
 - **Ordering:** `mode` (`preview` or `live`), `whatsappNumber` (international digits only, no plus or spaces) and `whatsappVerified`. Live mode requires a verified number, and every approved product needs its original photo and confirmed availability.
-- **Owner-fact switches:** `paypalOverseas`, `delivery`, `paymentMethods`, `social` and `pages` stay off until the owner gives the fact. [BUILD-STATUS.md](BUILD-STATUS.md) describes the exact shape of each and what it changes. Change them only when the owner has given that fact, and record the decision in the PM's register.
+- **Owner-fact switches:** `paypalOverseas`, `delivery`, `paymentMethods` (with `paymentNote`), `social` and `pages` stay off until the owner gives the fact. [BUILD-STATUS.md](BUILD-STATUS.md) describes the exact shape of each and what it changes. Change them only when the owner has given that fact, and record the decision in the PM's register.
 - **`searchIndexing`:** a separate owner decision (D-12), independent of ordering. It requires an https `siteUrl`.
 
 The build validates all of these and fails on a malformed value.
