@@ -175,10 +175,16 @@ try {
   await page.getByRole('spinbutton').fill('2');
   if(ordering) {
     // One-tap order: same business number, just this design at the chosen quantity, nothing added to the cart.
-    const orderNow=new URL(await page.locator('.order-now').getByRole('link',{name:'Order now on WhatsApp'}).getAttribute('href'));
+    const orderLink=page.locator('#add-form').getByRole('link',{name:'Order now on WhatsApp'});
+    const orderNow=new URL(await orderLink.getAttribute('href'));
     assert.equal(orderNow.origin+orderNow.pathname,'https://wa.me/'+builtStore.whatsappNumber);
     assert.match(orderNow.searchParams.get('text'),/^Hello HoneyComb 3D, I would like to request an order\.\n- Baymax Figure \[HC-BAYMAX\] x 2: /);
     assert.match(orderNow.searchParams.get('text'),/not a confirmed purchase/);
+    // An invalid quantity never rides along silently: the link is marked invalid until the field is fixed.
+    await page.getByRole('spinbutton').fill('21');
+    assert.equal(await orderLink.getAttribute('data-invalid'),'');
+    await page.getByRole('spinbutton').fill('2');
+    assert.equal(await orderLink.getAttribute('data-invalid'),null);
   } else assert.equal(await page.getByTestId('order-now').count(),0);
   await page.getByRole('button',{name:'Add to request cart'}).click();
   await page.getByRole('button',{name:'Added to cart ✓'}).waitFor();

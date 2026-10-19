@@ -206,12 +206,23 @@ function initQuickAdd() {
 function initAdd() {
   const form=document.querySelector('#add-form');if(!form)return;
   const orderNow=[...document.querySelectorAll('[data-order-now]')];
-  if(orderNow.length) form.elements.quantity.addEventListener('input',()=>{
-    const quantity=Number(form.elements.quantity.value);
-    if(!Number.isInteger(quantity)||quantity<1||quantity>MAX_QUANTITY)return;
-    const url=whatsappUrl(orderMessage([{id:form.dataset.productId,quantity}],products),store);
-    if(url)orderNow.forEach(link=>link.href=url);
-  });
+  if(orderNow.length) {
+    // The links always carry the quantity on screen. An invalid quantity blocks the tap and shows why,
+    // like Add to request cart, instead of silently sending the last valid number.
+    const field=form.elements.quantity;
+    const sync=()=>{
+      const valid=field.checkValidity();
+      const url=valid&&whatsappUrl(orderMessage([{id:form.dataset.productId,quantity:Number(field.value)}],products),store);
+      orderNow.forEach(link=>{if(url)link.href=url;link.toggleAttribute('data-invalid',!url);});
+    };
+    ['input','change'].forEach(type=>field.addEventListener(type,sync));
+    addEventListener('pageshow',sync);
+    sync();
+    orderNow.forEach(link=>link.addEventListener('click',event=>{
+      if(!link.hasAttribute('data-invalid'))return;
+      event.preventDefault();form.reportValidity();
+    }));
+  }
   form.addEventListener('submit',event=>{
     event.preventDefault();if(!form.reportValidity())return;
     const quantity=Number(form.elements.quantity.value);

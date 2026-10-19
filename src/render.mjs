@@ -149,7 +149,7 @@ export function detail(p,products,store) {
   const ordering=store.mode==='live'&&store.whatsappVerified;
   // One tap from product to WhatsApp, skipping the cart. app.mjs keeps the quantity in the link current.
   const orderNow=ordering&&p.availability!=='unavailable'?whatsappUrl(orderMessage([{id:p.id,quantity:1}],[p]),store):null;
-  const orderNowLink=label=>'<a class="button" href="'+e(orderNow)+'" target="_blank" rel="noopener noreferrer" data-order-now data-testid="order-now">'+label+'</a>';
+  const orderNowLink=(label,testid)=>'<a class="button" href="'+e(orderNow)+'" target="_blank" rel="noopener noreferrer" data-order-now data-testid="'+testid+'">'+label+'<span class="sr-only"> (opens in a new tab)</span></a>';
   const crumbs='<nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/shop/">Shop</a></li><li><a href="/shop/?category='+encodeURIComponent(p.category)+'">'+e(p.category)+'</a></li><li><span aria-current="page">'+e(p.name)+'</span></li></ol></nav>';
   // Price and availability already lead the page; the facts link onward to the matching shop views instead.
   const shopLink=(key,value)=>'<a href="/shop/?'+key+'='+encodeURIComponent(value)+'">'+e(value)+'</a>';
@@ -173,8 +173,8 @@ export function detail(p,products,store) {
     '<div class="detail-info"><p class="eyebrow">'+e(p.category)+'</p><h1>'+e(p.name)+'</h1><p class="detail-price" data-testid="product-price">'+e(price(p))+'</p>' +
     '<p class="status-chip status-'+e(p.availability)+'" data-testid="availability"><span aria-hidden="true"></span>'+availability(p)+'</p>' +
     '<p class="lead">'+e(p.description)+'</p>' +
-    '<form id="add-form" data-product-id="'+e(p.id)+'"><label>Quantity<input name="quantity" type="number" min="1" max="20" step="1" value="1" required></label><button class="button'+(orderNow?' secondary':'')+'" type="submit" disabled data-enable="'+(p.availability!=='unavailable')+'" data-testid="add-to-cart">'+(p.availability==='unavailable'?'Currently unavailable':'Add to request cart')+'</button></form>' +
-    (orderNow?'<div class="order-now">'+orderNowLink('Order now on WhatsApp <span aria-hidden="true">↗</span>')+'<p class="fine">Opens WhatsApp with this design. Nothing is sent until you send it, and your order is confirmed once we agree the details.</p></div>':'') +
+    '<form id="add-form" data-product-id="'+e(p.id)+'"'+(orderNow?' class="has-order-now"':'')+'><label>Quantity<input name="quantity" type="number" min="1" max="20" step="1" value="1" required></label>'+(orderNow?orderNowLink('Order now on WhatsApp <span aria-hidden="true">↗</span>','order-now'):'')+'<button class="button'+(orderNow?' secondary':'')+'" type="submit" disabled data-enable="'+(p.availability!=='unavailable')+'" data-testid="add-to-cart">'+(p.availability==='unavailable'?'Currently unavailable':'Add to request cart')+'</button></form>' +
+    (orderNow?'<p class="fine order-now-note">Order now opens WhatsApp with this design. Nothing is sent until you send it, and your order is confirmed once we agree the details.</p><noscript><p class="fine">Without JavaScript, Order now asks for one. Change the quantity in WhatsApp before you send.</p></noscript>':'') +
     (ordering?'':'<p class="order-note" data-testid="order-status"><span class="order-dot" aria-hidden="true"></span>Online ordering opens soon. Save your picks in the request cart.</p>') +
     '<noscript><p>Enable JavaScript to build a request cart.</p></noscript>' +
     '<p class="fine">The request cart saves a list on your device. It does not reserve stock or complete a purchase.</p>' +
@@ -182,7 +182,7 @@ export function detail(p,products,store) {
     '<p class="fine">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
     '<a class="text-link" href="/cart/">View your request cart →</a>'+
     '<p class="variation-note">Want it in another size or colour? <a href="/custom/?design='+encodeURIComponent(p.id)+'" data-testid="ask-variation">Ask about a variation →</a></p>'+shareRow(p,store)+'</div></div></section>' +
-    (p.availability==='unavailable'?'':'<div class="sticky-buy" data-sticky-buy data-testid="sticky-buy" hidden><div class="sticky-buy-copy"><strong>'+e(p.name)+'</strong><span>'+e(price(p))+'</span></div>'+(orderNow?orderNowLink('Order now'):'<button type="button" class="button" data-sticky-add>Add to request cart</button>')+'</div>') +
+    (p.availability==='unavailable'?'':'<div class="sticky-buy" data-sticky-buy data-testid="sticky-buy" hidden><div class="sticky-buy-copy"><strong>'+e(p.name)+'</strong><span>'+e(price(p))+'</span></div>'+(orderNow?orderNowLink('Order now<span class="sr-only"> on WhatsApp</span>','sticky-order-now'):'<button type="button" class="button" data-sticky-add>Add to request cart</button>')+'</div>') +
     (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2>'+moreLink+'</div><div class="product-grid">'+more.map(p=>card(p)).join('')+'</div></section>':'')+recentRow(p.id),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
 }
 export function cartPage(store) {
