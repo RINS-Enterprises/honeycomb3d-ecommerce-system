@@ -13,8 +13,8 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 | 5 | Payment methods (switch) | Done, QA fixed | `6e49d2c`, `a651d24`, `d4e0c19` |
 | 6 | Social links | Done, QA fixed | `10aae7f`, `d4e0c19` |
 | 7 | Trust pages | Done, QA fixed | `b5c2e3f`, `d4e0c19` |
-| 8 | Indexing prep | Done, QA in progress | `7881dcc` |
-| 9 | Testing and docs | Done, QA in progress | `ad6f20f` |
+| 8 | Indexing prep | Done, QA fixed | `7881dcc` + final QA-fix commit |
+| 9 | Testing and docs | Done, QA fixed | `ad6f20f` + final QA-fix commit |
 
 ## 1. Order button on shop cards
 
@@ -222,6 +222,14 @@ The switched states were temporary local edits, never committed.
   - Negative checks confirmed each new assertion fails when broken: a dropped sitemap entry, a missing breadcrumb, a stray breadcrumb, a stray sitemap.
 - **Off = unchanged:** every generated page is byte-identical (diffed).
 - **Tests:** a render unit test (breadcrumb structure, sitemap contents, nothing invented) and `npm run check:indexing`, which builds and checks the on state from a fixture.
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, now fixed. The reviewer confirmed the off state is byte-identical and that no existing check was weakened.
+  - Should-fix, fixed: check.mjs missed some broken "on" states: a sitemap without `</urlset>` or its namespace, a breadcrumb with a wrong position, a relative item or malformed JSON, and `robots` `none`.
+    - It now matches the whole sitemap document, parses every JSON-LD block, and deep-equals each product's BreadcrumbList against the catalogue's trail.
+    - Pages other than the cart and 404 must carry no robots meta at all.
+    - Each of those breakages was confirmed to fail the check.
+  - Nit, fixed: with indexing on, the cart and 404 keep `noindex` (they were already left out of the sitemap).
+  - Nit, fixed: `siteUrl` may end in one slash.
+  - Nit, left for W-10: a canonical link for filtered shop URLs, recorded in BUILD-STATUS.
 - **Waits on owner fact:** D-12, the owner's decision to allow search indexing. Nothing here turns it on.
 
 ## 9. Testing and docs
@@ -237,9 +245,27 @@ The switched states were temporary local edits, never committed.
 - **npm scripts:** `gate` (unit, build, check, both browser tests), `gate:preview`, `gate:all-on`, `gate:proposal`, `check:indexing` and `test:browser`.
 - **`tests/store.test.mjs`:** checks the loader, that every fixture validates and switches only what it names, and that every owner-fact switch is off in the committed data.
 - **Docs:** `docs/BUILD-STATUS.md`, `docs/RUN-AND-RELEASE.md` and the README's status sections are rewritten to describe the live site, the session and release flow, every switch and the gates. They previously described the 13 October preview checkpoint.
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, now fixed. The reviewer checked every factual claim in the three docs against the code, data, register and GitHub, and found them correct.
+  - Should-fix, fixed: "release builds never set STORE_PATCH" was a promise, not a check. The loader now accepts only files in `tests/fixtures/` and fails the build when `VERCEL` is set, both covered by tests.
+  - Should-fix, fixed: RUN-AND-RELEASE pointed to register §7 for the flow, but §7's gate text predates the session plan. It now follows SESSIONS-PLAN and notes the difference (see below).
+  - Nits, fixed: the banned-number check is described as "common formats", and the fixture test checks that every fixture leaves all other keys alone.
+  - Noted: like items 4–7, `a651d24` added an off-by-default key (`paymentNote: null`) to `data/store.json`, as the brief allows.
+- **Follow-ups `a651d24` and `d4e0c19` in the same review:** `a651d24` PASS. `d4e0c19` FAIL until fixed, now fixed:
+  - **Blocker, fixed:** a validation regex used the `v` flag, and `domain.mjs` ships to browsers. Safari before 17 (iPhones stuck on iOS 16), Chrome before 112 and Firefox before 116 would reject the module, breaking the cart, filters and payment choice on every page. It never reached the release branch.
+    - The regex now uses only the `u` flag.
+    - check.mjs now parses every shipped browser module with the `v` flag disabled, so newer regex syntax fails the build. A reintroduced `v` regex was confirmed to fail it.
+  - Should-fix, fixed: social link duplicates are compared after normalising (`https://x.com` and `https://x.com/`).
+  - Nits, fixed:
+    - Names reject line and paragraph separators and bidi controls.
+    - "Pay Pal" is caught.
+    - "Not sure yet" can't be a method.
+    - Spacing variants count as duplicates.
+    - Descriptions cut on graphemes, so a Sinhala letter keeps its vowel sign and a ZWJ emoji stays whole.
+  - Nit, kept: method names keep the owner's capitals in the FAQ sentence.
 - **For the PM (outside my files):**
   - CI (`.github/workflows/storefront.yml`) still builds only the committed state. Adding `npm run gate:preview` and `npm run gate:all-on` would test the switched states on every PR.
-  - `package.json` gained the npm scripts above.
+  - `package.json` gained the npm scripts above (PM: keep them there).
+  - Register §2 and §7 still describe deploys from `codex/storefront-mvp` by a QA session, while SESSIONS-PLAN has the PM deploy from `claude/funny-albattani-c5a91a`.
 
 ## Gate at `d4e0c19` (items 5–9 with QA fixes)
 
@@ -252,4 +278,16 @@ The switched states were temporary local edits, never committed.
 | `npm run check:indexing` | 24 | pass |
 
 Each gate except `check:indexing` covers build, check, `browser.mjs` and `images-browser.mjs`; `check:indexing` is build and check only. The all-on footer was also checked at 390px (100% and 200% text) and 1440px.
+
+## Final gate (after all QA fixes)
+
+Every gate exited 0:
+
+| Gate | Pages | Result |
+|---|---|---|
+| `npm run gate` (63 unit tests, build, check, both browser tests) | 24 | pass |
+| `npm run gate:preview` | 24 | pass |
+| `npm run gate:all-on` | 27 | pass |
+| `npm run gate:proposal` | 24 | pass |
+| `npm run check:indexing` | 24 | pass |
 

@@ -347,3 +347,17 @@ test('trust page descriptions end on a whole word; CRLF text renders cleanly; pa
   assert.match(faqPage({...live,paymentMethods:['Card, debit','Bank transfer']}),/how you would like to pay: Card, debit or Bank transfer\./);
 });
 
+test('indexing on keeps the cart and 404 out of search results; descriptions never split a grapheme (QA, items 8-9)',async()=>{
+  const {cartPage,notFound,faqPage,trustPage}=await import('../src/render.mjs');
+  const {trustPages}=await import('../src/domain.mjs');
+  const on={...live,searchIndexing:true,siteUrl:'https://honeycomb3d.store'};
+  for(const html of [cartPage(on),notFound([],on)])assert.match(html,/<meta name="robots" content="noindex,nofollow">/);
+  assert.doesNotMatch(faqPage(on),/<meta name="robots"/);
+  const sinhala='ක'.repeat(100)+'කා'.repeat(60);
+  const description=trustPage(trustPages({pages:{about:sinhala}})[0],live).match(/<meta name="description" content="([^"]*)">/)[1];
+  assert(description.endsWith('කා…'),'Ends on a whole letter with its vowel sign');
+  const family='👨‍👩‍👧'.repeat(160);
+  const d2=trustPage(trustPages({pages:{about:family}})[0],live).match(/<meta name="description" content="([^"]*)">/)[1];
+  assert(d2.replace('…','').split('👨‍👩‍👧').every(x=>x===''),'ZWJ sequences stay whole');
+});
+

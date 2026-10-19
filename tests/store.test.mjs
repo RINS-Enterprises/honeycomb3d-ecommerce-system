@@ -27,6 +27,11 @@ test('fixtures merge over the store, validate, and switch exactly what they name
   const preview=await loadStore(root,'tests/fixtures/store-preview.json');
   assert.deepEqual(preview,{...data,mode:'preview'});
   assert.equal(orderingOpen(preview),false);
+  for(const name of ['store-preview','store-all-on','store-indexing','store-session-c-proposal']) {
+    const patch=JSON.parse(await readFile(new URL('fixtures/'+name+'.json',import.meta.url),'utf8'));
+    const merged=await loadStore(root,'tests/fixtures/'+name+'.json');
+    for(const key of Object.keys(data))if(!(key in patch))assert.deepEqual(merged[key],data[key],name+' leaves '+key+' alone');
+  }
   const on=await loadStore(root,'tests/fixtures/store-all-on.json');
   validateData(products,on);
   assert.equal(delivery(on).feeLkr,450.5);
@@ -47,5 +52,12 @@ test('session C\'s proposed delivery and payment values (PM, 2026-10-19) validat
   assert.deepEqual(delivery(proposal),{text:'Islandwide delivery by courier, LKR 400. Usually 2–4 working days after your order is printed.',feeLkr:400});
   assert.deepEqual(paymentMethods(proposal),['LankaQR','Bank transfer','Cash on delivery']);
   assert.match(paymentNote(proposal),/^Pay by LankaQR, bank transfer or cash on delivery\./);
+});
+
+test('STORE_PATCH accepts only test fixtures and never runs in a Vercel build',async()=>{
+  for(const path of ['data/store.json','../store.json','/etc/hosts','tests/fixtures/../../data/store.json','tests/fixtures-evil/x.json'])await assert.rejects(loadStore(root,path),/tests\/fixtures/,path);
+  process.env.VERCEL='1';
+  try{await assert.rejects(loadStore(root,'tests/fixtures/store-preview.json'),/Vercel/);assert.deepEqual(await loadStore(root,''),data,'A normal Vercel build is unaffected');}
+  finally{delete process.env.VERCEL;}
 });
 

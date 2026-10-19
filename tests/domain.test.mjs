@@ -191,3 +191,15 @@ test('owner-text switches reject collisions, invisible or multi-line names and m
   bad({delivery:{text:'\u200b'}},/delivery/);
 });
 
+test('names reject line and bidi separators, PayPal look-alikes, the default choice and spacing duplicates; links compare normalised (QA, items 8-9)',()=>{
+  const bad=(value,re)=>assert.throws(()=>validateData(products,{...preview,...value}),re,JSON.stringify(value));
+  bad({paymentMethods:['Bank\u2028transfer']},/paymentMethods/);
+  bad({paymentMethods:['\u202eBank']},/paymentMethods/);
+  bad({paymentMethods:['Pay Pal']},/use paypalOverseas/);
+  bad({paymentMethods:['Not sure yet']},/default choice/);
+  bad({paymentMethods:['Bank transfer','Bank  transfer']},/same method twice/);
+  bad({social:[{label:'A',url:'https://example.com'},{label:'B',url:'https://example.com/'}]},/social/);
+  bad({pages:{about:'Text \u202e reversed'}},/pages/);
+  assert.doesNotThrow(()=>validateData(products,{...preview,searchIndexing:true,siteUrl:'https://honeycomb3d.store/'}),'One trailing slash is fine');
+});
+

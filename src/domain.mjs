@@ -6,7 +6,9 @@ export const money = value => new Intl.NumberFormat('en-LK', {style:'currency',c
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const isHttpsUrl = v => { if (!/^https:\/\/[^\s]+$/.test(v) || v.length > 200) return false; try { const u=new URL(v); return !u.username && !u.password; } catch { return false; } };
 // Owner text checks: no control or invisible-only content (a zero-width space is not a name); limits count the trimmed text.
-const ownerText = (v, max, {lines=false}={}) => typeof v === 'string' && v.trim().length > 0 && v.trim().length <= max && /[^\p{Cf}\p{Z}\s]/u.test(v) && !(lines ? /[\p{Cc}--[\n\r\t]]/v : /\p{Cc}/u).test(v.trim());
+// No regex v flag here: this file ships to browsers (Safari < 17 rejects the whole module); scripts/check.mjs guards it.
+const ownerText = (v, max, {lines=false}={}) => typeof v === 'string' && v.trim().length > 0 && v.trim().length <= max && /[^\p{Cf}\p{Z}\s]/u.test(v) && !(lines ? /(?![\n\r\t])\p{Cc}|[\u202a-\u202e\u2066-\u2069]/u : /\p{Cc}|\p{Cf}|\p{Zl}|\p{Zp}/u).test(v.trim());
+const sameName = v => v.trim().replace(/\s+/g,' ').toLowerCase();
 // A positive LKR amount with at most two decimal places (prices and the delivery fee).
 const validLkr = v => Number.isFinite(v) && v > 0 && Number.isSafeInteger(Math.round(v*100)) && Math.abs(Math.round(v*100)-v*100) <= 1e-6;
 export function validateData(products, store) {
@@ -25,14 +27,15 @@ export function validateData(products, store) {
     for (const x of m) {
       if (!ownerText(x,40)) throw new Error('paymentMethods: '+JSON.stringify(x)+' must be a short, single-line name');
       // PayPal is its own switch (paypalOverseas), so a method of that name would collide with it.
-      if (/paypal/i.test(x)) throw new Error('paymentMethods: '+JSON.stringify(x)+' — use paypalOverseas for PayPal, not a payment method');
+      if (/pay\s*pal/i.test(x)) throw new Error('paymentMethods: '+JSON.stringify(x)+' — use paypalOverseas for PayPal, not a payment method');
+      if (sameName(x) === 'not sure yet') throw new Error('paymentMethods: "Not sure yet" is already the cart\'s default choice');
     }
-    if (new Set(m.map(x=>paymentLabel(x).toLowerCase())).size !== m.length) throw new Error('paymentMethods must not list the same method twice');
+    if (new Set(m.map(x=>sameName(paymentLabel(x)))).size !== m.length) throw new Error('paymentMethods must not list the same method twice');
   }
   if (store.paymentNote !== undefined && store.paymentNote !== null && !ownerText(store.paymentNote,200)) throw new Error('paymentNote must be null or a short owner-given line');
   if (store.social !== undefined) {
     const s=store.social;
-    if (!Array.isArray(s) || s.length > 6 || s.some(x=>!x || typeof x !== 'object' || Object.keys(x).some(k=>!['label','url'].includes(k)) || !ownerText(x.label,30) || typeof x.url !== 'string' || !isHttpsUrl(x.url)) || new Set(s.map(x=>x.url)).size !== s.length) throw new Error('social must be a list of up to six distinct {label, url} links with full https:// URLs');
+    if (!Array.isArray(s) || s.length > 6 || s.some(x=>!x || typeof x !== 'object' || Object.keys(x).some(k=>!['label','url'].includes(k)) || !ownerText(x.label,30) || typeof x.url !== 'string' || !isHttpsUrl(x.url)) || new Set(s.map(x=>new URL(x.url).href)).size !== s.length) throw new Error('social must be a list of up to six distinct {label, url} links with full https:// URLs');
   }
   if (store.pages !== undefined) {
     const pg=store.pages;
@@ -70,7 +73,7 @@ export function validateData(products, store) {
     if (store.mode === 'live' && p.approved && (!p.image || p.availability === 'unconfirmed')) throw new Error(`Approved live product needs an original photo and confirmed availability: ${p.id}`);
   }
   if (store.mode === 'live' && !store.whatsappVerified) throw new Error('Live ordering requires a verified WhatsApp contact');
-  if (searchIndexing(store) && !/^https:\/\/[a-z0-9.-]+$/i.test(store.siteUrl || '')) throw new Error('Search indexing needs the site\'s https siteUrl for the sitemap');
+  if (searchIndexing(store) && !/^https:\/\/[a-z0-9.-]+\/?$/i.test(store.siteUrl || '')) throw new Error('Search indexing needs the site\'s https siteUrl for the sitemap');
 }
 // Search indexing is its own owner decision, separate from ordering (mode): off unless explicitly true.
 export const searchIndexing = store => store.searchIndexing === true;

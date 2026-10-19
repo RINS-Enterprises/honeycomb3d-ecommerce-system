@@ -34,14 +34,14 @@ Each switch is off in the committed data. With a switch off, the site is exactly
 | `paymentNote` | `null` | The owner's line under the cart's payment choice. It is shown only when methods are set; otherwise the cart says "Payment arrangements are confirmed with your quote". |
 | `social` | `[]` | `[{"label": "Instagram", "url": "https://…"}]`. The footer gains a Follow column. https links only. |
 | `pages` | `{"shipping": null, "returns": null, "about": null}` | The owner's text for a key builds `/shipping/`, `/returns/` or `/about/` and links it in the footer. Blank lines separate paragraphs. |
-| `searchIndexing` | `false` | Owner decision D-12. When true, pages lose `noindex`, `robots.txt` allows crawling and points to `sitemap.xml`, the sitemap lists the public pages, and product pages carry BreadcrumbList data. It requires an https `siteUrl`. |
+| `searchIndexing` | `false` | Owner decision D-12. When true, public pages lose `noindex` (the cart and 404 keep it), `robots.txt` allows crawling and points to `sitemap.xml`, the sitemap lists the public pages, and product pages carry BreadcrumbList data. It requires an https `siteUrl`. A canonical link for filtered shop URLs is left for the indexing launch (W-10). |
 
 Every value is validated at build time; a malformed value fails the build instead of shipping.
 
 ## Verification
 
 - **Unit tests:** `npm test` runs domain, catalogue, render and store-loader tests.
-- **Build checks:** `npm run build && npm run check` verifies every generated page, local link and asset, image budgets and hashes, the font and favicons, `noindex` and the sitemap in both indexing states, and trust pages in both states. It also scans the output for the banned phone numbers in any format.
+- **Build checks:** `npm run build && npm run check` verifies every generated page, local link and asset, image budgets and hashes, the font and favicons, `noindex` and the sitemap in both indexing states, and trust pages in both states. It also scans the output for the banned phone numbers in common formats, and checks that every shipped browser module parses without newer syntax such as the regex `v` flag, so older Safari still runs the site.
 - **Browser tests:** `tests/browser.mjs` (layouts at 320/390/768/1440 px, catalogue, cart, all ordering paths, FAQ, switches, 404, network failure, no page errors) and `tests/images-browser.mjs` (mobile image decoding and budgets). They follow whatever state was built.
 - **Fixtures:** `npm run gate:preview`, `npm run gate:all-on` and `npm run gate:proposal` (session C's proposed delivery and payment values) build and test the preview state and every switch on, using fixtures in `tests/fixtures/`, without editing `data/`. `npm run check:indexing` builds and checks the indexing-on state. See [RUN-AND-RELEASE.md](RUN-AND-RELEASE.md).
 

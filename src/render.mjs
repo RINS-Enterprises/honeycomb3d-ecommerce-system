@@ -43,7 +43,7 @@ export function layout(title, body, store, current='', head='', meta={}) {
   return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>' + e(title) + ' | HoneyComb 3D</title>' + socialMeta(title+' | HoneyComb 3D', store, meta) +
     '<meta name="theme-color" content="#0c0b0a">' +
-    (searchIndexing(store) ? '' : '<meta name="robots" content="noindex,nofollow">') +
+    (searchIndexing(store) && !meta.noindex ? '' : '<meta name="robots" content="noindex,nofollow">') +
     head+'<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="preload" href="/fonts/bricolage-grotesque-display.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.mjs"></script></head><body>' +
     '<a class="skip-link" href="#main">Skip to content</a>' +
     (store.mode==='preview' ? '<aside class="preview-notice" aria-label="Store preview notice" data-testid="preview-notice"><span class="notice-mark" aria-hidden="true"></span><span>Online ordering opens soon.</span> <a href="/shop/">Browse the collection <span aria-hidden="true">→</span></a></aside>' : '') +
@@ -190,7 +190,7 @@ export function detail(p,products,store) {
     (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2>'+moreLink+'</div><div class="product-grid">'+more.map(p=>card(p,{store})).join('')+'</div></section>':'')+recentRow(p.id),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
 }
 export function cartPage(store) {
-  return layout('Your request cart','<section class="wrap section cart-section"><p class="eyebrow">YOUR SELECTION</p><h1>Request cart.</h1><p class="lead">A starting point for your order. We’ll confirm the details together.</p><div id="cart-body"><p>Loading your cart…</p></div><noscript><p>Enable JavaScript to access the cart saved on this device.</p></noscript></section>'+recentRow(),store,'cart');
+  return layout('Your request cart','<section class="wrap section cart-section"><p class="eyebrow">YOUR SELECTION</p><h1>Request cart.</h1><p class="lead">A starting point for your order. We’ll confirm the details together.</p><div id="cart-body"><p>Loading your cart…</p></div><noscript><p>Enable JavaScript to access the cart saved on this device.</p></noscript></section>'+recentRow(),store,'cart','',{noindex:true});
 }
 export function customPage(store) {
   const attachmentNote=store.mode==='live'&&store.whatsappVerified?'You can attach photos or model files in WhatsApp after opening the conversation. Nothing is uploaded by this form.':'Review and copy your enquiry below. Nothing is uploaded by this form.';
@@ -219,7 +219,8 @@ export function faqPage(store) {
 }
 // A meta description from owner text: whole words up to ~155 characters, with an ellipsis when cut (never mid-word or mid-character).
 function summary(text, max=155) {
-  const flat=text.replace(/\s+/g,' ').trim(), chars=[...flat];
+  // Graphemes, not code points: never splits an emoji sequence or a Sinhala letter from its vowel sign.
+  const flat=text.replace(/\s+/g,' ').trim(), chars=[...new Intl.Segmenter('en',{granularity:'grapheme'}).segment(flat)].map(x=>x.segment);
   if (chars.length<=max) return flat;
   const cut=chars.slice(0,max).join(''), space=cut.lastIndexOf(' ');
   return (space>max/2?cut.slice(0,space):cut).replace(/[\s,;:.]+$/,'')+'…';
@@ -239,5 +240,5 @@ export function notFound(products,store) {
   return layout('Page not found','<section class="wrap section narrow state-page"><div class="state-mark" aria-hidden="true">404</div><p class="eyebrow">Page not found</p><h1>This page wandered off.</h1><p class="lead">The design you are looking for may have moved.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/">Back to home</a></div>'+
     '<form class="nf-search" action="/shop/" method="get" role="search" aria-label="Search the collection"><label for="nf-search">Or search the collection</label><div class="nf-search-row"><input type="search" id="nf-search" name="q" placeholder="Try dragons, Naruto, keychains…" maxlength="100" autocomplete="off" data-testid="notfound-search"><button class="button secondary" type="submit">Search</button></div></form></section>'+
     (picks.length?'<section class="wrap section nf-picks" aria-labelledby="nf-picks-title" data-testid="notfound-picks"><div class="section-heading"><h2 id="nf-picks-title">A few designs to explore</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+picks.map(p=>card(p,{store})).join('')+'</div></section>':''),
-    store,'','',{description:'This page could not be found. Explore the HoneyComb 3D collection instead.'});
+    store,'','',{description:'This page could not be found. Explore the HoneyComb 3D collection instead.',noindex:true});
 }

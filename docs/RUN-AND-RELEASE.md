@@ -33,7 +33,7 @@ The browser tests follow whatever state was built, so a change behind a switch i
     npm run gate:proposal   # session C's proposed delivery line (LKR 400) and payment methods, as the owner would set them
     npm run check:indexing  # searchIndexing on: robots.txt, sitemap and breadcrumb data (build and check only)
 
-The all-on fixture's texts say "Test fixture… not an owner fact" so they cannot pass for real copy. The proposal fixture holds session C's proposed values; they are not owner facts until the owner replies. A fixture build prints `Store patch (test fixture, not for release)`. After running one, run `npm run build` again before looking at `dist/` as the real site. Production builds (`vercel.json` runs `npm run build`) never set `STORE_PATCH`.
+The all-on fixture's texts say "Test fixture… not an owner fact" so they cannot pass for real copy. The proposal fixture holds session C's proposed values; they are not owner facts until the owner replies. A fixture build prints `Store patch (test fixture, not for release)`. After running one, run `npm run build` again before looking at `dist/` as the real site. The loader enforces two guards: `STORE_PATCH` accepts only files in `tests/fixtures/`, and it fails the build outright on Vercel (where `VERCEL` is set). A fixture therefore cannot reach production even if the variable is set there by mistake.
 
 ## Store settings (`data/store.json`)
 
@@ -43,7 +43,7 @@ The all-on fixture's texts say "Test fixture… not an owner fact" so they canno
 
 The build validates all of these and fails on a malformed value.
 
-The business WhatsApp is 94710599815. `scripts/check.mjs` fails the build if any of the banned numbers (a former partner's two numbers and a mistyped copy of the business number) appear in the output in any format. Never weaken that check.
+The business WhatsApp is 94710599815. `scripts/check.mjs` fails the build if any of the banned numbers (a former partner's two numbers and a mistyped copy of the business number) appear in the output in common formats (spaces, dashes, dots, percent-encoding or HTML entities between digits). Never weaken that check.
 
 ## Catalogue
 
@@ -63,7 +63,7 @@ Only derivatives referenced by the visible catalogue are copied into `dist/`. Do
 
 ## Release
 
-The session plan is in [SESSIONS-PLAN.md](pm/SESSIONS-PLAN.md); the gate and deployment record are in the [project register](pm/PROJECT-REGISTER.md) §7.
+The flow below is the one in [SESSIONS-PLAN.md](pm/SESSIONS-PLAN.md). The PM records each deployment in the [project register](pm/PROJECT-REGISTER.md) §7. The gate text there predates the session plan (it still names `codex/storefront-mvp` and a QA deployer), so follow the session plan where they differ.
 
 1. A session works on its own branch and opens a draft PR into `main`, so the "Storefront checks" workflow runs. Sessions never merge their own PR and never push to another session's branch.
 2. The PM session runs an independent QA review. The session fixes the findings.
