@@ -9,7 +9,7 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 | 1 | Order button on shop cards | Done, QA fixed | `878df30`, `082d32c` |
 | 2 | Cart bundle suggestions | Done, QA fixed | `9a7f1e4` + QA-fix commit |
 | 3 | FAQ page | Done, QA fixed | `4c32420` + QA-fix commit |
-| 4 | Delivery line (switch) | Not started | |
+| 4 | Delivery line (switch) | Done, QA in progress | `2c7b46b` |
 | 5 | Payment methods (switch) | Not started | |
 | 6 | Social links | Not started | |
 | 7 | Trust pages | Not started | |
@@ -94,4 +94,25 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
   - Nit, kept: "tap Order on a design" matches the shop-card button label ("Order"). The product page's button reads "Order now on WhatsApp".
   - Verified OK: the footer link on all 24 pages, check/build inclusion (check.mjs only extended), noindex, title and description, heading order and landmarks, layout at 320–1440px and 200% text, banned numbers absent.
 - **Waits on owner fact:** none. Delivery and payment answers will pick up items 4 and 5 once their switches are set.
+
+## 4. Delivery line (switch, off by default)
+
+- **Commit:** `2c7b46b`
+- **Switch:** `store.delivery` in `data/store.json`, added as `null` (off). To turn it on, set e.g. `{"text": "Islandwide by courier, LKR 500, usually 2–4 working days after printing", "feeLkr": 500}`. `feeLkr` is optional.
+- **What changed (only when set):**
+  - **Product pages:** a "Delivery" line with the owner's text replaces "Delivery cost and timing are included in your quote." "Confirm size, material, colours and finish before ordering." stays.
+  - **Cart summary:** the Delivery row shows the fee (or "Confirmed with your quote" when there is no fee), with the owner's text under it. The closing line becomes "The final total will be confirmed with your quote."
+  - **FAQ:** the delivery answer is the owner's text plus "The final total is confirmed with your quote."
+  - **Order messages:** when `feeLkr` is set, a separate `Delivery fee: LKR 500` line follows the items subtotal in every order message: cart, product-page Order now (it keeps the live quantity) and card Order.
+  - **Not changed:** no total including delivery is computed; the message still asks the owner to confirm delivery cost and the final total.
+  - **Published data:** `dist/data/store.json` carries `delivery`.
+  - **Validation:** the text must be non-empty and at most 200 characters; the fee must be null or a positive LKR amount with at most 2 decimals. Anything else fails the build. The existing price check now shares the same `validLkr` helper; behaviour is unchanged.
+- **Off = unchanged:** with `delivery: null`, every generated HTML page is byte-identical to the item 3 build (diffed). Only `dist/data/store.json` gains `"delivery": null`.
+- **Tests:**
+  - Unit tests cover normalisation, validation (accepted and rejected shapes), the fee line placement, no change without a fee, Order now / card Order with the fee, the product-page line (escaped), the FAQ answer (and no doubled full stop) and preview.
+  - The browser test branches on the published switch: product line and Order now fee, cart text and fee, and the message line; or their absence when off.
+- **Local gate:** passed in four states: live with delivery null (the committed state), preview, live with text and fee, and live with text only. Each state ran `npm test` (46 pass), `build` + `check` (24 pages), `browser.mjs` and `images-browser.mjs`. The switched states were temporary local edits, never committed.
+- **Screenshots checked:** product page and cart at 390 and 1440px with the example line on. The spacing of the cart note was fixed after the first look.
+- **QA verdict:** _in progress_
+- **Waits on owner fact:** the delivery line and fee (session C, item 3/5 recommends them). The example text above is the PM's illustration, not an owner fact.
 
