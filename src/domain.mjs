@@ -8,6 +8,7 @@ export function validateData(products, store) {
   if (!Array.isArray(products)) throw new Error('Catalog must be an array');
   if (!['preview','live'].includes(store.mode)) throw new Error('Invalid store mode');
   if (store.searchIndexing !== undefined && typeof store.searchIndexing !== 'boolean') throw new Error('searchIndexing must be true or false');
+  if (store.paypalOverseas !== undefined && typeof store.paypalOverseas !== 'boolean') throw new Error('paypalOverseas must be true or false');
   if (store.whatsappVerified && !/^[1-9]\d{7,14}$/.test(store.whatsappNumber || '')) throw new Error('Use a verified international WhatsApp number, digits only');
   const ids = new Set(), slugs = new Set();
   for (const p of products) {
@@ -44,6 +45,9 @@ export function validateData(products, store) {
 // Search indexing is its own owner decision, separate from ordering (mode): off unless explicitly true.
 export const searchIndexing = store => store.searchIndexing === true;
 // Products without an approved original photo stay hidden until their photo is imported.
+// PayPal (USD) only for payers outside Sri Lanka: Sri Lankan PayPal accounts can receive cross-border payments only
+// (partner-bank launch, May 2026). Off until the owner has proven a test payment arrives.
+export const paypalOverseas = store => store.paypalOverseas === true;
 export const visibleProducts = (products, store) => products.filter(p => p.image && (store.mode !== 'live' || p.approved));
 export function filterProducts(products, query='', category='all') {
   const words = query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
@@ -68,10 +72,10 @@ export function cartSummary(items, products) {
   const lines=normalizeCart(items,products).map(item=>({...item,product:products.find(p=>p.id===item.id)}));
   return {lines,count:lines.reduce((n,x)=>n+x.quantity,0),knownSubtotal:lines.reduce((n,x)=>n+(x.product.priceLkr===null?0:Math.round(x.product.priceLkr*100)*x.quantity),0)/100,unpriced:lines.some(x=>x.product.priceLkr===null)};
 }
-export function orderMessage(items, products, notes='') {
+export function orderMessage(items, products, notes='', {paypal=false}={}) {
   const s=cartSummary(items,products);
   if (!s.lines.length) return '';
-  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, 'Please confirm availability, options, delivery cost, final total and payment arrangements. This is an order request, not a confirmed purchase.',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
+  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, 'Please confirm availability, options, delivery cost, final total and payment arrangements. This is an order request, not a confirmed purchase.',paypal?'Payment: I am paying from outside Sri Lanka. Please send a PayPal payment link in USD once the total is confirmed.':'',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
 }
 export function whatsappUrl(message, store) {
   if (!message || !store.whatsappVerified || !/^[1-9]\d{7,14}$/.test(store.whatsappNumber||'')) return null;

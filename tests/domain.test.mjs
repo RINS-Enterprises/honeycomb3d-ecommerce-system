@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing} from '../src/domain.mjs';
+import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas} from '../src/domain.mjs';
 const p=(id,priceLkr=null,availability='unconfirmed')=>({id,slug:id.toLowerCase(),name:id,category:'Figures',tags:['Anime'],description:'Example',source:'Test fixture',priceLkr,availability,image:null,imageAlt:null,approved:false});
 const products=[p('A',10.25),p('B'),p('C',10,'unavailable')];
 const preview={mode:'preview',whatsappVerified:false,whatsappNumber:null};
@@ -71,4 +71,15 @@ test('search indexing is a separate setting: off unless explicitly true, in prev
   assert.equal(searchIndexing({...live,searchIndexing:true}),true);
   for(const value of ['true',1,null])assert.throws(()=>validateData(products,{...preview,searchIndexing:value}),/searchIndexing/);
   validateData(products,{...preview,searchIndexing:true});
+});
+test('PayPal for overseas payers is off unless explicitly true and only adds a request line',()=>{
+  for(const store of [preview,{...preview,paypalOverseas:false}])assert.equal(paypalOverseas(store),false);
+  assert.equal(paypalOverseas({...preview,paypalOverseas:true}),true);
+  for(const value of ['true',1,null])assert.throws(()=>validateData(products,{...preview,paypalOverseas:value}),/paypalOverseas/);
+  const items=[{id:'A',quantity:1}];
+  assert.doesNotMatch(orderMessage(items,products),/PayPal/);
+  const message=orderMessage(items,products,'Blue please',{paypal:true});
+  assert.match(message,/PayPal payment link in USD once the total is confirmed/);
+  assert.match(message,/not a confirmed purchase/);
+  assert.equal(orderMessage([],products,'',{paypal:true}),'');
 });

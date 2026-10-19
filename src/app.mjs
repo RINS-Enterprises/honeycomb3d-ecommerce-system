@@ -1,5 +1,5 @@
 import {card} from './card.mjs';
-import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, visibleProducts} from './domain.mjs';
+import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, visibleProducts, paypalOverseas} from './domain.mjs';
 
 const status=document.querySelector('#status');
 let toastTimer;
@@ -217,7 +217,8 @@ function initAdd() {
 }
 function initCart() {
   const root=document.querySelector('#cart-body');if(!root)return;
-  let notes='';
+  let notes='',paypal=false;
+  const message=()=>orderMessage(cart,products,notes,{paypal:paypal&&paypalOverseas(store)});
   function render(focusKey) {
     const s=cartSummary(cart,products);
     if(!s.lines.length) {
@@ -241,10 +242,11 @@ function initCart() {
       '<button type="button" data-step="1" data-id="'+e(p.id)+'" data-testid="cart-qty-increase" aria-label="Increase quantity of '+e(p.name)+'"'+(q>=MAX_QUANTITY?' disabled':'')+'>+</button></div>'+
       '<p class="cart-line-total">'+e(p.priceLkr===null?'To confirm':money(p.priceLkr*q))+'</p></div></article>').join('');
     root.innerHTML='<div class="cart-layout"><div class="cart-main"><div class="cart-lines">'+lines+'</div>'+
-      '<label class="cart-notes">Notes <span>(optional)</span><textarea id="order-notes" maxlength="500" rows="3" placeholder="Colours, sizes or anything else we should know">'+e(notes)+'</textarea></label></div>'+
+      '<label class="cart-notes">Notes <span>(optional)</span><textarea id="order-notes" maxlength="500" rows="3" placeholder="Colours, sizes or anything else we should know">'+e(notes)+'</textarea></label>'+
+      (paypalOverseas(store)?'<label class="cart-paypal"><input type="checkbox" id="order-paypal" data-testid="cart-paypal"'+(paypal?' checked':'')+'><span>Paying from outside Sri Lanka? Ask for a PayPal link in USD.<small>We send it in WhatsApp after we confirm your total. PayPal cannot take payments from Sri Lankan accounts.</small></span></label>':'')+'</div>'+
       '<aside class="cart-aside" aria-label="Request summary"><div class="cart-summary"><p class="eyebrow">Summary</p><dl class="summary-rows"><div><dt>Items</dt><dd>'+s.count+'</dd></div><div><dt>Delivery</dt><dd>Confirmed with your quote</dd></div></dl>'+
       '<h2 data-testid="cart-subtotal">'+(s.unpriced?(hasPriced?'Priced items subtotal: '+e(money(s.knownSubtotal)):'Quote required for all items'):'Estimated items subtotal: '+e(money(s.knownSubtotal)))+'</h2><p>'+(s.unpriced?'Unpriced items are not included in a subtotal. ':'')+'Delivery and the final total will be confirmed with your quote.</p></div>'+
-      '<div id="order-handoff">'+handoff(orderMessage(cart,products,notes))+'</div></aside></div>';
+      '<div id="order-handoff">'+handoff(message())+'</div></aside></div>';
     if(focusKey) {
       const [id,kind]=String(focusKey).split(':');
       const target=kind?root.querySelector('[data-step="'+kind+'"][data-id="'+CSS.escape(id)+'"]:not(:disabled)'):null;
@@ -252,7 +254,11 @@ function initCart() {
     }
     root.querySelector('#order-notes').addEventListener('input',event=>{
       notes=event.target.value;
-      root.querySelector('#order-handoff').innerHTML=handoff(orderMessage(cart,products,notes));
+      root.querySelector('#order-handoff').innerHTML=handoff(message());
+    });
+    root.querySelector('#order-paypal')?.addEventListener('change',event=>{
+      paypal=event.target.checked;
+      root.querySelector('#order-handoff').innerHTML=handoff(message());
     });
   }
   document.addEventListener('cart:change',event=>render(event.detail.id));

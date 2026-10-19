@@ -329,6 +329,10 @@ textarea{resize:vertical;line-height:1.5}
 .stepper input{width:44px;font-weight:700;min-height:40px;margin:0;padding:0;border:0;background:none;text-align:center;font-weight:700;-moz-appearance:textfield;appearance:textfield}
 .stepper input::-webkit-inner-spin-button,.stepper input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .cart-notes{margin-top:var(--space-5)}
+.cart-paypal{display:flex;gap:var(--space-3);align-items:flex-start;margin-top:var(--space-4);cursor:pointer}
+.cart-paypal input{width:1.1rem;height:1.1rem;min-height:0;padding:0;margin:.2em 0 0;accent-color:var(--accent);flex:none}
+.cart-paypal span{color:var(--text-soft)}
+.cart-paypal small{display:block;color:var(--muted);font-size:.85em;margin-top:.2em}
 .cart-aside{display:grid;gap:var(--space-4)}
 .cart-summary{background:var(--panel);border:1px solid var(--line);padding:var(--space-5);border-radius:var(--radius-md)}
 .cart-summary .eyebrow{margin-bottom:var(--space-3)}

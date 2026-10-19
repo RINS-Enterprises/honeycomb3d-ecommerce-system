@@ -255,6 +255,20 @@ try {
   assert.match(request,/not a confirmed purchase/);
   assert.equal(await page.getByRole('link',{name:'Open WhatsApp request'}).getAttribute('rel'),'noopener noreferrer');
   assert.match(await page.locator('#order-handoff').textContent(),/Opening WhatsApp does not send/);
+  // PayPal for overseas payers: no option unless the store switch is on; when on, it only adds a request line.
+  if(!builtStore.paypalOverseas)assert.equal(await page.getByTestId('cart-paypal').count(),0);
+  assert.doesNotMatch(request,/PayPal/);
+  await page.unroute('**/data/store.json');
+  await page.route('**/data/store.json',async route=>{
+    const response=await route.fetch();const data=await response.json();
+    await route.fulfill({json:{...data,mode:'live',whatsappVerified:true,whatsappNumber:'94700000000',paypalOverseas:true}});
+  });
+  await page.reload();
+  await page.getByLabel(/Paying from outside Sri Lanka/).check();
+  const paypalHref=()=>page.getByRole('link',{name:'Open WhatsApp request'}).getAttribute('href').then(h=>new URL(h).searchParams.get('text'));
+  assert.match(await paypalHref(),/PayPal payment link in USD once the total is confirmed/);
+  await page.getByLabel(/Paying from outside Sri Lanka/).uncheck();
+  assert.doesNotMatch(await paypalHref(),/PayPal/);
   await page.evaluate(()=>localStorage.clear());
   await page.unroute('**/data/products.json');
   await page.unroute('**/data/store.json');

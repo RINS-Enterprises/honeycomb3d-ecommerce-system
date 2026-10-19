@@ -31,9 +31,22 @@ The redesign makes the site calmer, but mixed photo backgrounds still give it aw
 | Bank transfer, agreed in WhatsApp | today, no setup | none, already works |
 | Cash on delivery through a courier | local trust | courier account |
 | **PayHere** payment links (cards, LKR) | the next step for local customers | merchant sign-up (business documents); Claude adds a "Pay by card" link step |
-| PayPal (USD, overseas only) | only if your account can receive money | test with $1 from a friend abroad first |
+| PayPal (USD, overseas payers only) | Sri Lankans abroad paying for a gift delivered here; overseas buyers | **built, switched off** (`paypalOverseas` in `data/store.json`). Turn on after a $1 test arrives; see below |
 
 Run the Gemini Deep Research prompt (section 1, payments) to confirm 2026 fees before choosing.
+
+**PayPal, checked 2026-10-19:**
+- Since 15 May 2026, Sri Lankan **personal** PayPal accounts can receive payments, but only **from abroad**. A customer paying from a Sri Lankan PayPal account cannot pay you.
+- To receive, the account must be signed up or linked through a partner bank's app: **Commercial Bank** or **Sampath Bank**. Bank of Ceylon is listed as coming soon.
+- New business accounts through the banks, PayPal invoicing and PayPal checkout on Sri Lankan sites are still "coming soon".
+- Withdrawals happen in the bank app. Commercial Bank charges USD 3 + 3%; PayPal conversion is reported at about 4% over the market rate. Expect roughly **8–12%** lost in total; price USD quotes with that in mind.
+- Your connected account (checked read-only) has only outgoing purchases and no payment links, so receiving is not proven yet.
+
+**To switch PayPal on:**
+1. In the Commercial Bank or Sampath app, link your PayPal account (or sign up through it).
+2. Ask someone abroad to pay you **USD 1** (a payment link, or "send to friends" to your PayPal email).
+3. Withdraw it to your bank in the app. If it arrives, tell Claude **"PayPal works, switch it on"**. The cart then shows "Paying from outside Sri Lanka? Ask for a PayPal link in USD", and the WhatsApp request says so.
+4. For each overseas order: you agree the USD total in WhatsApp, then ask Claude for a payment link (Claude opens PayPal's link form for you to fill in) and send that link in the chat.
 
 ## 3. Delivery wording (owner, 5 minutes)
 
