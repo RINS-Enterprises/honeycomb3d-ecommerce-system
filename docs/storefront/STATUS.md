@@ -10,9 +10,9 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 | 2 | Cart bundle suggestions | Done, QA fixed | `9a7f1e4` + QA-fix commit |
 | 3 | FAQ page | Done, QA fixed | `4c32420` + QA-fix commit |
 | 4 | Delivery line (switch) | Done, QA fixed | `2c7b46b` |
-| 5 | Payment methods (switch) | Not started | |
-| 6 | Social links | Not started | |
-| 7 | Trust pages | Not started | |
+| 5 | Payment methods (switch) | Done, QA in progress | `6e49d2c` |
+| 6 | Social links | Done, QA in progress | `10aae7f` |
+| 7 | Trust pages | Done, QA in progress | `b5c2e3f` |
 | 8 | Indexing prep | Not started | |
 | 9 | Testing and docs | Not started | |
 
@@ -123,4 +123,67 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
   - Nit, fixed: browser regexes escape the money string, so decimal fees match exactly.
   - Nit, noted: CI builds only the committed (null) state. The set states are covered by unit tests and by the local four-state gate above.
 - **Waits on owner fact:** the delivery line and fee (session C, item 3/5 recommends them). The example text above is the PM's illustration, not an owner fact.
+
+## 5. Payment methods (switch, off by default)
+
+- **Commit:** `6e49d2c` (plus the browser-test fix `5812498`).
+- **Switch:** `store.paymentMethods`, added as `[]` (off). To turn it on, set e.g. `["Bank transfer", "Cash on delivery"]`.
+- **What changed (only when set, live mode only):**
+  - **Cart:** a "How would you like to pay? (optional)" radio group. "Not sure yet" is selected by default, followed by the owner's methods.
+    - Picking a method adds `Preferred payment: Bank transfer` to the request message, just before any notes.
+    - When `paypalOverseas` is also on, PayPal becomes one of the radios (with its existing caveats) instead of the separate checkbox. A request can therefore never name both PayPal and another method. The PayPal message line is unchanged.
+    - The choice survives cart re-renders.
+  - **FAQ:** "In your request cart you can tell us how you would like to pay: A, B or C."
+  - **Published data:** `dist/data/store.json` carries `paymentMethods`.
+  - **Validation:** a list of up to six distinct names, at most 40 characters each.
+  - **Unchanged:** the site still says "Payment arrangements are confirmed with your quote"; no method is promised beyond the owner's list.
+- **Off = unchanged:** with `[]`, every HTML page is byte-identical to before (diffed), and the cart keeps the PayPal checkbox exactly as today.
+- **Tests:**
+  - Unit tests cover normalisation, validation, the message line and its position, and that PayPal and a method are never both written; also the FAQ sentence (escaped, live only).
+  - The browser test swaps the published store in the browser to check:
+    - The radios and their order.
+    - "Not sure yet" adds nothing.
+    - A method adds its line and survives a re-render.
+    - PayPal replaces it.
+    - Without the PayPal switch there are three choices.
+    - Preview mode shows no choice.
+- **Screenshots checked:** cart at 320, 390 and 1440px with methods and PayPal on. The legend was restyled to match the Notes label.
+- **Waits on owner fact:** which payment methods the owner accepts (session C, item 5).
+
+## 6. Social links (empty by default)
+
+- **Commit:** `10aae7f`
+- **Switch:** `store.social`, added as `[]`. To turn it on, set e.g. `[{"label": "Instagram", "url": "https://www.instagram.com/…"}]`.
+- **What changed (only when set):**
+  - **Footer:** every page gains a "Follow" column. Its links open in a new tab, with `rel="me noopener noreferrer"` and an "(opens in a new tab)" note for screen readers.
+  - **Validation:** up to six entries, each a label of at most 30 characters and an https URL without credentials.
+  - **Published data:** `dist/data/store.json` carries the links, so the browser test can follow the switch.
+- **Off = unchanged:** generated pages are byte-identical (diffed).
+- **Tests:** unit tests for validation (it rejects http, javascript:, bare domains and credentials) and for the footer markup (escaping, every page, absent when empty). The browser test checks the Follow block follows the switch.
+- **Screenshots checked:** footer at 390 and 1440px with two links.
+- **Waits on owner fact:** accounts the owner controls (session D, item 1).
+
+## 7. Trust pages: Shipping, Returns, About (hidden until written)
+
+- **Commit:** `b5c2e3f`
+- **Switch:** `store.pages`, added as `{"shipping": null, "returns": null, "about": null}`. Put the owner's text in a key to publish that page; blank lines separate paragraphs.
+- **What changed (per page, only with owner text):**
+  - **Pages:** `/shipping/` ("Shipping and delivery"), `/returns/` ("Returns") and `/about/` ("About HoneyComb 3D") are built in the privacy-page style. Each shows only the owner's words as escaped paragraphs; nothing else is added.
+  - **Footer:** each written page is linked in the About column.
+  - **Unwritten pages:** neither built nor linked.
+  - **Validation:** only those three keys; each value is null or up to 4000 characters.
+  - `scripts/check.mjs` now verifies both states for each page: it is built and linked when written, and absent and unlinked otherwise. This only extends the check.
+- **Off = unchanged:** generated pages are byte-identical (diffed); still 24 pages.
+- **Tests:** unit tests for validation, paragraphs and line breaks, escaping (including the meta description, escaped once), footer links and noindex. The browser test follows each built page's footer link and checks that unbuilt ones aren't linked.
+- **Screenshots checked:** an About page with placeholder text at 390 and 1440px (never committed).
+- **Waits on owner fact:** the owner's shipping, returns and about text.
+
+## Gate for items 5–7 together
+
+Each state ran `npm test` (52 pass), `build` + `check`, `browser.mjs` and `images-browser.mjs`:
+- **All switches off** (committed): 24 pages.
+- **Preview:** 24 pages.
+- **All switches on at once:** PayPal, a delivery line with a 450.5 fee, two payment methods, one social link and all three trust pages; 27 pages.
+
+The switched states were temporary local edits, never committed.
 
