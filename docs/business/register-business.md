@@ -1,6 +1,6 @@
 # Registering HoneyComb 3D as a business (Kegalle District)
 
-A sole proprietorship (one owner, a registered business name). Research date: **19 Oct 2026**. Nothing was submitted and nobody was contacted.
+A sole proprietorship (one owner, a registered business name). Research date: **19 Oct 2026**. Nothing was submitted and nobody was contacted. Key facts independently fact-checked against the sources on 19 Oct 2026; corrections applied.
 
 **How to read this:** ✅ official (a government or bank page) · ⚠️ seen only in a search summary or third-party page · 📰 news, with date · ❓ not found, ask at the office.
 
@@ -17,9 +17,9 @@ A sole proprietorship (one owner, a registered business name). Research date: **
 
 ## Step 1: Get your TIN (Taxpayer Identification Number)
 
-- **Why:** every resident aged 18+ must have one (IRD notice, early 2024; reported fine up to Rs 50,000 📰 [Sunday Times, 3 Jan 2024](https://www.sundaytimes.lk/online/news-online/Rs-50-000-fine-for-persons-with-no-TIN/2-1144546)). **A TIN doesn't mean you owe tax.**
-- **New rule, from 1 Nov 2026** 📰: under the Inland Revenue (Amendment) Act No. 11 of 2026, a TIN certificate (or an IRD printout showing your NIC and TIN) is reported to be required to **register a business, open a bank account**, get a credit card and more ([Daily FT, 26 Sep 2026](https://www.ft.lk/front-page/TIN-compulsory-for-key-transactions-from-1-Nov/44-797800), [Daily Mirror](https://www.dailymirror.lk/breaking-news/TIN-certificate-mandatory-for-key-transactions-from-November-1/108-351139)). We didn't find the notice on ird.gov.lk itself.
-- **How** ✅: go to [ird.gov.lk → e-Services → Taxpayer Registration](https://www.ird.gov.lk/en/eServices/SitePages/Registration.aspx). It can be done online, by post or in person. You need your **NIC**, plus a utility bill, bank statement or GN certificate if your address differs from your NIC. The TIN certificate is emailed to you. IRD call centre: **1944**.
+- **Why:** every resident aged 18+ must have one from 1 Jan 2024, with a reported Rs 50,000 fine for not having one 📰 ([Sunday Times, 3 Jan 2024](https://www.sundaytimes.lk/online/news-online/Rs-50-000-fine-for-persons-with-no-TIN/2-1144546)). **A TIN doesn't mean you owe tax.**
+- **New rule, from 1 Nov 2026** 📰: under the Inland Revenue (Amendment) Act No. 11 of 2026, a TIN certificate (or an IRD printout showing your NIC and TIN) is reported to be required to **register a business, open a bank account**, get a credit card and more ([Daily FT, 26 Sep 2026](https://www.ft.lk/front-page/TIN-compulsory-for-key-transactions-from-1-Nov/44-797800), [Daily Mirror](https://www.dailymirror.lk/breaking-news/TIN-certificate-mandatory-for-key-transactions-from-November-1/108-351139)). The press cites IRD notice SEC/PN/IT/2026/05 (22 Sep 2026); we didn't find it on ird.gov.lk itself.
+- **How** ✅: go to [ird.gov.lk → e-Services → Taxpayer Registration](https://www.ird.gov.lk/en/eServices/SitePages/Registration.aspx). It can be done online, by post or in person. You need your **NIC**, plus a utility bill, bank statement or GN certificate if your address differs from your NIC. Your PIN is emailed to you; how you receive the TIN certificate isn't stated ❓. IRD call centre: **1944**.
 - **Later:** once you have the business registration certificate, add the business to your TIN ✅ (IRD registration guideline, 7 Jun 2023).
 
 ---
@@ -46,7 +46,7 @@ From the official document list on the **Ruwanwella DS** application pack (Kegal
    - an **affidavit of consent from the owner** (e.g. a parent, if the house is theirs); or
    - a **GN possession certificate** plus an affidavit stating the boundaries.
 5. **Photo of the premises showing a business name board.**
-6. **Trade licence or business tax receipt** from your **Pradeshiya Sabha / Urban Council** (Kegalle UC if you're in town).
+6. **Trade licence or business tax receipt** from your **Pradeshiya Sabha** (if you're in Kegalle town, presumably the Urban Council instead; our inference).
 7. The cover letter also asks for your **GN division**, the **capital invested**, the **receipt number** for the form, and a **route map** to the premises.
 8. An "advisor affidavit" only if you have no experience in the field, plus approvals from regulators for regulated trades. A 3D-print shop is unlikely to need either, but ask.
 
@@ -56,7 +56,7 @@ From the official document list on the **Ruwanwella DS** application pack (Kegal
 
 ## Step 4: Apply at the Divisional Secretariat
 
-- **Which office:** the DS for the division your home is in. Kegalle District has: **Kegalle, Mawanella, Rambukkana, Galigamuwa, Warakapola, Ruwanwella, Yatiyantota, Bulathkohupitiya, Dehiovita, Deraniyagala and Aranayake**. Each DS website lists "Business Name Registration" ✅ ([Kegalle DS page](http://kegalle.ds.gov.lk/index.php/en/issuance-of-permits-licenses.html)).
+- **Which office:** the DS for the division your home is in. Kegalle District has: **Kegalle, Mawanella, Rambukkana, Galigamuwa, Warakapola, Ruwanwella, Yatiyantota, Bulathkohupitiya, Dehiovita, Deraniyagala and Aranayake**. The Kegalle DS website lists "Business Name Registration Permits" ✅ ([Kegalle DS page](http://kegalle.ds.gov.lk/index.php/en/issuance-of-permits-licenses.html)).
 - **Cost:** form Rs 27 ✅. The **registration fee** is paid after approval, but the **Sabaragamuwa amount wasn't found** ❓. For comparison only, Colombo DS (Western Province) charges Rs 500, 1,000 or 2,500 depending on capital ✅ ([Colombo DS instructions](http://colombo.ds.gov.lk/images/PDF/new_upload_admin_divistio/English_Instructions_For_Registration_of_Business_Name.pdf)). Don't assume Kegalle charges the same.
 - **Time:** about **3 weeks** ✅ (Aranayake DS citizen charter, service 18).
 - **Renewal:** no annual renewal found ❓. Ask. Changes (e.g. a new address) and closing the business use separate forms ✅.
@@ -73,7 +73,7 @@ From the official document list on the **Ruwanwella DS** application pack (Kegal
 ## Step 5: Open a business bank account
 
 Banks ask for the BR certificate and your NIC. Examples:
-- **Seylan Bank** current account ✅ ([product sheet, 14 Oct 2025](https://www.seylan.lk/uploads/Current%20Account%20(E)_20251014_6142.pdf)): certified copies of your **NIC** and **BR certificate**, a KYC form, an **introduction** from an existing customer, a **CRIB report**, and an interview. Minimum opening deposit **Rs 25,000** (personal) or Rs 50,000 (other). Rs 1,500 a month if the balance falls below Rs 25,000 ("other accounts").
+- **Seylan Bank** current account ✅ ([product sheet, 14 Oct 2025](https://www.seylan.lk/uploads/Current%20Account%20(E)_20251014_6142.pdf)): certified copies of your **NIC** and **BR certificate**, a KYC form, an **introduction** from an existing customer, a **CRIB report**, and an interview. Minimum opening deposit Rs 25,000 (personal) or **Rs 50,000 (other)**; a proprietorship account probably counts as "other", so expect **Rs 50,000**. Rs 1,500 a month if an "other" account averages below Rs 25,000.
 - **Cargills Bank** proprietorship form ✅ ([April 2026](https://www.cargillsbank.com/wp-content/uploads/2026/04/Proprietorship-Account-Application-E.pdf)): asks for the **BR number and registration date**, business address and your NIC.
 - **People's Bank:** sole-proprietor current account with a Rs 25,000 opening deposit ⚠️ (search summary).
 - **Commercial Bank, Sampath, BOC, HNB:** their pages couldn't be read from here ❓.
@@ -86,7 +86,7 @@ Banks ask for the BR certificate and your NIC. Examples:
 
 | Provider | What they ask for | Source |
 |---|---|---|
-| **PayHere** | For sole proprietors: **scanned BR certificate**, **NIC (front and back)**, **proof of the bank account**; more documents may be asked for during review. Whether the account must be in the business name: ❓ | ⚠️ [PayHere application process](https://support.payhere.lk/application-process) (search summary; site blocked) |
+| **PayHere** | For sole proprietors: **scanned BR certificate**, **NIC (front and back)**, **proof of the bank account**; more documents may be asked for during review. The summary says sole proprietors "should have a Business Bank Account" (current or savings) | ⚠️ [PayHere application process](https://support.payhere.lk/application-process) (search summary; site blocked) |
 | **Dialog Pay Business** (Genie) | **No BR needed.** You can sign up with your NIC, now or later. | ✅ [geniebusiness.lk/pricing](https://www.geniebusiness.lk/pricing) FAQ (see [payments.md](payments.md)) |
 | **WEBXPAY** | Sign-up form offers "Individual" and "Proprietorship"; document list not published ❓ | ✅ [sign-up form](https://signup.webxpay.com/wbx-merchant-signup) |
 | **PayPal** | Business accounts through Sri Lankan banks are **"coming soon"**. Personal accounts already work for overseas payments (see [paypal.md](paypal.md)). | ✅ [PayPal banking partners](https://www.paypal.com/lk/business/banking-partners) |
