@@ -350,6 +350,33 @@ try {
   assert.match(await paypalHref(),/PayPal payment link in USD/);
   await page.getByLabel(/Paying from outside Sri Lanka/).uncheck();
   assert.doesNotMatch(await paypalHref(),/PayPal/);
+  assert.equal(await page.getByTestId('cart-payment').count(),0,'No payment choice while paymentMethods is empty');
+  // Payment methods (owner switch): an optional choice written into the request; PayPal becomes one of the options.
+  const withPayment=async(extra)=>{
+    await page.unroute('**/data/store.json');
+    await page.route('**/data/store.json',async route=>{const data=await (await route.fetch()).json();await route.fulfill({json:{...data,mode:'live',whatsappVerified:true,whatsappNumber:'94700000000',paypalOverseas:true,paymentMethods:['Bank transfer','Cash on delivery'],...extra}});});
+    await page.reload();
+  };
+  await withPayment({});
+  const payment=page.getByTestId('cart-payment');
+  assert.deepEqual(await payment.locator('.cart-choice > span').evaluateAll(ls=>ls.map(l=>l.firstChild.textContent)),['Not sure yet','Bank transfer','Cash on delivery','PayPal link in USD, paying from outside Sri Lanka']);
+  assert.equal(await page.getByRole('radio',{name:'Not sure yet'}).isChecked(),true,'No choice is made for the customer');
+  assert.equal(await page.getByTestId('cart-paypal').count(),0,'PayPal sits among the choices, not as a second control');
+  assert.doesNotMatch(await paypalHref(),/Preferred payment|PayPal/);
+  await page.getByRole('radio',{name:'Bank transfer'}).check();
+  assert.match(await paypalHref(),/\nPreferred payment: Bank transfer(\n|$)/);
+  await page.getByRole('button',{name:'Increase quantity of Baymax Figure'}).click();
+  await page.waitForFunction(()=>document.querySelector('.message-preview').value.includes('Baymax Figure [HC-BAYMAX] x 4'));
+  assert.equal(await page.getByRole('radio',{name:'Bank transfer'}).isChecked(),true,'The choice survives a re-render');
+  await page.getByRole('radio',{name:/PayPal link in USD/}).check();
+  assert.match(await paypalHref(),/PayPal payment link in USD once the total is confirmed/);
+  assert.doesNotMatch(await paypalHref(),/Preferred payment/);
+  await page.getByRole('radio',{name:'Not sure yet'}).check();
+  assert.doesNotMatch(await paypalHref(),/Preferred payment|PayPal/);
+  await withPayment({paypalOverseas:false});
+  assert.equal(await page.getByRole('radio').count(),3,'Without the PayPal switch only the owner\'s methods are offered');
+  await withPayment({mode:'preview'});
+  assert.equal(await page.getByTestId('cart-payment').count(),0,'Preview: no payment choice');
   await page.evaluate(()=>localStorage.clear());
   await page.unroute('**/data/products.json');
   await page.unroute('**/data/store.json');

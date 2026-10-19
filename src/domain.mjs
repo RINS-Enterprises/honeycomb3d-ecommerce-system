@@ -16,6 +16,10 @@ export function validateData(products, store) {
     if (typeof d !== 'object' || Array.isArray(d) || Object.keys(d).some(k=>!['text','feeLkr'].includes(k)) || typeof d.text !== 'string' || !d.text.trim() || d.text.trim().length > 200) throw new Error('delivery must be null or {text, feeLkr} with a short owner-given text');
     if (d.feeLkr !== undefined && d.feeLkr !== null && !validLkr(d.feeLkr)) throw new Error('delivery.feeLkr must be null or a positive LKR amount with at most two decimal places');
   }
+  if (store.paymentMethods !== undefined) {
+    const m=store.paymentMethods;
+    if (!Array.isArray(m) || m.length > 6 || m.some(x=>typeof x !== 'string' || !x.trim() || x.length > 40) || new Set(m.map(x=>x.trim().toLowerCase())).size !== m.length) throw new Error('paymentMethods must be a list of up to six distinct, short owner-confirmed names');
+  }
   if (store.whatsappVerified && !/^[1-9]\d{7,14}$/.test(store.whatsappNumber || '')) throw new Error('Use a verified international WhatsApp number, digits only');
   const ids = new Set(), slugs = new Set();
   for (const p of products) {
@@ -57,6 +61,9 @@ export const searchIndexing = store => store.searchIndexing === true;
 export const paypalOverseas = store => store.paypalOverseas === true;
 // Delivery line: an owner fact, null (off) until the owner gives it. When set it shows on product pages and in the cart;
 // a fee, when given, rides as its own line in every order message. Off means the site reads exactly as before.
+// Payment methods: owner-confirmed names (e.g. "Bank transfer"), empty (off) until the owner confirms them.
+// When set, the live cart offers an optional choice that is written into the order message.
+export const paymentMethods = store => Array.isArray(store.paymentMethods) ? store.paymentMethods.map(m=>m.trim()).filter(Boolean) : [];
 export const delivery = store => store.delivery?.text?.trim() ? {text:store.delivery.text.trim(),feeLkr:store.delivery.feeLkr ?? null} : null;
 export const visibleProducts = (products, store) => products.filter(p => p.image && (store.mode !== 'live' || p.approved));
 export function filterProducts(products, query='', category='all') {
@@ -91,10 +98,10 @@ export function cartSuggestions(items, products, limit=3) {
   return products.map((p,i)=>({p,i,shared:inCart.has(p.id)||p.availability==='unavailable'?0:lines.reduce((n,x)=>n+themesOf(x.product).filter(t=>themesOf(p).includes(t)).length,0)}))
     .filter(o=>o.shared).sort((a,b)=>b.shared-a.shared||categories.has(a.p.category)-categories.has(b.p.category)||a.i-b.i).slice(0,limit).map(o=>o.p);
 }
-export function orderMessage(items, products, notes='', {paypal=false, deliveryFeeLkr=null}={}) {
+export function orderMessage(items, products, notes='', {paypal=false, payment='', deliveryFeeLkr=null}={}) {
   const s=cartSummary(items,products);
   if (!s.lines.length) return '';
-  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, deliveryFeeLkr?`Delivery fee: ${money(deliveryFeeLkr)}`:'', `Please confirm availability, options, ${deliveryFeeLkr?'':'delivery cost, '}final total and payment arrangements. This is an order request, not a confirmed purchase.`,paypal?'Payment: I am paying from outside Sri Lanka. Please send a PayPal payment link in USD once the total is confirmed.':'',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
+  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, deliveryFeeLkr?`Delivery fee: ${money(deliveryFeeLkr)}`:'', `Please confirm availability, options, ${deliveryFeeLkr?'':'delivery cost, '}final total and payment arrangements. This is an order request, not a confirmed purchase.`,paypal?'Payment: I am paying from outside Sri Lanka. Please send a PayPal payment link in USD once the total is confirmed.':payment?`Preferred payment: ${payment}`:'',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
 }
 export function whatsappUrl(message, store) {
   if (!message || !store.whatsappVerified || !/^[1-9]\d{7,14}$/.test(store.whatsappNumber||'')) return null;

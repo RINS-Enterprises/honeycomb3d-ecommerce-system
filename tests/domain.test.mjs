@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl,cartSuggestions,delivery,money} from '../src/domain.mjs';
+import {normalizeCart,cartSummary,orderMessage,whatsappUrl,readCart,filterProducts,validateData,visibleProducts,escapeHtml,searchIndexing,paypalOverseas,orderingOpen,orderNowUrl,cartSuggestions,delivery,money,paymentMethods} from '../src/domain.mjs';
 const p=(id,priceLkr=null,availability='unconfirmed')=>({id,slug:id.toLowerCase(),name:id,category:'Figures',tags:['Anime'],description:'Example',source:'Test fixture',priceLkr,availability,image:null,imageAlt:null,approved:false});
 const products=[p('A',10.25),p('B'),p('C',10,'unavailable')];
 const preview={mode:'preview',whatsappVerified:false,whatsappNumber:null};
@@ -128,5 +128,18 @@ test('delivery is off unless the owner gives a line; a fee becomes its own messa
   const a={id:'A',name:'Alpha',priceLkr:500,availability:'made-to-order'};
   assert.doesNotMatch(new URL(orderNowUrl(a,live)).searchParams.get('text'),/Delivery fee/);
   assert.match(new URL(orderNowUrl(a,{...live,delivery:{text:'Courier',feeLkr:500}})).searchParams.get('text'),/\nDelivery fee: LKR\s500\n/);
+});
+
+test('payment methods are off unless the owner lists them, and only add a line naming the chosen one',()=>{
+  for(const value of [undefined,[]])assert.deepEqual(paymentMethods({paymentMethods:value}),[]);
+  assert.deepEqual(paymentMethods({paymentMethods:[' Bank transfer ','Cash on delivery']}),['Bank transfer','Cash on delivery']);
+  for(const value of [[],['Bank transfer'],['Bank transfer','Cash on delivery']])assert.doesNotThrow(()=>validateData(products,{...preview,paymentMethods:value}));
+  for(const value of ['Bank transfer',{},[''],['  '],[1],['x'.repeat(41)],['Bank transfer','bank transfer'],['a','b','c','d','e','f','g'],null])assert.throws(()=>validateData(products,{...preview,paymentMethods:value}),/paymentMethods/,JSON.stringify(value));
+  const items=[{id:'A',quantity:1}];
+  const base=orderMessage(items,products);
+  assert.equal(orderMessage(items,products,'',{payment:''}),base);
+  assert.deepEqual(orderMessage(items,products,'Blue',{payment:'Bank transfer'}).split('\n').slice(-2),['Preferred payment: Bank transfer','Notes: Blue']);
+  const both=orderMessage(items,products,'',{paypal:true,payment:'Bank transfer'});
+  assert.match(both,/PayPal payment link in USD/);assert.doesNotMatch(both,/Preferred payment/,'PayPal and a method are never both written');
 });
 

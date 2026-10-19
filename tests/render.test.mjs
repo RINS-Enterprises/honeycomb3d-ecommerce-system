@@ -275,3 +275,11 @@ test('the delivery line shows on product pages and in the FAQ only when set, esc
   assert.match(faqPage({...live,delivery:{text:'Islandwide by courier!'}}),/<p>Islandwide by courier! The final total/);
 });
 
+test('the FAQ names the owner\'s payment methods only when they are set and ordering is open',async()=>{
+  const {faqPage}=await import('../src/render.mjs');
+  assert.doesNotMatch(faqPage(live),/how you would like to pay/);
+  assert.match(faqPage({...live,paymentMethods:['Bank transfer','Cash on delivery','Card <b>']}),/In your request cart you can tell us how you would like to pay: Bank transfer, Cash on delivery or Card &lt;b&gt;\./);
+  assert.match(faqPage({...live,paymentMethods:['Bank transfer']}),/how you would like to pay: Bank transfer\./);
+  assert.doesNotMatch(faqPage({...live,mode:'preview',paymentMethods:['Bank transfer']}),/Bank transfer/,'Preview: ordering is closed');
+});
+

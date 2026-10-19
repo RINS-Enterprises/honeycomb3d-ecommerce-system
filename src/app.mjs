@@ -1,5 +1,5 @@
 import {card} from './card.mjs';
-import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, visibleProducts, paypalOverseas, cartSuggestions, delivery, orderNowUrl} from './domain.mjs';
+import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, visibleProducts, paypalOverseas, cartSuggestions, delivery, orderNowUrl, paymentMethods} from './domain.mjs';
 
 const status=document.querySelector('#status');
 let toastTimer;
@@ -236,9 +236,18 @@ function initAdd() {
 }
 function initCart() {
   const root=document.querySelector('#cart-body');if(!root)return;
-  let notes='',paypal=false;
+  let notes='',paypal=false,payment='';
+  // Payment choice (owner switch, live only): radios for the owner's methods, with PayPal as one of them when that switch is on.
+  // Without methods the PayPal checkbox stays exactly as before.
+  const methods=store.mode==='live'?paymentMethods(store):[];
   const shipping=delivery(store);
-  const message=()=>orderMessage(cart,products,notes,{paypal:paypal&&store.mode==='live'&&paypalOverseas(store),deliveryFeeLkr:shipping?.feeLkr});
+  const paypalOn=store.mode==='live'&&paypalOverseas(store);
+  const message=()=>orderMessage(cart,products,notes,{paypal:paypalOn&&(methods.length?payment==='paypal':paypal),payment:methods.includes(payment)?payment:'',deliveryFeeLkr:shipping?.feeLkr});
+  const paymentChoice=()=>'<fieldset class="cart-payment" data-testid="cart-payment"><legend>How would you like to pay? <span>(optional)</span></legend>'+
+    [['','Not sure yet',''],...methods.map(m=>[m,m,'']),...(paypalOn?[['paypal','PayPal link in USD, paying from outside Sri Lanka','We send it in WhatsApp after we confirm your total. Payments from Sri Lankan PayPal accounts are not supported.']]:[])].map(([value,label,help],i)=>
+    '<label class="cart-choice"><input type="radio" name="order-payment" data-payment-index="'+i+'"'+(payment===value?' checked':'')+'><span>'+e(label)+(help?'<small>'+e(help)+'</small>':'')+'</span></label>').join('')+
+    '<p class="fine">Payment arrangements are confirmed with your quote.</p></fieldset>';
+  const paymentValues=()=>['',...methods,...(paypalOn?['paypal']:[])];
   function render(focusKey) {
     const s=cartSummary(cart,products);
     if(!s.lines.length) {
@@ -267,7 +276,7 @@ function initCart() {
       '<button type="button" class="quick-add" data-quick-add="'+e(p.id)+'" data-testid="suggestion-add" aria-label="Add '+e(p.name)+' to request cart"><span aria-hidden="true">+</span> Add</button></li>').join('')+'</ul></section>':'';
     root.innerHTML='<div class="cart-layout"><div class="cart-main"><div class="cart-lines">'+lines+'</div>'+
       '<label class="cart-notes">Notes <span>(optional)</span><textarea id="order-notes" maxlength="500" rows="3" placeholder="Colours, sizes or anything else we should know">'+e(notes)+'</textarea></label>'+
-      (store.mode==='live'&&paypalOverseas(store)?'<div class="cart-paypal"><input type="checkbox" id="order-paypal" data-testid="cart-paypal" aria-describedby="order-paypal-help"'+(paypal?' checked':'')+'><div><label for="order-paypal">Paying from outside Sri Lanka? Ask for a PayPal link in USD.</label><small id="order-paypal-help">We send it in WhatsApp after we confirm your total. Payments from Sri Lankan PayPal accounts are not supported.</small></div></div>':'')+suggest+'</div>'+
+      (methods.length?paymentChoice():'')+(!methods.length&&paypalOn?'<div class="cart-paypal"><input type="checkbox" id="order-paypal" data-testid="cart-paypal" aria-describedby="order-paypal-help"'+(paypal?' checked':'')+'><div><label for="order-paypal">Paying from outside Sri Lanka? Ask for a PayPal link in USD.</label><small id="order-paypal-help">We send it in WhatsApp after we confirm your total. Payments from Sri Lankan PayPal accounts are not supported.</small></div></div>':'')+suggest+'</div>'+
       '<aside class="cart-aside" aria-label="Request summary"><div class="cart-summary"><p class="eyebrow">Summary</p><dl class="summary-rows"><div><dt>Items</dt><dd>'+s.count+'</dd></div><div><dt>Delivery</dt><dd data-testid="cart-delivery-fee">'+(shipping?.feeLkr?e(money(shipping.feeLkr)):'Confirmed with your quote')+'</dd></div></dl>'+(shipping?'<p class="fine cart-delivery" data-testid="cart-delivery">'+e(shipping.text)+'</p>':'')+
       '<h2 data-testid="cart-subtotal">'+(s.unpriced?(hasPriced?'Priced items subtotal: '+e(money(s.knownSubtotal)):'Quote required for all items'):'Estimated items subtotal: '+e(money(s.knownSubtotal)))+'</h2><p>'+(s.unpriced?'Unpriced items are not included in a subtotal. ':'')+(shipping?'The final total will be confirmed with your quote.':'Delivery and the final total will be confirmed with your quote.')+'</p></div>'+
       '<div id="order-handoff">'+handoff(message())+'</div></aside></div>';
@@ -282,6 +291,10 @@ function initCart() {
     });
     root.querySelector('#order-paypal')?.addEventListener('change',event=>{
       paypal=event.target.checked;
+      root.querySelector('#order-handoff').innerHTML=handoff(message());
+    });
+    root.querySelector('[data-testid="cart-payment"]')?.addEventListener('change',event=>{
+      payment=paymentValues()[Number(event.target.dataset.paymentIndex)]??'';
       root.querySelector('#order-handoff').innerHTML=handoff(message());
     });
   }

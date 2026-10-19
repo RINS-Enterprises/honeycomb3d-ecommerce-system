@@ -352,6 +352,14 @@ textarea{resize:vertical;line-height:1.5}
 .cart-paypal label{font-weight:400;font-size:inherit;color:var(--text-soft);cursor:pointer}
 .cart-paypal input{width:1.1rem;height:1.1rem;min-height:0;padding:0;margin:.2em 0 0;accent-color:var(--accent);flex:none}
 .cart-paypal small{display:block;color:var(--muted);font-size:.85em;margin-top:.2em}
+.cart-payment{margin:var(--space-5) 0 0;padding:0;border:0;min-width:0}
+.cart-payment legend{padding:0;margin-bottom:var(--space-2);font-weight:700;font-size:var(--step--1)}
+.cart-payment legend span{color:var(--muted);font-weight:400}
+.cart-choice{display:flex;gap:var(--space-3);align-items:flex-start;padding:var(--space-2) 0;font-weight:400;font-size:var(--step-0);cursor:pointer}
+.cart-choice>span{color:var(--text-soft)}
+.cart-choice input{width:1.1rem;height:1.1rem;min-height:0;padding:0;margin:.2em 0 0;accent-color:var(--accent);flex:none}
+.cart-choice small{display:block;color:var(--muted);font-size:.85em;margin-top:.2em}
+.cart-payment .fine{margin:var(--space-2) 0 0;color:var(--muted)}
 .cart-aside{display:grid;gap:var(--space-4)}
 .cart-summary{background:var(--panel);border:1px solid var(--line);padding:var(--space-5);border-radius:var(--radius-md)}
 .cart-summary .eyebrow{margin-bottom:var(--space-3)}
