@@ -118,7 +118,7 @@ The "How to order" post. Facebook lets you pin one post; keep it there.
 3. Name: `HoneyComb 3D`.
 4. **Bio** (80 characters max):
    - English: `3D-printed anime & film figures 🐝 Made to order in Kegalle · WA 071 059 9815` (77)
-   - Sinhala: `Anime figures 3D print කරනවා 🐝 කෑගල්ල · WA 071 059 9815`
+   - Sinhala: `Anime figures ඕඩර් එකට 3D print කරනවා 🐝 කෑගල්ල · WA 071 059 9815`
 5. **Website link:** add `https://honeycomb3d.store` if TikTok offers the field. Some accounts only get it after reaching a follower count; if so, the WhatsApp number in the bio does the job.
 
 ### What to pin (3 videos)

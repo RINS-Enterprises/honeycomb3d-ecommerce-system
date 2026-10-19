@@ -12,7 +12,7 @@ Built **only** from the 17 approved designs and their existing photos in `data/p
 - **Photos:** each post names the **site file** (in `public/assets/`) and, in brackets, the **original file name** in the product's Drive folder. Upload the **original** where you can; it's sharper. If you can't find it, ask Claude for a 1080 × 1350 JPG of the site file. Use **4:5 portrait** crop on Instagram.
 - **Every caption ends with the order line.** Swap `@yourhandle` for your real handle once you have it.
 - **Languages:** post the English caption, then the Sinhala one under it in the same post, or alternate days. Both are written for each post.
-- **Lines marked ⚠️** are Sinhala lines the reviewer flagged as worth a second look. Change the wording to how you'd say it.
+- **Sinhala:** a Sinhala reviewer checked every line and the fixes are applied. A note marked ⚠️ under a caption means a line is fine but could be worded differently; change any line to how you'd say it. Don't copy the ⚠️ notes into posts.
 - **When new photos arrive** (`photo-guide.md`), re-post the same product with the new photo. That's normal and good.
 
 ## Hashtag sets
@@ -35,7 +35,7 @@ Use the **Core** set on every post, plus one topic set. Instagram allows up to 3
 ## The order line (end of every caption)
 
 - **English:** `Order on WhatsApp: 071 059 9815, or tap the link in bio → honeycomb3d.store`
-- **Sinhala:** `ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store`
+- **Sinhala:** `ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store`
 
 ## Overview
 
@@ -101,10 +101,10 @@ All 17 approved designs appear at least once.
 > Order on WhatsApp: 071 059 9815, or tap the link in bio → honeycomb3d.store
 
 **SI:**
-> HoneyComb 3D වෙතින් ආයුබෝවන් 🐝
-> අපි කෑගල්ලේ ඉඳන් anime, film සහ comic චරිතවල figures, keychains සහ props 3D print කරනවා. හැම එකක්ම ඕඩර් එකට අනුව print කරන්නේ. Size එක සහ colour එක මුලින්ම ඔයා එක්ක කතා කරලා confirm කරනවා.
+> HoneyComb 3D එකෙන් ආයුබෝවන් 🐝
+> අපි කෑගල්ලේ ඉඳන් anime, film සහ comic චරිතවල figures, keychains සහ props 3D print කරනවා. හැම එකක්ම ඕඩර් එකට අනුව තමයි print කරන්නේ. Size එක සහ colour එක මුලින්ම ඔයා එක්ක කතා කරලා confirm කරනවා.
 > ඔයාගේ favourite එක මොකක්ද? 👇
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Naruto + Dragons
 
@@ -128,7 +128,8 @@ All 17 approved designs appear at least once.
 > 1. honeycomb3d.store එකෙන් design එකක් තෝරන්න
 > 2. Order now ඔබන්න. ඔයාගේ ඕඩර් එක ලියපු WhatsApp message එකක් open වෙනවා.
 > 3. Size, colour, මිල සහ delivery ගැන අපි ඔයා එක්ක කතා කරලා confirm කරලා තමයි print කරන්නේ.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> Details ගැන අපි දෙගොල්ලොම එකඟ වෙනකම් ඕඩර් එක confirm වෙන්නේ නෑ.
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core. **Pin this post.**
 
@@ -143,7 +144,7 @@ All 17 approved designs appear at least once.
 **SI:**
 > ඔයාගේ shelf එකට Nine-Tails 🦊
 > Kurama Figure, LKR 1,500. ඕඩර් එකට අනුව print කරනවා. Size, colour සහ finish ගැන අපෙන් අහන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Naruto + `#Kurama #NineTails`
 
@@ -163,7 +164,7 @@ All 17 approved designs appear at least once.
 **SI:**
 > Keys වලට පොඩි Toothless කෙනෙක් 🐉
 > Night Fury Keychain, LKR 500. ඕඩර් එකට අනුව print කරනවා. Size, colour සහ keyring එක ගැන අපිට කියන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Dragons
 
@@ -178,9 +179,9 @@ All 17 approved designs appear at least once.
 > Order on WhatsApp: 071 059 9815, or tap the link in bio → honeycomb3d.store
 
 **SI:**
-> [product name] එකක් print වෙන හැටි ⏱️ පැය [real hours] ක් තත්පර [seconds] කින්.
-> HoneyComb 3D එකේ හැම එකක්ම ඕඩර් එකට අනුව print කරන්නේ.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> [product name] එකක් print වෙන හැටි ⏱️ පැය [real hours]ක වැඩේ තත්පර [seconds]කින්.
+> HoneyComb 3D එකේ හැම එකක්ම ඕඩර් එකට අනුව තමයි print කරන්නේ.
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Reels + the product's set
 
@@ -202,9 +203,9 @@ Optional: share Day 5 to your story.
 
 **SI:**
 > Flying Thunder God, desk එකට ⚡
-> Minato Kunai, LKR 1,000. සැරසිලි prop එකක්. Engraved handle එක, ring එක සහ blade එක බලන්න swipe කරන්න.
+> Minato Kunai, LKR 1,000. Display කරන්න හදපු prop එකක්. Engraved handle එක, ring එක සහ blade එක බලන්න swipe කරන්න.
 > ඕඩර් කරන්න කලින් size එක සහ finish එක ගැන අපෙන් අහන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Naruto + `#Minato #Kunai #Cosplay #CosplayProps`
 
@@ -218,8 +219,8 @@ Optional: share Day 5 to your story.
 
 **SI:**
 > Hoodie එක දාගෙන, mask එක දාගෙන 🕷️
-> Urban Spider-Man, LKR 1,750. Desk එකට හරි shelf එකට හරි figure එකක්. ඕඩර් එකට අනුව print කරනවා. Size, colour, finish ඔයා එක්ක confirm කරනවා.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> Urban Spider-Man, LKR 1,750. Desk එකේ හරි shelf එකේ හරි තියන්න figure එකක්. ඕඩර් එකට අනුව print කරනවා. Size, colour, finish ඔයා එක්ක confirm කරනවා.
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Marvel
 
@@ -244,7 +245,7 @@ Optional: share Day 5 to your story.
 > Night Fury Keychain, LKR 500
 > Light Fury Keychain, LKR 500
 > දෙකම ඕඩර් එකට අනුව print කරනවා. ඔයා කැමති එක comment කරන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Dragons
 
@@ -258,8 +259,8 @@ Optional: share Day 5 to your story.
 
 **SI:**
 > පොඩි figure එකක්, joints ගොඩක් 🤖
-> Dummy 13 Iron Man, LKR 1,500. Iron Man විදියට හදපු, හොලවන්න පුළුවන් Dummy 13 figure එකක්. Size, colour සහ finish අපි එක්ක confirm කරන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> Dummy 13 Iron Man, LKR 1,500. Iron Man විදියට හදපු, joints හොලවන්න පුළුවන් Dummy 13 figure එකක්. Size, colour සහ finish අපි එක්ක confirm කරන්න.
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Dummy 13 + `#IronMan`
 
@@ -269,12 +270,12 @@ No promises: say "we'll try the top one", not "we'll sell it next week".
 
 **EN:**
 > Help us choose our next print 🗳️
-> Comment 1, 2, 3 or 4. We'll print the winner and show you how it turns out.
+> Comment 1, 2, 3 or 4. We'll try printing the top one and show you how it turns out.
 > Order what we already make: WhatsApp 071 059 9815 or honeycomb3d.store
 
 **SI:**
-> ඊළඟට print කරන්න ඕන මොකක්ද කියලා තෝරන්න උදව් කරන්න 🗳️
-> 1, 2, 3 නැත්නම් 4 comment කරන්න. වැඩිම vote ලැබෙන එක print කරලා කොහොමද ආවේ කියලා පෙන්නනවා.
+> ඊළඟට print කරන්න ඕන මොකක්ද කියලා තෝරන්න අපිට උදව් කරන්න 🗳️
+> 1, 2, 3 නැත්නම් 4 comment කරන්න. වැඩිම vote ලැබෙන එක print කරලා බලන්න try කරනවා, කොහොමද ආවේ කියලා පෙන්නනවා.
 > දැනට තියෙන designs ඕඩර් කරන්න: WhatsApp 071 059 9815 නැත්නම් honeycomb3d.store
 
 **Hashtags:** Core + Reels + Naruto (or whichever fits the choices)
@@ -297,7 +298,7 @@ Optional: reply to comments from Day 13 and share the leading answer in a story.
 **SI:**
 > Believe it! 🍃
 > Hidden Leaf Keychain, LKR 400. Emblem එක සහ rivets ළඟින් බලන්න swipe කරන්න. Colours සහ size ගැන අපෙන් අහන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Naruto + `#HiddenLeaf #Konoha`
 
@@ -311,8 +312,10 @@ Optional: reply to comments from Day 13 and share the leading answer in a story.
 
 **SI:**
 > ඕනම වෙලාවක පනින්න ලෑස්තියි 🕸️
-> Dummy 13 Spider-Man, LKR 1,500. Spider-Man විදියට හදපු, හොලවන්න පුළුවන් Dummy 13 figure එකක්. Size, colour සහ finish අපි එක්ක confirm කරන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> Dummy 13 Spider-Man, LKR 1,500. Spider-Man විදියට හදපු, joints හොලවන්න පුළුවන් Dummy 13 figure එකක්. Size, colour සහ finish අපි එක්ක confirm කරන්න.
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
+
+⚠️ *The first Sinhala line is a loose version of "Crouched and ready" ("ready to jump any time"). Fine to use, or reword it.*
 
 **Hashtags:** Core + Dummy 13 + `#SpiderMan`
 
@@ -330,7 +333,7 @@ Optional: reply to comments from Day 13 and share the leading answer in a story.
 **SI:**
 > This is the way 💚
 > Grogu Baby Yoda Keychain, LKR 500. Keys වලට හරි bag එකට හරි. Size සහ colour අපි එක්ක confirm කරන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Star Wars
 
@@ -345,7 +348,7 @@ Optional: reply to comments from Day 13 and share the leading answer in a story.
 **SI:**
 > Derpy ලා රංචුවක් 💙
 > Flexi Derpy (Kpop Demon Hunters), LKR 500. නැවෙන flexi figure එකක්. Size, colour සහ finish අපි එක්ක confirm කරන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + `#KpopDemonHunters #Derpy #FlexiFigure #Kpop #Fidget`
 
@@ -359,9 +362,9 @@ Only show a customer's order or name if they've said yes.
 > Order on WhatsApp: 071 059 9815, or tap the link in bio → honeycomb3d.store
 
 **SI:**
-> දැන් print වෙලා ආපු [product name] ✨ LKR [price from the site].
+> අලුතෙන්ම print වෙලා ආපු [product name] ✨ LKR [price from the site].
 > කෑගල්ලේ ඕඩර් එකට අනුව print කරනවා.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Reels + the product's set
 
@@ -386,7 +389,7 @@ Only show a customer's order or name if they've said yes.
 > Classic Kunai, LKR 1,000
 > Shuriken Ninja Star, LKR 500
 > Display කරන්න props, ඕඩර් එකට අනුව print කරනවා. ඔයාට ඕන size එක සහ colour එක කියන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Naruto + `#Kunai #Shuriken #Ninja #CosplayProps`
 
@@ -399,9 +402,9 @@ Only show a customer's order or name if they've said yes.
 > Order on WhatsApp: 071 059 9815, or tap the link in bio → honeycomb3d.store
 
 **SI:**
-> පියාපත් විහිදගෙන 🤍
-> Light Fury Big Wings, LKR 600. Desk එකට හරි shelf එකට හරි Light Fury figure එකක්. Size, colour සහ finish අපි එක්ක confirm කරන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> පියාපත් විහිදාගෙන 🤍
+> Light Fury Big Wings, LKR 600. Desk එකේ හරි shelf එකේ හරි තියන්න Light Fury figure එකක්. Size, colour සහ finish අපි එක්ක confirm කරන්න.
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Dragons
 
@@ -416,7 +419,7 @@ Only show a customer's order or name if they've said yes.
 **SI:**
 > Pens ටික ඇතුළට, phone එක උඩට 📱
 > Office Desk Organizer with Phone Holder, LKR 2,000. Pen cups දෙකක් සහ phone එක තියන්න තැනක් තියෙනවා. Size සහ colour අපි එක්ක confirm කරන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Gifts & desk
 
@@ -430,8 +433,8 @@ Only show a customer's order or name if they've said yes.
 
 **SI:**
 > පොත් කියවන අයට 📖
-> Bridgerton Bookmark, LKR 300. කියවපු තැන ලස්සනට මතක තියාගන්න. Size සහ colour අපි එක්ක confirm කරන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> Bridgerton Bookmark, LKR 300. කියවපු තැන මතක තියාගන්න ලස්සන විදියක්. Size සහ colour අපි එක්ක confirm කරන්න.
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Gifts & desk + `#Bridgerton`
 
@@ -444,9 +447,9 @@ Only show a customer's order or name if they've said yes.
 > Order on WhatsApp: 071 059 9815, or tap the link in bio → honeycomb3d.store
 
 **SI:**
-> එක Dummy 13 කෙනෙක්ට poses කීයක් කරන්න පුළුවන්ද? 🤸
+> එක Dummy 13 කෙනෙක්ට poses කීයක් දාන්න පුළුවන්ද? 🤸
 > Dummy 13 Iron Man සහ Dummy 13 Spider-Man, එකක් LKR 1,500 යි.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Dummy 13 + Reels
 
@@ -461,7 +464,7 @@ Only show a customer's order or name if they've said yes.
 **SI:**
 > Low-poly අශ්වයෙක්, දුවන ගමන් 🐎
 > Horse Figurine, LKR 1,600. Desk එකට හරි shelf එකට හරි. Size, colour සහ finish අපි එක්ක confirm කරන්න.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Gifts & desk + `#LowPoly #HorseLover`
 
@@ -476,7 +479,7 @@ Only show a customer's order or name if they've said yes.
 **SI:**
 > Hello. I am Baymax 🤍
 > Baymax Figure, LKR 1,000. Size, colour සහ finish quote එකත් එක්කම confirm කරනවා.
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + `#Baymax #BigHero6 #Disney #Collectibles`
 
@@ -505,10 +508,10 @@ Only show a customer's order or name if they've said yes.
 > Order on WhatsApp: 071 059 9815, or tap the link in bio → honeycomb3d.store
 
 **SI:**
-> HoneyComb 3D එක්ක මාසයක් 🐝 හැම like එකකටම, share එකකටම, message එකකටම ස්තූතියි.
+> HoneyComb 3D එක්ක මාසයක් 🐝 හැම like එකකටම, share එකකටම, message එකකටම ස්තුතියි.
 > මේ ඔයාලා වැඩියෙන්ම කැමති වුණ ඒවා. ආයෙත් බලන්න swipe කරන්න.
 > ඊළඟට: [Day 13 winner, print කරනවා නම් විතරක්].
-> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එක → honeycomb3d.store
+> ඕඩර් කරන්න WhatsApp: 071 059 9815, නැත්නම් bio එකේ link එකෙන් → honeycomb3d.store
 
 **Hashtags:** Core + Naruto + Dragons
 
