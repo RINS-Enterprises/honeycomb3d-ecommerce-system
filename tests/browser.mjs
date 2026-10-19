@@ -173,6 +173,13 @@ try {
   await page.waitForFunction(()=>!document.querySelector('#add-form button').disabled);
   await screenshot('test-results/product-desktop.png');
   await page.getByRole('spinbutton').fill('2');
+  if(ordering) {
+    // One-tap order: same business number, just this design at the chosen quantity, nothing added to the cart.
+    const orderNow=new URL(await page.locator('.order-now').getByRole('link',{name:'Order now on WhatsApp'}).getAttribute('href'));
+    assert.equal(orderNow.origin+orderNow.pathname,'https://wa.me/'+builtStore.whatsappNumber);
+    assert.match(orderNow.searchParams.get('text'),/^Hello HoneyComb 3D, I would like to request an order\.\n- Baymax Figure \[HC-BAYMAX\] x 2: /);
+    assert.match(orderNow.searchParams.get('text'),/not a confirmed purchase/);
+  } else assert.equal(await page.getByTestId('order-now').count(),0);
   await page.getByRole('button',{name:'Add to request cart'}).click();
   await page.getByRole('button',{name:'Added to cart ✓'}).waitFor();
   await page.getByRole('status').filter({hasText:'Baymax Figure added to your request cart.'}).waitFor();
@@ -338,8 +345,18 @@ try {
   assert.equal(await page.getByTestId('sticky-buy').isVisible(),false,'No buy bar while the add button is on screen or below');
   await page.evaluate(()=>{const f=document.querySelector('#add-form');scrollTo(0,f.getBoundingClientRect().bottom+scrollY+200);});
   await page.waitForFunction(()=>document.querySelector('[data-sticky-buy]').classList.contains('is-visible'));
-  await page.getByTestId('sticky-buy').getByRole('button',{name:'Add to request cart'}).click();
-  await page.getByRole('status').filter({hasText:'Kurama Figure added to your request cart.'}).waitFor();
+  if(ordering) {
+    // Live: the bar carries the one-tap order link, kept in step with the quantity field.
+    const stickyOrder=page.getByTestId('sticky-buy').getByRole('link',{name:'Order now'});
+    const text=new URL(await stickyOrder.getAttribute('href')).searchParams.get('text');
+    assert.match(text,/Kurama Figure \[HC-KURAMA\] x 1/);
+    await page.locator('#add-form input[name="quantity"]').fill('4');
+    assert.match(new URL(await stickyOrder.getAttribute('href')).searchParams.get('text'),/Kurama Figure \[HC-KURAMA\] x 4/);
+    await page.locator('#add-form input[name="quantity"]').fill('1');
+  } else {
+    await page.getByTestId('sticky-buy').getByRole('button',{name:'Add to request cart'}).click();
+    await page.getByRole('status').filter({hasText:'Kurama Figure added to your request cart.'}).waitFor();
+  }
   await page.evaluate(()=>document.querySelector('.site-footer').scrollIntoView());
   await page.waitForFunction(()=>!document.querySelector('[data-sticky-buy]').classList.contains('is-visible'));
   await page.evaluate(()=>localStorage.clear());

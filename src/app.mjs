@@ -205,6 +205,13 @@ function initQuickAdd() {
 }
 function initAdd() {
   const form=document.querySelector('#add-form');if(!form)return;
+  const orderNow=[...document.querySelectorAll('[data-order-now]')];
+  if(orderNow.length) form.elements.quantity.addEventListener('input',()=>{
+    const quantity=Number(form.elements.quantity.value);
+    if(!Number.isInteger(quantity)||quantity<1||quantity>MAX_QUANTITY)return;
+    const url=whatsappUrl(orderMessage([{id:form.dataset.productId,quantity}],products),store);
+    if(url)orderNow.forEach(link=>link.href=url);
+  });
   form.addEventListener('submit',event=>{
     event.preventDefault();if(!form.reportValidity())return;
     const quantity=Number(form.elements.quantity.value);
@@ -370,7 +377,7 @@ function initStickyBuy() {
   addEventListener('scroll',()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(update);},{passive:true});
   addEventListener('resize',update);
   narrow.addEventListener('change',update);
-  bar.querySelector('[data-sticky-add]').addEventListener('click',()=>form.requestSubmit());
+  bar.querySelector('[data-sticky-add]')?.addEventListener('click',()=>form.requestSubmit());
   update();
 }
 function initShare() {
