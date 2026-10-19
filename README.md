@@ -1,131 +1,53 @@
-# Honeycomb 3D Store 🚀
+# HoneyComb 3D storefront
 
-![Preview](homepage.png)
+A static storefront for HoneyComb 3D / HONEYCOMB™, a 3D-print studio in Sri Lanka, live at [honeycomb3d.store](https://honeycomb3d.store).
 
-> Built and optimized a real-world e-commerce system focused on conversions, trust, and user experience.
+It includes:
+- a homepage and a searchable catalogue of 17 approved designs, each with its own product page;
+- a persistent request cart;
+- a custom-print enquiry;
+- an FAQ.
 
-A conversion-focused e-commerce store built for anime collectible lovers in Sri Lanka.
+**Mode: live.** Visitors send order requests through WhatsApp to the business number, and HoneyComb confirms availability, options, delivery, the final total and payment before anything is a purchase. Prices are in LKR. There are no sale, compare-at or stock-count claims, and the site makes no payment, stock, review or delivery promises of its own. Delivery, payment methods, social links and the Shipping/Returns/About pages are switches that stay off until the owner gives those facts. Search engines are kept out (`noindex`) until the owner decides otherwise.
 
-🔗 Live Site: https://honeycomb3d.store
+Work is split across Claude sessions; see the [session plan](docs/pm/SESSIONS-PLAN.md). The PM session merges into the release branch `claude/funny-albattani-c5a91a` and is the only one that deploys. See [build status](docs/BUILD-STATUS.md) for what the site does and which owner facts are pending, and [run and release](docs/RUN-AND-RELEASE.md) for commands, fixtures and the release flow.
 
----
+## Run locally
 
-## 💡 Role & Contribution
+Requires Node.js 22 or newer. No application dependencies.
 
-Independently built and optimized a full e-commerce system, focusing on conversion optimization, payment integration, and trust-building mechanisms.
+```sh
+npm ci
+npm test
+npm run build
+npm run check
+npm start
+```
 
-**Key responsibilities:**
+Open http://127.0.0.1:4173. `npm run dev` builds once and serves; it does not watch for edits. The generated site is in `dist/`.
 
-* Store setup and configuration (WooCommerce)
-* UI/UX improvements for better product focus
-* Stripe payment gateway integration
-* Email system setup using SMTP (FluentSMTP)
-* Trustpilot review automation (via email logic)
+`npm run gate` runs the unit tests, build, checks and both browser tests (see [run and release](docs/RUN-AND-RELEASE.md) for the Playwright setup and the preview / all-switches-on fixtures). GitHub Actions separately installs pinned browser-test tooling and runs `tests/browser.mjs` and `tests/images-browser.mjs`. Screenshots and the generated site are retained in its `storefront-check-output` artifact. Test contacts and test prices are used only in fixtures; no WhatsApp message is sent.
 
----
+## Order requests
 
-## 📈 Real-World Application
+The cart saves product IDs and quantities on the visitor’s device. Notes and custom enquiries are not persisted. Visitors review a message before copying it or opening WhatsApp. A WhatsApp handoff opens a prepared request; the visitor must send it, and HoneyComb must confirm the details.
 
-This project is a live store designed to generate actual sales, not just a demo.
+Order requests can also start from "Order now on WhatsApp" on a product page or "Order" on a product card; both open the same kind of prepared message for one design. Preview mode disables external WhatsApp handoff. Live mode requires a verified international contact and hides unapproved products. Approved products require original photos and confirmed availability; quote-only pricing is supported. There is no payment processor, order database or inventory integration.
 
-It applies real-world e-commerce principles such as:
+## Source and recovery
 
-* Conversion optimization
-* Customer trust building
-* Friction reduction in checkout
+- `src/`: page rendering, styles, browser interactions and cart rules.
+- `data/`: catalogue and store settings; unknown prices remain `null`.
+- `assets/photo-sources/`: metadata-clean source inputs, excluded from served files.
+- `assets/image-sources.json`: verified Drive hashes, source dimensions and crop specifications.
+- `assets/derivatives.json`: output dimensions, byte counts and SHA-256 hashes.
+- `public/assets/`: only the generated photo derivatives and logo files referenced by the build.
+- `tests/fixtures/`: store patches for testing preview and switched-on states (`STORE_PATCH`); never used for release builds.
+- [Build status](docs/BUILD-STATUS.md): current checkpoint, verification and remaining launch inputs.
+- [Run and release](docs/RUN-AND-RELEASE.md): configuration, deployment and handoff instructions.
+- [Recovery brief](docs/RECOVERY-AND-BUILD-BRIEF.md): historical specification with explicitly unverified claims.
+- [Historical WooCommerce README](docs/LEGACY-WOOCOMMERCE-README.md): preserved April evidence. Its payment and stock claims do not describe this implementation.
 
----
+## Photo maintenance
 
-## 🧠 Project Overview
-
-The store is designed to:
-
-* Sell 3D printed anime collectibles
-* Optimize product pages for conversions
-* Use psychological triggers to influence buying decisions
-
----
-
-## 🔄 System Flow
-
-User browses products → selects item → adds to cart
-→ proceeds to checkout → completes payment (Stripe or COD)
-→ receives order confirmation email (SMTP)
-→ Trustpilot review request is triggered → customer feedback collected
-
----
-
-## ⚔️ Key Features
-
-* 🔥 Stripe payment integration
-* 📦 Cash on Delivery (COD)
-* ⚡ Low stock + “X sold” urgency system
-* 💬 WhatsApp direct customer contact
-* ⭐ Trustpilot review automation
-* 🌙 Dark UI optimized for product focus
-
----
-
-## 🛠 Tech Stack
-
-* WordPress
-* WooCommerce
-* Blocksy Theme
-* FluentSMTP (Email system)
-* Stripe (Payments)
-
----
-
-## 🎯 What I Optimized
-
-Focused on **conversion psychology**, not just design:
-
-* Product hierarchy (best sellers prioritized)
-* Scarcity triggers (“Only X left”)
-* Social proof (“X sold” indicators)
-* Clean UI for faster decision-making
-* Reduced checkout friction
-
----
-
-## 🧩 Problems Solved
-
-* Low trust in new stores → Implemented review system (Trustpilot)
-* Cart abandonment → Simplified checkout + added COD
-* Weak product appeal → Improved visuals and hierarchy
-* Lack of urgency → Added stock indicators and demand signals
-
----
-
-## 📸 Screenshots
-
-### Homepage
-
-![Homepage](homepage.png)
-
-### Shop Page
-
-![Shop](shop.png)
-
-### Product Page
-
-![Product](product.png)
-
-### Checkout Page
-
-![Checkout](checkout.png)
-
----
-
-## ⚙️ Custom Work
-
-* CSS fixes for UI consistency
-* Product card and layout optimization
-* Trustpilot automated review system (BCC logic)
-* SMTP email system configuration
-
----
-
-## 🧠 Summary
-
-This project demonstrates the ability to build and optimize a real-world e-commerce system with a strong focus on conversions, user experience, and trust.
+The checked-in derivatives keep the normal Node build dependency-free. To regenerate them, install Pillow 11.3.0 and run `python scripts/prepare-images.py`; this also regenerates the provenance document. `npm run check` verifies all source/output hashes, metadata removal, intrinsic dimensions, responsive candidates and image budgets, and prevents source files or unused originals from entering `dist/`. Mobile browser checks measure every page at 390 px and DPR 3.

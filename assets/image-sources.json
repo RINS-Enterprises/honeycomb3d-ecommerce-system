@@ -1,0 +1,878 @@
+{
+  "version": 1,
+  "importedAt": "2026-10-13",
+  "ownerApprovalDate": "2026-10-11",
+  "widths": [
+    480,
+    960,
+    1440
+  ],
+  "assets": [
+    {
+      "id": "HC-LEAF",
+      "stem": "hidden-leaf",
+      "input": "assets/photo-sources/hidden-leaf.jpg",
+      "sourceTitle": "Copy of RAV_4459.jpg",
+      "sourceDriveId": "1rW98jCTB1kwWoP0gMThUrnWitqN8-q_v",
+      "sourceSha256": "d1f9cb985d101fde84d3decfb82c3b9ae8f90f67a2c82db03606b214ccef9b04",
+      "inputSha256": "6550f9d1c2a03ffedba857715ddfb9cbb55d3c2c5f566d789dde966b94b9145e",
+      "exifOrientation": 1,
+      "sourceSize": [
+        4299,
+        6442
+      ],
+      "cropBox": [
+        1250,
+        1660,
+        3000,
+        2430
+      ],
+      "alt": "White Hidden Leaf headband keychain with a black leaf symbol on a light backdrop",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Shows the whole plate, keyring loop to right end."
+      },
+      "gallery": [
+        {
+          "box": [
+            1640,
+            1660,
+            2410,
+            2430
+          ],
+          "widths": [
+            160,
+            320,
+            480,
+            640,
+            770
+          ],
+          "alt": "Close-up of the Hidden Leaf emblem and rivets on the white keychain plate",
+          "note": "Detail: Centres the Hidden Leaf emblem and the plate's left rivets; the approved crop is too shallow for a square of the whole plate."
+        },
+        {
+          "box": [
+            1250,
+            1660,
+            2020,
+            2430
+          ],
+          "alt": "Left end of the white Hidden Leaf keychain plate with its keyring loop and black rivets",
+          "note": "Keyring loop and rivets.",
+          "widths": [
+            160,
+            320,
+            480,
+            640,
+            770
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HC-BAYMAX",
+      "stem": "baymax",
+      "input": "assets/photo-sources/baymax.png",
+      "sourceTitle": "HNYCMB504 (1).png",
+      "sourceDriveId": "1XGpES0PDcZuXp46hSPsD_gtHMsP_qVbY",
+      "sourceSha256": "d9c9b702a5af80a9019a2224dbd5e102e4f0afd4fef9cab4948e471ea0efcdb5",
+      "inputSha256": "2caef48ac4bbcbcc586df925b59e77a4f1c706ca07b51d0d9061aa8babe4bc7e",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1536,
+        2048
+      ],
+      "cropBox": null,
+      "alt": "Two white 3D-printed Baymax figures photographed on a green display surface",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ],
+      "square": {
+        "box": [
+          0,
+          400,
+          1536,
+          1936
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Keeps both figures; trims the empty wall above and part of the grass below."
+      }
+    },
+    {
+      "id": "HNYCMB501",
+      "stem": "night-fury",
+      "input": "assets/photo-sources/night-fury.jpg",
+      "sourceTitle": "20260301_152139.jpg",
+      "sourceDriveId": "1w5Ulskt4b-WEdJkQLXcR52s3YucH5Rfg",
+      "sourceSha256": "408785f66536cca48db02286bdc9fdc50a3e246e4d69a6cd7f1343329f87807b",
+      "inputSha256": "775dddb36cf5d98a07ce92ba4a1ddad26c0e27bd7868c55bfe5822b447b04959",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1893,
+        1420
+      ],
+      "cropBox": null,
+      "alt": "A single black articulated Night Fury keychain with yellow-green eyes held in a hand",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ],
+      "square": {
+        "box": [
+          236,
+          0,
+          1656,
+          1420
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Centres the figure and the holding hand."
+      },
+      "hero": {
+        "landscape": {
+          "box": [
+            0,
+            200,
+            1893,
+            1146
+          ],
+          "widths": [
+            960,
+            1280,
+            1600,
+            1893
+          ],
+          "note": "2:1 desktop hero; the dragon sits just right of centre so the headline can sit on the darkened left."
+        },
+        "portrait": {
+          "box": [
+            480,
+            0,
+            1545,
+            1420
+          ],
+          "widths": [
+            480,
+            720,
+            960,
+            1065
+          ],
+          "note": "3:4 mobile hero; head, wings and tail."
+        }
+      },
+      "siteShare": {
+        "box": [
+          0,
+          176,
+          1893,
+          1170
+        ]
+      }
+    },
+    {
+      "id": "HC-MINATO",
+      "stem": "minato-kunai",
+      "input": "assets/photo-sources/minato-kunai.jpg",
+      "sourceTitle": "Copy of RAV_4468.jpg",
+      "sourceDriveId": "1saPgsNnYGHltaJeXCLFe4w5pL48P4v9F",
+      "sourceSha256": "6bed862cf24b3c9522222aa839198a94326ff1ca06c98f3dd0a43f9f24b02028",
+      "inputSha256": "4c9673b96abc990ab4505ef0f46e6f4050029e0ed0ee44ba21b681c47af77479",
+      "exifOrientation": 1,
+      "sourceSize": [
+        4912,
+        7360
+      ],
+      "cropBox": [
+        2770,
+        2150,
+        4600,
+        6250
+      ],
+      "alt": "Black three-pronged Minato kunai with silver edge bevels, a tan engraved handle and a black ring on a light backdrop",
+      "format": "webp",
+      "widths": [
+        160,
+        240,
+        480,
+        960,
+        1440
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Shows the whole kunai, ring to blade tip, with a margin."
+      },
+      "gallery": [
+        {
+          "box": [
+            2770,
+            2950,
+            4600,
+            4780
+          ],
+          "widths": [
+            160,
+            320,
+            480,
+            640,
+            960,
+            1200
+          ],
+          "alt": "Close-up of the Minato kunai: tan engraved handle and black curved wings",
+          "note": "Detail: Shows the engraved handle and full wings; the ring and blade tip fall outside the square."
+        },
+        {
+          "box": [
+            2770,
+            2200,
+            4600,
+            4030
+          ],
+          "alt": "Close-up of the Minato kunai: black ring and tan handle with engraved characters",
+          "note": "Ring and engraved grip.",
+          "widths": [
+            160,
+            320,
+            480,
+            640,
+            960,
+            1200
+          ]
+        },
+        {
+          "box": [
+            2770,
+            4320,
+            4600,
+            6150
+          ],
+          "alt": "Close-up of the Minato kunai: black blade with silver edge bevels and curved wings",
+          "note": "Wings and blade to the tip.",
+          "widths": [
+            160,
+            320,
+            480,
+            640,
+            960,
+            1200
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HC-LIGHTFURY",
+      "stem": "light-fury",
+      "input": "assets/photo-sources/light-fury.jpg",
+      "sourceTitle": "Variation 1 (2).jpg",
+      "sourceDriveId": "1pMK8OOE9bvE4WsKDRONnPk38k5HQbVaU",
+      "sourceSha256": "508c5590ee15f6f55c3db605080b0c8a8000e6c9758f0b61aad333786ee1c9e9",
+      "inputSha256": "371ebf51441bcf82c1feb7afa256b420e0d95d15a2834ad1811fd3f538fe069d",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1500,
+        2000
+      ],
+      "cropBox": null,
+      "alt": "A single painted white Light Fury keychain with blue eyes and black claws held in a hand",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ],
+      "square": {
+        "box": [
+          0,
+          300,
+          1500,
+          1800
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Centres the figure and its tail."
+      }
+    },
+    {
+      "id": "HC-KURAMA",
+      "stem": "kurama",
+      "input": "assets/photo-sources/kurama.png",
+      "sourceTitle": "1.png",
+      "sourceDriveId": "1wkBiKm7ZUMRYRpHJojCI9YPhv3ePKIXn",
+      "sourceSha256": "d33853df877263dab5a27300b0f92bd545a12b2111f9828bb411e7d3e9f5a494",
+      "inputSha256": "c245fbe4383675aedf68570a02299177fe9ef69dadbc33456eb0af35cd4eabcf",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3415,
+        5120
+      ],
+      "cropBox": [
+        487,
+        1228,
+        2937,
+        3876
+      ],
+      "alt": "Orange 3D-printed nine-tailed fox (Kurama) figure with black eye markings, crouching with its tails raised, on a white background",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Shows the whole figure, tail tips to paws, on its white Canva background."
+      },
+      "handoff": "QA branch claude/photo-handoff commit 4cefd25 (kurama-1.png), SHA-256 verified before import; Drive copy in the owner's HoneyComb folder."
+    },
+    {
+      "id": "HC-KUNAI",
+      "stem": "classic-kunai",
+      "input": "assets/photo-sources/classic-kunai.jpg",
+      "sourceTitle": "Copy of RAV_4322.jpg",
+      "sourceDriveId": "1PaOuVcZ82ij2vV2hq08fiFC42_w9iKua",
+      "sourceSha256": "f41368debf7c8dad784374727a8c374e64bd33fc89461a0d907f16d5ce3c8722",
+      "inputSha256": "091db23cdc9f942d12aafe1478de6514177b2aa0657da3e30c1ab91f949b602c",
+      "exifOrientation": 1,
+      "sourceSize": [
+        4912,
+        7360
+      ],
+      "cropBox": [
+        627,
+        1370,
+        4205,
+        6142
+      ],
+      "alt": "Black 3D-printed kunai with a white wrapped handle and a black ring, on a light grey backdrop",
+      "format": "webp",
+      "widths": [
+        480,
+        960,
+        1440
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Shows the whole kunai, ring to tip, with a margin."
+      },
+      "handoff": "QA branch claude/photo-handoff commit 4cefd25 (classic-kunai-RAV_4322.jpg), SHA-256 verified before import; Drive copy in the owner's HoneyComb folder."
+    },
+    {
+      "id": "brand-logo",
+      "stem": "honeycomb-logo",
+      "input": "assets/photo-sources/honeycomb-logo.png",
+      "sourceTitle": "HC_WhiteBK-1.png",
+      "sourceDriveId": "1sHmDdDKtS_qnh76ctrgYkJj_Uokaj23e",
+      "sourceSha256": "1a31b02c4343ed657a62d3dd49a86d5fe6b950b0d68b747877828ab4288ad08e",
+      "inputSha256": "1a31b02c4343ed657a62d3dd49a86d5fe6b950b0d68b747877828ab4288ad08e",
+      "exifOrientation": 1,
+      "sourceSize": [
+        8334,
+        8334
+      ],
+      "cropBox": [
+        583,
+        3156,
+        8018,
+        5385
+      ],
+      "alt": "HoneyComb",
+      "format": "png",
+      "widths": [
+        660
+      ],
+      "output": "/assets/honeycomb-logo-web.png"
+    },
+    {
+      "id": "HNYCMB505",
+      "stem": "bridgerton-bookmark",
+      "input": "assets/photo-sources/bridgerton-bookmark.jpg",
+      "sourceTitle": "HNYCMB505-bridgerton-bookmark.jpg",
+      "sourceDriveId": "12iD2dbrjeeKNhat0ns5d6ArSze5gSMKE",
+      "sourceSha256": "f7e859a647dc21012d1168391d6d649a3110e3a3451852f0117296acb8709283",
+      "inputSha256": "1c79679510a3d9e90af4b78ee39d7a1ba2cbb26a29f2da8a366b44f56a4cdc0a",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1920,
+        1581
+      ],
+      "cropBox": [
+        90,
+        0,
+        1920,
+        1581
+      ],
+      "alt": "White 3D-printed Bridgerton bookmark with raised lettering and an ornate cameo silhouette end, on black leather",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole bookmark, tip to cameo, on its black leather backdrop."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB505-bridgerton-bookmark.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16"
+    },
+    {
+      "id": "HNYCMB506",
+      "stem": "flexi-derpy",
+      "input": "assets/photo-sources/flexi-derpy.jpg",
+      "sourceTitle": "HNYCMB506-flexi-derpy.jpg",
+      "sourceDriveId": "1xKvveU7RYKISIkPpaq1ZqP3rSQPEzLZa",
+      "sourceSha256": "2e329ecfaccae167f3a1ab4bebba2577c2666cd6bc43d9837a71c450db7cfd34",
+      "inputSha256": "6d2d0fdc9dc0c88901a7bcb3ec11a7543d653f41e23ba9b47cfb936d805f5f0d",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1920,
+        2560
+      ],
+      "cropBox": [
+        300,
+        640,
+        1560,
+        1900
+      ],
+      "alt": "A group of blue 3D-printed flexi Derpy figures with yellow eyes and cream joints",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          300,
+          640,
+          1560,
+          1900
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The Derpy figures without the basket rim."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB506-flexi-derpy.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16"
+    },
+    {
+      "id": "HNYCMB507",
+      "stem": "desk-organizer",
+      "input": "assets/photo-sources/desk-organizer.jpg",
+      "sourceTitle": "HNYCMB507-desk-organizer.jpg",
+      "sourceDriveId": "1vmZYNsrB7_JkNByGhegptecoZoPbLmqg",
+      "sourceSha256": "6ad682b24ca487a50394bd5b7e5f1382f192347f0bad47fff55a2d0a748b6b92",
+      "inputSha256": "00a7ae74f2ee0519820bc81a766d0b3b3dd7a83fc2238529c8cafae5f794ee45",
+      "exifOrientation": 6,
+      "sourceSize": [
+        4608,
+        3456
+      ],
+      "cropBox": [
+        0,
+        1050,
+        3456,
+        4506
+      ],
+      "alt": "Black textured 3D-printed desk organizer with two yellow-lined pen cups and a phone stand slot, on a wooden floor",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          0,
+          1050,
+          3456,
+          4506
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole organizer, framed low to leave out the printer behind it."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB507-desk-organizer.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16"
+    },
+    {
+      "id": "HNYCMB510",
+      "stem": "light-fury-big-wings",
+      "input": "assets/photo-sources/light-fury-big-wings.jpg",
+      "sourceTitle": "HNYCMB510-light-fury-big-wings.jpg",
+      "sourceDriveId": "1KQeczUTxcbbVstTYWVDgL6epTOeyWqsF",
+      "sourceSha256": "cdb3293ee1faa7d75e67a520b87842ecbb6371d915b884d2523fe1e7662e461e",
+      "inputSha256": "bf34ba465b80c3fd68413d8af1ae4522bbcd9c09bf6a0029d374051456c57b84",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3264,
+        2448
+      ],
+      "cropBox": [
+        80,
+        0,
+        3264,
+        2448
+      ],
+      "alt": "White articulated 3D-printed Light Fury dragon with large wings and blue eyes, lying on dark fabric",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole dragon, wing tip to tail, on its dark fabric."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB510-light-fury-big-wings.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16"
+    },
+    {
+      "id": "HNYCMB512",
+      "stem": "urban-spider-man",
+      "input": "assets/photo-sources/urban-spider-man.jpg",
+      "sourceTitle": "HNYCMB512-urban-spider-man.jpg",
+      "sourceDriveId": "120w4276bAIJL7o9LX3m2SSlXjDW9qs53",
+      "sourceSha256": "8978e4307d61023d802dd213ce20e9e6601df22186396ed04903599c4739f7eb",
+      "inputSha256": "ed5e48f8ef92d64fac025b1da2513ebe40880621aec9da68086cbfe68cd463d7",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1920,
+        2560
+      ],
+      "cropBox": [
+        0,
+        180,
+        1920,
+        2300
+      ],
+      "alt": "3D-printed Spider-Man figure in a black hooded jacket with a red web-pattern mask and white sneakers, standing on a wooden table",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole figure, hood to sneakers."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB512-urban-spider-man.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16"
+    },
+    {
+      "id": "HNYCMB514",
+      "stem": "shuriken",
+      "input": "assets/photo-sources/shuriken.jpg",
+      "sourceTitle": "HNYCMB514-shuriken.jpg",
+      "sourceDriveId": "1vlDR1GAuyCUVawoikmyb6-IDCmg0J62Q",
+      "sourceSha256": "17e2e2cd44ecd9bc9bc8df6684fec4760bfbe6d85346151691ca13935f67ac4e",
+      "inputSha256": "21766fcaa5d766f36e874c1382b779e6c96e30e974162671ea06fd3fbcdbb878",
+      "exifOrientation": 1,
+      "sourceSize": [
+        2736,
+        3648
+      ],
+      "cropBox": [
+        400,
+        790,
+        2470,
+        2860
+      ],
+      "alt": "White six-pointed 3D-printed shuriken ninja star held in a hand in front of cardboard",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          400,
+          790,
+          2470,
+          2860
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole star; only the fingertips holding it remain, the box edges are cut."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB514-shuriken.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16"
+    },
+    {
+      "id": "HNYCMB515",
+      "stem": "grogu-keychain",
+      "input": "assets/photo-sources/grogu-keychain.jpg",
+      "sourceTitle": "HNYCMB515-grogu-keychain.jpg",
+      "sourceDriveId": "1OL98LhZBjTEKJ8swbXjxrEzVQFJqa2iN",
+      "sourceSha256": "2d4c5b10d455750c9e27f51e1146dcf43b37ce5558696fd360c66e3cac32b7eb",
+      "inputSha256": "ed1aa1466287a31fbc59a4b564155eb7e0cf77947f2bd28802cd5422d71d2553",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3024,
+        4032
+      ],
+      "cropBox": [
+        605,
+        1075,
+        2505,
+        2975
+      ],
+      "alt": "Flat 3D-printed Grogu keychain in green, white and brown with a silver keyring, on a black surface",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          605,
+          1075,
+          2505,
+          2975
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole keychain, ring included."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB515-grogu-keychain.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16"
+    },
+    {
+      "id": "HNYCMB516",
+      "stem": "dummy-13-iron-man",
+      "input": "assets/photo-sources/dummy-13-iron-man.jpg",
+      "sourceTitle": "HNYCMB516-dummy13-iron-man.jpg",
+      "sourceDriveId": "1o6V86ZMTo3Syo0Jom4cXwqGGflYVc98a",
+      "sourceSha256": "8754c67c2808981032178fe165aab49aa9fe20eff72f95850f529c1a7fc03641",
+      "inputSha256": "74d2bd9e740761a7af4e9248bb07dd427ea812775592a7f1d86e76d2f6d7ca2c",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1398,
+        2603
+      ],
+      "cropBox": [
+        0,
+        180,
+        1398,
+        2603
+      ],
+      "alt": "Red and yellow articulated 3D-printed Dummy 13 figure styled as Iron Man, held up in a hand",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole figure, hands to feet, with the carpet above its head cut away."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB516-dummy13-iron-man.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16"
+    },
+    {
+      "id": "HNYCMB517",
+      "stem": "dummy-13-spider-man",
+      "input": "assets/photo-sources/dummy-13-spider-man.jpg",
+      "sourceTitle": "HNYCMB517-dummy13-spider-man.jpg",
+      "sourceDriveId": "1TcA-A9JgUxGpfvv4Jff77SavaMoKTBMi",
+      "sourceSha256": "6512bc5d620a1a8a4e9e353ef0ab2b3a6335d8ebdb336b47d3d26847544e57a7",
+      "inputSha256": "bfe5057f493dbe26f8487c77521eb2692b74aa96685718534c14e87568ee4bc5",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1920,
+        1920
+      ],
+      "cropBox": [
+        219,
+        200,
+        1619,
+        1600
+      ],
+      "alt": "Red and blue articulated 3D-printed Dummy 13 figure styled as Spider-Man in a crouching pose on a white background",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          219,
+          200,
+          1619,
+          1600
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole crouching figure."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB517-dummy13-spider-man.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16"
+    },
+    {
+      "id": "HNYCMB518",
+      "stem": "horse-figurine",
+      "input": "assets/photo-sources/horse-figurine.jpg",
+      "sourceTitle": "HNYCMB518-horse-figurine.jpg",
+      "sourceDriveId": "1R7Pk1CEex_vlpISjuao7VyQZI_C8vDOU",
+      "sourceSha256": "0ca883d8de5de9fa5412fc861bc219cc70772766b11c008aa8a4098076ba54ca",
+      "inputSha256": "d3302a60cd6e3a4a3758d5d31b6bf2106609ef1d0c80e81fdfc912f6567563b4",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1920,
+        2560
+      ],
+      "cropBox": [
+        144,
+        730,
+        1794,
+        2380
+      ],
+      "alt": "White low-poly 3D-printed horse figurine galloping on a rock base, on a grey stone table",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "box": [
+          144,
+          730,
+          1794,
+          2380
+        ],
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "The whole horse and base."
+      },
+      "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB518-horse-figurine.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
+      "ownerApprovalDate": "2026-10-16"
+    }
+  ],
+  "pending": []
+}

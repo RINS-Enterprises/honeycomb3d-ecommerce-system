@@ -1,0 +1,11 @@
+{
+  "paypalOverseas": true,
+  "delivery": {"text": "Test fixture delivery line, not an owner fact", "feeLkr": 450.5},
+  "paymentMethods": ["Fixture method A", "Fixture method B"],
+  "social": [{"label": "Fixture account", "url": "https://example.com/fixture"}],
+  "pages": {
+    "shipping": "Test fixture shipping text, not an owner fact.",
+    "returns": "Test fixture returns text, not an owner fact.",
+    "about": "Test fixture about text, not an owner fact.\n\nSecond paragraph."
+  }
+}
