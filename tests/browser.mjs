@@ -41,7 +41,8 @@ try {
   for(const card of await page.locator('[data-product-card]').all()) {
     // One link to the product page per card; live ordering adds a separate one-tap Order link (nothing else).
     assert.equal(await card.locator('a[href^="/products/"]').count(),1,'One product link per product card');
-    assert.equal(await card.getByRole('link').count(),ordering?2:1,'Only the product link, plus Order when ordering is open');
+    const orderable=ordering&&!/Currently unavailable/.test(await card.locator('.card-status').textContent());
+    assert.equal(await card.getByRole('link').count(),orderable?2:1,'Only the product link, plus Order when ordering is open and the design is available');
     assert.equal(await card.getByRole('heading',{level:2}).count(),1,'Shop heading hierarchy');
   }
   if(ordering) {
