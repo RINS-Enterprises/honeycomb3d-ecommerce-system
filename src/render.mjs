@@ -21,7 +21,7 @@ function footer(store) {
     '<div class="footer-brand"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a><p>3D prints, collectibles &amp; custom ideas.</p><p class="muted">Sri Lanka · Prices in LKR</p></div>' +
     '<nav class="footer-links" aria-label="Footer"><div><h2>Shop</h2><ul><li><a href="/shop/">The collection</a></li><li><a href="/cart/">Request cart</a></li></ul></div>' +
     '<div><h2>Make</h2><ul><li><a href="/custom/">Have something in mind? Tell us.</a></li></ul></div>' +
-    '<div><h2>About</h2><ul><li><a href="/privacy/">How this site handles your data</a></li></ul></div></nav>' +
+    '<div><h2>About</h2><ul><li><a href="/faq/">Questions and answers</a></li><li><a href="/privacy/">How this site handles your data</a></li></ul></div></nav>' +
     '<div class="footer-bottom"><p class="fine">An enquiry is not a confirmed purchase. Availability, delivery and payment arrangements are confirmed with your quote.</p>' +
     '<p class="fine">© '+new Date().getFullYear()+' '+e(store.name||'HoneyComb 3D')+'</p></div></div></footer>';
 }
@@ -198,6 +198,20 @@ export function customPage(store) {
 }
 export function privacyPage(store) {
   return layout('How this site handles your data','<section class="wrap section narrow prose-page"><p class="eyebrow">PRIVACY</p><h1>Your data on this site.</h1><p>The request cart stores product identifiers and quantities in this browser’s local storage, and a short list of the last products you viewed is kept there too. Remove the items, use “Clear” under Recently viewed, or clear site data to delete them. Cart notes and custom-enquiry fields are not saved by the application.</p><p>This storefront has no account system, payment processing or application analytics. It does not submit your enquiry to a server.</p><p>If you choose to open WhatsApp, your prepared message is included in a link to WhatsApp. Review it there and choose whether to send it. WhatsApp handles that interaction under its own terms.</p>'+(store.mode==='live'&&paypalOverseas(store)?'<p>If you pay from outside Sri Lanka, we send you a PayPal payment link in WhatsApp. You pay on PayPal, which handles that payment under its own terms; this site never sees your payment details.</p>':'')+'<p>Your hosting provider may process ordinary request logs. Business shipping, returns and order terms must be confirmed before purchase.</p></section>',store,'','',{description:'How the HoneyComb 3D storefront handles your data: a request cart in your browser, no accounts, payments or analytics.',path:'/privacy/'});
+}
+// FAQ: only what the rest of the site already says. No delivery times, prices or payment promises; those come with each quote.
+export function faqPage(store) {
+  const ordering=orderingOpen(store);
+  const qa=[
+    ['How do I order?',ordering?'<p>Add designs to your <a href="/cart/">request cart</a>, or tap Order on a design, and review the message we prepare for you. It opens in WhatsApp, and nothing is sent until you send it there. We reply to confirm availability, options, delivery cost, the final total and payment arrangements.</p>':'<p>Online ordering opens soon. You can already save designs in your <a href="/cart/">request cart</a> and copy your request for later.</p>'],
+    ['Is my request a confirmed purchase?','<p>No. A request is not a confirmed purchase. Your order is confirmed once we agree the details with you.</p>'],
+    ['What does “made to order” mean?','<p>Designs marked “Made to order” are printed for you once we confirm your order. Each design shows its availability on its page.</p>'],
+    ['Can I choose the colour or size?','<p>Ask us. Add a note in your request cart, or ask in the conversation, and we confirm what is possible with your quote. Please confirm size, material, colours and finish before ordering.</p>'],
+    ['Can you print something that is not in the shop?','<p>Yes, tell us your idea. <a href="/custom/">Start a custom enquiry</a> with a model link, a rough size and the finish you have in mind, and we confirm whether we can make it and what it costs.</p>'],
+    ['How much is delivery, and how long does it take?','<p>Delivery cost and timing are included in your quote.</p>'],
+    ['How do I pay?','<p>Payment arrangements are confirmed with your quote.'+(ordering&&paypalOverseas(store)?' Paying from outside Sri Lanka? You can ask for a PayPal payment link in USD from your request cart.':'')+'</p>'],
+    ['Where are you based?','<p>We are a 3D print studio in Sri Lanka. Prices on this site are in Sri Lankan rupees (LKR).</p>']];
+  return layout('Questions and answers','<section class="wrap section narrow prose-page faq-page"><p class="eyebrow">QUESTIONS</p><h1>Questions and answers.</h1><div class="faq-list" data-testid="faq">'+qa.map(([q,a])=>'<section class="faq-item"><h2>'+q+'</h2>'+a+'</section>').join('')+'</div></section>',store,'','',{description:'How ordering works at HoneyComb 3D: '+(ordering?'request designs on WhatsApp':'the request cart')+', made-to-order prints, colours and sizes, and custom enquiries.',path:'/faq/'});
 }
 // 404: the original message, then a search that lands on the shop (works without JavaScript) and a few designs.
 export function notFound(products,store) {

@@ -465,6 +465,8 @@ body.has-sticky-buy .toast{bottom:84px}
 
 /* Text pages */
 .prose-page p:not(.eyebrow){max-width:68ch;color:var(--text-soft);font-size:var(--step-1);line-height:1.7;margin-bottom:var(--space-5)}
+.faq-item{border-top:1px solid var(--line);padding-top:var(--space-5)}
+.faq-item h2{font-size:var(--step-2);margin-bottom:var(--space-3)}
 .form-panel .request-preview h2{font-size:var(--step-2)}
 
 /* Empty and not-found states */

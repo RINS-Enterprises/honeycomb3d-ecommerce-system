@@ -125,6 +125,11 @@ try {
   // Recently viewed: newest first, never the current product, hidden when empty or when storage is blocked.
   await page.evaluate(()=>localStorage.clear());
   // Empty cart with no history offers a few designs; quick add from there fills the cart in place.
+  // FAQ from the footer: a plain page that works on every build.
+  await page.getByRole('contentinfo').getByRole('link',{name:'Questions and answers'}).click();
+  await page.getByRole('heading',{level:1,name:'Questions and answers.'}).waitFor();
+  assert.equal(await page.getByTestId('faq').getByRole('heading',{level:2}).count(),8);
+  assert.equal(await page.getByTestId('faq').getByRole('link',{name:'Start a custom enquiry'}).getAttribute('href'),'/custom/');
   await page.goto('http://127.0.0.1:4173/cart/');
   await page.getByTestId('cart-picks').waitFor();
   assert.equal(await page.getByTestId('cart-picks').getByTestId('product-card').count(),4);
@@ -328,7 +333,7 @@ try {
   await page.unroute('**/data/store.json');
   for(const width of [320,390,768,1440]) {
     await page.setViewportSize({width,height:844});
-    for(const path of ['/','/shop/','/products/baymax-figure/','/cart/','/custom/','/privacy/']) {
+    for(const path of ['/','/shop/','/products/baymax-figure/','/cart/','/custom/','/privacy/','/faq/']) {
       await page.goto('http://127.0.0.1:4173'+path);
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at '+width+': '+path);
     }
@@ -336,7 +341,7 @@ try {
   // System fonts differ by machine; repeat the narrowest check with a wide fallback face (as on CI runners).
   await page.route('**/styles.css',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace(/--font-sans:[^;]*;/,'--font-sans:"DejaVu Sans",sans-serif;')});});
   await page.setViewportSize({width:320,height:844});
-  for(const path of ['/','/shop/','/products/baymax-figure/','/products/minato-kunai/','/cart/','/custom/','/privacy/']) {
+  for(const path of ['/','/shop/','/products/baymax-figure/','/products/minato-kunai/','/cart/','/custom/','/privacy/','/faq/']) {
     await page.goto('http://127.0.0.1:4173'+path);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at 320 with a wide font: '+path);
   }

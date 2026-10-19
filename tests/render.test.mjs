@@ -232,3 +232,24 @@ test('the privacy page mentions PayPal only when overseas PayPal is switched on 
   assert.doesNotMatch(privacyPage({...store,mode:'preview',paypalOverseas:true}),/PayPal/);
   assert.match(privacyPage({...base,paypalOverseas:true}),/PayPal, which handles that payment under its own terms/);
 });
+
+test('the FAQ covers ordering, made to order, colours and sizes, custom prints and where we are, without promises',async()=>{
+  const {faqPage,cartPage}=await import('../src/render.mjs');
+  const text=html=>html.replace(/<[^>]+>/g,' ');
+  const liveHtml=faqPage(live), previewHtml=faqPage({mode:'preview'});
+  for(const html of [liveHtml,previewHtml]) {
+    assert.match(html,/<h1>Questions and answers\.<\/h1>/);
+    for(const q of ['How do I order?','Is my request a confirmed purchase?','What does “made to order” mean?','Can I choose the colour or size?','Can you print something that is not in the shop?','How much is delivery, and how long does it take?','How do I pay?','Where are you based?'])assert(html.includes('<h2>'+q+'</h2>'),q);
+    assert.match(html,/Sri Lanka/);assert.match(html,/href="\/custom\/"/);
+    const answers=text(html.slice(html.indexOf('data-testid="faq"'),html.indexOf('</main>'))).replaceAll('3D','');
+    assert(!/\d/.test(answers),'No numbers (prices, days, phone numbers) in the answers');
+    assert(!/\b(?:free|guarantee\w*|days?|weeks?|hours?|refund\w*|cash on delivery|bank transfer)\b/i.test(answers),'No delivery-time or payment promises');
+  }
+  assert.match(liveHtml,/opens in WhatsApp, and nothing is sent until you send it/);
+  assert.match(previewHtml,/Online ordering opens soon/);
+  assert(!previewHtml.includes('WhatsApp'),'Preview FAQ does not describe a WhatsApp flow that is not open');
+  assert(!liveHtml.includes('PayPal')&&!faqPage({...live,mode:'preview',paypalOverseas:true}).includes('PayPal'));
+  assert.match(faqPage({...live,paypalOverseas:true}),/PayPal payment link in USD from your request cart/);
+  for(const html of [cartPage(live),cartPage({mode:'preview'})])assert.match(html,/<a href="\/faq\/">Questions and answers<\/a>/,'Footer links the FAQ');
+});
+

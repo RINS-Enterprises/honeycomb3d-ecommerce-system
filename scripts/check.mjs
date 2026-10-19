@@ -18,7 +18,7 @@ for(const p of publicProducts) {
   for(const key of ['priceSource','imageApprovedAt','imageStatus'])assert.equal(p[key],undefined,'Source workflow metadata must not be published');
   assert.equal(p.source,'Public catalog','Recovery evidence must stay in source data');
 }
-const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','404.html',...products.map(p=>'products/'+p.slug+'/index.html')];
+const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','faq/index.html','404.html',...products.map(p=>'products/'+p.slug+'/index.html')];
 for(const path of paths) {
   const html=await readFile(join(root,'dist',path),'utf8');
   assert.match(html,/<html lang="en">/);assert.match(html,/<main id="main"/);
