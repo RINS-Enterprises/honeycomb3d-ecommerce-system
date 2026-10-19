@@ -31,14 +31,14 @@ Rule of thumb: **about 90% dark, 10% honey.** If a post looks orange overall, th
 
 ## Logo
 
-Files: `public/assets/honeycomb-logo-dark-660.png` (large) and `public/assets/honeycomb-logo-dark-264.png` (small). The original is `assets/brand-sources/honeycomb-logo-black.pdf`.
+Files: `public/assets/honeycomb-logo-dark-660.png` (large) and `public/assets/honeycomb-logo-dark-264.png` (small). The originals are `assets/brand-sources/honeycomb-logo-black.pdf` (full logo) and `assets/brand-sources/honeycomb-symbol.pdf` (the hexagon and bee on their own).
 
 The logo is the honey hexagon with the bee, plus a **white** wordmark. It's made for dark backgrounds.
 
 **Do**
 - Put it on studio black or a dark photo area.
 - Leave clear space around it at least as wide as the bee's head.
-- For a profile picture (a small circle), use the **hexagon and bee only**, centred on studio black. Crop it from the 660 px file; don't redraw it.
+- For a profile picture (a small circle), use the **hexagon and bee only** (`honeycomb-symbol.pdf`), centred on studio black. Ask Claude for a 1080 × 1080 PNG export of it; don't redraw it.
 
 **Don't**
 - Put it on white or a light photo. The white wordmark disappears. (A light-background version does not exist yet; ask Claude to prepare one from the original PDF if you need it.)
