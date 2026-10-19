@@ -1,6 +1,6 @@
 # Delivery: couriers from Kegalle
 
-For HoneyComb 3D (small figures and keychains, usually under 500 g). Research date: **19 Oct 2026**. Nobody was contacted and nothing was signed up for.
+For HoneyComb 3D (small figures and keychains, usually under 500 g). Research date: **19 Oct 2026**. Nobody was contacted and nothing was signed up for. Key numbers independently fact-checked against the sources on 19 Oct 2026; six corrections applied.
 
 **How to read this:**
 - ✅ **Official**: from the courier's own website or documents.
@@ -11,8 +11,8 @@ For HoneyComb 3D (small figures and keychains, usually under 500 g). Research da
 
 ## Quick answer
 
-- **Only Sri Lanka Post publishes a full price list.** It is also the cheapest, and anyone can send COD at the counter without a registered business.
-- **Domex, Koombiyo, Pronto and Prompt Xpress have branches in Kegalle town.** SONIC's head office is in Mawanella. Their prices are not published (Domex only via an old third-party table), so call them.
+- **Only Sri Lanka Post publishes a full price list.** It is also the cheapest, and its COD rules suggest you can send COD at the counter without a registered business (confirm at the counter).
+- **Domex, Koombiyo, Pronto and Prompt Xpress have branches in Kegalle town.** SONIC's head office is in Mawanella. SONIC has a price page (it didn't load from here, so its figures come from search summaries). The others publish no prices (Domex only in an old third-party table), so call them.
 - **Recommended delivery line (owner to confirm):**
   > Islandwide delivery by courier, **LKR 400**. Usually **2–4 working days** after your order is printed.
 
@@ -25,9 +25,9 @@ For HoneyComb 3D (small figures and keychains, usually under 500 g). Research da
 | Courier | ≤250 g | ≤500 g | ≤1 kg | COD fee | COD payout | In Kegalle? |
 |---|---|---|---|---|---|---|
 | **SL Post Courier** ✅ | Rs 200 | Rs 250 | Rs 350 | Rs 50 + money-order fee¹ | Collect at any post office after delivery | Any post office |
-| **SL Post ordinary parcel** ✅ | Rs 150 | Rs 200 | Rs 250 | No COD (COD goes through SL Post Courier) | – | Any post office |
+| **SL Post ordinary parcel** ✅ | Rs 150 | Rs 200 | Rs 250 | "Value payable parcel": Rs 50 + postage + money-order fee | Collect at post office | Any post office |
 | **Domex** | Rs 350 ⚠️ | ~Rs 430 ⚠️ | Rs 510 ⚠️ | ❓ | Every 15 days ✅ | Branch, Kegalle town ✅ |
-| **SONIC Express** ⚠️ | Rs 500² | Rs 500² | Rs 500² | 1.5%, min Rs 100 (unverified) | ❓ | Head office in Mawanella |
+| **SONIC Express** ⚠️ | Rs 500² | Rs 500² | Rs 500² | 1.5%, min Rs 100 ⚠️ | ❓ | Head office in Mawanella |
 | **Koombiyo** | ❓ | ❓ | ❓ | ❓ | Weekly ("one week") ✅ | Branch, Kegalle town ✅ |
 | **Pronto Lanka** | ❓ | ❓ | ❓ | Offered, fee ❓ | ❓ | Branch, Kegalle; free doorstep pickup ✅ |
 | **Prompt Xpress** | ❓ | ❓ | ❓ | Not mentioned | ❓ | Branch, Kegalle ✅ |
@@ -48,8 +48,8 @@ For HoneyComb 3D (small figures and keychains, usually under 500 g). Research da
 ### Sri Lanka Post ✅
 - **Prices:** the official schedule effective **9 Feb 2026** ([PDF](https://slpost.gov.lk/wp-content/uploads/2026/02/domesticpostagerevision2026-02-09.pdf), linked from [slpost.gov.lk/tariff](https://slpost.gov.lk/tariff)). Courier and parcel prices were **unchanged** in that revision: they match the [2023 courier price image](https://slpost.gov.lk/wp-content/uploads/2023/05/slpostcourier_charges.jpg), and NewsFirst and Ada Derana reported the revision on 9 Feb 2026.
 - **SL Post Courier:** the same price everywhere in the island. The [service page](https://slpost.gov.lk/services/speed-post-courier-tracking/) says delivery is "24 hours" within your zone and "48 hours" outside it, and that dates may vary. Tracking is included.
-- **Ordinary parcel:** cheaper, no COD, delivery time not stated. Registration is listed at Rs 60. Ask at the counter whether a "registered parcel" costs the parcel price plus Rs 60.
-- **COD:** hand it in at any post office counter. **No registered business is needed.** The optional online account needs a BR certificate only if you open it in a business name. The maximum value is Rs 100,000. If the item can't be delivered, it is kept for 5 days and then returned to you. After delivery you get a payment notice and collect the cash at any post office. No fixed number of days is stated. Sources: [COD page](https://slpost.gov.lk/cash-on-delivery-service/) and [COD manual, Oct 2023](https://slpost.gov.lk/wp-content/uploads/2023/10/SL-Post-COD-English-New.pdf).
+- **Ordinary parcel:** cheaper, delivery time not stated. A "value payable parcel" (cash collected on delivery) is listed at Rs 50 + parcel postage + money-order fee (schedule item 23); the main COD service uses SL Post Courier. Registration is listed at Rs 60. Ask at the counter whether a "registered parcel" costs the parcel price plus Rs 60.
+- **COD:** hand it in at any post office counter. The COD manual asks for a BR certificate only if you register an online account **in a business name**, so it appears **no registered business is needed** for counter COD (our reading of the manual; not stated in those words; confirm at the counter). The maximum value is Rs 100,000. If the item can't be delivered, it is kept for 5 days and then returned to you. After delivery you get a payment notice and collect the cash at any post office. No fixed number of days is stated. Sources: [COD page](https://slpost.gov.lk/cash-on-delivery-service/) and [COD manual, Oct 2023](https://slpost.gov.lk/wp-content/uploads/2023/10/SL-Post-COD-English-New.pdf).
 - **Pickup:** none mentioned. You drop the parcel at the post office.
 - "EMS" on slpost.gov.lk is **international only**. For local express, use SL Post Courier.
 
@@ -63,7 +63,7 @@ For HoneyComb 3D (small figures and keychains, usually under 500 g). Research da
 ### SONIC Express ⚠️
 - The website ([sonicexpress.lk/pricing](https://sonicexpress.lk/pricing)) **did not load** (expired security certificate). These figures come from search summaries.
 - **Prices:** Rs 350 within the district and Rs 500 to other districts, for the first 1 kg. Volumetric weight (L×W×H cm ÷ 5000) counts if it is higher than the real weight.
-- **COD:** "1.5%, minimum Rs 100" appeared in only one summary. Unverified.
+- **COD:** "1.5%, minimum Rs 100" appears in search summaries of its pricing page. Not confirmed on the live page.
 - **Where:** head office on Main Street, Mawanella. Easy to visit and confirm in person.
 
 ### Koombiyo Delivery
@@ -79,7 +79,7 @@ For HoneyComb 3D (small figures and keychains, usually under 500 g). Research da
 ### Prompt Xpress
 - **Prices and COD:** not published. COD is not mentioned.
 - **Kegalle ✅:** branch tel 035 493 5210. Also a branch in Mawanella ([branch network](https://promptxpress.lk/BranchNetwork.aspx)).
-- **Days ✅:** "within 24 hours anywhere of the island".
+- **Days ✅:** "pickup and delivery of **document** parcel within 24 hours any where of the island". That line is about documents; ask about parcels.
 
 ### Trans Express
 - **Prices and COD fee:** not published.
@@ -92,7 +92,7 @@ For HoneyComb 3D (small figures and keychains, usually under 500 g). Research da
 - **COD ✅:** "minimal handling fee". Settlement is **daily** (next working day) or **weekly** (paid Wednesday) ([FAQ](https://citypak.lk/faq/)).
 - **Days ✅:** 1–3 business days to customers.
 - **Kegalle:** no branch found among its "45+ branches". You can book a pickup by hotline or WhatsApp.
-- **Account:** the client panel is "for businesses". Ask whether an individual can sign up.
+- **Account:** the client panel is "for account customers only". Ask whether an individual can open an account.
 
 ### Grasshoppers (Kapruka group)
 - The website blocked this research tool. A search summary of its own About page says COD with "guaranteed weekly settlements".
@@ -137,7 +137,7 @@ Tips: write the person's name and the date. Ask for prices **in writing** (Whats
 | COD payout: how often / how | Collect at post office | | | |
 | Pickup from home? Charge? | No, drop off | | | |
 | Days to Colombo / far districts | "24–48 hours" (stated) | | | |
-| Individual without BR OK? | Yes (counter) | | | |
+| Individual without BR OK? | Appears yes (confirm) | | | |
 | Return charge if refused | Ask | | | |
 | Damage / loss cover | Ask | | | |
 | Rates received in writing? | Official PDF | | | |
@@ -146,7 +146,7 @@ Tips: write the person's name and the date. Ask for prices **in writing** (Whats
 
 ## Recommendation (for you to confirm)
 
-1. **Start with SL Post Courier.** It is the cheapest published option, there's a post office in Kegalle, it tracks parcels, and it allows COD **without a registered business**.
+1. **Start with SL Post Courier.** It is the cheapest published option, there's a post office in Kegalle, it tracks parcels, and COD appears to work **without a registered business** (confirm at the counter).
 2. **Call Domex, Koombiyo and Pronto** with the script. A private courier is worth it if it offers **home pickup** and **weekly bank payouts** at a similar price.
 3. **Delivery line for the website:**
    - With SL Post Courier: **"Islandwide delivery by courier, LKR 400. Usually 2–4 working days after your order is printed."**
