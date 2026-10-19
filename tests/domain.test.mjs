@@ -117,12 +117,13 @@ test('delivery is off unless the owner gives a line; a fee becomes its own messa
   assert.deepEqual(delivery({delivery:{text:' Islandwide by courier '}}),{text:'Islandwide by courier',feeLkr:null});
   assert.deepEqual(delivery({delivery:{text:'Courier',feeLkr:500}}),{text:'Courier',feeLkr:500});
   for(const value of [null,{text:'Courier'},{text:'Courier',feeLkr:null},{text:'Courier',feeLkr:450.5}])assert.doesNotThrow(()=>validateData(products,{...preview,delivery:value}));
-  for(const value of [{},{text:''},{text:'x'.repeat(201)},'Courier',['Courier'],{text:'Courier',feeLkr:0},{text:'Courier',feeLkr:-5},{text:'Courier',feeLkr:'500'},{text:'Courier',feeLkr:1.005}])assert.throws(()=>validateData(products,{...preview,delivery:value}),/delivery/,JSON.stringify(value));
+  for(const value of [{},{text:''},{text:'x'.repeat(201)},'Courier',['Courier'],{text:'Courier',feeLkr:0},{text:'Courier',feeLkr:-5},{text:'Courier',feeLkr:'500'},{text:'Courier',feeLkr:1.005},{text:'Courier',fee:500}])assert.throws(()=>validateData(products,{...preview,delivery:value}),/delivery/,JSON.stringify(value));
   const items=[{id:'A',quantity:2}];
   const base=orderMessage(items,products);
   assert.equal(orderMessage(items,products,'',{deliveryFeeLkr:null}),base,'No fee: the message is unchanged');
   const lines=orderMessage(items,products,'',{deliveryFeeLkr:500}).split('\n');
-  assert.deepEqual(lines,[...base.split('\n').slice(0,3),'Delivery fee: '+money(500),...base.split('\n').slice(3)],'The fee is one extra line after the subtotal');
+  assert.deepEqual(lines,[...base.split('\n').slice(0,3),'Delivery fee: '+money(500),base.split('\n')[3].replace('delivery cost, ','')],'The fee is one extra line after the subtotal; the request no longer asks to confirm a delivery cost it states');
+  assert.doesNotThrow(()=>validateData(products,{...preview,delivery:{text:'  '+'x'.repeat(200)+'  '}}),'The length limit counts the trimmed text');
   const live={mode:'live',whatsappVerified:true,whatsappNumber:'94700000000'};
   const a={id:'A',name:'Alpha',priceLkr:500,availability:'made-to-order'};
   assert.doesNotMatch(new URL(orderNowUrl(a,live)).searchParams.get('text'),/Delivery fee/);

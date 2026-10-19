@@ -212,7 +212,8 @@ function initAdd() {
     const field=form.elements.quantity;
     const sync=()=>{
       const valid=field.checkValidity();
-      const url=valid&&orderNowUrl(products.find(p=>p.id===form.dataset.productId),store,Number(field.value));
+      const product=products.find(p=>p.id===form.dataset.productId);
+      const url=valid&&product&&orderNowUrl(product,store,Number(field.value));
       orderNow.forEach(link=>{if(url)link.href=url;link.toggleAttribute('data-invalid',!url);});
     };
     ['input','change'].forEach(type=>field.addEventListener(type,sync));

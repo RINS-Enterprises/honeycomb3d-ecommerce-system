@@ -272,5 +272,6 @@ test('the delivery line shows on product pages and in the FAQ only when set, esc
   assert.match(faqPage(on),/Islandwide by courier &lt;b&gt;&amp; more&lt;\/b&gt;\. The final total is confirmed with your quote\./);
   assert.match(detail(leaf,visible,{...on,mode:'preview'}),/data-testid="delivery-line"/,'Shown in preview too: it is store information, not ordering');
   assert.match(faqPage({...live,delivery:{text:'Islandwide by courier.'}}),/<p>Islandwide by courier\. The final total is confirmed with your quote\.<\/p>/,'No doubled full stop');
+  assert.match(faqPage({...live,delivery:{text:'Islandwide by courier!'}}),/<p>Islandwide by courier! The final total/);
 });
 

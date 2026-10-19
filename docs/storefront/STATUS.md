@@ -9,7 +9,7 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 | 1 | Order button on shop cards | Done, QA fixed | `878df30`, `082d32c` |
 | 2 | Cart bundle suggestions | Done, QA fixed | `9a7f1e4` + QA-fix commit |
 | 3 | FAQ page | Done, QA fixed | `4c32420` + QA-fix commit |
-| 4 | Delivery line (switch) | Done, QA in progress | `2c7b46b` |
+| 4 | Delivery line (switch) | Done, QA fixed | `2c7b46b` |
 | 5 | Payment methods (switch) | Not started | |
 | 6 | Social links | Not started | |
 | 7 | Trust pages | Not started | |
@@ -111,8 +111,16 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 - **Tests:**
   - Unit tests cover normalisation, validation (accepted and rejected shapes), the fee line placement, no change without a fee, Order now / card Order with the fee, the product-page line (escaped), the FAQ answer (and no doubled full stop) and preview.
   - The browser test branches on the published switch: product line and Order now fee, cart text and fee, and the message line; or their absence when off.
-- **Local gate:** passed in four states: live with delivery null (the committed state), preview, live with text and fee, and live with text only. Each state ran `npm test` (46 pass), `build` + `check` (24 pages), `browser.mjs` and `images-browser.mjs`. The switched states were temporary local edits, never committed.
+- **Local gate:** passed in four states (re-run after the QA fixes, with a 19.99 fee in place of 500): live with delivery null (the committed state), preview, live with text and fee, and live with text only. Each state ran `npm test` (46 pass), `build` + `check` (24 pages), `browser.mjs` and `images-browser.mjs`. The switched states were temporary local edits, never committed.
 - **Screenshots checked:** product page and cart at 390 and 1440px with the example line on. The spacing of the cart note was fixed after the first look.
-- **QA verdict:** _in progress_
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, now fixed. No blockers.
+  - The reviewer confirmed the null state is byte-identical, checked five browser builds, and found exactly one fee line in every order path (cart, Order now with a changed quantity, sticky Order now, static and client-rendered cards). The fee never enters a subtotal, and price validation is unchanged across 23 edge values.
+  - Should-fix, fixed: a product page whose design is missing from the client catalogue (for example a cached page after un-approval) threw in Order now's sync and broke Add to cart. It now marks the link invalid, as before.
+  - Should-fix, fixed: the product delivery line squeezed the owner's text into a narrow column at 200% text. The label now wraps above the text when space is short.
+  - Nit, fixed: the FAQ only adds a full stop when the owner's text doesn't already end in `.`, `!` or `?`.
+  - Nit, fixed: with a fee in the message, the request asks to confirm "availability, options, final total and payment arrangements" (no longer "delivery cost", which it now states).
+  - Nit, fixed: `delivery` rejects unknown keys (a misspelt `fee` fails the build instead of silently dropping the fee), and the 200-character limit counts the trimmed text.
+  - Nit, fixed: browser regexes escape the money string, so decimal fees match exactly.
+  - Nit, noted: CI builds only the committed (null) state. The set states are covered by unit tests and by the local four-state gate above.
 - **Waits on owner fact:** the delivery line and fee (session C, item 3/5 recommends them). The example text above is the PM's illustration, not an owner fact.
 

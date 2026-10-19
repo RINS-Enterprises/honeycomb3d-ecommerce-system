@@ -13,7 +13,7 @@ export function validateData(products, store) {
   if (store.paypalOverseas !== undefined && typeof store.paypalOverseas !== 'boolean') throw new Error('paypalOverseas must be true or false');
   if (store.delivery !== undefined && store.delivery !== null) {
     const d=store.delivery;
-    if (typeof d !== 'object' || Array.isArray(d) || typeof d.text !== 'string' || !d.text.trim() || d.text.length > 200) throw new Error('delivery must be null or {text, feeLkr} with a short owner-given text');
+    if (typeof d !== 'object' || Array.isArray(d) || Object.keys(d).some(k=>!['text','feeLkr'].includes(k)) || typeof d.text !== 'string' || !d.text.trim() || d.text.trim().length > 200) throw new Error('delivery must be null or {text, feeLkr} with a short owner-given text');
     if (d.feeLkr !== undefined && d.feeLkr !== null && !validLkr(d.feeLkr)) throw new Error('delivery.feeLkr must be null or a positive LKR amount with at most two decimal places');
   }
   if (store.whatsappVerified && !/^[1-9]\d{7,14}$/.test(store.whatsappNumber || '')) throw new Error('Use a verified international WhatsApp number, digits only');
@@ -94,7 +94,7 @@ export function cartSuggestions(items, products, limit=3) {
 export function orderMessage(items, products, notes='', {paypal=false, deliveryFeeLkr=null}={}) {
   const s=cartSummary(items,products);
   if (!s.lines.length) return '';
-  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, deliveryFeeLkr?`Delivery fee: ${money(deliveryFeeLkr)}`:'', 'Please confirm availability, options, delivery cost, final total and payment arrangements. This is an order request, not a confirmed purchase.',paypal?'Payment: I am paying from outside Sri Lanka. Please send a PayPal payment link in USD once the total is confirmed.':'',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
+  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, deliveryFeeLkr?`Delivery fee: ${money(deliveryFeeLkr)}`:'', `Please confirm availability, options, ${deliveryFeeLkr?'':'delivery cost, '}final total and payment arrangements. This is an order request, not a confirmed purchase.`,paypal?'Payment: I am paying from outside Sri Lanka. Please send a PayPal payment link in USD once the total is confirmed.':'',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
 }
 export function whatsappUrl(message, store) {
   if (!message || !store.whatsappVerified || !/^[1-9]\d{7,14}$/.test(store.whatsappNumber||'')) return null;
