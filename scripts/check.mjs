@@ -43,6 +43,19 @@ if(!searchIndexing(store)) {
   for(const bot of ['Twitterbot','facebookexternalhit','LinkedInBot','Slackbot','TelegramBot','Discordbot'])assert.match(robots,new RegExp('User-agent: '+bot+'\nAllow: /'),'Link-preview crawler allowed: '+bot);
   for(const path of paths)assert.match(await readFile(join(root,'dist',path),'utf8'),/<meta name="robots" content="noindex,nofollow">/,'noindex while searchIndexing is off: '+path);
   assert(!(await readdir(join(root,'dist'))).includes('sitemap.xml'),'No sitemap until the owner decides on indexing');
+  for(const path of paths)assert(!(await readFile(join(root,'dist',path),'utf8')).includes('"BreadcrumbList"'),'No breadcrumb structured data until indexing is on: '+path);
+} else {
+  // Indexing on (D-12): crawlable, with a sitemap of exactly the public pages and breadcrumb data on every product page.
+  const site=store.siteUrl.replace(/\/$/,'');
+  assert.equal(await readFile(join(root,'dist/robots.txt'),'utf8'),'User-agent: *\nAllow: /\n\nSitemap: '+site+'/sitemap.xml\n');
+  const locs=[...(await readFile(join(root,'dist/sitemap.xml'),'utf8')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&'));
+  const publicPaths=paths.filter(path=>!['cart/index.html','404.html'].includes(path)).map(path=>site+'/'+path.replace(/index\.html$/,''));
+  assert.deepEqual([...locs].sort(),[...publicPaths].sort(),'The sitemap lists exactly the public pages');
+  for(const path of paths) {
+    const html=await readFile(join(root,'dist',path),'utf8');
+    assert(!html.includes('<meta name="robots" content="noindex'),'Indexable page: '+path);
+    assert.equal(html.includes('"BreadcrumbList"'),path.startsWith('products/'),'Breadcrumb data on product pages only: '+path);
+  }
 }
 // Self-hosted heading font: hash matches its provenance record, licence ships with it, total stays under ~100 KB.
 const fontRecord=JSON.parse(await readFile(join(root,'assets/font.json'),'utf8'));

@@ -61,6 +61,7 @@ export function validateData(products, store) {
     if (store.mode === 'live' && p.approved && (!p.image || p.availability === 'unconfirmed')) throw new Error(`Approved live product needs an original photo and confirmed availability: ${p.id}`);
   }
   if (store.mode === 'live' && !store.whatsappVerified) throw new Error('Live ordering requires a verified WhatsApp contact');
+  if (searchIndexing(store) && !/^https:\/\/[a-z0-9.-]+$/i.test(store.siteUrl || '')) throw new Error('Search indexing needs the site\'s https siteUrl for the sitemap');
 }
 // Search indexing is its own owner decision, separate from ordering (mode): off unless explicitly true.
 export const searchIndexing = store => store.searchIndexing === true;

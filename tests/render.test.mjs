@@ -309,3 +309,25 @@ test('trust pages render the owner\'s words as paragraphs, escaped, and appear i
   assert.match(html,/<meta name="robots" content="noindex,nofollow">/);
 });
 
+test('indexing prep: breadcrumb data and the sitemap exist only once searchIndexing is on',async()=>{
+  const {detail,sitemap}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const leaf=visible.find(p=>p.id==='HC-LEAF');
+  const site={...live,siteUrl:'https://honeycomb3d.store'};
+  assert(!detail(leaf,visible,site).includes('BreadcrumbList'),'Off: no breadcrumb data');
+  const html=detail(leaf,visible,{...site,searchIndexing:true});
+  const lds=[...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map(m=>JSON.parse(m[1]));
+  assert.deepEqual(lds.map(x=>x['@type']),['Product','BreadcrumbList']);
+  assert.deepEqual(lds[1].itemListElement,[
+    {'@type':'ListItem',position:1,name:'Shop',item:'https://honeycomb3d.store/shop/'},
+    {'@type':'ListItem',position:2,name:'Keychains',item:'https://honeycomb3d.store/shop/?category=Keychains'},
+    {'@type':'ListItem',position:3,name:'Hidden Leaf Keychain',item:'https://honeycomb3d.store/products/hidden-leaf-keychain/'}],'Mirrors the visible breadcrumb');
+  assert.doesNotMatch(html,/noindex/);
+  const xml=sitemap(visible,{...site,searchIndexing:true,pages:{about:'Owner text'}});
+  const locs=[...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
+  assert.deepEqual(locs.slice(0,6),['/','/shop/','/custom/','/faq/','/privacy/','/about/'].map(p=>'https://honeycomb3d.store'+p));
+  assert.equal(locs.length,6+visible.length);
+  assert(!xml.includes('/cart/')&&!xml.includes('404'),'Cart and 404 are not listed');
+  assert(!/lastmod|priority|changefreq/.test(xml),'No invented dates or priorities');
+});
+

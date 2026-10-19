@@ -169,7 +169,10 @@ export function detail(p,products,store) {
   const share=p.shareImage||{};
   // Structured data: name, photos and the LKR price only (no availability, ratings or reviews).
   const ld={'@context':'https://schema.org','@type':'Product',name:p.name,image:gallerySlides(p).map(g=>absolute(store,(g.variants.at(-1)||g).src)),...(p.priceLkr===null?{}:{offers:{'@type':'Offer',price:String(p.priceLkr),priceCurrency:'LKR'}})};
-  const head='<script type="application/ld+json">'+JSON.stringify(ld).replace(/</g,'\\u003c')+'</script>';
+  // Indexing prep (D-12): the BreadcrumbList mirrors the visible breadcrumb and ships only once searchIndexing is on.
+  const trail=[['Shop','/shop/'],[p.category,'/shop/?category='+encodeURIComponent(p.category)],[p.name,'/products/'+p.slug+'/']];
+  const crumbLd=searchIndexing(store)?{'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:trail.map(([name,path],i)=>({'@type':'ListItem',position:i+1,name,item:absolute(store,path)}))}:null;
+  const head=[ld,crumbLd].filter(Boolean).map(x=>'<script type="application/ld+json">'+JSON.stringify(x).replace(/</g,'\\u003c')+'</script>').join('');
   return layout(p.name,'<section class="wrap section product-section">'+crumbs+'<div class="product-detail">'+gallery(p)+
     '<div class="detail-info"><p class="eyebrow">'+e(p.category)+'</p><h1>'+e(p.name)+'</h1><p class="detail-price" data-testid="product-price">'+e(price(p))+'</p>' +
     '<p class="status-chip status-'+e(p.availability)+'" data-testid="availability"><span aria-hidden="true"></span>'+availability(p)+'</p>' +
@@ -217,6 +220,11 @@ export function faqPage(store) {
 // Shipping, Returns, About: the owner's own words, one paragraph per blank-line-separated block, nothing added.
 export function trustPage(page, store) {
   return layout(page.title,'<section class="wrap section narrow prose-page" data-testid="trust-page"><p class="eyebrow">'+page.eyebrow+'</p><h1>'+e(page.title)+'.</h1>'+page.text.split(/\n\s*\n/).map(x=>'<p>'+e(x.trim()).replace(/\n/g,'<br>')+'</p>').join('')+'</section>',store,'','',{description:page.text.replace(/\s+/g,' ').slice(0,155),path:'/'+page.slug+'/'});
+}
+// Indexing prep (D-12): every public page except the cart and 404, for sitemap.xml. Built only once searchIndexing is on.
+export function sitemap(products, store) {
+  const paths=['/','/shop/','/custom/','/faq/','/privacy/',...trustPages(store).map(t=>'/'+t.slug+'/'),...products.map(p=>'/products/'+p.slug+'/')];
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+paths.map(path=>'<url><loc>'+e(absolute(store,path))+'</loc></url>').join('\n')+'\n</urlset>\n';
 }
 // 404: the original message, then a search that lands on the shop (works without JavaScript) and a few designs.
 export function notFound(products,store) {

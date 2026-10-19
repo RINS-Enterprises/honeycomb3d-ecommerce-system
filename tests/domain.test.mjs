@@ -70,7 +70,9 @@ test('search indexing is a separate setting: off unless explicitly true, in prev
   for(const store of [preview,live,{...live,searchIndexing:false}])assert.equal(searchIndexing(store),false);
   assert.equal(searchIndexing({...live,searchIndexing:true}),true);
   for(const value of ['true',1,null])assert.throws(()=>validateData(products,{...preview,searchIndexing:value}),/searchIndexing/);
-  validateData(products,{...preview,searchIndexing:true});
+  validateData(products,{...preview,searchIndexing:true,siteUrl:'https://honeycomb3d.store'});
+  for(const siteUrl of [undefined,'','http://honeycomb3d.store','https://honeycomb3d.store/shop','honeycomb3d.store'])assert.throws(()=>validateData(products,{...preview,searchIndexing:true,siteUrl}),/siteUrl/,'Indexing needs the https site address for the sitemap: '+siteUrl);
+  assert.doesNotThrow(()=>validateData(products,{...preview,searchIndexing:false}),'Without indexing no siteUrl is needed');
 });
 test('PayPal for overseas payers is off unless explicitly true and only adds a request line',()=>{
   for(const store of [preview,{...preview,paypalOverseas:false}])assert.equal(paypalOverseas(store),false);

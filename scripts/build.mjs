@@ -2,7 +2,7 @@ import {readFile,writeFile,mkdir,copyFile,rm,access} from 'node:fs/promises';
 import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateData,visibleProducts,searchIndexing,delivery,paymentMethods,socialLinks,trustPages} from '../src/domain.mjs';
-import {layout,home,shop,detail,cartPage,customPage,privacyPage,faqPage,trustPage,notFound} from '../src/render.mjs';
+import {layout,home,shop,detail,cartPage,customPage,privacyPage,faqPage,trustPage,notFound,sitemap} from '../src/render.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const dist=resolve(root,'dist');
@@ -54,5 +54,7 @@ await writeFile(join(dist,'data/store.json'),JSON.stringify({name:store.name,cur
 // Until the owner turns on searchIndexing (in preview and live alike): search engines stay out (with noindex on every page), but link-preview crawlers may fetch
 // pages and share images so shared links show a card. WhatsApp builds previews on the sender's phone.
 const PREVIEW_BOTS=['Twitterbot','facebookexternalhit','Facebot','LinkedInBot','Slackbot','Slackbot-LinkExpanding','TelegramBot','Discordbot','WhatsApp'];
-await writeFile(join(dist,'robots.txt'),!searchIndexing(store)?PREVIEW_BOTS.map(bot=>'User-agent: '+bot+'\nAllow: /\n').join('\n')+'\nUser-agent: *\nDisallow: /\n':'User-agent: *\nAllow: /\n');
+await writeFile(join(dist,'robots.txt'),!searchIndexing(store)?PREVIEW_BOTS.map(bot=>'User-agent: '+bot+'\nAllow: /\n').join('\n')+'\nUser-agent: *\nDisallow: /\n':'User-agent: *\nAllow: /\n\nSitemap: '+store.siteUrl.replace(/\/$/,'')+'/sitemap.xml\n');
+// Indexing prep (D-12): the sitemap exists only once the owner turns searchIndexing on.
+if(searchIndexing(store))await writeFile(join(dist,'sitemap.xml'),sitemap(products,site));
 console.log('Built '+(products.length+7+trustPages(store).length)+' static pages into dist/ ('+store.mode+' mode).');
