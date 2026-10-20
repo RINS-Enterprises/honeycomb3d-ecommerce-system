@@ -1,13 +1,17 @@
 import {chromium} from 'playwright';
 import {spawn} from 'node:child_process';
 import assert from 'node:assert/strict';
-import {mkdir,readFile} from 'node:fs/promises';
+import {mkdir,readFile,readdir} from 'node:fs/promises';
 import {money} from '../src/domain.mjs';
 // Assertions follow the built configuration: preview (ordering closed) or live (WhatsApp order requests open).
 const builtStore=JSON.parse(await readFile('dist/data/store.json','utf8'));
 const ordering=builtStore.mode==='live'&&builtStore.whatsappVerified;
 // The cart reads the PayPal switch from the published store file, so the build must carry it.
 assert.equal(typeof builtStore.paypalOverseas,'boolean','Published store.json carries the PayPal switch');
+// Delivery line: null (off) until the owner gives it; when set, product pages and the cart show it and the fee rides in messages.
+assert('delivery' in builtStore,'Published store.json carries the delivery switch');
+const shipping=builtStore.delivery;
+const escapeRe=text=>text.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 const server=spawn(process.execPath,['scripts/serve.mjs'],{stdio:'inherit'});
 let browser;
 try {
@@ -125,6 +129,19 @@ try {
   // Recently viewed: newest first, never the current product, hidden when empty or when storage is blocked.
   await page.evaluate(()=>localStorage.clear());
   // Empty cart with no history offers a few designs; quick add from there fills the cart in place.
+  // FAQ from the footer: a plain page that works on every build.
+  assert.equal(await page.getByTestId('footer-social').count(),builtStore.social.length?1:0,'Social links only when the owner has given accounts');
+  // Trust pages (Shipping, Returns, About) exist only when the owner wrote them; each built one is linked and opens.
+  const builtDirs=await readdir('dist');
+  for(const [slug,title] of [['shipping','Shipping and delivery'],['returns','Returns'],['about','About HoneyComb 3D']]) {
+    const link=page.getByRole('contentinfo').getByRole('link',{name:title,exact:true});
+    assert.equal(await link.count(),builtDirs.includes(slug)?1:0,'Footer link only for a written page: '+slug);
+    if(builtDirs.includes(slug)){await link.click();await page.getByRole('heading',{level:1,name:title+'.'}).waitFor();await page.goBack();}
+  }
+  await page.getByRole('contentinfo').getByRole('link',{name:'Questions and answers'}).click();
+  await page.getByRole('heading',{level:1,name:'Questions and answers.'}).waitFor();
+  assert.equal(await page.getByTestId('faq').getByRole('heading',{level:2}).count(),8);
+  assert.equal(await page.getByTestId('faq').getByRole('link',{name:'Start a custom enquiry'}).getAttribute('href'),'/custom/');
   await page.goto('http://127.0.0.1:4173/cart/');
   await page.getByTestId('cart-picks').waitFor();
   assert.equal(await page.getByTestId('cart-picks').getByTestId('product-card').count(),4);
@@ -132,6 +149,20 @@ try {
   await page.getByTestId('cart-line').waitFor();
   assert.equal(await page.getByTestId('cart-picks').count(),0,'Picks go once the cart has a line');
   assert.equal(await page.evaluate(()=>document.activeElement?.dataset.quantity),'HC-LEAF','Focus lands on the new line');
+  // Suggestions: designs sharing the Hidden Leaf's Naruto theme, at their catalogue prices; Add fills the cart in place.
+  const suggestions=page.getByTestId('cart-suggestions');
+  assert.equal(await suggestions.getByRole('heading',{level:2}).textContent(),'Goes well with your request');
+  assert.deepEqual(await suggestions.locator('h3').allTextContents(),['Kurama Figure','Minato Kunai','Classic Kunai']);
+  assert.deepEqual(await suggestions.locator('.suggest-item p').allTextContents(),[money(1500),money(1000),money(1000)],'Existing prices only');
+  await page.locator('#order-notes').fill('Blue please');
+  await suggestions.getByRole('button',{name:'Add Minato Kunai to request cart'}).click();
+  await page.waitForFunction(()=>document.querySelectorAll('[data-testid="cart-line"]').length===2);
+  assert.equal(await page.evaluate(()=>document.activeElement?.dataset.quantity),'HC-MINATO','Focus lands on the added line');
+  assert.deepEqual(await page.getByTestId('cart-suggestions').locator('h3').allTextContents(),['Kurama Figure','Classic Kunai'],'Never suggests what is already in the cart');
+  assert.match(await page.locator('.message-preview').inputValue(),/Minato Kunai \[HC-MINATO\] x 1/);
+  assert.equal(await page.locator('#order-notes').inputValue(),'Blue please','Notes survive adding from suggestions');
+  assert.match(await page.locator('.message-preview').inputValue(),/Notes: Blue please/);
+  assert(await page.evaluate(()=>document.querySelector('#order-notes').compareDocumentPosition(document.querySelector('[data-testid="cart-suggestions"]'))&Node.DOCUMENT_POSITION_FOLLOWING),'Suggestions come after the request\'s own fields');
   await page.evaluate(()=>localStorage.clear());
   await page.goto('http://127.0.0.1:4173/products/baymax-figure/');
   await page.waitForFunction(()=>localStorage.getItem('honeycomb-recent-v1')!==null);
@@ -213,6 +244,13 @@ try {
   await page.getByRole('status').filter({hasText:'Baymax Figure added to your request cart.'}).waitFor();
   assert.equal(await page.getByTestId('cart-count').textContent(),'2');
   await page.getByRole('button',{name:'Add to request cart'}).waitFor();
+  if(shipping) {
+    assert.equal(await page.getByTestId('delivery-line').textContent(),'Delivery '+shipping.text);
+    if(ordering&&shipping.feeLkr)assert.match(new URL(await page.getByTestId('order-now').getAttribute('href')).searchParams.get('text'),new RegExp('\nDelivery fee: '+escapeRe(money(shipping.feeLkr))+'\n'),'Order now carries the fee line');
+  } else {
+    assert.equal(await page.getByTestId('delivery-line').count(),0,'No delivery line while the switch is off');
+    assert.match(await page.locator('.buy-panel, main').first().textContent(),/Delivery cost and timing are included in your quote\./);
+  }
   await page.getByRole('link',{name:'View your request cart'}).click();
   await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
   assert.equal(await page.getByRole('spinbutton').inputValue(),'2');
@@ -226,6 +264,17 @@ try {
   await page.getByTestId('cart-qty-increase').click();
   await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
   assert.equal(await page.getByTestId('cart-line').count(),1);
+  const draft=await page.locator('.message-preview').inputValue();
+  if(shipping) {
+    assert.equal(await page.getByTestId('cart-delivery').textContent(),shipping.text);
+    assert.equal(await page.getByTestId('cart-delivery-fee').textContent(),shipping.feeLkr?money(shipping.feeLkr):'Confirmed with your quote');
+    if(shipping.feeLkr)assert.match(draft,new RegExp('Estimated items subtotal: '+escapeRe(money(2000))+'\nDelivery fee: '+escapeRe(money(shipping.feeLkr))+'\n'),'Fee is its own line, after the items subtotal');
+    else assert.doesNotMatch(draft,/Delivery fee/);
+  } else {
+    assert.equal(await page.getByTestId('cart-delivery').count(),0);
+    assert.equal(await page.getByTestId('cart-delivery-fee').textContent(),'Confirmed with your quote');
+    assert.doesNotMatch(draft,/Delivery fee/,'No fee line while the switch is off');
+  }
   if(ordering) {
     const url=new URL(await page.getByRole('link',{name:'Open WhatsApp request'}).getAttribute('href'));
     assert.equal(url.origin+url.pathname,'https://wa.me/'+builtStore.whatsappNumber,'Order requests go to the configured business number');
@@ -296,7 +345,7 @@ try {
   await page.unroute('**/data/store.json');
   await page.route('**/data/store.json',async route=>{
     const response=await route.fetch();const data=await response.json();
-    await route.fulfill({json:{...data,mode:'live',whatsappVerified:true,whatsappNumber:'94700000000',paypalOverseas:true}});
+    await route.fulfill({json:{...data,mode:'live',whatsappVerified:true,whatsappNumber:'94700000000',paypalOverseas:true,paymentMethods:[]}});
   });
   await page.reload();
   await page.getByLabel(/Paying from outside Sri Lanka/).check();
@@ -309,12 +358,41 @@ try {
   assert.match(await paypalHref(),/PayPal payment link in USD/);
   await page.getByLabel(/Paying from outside Sri Lanka/).uncheck();
   assert.doesNotMatch(await paypalHref(),/PayPal/);
+  assert.equal(await page.getByTestId('cart-payment').count(),0,'No payment choice while paymentMethods is empty');
+  // Payment methods (owner switch): an optional choice written into the request; PayPal becomes one of the options.
+  const withPayment=async(extra)=>{
+    await page.unroute('**/data/store.json');
+    await page.route('**/data/store.json',async route=>{const data=await (await route.fetch()).json();await route.fulfill({json:{...data,mode:'live',whatsappVerified:true,whatsappNumber:'94700000000',paypalOverseas:true,paymentMethods:['Bank transfer','Cash on delivery'],...extra}});});
+    await page.reload();
+    await page.getByTestId('cart-line').first().waitFor();
+  };
+  await withPayment({});
+  const payment=page.getByTestId('cart-payment');
+  assert.deepEqual(await payment.locator('.cart-choice > span').evaluateAll(ls=>ls.map(l=>l.firstChild.textContent)),['Not sure yet','Bank transfer','Cash on delivery','PayPal link in USD, paying from outside Sri Lanka']);
+  assert.equal(await page.getByRole('radio',{name:'Not sure yet'}).isChecked(),true,'No choice is made for the customer');
+  assert.equal(await page.getByTestId('cart-payment-note').textContent(),builtStore.paymentNote||'Payment arrangements are confirmed with your quote.','The owner\'s line, or the neutral default');
+  assert.equal(await page.getByTestId('cart-paypal').count(),0,'PayPal sits among the choices, not as a second control');
+  assert.doesNotMatch(await paypalHref(),/Preferred payment|PayPal/);
+  await page.getByRole('radio',{name:'Bank transfer'}).check();
+  assert.match(await paypalHref(),/\nPreferred payment: Bank transfer(\n|$)/);
+  await page.getByRole('button',{name:'Increase quantity of Baymax Figure'}).click();
+  await page.waitForFunction(()=>document.querySelector('.message-preview').value.includes('Baymax Figure [HC-BAYMAX] x 4'));
+  assert.equal(await page.getByRole('radio',{name:'Bank transfer'}).isChecked(),true,'The choice survives a re-render');
+  await page.getByRole('radio',{name:/PayPal link in USD/}).check();
+  assert.match(await paypalHref(),/PayPal payment link in USD once the total is confirmed/);
+  assert.doesNotMatch(await paypalHref(),/Preferred payment/);
+  await page.getByRole('radio',{name:'Not sure yet'}).check();
+  assert.doesNotMatch(await paypalHref(),/Preferred payment|PayPal/);
+  await withPayment({paypalOverseas:false});
+  assert.equal(await page.getByRole('radio').count(),3,'Without the PayPal switch only the owner\'s methods are offered');
+  await withPayment({mode:'preview'});
+  assert.equal(await page.getByTestId('cart-payment').count(),0,'Preview: no payment choice');
   await page.evaluate(()=>localStorage.clear());
   await page.unroute('**/data/products.json');
   await page.unroute('**/data/store.json');
   for(const width of [320,390,768,1440]) {
     await page.setViewportSize({width,height:844});
-    for(const path of ['/','/shop/','/products/baymax-figure/','/cart/','/custom/','/privacy/']) {
+    for(const path of ['/','/shop/','/products/baymax-figure/','/cart/','/custom/','/privacy/','/faq/']) {
       await page.goto('http://127.0.0.1:4173'+path);
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at '+width+': '+path);
     }
@@ -322,7 +400,7 @@ try {
   // System fonts differ by machine; repeat the narrowest check with a wide fallback face (as on CI runners).
   await page.route('**/styles.css',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace(/--font-sans:[^;]*;/,'--font-sans:"DejaVu Sans",sans-serif;')});});
   await page.setViewportSize({width:320,height:844});
-  for(const path of ['/','/shop/','/products/baymax-figure/','/products/minato-kunai/','/cart/','/custom/','/privacy/']) {
+  for(const path of ['/','/shop/','/products/baymax-figure/','/products/minato-kunai/','/cart/','/custom/','/privacy/','/faq/']) {
     await page.goto('http://127.0.0.1:4173'+path);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at 320 with a wide font: '+path);
   }

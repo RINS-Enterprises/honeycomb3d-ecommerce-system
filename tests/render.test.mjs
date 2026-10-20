@@ -232,3 +232,132 @@ test('the privacy page mentions PayPal only when overseas PayPal is switched on 
   assert.doesNotMatch(privacyPage({...store,mode:'preview',paypalOverseas:true}),/PayPal/);
   assert.match(privacyPage({...base,paypalOverseas:true}),/PayPal, which handles that payment under its own terms/);
 });
+
+test('the FAQ covers ordering, made to order, colours and sizes, custom prints and where we are, without promises',async()=>{
+  const {faqPage,cartPage}=await import('../src/render.mjs');
+  const text=html=>html.replace(/<[^>]+>/g,' ');
+  const liveHtml=faqPage(live), previewHtml=faqPage({mode:'preview'});
+  for(const html of [liveHtml,previewHtml]) {
+    assert.match(html,/<h1>Questions and answers\.<\/h1>/);
+    for(const q of ['How do I order?','Is my request a confirmed purchase?','What does “made to order” mean?','Can I choose the colour or size?','Can you print something that is not in the shop?','How much is delivery, and how long does it take?','How do I pay?','Where are you based?'])assert(html.includes('<h2>'+q+'</h2>'),q);
+    assert.match(html,/Sri Lanka/);assert.match(html,/href="\/custom\/"/);
+    const answers=text(html.slice(html.indexOf('data-testid="faq"'),html.indexOf('</main>'))).replaceAll('3D','');
+    assert(!/\d/.test(answers),'No numbers (prices, days, phone numbers) in the answers');
+    assert(!/\b(?:free|guarantee\w*|warrant\w*|days?|weeks?|fortnight|hours?|refund\w*|returns?|exchange\w*|money back|cash|cards?|cod|bank transfer|express|same[- ]day|within)\b/i.test(answers),'No delivery-time, returns or payment promises');
+  }
+  assert.match(liveHtml,/opens in WhatsApp, and nothing is sent until you send it/);
+  assert.match(previewHtml,/Online ordering opens soon/);
+  for(const closed of [previewHtml,faqPage({...live,mode:'preview',paypalOverseas:true})])assert(!/WhatsApp|conversation|PayPal/.test(closed),'Preview FAQ does not describe a WhatsApp or PayPal flow that is not open');
+  assert.match(previewHtml,/use “Ask about a variation” on a design’s page/);
+  assert.match(liveHtml,/or ask in WhatsApp, and we confirm what is possible/);
+  assert(!liveHtml.includes('PayPal')&&!faqPage({...live,mode:'preview',paypalOverseas:true}).includes('PayPal'));
+  assert.match(faqPage({...live,paypalOverseas:true}),/PayPal payment link in USD from your request cart\. We send it in WhatsApp after we confirm your total\./);
+  for(const html of [cartPage(live),cartPage({mode:'preview'})])assert.match(html,/<a href="\/faq\/">Questions and answers<\/a>/,'Footer links the FAQ');
+});
+
+test('the delivery line shows on product pages and in the FAQ only when set, escaped, and the old wording stays when off',async()=>{
+  const {detail,faqPage}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const leaf=visible.find(p=>p.id==='HC-LEAF');
+  const off=detail(leaf,visible,live);
+  assert(!off.includes('data-testid="delivery-line"'));
+  assert.match(off,/Delivery cost and timing are included in your quote\./);
+  assert.match(faqPage(live),/<p>Delivery cost and timing are included in your quote\.<\/p>/);
+  const on={...live,delivery:{text:'Islandwide by courier <b>& more</b>',feeLkr:500}};
+  const html=detail(leaf,visible,on);
+  assert.match(html,/<p class="delivery-line" data-testid="delivery-line"><span>Delivery<\/span> Islandwide by courier &lt;b&gt;&amp; more&lt;\/b&gt;<\/p>/);
+  assert(!html.includes('Delivery cost and timing are included in your quote'));
+  const orderNow=new URL(html.match(/href="([^"]+)"[^>]*data-order-now/)[1].replaceAll('&amp;','&'));
+  assert.match(orderNow.searchParams.get('text'),/\nDelivery fee: LKR\s500\n/,'Order now carries the fee');
+  assert.match(faqPage(on),/Islandwide by courier &lt;b&gt;&amp; more&lt;\/b&gt;\. The final total is confirmed with your quote\./);
+  assert.match(detail(leaf,visible,{...on,mode:'preview'}),/data-testid="delivery-line"/,'Shown in preview too: it is store information, not ordering');
+  assert.match(faqPage({...live,delivery:{text:'Islandwide by courier.'}}),/<p>Islandwide by courier\. The final total is confirmed with your quote\.<\/p>/,'No doubled full stop');
+  assert.match(faqPage({...live,delivery:{text:'Islandwide by courier!'}}),/<p>Islandwide by courier! The final total/);
+});
+
+test('the FAQ names the owner\'s payment methods only when they are set and ordering is open',async()=>{
+  const {faqPage}=await import('../src/render.mjs');
+  assert.doesNotMatch(faqPage(live),/how you would like to pay/);
+  assert.match(faqPage({...live,paymentMethods:['Bank transfer','Cash on delivery','Card <b>']}),/In your request cart you can tell us how you would like to pay: Bank transfer, Cash on delivery or Card &lt;b&gt;\./);
+  assert.match(faqPage({...live,paymentMethods:['Bank transfer']}),/how you would like to pay: Bank transfer\./);
+  assert.doesNotMatch(faqPage({...live,mode:'preview',paymentMethods:['Bank transfer']}),/Bank transfer/,'Preview: ordering is closed');
+});
+
+test('the footer lists the owner\'s social accounts only when set, escaped, opening in a new tab',async()=>{
+  const {cartPage,faqPage,privacyPage}=await import('../src/render.mjs');
+  for(const html of [cartPage(live),faqPage({mode:'preview'})])assert(!html.includes('footer-social')&&!html.includes('<h2>Follow</h2>'));
+  const on={...live,social:[{label:'Instagram',url:'https://www.instagram.com/example?a=1&b="2"'},{label:'Face<b>book',url:'https://www.facebook.com/example'}]};
+  for(const html of [cartPage(on),privacyPage(on),faqPage({...on,mode:'preview'})]) {
+    const block=html.match(/<div data-testid="footer-social">.*?<\/div>/)[0];
+    assert.match(block,/<h2>Follow<\/h2>/);
+    assert.match(block,/<a href="https:\/\/www\.instagram\.com\/example\?a=1&amp;b=%222%22" target="_blank" rel="me noopener noreferrer">Instagram<span class="sr-only"> \(opens in a new tab\)<\/span><\/a>/,'Normalised and escaped');
+    assert.match(block,/>Face&lt;b&gt;book</);
+  }
+});
+
+test('trust pages render the owner\'s words as paragraphs, escaped, and appear in the footer only when written',async()=>{
+  const {trustPage,cartPage}=await import('../src/render.mjs');
+  const {trustPages}=await import('../src/domain.mjs');
+  for(const slug of ['shipping','returns','about'])assert(!cartPage(live).includes('href="/'+slug+'/"'),'No link to an unwritten page: '+slug);
+  const on={...live,pages:{shipping:null,returns:'First <b>para</b>.\nSame para.\n\n  Second para.  ',about:'We print in Kegalle.'}};
+  const footer=cartPage(on);
+  assert.match(footer,/<li><a href="\/returns\/">Returns<\/a><\/li><li><a href="\/about\/">About HoneyComb 3D<\/a><\/li><li><a href="\/faq\/">/);
+  assert(!footer.includes('href="/shipping/"'));
+  const html=trustPage(trustPages(on).find(t=>t.key==='returns'),on);
+  assert.match(html,/<h1>Returns\.<\/h1><p>First &lt;b&gt;para&lt;\/b&gt;\.<br>Same para\.<\/p><p>Second para\.<\/p><\/section>/);
+  assert.match(html,/<meta name="description" content="First &lt;b&gt;para&lt;\/b&gt;\. Same para\. Second para\.">/,'Description escaped once');
+  assert.match(html,/<meta name="robots" content="noindex,nofollow">/);
+});
+
+test('indexing prep: breadcrumb data and the sitemap exist only once searchIndexing is on',async()=>{
+  const {detail,sitemap}=await import('../src/render.mjs');
+  const visible=visibleProducts(products,store);
+  const leaf=visible.find(p=>p.id==='HC-LEAF');
+  const site={...live,siteUrl:'https://honeycomb3d.store'};
+  assert(!detail(leaf,visible,site).includes('BreadcrumbList'),'Off: no breadcrumb data');
+  const html=detail(leaf,visible,{...site,searchIndexing:true});
+  const lds=[...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map(m=>JSON.parse(m[1]));
+  assert.deepEqual(lds.map(x=>x['@type']),['Product','BreadcrumbList']);
+  assert.deepEqual(lds[1].itemListElement,[
+    {'@type':'ListItem',position:1,name:'Shop',item:'https://honeycomb3d.store/shop/'},
+    {'@type':'ListItem',position:2,name:'Keychains',item:'https://honeycomb3d.store/shop/?category=Keychains'},
+    {'@type':'ListItem',position:3,name:'Hidden Leaf Keychain',item:'https://honeycomb3d.store/products/hidden-leaf-keychain/'}],'Mirrors the visible breadcrumb');
+  assert.doesNotMatch(html,/noindex/);
+  const xml=sitemap(visible,{...site,searchIndexing:true,pages:{about:'Owner text'}});
+  const locs=[...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
+  assert.deepEqual(locs.slice(0,6),['/','/shop/','/custom/','/faq/','/privacy/','/about/'].map(p=>'https://honeycomb3d.store'+p));
+  assert.equal(locs.length,6+visible.length);
+  assert(!xml.includes('/cart/')&&!xml.includes('404'),'Cart and 404 are not listed');
+  assert(!/lastmod|priority|changefreq/.test(xml),'No invented dates or priorities');
+});
+
+test('trust page descriptions end on a whole word; CRLF text renders cleanly; payment lists read naturally (QA, items 5-7)',async()=>{
+  const {trustPage,faqPage}=await import('../src/render.mjs');
+  const {trustPages}=await import('../src/domain.mjs');
+  const long='We accept returns of unused prints in their original packaging. '.repeat(4)+'Returns accepted within 7 days.';
+  const html=trustPage(trustPages({pages:{returns:long}})[0],live);
+  const description=html.match(/<meta name="description" content="([^"]*)">/)[1];
+  assert(description.endsWith('…')&&[...description].length<=156,description);
+  assert(long.replace(/\s+/g,' ').startsWith(description.slice(0,-1)),'A prefix of the owner text');
+  assert.match(description,/[a-z]…$/,'Cut at a word boundary');
+  const emoji=trustPage(trustPages({pages:{about:'😀'.repeat(200)}})[0],live);
+  assert(!emoji.includes('\ufffd'),'Never splits a character');
+  const crlf=trustPage(trustPages({pages:{about:'Line one\r\nline two\r\n\r\nPara two'}})[0],live);
+  assert.match(crlf,/<p>Line one<br>line two<\/p><p>Para two<\/p>/);
+  assert.match(faqPage({...live,paymentMethods:['Card, debit','Bank transfer']}),/how you would like to pay: Card, debit or Bank transfer\./);
+});
+
+test('indexing on keeps the cart and 404 out of search results; descriptions never split a grapheme (QA, items 8-9)',async()=>{
+  const {cartPage,notFound,faqPage,trustPage}=await import('../src/render.mjs');
+  const {trustPages}=await import('../src/domain.mjs');
+  const on={...live,searchIndexing:true,siteUrl:'https://honeycomb3d.store'};
+  for(const html of [cartPage(on),notFound([],on)])assert.match(html,/<meta name="robots" content="noindex,nofollow">/);
+  assert.doesNotMatch(faqPage(on),/<meta name="robots"/);
+  const sinhala='ක'.repeat(100)+'කා'.repeat(60);
+  const description=trustPage(trustPages({pages:{about:sinhala}})[0],live).match(/<meta name="description" content="([^"]*)">/)[1];
+  assert(description.endsWith('කා…'),'Ends on a whole letter with its vowel sign');
+  const family='👨‍👩‍👧'.repeat(160);
+  const d2=trustPage(trustPages({pages:{about:family}})[0],live).match(/<meta name="description" content="([^"]*)">/)[1];
+  assert(d2.replace('…','').split('👨‍👩‍👧').every(x=>x===''),'ZWJ sequences stay whole');
+});
+

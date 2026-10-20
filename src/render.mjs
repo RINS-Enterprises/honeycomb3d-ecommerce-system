@@ -1,4 +1,4 @@
-import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl} from './domain.mjs';
+import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl, delivery, paymentMethods, socialLinks, trustPages} from './domain.mjs';
 import {price, CARD_SIZES, picture, card, availability, avifSource, withPicture} from './card.mjs';
 export {price, CARD_SIZES, picture, card};
 
@@ -21,7 +21,8 @@ function footer(store) {
     '<div class="footer-brand"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a><p>3D prints, collectibles &amp; custom ideas.</p><p class="muted">Sri Lanka · Prices in LKR</p></div>' +
     '<nav class="footer-links" aria-label="Footer"><div><h2>Shop</h2><ul><li><a href="/shop/">The collection</a></li><li><a href="/cart/">Request cart</a></li></ul></div>' +
     '<div><h2>Make</h2><ul><li><a href="/custom/">Have something in mind? Tell us.</a></li></ul></div>' +
-    '<div><h2>About</h2><ul><li><a href="/privacy/">How this site handles your data</a></li></ul></div></nav>' +
+    '<div><h2>About</h2><ul>'+trustPages(store).map(t=>'<li><a href="/'+t.slug+'/">'+e(t.title)+'</a></li>').join('')+'<li><a href="/faq/">Questions and answers</a></li><li><a href="/privacy/">How this site handles your data</a></li></ul></div>' +
+    (socialLinks(store).length?'<div data-testid="footer-social"><h2>Follow</h2><ul>'+socialLinks(store).map(x=>'<li><a href="'+e(x.url)+'" target="_blank" rel="me noopener noreferrer">'+e(x.label)+'<span class="sr-only"> (opens in a new tab)</span></a></li>').join('')+'</ul></div>':'')+'</nav>' +
     '<div class="footer-bottom"><p class="fine">An enquiry is not a confirmed purchase. Availability, delivery and payment arrangements are confirmed with your quote.</p>' +
     '<p class="fine">© '+new Date().getFullYear()+' '+e(store.name||'HoneyComb 3D')+'</p></div></div></footer>';
 }
@@ -42,7 +43,7 @@ export function layout(title, body, store, current='', head='', meta={}) {
   return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>' + e(title) + ' | HoneyComb 3D</title>' + socialMeta(title+' | HoneyComb 3D', store, meta) +
     '<meta name="theme-color" content="#0c0b0a">' +
-    (searchIndexing(store) ? '' : '<meta name="robots" content="noindex,nofollow">') +
+    (searchIndexing(store) && !meta.noindex ? '' : '<meta name="robots" content="noindex,nofollow">') +
     head+'<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="preload" href="/fonts/bricolage-grotesque-display.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.mjs"></script></head><body>' +
     '<a class="skip-link" href="#main">Skip to content</a>' +
     (store.mode==='preview' ? '<aside class="preview-notice" aria-label="Store preview notice" data-testid="preview-notice"><span class="notice-mark" aria-hidden="true"></span><span>Online ordering opens soon.</span> <a href="/shop/">Browse the collection <span aria-hidden="true">→</span></a></aside>' : '') +
@@ -168,7 +169,10 @@ export function detail(p,products,store) {
   const share=p.shareImage||{};
   // Structured data: name, photos and the LKR price only (no availability, ratings or reviews).
   const ld={'@context':'https://schema.org','@type':'Product',name:p.name,image:gallerySlides(p).map(g=>absolute(store,(g.variants.at(-1)||g).src)),...(p.priceLkr===null?{}:{offers:{'@type':'Offer',price:String(p.priceLkr),priceCurrency:'LKR'}})};
-  const head='<script type="application/ld+json">'+JSON.stringify(ld).replace(/</g,'\\u003c')+'</script>';
+  // Indexing prep (D-12): the BreadcrumbList mirrors the visible breadcrumb and ships only once searchIndexing is on.
+  const trail=[['Shop','/shop/'],[p.category,'/shop/?category='+encodeURIComponent(p.category)],[p.name,'/products/'+p.slug+'/']];
+  const crumbLd=searchIndexing(store)?{'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:trail.map(([name,path],i)=>({'@type':'ListItem',position:i+1,name,item:absolute(store,path)}))}:null;
+  const head=[ld,crumbLd].filter(Boolean).map(x=>'<script type="application/ld+json">'+JSON.stringify(x).replace(/</g,'\\u003c')+'</script>').join('');
   return layout(p.name,'<section class="wrap section product-section">'+crumbs+'<div class="product-detail">'+gallery(p)+
     '<div class="detail-info"><p class="eyebrow">'+e(p.category)+'</p><h1>'+e(p.name)+'</h1><p class="detail-price" data-testid="product-price">'+e(price(p))+'</p>' +
     '<p class="status-chip status-'+e(p.availability)+'" data-testid="availability"><span aria-hidden="true"></span>'+availability(p)+'</p>' +
@@ -179,14 +183,14 @@ export function detail(p,products,store) {
     '<noscript><p>Enable JavaScript to build a request cart.</p></noscript>' +
     '<p class="fine">The request cart saves a list on your device. It does not reserve stock or complete a purchase.</p>' +
     '<dl class="detail-facts">'+facts.map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+v+'</dd></div>').join('')+'</dl>' +
-    '<p class="fine">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>' +
+    (delivery(store)?'<p class="fine">Confirm size, material, colours and finish before ordering.</p><p class="delivery-line" data-testid="delivery-line"><span>Delivery</span> '+e(delivery(store).text)+'</p>':'<p class="fine">Confirm size, material, colours and finish before ordering. Delivery cost and timing are included in your quote.</p>') +
     '<a class="text-link" href="/cart/">View your request cart →</a>'+
     '<p class="variation-note">Want it in another size or colour? <a href="/custom/?design='+encodeURIComponent(p.id)+'" data-testid="ask-variation">Ask about a variation →</a></p>'+shareRow(p,store)+'</div></div></section>' +
     (p.availability==='unavailable'?'':'<div class="sticky-buy" data-sticky-buy data-testid="sticky-buy" hidden><div class="sticky-buy-copy"><strong>'+e(p.name)+'</strong><span>'+e(price(p))+'</span></div>'+(orderNow?orderNowLink('Order now<span class="sr-only"> on WhatsApp</span>','sticky-order-now'):'<button type="button" class="button" data-sticky-add>Add to request cart</button>')+'</div>') +
     (more.length?'<section class="wrap section more-section"><div class="section-heading"><h2>More from HoneyComb 3D</h2>'+moreLink+'</div><div class="product-grid">'+more.map(p=>card(p,{store})).join('')+'</div></section>':'')+recentRow(p.id),store,'shop',head,{description:p.description,path:'/products/'+p.slug+'/',image:share.src,imageWidth:share.width,imageHeight:share.height,imageAlt:p.imageAlt});
 }
 export function cartPage(store) {
-  return layout('Your request cart','<section class="wrap section cart-section"><p class="eyebrow">YOUR SELECTION</p><h1>Request cart.</h1><p class="lead">A starting point for your order. We’ll confirm the details together.</p><div id="cart-body"><p>Loading your cart…</p></div><noscript><p>Enable JavaScript to access the cart saved on this device.</p></noscript></section>'+recentRow(),store,'cart');
+  return layout('Your request cart','<section class="wrap section cart-section"><p class="eyebrow">YOUR SELECTION</p><h1>Request cart.</h1><p class="lead">A starting point for your order. We’ll confirm the details together.</p><div id="cart-body"><p>Loading your cart…</p></div><noscript><p>Enable JavaScript to access the cart saved on this device.</p></noscript></section>'+recentRow(),store,'cart','',{noindex:true});
 }
 export function customPage(store) {
   const attachmentNote=store.mode==='live'&&store.whatsappVerified?'You can attach photos or model files in WhatsApp after opening the conversation. Nothing is uploaded by this form.':'Review and copy your enquiry below. Nothing is uploaded by this form.';
@@ -199,11 +203,42 @@ export function customPage(store) {
 export function privacyPage(store) {
   return layout('How this site handles your data','<section class="wrap section narrow prose-page"><p class="eyebrow">PRIVACY</p><h1>Your data on this site.</h1><p>The request cart stores product identifiers and quantities in this browser’s local storage, and a short list of the last products you viewed is kept there too. Remove the items, use “Clear” under Recently viewed, or clear site data to delete them. Cart notes and custom-enquiry fields are not saved by the application.</p><p>This storefront has no account system, payment processing or application analytics. It does not submit your enquiry to a server.</p><p>If you choose to open WhatsApp, your prepared message is included in a link to WhatsApp. Review it there and choose whether to send it. WhatsApp handles that interaction under its own terms.</p>'+(store.mode==='live'&&paypalOverseas(store)?'<p>If you pay from outside Sri Lanka, we send you a PayPal payment link in WhatsApp. You pay on PayPal, which handles that payment under its own terms; this site never sees your payment details.</p>':'')+'<p>Your hosting provider may process ordinary request logs. Business shipping, returns and order terms must be confirmed before purchase.</p></section>',store,'','',{description:'How the HoneyComb 3D storefront handles your data: a request cart in your browser, no accounts, payments or analytics.',path:'/privacy/'});
 }
+// FAQ: only what the rest of the site already says. No delivery times, prices or payment promises; those come with each quote.
+export function faqPage(store) {
+  const ordering=orderingOpen(store);
+  const qa=[
+    ['How do I order?',ordering?'<p>Add designs to your <a href="/cart/">request cart</a>, or tap Order on a design, and review the message we prepare for you. It opens in WhatsApp, and nothing is sent until you send it there. We reply to confirm availability, options, delivery cost, the final total and payment arrangements.</p>':'<p>Online ordering opens soon. You can already save designs in your <a href="/cart/">request cart</a> and copy your request for later.</p>'],
+    ['Is my request a confirmed purchase?','<p>No. A request is not a confirmed purchase. Your order is confirmed once we agree the details with you.</p>'],
+    ['What does “made to order” mean?','<p>Designs marked “Made to order” are printed for you after we confirm your order with you. Each design shows its availability on its page.</p>'],
+    ['Can I choose the colour or size?','<p>Ask us. Add a note in your request cart, or '+(ordering?'ask in WhatsApp':'use “Ask about a variation” on a design’s page')+', and we confirm what is possible with your quote.</p>'],
+    ['Can you print something that is not in the shop?','<p>Yes, tell us your idea. <a href="/custom/">Start a custom enquiry</a> with a model link, a rough size and the finish you have in mind, and we confirm whether we can make it and what it costs.</p>'],
+    ['How much is delivery, and how long does it take?',delivery(store)?'<p>'+e(delivery(store).text)+(/[.!?]$/.test(delivery(store).text)?'':'.')+' The final total is confirmed with your quote.</p>':'<p>Delivery cost and timing are included in your quote.</p>'],
+    ['How do I pay?','<p>Payment arrangements are confirmed with your quote.'+(ordering&&paymentMethods(store).length?' In your request cart you can tell us how you would like to pay: '+e(new Intl.ListFormat('en-GB',{type:'disjunction'}).format(paymentMethods(store)))+'.':'')+(ordering&&paypalOverseas(store)?' Paying from outside Sri Lanka? You can ask for a PayPal payment link in USD from your request cart. We send it in WhatsApp after we confirm your total.':'')+'</p>'],
+    ['Where are you based?','<p>We are based in Sri Lanka, and our prints are made here. Prices on this site are in Sri Lankan rupees (LKR).</p>']];
+  return layout('Questions and answers','<section class="wrap section narrow prose-page faq-page"><p class="eyebrow">QUESTIONS</p><h1>Questions and answers.</h1><div class="faq-list" data-testid="faq">'+qa.map(([q,a])=>'<section class="faq-item"><h2>'+q+'</h2>'+a+'</section>').join('')+'</div></section>',store,'','',{description:'How ordering works at HoneyComb 3D: '+(ordering?'request designs on WhatsApp':'the request cart')+', made-to-order prints, colours and sizes, and custom enquiries.',path:'/faq/'});
+}
+// A meta description from owner text: whole words up to ~155 characters, with an ellipsis when cut (never mid-word or mid-character).
+function summary(text, max=155) {
+  // Graphemes, not code points: never splits an emoji sequence or a Sinhala letter from its vowel sign.
+  const flat=text.replace(/\s+/g,' ').trim(), chars=[...new Intl.Segmenter('en',{granularity:'grapheme'}).segment(flat)].map(x=>x.segment);
+  if (chars.length<=max) return flat;
+  const cut=chars.slice(0,max).join(''), space=cut.lastIndexOf(' ');
+  return (space>max/2?cut.slice(0,space):cut).replace(/[\s,;:.]+$/,'')+'…';
+}
+// Shipping, Returns, About: the owner's own words, one paragraph per blank-line-separated block, nothing added.
+export function trustPage(page, store) {
+  return layout(page.title,'<section class="wrap section narrow prose-page" data-testid="trust-page"><p class="eyebrow">'+page.eyebrow+'</p><h1>'+e(page.title)+'.</h1>'+page.text.split(/\n\s*\n/).map(x=>'<p>'+e(x.trim()).replace(/\n/g,'<br>')+'</p>').join('')+'</section>',store,'','',{description:summary(page.text),path:'/'+page.slug+'/'});
+}
+// Indexing prep (D-12): every public page except the cart and 404, for sitemap.xml. Built only once searchIndexing is on.
+export function sitemap(products, store) {
+  const paths=['/','/shop/','/custom/','/faq/','/privacy/',...trustPages(store).map(t=>'/'+t.slug+'/'),...products.map(p=>'/products/'+p.slug+'/')];
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+paths.map(path=>'<url><loc>'+e(absolute(store,path))+'</loc></url>').join('\n')+'\n</urlset>\n';
+}
 // 404: the original message, then a search that lands on the shop (works without JavaScript) and a few designs.
 export function notFound(products,store) {
   const picks=products.filter(p=>p.availability!=='unavailable').slice(0,4);
   return layout('Page not found','<section class="wrap section narrow state-page"><div class="state-mark" aria-hidden="true">404</div><p class="eyebrow">Page not found</p><h1>This page wandered off.</h1><p class="lead">The design you are looking for may have moved.</p><div class="actions"><a class="button" href="/shop/">Shop the collection <span aria-hidden="true">→</span></a><a class="button secondary" href="/">Back to home</a></div>'+
     '<form class="nf-search" action="/shop/" method="get" role="search" aria-label="Search the collection"><label for="nf-search">Or search the collection</label><div class="nf-search-row"><input type="search" id="nf-search" name="q" placeholder="Try dragons, Naruto, keychains…" maxlength="100" autocomplete="off" data-testid="notfound-search"><button class="button secondary" type="submit">Search</button></div></form></section>'+
     (picks.length?'<section class="wrap section nf-picks" aria-labelledby="nf-picks-title" data-testid="notfound-picks"><div class="section-heading"><h2 id="nf-picks-title">A few designs to explore</h2><a href="/shop/">View collection →</a></div><div class="product-grid">'+picks.map(p=>card(p,{store})).join('')+'</div></section>':''),
-    store,'','',{description:'This page could not be found. Explore the HoneyComb 3D collection instead.'});
+    store,'','',{description:'This page could not be found. Explore the HoneyComb 3D collection instead.',noindex:true});
 }

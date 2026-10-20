@@ -6,15 +6,15 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
 
 | # | Item | Status | Commit |
 |---|---|---|---|
-| 1 | Order button on shop cards | Done | see §1 |
-| 2 | Cart bundle suggestions | Not started | |
-| 3 | FAQ page | Not started | |
-| 4 | Delivery line (switch) | Not started | |
-| 5 | Payment methods (switch) | Not started | |
-| 6 | Social links | Not started | |
-| 7 | Trust pages | Not started | |
-| 8 | Indexing prep | Not started | |
-| 9 | Testing and docs | Not started | |
+| 1 | Order button on shop cards | Done, QA fixed | `878df30`, `082d32c` |
+| 2 | Cart bundle suggestions | Done, QA fixed | `9a7f1e4` + QA-fix commit |
+| 3 | FAQ page | Done, QA fixed | `4c32420` + QA-fix commit |
+| 4 | Delivery line (switch) | Done, QA fixed | `2c7b46b` |
+| 5 | Payment methods (switch) | Done, QA fixed | `6e49d2c`, `a651d24`, `d4e0c19` |
+| 6 | Social links | Done, QA fixed | `10aae7f`, `d4e0c19` |
+| 7 | Trust pages | Done, QA fixed | `b5c2e3f`, `d4e0c19` |
+| 8 | Indexing prep | Done, QA fixed | `7881dcc` + final QA-fix commit |
+| 9 | Testing and docs | Done, QA fixed | `ad6f20f` + final QA-fix commit |
 
 ## 1. Order button on shop cards
 
@@ -35,3 +35,259 @@ Each item lists its commit, what changed, the local gate, the QA verdict and the
   - Nit, for the PM (out of my lane): the `source` note in `data/store.json` contains the typo number's digits. It is stripped from the published `dist/data/store.json`, so nothing ships, but the source data still breaks the "never in any format" rule. Suggest rewording it without the digits.
   - Verified OK: the number, the message text, gating, escaping (hostile names), click targets over the card-wide link, keyboard order and accessible names, client-rendered cards, the unchanged product-page Order now, and no-JS behaviour.
 - **Waits on owner fact:** none. It follows the existing live-ordering switch (`mode: live`, verified number).
+
+## 2. Cart bundle suggestions
+
+- **Commits:** `9a7f1e4` (feature), plus the QA-fix commit that follows it.
+- **What changed:**
+  - `src/domain.mjs`: `cartSuggestions(items, products, limit=3)`. It picks designs that share themes (tags other than the category) with what's in the cart. The most shared themes rank first; on a tie, another category comes before the same one (a kunai with a keychain, not a second keychain); catalogue order breaks any remaining tie.
+    - It never suggests a design already in the cart, or an unavailable one.
+    - A cart with no shared themes gets no suggestions.
+  - `src/app.mjs` / `src/styles.css`: the cart shows **"Goes well with your request"** after the request's own fields (lines, notes, PayPal option). Each row has a thumbnail, the name linking to the product, the catalogue price (or "Price on enquiry"), and **+ Add**.
+    - Add uses the existing quick-add path, so limits, announcements and focus on the new line are unchanged.
+    - The order message only ever contains cart items.
+- **Wording:** the brief said "Often added together". There is no order history to support that claim, so the heading says "Goes well with your request". No discounts or bundle prices are shown.
+- **Example (live catalogue):** Hidden Leaf Keychain → Kurama Figure, Minato Kunai, Classic Kunai. Night Fury Keychain → Light Fury, Baymax, then a dragon figure.
+- **Tests:** a unit test covers ranking, exclusions, the limit, no-shared-theme and empty carts, and unknown prices. The browser test checks the heading, names and prices, Add from a suggestion (focus, cart line, message), and that the added design drops out of the list. It runs in both builds; suggestions don't depend on the mode.
+- **Local gate:** passed on live and preview builds (re-run after the QA fixes): `npm test` (43 pass), `build` + `check` (23 pages), `browser.mjs`, `images-browser.mjs`.
+- **Screenshots checked:** cart with one line at 320, 390 and 1440px (no overflow).
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, now fixed. No blockers.
+  - Should-fix, fixed: the block sat between the cart lines and the Notes / PayPal fields. It now comes after them, so the request's fields stay together for touch, keyboard and screen-reader users.
+  - Should-fix, fixed: a full cart (20 lines) shows no suggestions instead of Add buttons that can only fail. This can't happen yet, because there are only 17 visible designs.
+  - Nit, fixed: an unpriced suggestion reads "Price to confirm", like a cart line.
+  - Nit, fixed: suggestion Add buttons are 44px tall (touch target).
+  - Nit, fixed: the browser test checks that typed notes survive Add from suggestions, and that suggestions come after the notes. It runs on both the live and preview builds.
+  - Nit, accepted: broad genre tags such as "Movies" weigh the same as franchise tags (Baymax → dragon keychains). This is honest; worth revisiting if the owner adds tag tiers.
+  - Out of scope, existing before item 2: at 320/390px with 200% root text the cart scrolls sideways (`.cart-summary`, `.cart-line-total`). Removing the suggestions doesn't change it. Logged for a later fix.
+  - Verified OK: ranking and exclusions, escaping (hostile names), notes and PayPal state after Add, focus and announcement, message unaffected, preview mode, heading order, layout at 320–1440px (including 200% text inside the block), and the heading wording.
+- **Waits on owner fact:** none.
+
+## 3. FAQ page
+
+- **Commits:** `4c32420` (feature), plus the QA-fix commit that follows it.
+- **What changed:**
+  - `src/render.mjs`: `faqPage(store)` at `/faq/`, linked as "Questions and answers" in the footer's About column on every page. It has eight short answers, each built from wording the site already uses:
+    - How ordering works.
+    - A request is not a confirmed purchase.
+    - What "made to order" means.
+    - Colours and sizes: ask us (in WhatsApp when live; through "Ask about a variation" in preview).
+    - Custom prints, with a link to `/custom/`.
+    - Delivery cost and timing come with the quote.
+    - Payment arrangements come with the quote.
+    - We are based in Sri Lanka and our prints are made here, with prices in LKR.
+  - Mode-aware:
+    - Live: describes the WhatsApp request and that nothing is sent until you send it.
+    - Preview: "Online ordering opens soon" and no mention of WhatsApp, including the meta description.
+    - The PayPal sentence appears only when `paypalOverseas` is on in live mode.
+  - `scripts/build.mjs` builds it (24 pages). `scripts/check.mjs` adds it to the verified pages (links, noindex, favicons). This only extends the check.
+- **Tests:**
+  - A unit test runs live, preview and PayPal on/off. It checks the questions, the absence of any digits in the answers (no prices, days or phone numbers), and the absence of delivery-time and payment-promise words. It also checks the footer link.
+  - The browser test follows the footer link to the page. `/faq/` is in the 320–1440px overflow and wide-font sweeps.
+- **Local gate:** passed on live and preview builds (re-run after the QA fixes): `npm test` (44 pass), `build` + `check` (24 pages), `browser.mjs`, `images-browser.mjs`.
+- **Screenshots checked:** 320, 390 and 1440px (no overflow).
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, now fixed. Every claim was checked against existing site copy, and no new promises were found.
+  - Should-fix, fixed: in preview mode the colour/size answer said "ask in the conversation", pointing at a WhatsApp flow that isn't open. It now says "ask in WhatsApp" when live and "use “Ask about a variation” on a design’s page" in preview. The trailing "Please confirm size… before ordering" was dropped, because it put the confirming back on the customer.
+  - Nit, fixed: "printed for you after we confirm your order with you" (was "once").
+  - Nit, fixed: "We are based in Sri Lanka, and our prints are made here", which echoes the hero's "made in Sri Lanka". "Studio" isn't used elsewhere.
+  - Nit, fixed: the PayPal sentence adds the cart's caveat, "We send it in WhatsApp after we confirm your total."
+  - Nit, fixed: the promise guard now also bans warranty, returns, exchange, money back, cash, card, COD, express, same-day and "within". There is a new preview + PayPal-on case, and preview is checked for "conversation" as well as WhatsApp and PayPal.
+  - Nit, kept: "tap Order on a design" matches the shop-card button label ("Order"). The product page's button reads "Order now on WhatsApp".
+  - Verified OK: the footer link on all 24 pages, check/build inclusion (check.mjs only extended), noindex, title and description, heading order and landmarks, layout at 320–1440px and 200% text, banned numbers absent.
+- **Waits on owner fact:** none. Delivery and payment answers will pick up items 4 and 5 once their switches are set.
+
+## 4. Delivery line (switch, off by default)
+
+- **Commit:** `2c7b46b`
+- **Switch:** `store.delivery` in `data/store.json`, added as `null` (off). To turn it on, set e.g. `{"text": "Islandwide by courier, LKR 500, usually 2–4 working days after printing", "feeLkr": 500}`. `feeLkr` is optional.
+- **What changed (only when set):**
+  - **Product pages:** a "Delivery" line with the owner's text replaces "Delivery cost and timing are included in your quote." "Confirm size, material, colours and finish before ordering." stays.
+  - **Cart summary:** the Delivery row shows the fee (or "Confirmed with your quote" when there is no fee), with the owner's text under it. The closing line becomes "The final total will be confirmed with your quote."
+  - **FAQ:** the delivery answer is the owner's text plus "The final total is confirmed with your quote."
+  - **Order messages:** when `feeLkr` is set, a separate `Delivery fee: LKR 500` line follows the items subtotal in every order message: cart, product-page Order now (it keeps the live quantity) and card Order.
+  - **Not changed:** no total including delivery is computed; the message still asks the owner to confirm delivery cost and the final total.
+  - **Published data:** `dist/data/store.json` carries `delivery`.
+  - **Validation:** the text must be non-empty and at most 200 characters; the fee must be null or a positive LKR amount with at most 2 decimals. Anything else fails the build. The existing price check now shares the same `validLkr` helper; behaviour is unchanged.
+- **Off = unchanged:** with `delivery: null`, every generated HTML page is byte-identical to the item 3 build (diffed). Only `dist/data/store.json` gains `"delivery": null`.
+- **Tests:**
+  - Unit tests cover normalisation, validation (accepted and rejected shapes), the fee line placement, no change without a fee, Order now / card Order with the fee, the product-page line (escaped), the FAQ answer (and no doubled full stop) and preview.
+  - The browser test branches on the published switch: product line and Order now fee, cart text and fee, and the message line; or their absence when off.
+- **Local gate:** passed in four states (re-run after the QA fixes, with a 19.99 fee in place of 500): live with delivery null (the committed state), preview, live with text and fee, and live with text only. Each state ran `npm test` (46 pass), `build` + `check` (24 pages), `browser.mjs` and `images-browser.mjs`. The switched states were temporary local edits, never committed.
+- **Screenshots checked:** product page and cart at 390 and 1440px with the example line on. The spacing of the cart note was fixed after the first look.
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, now fixed. No blockers.
+  - The reviewer confirmed the null state is byte-identical, checked five browser builds, and found exactly one fee line in every order path (cart, Order now with a changed quantity, sticky Order now, static and client-rendered cards). The fee never enters a subtotal, and price validation is unchanged across 23 edge values.
+  - Should-fix, fixed: a product page whose design is missing from the client catalogue (for example a cached page after un-approval) threw in Order now's sync and broke Add to cart. It now marks the link invalid, as before.
+  - Should-fix, fixed: the product delivery line squeezed the owner's text into a narrow column at 200% text. The label now wraps above the text when space is short.
+  - Nit, fixed: the FAQ only adds a full stop when the owner's text doesn't already end in `.`, `!` or `?`.
+  - Nit, fixed: with a fee in the message, the request asks to confirm "availability, options, final total and payment arrangements" (no longer "delivery cost", which it now states).
+  - Nit, fixed: `delivery` rejects unknown keys (a misspelt `fee` fails the build instead of silently dropping the fee), and the 200-character limit counts the trimmed text.
+  - Nit, fixed: browser regexes escape the money string, so decimal fees match exactly.
+  - Nit, noted: CI builds only the committed (null) state. The set states are covered by unit tests and by the local four-state gate above.
+- **Waits on owner fact:** the delivery line and fee (session C, item 3/5 recommends them). The example text above is the PM's illustration, not an owner fact.
+
+## 5. Payment methods (switch, off by default)
+
+- **Commit:** `6e49d2c` (plus the browser-test fix `5812498`).
+- **Switch:** `store.paymentMethods`, added as `[]` (off). To turn it on, set e.g. `["Bank transfer", "Cash on delivery"]`.
+- **What changed (only when set, live mode only):**
+  - **Cart:** a "How would you like to pay? (optional)" radio group. "Not sure yet" is selected by default, followed by the owner's methods.
+    - Picking a method adds `Preferred payment: Bank transfer` to the request message, just before any notes.
+    - When `paypalOverseas` is also on, PayPal becomes one of the radios (with its existing caveats) instead of the separate checkbox. A request can therefore never name both PayPal and another method. The PayPal message line is unchanged.
+    - The choice survives cart re-renders.
+  - **FAQ:** "In your request cart you can tell us how you would like to pay: A, B or C."
+  - **Published data:** `dist/data/store.json` carries `paymentMethods`.
+  - **Validation:** a list of up to six distinct names, at most 40 characters each.
+  - **Unchanged:** the site still says "Payment arrangements are confirmed with your quote"; no method is promised beyond the owner's list.
+- **Off = unchanged:** with `[]`, every HTML page is byte-identical to before (diffed), and the cart keeps the PayPal checkbox exactly as today.
+- **Tests:**
+  - Unit tests cover normalisation, validation, the message line and its position, and that PayPal and a method are never both written; also the FAQ sentence (escaped, live only).
+  - The browser test swaps the published store in the browser to check:
+    - The radios and their order.
+    - "Not sure yet" adds nothing.
+    - A method adds its line and survives a re-render.
+    - PayPal replaces it.
+    - Without the PayPal switch there are three choices.
+    - Preview mode shows no choice.
+- **Screenshots checked:** cart at 320, 390 and 1440px with methods and PayPal on. The legend was restyled to match the Notes label.
+- **Follow-up `a651d24` (PM request, session C's proposal):**
+  - `paymentMethods` also accepts the ids `lankaqr`, `bank-transfer` and `cash-on-delivery`, shown as "LankaQR", "Bank transfer" and "Cash on delivery". An id and its label count as the same method.
+  - New `paymentNote` (null): the owner's line under the cart's payment choice, shown only when methods are set.
+  - `tests/fixtures/store-session-c-proposal.json` holds session C's proposed delivery (LKR 400) and payment values; `npm run gate:proposal` tests them.
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, fixed in `d4e0c19`.
+  - Should-fix, fixed: an owner method named "paypal" collided with the PayPal choice: picking it wrote the overseas PayPal line and the selection jumped on re-render. Methods matching "PayPal" are now rejected with a pointer to `paypalOverseas`.
+  - Nits, fixed:
+    - Names must be single-line and visible; a zero-width-only name is rejected. Limits count trimmed text, and errors name the bad value.
+    - The PayPal caveat is now the radio's description, not part of its name.
+    - The FAQ list uses `Intl.ListFormat`.
+  - Nit, kept: the radios are native circles; a radio group is the right control for one choice.
+  - Verified OK: keyboard and arrow keys, the choice surviving notes, quantity changes and suggestions, message order, escaping (hostile names and Sinhala), no payment promises.
+- **Waits on owner fact:** which payment methods the owner accepts (session C, decision 2).
+
+## 6. Social links (empty by default)
+
+- **Commit:** `10aae7f`
+- **Switch:** `store.social`, added as `[]`. To turn it on, set e.g. `[{"label": "Instagram", "url": "https://www.instagram.com/…"}]`.
+- **What changed (only when set):**
+  - **Footer:** every page gains a "Follow" column. Its links open in a new tab, with `rel="me noopener noreferrer"` and an "(opens in a new tab)" note for screen readers.
+  - **Validation:** up to six entries, each a label of at most 30 characters and an https URL without credentials.
+  - **Published data:** `dist/data/store.json` carries the links, so the browser test can follow the switch.
+- **Off = unchanged:** generated pages are byte-identical (diffed).
+- **Tests:** unit tests for validation (it rejects http, javascript:, bare domains and credentials) and for the footer markup (escaping, every page, absent when empty). The browser test checks the Follow block follows the switch.
+- **Screenshots checked:** footer at 390 and 1440px with two links.
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, fixed in `d4e0c19`.
+  - Should-fix, fixed: `https:example.com/fb` passed validation, and on the https site it would have become a relative link to a 404. URLs must now start `https://`, and the published href is normalised.
+  - Nits, fixed: duplicates, extra keys, and newlines or control characters in labels and URLs are rejected. The footer grid uses `minmax(min(100%,9.5rem),1fr)` with `overflow-wrap:anywhere`, so large text no longer widens the page.
+  - Verified OK: javascript:, data:, protocol-relative, http and credential URLs are rejected; everything is escaped; rel and the new-tab note are present; four-column footers at 320–1440px.
+- **Waits on owner fact:** accounts the owner controls (session D, item 1).
+
+## 7. Trust pages: Shipping, Returns, About (hidden until written)
+
+- **Commit:** `b5c2e3f`
+- **Switch:** `store.pages`, added as `{"shipping": null, "returns": null, "about": null}`. Put the owner's text in a key to publish that page; blank lines separate paragraphs.
+- **What changed (per page, only with owner text):**
+  - **Pages:** `/shipping/` ("Shipping and delivery"), `/returns/` ("Returns") and `/about/` ("About HoneyComb 3D") are built in the privacy-page style. Each shows only the owner's words as escaped paragraphs; nothing else is added.
+  - **Footer:** each written page is linked in the About column.
+  - **Unwritten pages:** neither built nor linked.
+  - **Validation:** only those three keys; each value is null or up to 4000 characters.
+  - `scripts/check.mjs` now verifies both states for each page: it is built and linked when written, and absent and unlinked otherwise. This only extends the check.
+- **Off = unchanged:** generated pages are byte-identical (diffed); still 24 pages.
+- **Tests:** unit tests for validation, paragraphs and line breaks, escaping (including the meta description, escaped once), footer links and noindex. The browser test follows each built page's footer link and checks that unbuilt ones aren't linked.
+- **Screenshots checked:** an About page with placeholder text at 390 and 1440px (never committed).
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, fixed in `d4e0c19`.
+  - Should-fix, fixed: the meta and link-preview description was cut at 155 characters mid-word. A cut-off sentence can read as a different promise, and the cut could also split an emoji. It now ends on a whole word with "…" and counts characters, not code units.
+  - Nits, fixed: CRLF text is normalised (no stray `\r`), invisible-only text is rejected, and limits count trimmed text.
+  - Nit, consistent with the site: no `aria-current` on the footer link to the current page (FAQ and privacy don't have one either).
+  - Verified OK: built and linked only with text, footer order, title, H1, noindex, escaping (including `<script>`), paragraphs, the length limit, and check.mjs failing on a stale page.
+- **Waits on owner fact:** the owner's shipping, returns and about text.
+
+## Gate for items 5–7 together
+
+Each state ran `npm test` (52 pass), `build` + `check`, `browser.mjs` and `images-browser.mjs`:
+- **All switches off** (committed): 24 pages.
+- **Preview:** 24 pages.
+- **All switches on at once:** PayPal, a delivery line with a 450.5 fee, two payment methods, one social link and all three trust pages; 27 pages.
+
+The switched states were temporary local edits, never committed.
+
+## 8. Indexing prep (only when `searchIndexing` is true; it stays false)
+
+- **Commit:** `7881dcc`
+- **What changed (only with `searchIndexing: true`):**
+  - **Sitemap:** `dist/sitemap.xml` lists exactly the public pages: home, shop, custom, FAQ, privacy, any written trust pages and every product. It leaves out the cart and 404, and carries no `lastmod` or `priority`, so nothing is invented.
+  - **robots.txt:** `Allow: /` plus `Sitemap: https://honeycomb3d.store/sitemap.xml`.
+  - **Breadcrumb data:** product pages carry BreadcrumbList JSON-LD that mirrors the visible breadcrumb (Shop › category › design).
+  - **Validation:** turning indexing on requires an https `siteUrl`; the old unit test was updated to cover both sides.
+- **check.mjs, both states:**
+  - Off: no sitemap, and no BreadcrumbList on any page. These join the existing robots and noindex checks.
+  - On: the exact robots.txt, a sitemap that equals the public pages, no noindex anywhere, and BreadcrumbList on product pages only.
+  - Negative checks confirmed each new assertion fails when broken: a dropped sitemap entry, a missing breadcrumb, a stray breadcrumb, a stray sitemap.
+- **Off = unchanged:** every generated page is byte-identical (diffed).
+- **Tests:** a render unit test (breadcrumb structure, sitemap contents, nothing invented) and `npm run check:indexing`, which builds and checks the on state from a fixture.
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, now fixed. The reviewer confirmed the off state is byte-identical and that no existing check was weakened.
+  - Should-fix, fixed: check.mjs missed some broken "on" states: a sitemap without `</urlset>` or its namespace, a breadcrumb with a wrong position, a relative item or malformed JSON, and `robots` `none`.
+    - It now matches the whole sitemap document, parses every JSON-LD block, and deep-equals each product's BreadcrumbList against the catalogue's trail.
+    - Pages other than the cart and 404 must carry no robots meta at all.
+    - Each of those breakages was confirmed to fail the check.
+  - Nit, fixed: with indexing on, the cart and 404 keep `noindex` (they were already left out of the sitemap).
+  - Nit, fixed: `siteUrl` may end in one slash.
+  - Nit, left for W-10: a canonical link for filtered shop URLs, recorded in BUILD-STATUS.
+- **Waits on owner fact:** D-12, the owner's decision to allow search indexing. Nothing here turns it on.
+
+## 9. Testing and docs
+
+- **Commit:** `ad6f20f`
+- **Fixtures:**
+  - `scripts/store.mjs`: `build.mjs` and `check.mjs` load the store through it. `STORE_PATCH=path` merges a JSON fixture over `data/store.json` for that build only and prints "Store patch (test fixture, not for release)". Release builds never set it.
+  - `tests/fixtures/`:
+    - `store-preview.json`: preview mode.
+    - `store-all-on.json`: every switch on, with texts marked "Test fixture… not an owner fact".
+    - `store-indexing.json`: indexing on.
+    - `store-session-c-proposal.json`: added in `a651d24`.
+- **npm scripts:** `gate` (unit, build, check, both browser tests), `gate:preview`, `gate:all-on`, `gate:proposal`, `check:indexing` and `test:browser`.
+- **`tests/store.test.mjs`:** checks the loader, that every fixture validates and switches only what it names, and that every owner-fact switch is off in the committed data.
+- **Docs:** `docs/BUILD-STATUS.md`, `docs/RUN-AND-RELEASE.md` and the README's status sections are rewritten to describe the live site, the session and release flow, every switch and the gates. They previously described the 13 October preview checkpoint.
+- **QA verdict:** independent read-only review: **PASS WITH FIXES**, now fixed. The reviewer checked every factual claim in the three docs against the code, data, register and GitHub, and found them correct.
+  - Should-fix, fixed: "release builds never set STORE_PATCH" was a promise, not a check. The loader now accepts only files in `tests/fixtures/` and fails the build when `VERCEL` is set, both covered by tests.
+  - Should-fix, fixed: RUN-AND-RELEASE pointed to register §7 for the flow, but §7's gate text predates the session plan. It now follows SESSIONS-PLAN and notes the difference (see below).
+  - Nits, fixed: the banned-number check is described as "common formats", and the fixture test checks that every fixture leaves all other keys alone.
+  - Noted: like items 4–7, `a651d24` added an off-by-default key (`paymentNote: null`) to `data/store.json`, as the brief allows.
+- **Follow-ups `a651d24` and `d4e0c19` in the same review:** `a651d24` PASS. `d4e0c19` FAIL until fixed, now fixed:
+  - **Blocker, fixed:** a validation regex used the `v` flag, and `domain.mjs` ships to browsers. Safari before 17 (iPhones stuck on iOS 16), Chrome before 112 and Firefox before 116 would reject the module, breaking the cart, filters and payment choice on every page. It never reached the release branch.
+    - The regex now uses only the `u` flag.
+    - check.mjs now parses every shipped browser module with the `v` flag disabled, so newer regex syntax fails the build. A reintroduced `v` regex was confirmed to fail it.
+  - Should-fix, fixed: social link duplicates are compared after normalising (`https://x.com` and `https://x.com/`).
+  - Nits, fixed:
+    - Names reject line and paragraph separators and bidi controls.
+    - "Pay Pal" is caught.
+    - "Not sure yet" can't be a method.
+    - Spacing variants count as duplicates.
+    - Descriptions cut on graphemes, so a Sinhala letter keeps its vowel sign and a ZWJ emoji stays whole.
+  - Nit, kept: method names keep the owner's capitals in the FAQ sentence.
+- **For the PM (outside my files):**
+  - CI (`.github/workflows/storefront.yml`) still builds only the committed state. Adding `npm run gate:preview` and `npm run gate:all-on` would test the switched states on every PR.
+  - `package.json` gained the npm scripts above (PM: keep them there).
+  - Register §2 and §7 still describe deploys from `codex/storefront-mvp` by a QA session, while SESSIONS-PLAN has the PM deploy from `claude/funny-albattani-c5a91a`.
+
+## Gate at `d4e0c19` (items 5–9 with QA fixes)
+
+| Gate | Pages | Result |
+|---|---|---|
+| `npm run gate` (committed state; 60 unit tests) | 24 | pass |
+| `npm run gate:preview` | 24 | pass |
+| `npm run gate:all-on` | 27 | pass |
+| `npm run gate:proposal` | 24 | pass |
+| `npm run check:indexing` | 24 | pass |
+
+Each gate except `check:indexing` covers build, check, `browser.mjs` and `images-browser.mjs`; `check:indexing` is build and check only. The all-on footer was also checked at 390px (100% and 200% text) and 1440px.
+
+## Final gate (after all QA fixes)
+
+Every gate exited 0:
+
+| Gate | Pages | Result |
+|---|---|---|
+| `npm run gate` (63 unit tests, build, check, both browser tests) | 24 | pass |
+| `npm run gate:preview` | 24 | pass |
+| `npm run gate:all-on` | 27 | pass |
+| `npm run gate:proposal` | 24 | pass |
+| `npm run check:indexing` | 24 | pass |
+
