@@ -183,7 +183,8 @@ Never deploy a SHA whose CI is red, even if QA's own checks pass (D7–D8). A ch
 
 | Created (UTC) | Commit | Deployment | CI push run | Result |
 |---|---|---|---|---|
-| 2026-10-19 19:20 | `e82734d` | `dpl_868orLiQq32g9xHzDpi8fWtBp5Jx` | 39309543716 (PR run) | green (current; Session B item 1: Order on shop cards; PayPal switch published; typo digits removed from store note. Live shop verified: 17 card order links to wa.me/94710599815, noindex) |
+| 2026-10-20 00:31 | `f1a2b1c` | `dpl_C3tu5TsqLJLCzqRcn1GZKgC66t7X` | 39347546561 (PR run) | green (current; Session B items 2–9: cart suggestions and /faq/ visible; delivery, payment methods, social, trust pages, indexing prep built but off; CI now runs preview/all-on/proposal/indexing gates. Independent QA PASS: off state = base + /faq/ + footer link + suggestions only) |
+| 2026-10-19 19:20 | `e82734d` | `dpl_868orLiQq32g9xHzDpi8fWtBp5Jx` | 39309543716 (PR run) | green (Session B item 1: Order on shop cards; PayPal switch published; typo digits removed from store note. Live shop verified: 17 card order links to wa.me/94710599815, noindex) |
 | 2026-10-19 05:54 | `06993ea` | `dpl_FwrLnSv9LYjQKAtWb4cXbRnqjFMp` | 39206651342 (PR run) | green (Order now on product pages, PayPal option built but off) |
 | 2026-10-18 20:44 | `0f60ac6` | `dpl_CjrhyrqgpTCpyESmmv5fuCLxTGXf` | 39164293917 (PR run) | green (correct number 94710599815, studio redesign) |
 | 2026-10-18 12:30 | `067d776` | `dpl_AXggTyHvvrZDdSFSckwqBGehT1Zb` | 39129717102 (PR run) | green (ordering live, but on the mistyped 0710559815) |
