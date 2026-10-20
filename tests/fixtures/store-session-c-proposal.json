@@ -1,0 +1,5 @@
+{
+  "delivery": {"text": "Islandwide delivery by courier, LKR 400. Usually 2–4 working days after your order is printed.", "feeLkr": 400},
+  "paymentMethods": ["lankaqr", "bank-transfer", "cash-on-delivery"],
+  "paymentNote": "Pay by LankaQR, bank transfer or cash on delivery. We confirm your order and send payment details on WhatsApp."
+}
