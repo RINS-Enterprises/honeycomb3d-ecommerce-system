@@ -24,6 +24,14 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: node tests/browser.mjs
       - run: node tests/images-browser.mjs
+      # Owner switches (delivery, payments, social, trust pages, PayPal, indexing) are off in data/;
+      # build and test them switched on too, then rebuild the committed state for the image audit.
+      - run: npm run gate:preview
+      - run: npm run gate:all-on
+      - run: npm run gate:proposal
+      - run: npm run check:indexing
+      - name: Rebuild the committed state
+        run: npm run build && npm run check
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
