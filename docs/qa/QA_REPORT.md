@@ -149,7 +149,7 @@ I judged these from repo names and from this repo's content only; I did not open
 |---|---|
 | `c63bb3f` | Added this report. |
 | `6035a30` | Moved the April WooCommerce portfolio text to `docs/LEGACY-WOOCOMMERCE-README.md` and added `.gitignore` (it ignores `node_modules`, `dist`, `.env*`, WordPress dumps and backups, and `test-results`). Both files are byte-identical to the release branch, so merging that branch causes no conflicts on them. |
-| (README commit) | Rewrote `README.md`: purpose, where the code lives (branch map), setup and run, deploy, and history. This addresses H-1 and H-2 for readers of `main`. When the release branch is merged into `main`, `README.md` will conflict: take the release branch's version. |
+| `3b32f72` | Rewrote `README.md`: purpose, where the code lives (branch map), setup and run, deploy, and history. This addresses H-1 and H-2 for readers of `main`. When the release branch is merged into `main`, `README.md` will conflict: take the release branch's version. |
 
 Deliberately not done:
 
