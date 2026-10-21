@@ -1,131 +1,45 @@
-# Honeycomb 3D Store 🚀
+# HoneyComb 3D storefront
 
-![Preview](homepage.png)
+The storefront for HoneyComb 3D / HONEYCOMB™, a 3D-print studio in Sri Lanka, live at [honeycomb3d.store](https://honeycomb3d.store).
 
-> Built and optimized a real-world e-commerce system focused on conversions, trust, and user experience.
+Visitors browse a catalogue of made-to-order prints (keychains, figures, props, bookmarks, desk organisers), build a request cart, and send the request to the business on WhatsApp. HoneyComb confirms availability, options, delivery, the final total and payment before anything is a purchase. Prices are in LKR.
 
-A conversion-focused e-commerce store built for anime collectible lovers in Sri Lanka.
+> **The code is not on `main` yet.** The live site is built and deployed from the release branch
+> [`claude/funny-albattani-c5a91a`](../../tree/claude/funny-albattani-c5a91a) (draft PR #4).
+> `main` will carry it once the owner merges that branch. Until then, check out the release branch to work on the site.
 
-🔗 Live Site: https://honeycomb3d.store
+## Where things live
 
----
+| Branch | What it holds |
+|---|---|
+| `claude/funny-albattani-c5a91a` | **Release branch.** Storefront source, data, tests, CI and the PM register. Production deploys from here. |
+| `claude/storefront-features` | Storefront feature work, merged into the release branch |
+| `claude/payments-delivery` | Payment, delivery and business-registration research (`docs/business/`) |
+| `claude/brand-marketing` | Brand guide and launch/marketing kit (`docs/marketing/`) |
+| `claude/ops-automations` | MakerWorld → Google Drive tool (`ops/`) and QA tooling (`qa/`) |
+| `claude/qa-review` | Repository QA report ([`docs/qa/QA_REPORT.md`](docs/qa/QA_REPORT.md)) |
 
-## 💡 Role & Contribution
+The full branch map, with open PRs, is in the [QA report](docs/qa/QA_REPORT.md#branch-map-as-of-2026-10-21).
 
-Independently built and optimized a full e-commerce system, focusing on conversion optimization, payment integration, and trust-building mechanisms.
+## Setup and run
 
-**Key responsibilities:**
+Requires Node.js 22 or newer. The site has no application dependencies.
 
-* Store setup and configuration (WooCommerce)
-* UI/UX improvements for better product focus
-* Stripe payment gateway integration
-* Email system setup using SMTP (FluentSMTP)
-* Trustpilot review automation (via email logic)
+```sh
+git checkout claude/funny-albattani-c5a91a
+npm ci
+npm test         # unit tests
+npm run build    # static site into dist/
+npm run check    # verifies pages, links, images and budgets
+npm start        # serves dist/ at http://127.0.0.1:4173
+```
 
----
+`npm run gate` also runs the Playwright browser tests. The release branch's `docs/RUN-AND-RELEASE.md` covers Playwright setup, test fixtures and the owner switches in `data/store.json`.
 
-## 📈 Real-World Application
+## Deploy
 
-This project is a live store designed to generate actual sales, not just a demo.
+The site is static, hosted on Vercel (`vercel.json`: build `npm run build`, output `dist/`). Production is deployed from the release branch's head, only after CI passes and an independent QA review. Every release is recorded in `docs/pm/PROJECT-REGISTER.md` §7 on that branch. No secrets are needed to build. The only environment variables are optional: `PORT` for `npm start`, and `STORE_PATCH`, which applies a test fixture and is never used for release builds. That is why there is no `.env.example`.
 
-It applies real-world e-commerce principles such as:
+## History
 
-* Conversion optimization
-* Customer trust building
-* Friction reduction in checkout
-
----
-
-## 🧠 Project Overview
-
-The store is designed to:
-
-* Sell 3D printed anime collectibles
-* Optimize product pages for conversions
-* Use psychological triggers to influence buying decisions
-
----
-
-## 🔄 System Flow
-
-User browses products → selects item → adds to cart
-→ proceeds to checkout → completes payment (Stripe or COD)
-→ receives order confirmation email (SMTP)
-→ Trustpilot review request is triggered → customer feedback collected
-
----
-
-## ⚔️ Key Features
-
-* 🔥 Stripe payment integration
-* 📦 Cash on Delivery (COD)
-* ⚡ Low stock + “X sold” urgency system
-* 💬 WhatsApp direct customer contact
-* ⭐ Trustpilot review automation
-* 🌙 Dark UI optimized for product focus
-
----
-
-## 🛠 Tech Stack
-
-* WordPress
-* WooCommerce
-* Blocksy Theme
-* FluentSMTP (Email system)
-* Stripe (Payments)
-
----
-
-## 🎯 What I Optimized
-
-Focused on **conversion psychology**, not just design:
-
-* Product hierarchy (best sellers prioritized)
-* Scarcity triggers (“Only X left”)
-* Social proof (“X sold” indicators)
-* Clean UI for faster decision-making
-* Reduced checkout friction
-
----
-
-## 🧩 Problems Solved
-
-* Low trust in new stores → Implemented review system (Trustpilot)
-* Cart abandonment → Simplified checkout + added COD
-* Weak product appeal → Improved visuals and hierarchy
-* Lack of urgency → Added stock indicators and demand signals
-
----
-
-## 📸 Screenshots
-
-### Homepage
-
-![Homepage](homepage.png)
-
-### Shop Page
-
-![Shop](shop.png)
-
-### Product Page
-
-![Product](product.png)
-
-### Checkout Page
-
-![Checkout](checkout.png)
-
----
-
-## ⚙️ Custom Work
-
-* CSS fixes for UI consistency
-* Product card and layout optimization
-* Trustpilot automated review system (BCC logic)
-* SMTP email system configuration
-
----
-
-## 🧠 Summary
-
-This project demonstrates the ability to build and optimize a real-world e-commerce system with a strong focus on conversions, user experience, and trust.
+Until October 2026 the domain ran a WooCommerce site. Its April 2026 portfolio write-up is kept in [docs/LEGACY-WOOCOMMERCE-README.md](docs/LEGACY-WOOCOMMERCE-README.md), along with the screenshots (`*.png`) at the repo root. Its payment, stock and review claims do **not** describe the current site.

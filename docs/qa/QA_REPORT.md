@@ -142,3 +142,18 @@ I judged these from repo names and from this repo's content only; I did not open
 | 8 | Get the owner's facts so the switches can go on (delivery line and fee, payment methods, trust pages) | owner time |
 | 9 | Resolve the licensing question (H-4) before any paid ads or search indexing | owner time |
 | 10 | Add a LICENSE / all-rights-reserved notice and update the GitHub repo description | 10 min |
+
+## 12. Changes made on this branch
+
+| Commit | Change |
+|---|---|
+| `c63bb3f` | Added this report. |
+| `6035a30` | Moved the April WooCommerce portfolio text to `docs/LEGACY-WOOCOMMERCE-README.md` and added `.gitignore` (it ignores `node_modules`, `dist`, `.env*`, WordPress dumps and backups, and `test-results`). Both files are byte-identical to the release branch, so merging that branch causes no conflicts on them. |
+| (README commit) | Rewrote `README.md`: purpose, where the code lives (branch map), setup and run, deploy, and history. This addresses H-1 and H-2 for readers of `main`. When the release branch is merged into `main`, `README.md` will conflict: take the release branch's version. |
+
+Deliberately not done:
+
+- **No `.env.example`:** the build needs no secrets, and the only variables (`PORT`, `STORE_PATCH`) are optional and documented in the README.
+- **No CI workflow on `main`:** there is no code on `main` yet, and the release branch already has a full workflow.
+- **No screenshots removed:** the legacy README references them. H-3 (the third-party number in `product.png`) is the owner's call.
+- **No code fixes** on the release or other session branches, which are out of scope for this branch.
