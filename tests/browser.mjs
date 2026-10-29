@@ -133,10 +133,21 @@ try {
   assert.equal(await page.getByTestId('footer-social').count(),builtStore.social.length?1:0,'Social links only when the owner has given accounts');
   // Trust pages (Shipping, Returns, About) exist only when the owner wrote them; each built one is linked and opens.
   const builtDirs=await readdir('dist');
-  for(const [slug,title] of [['shipping','Shipping and delivery'],['returns','Returns'],['about','About HoneyComb 3D']]) {
+  for(const [slug,title] of [['shipping','Shipping and delivery'],['returns','Returns'],['about','About HoneyComb 3D']].filter(([slug])=>!(builtStore.policies&&slug==='shipping'))) {
     const link=page.getByRole('contentinfo').getByRole('link',{name:title,exact:true});
     assert.equal(await link.count(),builtDirs.includes(slug)?1:0,'Footer link only for a written page: '+slug);
     if(builtDirs.includes(slug)){await link.click();await page.getByRole('heading',{level:1,name:title+'.'}).waitFor();await page.goBack();}
+  }
+  // Policy pages (payment-gateway review): every footer link opens its policy, and the seller line names the operator.
+  assert.equal(await page.getByTestId('footer-policies').count(),builtStore.policies?1:0,'Policies column only when switched on');
+  if(builtStore.policies) {
+    assert.match(await page.getByTestId('footer-seller').textContent(),new RegExp(builtStore.contact.operator+'.*'+builtStore.contact.email.replace(/[.]/g,'\\.')));
+    for(const name of ['Terms and conditions','Refunds and cancellations','Shipping and delivery','Privacy policy','Contact us']) {
+      await page.getByTestId('footer-policies').getByRole('link',{name,exact:true}).click();
+      await page.getByTestId('policy-page').waitFor();
+      assert.match(await page.getByTestId('policy-page').textContent(),/Last updated/);
+      await page.goBack();
+    }
   }
   await page.getByRole('contentinfo').getByRole('link',{name:'Questions and answers'}).click();
   await page.getByRole('heading',{level:1,name:'Questions and answers.'}).waitFor();

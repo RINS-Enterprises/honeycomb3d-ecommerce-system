@@ -22,10 +22,10 @@ for(const p of publicProducts) {
 }
 const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','faq/index.html','404.html',...trustPages(store).map(t=>t.slug+'/index.html'),...(policiesOn(store)?POLICY_PAGES.filter(p=>p.slug!=='privacy').map(p=>p.slug+'/index.html'):[]),...products.map(p=>'products/'+p.slug+'/index.html')];
 // Policy pages (payment-gateway review): all five, linked from every footer, with the seller line, only when switched on.
-for(const p of POLICY_PAGES.filter(p=>p.slug!=='privacy'))assert.equal((await readdir(join(root,'dist'))).includes(p.slug),policiesOn(store),'Policy page '+p.slug+' is built only when policies are on');
+for(const p of POLICY_PAGES.filter(p=>p.slug!=='privacy'))assert.equal((await readdir(join(root,'dist'))).includes(p.slug),policiesOn(store)||trustPages(store).some(t=>t.slug===p.slug),'Policy page '+p.slug+' is built only when policies are on (or as an owner-written trust page)');
 for(const path of ['index.html','404.html','privacy/index.html']) {
   const html=await readFile(join(root,'dist',path),'utf8');
-  for(const p of POLICY_PAGES.filter(p=>p.slug!=='privacy'))assert.equal(html.includes('href="/'+p.slug+'/"'),policiesOn(store),'Footer links '+p.slug+' only when policies are on: '+path);
+  for(const p of POLICY_PAGES.filter(p=>p.slug!=='privacy'&&!trustPages(store).some(t=>t.slug===p.slug)))assert.equal(html.includes('href="/'+p.slug+'/"'),policiesOn(store),'Footer links '+p.slug+' only when policies are on: '+path);
   assert.equal(html.includes('data-testid="footer-seller"'),policiesOn(store),'Seller line only when policies are on: '+path);
   if(policiesOn(store))assert(html.includes(store.contact.email)&&html.includes(store.contact.operator),'Seller line names the operator and email: '+path);
 }
