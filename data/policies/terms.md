@@ -41,7 +41,7 @@ An order request is not a confirmed purchase. We may decline a request, for exam
 Made-to-order items take time to print and finish. We give you an estimated time in your quote. Delivery is covered by our [Shipping and delivery policy](/shipping/). Delivery estimates are not guaranteed, but we will tell you on WhatsApp if your order is delayed.
 
 ## Cancellations, refunds and returns
-Covered by our [Refund, return and cancellation policy](/refunds/). In short: you can cancel for a full refund before we start printing. If your order arrives damaged, faulty or wrong, we reprint it or refund you.
+Covered by our [Refund, return and cancellation policy](/refunds/). In short: you can cancel for a full refund before we start printing. If your order arrives damaged, faulty or wrong and you tell us within 48 hours with a photo, we reprint it or refund you.
 
 ## Custom orders
 For custom designs, you must have the right to use any model, image or logo you send us. We may decline requests that infringe someone else's rights or that we consider offensive or unsafe. Custom items are made for you personally, so they cannot be returned for a change of mind.

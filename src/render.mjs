@@ -229,7 +229,7 @@ function summary(text, max=155) {
   return (space>max/2?cut.slice(0,space):cut).replace(/[\s,;:.]+$/,'')+'…';
 }
 // Shown wherever an order request starts once the policy pages are live (gateways look for terms before payment).
-export const policyAgreement='By sending an order request you agree to our <a href="/terms/">Terms</a>, <a href="/refunds/">Refund policy</a> and <a href="/shipping/">Shipping policy</a>.';
+export const policyAgreement='By sending an order request you agree to our <a href="/terms/">Terms</a>, <a href="/refunds/">Refund</a>, <a href="/shipping/">Shipping</a> and <a href="/privacy/">Privacy</a> policies.';
 // Policy pages (src/policies.mjs renders the body from data/policies/*.md; this adds the page frame).
 export function policyPage(doc, store) {
   return layout(doc.title,'<section class="wrap section narrow prose-page policy-page" data-testid="policy-page"><p class="eyebrow">'+e(doc.eyebrow)+'</p><h1>'+e(doc.title)+'.</h1><p class="fine policy-updated">Last updated '+e(new Date(doc.updated+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}))+'</p>'+doc.html+'</section>',store,'','',{description:doc.description,path:'/'+doc.slug+'/'});

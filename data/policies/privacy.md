@@ -36,13 +36,23 @@ We do not sell your personal data. We do not send you marketing messages unless 
 Only with the people who help us complete your order:
 - **Couriers or the postal service:** your name, address and phone number, to deliver your parcel.
 - **Our payment partner:** for card payments. They process your card details on their own secure page. **We never see or store your full card number.**
+- {{paypal}}
 - **Authorities:** where the law requires it.
 
 ## How long we keep it
 We keep order records for as long as the law requires for business and tax records, and other messages and photos only as long as needed to complete and support your order.
 
 ## Your rights
-You can ask us to show you, correct or delete the personal data we hold about you, or to stop using it, unless the law requires us to keep it. Message us on WhatsApp at {{phone}} or email {{email}}. We will reply within 14 days.
+You can ask us to show you, correct or delete the personal data we hold about you, or to stop using it, unless the law requires us to keep it. Message us on WhatsApp at {{phone}} or email {{email}}. We will reply as soon as we can, and within the time the law requires.
+
+## Data stored outside Sri Lanka
+Some of the services we use store data outside Sri Lanka: WhatsApp (Meta), our website host, and our payment partner. We use them only for the purposes above.
+
+## Cookies
+This website does not set cookies. The request cart uses your browser's local storage, as described above.
+
+## Complaints
+If you are unhappy with how we handle your data, please contact us first. You can also complain to Sri Lanka's Data Protection Authority.
 
 ## Security
 We keep order information in access-controlled accounts and share it only as described here. This website uses HTTPS.

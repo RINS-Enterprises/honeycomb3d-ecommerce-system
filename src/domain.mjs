@@ -48,7 +48,7 @@ export function validateData(products, store) {
     for (const k of ['operator','location']) if (c[k] !== undefined && !ownerText(c[k],80)) throw new Error('contact.'+k+' must be a short, single-line name');
     if (c.email !== undefined && !(typeof c.email === 'string' && c.email.length <= 100 && /^[^\s@<>()"',;]+@[a-z0-9-]+(?:\.[a-z0-9-]+)+$/i.test(c.email))) throw new Error('contact.email must be a plain email address');
     if (c.hours !== undefined && c.hours !== null && !ownerText(c.hours,120)) throw new Error('contact.hours must be a short line');
-    if (c.updated !== undefined && !(typeof c.updated === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(c.updated) && !Number.isNaN(Date.parse(c.updated)))) throw new Error('contact.updated must be a YYYY-MM-DD date');
+    if (c.updated !== undefined && !(typeof c.updated === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(c.updated) && !Number.isNaN(Date.parse(c.updated)) && new Date(c.updated+'T00:00:00Z').toISOString().slice(0,10) === c.updated)) throw new Error('contact.updated must be a YYYY-MM-DD date');
   }
   if (store.policies === true) {
     const c=store.contact||{};
@@ -113,7 +113,7 @@ export const TRUST_PAGES = [{key:'shipping',slug:'shipping',title:'Shipping and 
 export const trustPages = store => TRUST_PAGES.filter(t=>typeof store.pages?.[t.key] === 'string' && store.pages[t.key].trim()).map(t=>({...t,text:store.pages[t.key].replace(/\r\n?/g,'\n').trim()}));
 // Policy pages for payment-gateway review (terms, refunds, shipping, privacy, contact): off until the owner approves the text
 // and gives a business email (store.policies + store.contact). Built from data/policies/*.md by src/policies.mjs.
-export const POLICY_PAGES = [{slug:'terms',label:'Terms and conditions'},{slug:'refunds',label:'Refunds and cancellations'},{slug:'shipping',label:'Shipping and delivery'},{slug:'privacy',label:'Privacy policy'},{slug:'contact',label:'Contact us'}];
+export const POLICY_PAGES = [{slug:'terms',label:'Terms and conditions'},{slug:'refunds',label:'Refunds, returns and cancellations'},{slug:'shipping',label:'Shipping and delivery'},{slug:'privacy',label:'Privacy policy'},{slug:'contact',label:'Contact us'}];
 export const policiesOn = store => store.policies === true;
 export const delivery = store => store.delivery?.text?.trim() ? {text:store.delivery.text.trim(),feeLkr:store.delivery.feeLkr ?? null} : null;
 export const visibleProducts = (products, store) => products.filter(p => p.image && (store.mode !== 'live' || p.approved));

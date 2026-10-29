@@ -142,7 +142,7 @@ try {
   assert.equal(await page.getByTestId('footer-policies').count(),builtStore.policies?1:0,'Policies column only when switched on');
   if(builtStore.policies) {
     assert.match(await page.getByTestId('footer-seller').textContent(),new RegExp(builtStore.contact.operator+'.*'+builtStore.contact.email.replace(/[.]/g,'\\.')));
-    for(const name of ['Terms and conditions','Refunds and cancellations','Shipping and delivery','Privacy policy','Contact us']) {
+    for(const name of ['Terms and conditions','Refunds, returns and cancellations','Shipping and delivery','Privacy policy','Contact us']) {
       await page.getByTestId('footer-policies').getByRole('link',{name,exact:true}).click();
       await page.getByTestId('policy-page').waitFor();
       assert.match(await page.getByTestId('policy-page').textContent(),/Last updated/);

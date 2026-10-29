@@ -6,7 +6,7 @@ description: How HoneyComb 3D delivers made-to-order 3D-printed products across 
 We send orders from Kegalle to addresses across Sri Lanka. This policy is part of our [Terms and conditions](/terms/).
 
 ## Where we deliver
-We deliver **islandwide in Sri Lanka** by courier or registered post. For orders outside Sri Lanka, please contact us first. We will tell you if we can send them and what it costs.
+We deliver **islandwide in Sri Lanka** by courier. For orders outside Sri Lanka, please contact us first. We will tell you if we can send them and what it costs.
 
 ## Delivery cost and time
 {{delivery}}
@@ -22,9 +22,6 @@ When your order is sent, we message you on WhatsApp with the courier name and, w
 
 ## Damage in transit
 We pack every order carefully. If your parcel arrives damaged, keep the packaging and contact us within **48 hours** with photos. Our [Refund, return and cancellation policy](/refunds/) explains what we do.
-
-## Collection
-If you are near Kegalle, you can ask us about collecting your order in person. We will agree a time with you on WhatsApp.
 
 ## Contact
 WhatsApp {{phone}} · Email {{email}} · [Contact page](/contact/)

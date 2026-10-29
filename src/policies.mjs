@@ -3,7 +3,7 @@
 // and delivery terms come from one place and nothing is promised that the owner has not set.
 import {readFile} from 'node:fs/promises';
 import {join} from 'node:path';
-import {escapeHtml as e, delivery, policiesOn, POLICY_PAGES} from './domain.mjs';
+import {escapeHtml as e, delivery, policiesOn, paypalOverseas, POLICY_PAGES} from './domain.mjs';
 
 // 94710599815 -> 071 059 9815 (Sri Lankan mobile); anything else as +international digits.
 export const displayPhone = digits => /^94\d{9}$/.test(digits||'') ? '0'+digits.slice(2,4)+' '+digits.slice(4,7)+' '+digits.slice(7) : '+'+digits;
@@ -16,6 +16,8 @@ export function policyTokens(store) {
     email:c.email,
     location:c.location,
     hours:c.hours||'We reply on WhatsApp as soon as we can.',
+    // Empty when PayPal is off: a line that is only this token is left out.
+    paypal:store.mode==='live'&&paypalOverseas(store)?'**PayPal:** if you pay from outside Sri Lanka, PayPal processes that payment under its own terms. We never see your PayPal or card login.':'',
     delivery:d?d.text.replace(/[.!?]?$/,'.')+' The exact delivery charge for your order is shown in your quote before you pay.':'Delivery cost and the estimated delivery time for your address are confirmed in your quote before you pay.'
   };
 }
@@ -41,6 +43,9 @@ export function renderPolicy(markdown, tokens) {
   for (const raw of markdown.replace(/\r\n?/g,'\n').trim().split('\n')) {
     const line=raw.trim();
     if (!line) { flush(); continue; }
+    // A line holding only an empty token (an optional sentence that is switched off) is dropped.
+    const only=line.replace(/^(- |\d+\. )/,'').match(/^\{\{(\w+)\}\}$/);
+    if (only && tokens[only[1]]==='') continue;
     if (line.startsWith('## ')) { flush(); html.push('<h2>'+inline(line.slice(3),tokens)+'</h2>'); continue; }
     if (/^(#|>|\* |\+ |```|\|)/.test(line)) throw new Error('Unsupported Markdown in policy: '+line);
     const [kind,text]=line.startsWith('- ')?['ul',line.slice(2)]:/^\d+\. /.test(line)?['ol',line.replace(/^\d+\. /,'')]:['p',line];

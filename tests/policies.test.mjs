@@ -55,3 +55,20 @@ test('front matter is required on every policy file',()=>{
   assert.throws(()=>parsePolicy('no front matter','x'),/front-matter/);
   assert.throws(()=>parsePolicy('---\ntitle: T\n---\nbody','x'),/missing eyebrow/);
 });
+test('an optional token line is dropped when empty, and kept when set',()=>{
+  assert.equal(renderPolicy('- a\n- {{paypal}}\n- b',{...tokens,paypal:''}),'<ul><li>a</li><li>b</li></ul>');
+  assert.equal(renderPolicy('- a\n- {{paypal}}',{...tokens,paypal:'P'}),'<ul><li>a</li><li>P</li></ul>');
+});
+test('contact.updated must be a real calendar date',()=>{
+  assert.throws(()=>validateData([],{...on,contact:{...on.contact,updated:'2026-02-31'}}),/updated/);
+});
+test('the agreement line shows next to Order now only when policies are on',async()=>{
+  const {detail}=await import('../src/render.mjs');
+  const products=JSON.parse(await readFile(new URL('../data/products.json',import.meta.url),'utf8')).filter(p=>p.approved);
+  const p=products[0];
+  assert.match(detail(p,products,on),/By sending an order request you agree to our <a href="\/terms\/">Terms<\/a>/);
+  assert.doesNotMatch(detail(p,products,store),/you agree to our/);
+  const docs=await loadPolicies(root,on);
+  assert.doesNotMatch(docs.find(d=>d.slug==='privacy').html,/PayPal/,'No PayPal line while PayPal is off');
+  assert.match((await loadPolicies(root,{...on,paypalOverseas:true})).find(d=>d.slug==='privacy').html,/PayPal processes that payment/);
+});
