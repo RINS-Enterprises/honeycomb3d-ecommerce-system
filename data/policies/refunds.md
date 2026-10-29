@@ -14,9 +14,7 @@ If your order arrives **damaged, faulty or different from what you ordered**, we
 
 1. Contact us within **48 hours** of receiving the parcel, on WhatsApp at {{phone}} or by email at {{email}}.
 2. Send a photo of the item and of the packaging, plus your order details.
-3. We check the photos and reply. If the problem is confirmed, you choose:
-   - a **free reprint and redelivery**, or
-   - a **full refund** of the item and its delivery charge.
+3. We check the photos and reply. If the problem is confirmed, you choose a **free reprint and redelivery** or a **full refund** of the item and its delivery charge.
 
 We may ask you to send the item back so we can check it. If so, we pay the return postage.
 

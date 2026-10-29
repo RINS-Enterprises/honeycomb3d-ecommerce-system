@@ -1,4 +1,5 @@
-import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl, delivery, paymentMethods, socialLinks, trustPages} from './domain.mjs';
+import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl, delivery, paymentMethods, socialLinks, trustPages, policiesOn, POLICY_PAGES} from './domain.mjs';
+import {displayPhone} from './policies.mjs';
 import {price, CARD_SIZES, picture, card, availability, avifSource, withPicture} from './card.mjs';
 export {price, CARD_SIZES, picture, card};
 
@@ -21,9 +22,11 @@ function footer(store) {
     '<div class="footer-brand"><a class="wordmark" href="/" aria-label="HoneyComb 3D home">'+brand(store)+'</a><p>3D prints, collectibles &amp; custom ideas.</p><p class="muted">Sri Lanka · Prices in LKR</p></div>' +
     '<nav class="footer-links" aria-label="Footer"><div><h2>Shop</h2><ul><li><a href="/shop/">The collection</a></li><li><a href="/cart/">Request cart</a></li></ul></div>' +
     '<div><h2>Make</h2><ul><li><a href="/custom/">Have something in mind? Tell us.</a></li></ul></div>' +
-    '<div><h2>About</h2><ul>'+trustPages(store).map(t=>'<li><a href="/'+t.slug+'/">'+e(t.title)+'</a></li>').join('')+'<li><a href="/faq/">Questions and answers</a></li><li><a href="/privacy/">How this site handles your data</a></li></ul></div>' +
+    '<div><h2>About</h2><ul>'+trustPages(store).map(t=>'<li><a href="/'+t.slug+'/">'+e(t.title)+'</a></li>').join('')+'<li><a href="/faq/">Questions and answers</a></li>'+(policiesOn(store)?'':'<li><a href="/privacy/">How this site handles your data</a></li>')+'</ul></div>' +
+    (policiesOn(store)?'<div data-testid="footer-policies"><h2>Policies</h2><ul>'+POLICY_PAGES.map(p=>'<li><a href="/'+p.slug+'/">'+p.label+'</a></li>').join('')+'</ul></div>':'') +
     (socialLinks(store).length?'<div data-testid="footer-social"><h2>Follow</h2><ul>'+socialLinks(store).map(x=>'<li><a href="'+e(x.url)+'" target="_blank" rel="me noopener noreferrer">'+e(x.label)+'<span class="sr-only"> (opens in a new tab)</span></a></li>').join('')+'</ul></div>':'')+'</nav>' +
     '<div class="footer-bottom"><p class="fine">An enquiry is not a confirmed purchase. Availability, delivery and payment arrangements are confirmed with your quote.</p>' +
+    (policiesOn(store)?'<p class="fine" data-testid="footer-seller">'+e(store.name||'HoneyComb 3D')+' · operated by '+e(store.contact.operator)+' · '+e(store.contact.location)+' · WhatsApp '+e(displayPhone(store.whatsappNumber))+' · '+e(store.contact.email)+'</p>':'') +
     '<p class="fine">© '+new Date().getFullYear()+' '+e(store.name||'HoneyComb 3D')+'</p></div></div></footer>';
 }
 const DEFAULT_DESCRIPTION = 'Explore HoneyComb 3D collectibles and custom prints. Request a quote and confirm the details before ordering.';
@@ -178,7 +181,7 @@ export function detail(p,products,store) {
     '<p class="status-chip status-'+e(p.availability)+'" data-testid="availability"><span aria-hidden="true"></span>'+availability(p)+'</p>' +
     '<p class="lead">'+e(p.description)+'</p>' +
     '<form id="add-form" data-product-id="'+e(p.id)+'"'+(orderNow?' class="has-order-now"':'')+'><label>Quantity<input name="quantity" type="number" min="1" max="20" step="1" value="1" required></label>'+(orderNow?orderNowLink('Order now on WhatsApp <span aria-hidden="true">↗</span>','order-now'):'')+'<button class="button'+(orderNow?' secondary':'')+'" type="submit" disabled data-enable="'+(p.availability!=='unavailable')+'" data-testid="add-to-cart">'+(p.availability==='unavailable'?'Currently unavailable':'Add to request cart')+'</button></form>' +
-    (orderNow?'<p class="fine order-now-note">Order now opens WhatsApp with this design. Nothing is sent until you send it, and your order is confirmed once we agree the details.</p><noscript><p class="fine">Without JavaScript, Order now asks for one. Change the quantity in WhatsApp before you send.</p></noscript>':'') +
+    (orderNow?'<p class="fine order-now-note">Order now opens WhatsApp with this design. Nothing is sent until you send it, and your order is confirmed once we agree the details.'+(policiesOn(store)?' '+policyAgreement:'')+'</p><noscript><p class="fine">Without JavaScript, Order now asks for one. Change the quantity in WhatsApp before you send.</p></noscript>':'') +
     (ordering?'':'<p class="order-note" data-testid="order-status"><span class="order-dot" aria-hidden="true"></span>Online ordering opens soon. Save your picks in the request cart.</p>') +
     '<noscript><p>Enable JavaScript to build a request cart.</p></noscript>' +
     '<p class="fine">The request cart saves a list on your device. It does not reserve stock or complete a purchase.</p>' +
@@ -225,13 +228,19 @@ function summary(text, max=155) {
   const cut=chars.slice(0,max).join(''), space=cut.lastIndexOf(' ');
   return (space>max/2?cut.slice(0,space):cut).replace(/[\s,;:.]+$/,'')+'…';
 }
+// Shown wherever an order request starts once the policy pages are live (gateways look for terms before payment).
+export const policyAgreement='By sending an order request you agree to our <a href="/terms/">Terms</a>, <a href="/refunds/">Refund policy</a> and <a href="/shipping/">Shipping policy</a>.';
+// Policy pages (src/policies.mjs renders the body from data/policies/*.md; this adds the page frame).
+export function policyPage(doc, store) {
+  return layout(doc.title,'<section class="wrap section narrow prose-page policy-page" data-testid="policy-page"><p class="eyebrow">'+e(doc.eyebrow)+'</p><h1>'+e(doc.title)+'.</h1><p class="fine policy-updated">Last updated '+e(new Date(doc.updated+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}))+'</p>'+doc.html+'</section>',store,'','',{description:doc.description,path:'/'+doc.slug+'/'});
+}
 // Shipping, Returns, About: the owner's own words, one paragraph per blank-line-separated block, nothing added.
 export function trustPage(page, store) {
   return layout(page.title,'<section class="wrap section narrow prose-page" data-testid="trust-page"><p class="eyebrow">'+page.eyebrow+'</p><h1>'+e(page.title)+'.</h1>'+page.text.split(/\n\s*\n/).map(x=>'<p>'+e(x.trim()).replace(/\n/g,'<br>')+'</p>').join('')+'</section>',store,'','',{description:summary(page.text),path:'/'+page.slug+'/'});
 }
 // Indexing prep (D-12): every public page except the cart and 404, for sitemap.xml. Built only once searchIndexing is on.
 export function sitemap(products, store) {
-  const paths=['/','/shop/','/custom/','/faq/','/privacy/',...trustPages(store).map(t=>'/'+t.slug+'/'),...products.map(p=>'/products/'+p.slug+'/')];
+  const paths=['/','/shop/','/custom/','/faq/','/privacy/',...(policiesOn(store)?POLICY_PAGES.filter(p=>p.slug!=='privacy').map(p=>'/'+p.slug+'/'):[]),...trustPages(store).map(t=>'/'+t.slug+'/'),...products.map(p=>'/products/'+p.slug+'/')];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+paths.map(path=>'<url><loc>'+e(absolute(store,path))+'</loc></url>').join('\n')+'\n</urlset>\n';
 }
 // 404: the original message, then a search that lands on the shop (works without JavaScript) and a few designs.

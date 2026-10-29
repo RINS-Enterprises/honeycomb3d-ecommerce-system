@@ -29,6 +29,7 @@ jobs:
       - run: npm run gate:preview
       - run: npm run gate:all-on
       - run: npm run gate:proposal
+      - run: npm run gate:policies
       - run: npm run check:indexing
       - name: Rebuild the committed state
         run: npm run build && npm run check

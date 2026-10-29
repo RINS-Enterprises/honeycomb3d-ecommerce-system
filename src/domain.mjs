@@ -41,6 +41,21 @@ export function validateData(products, store) {
     const pg=store.pages;
     if (!pg || typeof pg !== 'object' || Array.isArray(pg) || Object.keys(pg).some(k=>!TRUST_PAGES.some(t=>t.key===k)) || Object.values(pg).some(v=>v !== null && !ownerText(v,4000,{lines:true}))) throw new Error('pages must map shipping, returns or about to null or the owner\'s text');
   }
+  if (store.policies !== undefined && typeof store.policies !== 'boolean') throw new Error('policies must be true or false');
+  if (store.contact !== undefined && store.contact !== null) {
+    const c=store.contact;
+    if (typeof c !== 'object' || Array.isArray(c) || Object.keys(c).some(k=>!['operator','location','email','hours','updated'].includes(k))) throw new Error('contact may only hold operator, location, email, hours and updated');
+    for (const k of ['operator','location']) if (c[k] !== undefined && !ownerText(c[k],80)) throw new Error('contact.'+k+' must be a short, single-line name');
+    if (c.email !== undefined && !(typeof c.email === 'string' && c.email.length <= 100 && /^[^\s@<>()"',;]+@[a-z0-9-]+(?:\.[a-z0-9-]+)+$/i.test(c.email))) throw new Error('contact.email must be a plain email address');
+    if (c.hours !== undefined && c.hours !== null && !ownerText(c.hours,120)) throw new Error('contact.hours must be a short line');
+    if (c.updated !== undefined && !(typeof c.updated === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(c.updated) && !Number.isNaN(Date.parse(c.updated)))) throw new Error('contact.updated must be a YYYY-MM-DD date');
+  }
+  if (store.policies === true) {
+    const c=store.contact||{};
+    if (!['operator','location','email','updated'].every(k=>c[k])) throw new Error('Policies need contact.operator, location, email and updated');
+    if (!store.whatsappVerified) throw new Error('Policies need the verified WhatsApp number as the contact phone');
+    if (store.pages?.shipping || store.pages?.returns) throw new Error('Policies replace pages.shipping and pages.returns; set those to null');
+  }
   if (store.whatsappVerified && !/^[1-9]\d{7,14}$/.test(store.whatsappNumber || '')) throw new Error('Use a verified international WhatsApp number, digits only');
   const ids = new Set(), slugs = new Set();
   for (const p of products) {
@@ -96,6 +111,10 @@ export const socialLinks = store => Array.isArray(store.social) ? store.social.m
 // Trust pages: generated, and linked from the footer, only once the owner has written their text (store.pages.<key>).
 export const TRUST_PAGES = [{key:'shipping',slug:'shipping',title:'Shipping and delivery',eyebrow:'SHIPPING'},{key:'returns',slug:'returns',title:'Returns',eyebrow:'RETURNS'},{key:'about',slug:'about',title:'About HoneyComb 3D',eyebrow:'ABOUT'}];
 export const trustPages = store => TRUST_PAGES.filter(t=>typeof store.pages?.[t.key] === 'string' && store.pages[t.key].trim()).map(t=>({...t,text:store.pages[t.key].replace(/\r\n?/g,'\n').trim()}));
+// Policy pages for payment-gateway review (terms, refunds, shipping, privacy, contact): off until the owner approves the text
+// and gives a business email (store.policies + store.contact). Built from data/policies/*.md by src/policies.mjs.
+export const POLICY_PAGES = [{slug:'terms',label:'Terms and conditions'},{slug:'refunds',label:'Refunds and cancellations'},{slug:'shipping',label:'Shipping and delivery'},{slug:'privacy',label:'Privacy policy'},{slug:'contact',label:'Contact us'}];
+export const policiesOn = store => store.policies === true;
 export const delivery = store => store.delivery?.text?.trim() ? {text:store.delivery.text.trim(),feeLkr:store.delivery.feeLkr ?? null} : null;
 export const visibleProducts = (products, store) => products.filter(p => p.image && (store.mode !== 'live' || p.approved));
 export function filterProducts(products, query='', category='all') {

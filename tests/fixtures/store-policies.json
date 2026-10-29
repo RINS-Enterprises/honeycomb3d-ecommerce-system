@@ -1,0 +1,19 @@
+{
+  "policies": true,
+  "contact": {
+    "operator": "Isuru Sandaruwan",
+    "location": "Kegalle, Sri Lanka",
+    "email": "orders@example.com",
+    "hours": "Test fixture reply hours, not an owner fact.",
+    "updated": "2026-10-29"
+  },
+  "delivery": {
+    "text": "Islandwide delivery by courier, LKR 400. Usually 2–4 working days after your order is printed.",
+    "feeLkr": 400
+  },
+  "paymentMethods": [
+    "lankaqr",
+    "bank-transfer",
+    "cash-on-delivery"
+  ]
+}

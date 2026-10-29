@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-import {validateData,visibleProducts,searchIndexing,trustPages,TRUST_PAGES} from '../src/domain.mjs';
+import {validateData,visibleProducts,searchIndexing,trustPages,TRUST_PAGES,policiesOn,POLICY_PAGES} from '../src/domain.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 assert((await readdir(join(root,'tests'))).some(name=>name.endsWith('.test.mjs')), 'At least one unit-test file must exist');
 const all=JSON.parse(await readFile(join(root,'data/products.json'),'utf8'));
@@ -20,9 +20,18 @@ for(const p of publicProducts) {
   for(const key of ['priceSource','imageApprovedAt','imageStatus'])assert.equal(p[key],undefined,'Source workflow metadata must not be published');
   assert.equal(p.source,'Public catalog','Recovery evidence must stay in source data');
 }
-const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','faq/index.html','404.html',...trustPages(store).map(t=>t.slug+'/index.html'),...products.map(p=>'products/'+p.slug+'/index.html')];
+const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','faq/index.html','404.html',...trustPages(store).map(t=>t.slug+'/index.html'),...(policiesOn(store)?POLICY_PAGES.filter(p=>p.slug!=='privacy').map(p=>p.slug+'/index.html'):[]),...products.map(p=>'products/'+p.slug+'/index.html')];
+// Policy pages (payment-gateway review): all five, linked from every footer, with the seller line, only when switched on.
+for(const p of POLICY_PAGES.filter(p=>p.slug!=='privacy'))assert.equal((await readdir(join(root,'dist'))).includes(p.slug),policiesOn(store),'Policy page '+p.slug+' is built only when policies are on');
+for(const path of ['index.html','404.html','privacy/index.html']) {
+  const html=await readFile(join(root,'dist',path),'utf8');
+  for(const p of POLICY_PAGES.filter(p=>p.slug!=='privacy'))assert.equal(html.includes('href="/'+p.slug+'/"'),policiesOn(store),'Footer links '+p.slug+' only when policies are on: '+path);
+  assert.equal(html.includes('data-testid="footer-seller"'),policiesOn(store),'Seller line only when policies are on: '+path);
+  if(policiesOn(store))assert(html.includes(store.contact.email)&&html.includes(store.contact.operator),'Seller line names the operator and email: '+path);
+}
+if(policiesOn(store))assert.match(await readFile(join(root,'dist/privacy/index.html'),'utf8'),/data-testid="policy-page"/,'The privacy page is the full privacy policy when policies are on');
 // Trust pages exist, and are linked, only once the owner has written them.
-for(const t of TRUST_PAGES) {
+for(const t of TRUST_PAGES.filter(t=>!(policiesOn(store)&&POLICY_PAGES.some(p=>p.slug===t.slug)))) {
   const written=trustPages(store).some(x=>x.key===t.key);
   assert.equal((await readdir(join(root,'dist'))).includes(t.slug),written,'Trust page '+t.slug+' is built only with owner text');
   for(const path of ['index.html','404.html'])assert.equal((await readFile(join(root,'dist',path),'utf8')).includes('href="/'+t.slug+'/"'),written,'Footer links '+t.slug+' only with owner text');
@@ -32,6 +41,7 @@ for(const path of paths) {
   assert.match(html,/<html lang="en">/);assert.match(html,/<main id="main"/);
   assert.match(html,/<title>[^<]+<\/title>/);
   assert(!/\b(?:undefined|NaN)\b/.test(html),'Unexpected value: '+path);
+  assert(!/\{\{\s*\w+\s*\}\}/.test(html),'Unfilled template token: '+path);
   for(const [,href] of html.matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
     let local=decodeURIComponent(href.split('?')[0]);
     if(local.endsWith('/'))local+='index.html';

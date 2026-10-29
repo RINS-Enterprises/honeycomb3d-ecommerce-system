@@ -1,9 +1,10 @@
 import {readFile,writeFile,mkdir,copyFile,rm,access} from 'node:fs/promises';
 import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {validateData,visibleProducts,searchIndexing,delivery,paymentMethods,paymentNote,socialLinks,trustPages} from '../src/domain.mjs';
+import {validateData,visibleProducts,searchIndexing,delivery,paymentMethods,paymentNote,socialLinks,trustPages,policiesOn} from '../src/domain.mjs';
+import {loadPolicies} from '../src/policies.mjs';
 import {loadStore} from './store.mjs';
-import {layout,home,shop,detail,cartPage,customPage,privacyPage,faqPage,trustPage,notFound,sitemap} from '../src/render.mjs';
+import {layout,home,shop,detail,cartPage,customPage,privacyPage,faqPage,trustPage,policyPage,notFound,sitemap} from '../src/render.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const dist=resolve(root,'dist');
@@ -27,7 +28,9 @@ await page('index.html',home(products,site));
 await page('shop/index.html',shop(products,site));
 await page('cart/index.html',cartPage(site));
 await page('custom/index.html',customPage(site));
-await page('privacy/index.html',privacyPage(site));
+const policies=await loadPolicies(root,site);
+if(!policies.length)await page('privacy/index.html',privacyPage(site));
+for(const doc of policies)await page(doc.slug+'/index.html',policyPage(doc,site));
 await page('faq/index.html',faqPage(site));
 for(const t of trustPages(site))await page(t.slug+'/index.html',trustPage(t,site));
 await page('404.html',notFound(products,site));
@@ -51,11 +54,11 @@ for(const name of ['bricolage-grotesque-display.woff2','OFL.txt'])await copyFile
 await mkdir(join(dist,'data'),{recursive:true});
 // Approval stays in the payload for client-side live filtering. Recovery and copy-workflow metadata do not.
 await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,copyStatus,imageSource,priceSource,imageApprovedAt,imageStatus,...p})=>({...p,source:'Public catalog'}))));
-await writeFile(join(dist,'data/store.json'),JSON.stringify({name:store.name,currency:store.currency,country:store.country,mode:store.mode,whatsappNumber:store.whatsappVerified?store.whatsappNumber:null,whatsappVerified:store.whatsappVerified,paypalOverseas:store.paypalOverseas===true,delivery:delivery(store),paymentMethods:paymentMethods(store),paymentNote:paymentNote(store),social:socialLinks(store),logo:store.logo,logoWidth:store.logoWidth,logoHeight:store.logoHeight,logoVariants:store.logoVariants,hero:heroVariants.length?store.hero:null}));
+await writeFile(join(dist,'data/store.json'),JSON.stringify({name:store.name,currency:store.currency,country:store.country,mode:store.mode,whatsappNumber:store.whatsappVerified?store.whatsappNumber:null,whatsappVerified:store.whatsappVerified,paypalOverseas:store.paypalOverseas===true,delivery:delivery(store),paymentMethods:paymentMethods(store),paymentNote:paymentNote(store),social:socialLinks(store),policies:policiesOn(store),logo:store.logo,logoWidth:store.logoWidth,logoHeight:store.logoHeight,logoVariants:store.logoVariants,hero:heroVariants.length?store.hero:null}));
 // Until the owner turns on searchIndexing (in preview and live alike): search engines stay out (with noindex on every page), but link-preview crawlers may fetch
 // pages and share images so shared links show a card. WhatsApp builds previews on the sender's phone.
 const PREVIEW_BOTS=['Twitterbot','facebookexternalhit','Facebot','LinkedInBot','Slackbot','Slackbot-LinkExpanding','TelegramBot','Discordbot','WhatsApp'];
 await writeFile(join(dist,'robots.txt'),!searchIndexing(store)?PREVIEW_BOTS.map(bot=>'User-agent: '+bot+'\nAllow: /\n').join('\n')+'\nUser-agent: *\nDisallow: /\n':'User-agent: *\nAllow: /\n\nSitemap: '+store.siteUrl.replace(/\/$/,'')+'/sitemap.xml\n');
 // Indexing prep (D-12): the sitemap exists only once the owner turns searchIndexing on.
 if(searchIndexing(store))await writeFile(join(dist,'sitemap.xml'),sitemap(products,site));
-console.log('Built '+(products.length+7+trustPages(store).length)+' static pages into dist/ ('+store.mode+' mode).');
+console.log('Built '+(products.length+7+trustPages(store).length+Math.max(0,policies.length-1))+' static pages into dist/ ('+store.mode+' mode).');
