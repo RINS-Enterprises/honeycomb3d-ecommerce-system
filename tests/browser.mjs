@@ -39,8 +39,17 @@ try {
   if(ordering)assert.equal(await page.getByRole('complementary',{name:'Store preview notice'}).count(),0,'No preview notice once ordering is open');
   else await page.getByRole('complementary',{name:'Store preview notice'}).waitFor();
   await screenshot('test-results/home-desktop.png');
+  // Home slider: every design, newest first, buttons scroll it; the page itself never scrolls sideways.
+  const rail=page.getByTestId('home-slider');
+  assert.equal(await rail.locator('[data-product-card]').count(),33,'The home slider shows every design');
+  assert.match(await rail.locator('[data-product-card]').first().getAttribute('data-name'),/Nazg/,'Newest first');
+  assert(await page.locator('[data-rail-prev]').isDisabled(),'Prev disabled at the start');
+  await page.locator('[data-rail-next]').click();
+  await page.waitForFunction(()=>document.querySelector('[data-rail]').scrollLeft>100);
+  await page.waitForFunction(()=>!document.querySelector('[data-rail-prev]').disabled);
+  assert.equal(await rail.getByTestId('photo-credit').count(),16,'Designer photos are labelled on cards');
   await page.getByRole('link',{name:'Shop the collection'}).click();
-  assert.equal(await page.locator('[data-product-card]').count(),17,'Every product with an approved photo is shown (Stormtrooper has none)');
+  assert.equal(await page.locator('[data-product-card]').count(),33,'Every product with an approved photo is shown');
   assert.equal(await page.locator('.photo-placeholder').count(),0);
   for(const card of await page.locator('[data-product-card]').all()) {
     // One link to the product page per card; live ordering adds a separate one-tap Order link (nothing else).
@@ -85,12 +94,12 @@ try {
   await page.getByTestId('filter-figures').click();
   assert.equal(await page.getByRole('radio',{name:'Figures'}).isChecked(),true);
   assert.match(page.url(),/category=Figures/);
-  assert.equal(await page.locator('[data-product-card]:visible').count(),8,'Figures: Baymax, Kurama and the six new figures');
+  assert.equal(await page.locator('[data-product-card]:visible').count(),18,'Figures: Baymax, Kurama, the six figures of 16 Oct and ten Drive designs of 31 Oct');
   await page.getByTestId('filter-all').click();
   await page.getByTestId('filter-naruto').click();
   assert.equal(await page.locator('[data-product-card]:visible').count(),4,'Theme chip: Hidden Leaf, Kurama, Minato and Classic Kunai');
   await page.goBack();
-  await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===17);
+  await page.waitForFunction(()=>document.querySelectorAll('[data-product-card]:not([hidden])').length===33);
   assert.equal(await page.getByRole('radio',{name:'Any theme'}).isChecked(),true,'Back restores the previous filter');
   // Hover photo: gallery products get a decorative second photo, loaded lazily; size never changes.
   const leafCard=page.locator('[data-product-card]').filter({hasText:'Hidden Leaf Keychain'});
@@ -169,7 +178,7 @@ try {
   await suggestions.getByRole('button',{name:'Add Minato Kunai to request cart'}).click();
   await page.waitForFunction(()=>document.querySelectorAll('[data-testid="cart-line"]').length===2);
   assert.equal(await page.evaluate(()=>document.activeElement?.dataset.quantity),'HC-MINATO','Focus lands on the added line');
-  assert.deepEqual(await page.getByTestId('cart-suggestions').locator('h3').allTextContents(),['Kurama Figure','Classic Kunai'],'Never suggests what is already in the cart');
+  assert.deepEqual(await page.getByTestId('cart-suggestions').locator('h3').allTextContents(),['Kurama Figure','Classic Kunai','Pikachu'],'Never suggests what is already in the cart; the next Anime design fills the third slot');
   assert.match(await page.locator('.message-preview').inputValue(),/Minato Kunai \[HC-MINATO\] x 1/);
   assert.equal(await page.locator('#order-notes').inputValue(),'Blue please','Notes survive adding from suggestions');
   assert.match(await page.locator('.message-preview').inputValue(),/Notes: Blue please/);
@@ -208,7 +217,7 @@ try {
   await page.getByTestId('sort').selectOption('price-desc');
   assert.equal(await firstVisible(),'Office Desk Organizer with Phone Holder','Most expensive first (LKR 2,650)');
   await page.getByTestId('filter-keychains').click();
-  assert.deepEqual(await page.locator('[data-product-card]:visible .card-link').allTextContents(),['Night Fury Keychain','Light Fury Keychain','Grogu Baby Yoda Keychain','Hidden Leaf Keychain'],'Sort works with category chips; equal prices keep catalogue order');
+  assert.deepEqual(await page.locator('[data-product-card]:visible .card-link').allTextContents(),['Night Fury Keychain','Light Fury Keychain','Stormtrooper Keychain (Star Wars)','Grogu Baby Yoda Keychain','Hidden Leaf Keychain','Skeleton Keychain','Panda Keychain'],'Sort works with category chips; equal prices keep catalogue order; price on enquiry last');
   await page.getByTestId('sort').selectOption('name');
   assert.equal(await firstVisible(),'Grogu Baby Yoda Keychain');
   assert.equal(await page.locator('.product-grid > :last-child').getAttribute('data-testid'),'shop-custom-tile','Custom tile stays last after sorting');

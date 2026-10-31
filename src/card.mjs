@@ -2,7 +2,9 @@
 import {escapeHtml as e, money, orderNowUrl} from './domain.mjs';
 
 export const price = p => p.priceLkr === null ? 'Price on enquiry' : money(p.priceLkr);
-export const CARD_MAX_WIDTH = 960;
+// 640 px covers a 284 CSS px card at DPR 2 and keeps a full shop page inside the 1.5 MB image budget.
+export const CARD_MAX_WIDTH = 640;
+export const DESIGNER_NOTE = 'Photo from the model\u2019s designer. Your print is made by HoneyComb 3D; colours and finish may differ.';
 export const CARD_SIZES = '(max-width: 700px) calc((100vw - 52px) / 2), (max-width: 1000px) calc((100vw - 124px) / 3), (max-width: 1280px) calc((100vw - 146px) / 4), 284px';
 // AVIF first inside <picture> when every variant has an AVIF twin; the WebP <img> stays the fallback.
 export function avifSource(variants, sizes, media='') {
@@ -24,12 +26,12 @@ function altPhoto(p) {
   return ' data-alt-srcset="'+e(g.variants.map(v=>v.src+' '+v.width+'w').join(', '))+'" data-alt-src="'+e(g.src)+'" data-alt-text="'+e(g.alt||'')+'"';
 }
 // Pass the store to add the one-tap WhatsApp Order link (live ordering only); it works without JavaScript.
-export function card(p, {headingLevel=3, loading='lazy', store=null}={}) {
+export function card(p, {headingLevel=3, loading='lazy', store=null, maxWidth=CARD_MAX_WIDTH, sizes=CARD_SIZES}={}) {
   const heading=headingLevel===2?'h2':'h3';
   const order=store?orderNowUrl(p,store):null;
   // One link per card; its ::after stretches over the whole card so the photo is clickable too.
   return '<article class="product-card" data-product-card data-testid="product-card" data-category="' + e(p.category) + '" data-search="' + e([p.name,p.category,...p.tags].join(' ').toLowerCase()) + '" data-tags="' + e(p.tags.join('|')) + '" data-name="' + e(p.name) + '" data-price="' + (p.priceLkr===null?'':p.priceLkr) + '">' +
-    '<div class="product-image"' + altPhoto(p) + '>' + picture(p,{loading,maxWidth:CARD_MAX_WIDTH}) + '</div>' +
+    '<div class="product-image"' + altPhoto(p) + '>' + picture(p,{loading,maxWidth,sizes})+(p.photoCredit==='designer'?'<span class="photo-credit" data-testid="photo-credit" title="'+e(DESIGNER_NOTE)+'">Designer photo</span>':'') + '</div>' +
     '<div class="card-copy"><p class="eyebrow">' + e(p.category) + '</p><'+heading+'><a class="card-link" href="/products/' + e(p.slug) + '/">' + e(p.name) + '</a></'+heading+'><p class="price" data-testid="product-price">' + e(price(p)) + '</p><div class="card-foot"><p class="card-status">' + availability(p) + '</p>' +
     (p.availability==='unavailable'?'':'<div class="card-actions'+(order?' has-order':'')+'"><button type="button" class="quick-add" data-quick-add="' + e(p.id) + '" data-testid="quick-add" aria-label="Add ' + e(p.name) + ' to request cart" hidden><span aria-hidden="true">+</span> Add</button>' +
     (order?'<a class="quick-order" href="' + e(order) + '" target="_blank" rel="noopener noreferrer" data-card-order data-testid="card-order" aria-label="Order ' + e(p.name) + ' on WhatsApp (opens in a new tab)">Order <span aria-hidden="true">↗</span></a>':'') + '</div>') + '</div></div></article>';

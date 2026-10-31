@@ -683,6 +683,511 @@ This is the allowed raster option: the verified HC_WhiteBK-1.png artwork is crop
 | `/assets/horse-figurine-sq-1200.avif` | 1200 | 1200 × 1200 | 32762 | AVIF 60 | `2c533533a3c831cc73d224eb1ce09a183af1e3e112b745d387acecb605fc99d8` |
 | `/assets/horse-figurine-share.jpg` | 1200 | 1200 × 1200 | 130548 | JPEG 84 | `e73b979a984b8ef3f40bbf9485a39eeef09098a7365399ca73e2bc26c1136f4b` |
 
+## HNYCMB513
+
+- Source title: `1777632524778.png`
+- Source Drive ID: `1Ui0ET82xux0qEr-jfnyTD7Z8P_WkX-Ve`
+- Drive original SHA-256: `5d3180b2c48685100857e735c1ad03d1efd69253d30d4dc28692205fc4756e14`
+- Metadata-clean source input: `assets/photo-sources/stormtrooper-keychain.png`
+- Input SHA-256: `7fe55569657c09902f13d0603ec5243d946b21033c85ba083067c2a1fe3bcdbe`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB513 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 874 × 1116; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 874, 1116)`.
+- Square storefront frame: the whole applied crop centred on a 1116 × 1116 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#d9d9d9`), with a 45 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/stormtrooper-keychain-480.webp` | 480 | 480 × 613 | 8892 | 82 | `4ace016a4ae9aed863638633f5c981f77921ff9f88ef3a908b65bfedf15ce713` |
+| `/assets/stormtrooper-keychain-480.avif` | 480 | 480 × 613 | 6776 | AVIF 60 | `aa352246ac699f31e724e07e0eb25ef116bf8b58b31dbb8d38e175fa546f4551` |
+| `/assets/stormtrooper-keychain-sq-160.webp` | 160 | 160 × 160 | 1428 | 82 | `0d5b852115814a730ef2d5d6a0ff1cb1347cf259c242bf372521c7066ede4bf7` |
+| `/assets/stormtrooper-keychain-sq-320.webp` | 320 | 320 × 320 | 3646 | 82 | `3040a5c10c7226c7a1bde813564db762374775ffbff204a48f74e1528f568821` |
+| `/assets/stormtrooper-keychain-sq-320.avif` | 320 | 320 × 320 | 3151 | AVIF 60 | `25555c97950084927cdeb2f67c2a5c4f810cbacd3e2099861a033b2e16f924a4` |
+| `/assets/stormtrooper-keychain-sq-480.webp` | 480 | 480 × 480 | 6482 | 82 | `d0624118dae6a29e139e2e1743d997875c9dfd42974323886cebc8e138043b16` |
+| `/assets/stormtrooper-keychain-sq-480.avif` | 480 | 480 × 480 | 5062 | AVIF 60 | `bd57853753c63d6801166a355fc074c93ad910f31009b2b20a917c60ca64678e` |
+| `/assets/stormtrooper-keychain-sq-640.webp` | 640 | 640 × 640 | 9472 | 82 | `0484b89aef7691d0247e655e50c7915b3438d653588b9bfead01d85f231c2784` |
+| `/assets/stormtrooper-keychain-sq-640.avif` | 640 | 640 × 640 | 7117 | AVIF 60 | `34051205c786f8ce3462042f1bc41f253db6f5e2651aa4745e8df3a5b7aa6dea` |
+| `/assets/stormtrooper-keychain-sq-960.webp` | 960 | 960 × 960 | 16424 | 82 | `f52f2ce55d2cf217ec888b09213d13db1026e16b8ec0355b05b46979ad9971f8` |
+| `/assets/stormtrooper-keychain-sq-960.avif` | 960 | 960 × 960 | 11616 | AVIF 60 | `e5677ea1f01c23f70135884ee00cd949fa07dfaaa40024b51660f219606c6359` |
+| `/assets/stormtrooper-keychain-share.jpg` | 1200 | 1200 × 1200 | 50187 | JPEG 84 | `74030293c6cc1957b9a68d573c4b7d110d63f68200c1695fba0cea3e77688cb1` |
+
+## HNYCMB519
+
+- Source title: `handy_1790759188889.png`
+- Source Drive ID: `1aKzskO22QTvkzyiodLFV4FEvYp1oF0Zw`
+- Drive original SHA-256: `14f2a80a9d388048cda74256f0f5d84d90d91bd1359a58c0736bcec8aa3a4602`
+- Metadata-clean source input: `assets/photo-sources/pikachu.png`
+- Input SHA-256: `8e43e91bbc5df95f12ac0d3eb6e31d3af313b83e5efc53b48ff9dc060bce079a`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB519 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 801 × 1068; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 801, 1068)`.
+- Square storefront frame: the whole applied crop centred on a 1068 × 1068 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#848e8c`), with a 43 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/pikachu-480.webp` | 480 | 480 × 640 | 13566 | 82 | `6cdad4272700072eb0c50f60bbb3e9f9d21e9d6f489302df8893e9eb23df95d9` |
+| `/assets/pikachu-480.avif` | 480 | 480 × 640 | 7221 | AVIF 60 | `b8d3d6d56e0a92b9d7955057a696c0c32981ba23566ab64ca8e8d0d3c5e9d93c` |
+| `/assets/pikachu-sq-160.webp` | 160 | 160 × 160 | 2682 | 82 | `490d1419dbeb31e87520254e3db934c57e7d1bfbc07c647f5ae6fb1a8d87e457` |
+| `/assets/pikachu-sq-160.avif` | 160 | 160 × 160 | 2135 | AVIF 60 | `e2f961a9b09c51984aece3f246a9bec40c017724f42df62c8d781ef8720cc477` |
+| `/assets/pikachu-sq-320.webp` | 320 | 320 × 320 | 5930 | 82 | `068d6c414c0eaafa0c856656d02c76d48a0adf074383c5da6b8d2a67b9fbfde3` |
+| `/assets/pikachu-sq-320.avif` | 320 | 320 × 320 | 3766 | AVIF 60 | `2f43c19ed1d1dc87c5eab4311e0e3da705a2e80d33234ec5b2574af47219f176` |
+| `/assets/pikachu-sq-480.webp` | 480 | 480 × 480 | 9614 | 82 | `86548815477070bcbbd197e698d48b04a7d755cb3aa62bddc2d3b7b04eb0fc74` |
+| `/assets/pikachu-sq-480.avif` | 480 | 480 × 480 | 5336 | AVIF 60 | `0d55e2de6c412795622005e976d4bdeef8c61693c5ae1c605b4a767002922b0a` |
+| `/assets/pikachu-sq-640.webp` | 640 | 640 × 640 | 14170 | 82 | `aac8c31c7fa03c18398380894db33757d147555652d0d61a4fb49657c8619ba6` |
+| `/assets/pikachu-sq-640.avif` | 640 | 640 × 640 | 7344 | AVIF 60 | `6d10ad8dc313e5484fa68cf6597f891f21a06aa78c155e1e831ce0f13a7edac5` |
+| `/assets/pikachu-sq-960.webp` | 960 | 960 × 960 | 24754 | 82 | `58090603d84c5927c9237e65953a1dbbc84f59e0776c9608ed1bb1957782c0be` |
+| `/assets/pikachu-sq-960.avif` | 960 | 960 × 960 | 11895 | AVIF 60 | `6c686a264d64c1bd9ad2fe602cef526ea7086c3ad148312e983b3e5081e2e445` |
+| `/assets/pikachu-share.jpg` | 1200 | 1200 × 1200 | 92915 | JPEG 84 | `3056148795c7bf732adac6333202ae9993a8c485463f6eedc6e29072037c921b` |
+
+## HNYCMB520
+
+- Source title: `handy_1790942351004.jpg`
+- Source Drive ID: `1nELay3VpygVpS6brIMmz6BpKFqPA4gaC`
+- Drive original SHA-256: `0ed9d7a8042cf80a046645e28cffa288f8d2d207e3e6cb0704a2df61b84e9bf2`
+- Metadata-clean source input: `assets/photo-sources/dobby.jpg`
+- Input SHA-256: `ae9c12339335ea9973df06fa04b4318220fbfcc6b9582481c15631c03f05e649`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB520 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 3000 × 4000; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 3000, 4000)`.
+- Square storefront frame: the whole applied crop centred on a 4000 × 4000 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#a48c8b`), with a 160 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/dobby-480.webp` | 480 | 480 × 640 | 17206 | 82 | `b8c53dcc92c3f8f1b249e392c1d9c907c015ae345c9964202da3f7fab9f7b476` |
+| `/assets/dobby-480.avif` | 480 | 480 × 640 | 10580 | AVIF 60 | `13bf979ad4543ede699a4ac86acd51122c3c7f6f523078bc9f38e544d3b89179` |
+| `/assets/dobby-960.webp` | 960 | 960 × 1280 | 48182 | 82 | `0cd18fbfa262bc9b101db6242630f620cf42a11c5704125f99427dd1136299c9` |
+| `/assets/dobby-960.avif` | 960 | 960 × 1280 | 26911 | AVIF 60 | `991dcf59fc1d54f0d9be8bf00fdd8d7daaaad08f44ab2382f96eeaadf79137ba` |
+| `/assets/dobby-sq-160.webp` | 160 | 160 × 160 | 2804 | 82 | `14ebb6534559ce81217a34d87a823acf15ec0f7a91c7ce82fb52443533790b31` |
+| `/assets/dobby-sq-160.avif` | 160 | 160 × 160 | 2362 | AVIF 60 | `d469a15370f82915e1a955d7725ab65994537fb899e348628162e6a246ab69ad` |
+| `/assets/dobby-sq-320.webp` | 320 | 320 × 320 | 6470 | 82 | `6b5862ce6cbc2e52bc5bf7e41beda018a580138880aeb8357c905e67e2b4f920` |
+| `/assets/dobby-sq-320.avif` | 320 | 320 × 320 | 4546 | AVIF 60 | `0db959ce62b72797619cdf1843b5c7fc2cfdd41024dc75317b49025950eeb334` |
+| `/assets/dobby-sq-480.webp` | 480 | 480 × 480 | 11414 | 82 | `e1cce70f38cf486442c620ba1946e3aca8174a5304e65362879fa5a707b8d65a` |
+| `/assets/dobby-sq-480.avif` | 480 | 480 × 480 | 7221 | AVIF 60 | `1f56083ebadc56d966ddf6e4ba0f9a1b1c885e9733d775338d679e7570110969` |
+| `/assets/dobby-sq-640.webp` | 640 | 640 × 640 | 17356 | 82 | `96eeba0db1c2d4e5a1fcc53ce33e15da12828d63e3bc81248e1368649c54b999` |
+| `/assets/dobby-sq-640.avif` | 640 | 640 × 640 | 10565 | AVIF 60 | `4be652db7c4abb22b32bacc6a57c8547a1ef00fe874da7fe65099c85861166ae` |
+| `/assets/dobby-sq-960.webp` | 960 | 960 × 960 | 31872 | 82 | `1f0dde81442faec179f64f0009777bf59a9f19e8267063f5065082f2d9f7fe0e` |
+| `/assets/dobby-sq-960.avif` | 960 | 960 × 960 | 18291 | AVIF 60 | `24aa3318b3757f1b7b2a393aa33f81bf3989878a63fe1caa935a5015dc7e6d31` |
+| `/assets/dobby-sq-1200.webp` | 1200 | 1200 × 1200 | 44524 | 82 | `755b64da637a4e32e8180cbff7bc77da32683c2be9b0f768e63ea15bfb6844ab` |
+| `/assets/dobby-sq-1200.avif` | 1200 | 1200 × 1200 | 24322 | AVIF 60 | `07d11f7d5fd10fe39b6794b912d16acd51300c64247417ae1626092cffcba6fe` |
+| `/assets/dobby-share.jpg` | 1200 | 1200 × 1200 | 106683 | JPEG 84 | `e3c6d43e473d8958e9311a20bdf4777b6f3551d23fcdd53ab635f55d8097cf41` |
+
+## HNYCMB521
+
+- Source title: `handy_1791102641081.png`
+- Source Drive ID: `1G2hZV_1TKsNKoWp-bGaEeOj_LdcMQMCi`
+- Drive original SHA-256: `f2375c3a442df6504d6819eebf9c3dde1e36ec920ca795801686af8e2a4bf603`
+- Metadata-clean source input: `assets/photo-sources/skeleton-keychain.png`
+- Input SHA-256: `61078b754ab058c3ebbcdf8045b92443233184d7b4b68c4fd6e7ac2ed4913d92`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB521 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 1080 × 1440; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 1080, 1440)`.
+- Square storefront frame: the whole applied crop centred on a 1440 × 1440 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#897a69`), with a 58 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/skeleton-keychain-480.webp` | 480 | 480 × 640 | 24252 | 82 | `4e823fe7b4cca363525c5928ccf8631ab3434c26868676e6db71685977f6ecc0` |
+| `/assets/skeleton-keychain-480.avif` | 480 | 480 × 640 | 15694 | AVIF 60 | `c5f67bdb7ebb8d2efad9612273b4c4fcb99ea117f321093466d63c654786541d` |
+| `/assets/skeleton-keychain-960.webp` | 960 | 960 × 1280 | 59998 | 82 | `56d1090a3b3a95c4242c8ffb185f8a9a0fa21b4f39df3d7fa6659ca29b02e397` |
+| `/assets/skeleton-keychain-960.avif` | 960 | 960 × 1280 | 34272 | AVIF 60 | `b2862e0658830b8805c5d4793feebf4dadfff2e8acd8a3f6632857761701d830` |
+| `/assets/skeleton-keychain-sq-160.webp` | 160 | 160 × 160 | 3700 | 82 | `87832bcd0f4bb938b1f04fe5cced6c3df7594d89ab45b27c0210ed2da15294d7` |
+| `/assets/skeleton-keychain-sq-160.avif` | 160 | 160 × 160 | 3136 | AVIF 60 | `e559fd1f6cbe7716338b0aa8d9afb7a81b6be4952070e462698a066266b89ce3` |
+| `/assets/skeleton-keychain-sq-320.webp` | 320 | 320 × 320 | 9548 | 82 | `541b409ee69ee07b42ffe1dd8e66302528a230a89c97f48ca8ae6272a4a9b0e8` |
+| `/assets/skeleton-keychain-sq-320.avif` | 320 | 320 × 320 | 6821 | AVIF 60 | `7b6819081bf597ccbfc89e3f27abe8f42f4ad70bcb2bfb7fa553263b7e0808ec` |
+| `/assets/skeleton-keychain-sq-480.webp` | 480 | 480 × 480 | 16136 | 82 | `4205c447827cb9ec09ea15bffb2229e94fc3c53efb8ba960412232dd7c623cc4` |
+| `/assets/skeleton-keychain-sq-480.avif` | 480 | 480 × 480 | 10808 | AVIF 60 | `8437f4b6db6eb3af534b42766cd8dea55e07c4b40a4c7c4039a53edd45f29334` |
+| `/assets/skeleton-keychain-sq-640.webp` | 640 | 640 × 640 | 23884 | 82 | `f56cfa0afb5440a822537d6e09610b6c20b555d4ecb770a7e040f9111f408796` |
+| `/assets/skeleton-keychain-sq-640.avif` | 640 | 640 × 640 | 15165 | AVIF 60 | `a414207cddd5786754c79080bb1a1ff447582e79f61983c53439d56885a42725` |
+| `/assets/skeleton-keychain-sq-960.webp` | 960 | 960 × 960 | 40448 | 82 | `3039747391f76e4b479fd1fb3dd3ea137d30d90c3565b01a87f8fa6d197daf42` |
+| `/assets/skeleton-keychain-sq-960.avif` | 960 | 960 × 960 | 23796 | AVIF 60 | `e1e6a2219be7e1b3e76bd00885c224bf8af5789f9fa6de7bedc4a7e27b5a8fcb` |
+| `/assets/skeleton-keychain-sq-1200.webp` | 1200 | 1200 × 1200 | 54248 | 82 | `cad1db551f354f2f09b667e0a2443c00c0d84ad5dbab631446525eb748c3aa62` |
+| `/assets/skeleton-keychain-sq-1200.avif` | 1200 | 1200 × 1200 | 30538 | AVIF 60 | `bd1c916c44c98e0b0a276a2167f3f7b1a0116de3e9e7d9730a3846ddc2a7cce6` |
+| `/assets/skeleton-keychain-share.jpg` | 1200 | 1200 × 1200 | 132446 | JPEG 84 | `20957acf00881dae645095b838663ce6385d9403985978e0a4923f17144b98ac` |
+
+## HNYCMB522
+
+- Source title: `1791993348044.jpg`
+- Source Drive ID: `13mSXW5E9LpFCBF_7IuONmC517Fx_MjXh`
+- Drive original SHA-256: `157112e10d672ea08d9d5207faa7bd369bde6215325865f87a01b4ea397b35fa`
+- Metadata-clean source input: `assets/photo-sources/panda-keychain.jpg`
+- Input SHA-256: `95d0ee804e60a985a8079425869c21b4d038b8762df8676efa97776656dcdf55`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB522 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 896 × 1195; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 896, 1195)`.
+- Square storefront frame: the whole applied crop centred on a 1195 × 1195 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#e0e1de`), with a 48 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/panda-keychain-480.webp` | 480 | 480 × 640 | 11398 | 82 | `2b3a7fa673c8994d6a34672b64c71f8bbdbb747d3075b7ba812d2ec50792b46c` |
+| `/assets/panda-keychain-480.avif` | 480 | 480 × 640 | 8911 | AVIF 60 | `ce01b3edf9084e1e7e1effc71bd8c7ed0da9fe9232dce1931e4b7775282e20f1` |
+| `/assets/panda-keychain-sq-160.webp` | 160 | 160 × 160 | 1476 | 82 | `7cfba05efb08fe3c6cdfd7b1c39efdf909e51109a4068dfdd1c5781288b623ab` |
+| `/assets/panda-keychain-sq-160.avif` | 160 | 160 × 160 | 1372 | AVIF 60 | `b87b8b08ef7ddf12b7222a028f33e478690102c5749b2caa37a4221bb0d3609d` |
+| `/assets/panda-keychain-sq-320.webp` | 320 | 320 × 320 | 3476 | 82 | `504dc9aaf5799e6641eae17d0395cb19401bf375352e3df4e42bf2a41b854bc2` |
+| `/assets/panda-keychain-sq-320.avif` | 320 | 320 × 320 | 2633 | AVIF 60 | `615d310cc04fa84010f4ee0dabed13cbecf36ae4514f9c79c161aae3cd0da1ae` |
+| `/assets/panda-keychain-sq-480.webp` | 480 | 480 × 480 | 6758 | 82 | `80f52ca80db10ef657347f1daa849c66e5d87c2a0c7b96a6cb6b595458ef1d3b` |
+| `/assets/panda-keychain-sq-480.avif` | 480 | 480 × 480 | 5097 | AVIF 60 | `db79944ee9fe0815cbfadc6cc41f35da32e99d972915fcf7312815f3ce518c31` |
+| `/assets/panda-keychain-sq-640.webp` | 640 | 640 × 640 | 11960 | 82 | `b4971850cba24a77dbe888f6522b228969f485104365b25173ff70ee5b3c0f36` |
+| `/assets/panda-keychain-sq-640.avif` | 640 | 640 × 640 | 8920 | AVIF 60 | `b2ab0f99fb936432fb1a1a6b99a2b8b54bf89ddc71ef9954db006ed266529934` |
+| `/assets/panda-keychain-sq-960.webp` | 960 | 960 × 960 | 27060 | 82 | `891d1983bac82097c1f728c01e21cf694ccea3f54772c8dc62ca7b0c00f96f6d` |
+| `/assets/panda-keychain-sq-960.avif` | 960 | 960 × 960 | 20539 | AVIF 60 | `534e9f3a5026ced6c6ab8660a90c834258d77a18908bfdc5d96c3b2acd7348cd` |
+| `/assets/panda-keychain-share.jpg` | 1200 | 1200 × 1200 | 92087 | JPEG 84 | `fb04b00c60d105071b173e679f04c6924a7e1b3c4da9a36012b498447fcf8fe4` |
+
+## HNYCMB523
+
+- Source title: `1792043275017.jpg`
+- Source Drive ID: `16Rjm3PuGoY8ko0EzCVDFbBVoA0BvhnCv`
+- Drive original SHA-256: `1f2d7080c1c54c312e60512c19da4928e19815b06d68e8889f17782e88dc60af`
+- Metadata-clean source input: `assets/photo-sources/twilight-nazgul.jpg`
+- Input SHA-256: `5a8937bd294c8e720dbd92f3df2f4f0af3266a1f1f83d3ac95616c98ab0617f6`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB523 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 896 × 1195; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 896, 1195)`.
+- Square storefront frame: the whole applied crop centred on a 1195 × 1195 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#e1e5e9`), with a 48 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/twilight-nazgul-480.webp` | 480 | 480 × 640 | 22796 | 82 | `72949d05bcf2015792f3191823955c2052a12d451449cb1dfa5541fa612c6bd1` |
+| `/assets/twilight-nazgul-480.avif` | 480 | 480 × 640 | 18123 | AVIF 60 | `aa7f1879fa1a8e9547e52f37fdb28eff65ff78e8dd9c11e0f8b6935865f2f745` |
+| `/assets/twilight-nazgul-sq-160.webp` | 160 | 160 × 160 | 2824 | 82 | `e253b2b317695abd66b2027c0bd19f2863914e8664c0c1618e70f798743f7f33` |
+| `/assets/twilight-nazgul-sq-160.avif` | 160 | 160 × 160 | 2678 | AVIF 60 | `1f06aa5ceaca4472c1a2640e97e165e5c656adc4d661139f9daad066203ef6b7` |
+| `/assets/twilight-nazgul-sq-320.webp` | 320 | 320 × 320 | 8044 | 82 | `2a365d811ede10e08433cee4f9cca08331b5a86baa084b9cac797cefe5ee0861` |
+| `/assets/twilight-nazgul-sq-320.avif` | 320 | 320 × 320 | 6823 | AVIF 60 | `ceda184ea03fed577859886835f9b8496cedc2eeb1732d0bdf743df39aadb61e` |
+| `/assets/twilight-nazgul-sq-480.webp` | 480 | 480 × 480 | 14498 | 82 | `76d36c7c8ffbc2020f3c4893f672facdf10a2f964ff8c942026209065424a748` |
+| `/assets/twilight-nazgul-sq-480.avif` | 480 | 480 × 480 | 11800 | AVIF 60 | `da87b97e02341ff710bb1b9ae7cd2ec203d99346ea3da638122f0a4d7f211c93` |
+| `/assets/twilight-nazgul-sq-640.webp` | 640 | 640 × 640 | 22452 | 82 | `686a23ed34e87955da47361c1809f3f1a23cd11cdea9ac7e85ce341d542bcaa3` |
+| `/assets/twilight-nazgul-sq-640.avif` | 640 | 640 × 640 | 17894 | AVIF 60 | `b9b9f1686dd8106e13c8b612fcb4bdf383941ccc6dab6f9b4b62d916047b85b9` |
+| `/assets/twilight-nazgul-sq-960.webp` | 960 | 960 × 960 | 41118 | 82 | `5aaec2bef24e30c31fc4e60e40b160e6b08feb6c380c6d98a0c90a9e6bc56007` |
+| `/assets/twilight-nazgul-sq-960.avif` | 960 | 960 × 960 | 31145 | AVIF 60 | `7415813106a43ee81cfa79fc8f3eb393b5a298f1a52bfcfe1ae34adca49082ec` |
+| `/assets/twilight-nazgul-share.jpg` | 1200 | 1200 × 1200 | 126789 | JPEG 84 | `d7d23e057621b592e9712cdc7545b55813b870f2bf98bb48f6247406fd8a97fe` |
+
+## HNYCMB524
+
+- Source title: `handy_1792076546195.jpg`
+- Source Drive ID: `1inT2BrFXqB2mtB09V5fBTVeToaYkZEIn`
+- Drive original SHA-256: `044fedced28fbcb62b5b404d21a85b9f84e47669a6c3aefcc1149fe30bd27085`
+- Metadata-clean source input: `assets/photo-sources/black-panther.jpg`
+- Input SHA-256: `022eab0a210131a7469aa96d8739747a2ec74aa8eae3d71a5a77436e85f9e81e`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB524 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 3024 × 4032; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 3024, 4032)`.
+- Square storefront frame: the whole applied crop centred on a 4032 × 4032 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#2f2f2a`), with a 161 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/black-panther-480.webp` | 480 | 480 × 640 | 15852 | 82 | `23a17f55f3565cd846c48b0d2a3fb38db8b5bb062e7b545f4662feb3feac4ec3` |
+| `/assets/black-panther-480.avif` | 480 | 480 × 640 | 10328 | AVIF 60 | `342fddad96da293bcfbf65a3ac17fbbceba81c328b51f3d28d8b87848db4673e` |
+| `/assets/black-panther-960.webp` | 960 | 960 × 1280 | 56104 | 82 | `877892935b420cb84374f246c9455e5ddfc3de185e019a77037d68cdabebfd8e` |
+| `/assets/black-panther-960.avif` | 960 | 960 × 1280 | 33555 | AVIF 60 | `8d6fcea42023d76ff5dedd3817945c8ea887dcc41f8adc6a849f9dd8aaa064c1` |
+| `/assets/black-panther-sq-160.webp` | 160 | 160 × 160 | 1852 | 82 | `c7b5aeca6110d7da3f81543d66d14ed1234c6e341472709145cef2ee5ac58fec` |
+| `/assets/black-panther-sq-160.avif` | 160 | 160 × 160 | 1588 | AVIF 60 | `a53d21df16555e3de32254b2bd1cd2a8807534b6c2c28afaf7c4128be7e8d69e` |
+| `/assets/black-panther-sq-320.webp` | 320 | 320 × 320 | 5150 | 82 | `777988f0bb33882f0367faf7d55dc95c6308e6aa43e823571ea38d34d3884bd6` |
+| `/assets/black-panther-sq-320.avif` | 320 | 320 × 320 | 3712 | AVIF 60 | `2ec27d250a8e69df5a2cd61cb152b37ffde3362ed2b1105395a8ea1cb339eb94` |
+| `/assets/black-panther-sq-480.webp` | 480 | 480 × 480 | 9690 | 82 | `e01cb4dfe8c1b026566c2d998f112ca4fb8095c3139fd6ced79b14e33355b255` |
+| `/assets/black-panther-sq-480.avif` | 480 | 480 × 480 | 6464 | AVIF 60 | `9d9cd75e18c965cf485776d715f2fcde44298a850a9bc88963607b4ecd3c74d6` |
+| `/assets/black-panther-sq-640.webp` | 640 | 640 × 640 | 16098 | 82 | `a5fda4415bcdbc6c90296cc34ec939338690247e3aee26c580d62a77715a8ba4` |
+| `/assets/black-panther-sq-640.avif` | 640 | 640 × 640 | 10410 | AVIF 60 | `79e3542f17860495c1eeceebd1a105265b44cb2b75a6fd34fecdbcaf4137d7df` |
+| `/assets/black-panther-sq-960.webp` | 960 | 960 × 960 | 33340 | 82 | `3cc0da2efbf38ae3c51f517babc65b86ecad79415f976a6cda9ceba73ad31d84` |
+| `/assets/black-panther-sq-960.avif` | 960 | 960 × 960 | 20003 | AVIF 60 | `46d87f123ef31c1addefe360d161c159ba7c9176adff1751d68ab698426f53b4` |
+| `/assets/black-panther-sq-1200.webp` | 1200 | 1200 × 1200 | 49814 | 82 | `9b1aa53bed6043aaf6b4f56a7a1400f2191edef51626816fe13500d244ebb51d` |
+| `/assets/black-panther-sq-1200.avif` | 1200 | 1200 × 1200 | 29257 | AVIF 60 | `a44f49bdc319a0a6d9dee131145d911026545917a45c8a230563aaf9611f6097` |
+| `/assets/black-panther-share.jpg` | 1200 | 1200 × 1200 | 118893 | JPEG 84 | `3a31e127166e1aae5289b6077f3c83cad7d36be3efa4c3d1a35adfac58bfe0f2` |
+
+## HNYCMB525
+
+- Source title: `handy_1792484549523.jpg`
+- Source Drive ID: `1Vuvht6VpM8bFCRYhpbJcThm5w6UrnRkj`
+- Drive original SHA-256: `0490fb4f74fe9f26c75ed120b7e4f95f3d7a667e674440ae4c18b5ddccc8c454`
+- Metadata-clean source input: `assets/photo-sources/muscle-man-001.jpg`
+- Input SHA-256: `e15d03b26f05ea467fd5677c1a431d9c5a887fcd2de41bb5c7e204c4d40f2fc8`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB525 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 959 × 1279; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 959, 1279)`.
+- Square storefront frame: the whole applied crop centred on a 1279 × 1279 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#735833`), with a 51 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/muscle-man-001-480.webp` | 480 | 480 × 640 | 20024 | 82 | `53acabf912deee4e28055b6469658b6d4082ff108739f08eb4564c72c008dd36` |
+| `/assets/muscle-man-001-480.avif` | 480 | 480 × 640 | 11638 | AVIF 60 | `08f355e54ea8207dfbc12cb7219fb9513ee29c4637c54d84ea992332395fa455` |
+| `/assets/muscle-man-001-sq-160.webp` | 160 | 160 × 160 | 3090 | 82 | `21cdf5b55a382dbde3fa5ee9f3e92e29e3ff3eab9e67a47c81f90c25ff414eda` |
+| `/assets/muscle-man-001-sq-160.avif` | 160 | 160 × 160 | 2646 | AVIF 60 | `009d7f9054080fdabf0a9d38ae6182984af9b24de2cad9a1a53f700888c35594` |
+| `/assets/muscle-man-001-sq-320.webp` | 320 | 320 × 320 | 8216 | 82 | `b7de2a9761e1c8e4eb473d0eb48fa966987cc7428e818c315de7f33f8ae705cf` |
+| `/assets/muscle-man-001-sq-320.avif` | 320 | 320 × 320 | 5583 | AVIF 60 | `ef9295c043c08a7acf481d8fd8780011d8aec920453c362a812febbdf7065f37` |
+| `/assets/muscle-man-001-sq-480.webp` | 480 | 480 × 480 | 13760 | 82 | `f160016075528873162c17b53975b61a74ef7b544bde5e538327aa72fcb59744` |
+| `/assets/muscle-man-001-sq-480.avif` | 480 | 480 × 480 | 8602 | AVIF 60 | `463c47573a6b8289ac789b6a02798d6deede96a41b0eb8cb08d972270ed9eab3` |
+| `/assets/muscle-man-001-sq-640.webp` | 640 | 640 × 640 | 19978 | 82 | `1cb7da57a8c7ea2fca01263a01d31bf5c7076455a9fa4ffa0695753661ae3d01` |
+| `/assets/muscle-man-001-sq-640.avif` | 640 | 640 × 640 | 11898 | AVIF 60 | `ceae77df8dbec8cb6ad95f08d7fecf3225229c215605bfd34a4a48f4eb4f04d5` |
+| `/assets/muscle-man-001-sq-960.webp` | 960 | 960 × 960 | 32650 | 82 | `1cb58313274684c307a80610e4a49420b3ce4b6d04548f50783b30ee8e5f7721` |
+| `/assets/muscle-man-001-sq-960.avif` | 960 | 960 × 960 | 17714 | AVIF 60 | `b70ca6c67d85a42af6c6e77cdd7c6980cdf36947501a9767cfd9a4a1ff15067d` |
+| `/assets/muscle-man-001-sq-1200.webp` | 1200 | 1200 × 1200 | 43246 | 82 | `eec9e0ed12b4f3b6be6bc0ad7175ff703000bcb0bbcf5e5bf59855e12291e4ec` |
+| `/assets/muscle-man-001-sq-1200.avif` | 1200 | 1200 × 1200 | 22041 | AVIF 60 | `95dff81be32be7bd096d763a39cdb2968838f7c73728e993aabdb2d238ecfcb2` |
+| `/assets/muscle-man-001-share.jpg` | 1200 | 1200 × 1200 | 102126 | JPEG 84 | `c9de7e80229c72d3211c5142bbe3f93ee4b90740859438083b10da50f6607e2c` |
+
+## HNYCMB526
+
+- Source title: `handy_1792485823342.jpg`
+- Source Drive ID: `16RNFMOkB4dIcmlFf0xWtlYzL9ZVzm2jw`
+- Drive original SHA-256: `5d4d71ad905c8c7839014f2d32bfb268441c6f646756d0de257fd6dee2f0c9d8`
+- Metadata-clean source input: `assets/photo-sources/muscle-man-002.jpg`
+- Input SHA-256: `06fe082edc3d293591b14d985bfff284e0b43a325987473ecfdf1316d751fda5`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB526 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 3024 × 4032; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 3024, 4032)`.
+- Square storefront frame: the whole applied crop centred on a 4032 × 4032 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#c8c9bb`), with a 161 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/muscle-man-002-480.webp` | 480 | 480 × 640 | 15920 | 82 | `c0e8cf9015e9c55eb5b3f8f6b5f586b32860e0f0e3b63cbf16cd14a124764220` |
+| `/assets/muscle-man-002-480.avif` | 480 | 480 × 640 | 11962 | AVIF 60 | `3652eb60a9682990bf47d07a71740c4e1c83d5539dbaa3584197ef7ba7502a8e` |
+| `/assets/muscle-man-002-960.webp` | 960 | 960 × 1280 | 55610 | 82 | `1958dfb59f5051c3373e1418fd975b019443ee3689d68aa1600c4885e0ce2e03` |
+| `/assets/muscle-man-002-960.avif` | 960 | 960 × 1280 | 39445 | AVIF 60 | `98e90e0b1bbdb606ced51867cbe16b64f4b70a8c0b72f93d165085c39cce5906` |
+| `/assets/muscle-man-002-sq-160.webp` | 160 | 160 × 160 | 2130 | 82 | `b3d764008a1bf345b8ec335bdd697944dbdbb4bd8663ad74d64c9405e9bb94e8` |
+| `/assets/muscle-man-002-sq-160.avif` | 160 | 160 × 160 | 1843 | AVIF 60 | `94dd3f87e0bc7d83b3bba7ad7c68de4a49b3f3b847d29584ef97e6e7f5ede8d8` |
+| `/assets/muscle-man-002-sq-320.webp` | 320 | 320 × 320 | 5314 | 82 | `d820b01f3dfdc27b25f09a31cdb988d3ee11af67ddfb4460a2af6b92494454aa` |
+| `/assets/muscle-man-002-sq-320.avif` | 320 | 320 × 320 | 4070 | AVIF 60 | `b52b969f2527bba41d80de41aa2e312c0e30077511a7bac3e8f287988dde20f6` |
+| `/assets/muscle-man-002-sq-480.webp` | 480 | 480 × 480 | 9870 | 82 | `0e63286289c9c001c0b5bd5d721b40a3e0881296d5c0119209032780a42a545a` |
+| `/assets/muscle-man-002-sq-480.avif` | 480 | 480 × 480 | 7216 | AVIF 60 | `1e1d9c4e5123a72cadd6df1485adb915cce3dc83eef5f9f22ef8aa5976f801dd` |
+| `/assets/muscle-man-002-sq-640.webp` | 640 | 640 × 640 | 15752 | 82 | `357b100d6b4717c6897ed33ea706cb10221c4e04e99cdfc97f5eb9fe8038602d` |
+| `/assets/muscle-man-002-sq-640.avif` | 640 | 640 × 640 | 11621 | AVIF 60 | `d73b4ff83295cafe1b61656995f033cbaf7ff83b501f915496f3832614820613` |
+| `/assets/muscle-man-002-sq-960.webp` | 960 | 960 × 960 | 32598 | 82 | `1eaeb6b1236f65ee5e1c0061594ebd291b8927d9c1ceaf835e1915734e537c11` |
+| `/assets/muscle-man-002-sq-960.avif` | 960 | 960 × 960 | 23694 | AVIF 60 | `8c17747b2298bfff8da28618d240696479109bc3803bae1d03a41ced933d344f` |
+| `/assets/muscle-man-002-sq-1200.webp` | 1200 | 1200 × 1200 | 49460 | 82 | `5f3e6ed9f8a3d05dfc54f911886c53be83ba39f15655210c3f338ec7e9f05e77` |
+| `/assets/muscle-man-002-sq-1200.avif` | 1200 | 1200 × 1200 | 34395 | AVIF 60 | `e3b63a2e2b818cfa906ec844d4adb9ae7d7ba725f71d745c7e1f39113e2013fb` |
+| `/assets/muscle-man-002-share.jpg` | 1200 | 1200 × 1200 | 110912 | JPEG 84 | `e584d998afbf43515033e01f11a4d4ba09800ef2a51e4808f14d6a5452a63e0d` |
+
+## HNYCMB527
+
+- Source title: `handy_1792759515557.png`
+- Source Drive ID: `1TnaVZcgNr8B4bOfmISqCUHOEaDKrQR8n`
+- Drive original SHA-256: `07d73780fc04895ace911f9995d47010c5b9f9de75676e404755df61ba356466`
+- Metadata-clean source input: `assets/photo-sources/hellbound-avenger.png`
+- Input SHA-256: `97b7f9b92e3f7baa48416396d3865c2118cd1a36780e3b8be472c5d17536beb5`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB527 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 1075 × 1433; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 1075, 1433)`.
+- Square storefront frame: the whole applied crop centred on a 1433 × 1433 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#d5d6da`), with a 57 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/hellbound-avenger-480.webp` | 480 | 480 × 640 | 27612 | 82 | `3a882407d97c2aa9ca9284f8e02f2a9d600c3d9d97087793bc9f25ccf7569c7e` |
+| `/assets/hellbound-avenger-480.avif` | 480 | 480 × 640 | 23894 | AVIF 60 | `5dfc3600306ee564ef21d50f68c71e4545f559760860bfffddc166dcb0c276ef` |
+| `/assets/hellbound-avenger-960.webp` | 960 | 960 × 1280 | 71974 | 82 | `205d57c6d7ee0a96c932897d2cd12f8ef29abb4325ccd685c84a59a020ad5bc2` |
+| `/assets/hellbound-avenger-960.avif` | 960 | 960 × 1280 | 56148 | AVIF 60 | `a180d8060e27e1aaa3b398ed6ae2fd083fd1a07120fe47ca7e7d8bfcf186aece` |
+| `/assets/hellbound-avenger-sq-160.webp` | 160 | 160 × 160 | 3546 | 82 | `e37029ab63bd8bb52cf0c89c100241d7686db42c2b6717cf40fdb2d6f1696d3d` |
+| `/assets/hellbound-avenger-sq-160.avif` | 160 | 160 × 160 | 3423 | AVIF 60 | `f85ee32fcac533a70d589071b677317431c09a3b9e091af8d8f371e7bbb4fd9b` |
+| `/assets/hellbound-avenger-sq-320.webp` | 320 | 320 × 320 | 9940 | 82 | `449f566ad71547a1960971e18fb62a99177a698fb5f437983589eefdf4550e29` |
+| `/assets/hellbound-avenger-sq-320.avif` | 320 | 320 × 320 | 8829 | AVIF 60 | `8f16cc115eb931b1af6d5c1a1870572ce53d351c6ad1f0b447c50305b1e420dd` |
+| `/assets/hellbound-avenger-sq-480.webp` | 480 | 480 × 480 | 17816 | 82 | `d920fad94c029d25378a009e42ff0e88bce4d996c61263540fb28ce3eac15035` |
+| `/assets/hellbound-avenger-sq-480.avif` | 480 | 480 × 480 | 15374 | AVIF 60 | `d65a8c943a1d22f6e902b798e2698ef6b55a363d16589859804e06f797a79fa0` |
+| `/assets/hellbound-avenger-sq-640.webp` | 640 | 640 × 640 | 27604 | 82 | `aa27b4f00d6b691437621d1055b1f3f987c6e9898efb8bac40600cb7f4fe64d9` |
+| `/assets/hellbound-avenger-sq-640.avif` | 640 | 640 × 640 | 23411 | AVIF 60 | `6e254470d07db237d57c951ef59dadf24926b7713e76647d33db23f72ebd6934` |
+| `/assets/hellbound-avenger-sq-960.webp` | 960 | 960 × 960 | 49648 | 82 | `91eb7a7e582d8a3ced30697c6eab775211b7724b790de1d87a4eb93b23200f09` |
+| `/assets/hellbound-avenger-sq-960.avif` | 960 | 960 × 960 | 40001 | AVIF 60 | `51ceca281b1a14a7f0813526f25401b3129d45448b504673bd53586efbdbc22b` |
+| `/assets/hellbound-avenger-sq-1200.webp` | 1200 | 1200 × 1200 | 65638 | 82 | `d355dae03263b54076d1c885c988f5bec0380c3444dbc1d5998cf74698efd7b4` |
+| `/assets/hellbound-avenger-sq-1200.avif` | 1200 | 1200 × 1200 | 51601 | AVIF 60 | `cc6263cc2c7c77d220da29501bb57787e4ab2693f7d2ab775b82f117c386eecc` |
+| `/assets/hellbound-avenger-share.jpg` | 1200 | 1200 × 1200 | 129267 | JPEG 84 | `25a9d47cb9e2c25985ed6ba11d85bba2bcd6f9fbceab47220bc6c8d71fcf8c03` |
+
+## HNYCMB528
+
+- Source title: `handy_1792760519507.jpg`
+- Source Drive ID: `17pNI9Vw0OhBKwCS5SZoi-DA8Lds7dFgP`
+- Drive original SHA-256: `393779f58d3d2c39890f6278accb24d5b67147c74f37942fe84ff75a759e82ea`
+- Metadata-clean source input: `assets/photo-sources/tiered-bookmark-stand.jpg`
+- Input SHA-256: `ddae1ccf2585b8787c35132b09150afd6e2b70497bfdd4f81dbc7e851b5fb2e4`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB528 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 2256 × 2152; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 2256, 2152)`.
+- Square storefront frame: the whole applied crop centred on a 2256 × 2256 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#dfe2df`), with a 90 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/tiered-bookmark-stand-480.webp` | 480 | 480 × 458 | 9060 | 82 | `52aa94c358f769304170993af70957d4d78ebc91891040faa1a738864b420634` |
+| `/assets/tiered-bookmark-stand-480.avif` | 480 | 480 × 458 | 6089 | AVIF 60 | `183adc5266db9eaf0eccc0d57b1ae24273a6c1e8251f4d8696f1f4c001c4ce8c` |
+| `/assets/tiered-bookmark-stand-960.webp` | 960 | 960 × 916 | 24656 | 82 | `03ce76d11be20c47ca933580f4ff12cefd1be91595b9dd197bd636a697bdf479` |
+| `/assets/tiered-bookmark-stand-960.avif` | 960 | 960 × 916 | 14656 | AVIF 60 | `6c0128caecb8563c4fdbc865999f2bcca56a8c894e126ff0b2b4fe8268d70973` |
+| `/assets/tiered-bookmark-stand-sq-160.webp` | 160 | 160 × 160 | 1992 | 82 | `4524bb7c59d7fbe299730bf2daacc1e04181418387e54227b5f6054643f05e5d` |
+| `/assets/tiered-bookmark-stand-sq-160.avif` | 160 | 160 × 160 | 1708 | AVIF 60 | `8268ebc978a2a19aeb72a4487c9c6967654f91ca6bbafc25a0190d34adf3fc89` |
+| `/assets/tiered-bookmark-stand-sq-320.webp` | 320 | 320 × 320 | 5122 | 82 | `8a84b3f03df80bd8ad94c9d4818fa8c9a6417865b3186d6a336eea53b3ad64a9` |
+| `/assets/tiered-bookmark-stand-sq-320.avif` | 320 | 320 × 320 | 3791 | AVIF 60 | `2266e5483fdb5a79ddb89a3834ca426dc26ee30eeef774dfc9d2c97ace8f7059` |
+| `/assets/tiered-bookmark-stand-sq-480.webp` | 480 | 480 × 480 | 8824 | 82 | `1df0927b47d0cbdfe2612214028746a90a080a955c2033b2e2a57c1945ef79d4` |
+| `/assets/tiered-bookmark-stand-sq-480.avif` | 480 | 480 × 480 | 6051 | AVIF 60 | `2cf3c8b106e7b9cc82039f3284db89482c76d3f13e5543719a5ac1dca51a6c61` |
+| `/assets/tiered-bookmark-stand-sq-640.webp` | 640 | 640 × 640 | 13254 | 82 | `8137c6f9c772ce191d7cf81366dd6dfb73714152aa2ee0141e47667be039536c` |
+| `/assets/tiered-bookmark-stand-sq-640.avif` | 640 | 640 × 640 | 8690 | AVIF 60 | `66c636ce95336aeb8850f938109a21e5e06e3b038171bc4c854c969fc864b409` |
+| `/assets/tiered-bookmark-stand-sq-960.webp` | 960 | 960 × 960 | 24400 | 82 | `5526069bd3d0166bb03ca85898f28d79d3cba1f8004f5cf69f44ca41138f71a5` |
+| `/assets/tiered-bookmark-stand-sq-960.avif` | 960 | 960 × 960 | 14485 | AVIF 60 | `d6684af409497b9990dc8216465dd61988117c6fee080443be3e3df0f165424d` |
+| `/assets/tiered-bookmark-stand-sq-1200.webp` | 1200 | 1200 × 1200 | 35764 | 82 | `e93e80cc6d58110c2aeae3046d33e2adc7e4006ec97a73c83e54d9bd59383f55` |
+| `/assets/tiered-bookmark-stand-sq-1200.avif` | 1200 | 1200 × 1200 | 19515 | AVIF 60 | `17131baa3028789d023de5f40e2e5404ee0ccc9837365bd9eb88f32a133963ed` |
+| `/assets/tiered-bookmark-stand-share.jpg` | 1200 | 1200 × 1200 | 101231 | JPEG 84 | `a8db99b23f59b3225100b19906db5934d860fe5b730ee013d9afc495c4ef2129` |
+
+## HNYCMB529
+
+- Source title: `handy_1792850654535.png`
+- Source Drive ID: `1C8J9wb0VVD1aYCJ4eagy6nvehMQTsxXl`
+- Drive original SHA-256: `5c5995ff48a8dd305e8061e47845d1bd59056f793927179a7872ab7b69ab8be1`
+- Metadata-clean source input: `assets/photo-sources/shadow-ninja.png`
+- Input SHA-256: `fda8e28330d5b30d66ad4594d19aae867d2bbdb72b517d8daa6ea4bab4677b96`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB529 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 791 × 1054; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 791, 1054)`.
+- Square storefront frame: the whole applied crop centred on a 1054 × 1054 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#754e2b`), with a 42 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/shadow-ninja-480.webp` | 480 | 480 × 640 | 17116 | 82 | `8222934afc5318ae996dc81701ef28d7f346e38f1ce27c91ed8ef04907bab13a` |
+| `/assets/shadow-ninja-480.avif` | 480 | 480 × 640 | 11765 | AVIF 60 | `56d79854a13b6e75e936df0081cf46938d0d39dad96f94cd3cd62f5d41a92c49` |
+| `/assets/shadow-ninja-sq-160.webp` | 160 | 160 × 160 | 2344 | 82 | `dadf8f5a84f8b4d82be70be8134e106d06bd95bb09b347023eab932083c06f7b` |
+| `/assets/shadow-ninja-sq-160.avif` | 160 | 160 × 160 | 2080 | AVIF 60 | `03b925cbf8b61751e7b041704bccd4074398c1536caf55568558dcca3f7178f9` |
+| `/assets/shadow-ninja-sq-320.webp` | 320 | 320 × 320 | 6202 | 82 | `55a6958f2320c19ee23cf809d16d3166ab9111d3fff34b9985f3ebad73f6dcee` |
+| `/assets/shadow-ninja-sq-320.avif` | 320 | 320 × 320 | 4674 | AVIF 60 | `b38022115228c36f18a95d41d7f2ded40bb6cf5abefe12aec7ae52bce1f111fa` |
+| `/assets/shadow-ninja-sq-480.webp` | 480 | 480 × 480 | 11048 | 82 | `33918d9c351bf6e437e4e0f962edf07b7add296190cb466b454832dd82a45873` |
+| `/assets/shadow-ninja-sq-480.avif` | 480 | 480 × 480 | 7710 | AVIF 60 | `b65ad466addfa6f5300104d158ac099a7ed0a51dd2b63114d9a7d3b0daef6111` |
+| `/assets/shadow-ninja-sq-640.webp` | 640 | 640 × 640 | 16824 | 82 | `d2944b90b9ccfc8fe452bfc60abb7fb3a8be44dc3403fad8880958e17fb42cff` |
+| `/assets/shadow-ninja-sq-640.avif` | 640 | 640 × 640 | 11657 | AVIF 60 | `e27da21fd856655ac1543e42f51bf240bcb2877aae7ddb329fdf980d36e3f090` |
+| `/assets/shadow-ninja-sq-960.webp` | 960 | 960 × 960 | 29954 | 82 | `6765212880a5a553f2d66b46ec23843cc277a9eaab10f3c70cabe05b7c4e28be` |
+| `/assets/shadow-ninja-sq-960.avif` | 960 | 960 × 960 | 19281 | AVIF 60 | `dd98af5ca0d10078a687ec67d5c54682b6c287ae714485fefc7d9863ed7eccb7` |
+| `/assets/shadow-ninja-share.jpg` | 1200 | 1200 × 1200 | 97106 | JPEG 84 | `5c0cfc7bba5c4a29f6914ae8e969bfaf0e18a299c657d749ff5b999ab0affe5f` |
+
+## HNYCMB530
+
+- Source title: `handy_1792851691397.jpg`
+- Source Drive ID: `1Mj-HTa4w6ivdQd1-mv3jo428SIZm65J3`
+- Drive original SHA-256: `86222d185f7cc7d7b23ea3d899d0b93cbc2c6fce979fd13398c7e7a7160ce436`
+- Metadata-clean source input: `assets/photo-sources/hueforge-poster-bin.jpg`
+- Input SHA-256: `e4157537cb0e18e4e6808acaa26addb73502ce28393dc6bfaa68cfe6b0cd4cf0`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB530 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 1080 × 1440; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 1080, 1440)`.
+- Square storefront frame: the whole applied crop centred on a 1440 × 1440 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#dfded9`), with a 58 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/hueforge-poster-bin-480.webp` | 480 | 480 × 640 | 39686 | 82 | `988c4c9e49b3ddb047496c6e73c6a50b71b1cdf1df77cacd4490def8485c81f8` |
+| `/assets/hueforge-poster-bin-480.avif` | 480 | 480 × 640 | 25151 | AVIF 60 | `410aa906d6679650f21160833af03def6067171328fcf5e330f5fdd680f60ff1` |
+| `/assets/hueforge-poster-bin-960.webp` | 960 | 960 × 1280 | 86318 | 82 | `b9ecf5402ef3342c54a9da7e033970762ea67607a57e5e0f4c72923f91c0ab35` |
+| `/assets/hueforge-poster-bin-960.avif` | 960 | 960 × 1280 | 48889 | AVIF 60 | `559ec8e75d0932fb55453bfd610f246b98bb1ed764534ff187f8c8ca0097cc01` |
+| `/assets/hueforge-poster-bin-sq-160.webp` | 160 | 160 × 160 | 5146 | 82 | `56fcd14d72c63523f84154f5645a83377d884f507398559fa4b5f754ab913473` |
+| `/assets/hueforge-poster-bin-sq-160.avif` | 160 | 160 × 160 | 4066 | AVIF 60 | `21208c058162ab7d63be75a96281e6815476e2c97a75256e41232d89824213a1` |
+| `/assets/hueforge-poster-bin-sq-320.webp` | 320 | 320 × 320 | 15268 | 82 | `61ac94998d657f1fd8469d15d67f1851c99d87e1ed833b91c03a397e91acdb33` |
+| `/assets/hueforge-poster-bin-sq-320.avif` | 320 | 320 × 320 | 10632 | AVIF 60 | `6bfe4f104297dc06cdf6a673e1393373f21b00956589093518a0fb6782fe8b55` |
+| `/assets/hueforge-poster-bin-sq-480.webp` | 480 | 480 × 480 | 27048 | 82 | `264225ebdf77efe68321c8470749b5a4cbb397e36a3a3b907082762f825a574b` |
+| `/assets/hueforge-poster-bin-sq-480.avif` | 480 | 480 × 480 | 17332 | AVIF 60 | `a187527abc49f015ee114af79a2f3607163c9c0a90a8fbfdaf1615424cfd1bd5` |
+| `/assets/hueforge-poster-bin-sq-640.webp` | 640 | 640 × 640 | 39114 | 82 | `6619bda1f14d4c26cab330c7364d1d6f856889ee777bfb258ab8a3cb64996b55` |
+| `/assets/hueforge-poster-bin-sq-640.avif` | 640 | 640 × 640 | 23839 | AVIF 60 | `15f43265949c1385cad07ac0173cad83716e5d4a31b7a49cab91a91dedbc1e80` |
+| `/assets/hueforge-poster-bin-sq-960.webp` | 960 | 960 × 960 | 61672 | 82 | `efe1c657126fcedcdf986142ef4f0c5e329afd0344c1f3b4df8bbc4f21e31ca7` |
+| `/assets/hueforge-poster-bin-sq-960.avif` | 960 | 960 × 960 | 35970 | AVIF 60 | `ce1f59210a7d966c948f0db8cbd15ac9e640af097f939c9e19f14131142f949a` |
+| `/assets/hueforge-poster-bin-sq-1200.webp` | 1200 | 1200 × 1200 | 78480 | 82 | `e6927c373238d8abd3ae20e9225c12dc7dfe8d8d622495df5915c4f6d6736f56` |
+| `/assets/hueforge-poster-bin-sq-1200.avif` | 1200 | 1200 × 1200 | 44296 | AVIF 60 | `cdfb8c2b567f6e6920153f8a7ed282af593c3dafc5cb401fe844e008878092a5` |
+| `/assets/hueforge-poster-bin-share.jpg` | 1200 | 1200 × 1200 | 168119 | JPEG 84 | `c84a8931f9c5faa1ef19e427577b4fd858988f5afaf7694b9b98626993c535ca` |
+
+## HNYCMB531
+
+- Source title: `handy_1792853041602.jpg`
+- Source Drive ID: `1vv2-4nRome8MPq3Ex_uF2FPb1cJGdAnb`
+- Drive original SHA-256: `0f42e397b14b2ba06ddfe08e43b14d91892d4f0b7d61b3bd1f4e6d63093aa7ce`
+- Metadata-clean source input: `assets/photo-sources/hueforge-poster-stand.jpg`
+- Input SHA-256: `410b88f03804bca6def8717a608f40a71b27725926746dcd4858da686d6a24dd`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB531 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 1080 × 1440; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 1080, 1440)`.
+- Square storefront frame: the whole applied crop centred on a 1440 × 1440 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#9b8f87`), with a 58 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/hueforge-poster-stand-480.webp` | 480 | 480 × 640 | 29382 | 82 | `97ab7080ef8183960d30ba7b080fd191faf97e4e8252e3a4dd3d2ddefcc29f80` |
+| `/assets/hueforge-poster-stand-480.avif` | 480 | 480 × 640 | 18935 | AVIF 60 | `22f534a2700140835ebf58abdd98cffdd73a14f623ca08880818e85c34ead001` |
+| `/assets/hueforge-poster-stand-960.webp` | 960 | 960 × 1280 | 86096 | 82 | `c6be9ccfacca5dc99586adad6dcca6c3237bae025b5dbaafc2b72702eeb68bce` |
+| `/assets/hueforge-poster-stand-960.avif` | 960 | 960 × 1280 | 52499 | AVIF 60 | `811480e3b2d5023711f2aa4a21fe4e468a45064ba0284b2758414421b8cf893d` |
+| `/assets/hueforge-poster-stand-sq-160.webp` | 160 | 160 × 160 | 2356 | 82 | `9b59f1cad1b73c75738b19bbf5e00b8e90e10569b820c5aaeb66d3431de1659a` |
+| `/assets/hueforge-poster-stand-sq-160.avif` | 160 | 160 × 160 | 1727 | AVIF 60 | `25eafa3969979d9cea67e9cde10f7b670aba15ab25a3b66dc06bb8ec34e467ea` |
+| `/assets/hueforge-poster-stand-sq-320.webp` | 320 | 320 × 320 | 7612 | 82 | `d7e92287bfcb6eb3e74610fddf648623112fe78a1ee1f73c70d868e821818aa8` |
+| `/assets/hueforge-poster-stand-sq-320.avif` | 320 | 320 × 320 | 4975 | AVIF 60 | `a4e88537d6d7e3b4a0f57b80660da7355733f6d9efcc8da95e85607b5d0767b9` |
+| `/assets/hueforge-poster-stand-sq-480.webp` | 480 | 480 × 480 | 15304 | 82 | `dff1ad9920b8c38b8e48a6a1eb9f5ced2f05b829d5b209b96e54519dcb726b0e` |
+| `/assets/hueforge-poster-stand-sq-480.avif` | 480 | 480 × 480 | 10048 | AVIF 60 | `74fe9303f8a6d946cdb9c027a89035963ce85ecda5d191266ec9adf2e463f732` |
+| `/assets/hueforge-poster-stand-sq-640.webp` | 640 | 640 × 640 | 25982 | 82 | `0007307093fa0bd285e5402953694e79bc2ad33f6465dbd7d0aa1a88b124f59a` |
+| `/assets/hueforge-poster-stand-sq-640.avif` | 640 | 640 × 640 | 17472 | AVIF 60 | `efcaf7d608684dbcf667f5a6a4fc66346e0793819223c243889aec462df69879` |
+| `/assets/hueforge-poster-stand-sq-960.webp` | 960 | 960 × 960 | 50718 | 82 | `cdd0d2bec1ad4d935ab76978e36c03d27a911d4560526b35550451bbc5fae1a3` |
+| `/assets/hueforge-poster-stand-sq-960.avif` | 960 | 960 × 960 | 33113 | AVIF 60 | `6dad7c1bfababeb521108dec26bb56b2f0342327b371a64e6719b1308f25698e` |
+| `/assets/hueforge-poster-stand-sq-1200.webp` | 1200 | 1200 × 1200 | 71028 | 82 | `b34c861fbaf16bc04a54508f711be8e17f5558772e06ad5b901490ee9ef1a528` |
+| `/assets/hueforge-poster-stand-sq-1200.avif` | 1200 | 1200 × 1200 | 45066 | AVIF 60 | `a8dd376c8812709e4f78ed09631b104db4ff3613e4d6e710e2909bdc321cb1ee` |
+| `/assets/hueforge-poster-stand-share.jpg` | 1200 | 1200 × 1200 | 153709 | JPEG 84 | `b871b32c1126e6931d5a6b26e27ea0040cb8c910b5f0dedf511d6471266faff0` |
+
+## HNYCMB532
+
+- Source title: `handy_1793361577809.jpg`
+- Source Drive ID: `1dyRVPgw73c5Yf6JI2EJ-GtMjTtl3xdeE`
+- Drive original SHA-256: `52851d9a5b778206a29a1675b561b5375accfd49b67024fa5695e13ee82fe63e`
+- Metadata-clean source input: `assets/photo-sources/halo-master-chief.jpg`
+- Input SHA-256: `bf4a773ed7f89ccc29798f599dedb9aa8ae160e18a17749a8c5060d649ae05f3`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB532 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 3024 × 4032; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 3024, 4032)`.
+- Square storefront frame: the whole applied crop centred on a 4032 × 4032 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#b6b6b8`), with a 161 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/halo-master-chief-480.webp` | 480 | 480 × 640 | 14034 | 82 | `3857748938aae5f7acd9631723989762e8af76ba0b59849b208b42455b67de4d` |
+| `/assets/halo-master-chief-480.avif` | 480 | 480 × 640 | 10744 | AVIF 60 | `5e196ef81e31267f92c42e0db220320c80433295ff96128ff960bc9e821a88f8` |
+| `/assets/halo-master-chief-960.webp` | 960 | 960 × 1280 | 38366 | 82 | `45cbd3afdc14d1c131c2a00c357bbe2bb941c3a9ce3e8877d071e9767f037059` |
+| `/assets/halo-master-chief-960.avif` | 960 | 960 × 1280 | 24685 | AVIF 60 | `f8be40861bb53524aea83f7e1cbeafd65f741fd81f8706a39c14de91b0ee0685` |
+| `/assets/halo-master-chief-sq-160.webp` | 160 | 160 × 160 | 2050 | 82 | `c848315ad52106565b591cfd85c0c3ae8adfa3a4b9f95cdeacf8b433f5133760` |
+| `/assets/halo-master-chief-sq-160.avif` | 160 | 160 × 160 | 1972 | AVIF 60 | `d947e9e7ffecf9af24b38f2f207eb9b930292ba4890b5bed1eae78757f0b04dc` |
+| `/assets/halo-master-chief-sq-320.webp` | 320 | 320 × 320 | 5502 | 82 | `6d30f0bc8d4490057d5e4fd9a8478d3e66fcabae663031a8b34cca4a7d4ba10f` |
+| `/assets/halo-master-chief-sq-320.avif` | 320 | 320 × 320 | 4586 | AVIF 60 | `4388642c9f4aeda83f52e081a8b5488ee75123dc0e219821e243a24de7d2547c` |
+| `/assets/halo-master-chief-sq-480.webp` | 480 | 480 × 480 | 9614 | 82 | `a23b2313f63b730ad6bec93b5dbac5c899daa3b87b633cbce3a26837331ecfcd` |
+| `/assets/halo-master-chief-sq-480.avif` | 480 | 480 × 480 | 7545 | AVIF 60 | `58d163040adfb29fdf767327394b5fbaf74af347cb567ecacc698ff627f4f7ee` |
+| `/assets/halo-master-chief-sq-640.webp` | 640 | 640 × 640 | 14226 | 82 | `3784912c47733f0d0ad98c3bad5d3d385736c20a76c65780d81593769734f565` |
+| `/assets/halo-master-chief-sq-640.avif` | 640 | 640 × 640 | 10828 | AVIF 60 | `69ff37bd8077bd09482e02070ba771a15b442e6abada07b098302a6da951f56f` |
+| `/assets/halo-master-chief-sq-960.webp` | 960 | 960 × 960 | 24904 | 82 | `e5c1208bb55e5f0c6f57cd31e31c0d12949427c2f3530a4ad120cfee786e7efb` |
+| `/assets/halo-master-chief-sq-960.avif` | 960 | 960 × 960 | 17362 | AVIF 60 | `7e3a7c1f7cfb6d9e2011c23175397dfe74891378d569250c2ae9d09290651a9d` |
+| `/assets/halo-master-chief-sq-1200.webp` | 1200 | 1200 × 1200 | 34886 | 82 | `9e67e864494518446795b63c28a460a5675d2f75b5004a61a2005410fb0abd1a` |
+| `/assets/halo-master-chief-sq-1200.avif` | 1200 | 1200 × 1200 | 22686 | AVIF 60 | `40d67c0ad0455d0e2e4373462e66185b38fca779a2dd8e56927d756cb3389fe9` |
+| `/assets/halo-master-chief-share.jpg` | 1200 | 1200 × 1200 | 94786 | JPEG 84 | `80db15a91a89cf885ce219b9b6746cc97793bc81f81ea21970d019e2552e2dbc` |
+
+## HNYCMB533
+
+- Source title: `handy_1793362715932.jpg`
+- Source Drive ID: `1saaV6L8pH6m1YJEOVsGXbdh3jdo1UMuk`
+- Drive original SHA-256: `3879e1100ad6575455b680ec0077dbbd275624f8cc8f1c1e84a4b7b70f82f68c`
+- Metadata-clean source input: `assets/photo-sources/nazgul-black-rider.jpg`
+- Input SHA-256: `5efa384bf9f1a16fd8260312a7cdf61067315f70814d5c37c37e0a1b0ed7c96c`
+- Handoff: Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB533 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose "Use designer photos, credited" on 2026-10-31. Metadata removed with scripts/clean-source.py; decoded pixels verified identical to the original.
+- Source dimensions: 3000 × 4000; EXIF orientation 1.
+- Applied crop box after orientation: `(0, 0, 3000, 4000)`.
+- Square storefront frame: the whole applied crop centred on a 4000 × 4000 square whose padding repeats the crop edge tones outward (averaged per row or column and smoothed; median backdrop `#396553`), with a 160 px edge fade. Whole frame, padded to a square.
+- Link-preview image: the square storefront frame at 1200 × 1200, baseline JPEG without metadata.
+
+| Output | Resize width | Actual dimensions | Bytes | Quality | Output SHA-256 |
+|---|---:|---|---:|---:|---|
+| `/assets/nazgul-black-rider-480.webp` | 480 | 480 × 640 | 28560 | 82 | `83869d6d20cc0049e83e947c040d7f2578f9cc588fbdb70455f046970c88042a` |
+| `/assets/nazgul-black-rider-480.avif` | 480 | 480 × 640 | 19217 | AVIF 60 | `ba97909f3b6897d5f2ae5eae2772fabfba4d7de50f170124bdbf3726a7377608` |
+| `/assets/nazgul-black-rider-960.webp` | 960 | 960 × 1280 | 73792 | 82 | `67556d5e1ce19598cae5eed12c1181567f7f69a99ed04fd6a6a915bcb9fc4708` |
+| `/assets/nazgul-black-rider-960.avif` | 960 | 960 × 1280 | 41299 | AVIF 60 | `ac6c4428d54e7dca4768fb18e4233d12a4dbb15ffddacb9db1bec3f9eaddffbd` |
+| `/assets/nazgul-black-rider-sq-160.webp` | 160 | 160 × 160 | 5060 | 82 | `56d90ff192d9e5a0f8cb53b3eddb03249107bc02cafc803a78a3c0033fc7be17` |
+| `/assets/nazgul-black-rider-sq-160.avif` | 160 | 160 × 160 | 4410 | AVIF 60 | `4ddffba418db2819677946d84f6624bcfc004fd4dd6741ccc7c109b3a68ed7ff` |
+| `/assets/nazgul-black-rider-sq-320.webp` | 320 | 320 × 320 | 12092 | 82 | `b4ffc776352da313cf52f37a498d7fddb974c081dbfad8953f2041d2a6bae4c6` |
+| `/assets/nazgul-black-rider-sq-320.avif` | 320 | 320 × 320 | 9363 | AVIF 60 | `4d76799d5145ed703edd5f8e0eee9920164622ab0e2b1b64e53cc2d0988bc683` |
+| `/assets/nazgul-black-rider-sq-480.webp` | 480 | 480 × 480 | 19462 | 82 | `358ae4db59ba596778c4bddd02266357251ce66b4396217032efe1d1c95dc6be` |
+| `/assets/nazgul-black-rider-sq-480.avif` | 480 | 480 × 480 | 13802 | AVIF 60 | `212ddbecf85929f1ccd27d40e988e5dbf7ff349531f0554f0ebeff05a1a50d7e` |
+| `/assets/nazgul-black-rider-sq-640.webp` | 640 | 640 × 640 | 27402 | 82 | `dd06a0972657aba54f1c70e0c43ee2bdefe8861ee8ea4d8a3fc5962de1d41f74` |
+| `/assets/nazgul-black-rider-sq-640.avif` | 640 | 640 × 640 | 18573 | AVIF 60 | `04648c4e31caf85f8f084a3397e5f5f4bcdeb6c904371181e89f50e0719dc93a` |
+| `/assets/nazgul-black-rider-sq-960.webp` | 960 | 960 × 960 | 45848 | 82 | `58621c9e412a749097bba5ae46529060e8bcea46e80c0bf8ab3348a679959011` |
+| `/assets/nazgul-black-rider-sq-960.avif` | 960 | 960 × 960 | 28115 | AVIF 60 | `916df7fd56e1e58545d52e290994804979e82d55f46fae6525a7e0bed5338903` |
+| `/assets/nazgul-black-rider-sq-1200.webp` | 1200 | 1200 × 1200 | 63378 | 82 | `0487223b1406e7a3771698df40404ecd459a6a6c05d90fbf940c9d5146a5595d` |
+| `/assets/nazgul-black-rider-sq-1200.avif` | 1200 | 1200 × 1200 | 36165 | AVIF 60 | `a12a5aa1d0e38bb86cf8834ce89037ceb58f9cdeb30889358a6203e2500bfea2` |
+| `/assets/nazgul-black-rider-share.jpg` | 1200 | 1200 × 1200 | 145713 | JPEG 84 | `8e043b2511c562c55b82aae7d71eb0406d326c46f57a44fc2b9eee7a913954c8` |
+
 ## Pending approved originals
 
 None. Kurama and Classic Kunai were imported on 16 October 2026 from the QA handoff branch; both original SHA-256 hashes matched the owner-approved files before import.

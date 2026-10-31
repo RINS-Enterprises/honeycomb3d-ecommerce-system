@@ -872,6 +872,555 @@
       },
       "handoff": "QA branch claude/photo-handoff commit fe19da8 (HNYCMB518-horse-figurine.jpg), SHA-256 verified before import; Drive original in the owner's HoneyComb folder; owner said \"list those\" on 2026-10-16.",
       "ownerApprovalDate": "2026-10-16"
+    },
+    {
+      "id": "HNYCMB513",
+      "stem": "stormtrooper-keychain",
+      "input": "assets/photo-sources/stormtrooper-keychain.png",
+      "sourceTitle": "1777632524778.png",
+      "sourceDriveId": "1Ui0ET82xux0qEr-jfnyTD7Z8P_WkX-Ve",
+      "sourceSha256": "5d3180b2c48685100857e735c1ad03d1efd69253d30d4dc28692205fc4756e14",
+      "inputSha256": "7fe55569657c09902f13d0603ec5243d946b21033c85ba083067c2a1fe3bcdbe",
+      "exifOrientation": 1,
+      "sourceSize": [
+        874,
+        1116
+      ],
+      "cropBox": null,
+      "alt": "Black and white 3D-printed Stormtrooper keychain on a metal key ring, on a light grey background",
+      "format": "webp",
+      "widths": [
+        480
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB513 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB519",
+      "stem": "pikachu",
+      "input": "assets/photo-sources/pikachu.png",
+      "sourceTitle": "handy_1790759188889.png",
+      "sourceDriveId": "1aKzskO22QTvkzyiodLFV4FEvYp1oF0Zw",
+      "sourceSha256": "14f2a80a9d388048cda74256f0f5d84d90d91bd1359a58c0736bcec8aa3a4602",
+      "inputSha256": "8e43e91bbc5df95f12ac0d3eb6e31d3af313b83e5efc53b48ff9dc060bce079a",
+      "exifOrientation": 1,
+      "sourceSize": [
+        801,
+        1068
+      ],
+      "cropBox": null,
+      "alt": "Yellow 3D-printed Pikachu figure with an articulated lightning-bolt tail, sitting on a table",
+      "format": "webp",
+      "widths": [
+        480
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB519 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB520",
+      "stem": "dobby",
+      "input": "assets/photo-sources/dobby.jpg",
+      "sourceTitle": "handy_1790942351004.jpg",
+      "sourceDriveId": "1nELay3VpygVpS6brIMmz6BpKFqPA4gaC",
+      "sourceSha256": "0ed9d7a8042cf80a046645e28cffa288f8d2d207e3e6cb0704a2df61b84e9bf2",
+      "inputSha256": "ae9c12339335ea9973df06fa04b4318220fbfcc6b9582481c15631c03f05e649",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3000,
+        4000
+      ],
+      "cropBox": null,
+      "alt": "Small 3D-printed Dobby figure with green eyes and a grey tunic, held in a hand",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB520 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB521",
+      "stem": "skeleton-keychain",
+      "input": "assets/photo-sources/skeleton-keychain.png",
+      "sourceTitle": "handy_1791102641081.png",
+      "sourceDriveId": "1G2hZV_1TKsNKoWp-bGaEeOj_LdcMQMCi",
+      "sourceSha256": "f2375c3a442df6504d6819eebf9c3dde1e36ec920ca795801686af8e2a4bf603",
+      "inputSha256": "61078b754ab058c3ebbcdf8045b92443233184d7b4b68c4fd6e7ac2ed4913d92",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1080,
+        1440
+      ],
+      "cropBox": null,
+      "alt": "White articulated 3D-printed skeleton keychain hanging from a key ring over an open hand",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB521 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB522",
+      "stem": "panda-keychain",
+      "input": "assets/photo-sources/panda-keychain.jpg",
+      "sourceTitle": "1791993348044.jpg",
+      "sourceDriveId": "13mSXW5E9LpFCBF_7IuONmC517Fx_MjXh",
+      "sourceSha256": "157112e10d672ea08d9d5207faa7bd369bde6215325865f87a01b4ea397b35fa",
+      "inputSha256": "95d0ee804e60a985a8079425869c21b4d038b8762df8676efa97776656dcdf55",
+      "exifOrientation": 1,
+      "sourceSize": [
+        896,
+        1195
+      ],
+      "cropBox": null,
+      "alt": "Black and white 3D-printed waving panda keychain with pink cheeks on a key ring",
+      "format": "webp",
+      "widths": [
+        480
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB522 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB523",
+      "stem": "twilight-nazgul",
+      "input": "assets/photo-sources/twilight-nazgul.jpg",
+      "sourceTitle": "1792043275017.jpg",
+      "sourceDriveId": "16Rjm3PuGoY8ko0EzCVDFbBVoA0BvhnCv",
+      "sourceSha256": "1f2d7080c1c54c312e60512c19da4928e19815b06d68e8889f17782e88dc60af",
+      "inputSha256": "5a8937bd294c8e720dbd92f3df2f4f0af3266a1f1f83d3ac95616c98ab0617f6",
+      "exifOrientation": 1,
+      "sourceSize": [
+        896,
+        1195
+      ],
+      "cropBox": null,
+      "alt": "Black 3D-printed hooded Nazgul figure holding a sword, on a rocky base",
+      "format": "webp",
+      "widths": [
+        480
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB523 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB524",
+      "stem": "black-panther",
+      "input": "assets/photo-sources/black-panther.jpg",
+      "sourceTitle": "handy_1792076546195.jpg",
+      "sourceDriveId": "1inT2BrFXqB2mtB09V5fBTVeToaYkZEIn",
+      "sourceSha256": "044fedced28fbcb62b5b404d21a85b9f84e47669a6c3aefcc1149fe30bd27085",
+      "inputSha256": "022eab0a210131a7469aa96d8739747a2ec74aa8eae3d71a5a77436e85f9e81e",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3024,
+        4032
+      ],
+      "cropBox": null,
+      "alt": "Grey 3D-printed Black Panther figure crouching, facing forward",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB524 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB525",
+      "stem": "muscle-man-001",
+      "input": "assets/photo-sources/muscle-man-001.jpg",
+      "sourceTitle": "handy_1792484549523.jpg",
+      "sourceDriveId": "1Vuvht6VpM8bFCRYhpbJcThm5w6UrnRkj",
+      "sourceSha256": "0490fb4f74fe9f26c75ed120b7e4f95f3d7a667e674440ae4c18b5ddccc8c454",
+      "inputSha256": "e15d03b26f05ea467fd5677c1a431d9c5a887fcd2de41bb5c7e204c4d40f2fc8",
+      "exifOrientation": 1,
+      "sourceSize": [
+        959,
+        1279
+      ],
+      "cropBox": null,
+      "alt": "Light grey 3D-printed muscle man figure standing with arms stretched out, on a wooden table",
+      "format": "webp",
+      "widths": [
+        480
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB525 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB526",
+      "stem": "muscle-man-002",
+      "input": "assets/photo-sources/muscle-man-002.jpg",
+      "sourceTitle": "handy_1792485823342.jpg",
+      "sourceDriveId": "16RNFMOkB4dIcmlFf0xWtlYzL9ZVzm2jw",
+      "sourceSha256": "5d4d71ad905c8c7839014f2d32bfb268441c6f646756d0de257fd6dee2f0c9d8",
+      "inputSha256": "06fe082edc3d293591b14d985bfff284e0b43a325987473ecfdf1316d751fda5",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3024,
+        4032
+      ],
+      "cropBox": null,
+      "alt": "Bronze-coloured 3D-printed muscle man figure flexing both arms, on a white table",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB526 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB527",
+      "stem": "hellbound-avenger",
+      "input": "assets/photo-sources/hellbound-avenger.png",
+      "sourceTitle": "handy_1792759515557.png",
+      "sourceDriveId": "1TnaVZcgNr8B4bOfmISqCUHOEaDKrQR8n",
+      "sourceSha256": "07d73780fc04895ace911f9995d47010c5b9f9de75676e404755df61ba356466",
+      "inputSha256": "97b7f9b92e3f7baa48416396d3865c2118cd1a36780e3b8be472c5d17536beb5",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1075,
+        1433
+      ],
+      "cropBox": null,
+      "alt": "Grey 3D-printed caped antihero figure with flowing chains and cape, crouching",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB527 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB528",
+      "stem": "tiered-bookmark-stand",
+      "input": "assets/photo-sources/tiered-bookmark-stand.jpg",
+      "sourceTitle": "handy_1792760519507.jpg",
+      "sourceDriveId": "17pNI9Vw0OhBKwCS5SZoi-DA8Lds7dFgP",
+      "sourceSha256": "393779f58d3d2c39890f6278accb24d5b67147c74f37942fe84ff75a759e82ea",
+      "inputSha256": "ddae1ccf2585b8787c35132b09150afd6e2b70497bfdd4f81dbc7e851b5fb2e4",
+      "exifOrientation": 1,
+      "sourceSize": [
+        2256,
+        2152
+      ],
+      "cropBox": null,
+      "alt": "Black 3D-printed tiered bookmark display stand with a geometric pattern, empty, on a desk",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB528 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB529",
+      "stem": "shadow-ninja",
+      "input": "assets/photo-sources/shadow-ninja.png",
+      "sourceTitle": "handy_1792850654535.png",
+      "sourceDriveId": "1C8J9wb0VVD1aYCJ4eagy6nvehMQTsxXl",
+      "sourceSha256": "5c5995ff48a8dd305e8061e47845d1bd59056f793927179a7872ab7b69ab8be1",
+      "inputSha256": "fda8e28330d5b30d66ad4594d19aae867d2bbdb72b517d8daa6ea4bab4677b96",
+      "exifOrientation": 1,
+      "sourceSize": [
+        791,
+        1054
+      ],
+      "cropBox": null,
+      "alt": "Black 3D-printed hooded ninja figure in a long coat with a sword on its back",
+      "format": "webp",
+      "widths": [
+        480
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB529 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB530",
+      "stem": "hueforge-poster-bin",
+      "input": "assets/photo-sources/hueforge-poster-bin.jpg",
+      "sourceTitle": "handy_1792851691397.jpg",
+      "sourceDriveId": "1Mj-HTa4w6ivdQd1-mv3jo428SIZm65J3",
+      "sourceSha256": "86222d185f7cc7d7b23ea3d899d0b93cbc2c6fce979fd13398c7e7a7160ce436",
+      "inputSha256": "e4157537cb0e18e4e6808acaa26addb73502ce28393dc6bfaa68cfe6b0cd4cf0",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1080,
+        1440
+      ],
+      "cropBox": null,
+      "alt": "Grey 3D-printed storage bin holding a row of HueForge prints",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB530 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB531",
+      "stem": "hueforge-poster-stand",
+      "input": "assets/photo-sources/hueforge-poster-stand.jpg",
+      "sourceTitle": "handy_1792853041602.jpg",
+      "sourceDriveId": "1vv2-4nRome8MPq3Ex_uF2FPb1cJGdAnb",
+      "sourceSha256": "0f42e397b14b2ba06ddfe08e43b14d91892d4f0b7d61b3bd1f4e6d63093aa7ce",
+      "inputSha256": "410b88f03804bca6def8717a608f40a71b27725926746dcd4858da686d6a24dd",
+      "exifOrientation": 1,
+      "sourceSize": [
+        1080,
+        1440
+      ],
+      "cropBox": null,
+      "alt": "Black curved 3D-printed stand for a HueForge print, on a wooden table",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB531 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB532",
+      "stem": "halo-master-chief",
+      "input": "assets/photo-sources/halo-master-chief.jpg",
+      "sourceTitle": "handy_1793361577809.jpg",
+      "sourceDriveId": "1dyRVPgw73c5Yf6JI2EJ-GtMjTtl3xdeE",
+      "sourceSha256": "52851d9a5b778206a29a1675b561b5375accfd49b67024fa5695e13ee82fe63e",
+      "inputSha256": "bf4a773ed7f89ccc29798f599dedb9aa8ae160e18a17749a8c5060d649ae05f3",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3024,
+        4032
+      ],
+      "cropBox": null,
+      "alt": "Tan 3D-printed Master Chief figure holding a rifle, on a debris base",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB532 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
+    },
+    {
+      "id": "HNYCMB533",
+      "stem": "nazgul-black-rider",
+      "input": "assets/photo-sources/nazgul-black-rider.jpg",
+      "sourceTitle": "handy_1793362715932.jpg",
+      "sourceDriveId": "1saaV6L8pH6m1YJEOVsGXbdh3jdo1UMuk",
+      "sourceSha256": "3879e1100ad6575455b680ec0077dbbd275624f8cc8f1c1e84a4b7b70f82f68c",
+      "inputSha256": "5efa384bf9f1a16fd8260312a7cdf61067315f70814d5c37c37e0a1b0ed7c96c",
+      "exifOrientation": 1,
+      "sourceSize": [
+        3000,
+        4000
+      ],
+      "cropBox": null,
+      "alt": "Tan unpainted 3D-printed Nazgul on horseback with a sword, on a round base",
+      "format": "webp",
+      "widths": [
+        480,
+        960
+      ],
+      "square": {
+        "mode": "pad",
+        "widths": [
+          160,
+          320,
+          480,
+          640,
+          960,
+          1200
+        ],
+        "note": "Whole frame, padded to a square."
+      },
+      "handoff": "Downloaded 2026-10-31 from the owner's Drive folder HoneyComb / 01 Products / HNYCMB533 (link-shared original; byte size checked against Drive). Photo from the model's designer (MakerWorld/Bambu Handy); owner chose \"Use designer photos, credited\" on 2026-10-31.",
+      "ownerApprovalDate": "2026-10-31"
     }
   ],
   "pending": []

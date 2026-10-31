@@ -91,6 +91,7 @@ export function validateData(products, store) {
     if (p.shareImage !== undefined && (!/^\/assets\/[a-zA-Z0-9_-]+\.jpg$/.test(p.shareImage.src) || !Number.isInteger(p.shareImage.width) || !Number.isInteger(p.shareImage.height))) throw new Error('Invalid share image: '+p.id);
     // Partner stock (printed by the partner, sold by HoneyComb): the cost price stays private, for the profit split.
     if (p.partner !== undefined && (!p.partner || typeof p.partner !== 'object' || Array.isArray(p.partner) || Object.keys(p.partner).some(k=>k!=='costLkr') || (p.partner.costLkr !== null && !validLkr(p.partner.costLkr)))) throw new Error('partner must be {costLkr} with null or a positive LKR amount: '+p.id);
+    if (p.photoCredit !== undefined && p.photoCredit !== 'designer') throw new Error('photoCredit must be "designer" when set: '+p.id);
     if (typeof p.approved !== 'boolean') throw new Error('Missing approval state');
     if (store.mode === 'live' && p.approved && (!p.image || p.availability === 'unconfirmed')) throw new Error(`Approved live product needs an original photo and confirmed availability: ${p.id}`);
   }

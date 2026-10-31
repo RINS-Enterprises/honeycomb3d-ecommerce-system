@@ -7,7 +7,10 @@ import {activePromos, promoActive, validateData} from '../src/domain.mjs';
 const products=JSON.parse(await readFile(new URL('../data/products.json',import.meta.url),'utf8'));
 const store=JSON.parse(await readFile(new URL('../data/store.json',import.meta.url),'utf8'));
 const NOW=Date.parse('2026-11-05T06:00:00Z');
-const live=products.find(p=>p.approved), pending=products.find(p=>!p.approved);
+const live=products.find(p=>p.approved);
+// A pending listing without a photo, as the admin creates them.
+const pending={id:'HNYCMB999',slug:'test-pending',name:'Test pending',category:'Figures',tags:[],description:'Pending.',priceLkr:null,availability:'unconfirmed',image:null,approved:false,source:'test'};
+products.push(pending);
 
 test('an edit changes only whitelisted fields, records an admin price, and keeps the input untouched',()=>{
   const r=applyAdminChanges(products,store,{edits:[{id:live.id,fields:{priceLkr:999,availability:'unavailable'}}]},NOW);
@@ -48,12 +51,12 @@ test('partner cost is stored privately and removed with null',()=>{
   assert.throws(()=>validateData([{...live,partner:{costLkr:1,secret:1}}],store),/partner/);
 });
 test('a new listing gets the next HNYCMB number, a unique slug, and stays pending without a photo',()=>{
-  const r=applyAdminChanges(products,store,{create:{name:'Halo Master Chief',category:'Figures',description:'A Master Chief figure.',priceLkr:2500,availability:'made-to-order',tags:['Halo']}},NOW);
+  const r=applyAdminChanges(products,store,{create:{name:'Mandalorian Helmet',category:'Figures',description:'A helmet.',priceLkr:2500,availability:'made-to-order',tags:['Star Wars']}},NOW);
   const p=r.products.at(-1);
   assert.equal(p.id,nextId(products));assert.match(p.id,/^HNYCMB\d+$/);
-  assert.equal(p.slug,'halo-master-chief');assert.equal(p.approved,false);assert.equal(p.image,null);
+  assert.equal(p.slug,'mandalorian-helmet');assert.equal(p.approved,false);assert.equal(p.image,null);
   assert.deepEqual(p.priceSource,{provider:'admin',setAt:'2026-11-05'});
-  assert.equal(applyAdminChanges(r.products,store,{create:{name:'Halo Master Chief',category:'Figures',description:'Again.'}},NOW).products.at(-1).slug,'halo-master-chief-2');
+  assert.equal(applyAdminChanges(r.products,store,{create:{name:'Mandalorian Helmet',category:'Figures',description:'Again.'}},NOW).products.at(-1).slug,'mandalorian-helmet-2');
   assert.throws(()=>applyAdminChanges(products,store,{create:{name:'X',category:'Y',description:'Z',approved:true}},NOW),/Not allowed/);
   assert.equal(slugify('Shadow ninja — Dark Warrior!'),'shadow-ninja-dark-warrior');
 });

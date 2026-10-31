@@ -141,7 +141,8 @@ function reveal(root=document) {
   if(!revealer)return;
   const fold=innerHeight;
   root.querySelectorAll(REVEAL).forEach(el=>{
-    if(el.dataset.revealed||el.getBoundingClientRect().top<fold)return;
+    // Cards inside the sideways slider may never cross the viewport vertically, so they are never hidden.
+    if(el.dataset.revealed||el.closest('[data-rail]')||el.getBoundingClientRect().top<fold)return;
     el.dataset.revealed='pending';el.classList.add('reveal');revealer.observe(el);
   });
 }
@@ -446,7 +447,18 @@ function initChipFades() {
     row.addEventListener('scroll',update,{passive:true});addEventListener('resize',update);update();
   });
 }
-initHeader();initChipFades();armAltPhotos();initFilters();initGallery();initShare();initLightbox();initStickyBuy();initReveal();
+// Home slider: the prev/next buttons scroll one view; disabled at either end. Without JS the rail still scrolls.
+function initRail() {
+  const rail=document.querySelector('[data-rail]'), controls=document.querySelector('[data-rail-controls]');
+  if(!rail||!controls)return;
+  const prev=controls.querySelector('[data-rail-prev]'), next=controls.querySelector('[data-rail-next]');
+  const update=()=>{prev.disabled=rail.scrollLeft<=4;next.disabled=rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-4;controls.hidden=rail.scrollWidth<=rail.clientWidth+4;};
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  prev.addEventListener('click',()=>rail.scrollBy({left:-rail.clientWidth*0.9,behavior:reduce?'auto':'smooth'}));
+  next.addEventListener('click',()=>rail.scrollBy({left:rail.clientWidth*0.9,behavior:reduce?'auto':'smooth'}));
+  rail.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();
+}
+initHeader();initChipFades();armAltPhotos();initFilters();initRail();initGallery();initShare();initLightbox();initStickyBuy();initReveal();
 try {
   const responses=await Promise.all([fetch('/data/products.json'),fetch('/data/store.json')]);
   if(responses.some(r=>!r.ok))throw new Error('Data unavailable');

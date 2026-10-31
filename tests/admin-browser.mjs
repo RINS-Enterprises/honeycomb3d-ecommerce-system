@@ -19,7 +19,7 @@ try {
   const errors=[];page.on('pageerror',err=>errors.push(err.message));
   let loggedIn=false,head='h1',saves=[];
   await page.route('**/api/admin/**',async route=>{
-    const url=new URL(route.request().url()),name=url.pathname.replace('/api/admin/',''),body=route.request().postDataJSON?.();
+    const url=new URL(route.request().url()),name=url.pathname.replace('/api/admin/','').replace(/\/$/,''),body=route.request().postDataJSON?.();
     const json=(v,status=200)=>route.fulfill({status,contentType:'application/json',body:JSON.stringify(v)});
     if(name==='login')return body.password==='right'?(loggedIn=true,json({ok:true})):json({error:'Wrong password'},401);
     if(name==='logout'){loggedIn=false;return json({ok:true});}

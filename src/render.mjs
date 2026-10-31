@@ -1,6 +1,6 @@
 import {escapeHtml as e, money, searchIndexing, paypalOverseas, orderingOpen, orderNowUrl, delivery, paymentMethods, socialLinks, trustPages, policiesOn, POLICY_PAGES} from './domain.mjs';
 import {displayPhone} from './policies.mjs';
-import {price, CARD_SIZES, picture, card, availability, avifSource, withPicture} from './card.mjs';
+import {price, CARD_SIZES, picture, card, availability, avifSource, withPicture, DESIGNER_NOTE} from './card.mjs';
 export {price, CARD_SIZES, picture, card};
 
 // Every photo slot is a square frame filled by a square derivative (object-fit: cover).
@@ -60,6 +60,8 @@ export function layout(title, body, store, current='', head='', meta={}) {
 const preload=(variants,media)=>variants.every(v=>v.avif)?
   '<link rel="preload" as="image" type="image/avif" imagesrcset="'+e(variants.map(v=>v.avif+' '+v.width+'w').join(', '))+'" imagesizes="100vw" media="'+media+'" fetchpriority="high">':
   '<link rel="preload" as="image" imagesrcset="'+e(srcset(variants))+'" imagesizes="100vw" media="'+media+'" fetchpriority="high">';
+// Slider card width: about 40% of a phone screen, so the next card peeks in, 240 CSS px on larger screens.
+const RAIL_SIZES='(max-width: 700px) 40vw, 240px';
 export function home(products,store) {
   const categories=[...new Set(products.map(p=>p.category))];
   // Themes as a second way in: the largest first (ties keep catalogue order), each with its design count.
@@ -88,8 +90,9 @@ export function home(products,store) {
       const count=inCategory.length+' '+(inCategory.length===1?'design':'designs');
       return '<a class="category-tile'+(centre?' is-centred':'')+'" href="/shop/?category='+encodeURIComponent(c)+'" aria-label="'+e(c)+', '+count+'"><span class="category-photo">'+picture(cover,{sizes:TILE_SIZES})+'</span><span class="category-copy"><strong>'+e(c)+'</strong><span>'+count+'</span></span><span class="category-arrow" aria-hidden="true">→</span></a>';
     }).join('') + '</div>'+themeRow+'</section>':'') +
-    '<section class="wrap section featured-section" aria-labelledby="featured-title"><div class="section-heading"><div><p class="eyebrow">THE COLLECTION</p><h2 id="featured-title">Small objects. Big character.</h2></div><a href="/shop/">View collection →</a></div>' +
-    '<div class="product-grid">' + products.slice(0,4).map(p=>card(p,{store})).join('') + (products.length?'':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</div></section>' +
+    // Every design in one sideways slider, newest first. Plain scroll-snap: works by touch, trackpad and keyboard; the buttons are an extra.
+    '<section class="wrap section featured-section" aria-labelledby="featured-title"><div class="section-heading"><div><p class="eyebrow">THE COLLECTION · '+products.length+' DESIGNS</p><h2 id="featured-title">Small objects. Big character.</h2></div><div class="rail-head"><span class="rail-controls" data-rail-controls hidden><button type="button" class="rail-btn" data-rail-prev aria-label="Previous designs" disabled>←</button><button type="button" class="rail-btn" data-rail-next aria-label="Next designs">→</button></span><a href="/shop/">View all →</a></div></div>' +
+    (products.length?'<div class="product-rail" data-rail data-testid="home-slider" role="region" aria-label="All designs. Scroll sideways to see more." tabindex="0">' + [...products].reverse().map(p=>card(p,{store,maxWidth:480,sizes:RAIL_SIZES})).join('') + '</div>':'<p>Our collection is being updated. You can still explore custom-print enquiries.</p>') + '</section>' +
     '<section class="wrap section how-it-works" aria-labelledby="how-title" data-testid="how-it-works"><div class="section-heading"><div><p class="eyebrow">HOW IT WORKS</p><h2 id="how-title">From favourite to yours</h2></div></div><ol class="how-steps">' +
     [['Browse the designs','Explore the collection, or bring an idea of your own.'],['Add them to your request cart','Choose quantities and add notes. Nothing is reserved or charged.'],['We confirm the details with you','Size, colour, price and delivery are agreed before anything is ordered.']].map(([t,d],i)=>'<li><span class="how-num" aria-hidden="true">0'+(i+1)+'</span><h3>'+t+'</h3><p>'+d+'</p></li>').join('') + '</ol></section>' +
     '<section class="wrap banner-wrap"><div class="custom-banner"><p class="eyebrow">YOUR IDEA, OUR NEXT PRINT</p><h2>Can’t find it?<br>Let’s talk about making it.</h2><p>Share a model link or describe your idea. We’ll confirm what is possible, the finish and the quote.</p><a class="button" href="/custom/">Start a custom enquiry <span aria-hidden="true">→</span></a></div></section>',store,'',head,{description:'3D-printed collectibles made in Sri Lanka: anime, film and comic figures, keychains and props, printed to order. Prices in LKR; order on WhatsApp.'});
@@ -178,6 +181,7 @@ export function detail(p,products,store) {
   const head=[ld,crumbLd].filter(Boolean).map(x=>'<script type="application/ld+json">'+JSON.stringify(x).replace(/</g,'\\u003c')+'</script>').join('');
   return layout(p.name,'<section class="wrap section product-section">'+crumbs+'<div class="product-detail">'+gallery(p)+
     '<div class="detail-info"><p class="eyebrow">'+e(p.category)+'</p><h1>'+e(p.name)+'</h1><p class="detail-price" data-testid="product-price">'+e(price(p))+'</p>' +
+    (p.photoCredit==='designer'?'<p class="fine photo-note" data-testid="photo-note">'+e(DESIGNER_NOTE)+'</p>':'') +
     '<p class="status-chip status-'+e(p.availability)+'" data-testid="availability"><span aria-hidden="true"></span>'+availability(p)+'</p>' +
     '<p class="lead">'+e(p.description)+'</p>' +
     '<form id="add-form" data-product-id="'+e(p.id)+'"'+(orderNow?' class="has-order-now"':'')+'><label>Quantity<input name="quantity" type="number" min="1" max="20" step="1" value="1" required></label>'+(orderNow?orderNowLink('Order now on WhatsApp <span aria-hidden="true">↗</span>','order-now'):'')+'<button class="button'+(orderNow?' secondary':'')+'" type="submit" disabled data-enable="'+(p.availability!=='unavailable')+'" data-testid="add-to-cart">'+(p.availability==='unavailable'?'Currently unavailable':'Add to request cart')+'</button></form>' +

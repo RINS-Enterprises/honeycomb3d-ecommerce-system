@@ -7,7 +7,9 @@ const STOCK = [['available','In stock'],['made-to-order','Made to order'],['unav
 let data = null, tab = 'pending', busy = false;
 
 async function call(path, body) {
-  const r = await fetch('/api/admin/'+path, body===undefined ? {credentials:'same-origin'} : {method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+  // Trailing slash: the site uses trailingSlash, so this skips a redirect on every call.
+  const [name, query] = path.split('?'), url = '/api/admin/'+name+'/'+(query?'?'+query:'');
+  const r = await fetch(url, body===undefined ? {credentials:'same-origin'} : {method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
   const json = await r.json().catch(()=>({error:'Unexpected answer ('+r.status+')'}));
   if (!r.ok) { const err = new Error(json.error||('Error '+r.status)); err.status = r.status; throw err; }
   return json;
@@ -15,7 +17,7 @@ async function call(path, body) {
 const say = (text, kind='') => { const el = document.getElementById('admin-status'); el.className = 'admin-status '+kind; el.textContent = text; };
 const sha256 = async t => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)))].map(b=>b.toString(16).padStart(2,'0')).join('');
 const colomboToday = () => new Date(Date.now()+5.5*3600e3).toISOString().slice(0,10);
-const thumb = p => { const v = (p.imageVariants||[]).find(x=>x.width>=320) || (p.image ? {src:p.image} : null); return v ? '<img src="/api/admin/image?src='+encodeURIComponent(v.src)+'" alt="" width="160" height="160" loading="lazy">' : '<div class="admin-nophoto">No photo yet</div>'; };
+const thumb = p => { const v = (p.imageVariants||[]).find(x=>x.width>=320) || (p.image ? {src:p.image} : null); return v ? '<img src="/api/admin/image/?src='+encodeURIComponent(v.src)+'" alt="" width="160" height="160" loading="lazy">' : '<div class="admin-nophoto">No photo yet</div>'; };
 const profit = p => p.partner && p.partner.costLkr!==null && p.priceLkr!==null ? 'Profit '+money(p.priceLkr-p.partner.costLkr)+' · partner share '+money((p.priceLkr-p.partner.costLkr)/2) : '';
 
 function loginView(message='') {
