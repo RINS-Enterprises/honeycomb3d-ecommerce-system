@@ -10,6 +10,8 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 const store=JSON.parse(await readFile(new URL('../data/store.json',import.meta.url),'utf8'));
 const fixture=JSON.parse(await readFile(new URL('fixtures/store-policies.json',import.meta.url),'utf8'));
 const on={...store,...fixture};
+// The policies switch as it was before the owner turned it on, so the off state stays tested.
+const off={...store,policies:false};
 const tokens={seller:'S',phone:'P',email:'E',location:'L',hours:'H',delivery:'D'};
 
 test('policy Markdown subset: headings, lists, paragraphs, bold and internal links only',()=>{
@@ -28,14 +30,14 @@ test('the business WhatsApp number displays in local form',()=>{
   assert.equal(displayPhone('447700900123'),'+447700900123');
 });
 test('policies are off unless switched on, and need complete contact details when on',()=>{
-  validateData([],store);
-  assert.equal(store.policies,false);
+  validateData([],off);
+  assert.equal(off.policies,false);
   validateData([],on);
   const bad=[{...on,contact:{...on.contact,email:undefined}},{...on,contact:{...on.contact,email:'not an email'}},{...on,contact:{...on.contact,updated:'yesterday'}},{...on,contact:{...on.contact,extra:'x'}},{...on,policies:'true'},{...on,pages:{shipping:'Owner text',returns:null,about:null}}];
   for(const s of bad)assert.throws(()=>validateData([],s));
 });
 test('all five policy files render with the store\'s contact details and no leftover tokens',async()=>{
-  assert.deepEqual(await loadPolicies(root,store),[],'Nothing is built while the switch is off');
+  assert.deepEqual(await loadPolicies(root,off),[],'Nothing is built while the switch is off');
   const docs=await loadPolicies(root,on);
   assert.deepEqual(docs.map(d=>d.slug),POLICY_PAGES.map(p=>p.slug));
   for(const d of docs) {
@@ -67,7 +69,7 @@ test('the agreement line shows next to Order now only when policies are on',asyn
   const products=JSON.parse(await readFile(new URL('../data/products.json',import.meta.url),'utf8')).filter(p=>p.approved);
   const p=products[0];
   assert.match(detail(p,products,on),/By sending an order request you agree to our <a href="\/terms\/">Terms<\/a>/);
-  assert.doesNotMatch(detail(p,products,store),/you agree to our/);
+  assert.doesNotMatch(detail(p,products,off),/you agree to our/);
   const docs=await loadPolicies(root,on);
   assert.doesNotMatch(docs.find(d=>d.slug==='privacy').html,/PayPal/,'No PayPal line while PayPal is off');
   assert.match((await loadPolicies(root,{...on,paypalOverseas:true})).find(d=>d.slug==='privacy').html,/PayPal processes that payment/);
