@@ -54,7 +54,7 @@ try {
     const leafOrder=page.locator('[data-product-card]').filter({hasText:'Hidden Leaf Keychain'}).getByRole('link',{name:'Order Hidden Leaf Keychain on WhatsApp (opens in a new tab)'});
     const url=new URL(await leafOrder.getAttribute('href'));
     assert.equal(url.origin+url.pathname,'https://wa.me/'+builtStore.whatsappNumber);
-    assert.equal(url.searchParams.get('text').split('\n')[1],'- Hidden Leaf Keychain [HC-LEAF] x 1: '+money(400));
+    assert.equal(url.searchParams.get('text').split('\n')[1],'- Hidden Leaf Keychain [HC-LEAF] x 1: '+money(550));
     assert.match(url.searchParams.get('text'),/not a confirmed purchase/);
     assert.equal(await leafOrder.getAttribute('target'),'_blank');
     assert.equal(await leafOrder.getAttribute('rel'),'noopener noreferrer');
@@ -164,7 +164,7 @@ try {
   const suggestions=page.getByTestId('cart-suggestions');
   assert.equal(await suggestions.getByRole('heading',{level:2}).textContent(),'Goes well with your request');
   assert.deepEqual(await suggestions.locator('h3').allTextContents(),['Kurama Figure','Minato Kunai','Classic Kunai']);
-  assert.deepEqual(await suggestions.locator('.suggest-item p').allTextContents(),[money(1500),money(1000),money(1000)],'Existing prices only');
+  assert.deepEqual(await suggestions.locator('.suggest-item p').allTextContents(),[money(2000),money(1350),money(1350)],'Existing prices only');
   await page.locator('#order-notes').fill('Blue please');
   await suggestions.getByRole('button',{name:'Add Minato Kunai to request cart'}).click();
   await page.waitForFunction(()=>document.querySelectorAll('[data-testid="cart-line"]').length===2);
@@ -206,7 +206,7 @@ try {
   assert.equal(await firstVisible(),'Bridgerton Bookmark','Cheapest first (LKR 300)');
   assert.match(page.url(),/sort=price-asc/);
   await page.getByTestId('sort').selectOption('price-desc');
-  assert.equal(await firstVisible(),'Office Desk Organizer with Phone Holder','Most expensive first (LKR 2,000)');
+  assert.equal(await firstVisible(),'Office Desk Organizer with Phone Holder','Most expensive first (LKR 2,650)');
   await page.getByTestId('filter-keychains').click();
   assert.deepEqual(await page.locator('[data-product-card]:visible .card-link').allTextContents(),['Night Fury Keychain','Light Fury Keychain','Grogu Baby Yoda Keychain','Hidden Leaf Keychain'],'Sort works with category chips; equal prices keep catalogue order');
   await page.getByTestId('sort').selectOption('name');
@@ -263,23 +263,40 @@ try {
     assert.match(await page.locator('.buy-panel, main').first().textContent(),/Delivery cost and timing are included in your quote\./);
   }
   await page.getByRole('link',{name:'View your request cart'}).click();
-  await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
+  await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2700),exact:true}).waitFor();
+  // Promo code (e.g. COMICCON26): offered only on its dates in Sri Lanka time; a right code adds a discount line, a wrong one doesn't.
+  const colombo=new Date(Date.now()+5.5*3600e3).toISOString().slice(0,10);
+  const promoOn=ordering&&builtStore.promo&&colombo>=builtStore.promo.from&&colombo<=builtStore.promo.until;
+  assert.equal(await page.getByTestId('cart-promo').count(),promoOn?1:0,'Promo field only while a code is active');
+  if(promoOn) {
+    const draft=()=>page.locator('.message-preview').inputValue();
+    await page.getByTestId('cart-promo').fill('nope');
+    await page.getByText('Code not recognised.').waitFor();
+    assert.doesNotMatch(await draft(),/Promo/);
+    await page.getByTestId('cart-promo').fill('comiccon26');
+    await page.getByTestId('cart-promo-ok').waitFor();
+    assert.equal(await page.getByTestId('cart-promo').evaluate(el=>el===document.activeElement),true,'Typing keeps focus in the field');
+    assert.match(await draft(),new RegExp('Promo code COMICCON26 \\('+builtStore.promo.percent+'% off\\): -'+escapeRe(money(2700*builtStore.promo.percent/100))));
+    assert.match(await page.getByTestId('cart-discount').textContent(),new RegExp(escapeRe(money(2700-2700*builtStore.promo.percent/100))));
+    await page.getByTestId('cart-promo').fill('');
+    await page.getByTestId('cart-discount').waitFor({state:'detached'});
+  }
   assert.equal(await page.getByRole('spinbutton').inputValue(),'2');
   await page.getByTestId('cart-qty-increase').click();
-  await page.getByRole('heading',{name:'Estimated items subtotal: '+money(3000),exact:true}).waitFor();
+  await page.getByRole('heading',{name:'Estimated items subtotal: '+money(4050),exact:true}).waitFor();
   assert.equal(await page.getByTestId('cart-qty').inputValue(),'3');
   await page.getByTestId('cart-qty-decrease').click();
   await page.getByTestId('cart-qty-decrease').click();
   assert.equal(await page.getByTestId('cart-qty').inputValue(),'1');
   assert.equal(await page.getByTestId('cart-qty-decrease').isDisabled(),true,'Quantity cannot go below 1');
   await page.getByTestId('cart-qty-increase').click();
-  await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2000),exact:true}).waitFor();
+  await page.getByRole('heading',{name:'Estimated items subtotal: '+money(2700),exact:true}).waitFor();
   assert.equal(await page.getByTestId('cart-line').count(),1);
   const draft=await page.locator('.message-preview').inputValue();
   if(shipping) {
     assert.equal(await page.getByTestId('cart-delivery').textContent(),shipping.text);
     assert.equal(await page.getByTestId('cart-delivery-fee').textContent(),shipping.feeLkr?money(shipping.feeLkr):'Confirmed with your quote');
-    if(shipping.feeLkr)assert.match(draft,new RegExp('Estimated items subtotal: '+escapeRe(money(2000))+'\nDelivery fee: '+escapeRe(money(shipping.feeLkr))+'\n'),'Fee is its own line, after the items subtotal');
+    if(shipping.feeLkr)assert.match(draft,new RegExp('Estimated items subtotal: '+escapeRe(money(2700))+'\nDelivery fee: '+escapeRe(money(shipping.feeLkr))+'\n'),'Fee is its own line, after the items subtotal');
     else assert.doesNotMatch(draft,/Delivery fee/);
   } else {
     assert.equal(await page.getByTestId('cart-delivery').count(),0);

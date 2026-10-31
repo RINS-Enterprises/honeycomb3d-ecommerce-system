@@ -203,3 +203,23 @@ test('names reject line and bidi separators, PayPal look-alikes, the default cho
   assert.doesNotThrow(()=>validateData(products,{...preview,searchIndexing:true,siteUrl:'https://honeycomb3d.store/'}),'One trailing slash is fine');
 });
 
+test('promo code: hashed, dated in Sri Lanka time, and a clear discount line in the order message',async()=>{
+  const {promoActive,promoDiscount,normalizePromo,colomboDay}=await import('../src/domain.mjs');
+  const {createHash}=await import('node:crypto');
+  const promo={sha256:createHash('sha256').update('COMICCON26').digest('hex'),percent:25,from:'2026-10-31',until:'2026-11-01'};
+  const live={mode:'live',whatsappVerified:true,whatsappNumber:'94700000000',promo};
+  validateData([],live);
+  for(const bad of [{...promo,sha256:'COMICCON26'},{...promo,percent:0},{...promo,percent:95},{...promo,until:'2026-10-30'},{...promo,from:'2026-02-31'},{...promo,code:'X'}])assert.throws(()=>validateData([],{...live,promo:bad}),/promo/);
+  assert.equal(colomboDay(Date.parse('2026-10-30T18:29:00Z')),'2026-10-30');
+  assert.equal(promoActive(live,Date.parse('2026-10-30T18:30:00Z')),true,'Starts at midnight in Colombo');
+  assert.equal(promoActive(live,Date.parse('2026-11-01T18:29:00Z')),true);
+  assert.equal(promoActive(live,Date.parse('2026-11-01T18:30:00Z')),false,'Ends at midnight in Colombo');
+  assert.equal(normalizePromo(' comic con26 '),'COMICCON26');
+  assert.equal(promoDiscount(2650,25),662.5);
+  const items=[{id:'A',quantity:2}];
+  const priced=[{id:'A',slug:'a',name:'A',priceLkr:2000,availability:'made-to-order'}];
+  const m=orderMessage(items,priced,'',{promo:{code:'COMICCON26',percent:25}});
+  assert.match(m,/Promo code COMICCON26 \(25% off\): -LKR\s1,000/);
+  assert.match(m,/Items subtotal after discount: LKR\s3,000/);
+  assert.doesNotMatch(orderMessage(items,priced),/Promo/);
+});

@@ -15,7 +15,10 @@ test('draft descriptions are explicitly attributed and remain unapproved',()=>{
 test('owner prices preserve storefront IDs and provenance; photographed designs are owner-approved as made to order',()=>{
   const prices={'HC-LEAF':400,'HC-BAYMAX':1000,'HC-KURAMA':1500,'HNYCMB501':500,'HC-MINATO':1000,'HC-LIGHTFURY':500,'HC-KUNAI':1000,
     HNYCMB505:300,HNYCMB506:500,HNYCMB507:2000,HNYCMB510:600,HNYCMB512:1750,HNYCMB513:500,HNYCMB514:500,HNYCMB515:500,HNYCMB516:1500,HNYCMB517:1500,HNYCMB518:1600};
-  assert.deepEqual(Object.fromEntries(products.map(p=>[p.id,p.priceLkr])),prices);
+  // Owner 2026-10-31: these are the Comic Con stall prices; the website price is stall ÷ 0.75, rounded to the nearest LKR 50.
+  assert.deepEqual(Object.fromEntries(products.map(p=>[p.id,p.stallPriceLkr??p.priceLkr])),prices);
+  for(const p of products.filter(p=>p.approved))assert.equal(p.priceLkr,Math.round(p.stallPriceLkr/0.75/50)*50,'Website price follows the owner rule: '+p.id);
+  for(const p of products.filter(p=>!p.approved))assert.equal(p.stallPriceLkr,undefined,'Unlisted designs keep their recorded price: '+p.id);
   for(const p of products) {
     assert.equal(p.priceSource.provider,'Airtable');
     assert.equal(p.priceSource.tableId,'tblmUOdfunwP8iWKi');

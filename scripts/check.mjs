@@ -17,7 +17,7 @@ const publicProducts=JSON.parse(await readFile(join(root,'dist/data/products.jso
 for(const p of publicProducts) {
   assert.equal(p.copyStatus,undefined,'Copy approval workflow must not be published');
   assert.equal(p.imageSource,undefined,'Recovery asset filenames must not be published');
-  for(const key of ['priceSource','imageApprovedAt','imageStatus'])assert.equal(p[key],undefined,'Source workflow metadata must not be published');
+  for(const key of ['priceSource','priceRule','stallPriceLkr','imageApprovedAt','imageStatus'])assert.equal(p[key],undefined,'Source workflow metadata must not be published');
   assert.equal(p.source,'Public catalog','Recovery evidence must stay in source data');
 }
 const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','faq/index.html','404.html',...trustPages(store).map(t=>t.slug+'/index.html'),...(policiesOn(store)?POLICY_PAGES.filter(p=>p.slug!=='privacy').map(p=>p.slug+'/index.html'):[]),...products.map(p=>'products/'+p.slug+'/index.html')];
@@ -42,6 +42,7 @@ for(const path of paths) {
   assert.match(html,/<title>[^<]+<\/title>/);
   assert(!/\b(?:undefined|NaN)\b/.test(html),'Unexpected value: '+path);
   assert(!/\{\{\s*\w+\s*\}\}/.test(html),'Unfilled template token: '+path);
+  assert(!/COMICCON/i.test(html),'The promo code itself is never published (only its hash): '+path);
   for(const [,href] of html.matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
     let local=decodeURIComponent(href.split('?')[0]);
     if(local.endsWith('/'))local+='index.html';

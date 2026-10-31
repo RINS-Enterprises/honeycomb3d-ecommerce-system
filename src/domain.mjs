@@ -41,6 +41,10 @@ export function validateData(products, store) {
     const pg=store.pages;
     if (!pg || typeof pg !== 'object' || Array.isArray(pg) || Object.keys(pg).some(k=>!TRUST_PAGES.some(t=>t.key===k)) || Object.values(pg).some(v=>v !== null && !ownerText(v,4000,{lines:true}))) throw new Error('pages must map shipping, returns or about to null or the owner\'s text');
   }
+  if (store.promo !== undefined && store.promo !== null) {
+    const pr=store.promo, day=v=>typeof v==='string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && new Date(v+'T00:00:00Z').toISOString().slice(0,10)===v;
+    if (typeof pr!=='object' || Array.isArray(pr) || Object.keys(pr).some(k=>!['sha256','percent','from','until'].includes(k)) || !/^[0-9a-f]{64}$/.test(pr.sha256||'') || !Number.isInteger(pr.percent) || pr.percent<1 || pr.percent>90 || !day(pr.from) || !day(pr.until) || pr.until<pr.from) throw new Error('promo must be null or {sha256, percent 1-90, from, until} with YYYY-MM-DD dates');
+  }
   if (store.policies !== undefined && typeof store.policies !== 'boolean') throw new Error('policies must be true or false');
   if (store.contact !== undefined && store.contact !== null) {
     const c=store.contact;
@@ -149,10 +153,16 @@ export function cartSuggestions(items, products, limit=3) {
   return products.map((p,i)=>({p,i,shared:inCart.has(p.id)||p.availability==='unavailable'?0:lines.reduce((n,x)=>n+themesOf(x.product).filter(t=>themesOf(p).includes(t)).length,0)}))
     .filter(o=>o.shared).sort((a,b)=>b.shared-a.shared||categories.has(a.p.category)-categories.has(b.p.category)||a.i-b.i).slice(0,limit).map(o=>o.p);
 }
-export function orderMessage(items, products, notes='', {paypal=false, payment='', deliveryFeeLkr=null}={}) {
+// Promo code (e.g. a Comic Con code): only a SHA-256 of the code is published, so the code itself isn't readable in the site's
+// files. Active on its dates in Sri Lanka time (UTC+05:30), inclusive; off (null) otherwise. The discount applies to priced items.
+export const normalizePromo = v => String(v||'').trim().toUpperCase().replace(/\s+/g,'');
+export const colomboDay = (now=Date.now()) => new Date(now+5.5*3600e3).toISOString().slice(0,10);
+export const promoActive = (store, now=Date.now()) => !!store.promo && colomboDay(now)>=store.promo.from && colomboDay(now)<=store.promo.until;
+export const promoDiscount = (knownSubtotal, percent) => Math.round(knownSubtotal*percent)/100;
+export function orderMessage(items, products, notes='', {paypal=false, payment='', deliveryFeeLkr=null, promo=null}={}) {
   const s=cartSummary(items,products);
   if (!s.lines.length) return '';
-  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, deliveryFeeLkr?`Delivery fee: ${money(deliveryFeeLkr)}`:'', `Please confirm availability, options, ${deliveryFeeLkr?'':'delivery cost, '}final total and payment arrangements. This is an order request, not a confirmed purchase.`,paypal?'Payment: I am paying from outside Sri Lanka. Please send a PayPal payment link in USD once the total is confirmed.':payment?`Preferred payment: ${payment}`:'',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
+  return ['Hello HoneyComb 3D, I would like to request an order.',...s.lines.map(({product:p,quantity:q})=>`- ${p.name} [${p.id}] x ${q}: ${p.priceLkr===null?'price to confirm':money(p.priceLkr*q)}`),s.unpriced?(s.lines.every(x=>x.product.priceLkr===null)?'Quote required for all items. No total is available yet.':`Priced items subtotal: ${money(s.knownSubtotal)}. Other item prices are pending; this is not the full total.`):`Estimated items subtotal: ${money(s.knownSubtotal)}`, ...(promo&&s.knownSubtotal?[`Promo code ${promo.code} (${promo.percent}% off): -${money(promoDiscount(s.knownSubtotal,promo.percent))}`,`Items subtotal after discount: ${money(s.knownSubtotal-promoDiscount(s.knownSubtotal,promo.percent))}`]:[]), deliveryFeeLkr?`Delivery fee: ${money(deliveryFeeLkr)}`:'', `Please confirm availability, options, ${deliveryFeeLkr?'':'delivery cost, '}final total and payment arrangements. This is an order request, not a confirmed purchase.`,paypal?'Payment: I am paying from outside Sri Lanka. Please send a PayPal payment link in USD once the total is confirmed.':payment?`Preferred payment: ${payment}`:'',notes.trim()?`Notes: ${notes.trim().slice(0,500)}`:''].filter(Boolean).join('\n');
 }
 export function whatsappUrl(message, store) {
   if (!message || !store.whatsappVerified || !/^[1-9]\d{7,14}$/.test(store.whatsappNumber||'')) return null;

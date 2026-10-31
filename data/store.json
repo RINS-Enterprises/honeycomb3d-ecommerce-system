@@ -23,6 +23,12 @@
     "email": "honeycomb3d.lk@gmail.com",
     "updated": "2026-10-31"
   },
+  "promo": {
+    "sha256": "6543abf225796c5568f9f189d8f518f40bf424207c4ce234a82d00eb1826d0d1",
+    "percent": 25,
+    "from": "2026-10-31",
+    "until": "2026-11-01"
+  },
   "logo": "/assets/honeycomb-logo-dark-660.png",
   "source": "Owner's own WhatsApp Business number 0710599815 (owner correction, 2026-10-18: an earlier mistyped number is banned in scripts/check.mjs).",
   "logoWidth": 660,

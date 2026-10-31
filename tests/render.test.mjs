@@ -64,7 +64,7 @@ test('cards are one link with a clean LKR price and test hooks',async()=>{
   const html=card(products.find(p=>p.id==='HC-LEAF'));
   assert.equal([...html.matchAll(/<a\b/g)].length,1,'A single link covers the whole card');
   assert.match(html,/data-testid="product-card"/);
-  assert.match(html,/<p class="price" data-testid="product-price">LKR\s400<\/p>/);
+  assert.match(html,/<p class="price" data-testid="product-price">LKR\s550<\/p>/);
 });
 
 test('live cards add a one-tap WhatsApp Order for that design at quantity 1; preview and unavailable cards do not',async()=>{
@@ -74,7 +74,7 @@ test('live cards add a one-tap WhatsApp Order for that design at quantity 1; pre
   const href=html.match(/<a class="quick-order" href="([^"]+)"/)[1].replaceAll('&amp;','&');
   const url=new URL(href);
   assert.equal(url.origin+url.pathname,'https://wa.me/94700000000');
-  assert.match(url.searchParams.get('text'),/^Hello HoneyComb 3D, I would like to request an order\.\n- Hidden Leaf Keychain \[HC-LEAF\] x 1: LKR\s400\n/);
+  assert.match(url.searchParams.get('text'),/^Hello HoneyComb 3D, I would like to request an order\.\n- Hidden Leaf Keychain \[HC-LEAF\] x 1: LKR\s550\n/);
   assert.match(html,/target="_blank" rel="noopener noreferrer" data-card-order data-testid="card-order" aria-label="Order Hidden Leaf Keychain on WhatsApp \(opens in a new tab\)"/);
   assert.match(html,/data-quick-add="HC-LEAF"/,'Add stays beside Order');
   assert.equal([...html.matchAll(/<a\b/g)].length,2,'The product link plus Order');
@@ -95,7 +95,7 @@ test('product page: gallery only with several photos, clear price, availability 
   const closedMinato={...visible.find(p=>p.id==='HC-MINATO'),availability:'unconfirmed'};
   const minato=detail(closedMinato,visible,preview);
   assert.equal([...minato.matchAll(/data-gallery-thumb=/g)].length,4);
-  assert.match(minato,/<p class="detail-price" data-testid="product-price">LKR\s1,000<\/p>/);
+  assert.match(minato,/<p class="detail-price" data-testid="product-price">LKR\s1,350<\/p>/);
   assert.match(minato,/data-testid="availability"><span aria-hidden="true"><\/span>Availability to confirm/);
   assert.match(minato,/<p class="order-note" data-testid="order-status">.*Online ordering opens soon\. Save your picks in the request cart\.<\/p>/);
   assert(!minato.includes('order-button'),'The disabled order button is gone');
@@ -122,7 +122,7 @@ test('pages carry share metadata, theme colour, touch icon and price-only Produc
   assert.match(html,/<link rel="apple-touch-icon" href="\/apple-touch-icon\.png">/);
   const ld=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);
   assert.deepEqual(Object.keys(ld).sort(),['@context','@type','image','name','offers']);
-  assert.deepEqual(ld.offers,{'@type':'Offer',price:'400',priceCurrency:'LKR'});
+  assert.deepEqual(ld.offers,{'@type':'Offer',price:'550',priceCurrency:'LKR'});
   assert(!/availability|rating|review/i.test(JSON.stringify(ld)));
 });
 

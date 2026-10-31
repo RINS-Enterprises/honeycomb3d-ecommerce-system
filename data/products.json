@@ -9,7 +9,7 @@
       "Anime"
     ],
     "description": "A Hidden Leaf design for your keyring. Ask us about the available colours and size.",
-    "priceLkr": 400,
+    "priceLkr": 550,
     "availability": "made-to-order",
     "image": "/assets/hidden-leaf-sq-640.webp",
     "imageAlt": "White Hidden Leaf headband keychain with a black leaf symbol on a light backdrop",
@@ -150,6 +150,12 @@
       "src": "/assets/hidden-leaf-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 400,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -162,7 +168,7 @@
       "Movies"
     ],
     "description": "Bring Baymax to your shelf. Size, colour and finish will be confirmed with your quote.",
-    "priceLkr": 1000,
+    "priceLkr": 1350,
     "availability": "made-to-order",
     "image": "/assets/baymax-sq-640.webp",
     "imageAlt": "Two white 3D-printed Baymax figures photographed on a green display surface",
@@ -226,6 +232,12 @@
       "src": "/assets/baymax-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 1000,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -238,7 +250,7 @@
       "Anime"
     ],
     "description": "A Kurama figure for your collection. Ask about available sizes, colours and finishing options.",
-    "priceLkr": 1500,
+    "priceLkr": 2000,
     "availability": "made-to-order",
     "image": "/assets/kurama-sq-640.webp",
     "imageAlt": "Orange 3D-printed nine-tailed fox (Kurama) figure with black eye markings, crouching with its tails raised, on a white background",
@@ -302,6 +314,12 @@
       "src": "/assets/kurama-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 1500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -316,7 +334,7 @@
       "Dragons"
     ],
     "description": "A little Night Fury for your keys or bag. Confirm the size, colour and keyring details with us.",
-    "priceLkr": 500,
+    "priceLkr": 650,
     "availability": "made-to-order",
     "image": "/assets/night-fury-sq-640.webp",
     "imageAlt": "A single black articulated Night Fury keychain with yellow-green eyes held in a hand",
@@ -380,6 +398,12 @@
       "src": "/assets/night-fury-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -392,7 +416,7 @@
       "Anime"
     ],
     "description": "A decorative Minato-inspired kunai prop. Ask about dimensions and finish before ordering.",
-    "priceLkr": 1000,
+    "priceLkr": 1350,
     "availability": "made-to-order",
     "image": "/assets/minato-kunai-sq-640.webp",
     "imageAlt": "Black three-pronged Minato kunai with silver edge bevels, a tan engraved handle and a black ring on a light backdrop",
@@ -589,6 +613,12 @@
       "src": "/assets/minato-kunai-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 1000,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -603,7 +633,7 @@
       "Dragons"
     ],
     "description": "A Light Fury keychain for your collection. Size and finishing details are confirmed on enquiry.",
-    "priceLkr": 500,
+    "priceLkr": 650,
     "availability": "made-to-order",
     "image": "/assets/light-fury-sq-640.webp",
     "imageAlt": "A single painted white Light Fury keychain with blue eyes and black claws held in a hand",
@@ -667,6 +697,12 @@
       "src": "/assets/light-fury-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -679,7 +715,7 @@
       "Anime"
     ],
     "description": "A classic kunai display prop. Tell us the size and colour you have in mind when requesting a quote.",
-    "priceLkr": 1000,
+    "priceLkr": 1350,
     "availability": "made-to-order",
     "image": "/assets/classic-kunai-sq-640.webp",
     "imageAlt": "Black 3D-printed kunai with a white wrapped handle and a black ring, on a light grey backdrop",
@@ -743,6 +779,12 @@
       "src": "/assets/classic-kunai-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 1000,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -754,7 +796,7 @@
       "Bridgerton"
     ],
     "description": "A Bridgerton bookmark to keep your place. Confirm the size and colour with us.",
-    "priceLkr": 300,
+    "priceLkr": 400,
     "availability": "made-to-order",
     "image": "/assets/bridgerton-bookmark-sq-640.webp",
     "approved": true,
@@ -820,6 +862,12 @@
       "src": "/assets/bridgerton-bookmark-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 300,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -831,7 +879,7 @@
       "Kpop Demon Hunters"
     ],
     "description": "A Flexi Derpy figure from Kpop Demon Hunters. Confirm the size, colour and finish with us.",
-    "priceLkr": 500,
+    "priceLkr": 650,
     "availability": "made-to-order",
     "image": "/assets/flexi-derpy-sq-640.webp",
     "approved": true,
@@ -897,6 +945,12 @@
       "src": "/assets/flexi-derpy-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -906,7 +960,7 @@
     "category": "Desk Organizers",
     "tags": [],
     "description": "A desk organizer with a phone holder for your workspace. Confirm the size and colour with us.",
-    "priceLkr": 2000,
+    "priceLkr": 2650,
     "availability": "made-to-order",
     "image": "/assets/desk-organizer-sq-640.webp",
     "approved": true,
@@ -972,6 +1026,12 @@
       "src": "/assets/desk-organizer-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 2000,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -983,7 +1043,7 @@
       "Dragons"
     ],
     "description": "A Light Fury figure with big wings for your desk or shelf. Confirm the size, colour and finish with us.",
-    "priceLkr": 600,
+    "priceLkr": 800,
     "availability": "made-to-order",
     "image": "/assets/light-fury-big-wings-sq-640.webp",
     "approved": true,
@@ -1049,6 +1109,12 @@
       "src": "/assets/light-fury-big-wings-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 600,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -1061,7 +1127,7 @@
       "Spider-Man"
     ],
     "description": "An Urban Spider-Man figure for your desk or shelf. Confirm the size, colour and finish with us.",
-    "priceLkr": 1750,
+    "priceLkr": 2350,
     "availability": "made-to-order",
     "image": "/assets/urban-spider-man-sq-640.webp",
     "approved": true,
@@ -1127,6 +1193,12 @@
       "src": "/assets/urban-spider-man-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 1750,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -1164,7 +1236,7 @@
     "category": "Props",
     "tags": [],
     "description": "A shuriken ninja star prop for your collection. Confirm the size, colour and finish with us.",
-    "priceLkr": 500,
+    "priceLkr": 650,
     "availability": "made-to-order",
     "image": "/assets/shuriken-sq-640.webp",
     "approved": true,
@@ -1230,6 +1302,12 @@
       "src": "/assets/shuriken-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -1241,7 +1319,7 @@
       "Star Wars"
     ],
     "description": "A Grogu keychain for your keys or bag. Confirm the size and colour with us.",
-    "priceLkr": 500,
+    "priceLkr": 650,
     "availability": "made-to-order",
     "image": "/assets/grogu-keychain-sq-640.webp",
     "approved": true,
@@ -1307,6 +1385,12 @@
       "src": "/assets/grogu-keychain-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -1319,7 +1403,7 @@
       "Iron Man"
     ],
     "description": "A Dummy 13 figure styled as Iron Man. Confirm the size, colour and finish with us.",
-    "priceLkr": 1500,
+    "priceLkr": 2000,
     "availability": "made-to-order",
     "image": "/assets/dummy-13-iron-man-sq-640.webp",
     "approved": true,
@@ -1385,6 +1469,12 @@
       "src": "/assets/dummy-13-iron-man-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 1500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -1397,7 +1487,7 @@
       "Spider-Man"
     ],
     "description": "A Dummy 13 figure styled as Spider-Man. Confirm the size, colour and finish with us.",
-    "priceLkr": 1500,
+    "priceLkr": 2000,
     "availability": "made-to-order",
     "image": "/assets/dummy-13-spider-man-sq-640.webp",
     "approved": true,
@@ -1463,6 +1553,12 @@
       "src": "/assets/dummy-13-spider-man-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 1500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   },
   {
@@ -1472,7 +1568,7 @@
     "category": "Figures",
     "tags": [],
     "description": "A horse figurine for your desk or shelf. Confirm the size, colour and finish with us.",
-    "priceLkr": 1600,
+    "priceLkr": 2150,
     "availability": "made-to-order",
     "image": "/assets/horse-figurine-sq-640.webp",
     "approved": true,
@@ -1538,6 +1634,12 @@
       "src": "/assets/horse-figurine-share.jpg",
       "width": 1200,
       "height": 1200
+    },
+    "stallPriceLkr": 1600,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
     }
   }
 ]
