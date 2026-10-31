@@ -62,7 +62,7 @@ if(!searchIndexing(store)) {
 } else {
   // Indexing on (D-12): crawlable, with a sitemap of exactly the public pages and breadcrumb data on every product page.
   const site=store.siteUrl.replace(/\/$/,'');
-  assert.equal(await readFile(join(root,'dist/robots.txt'),'utf8'),'User-agent: *\nAllow: /\n\nSitemap: '+site+'/sitemap.xml\n');
+  assert.equal(await readFile(join(root,'dist/robots.txt'),'utf8'),'User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: '+site+'/sitemap.xml\n');
   const xml=await readFile(join(root,'dist/sitemap.xml'),'utf8');
   assert.match(xml,/^<\?xml version="1\.0" encoding="UTF-8"\?>\n<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">\n(?:<url><loc>https:\/\/[^<\s]+<\/loc><\/url>\n)+<\/urlset>\n$/,'Well-formed sitemap of absolute URLs');
   const locs=[...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&'));

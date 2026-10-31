@@ -1,10 +1,13 @@
-import {guard, send, readCatalog, commitCatalog, deploy} from '../_admin.mjs';
-import {applyAdminChanges} from '../../src/admin-core.mjs';
+import {guard, send, readCatalog, commitCatalog, deploy, repoIsPrivate} from '../_admin.mjs';
+import {applyAdminChanges, touchesPrivate} from '../../src/admin-core.mjs';
 // POST {head, edits?, create?, promos?}: check, commit to the release branch, then publish that commit to production.
 // The production build runs the site checks, so a change that breaks them fails the build and the live site stays as it was.
 export default async function handler(req, res) {
   const body = await guard(req, res, {method:'POST'});
   if (!body) return;
+  // The data files are committed to GitHub: partner costs and promo notes only while the repository is private.
+  try { if (touchesPrivate(body) && !await repoIsPrivate()) return send(res, 400, {error:'Partner costs and promo notes are private. Make the GitHub repository private first (see docs/pm/ADMIN-SETUP.md), or leave them empty.'}); }
+  catch (e) { return send(res, 502, {error:'Could not check the repository ('+e.message+').'}); }
   let catalog;
   try { catalog = await readCatalog(); } catch (e) { return send(res, 502, {error:'Could not read the catalog ('+e.message+').'}); }
   if (body.head !== catalog.head) return send(res, 409, {error:'The catalog changed since you opened this page. Reload and try again.'});

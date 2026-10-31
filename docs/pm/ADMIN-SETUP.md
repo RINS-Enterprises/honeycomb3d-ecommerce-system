@@ -20,6 +20,14 @@
 2. publishes the site, and "Live ✓" shows after about a minute
 3. if the site's safety checks fail, the live site stays as it was and the page says so
 
+## Before using partner costs: make the GitHub repository private
+The repository `RINS-Enterprises/honeycomb3d-ecommerce-system` is **public**. Anyone can read everything in it: the data files, the business documents (operating plan, partner-stock arrangement, Comic Con stall prices) and the code.
+
+- **Admin saves are commits there.** So the admin **refuses partner costs and promo notes while the repository is public.** Prices, names, stock and approvals still work.
+- **To make it private:** GitHub → the repository → Settings → General → Danger Zone → **Change visibility → Private**.
+  - Vercel keeps deploying, because it uses the GitHub app.
+  - What was public before stays in anyone's copies, so treat anything already pushed as seen.
+
 ## One-time setup (owner, about 10 minutes)
 The admin stays switched off (it answers "not set up yet") until all four values below are added.
 
@@ -27,7 +35,7 @@ The admin stays switched off (it answers "not set up yet") until all four values
 
 | Name | What to put | Where to get it |
 |---|---|---|
-| `ADMIN_PASSWORD` | The admin password. Use 4+ random words, e.g. `honey printer mango lamp`. | You choose it. Share it only with admins. |
+| `ADMIN_PASSWORD` | The admin password: **at least 12 characters**. Make up 4 or more unrelated words of your own; don't copy any example. | You choose it. Share it only with admins. Changing it later logs everyone out. |
 | `ADMIN_SESSION_SECRET` | Any long random text (30+ characters). Never needed again. | Mash the keyboard, or use a password generator. |
 | `GITHUB_TOKEN` | A fine-grained token. | See the GitHub steps below. |
 | `VERCEL_TOKEN` | A Vercel token. | See the Vercel steps below. |
@@ -52,6 +60,12 @@ The admin stays switched off (it answers "not set up yet") until all four values
 3. Copy the token into `VERCEL_TOKEN`.
 
 **Then:** tell the PM "admin env added". The PM publishes once so the values take effect. After that, log in at /admin/.
+
+**Risk to know:** a Vercel token can manage the whole RINS Enterprises team on Vercel. Mark it **Sensitive** when you add it, and never share it.
+
+**Recommended extra protection:** add a rate limit on logins. Vercel → project → Firewall → Add rule:
+- if the path starts with `/api/admin/login`
+- then rate limit to 10 requests per minute per IP, and deny the rest
 
 **Never paste these values into a chat, an email or the repo.** If one leaks, delete it where you made it, make a new one, and update it in Vercel.
 

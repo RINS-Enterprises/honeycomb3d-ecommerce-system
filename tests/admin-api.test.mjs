@@ -8,11 +8,12 @@ const products=JSON.parse(await readFile(new URL('../data/products.json',import.
 const store=JSON.parse(await readFile(new URL('../data/store.json',import.meta.url),'utf8'));
 const ENV={ADMIN_PASSWORD:'test password',ADMIN_SESSION_SECRET:'test secret',GITHUB_TOKEN:'gh-test',VERCEL_TOKEN:'vc-test'};
 const ORIGIN='https://honeycomb3d.store';
-let head='a'.repeat(40), calls=[], files={};
-const reset=()=>{head='a'.repeat(40);calls=[];files={'data/products.json':JSON.stringify(products),'data/store.json':JSON.stringify(store)};};
+let head='a'.repeat(40), calls=[], files={}, repoPrivate=false;
+const reset=()=>{repoPrivate=false;head='a'.repeat(40);calls=[];files={'data/products.json':JSON.stringify(products),'data/store.json':JSON.stringify(store)};};
 globalThis.fetch=async(url,opts={})=>{
   const u=new URL(url),body=opts.body&&JSON.parse(opts.body);calls.push({url:u.pathname,method:opts.method||'GET',body,auth:opts.headers.Authorization});
   const json=(v,status=200)=>new Response(JSON.stringify(v),{status});
+  if(u.pathname==='/repos/RINS-Enterprises/honeycomb3d-ecommerce-system')return json({private:repoPrivate});
   if(u.pathname.endsWith('/git/ref/heads/claude%2Ffunny-albattani-c5a91a'))return json({object:{sha:head}});
   const file=/\/contents\/(.+)$/.exec(u.pathname)?.[1];
   if(file)return files[file]!==undefined?new Response(files[file]):json({},404);
@@ -86,4 +87,18 @@ test('images: only asset paths, only with a session',async()=>{
   assert.equal((await run('image',{url:'/api/admin/image?src=/assets/x-sq-320.webp'})).status,401);
   const ok=await run('image',{cookie,url:'/api/admin/image?src=/assets/x-sq-320.webp'});assert.equal(ok.status,200);assert.equal(ok.headers['content-type'],'image/webp');
   for(const src of ['/assets/../data/store.json','/data/store.json','/assets/x.svg'])assert.equal((await run('image',{cookie,url:'/api/admin/image?src='+encodeURIComponent(src)})).status,400);
+});
+test('partner costs and promo notes are refused while the repository is public',async()=>{
+  reset();Object.assign(process.env,ENV);const cookie=await login();const live=products.find(p=>p.approved);
+  const r=await run('save',{method:'POST',cookie,body:{head,edits:[{id:live.id,fields:{partner:{costLkr:300}}}]}});
+  assert.equal(r.status,400);assert.match(r.json.error,/private/);assert(!calls.some(c=>c.method==='PATCH'));
+  repoPrivate=true;
+  assert.equal((await run('save',{method:'POST',cookie,body:{head,edits:[{id:live.id,fields:{partner:{costLkr:300}}}]}})).status,200);
+});
+test('odd bodies get an answer, a short password keeps the admin off, and a new password ends old logins',async()=>{
+  reset();Object.assign(process.env,ENV);const cookie=await login();
+  for(const body of [null,0,false,[1]])assert.equal((await run('login',{method:'POST',body})).status,400);
+  process.env.ADMIN_PASSWORD='short';assert.equal((await run('data',{cookie})).status,503);
+  process.env.ADMIN_PASSWORD='a different long password';assert.equal((await run('data',{cookie})).status,401);
+  Object.assign(process.env,ENV);assert.equal((await run('data',{cookie})).status,200);
 });

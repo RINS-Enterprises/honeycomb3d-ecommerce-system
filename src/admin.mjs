@@ -57,8 +57,8 @@ function promoView() {
   const today = colomboToday();
   return '<section class="admin-promos" data-testid="admin-promos"><h2>Promo codes</h2><p class="fine">Codes are stored only as a fingerprint, so the site never shows them. Write the code down when you create it.</p>'+
     '<ul class="admin-promo-list">'+(rows.length?rows.map((x,i)=>'<li>'+e(x.note||'Code')+' · '+x.percent+'% off · '+e(x.from)+' to '+e(x.until)+(x.until<today?' (ended)':x.from>today?' (not started)':' (active)')+(x.legacy?'':' <button type="button" class="link-button" data-remove-promo="'+(i-(data.legacyPromo?1:0))+'">Remove</button>')+'</li>').join(''):'<li>No codes yet.</li>')+'</ul>'+
-    '<form class="admin-card admin-promo-form" data-testid="admin-promo-form"><div class="admin-fields"><h3>New code</h3><div class="admin-row"><label>Code<input name="code" maxlength="30" autocapitalize="characters" autocomplete="off" required></label><label>Discount %<input name="percent" type="number" min="1" max="90" required></label></div>'+
-    '<div class="admin-row"><label>From<input name="from" type="date" value="'+today+'" required></label><label>Until<input name="until" type="date" value="'+today+'" required></label></div><label>Note (only you see this)<input name="note" maxlength="80" placeholder="e.g. Comic Con 2027"></label>'+
+    '<form class="admin-card admin-promo-form" data-testid="admin-promo-form"><div class="admin-fields"><h3>New code</h3><div class="admin-row"><label>Code<input name="code" minlength="6" maxlength="30" autocapitalize="characters" autocomplete="off" required></label><label>Discount %<input name="percent" type="number" min="1" max="90" required></label></div>'+
+    '<div class="admin-row"><label>From<input name="from" type="date" value="'+today+'" required></label><label>Until<input name="until" type="date" value="'+today+'" required></label></div><label>Note (only you see this)<input name="note" maxlength="80" placeholder="e.g. Year-end sale"></label>'+
     '<div class="admin-actions"><button class="button" type="submit">Create code &amp; publish</button></div></div></form></section>';
 }
 function newView() {
@@ -105,7 +105,7 @@ async function save(changes, done='') {
   if (busy) return; busy = true; say('Saving…');
   try {
     const r = await call('save', {head:data.head, ...changes});
-    data = await call('data'); view();
+    data = await call('data'); view(); busy = false;
     if (done) say(done, 'good');
     if (r.warning) return say(r.warning, 'bad');
     say((done?done+' ':'')+'Saved. Publishing to honeycomb3d.store…');

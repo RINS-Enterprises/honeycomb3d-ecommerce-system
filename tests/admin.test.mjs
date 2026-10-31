@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {applyAdminChanges, nextId, slugify, passwordMatches, signSession, verifySession, adminView} from '../src/admin-core.mjs';
+import {applyAdminChanges, nextId, slugify, passwordMatches, signSession, verifySession, adminView, safeText, sessionKey, touchesPrivate} from '../src/admin-core.mjs';
 import {activePromos, promoActive, validateData} from '../src/domain.mjs';
 
 const products=JSON.parse(await readFile(new URL('../data/products.json',import.meta.url),'utf8'));
@@ -35,7 +35,7 @@ test('approval needs a photo and a confirmed stock state; hiding takes it off th
 });
 test('bad values are refused by the shared catalog validation',()=>{
   assert.throws(()=>applyAdminChanges(products,store,{edits:[{id:live.id,fields:{priceLkr:-5}}]},NOW),/Price/);
-  assert.throws(()=>applyAdminChanges(products,store,{edits:[{id:live.id,fields:{name:'   '}}]},NOW),/Missing name/);
+  assert.throws(()=>applyAdminChanges(products,store,{edits:[{id:live.id,fields:{name:'   '}}]},NOW),/name must be 1 to 80/);
   assert.throws(()=>applyAdminChanges(products,store,{edits:[{id:live.id,fields:{availability:'lots'}}]},NOW),/Unknown stock/);
   assert.throws(()=>applyAdminChanges(products,store,{},NOW),/Nothing changed/);
 });
@@ -79,4 +79,23 @@ test('login: password comparison and signed, expiring sessions',()=>{
   assert(!verifySession(t.replace(/.$/,c=>c==='A'?'B':'A'),'secret',NOW),'Tampered');
   assert(!verifySession('9'.repeat(13)+'.'+'A'.repeat(43),'secret',NOW),'Forged');
   assert(!verifySession(t,'',NOW));
+});
+test('admin text: limits and anything the site checks would refuse; every current listing passes',()=>{
+  for(const p of products){safeText('name',p.name);safeText('category',p.category);safeText('description',p.description);for(const t of p.tags)safeText('tag',t);}
+  for(const bad of ['x'.repeat(81),'a\u202eb','line\nbreak','NaN deal','undefined','{{phone}}','COMICCON26 special','Call 070 300 9064'])
+    assert.throws(()=>applyAdminChanges(products,store,{edits:[{id:live.id,fields:{name:bad}}]},NOW),/name/);
+  assert.equal(applyAdminChanges(products,store,{edits:[{id:live.id,fields:{description:'Two\nlines'}}]},NOW).products.find(x=>x.id===live.id).description,'Two\nlines');
+  assert.throws(()=>applyAdminChanges(products,store,{edits:[{id:live.id,fields:{tags:['ok','x'.repeat(31)]}}]},NOW),/tag/);
+  assert.throws(()=>applyAdminChanges(products,store,{promos:'x'},NOW),/promos must be a list/);
+});
+test('re-saving an approved listing keeps its first approval date',()=>{
+  const p={...live,approvedAt:'2026-10-01'};
+  assert.equal(applyAdminChanges(products.map(x=>x.id===live.id?p:x),store,{edits:[{id:live.id,fields:{approved:true,availability:'available'}}]},NOW).products.find(x=>x.id===live.id).approvedAt,'2026-10-01');
+});
+test('changing the password ends existing logins; private fields are detected',()=>{
+  const t=signSession(sessionKey('s','password one'),NOW);
+  assert(verifySession(t,sessionKey('s','password one'),NOW));assert(!verifySession(t,sessionKey('s','password two'),NOW));
+  assert.equal(sessionKey('s',''),'');
+  assert(touchesPrivate({edits:[{id:'x',fields:{partner:{costLkr:1}}}]}));assert(touchesPrivate({create:{partner:{costLkr:null}}}));assert(touchesPrivate({promos:[{note:'n'}]}));
+  assert(!touchesPrivate({edits:[{id:'x',fields:{partner:null,name:'a'}}],promos:[{sha256:'a'}]}));
 });

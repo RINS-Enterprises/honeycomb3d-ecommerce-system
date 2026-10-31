@@ -1,5 +1,5 @@
 import {guard, send, COOKIE} from '../_admin.mjs';
-import {passwordMatches, signSession, SESSION_HOURS} from '../../src/admin-core.mjs';
+import {passwordMatches, signSession, sessionKey, SESSION_HOURS} from '../../src/admin-core.mjs';
 // POST {password}. A wrong password waits before answering, to slow down guessing.
 export default async function handler(req, res) {
   const body = await guard(req, res, {method:'POST', session:false});
@@ -8,5 +8,5 @@ export default async function handler(req, res) {
     await new Promise(r=>setTimeout(r,800));
     return send(res, 401, {error:'Wrong password'});
   }
-  send(res, 200, {ok:true}, {'Set-Cookie':COOKIE+'='+signSession(process.env.ADMIN_SESSION_SECRET)+'; Path=/api/admin; HttpOnly; Secure; SameSite=Strict; Max-Age='+SESSION_HOURS*3600});
+  send(res, 200, {ok:true}, {'Set-Cookie':COOKIE+'='+signSession(sessionKey(process.env.ADMIN_SESSION_SECRET, process.env.ADMIN_PASSWORD))+'; Path=/api/admin; HttpOnly; Secure; SameSite=Strict; Max-Age='+SESSION_HOURS*3600});
 }

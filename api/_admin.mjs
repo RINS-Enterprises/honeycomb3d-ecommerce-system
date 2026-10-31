@@ -1,13 +1,13 @@
 // Shared helpers for the admin API (files starting with _ are not functions on Vercel).
 // Secrets come only from the Vercel project's environment variables and are never logged or returned.
-import {verifySession} from '../src/admin-core.mjs';
+import {verifySession, sessionKey, MIN_PASSWORD} from '../src/admin-core.mjs';
 
 export const config = {
   repo: process.env.ADMIN_REPO || 'RINS-Enterprises/honeycomb3d-ecommerce-system',
   branch: process.env.ADMIN_BRANCH || 'claude/funny-albattani-c5a91a',
   team: process.env.ADMIN_VERCEL_TEAM || 'team_dErX7uzTIgpWT6SY1Syo3uxr',
   project: process.env.ADMIN_VERCEL_PROJECT || 'prj_gpsHMSC2HZWoBOrx79ypk36O2rsS',
-  origins: (process.env.ADMIN_ORIGINS || 'https://honeycomb3d.store,https://www.honeycomb3d.store').split(','),
+  origins: (process.env.ADMIN_ORIGINS || 'https://honeycomb3d.store,https://www.honeycomb3d.store').split(',').map(x=>x.trim()).filter(Boolean),
 };
 const NEEDED = ['ADMIN_PASSWORD','ADMIN_SESSION_SECRET','GITHUB_TOKEN','VERCEL_TOKEN'];
 export const COOKIE = 'hc_admin';
@@ -25,16 +25,21 @@ const cookie = req => Object.fromEntries((req.headers.cookie||'').split(';').map
 // Every request: set up, same origin for writes, JSON bodies, and (unless login) a valid session.
 export async function guard(req, res, {method='GET', session=true}={}) {
   if (NEEDED.some(k=>!process.env[k])) { send(res,503,{error:'The admin is not set up yet. See docs/pm/ADMIN-SETUP.md.'}); return null; }
+  if (process.env.ADMIN_PASSWORD.length<MIN_PASSWORD) { send(res,503,{error:'ADMIN_PASSWORD is too short: use at least '+MIN_PASSWORD+' characters.'}); return null; }
   if (req.method!==method) { send(res,405,{error:'Method not allowed'},{Allow:method}); return null; }
   if (method!=='GET') {
     if (!config.origins.includes(req.headers.origin)) { send(res,403,{error:'Wrong origin'}); return null; }
     if (!String(req.headers['content-type']||'').startsWith('application/json')) { send(res,415,{error:'JSON only'}); return null; }
   }
-  if (session && !verifySession(cookie(req), process.env.ADMIN_SESSION_SECRET)) { send(res,401,{error:'Please log in'}); return null; }
+  if (session && !verifySession(cookie(req), sessionKey(process.env.ADMIN_SESSION_SECRET, process.env.ADMIN_PASSWORD))) { send(res,401,{error:'Please log in'}); return null; }
   if (method==='GET') return {};
-  if (req.body && typeof req.body==='object') return req.body;
-  let raw=''; for await (const chunk of req) { raw+=chunk; if (raw.length>200_000) { send(res,413,{error:'Too large'}); return null; } }
-  try { return JSON.parse(raw||'{}'); } catch { send(res,400,{error:'Bad JSON'}); return null; }
+  let body = req.body;
+  if (body === undefined) {
+    let raw=''; for await (const chunk of req) { raw+=chunk; if (raw.length>200_000) { send(res,413,{error:'Too large'}); return null; } }
+    try { body = JSON.parse(raw||'{}'); } catch { send(res,400,{error:'Bad JSON'}); return null; }
+  }
+  if (!body || typeof body!=='object' || Array.isArray(body)) { send(res,400,{error:'Expected a JSON object'}); return null; }
+  return body;
 }
 
 async function api(url, {token, method='GET', body, accept='application/vnd.github+json'}={}) {
@@ -44,6 +49,7 @@ async function api(url, {token, method='GET', body, accept='application/vnd.gith
 }
 const gh = (path, opts={}) => api('https://api.github.com/repos/'+config.repo+path, {token:process.env.GITHUB_TOKEN, ...opts});
 
+export const repoIsPrivate = async () => (await gh('')).private === true;
 export async function readCatalog() {
   const ref = await gh('/git/ref/heads/'+encodeURIComponent(config.branch));
   const head = ref.object.sha, file = async p => JSON.parse(Buffer.from(await gh('/contents/'+p+'?ref='+head, {accept:'application/vnd.github.raw+json'})).toString('utf8'));
