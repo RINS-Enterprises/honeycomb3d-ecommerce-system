@@ -1,0 +1,21 @@
+{
+  "name": "honeycomb3d-storefront",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "test:browser": "node tests/browser.mjs && node tests/images-browser.mjs && node tests/admin-browser.mjs",
+    "gate": "npm test && npm run build && npm run check && npm run test:browser",
+    "gate:preview": "STORE_PATCH=tests/fixtures/store-preview.json npm run build && STORE_PATCH=tests/fixtures/store-preview.json npm run check && npm run test:browser",
+    "gate:all-on": "STORE_PATCH=tests/fixtures/store-all-on.json npm run build && STORE_PATCH=tests/fixtures/store-all-on.json npm run check && npm run test:browser",
+    "gate:proposal": "STORE_PATCH=tests/fixtures/store-session-c-proposal.json npm run build && STORE_PATCH=tests/fixtures/store-session-c-proposal.json npm run check && npm run test:browser",
+    "gate:policies": "STORE_PATCH=tests/fixtures/store-policies.json npm run build && STORE_PATCH=tests/fixtures/store-policies.json npm run check && npm run test:browser",
+    "check:indexing": "STORE_PATCH=tests/fixtures/store-indexing.json npm run build && STORE_PATCH=tests/fixtures/store-indexing.json npm run check"
+  }
+}

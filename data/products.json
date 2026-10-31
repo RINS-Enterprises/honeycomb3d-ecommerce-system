@@ -1,0 +1,2683 @@
+[
+  {
+    "id": "HC-LEAF",
+    "slug": "hidden-leaf-keychain",
+    "name": "Hidden Leaf Keychain",
+    "category": "Keychains",
+    "tags": [
+      "Naruto",
+      "Anime"
+    ],
+    "description": "A Hidden Leaf design for your keyring. Ask us about the available colours and size.",
+    "priceLkr": 550,
+    "availability": "made-to-order",
+    "image": "/assets/hidden-leaf-sq-640.webp",
+    "imageAlt": "White Hidden Leaf headband keychain with a black leaf symbol on a light backdrop",
+    "approved": true,
+    "source": "Product identity: recovery brief and April storefront screenshots. Price: owner's chosen Airtable Products source, read 2026-10-11 (record recgVDtQsRTEGSyzG). Description remains newly drafted and needs owner approval. Availability unconfirmed; storefront ID retained pending the Baymax/Kurama SKU conflict (QA F-17).",
+    "copyStatus": "owner-approved",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recgVDtQsRTEGSyzG",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-11",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageVariants": [
+      {
+        "src": "/assets/hidden-leaf-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/hidden-leaf-sq-160.avif"
+      },
+      {
+        "src": "/assets/hidden-leaf-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/hidden-leaf-sq-320.avif"
+      },
+      {
+        "src": "/assets/hidden-leaf-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/hidden-leaf-sq-480.avif"
+      },
+      {
+        "src": "/assets/hidden-leaf-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/hidden-leaf-sq-640.avif"
+      },
+      {
+        "src": "/assets/hidden-leaf-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/hidden-leaf-sq-960.avif"
+      },
+      {
+        "src": "/assets/hidden-leaf-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/hidden-leaf-sq-1200.avif"
+      }
+    ],
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageSource": "Copy of RAV_4459.jpg",
+    "imageApprovedAt": "2026-10-11",
+    "gallery": [
+      {
+        "src": "/assets/hidden-leaf-g2-640.webp",
+        "alt": "Close-up of the Hidden Leaf emblem and rivets on the white keychain plate",
+        "width": 640,
+        "height": 640,
+        "variants": [
+          {
+            "src": "/assets/hidden-leaf-g2-160.webp",
+            "width": 160,
+            "height": 160,
+            "avif": "/assets/hidden-leaf-g2-160.avif"
+          },
+          {
+            "src": "/assets/hidden-leaf-g2-320.webp",
+            "width": 320,
+            "height": 320,
+            "avif": "/assets/hidden-leaf-g2-320.avif"
+          },
+          {
+            "src": "/assets/hidden-leaf-g2-480.webp",
+            "width": 480,
+            "height": 480,
+            "avif": "/assets/hidden-leaf-g2-480.avif"
+          },
+          {
+            "src": "/assets/hidden-leaf-g2-640.webp",
+            "width": 640,
+            "height": 640,
+            "avif": "/assets/hidden-leaf-g2-640.avif"
+          },
+          {
+            "src": "/assets/hidden-leaf-g2-770.webp",
+            "width": 770,
+            "height": 770,
+            "avif": "/assets/hidden-leaf-g2-770.avif"
+          }
+        ]
+      },
+      {
+        "src": "/assets/hidden-leaf-g3-640.webp",
+        "alt": "Left end of the white Hidden Leaf keychain plate with its keyring loop and black rivets",
+        "width": 640,
+        "height": 640,
+        "variants": [
+          {
+            "src": "/assets/hidden-leaf-g3-160.webp",
+            "width": 160,
+            "height": 160,
+            "avif": "/assets/hidden-leaf-g3-160.avif"
+          },
+          {
+            "src": "/assets/hidden-leaf-g3-320.webp",
+            "width": 320,
+            "height": 320,
+            "avif": "/assets/hidden-leaf-g3-320.avif"
+          },
+          {
+            "src": "/assets/hidden-leaf-g3-480.webp",
+            "width": 480,
+            "height": 480,
+            "avif": "/assets/hidden-leaf-g3-480.avif"
+          },
+          {
+            "src": "/assets/hidden-leaf-g3-640.webp",
+            "width": 640,
+            "height": 640,
+            "avif": "/assets/hidden-leaf-g3-640.avif"
+          },
+          {
+            "src": "/assets/hidden-leaf-g3-770.webp",
+            "width": 770,
+            "height": 770,
+            "avif": "/assets/hidden-leaf-g3-770.avif"
+          }
+        ]
+      }
+    ],
+    "shareImage": {
+      "src": "/assets/hidden-leaf-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 400,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HC-BAYMAX",
+    "slug": "baymax-figure",
+    "name": "Baymax Figure",
+    "category": "Figures",
+    "tags": [
+      "Big Hero 6",
+      "Movies"
+    ],
+    "description": "Bring Baymax to your shelf. Size, colour and finish will be confirmed with your quote.",
+    "priceLkr": 1350,
+    "availability": "made-to-order",
+    "image": "/assets/baymax-sq-640.webp",
+    "imageAlt": "Two white 3D-printed Baymax figures photographed on a green display surface",
+    "approved": true,
+    "source": "Product identity: recovery brief and April storefront screenshots. Price: owner's chosen Airtable Products source, read 2026-10-11 (record recIC7e7QDrEe31ac). Description remains newly drafted and needs owner approval. Availability unconfirmed; storefront ID retained pending the Baymax/Kurama SKU conflict (QA F-17).",
+    "copyStatus": "owner-approved",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recIC7e7QDrEe31ac",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-11",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageVariants": [
+      {
+        "src": "/assets/baymax-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/baymax-sq-160.avif"
+      },
+      {
+        "src": "/assets/baymax-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/baymax-sq-320.avif"
+      },
+      {
+        "src": "/assets/baymax-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/baymax-sq-480.avif"
+      },
+      {
+        "src": "/assets/baymax-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/baymax-sq-640.avif"
+      },
+      {
+        "src": "/assets/baymax-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/baymax-sq-960.avif"
+      },
+      {
+        "src": "/assets/baymax-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/baymax-sq-1200.avif"
+      }
+    ],
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageSource": "HNYCMB504 (1).png",
+    "imageApprovedAt": "2026-10-11",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/baymax-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 1000,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HC-KURAMA",
+    "slug": "kurama-figure",
+    "name": "Kurama Figure",
+    "category": "Figures",
+    "tags": [
+      "Naruto",
+      "Anime"
+    ],
+    "description": "A Kurama figure for your collection. Ask about available sizes, colours and finishing options.",
+    "priceLkr": 2000,
+    "availability": "made-to-order",
+    "image": "/assets/kurama-sq-640.webp",
+    "imageAlt": "Orange 3D-printed nine-tailed fox (Kurama) figure with black eye markings, crouching with its tails raised, on a white background",
+    "approved": true,
+    "source": "Product identity: recovery brief and April storefront screenshots. Price: owner's chosen Airtable Products source, read 2026-10-11 (record recIEe7aBzmZkPiIQ). Description remains newly drafted and needs owner approval. Availability unconfirmed; storefront ID retained pending the Baymax/Kurama SKU conflict (QA F-17).",
+    "copyStatus": "owner-approved",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recIEe7aBzmZkPiIQ",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-11",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageVariants": [
+      {
+        "src": "/assets/kurama-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/kurama-sq-160.avif"
+      },
+      {
+        "src": "/assets/kurama-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/kurama-sq-320.avif"
+      },
+      {
+        "src": "/assets/kurama-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/kurama-sq-480.avif"
+      },
+      {
+        "src": "/assets/kurama-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/kurama-sq-640.avif"
+      },
+      {
+        "src": "/assets/kurama-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/kurama-sq-960.avif"
+      },
+      {
+        "src": "/assets/kurama-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/kurama-sq-1200.avif"
+      }
+    ],
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageSource": "1.png",
+    "imageApprovedAt": "2026-10-11",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/kurama-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 1500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB501",
+    "slug": "night-fury-keychain",
+    "name": "Night Fury Keychain",
+    "category": "Keychains",
+    "tags": [
+      "How to Train Your Dragon",
+      "Keychains",
+      "Movies",
+      "Dragons"
+    ],
+    "description": "A little Night Fury for your keys or bag. Confirm the size, colour and keyring details with us.",
+    "priceLkr": 650,
+    "availability": "made-to-order",
+    "image": "/assets/night-fury-sq-640.webp",
+    "imageAlt": "A single black articulated Night Fury keychain with yellow-green eyes held in a hand",
+    "approved": true,
+    "source": "Product identity: recovery brief and April storefront screenshots. Price: owner's chosen Airtable Products source, read 2026-10-11 (record rechNg8MzLC5lT3uu). Description remains newly drafted and needs owner approval. Availability unconfirmed; storefront ID retained pending the Baymax/Kurama SKU conflict (QA F-17).",
+    "copyStatus": "owner-approved",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "rechNg8MzLC5lT3uu",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-11",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageVariants": [
+      {
+        "src": "/assets/night-fury-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/night-fury-sq-160.avif"
+      },
+      {
+        "src": "/assets/night-fury-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/night-fury-sq-320.avif"
+      },
+      {
+        "src": "/assets/night-fury-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/night-fury-sq-480.avif"
+      },
+      {
+        "src": "/assets/night-fury-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/night-fury-sq-640.avif"
+      },
+      {
+        "src": "/assets/night-fury-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/night-fury-sq-960.avif"
+      },
+      {
+        "src": "/assets/night-fury-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/night-fury-sq-1200.avif"
+      }
+    ],
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageSource": "20260301_152139.jpg",
+    "imageApprovedAt": "2026-10-11",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/night-fury-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HC-MINATO",
+    "slug": "minato-kunai",
+    "name": "Minato Kunai",
+    "category": "Props",
+    "tags": [
+      "Naruto",
+      "Anime"
+    ],
+    "description": "A decorative Minato-inspired kunai prop. Ask about dimensions and finish before ordering.",
+    "priceLkr": 1350,
+    "availability": "made-to-order",
+    "image": "/assets/minato-kunai-sq-640.webp",
+    "imageAlt": "Black three-pronged Minato kunai with silver edge bevels, a tan engraved handle and a black ring on a light backdrop",
+    "approved": true,
+    "source": "Product identity: recovery brief and April storefront screenshots. Price: owner's chosen Airtable Products source, read 2026-10-11 (record recjsg5yUe8VJDPWl). Description remains newly drafted and needs owner approval. Availability unconfirmed; storefront ID retained pending the Baymax/Kurama SKU conflict (QA F-17).",
+    "copyStatus": "owner-approved",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recjsg5yUe8VJDPWl",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-11",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageVariants": [
+      {
+        "src": "/assets/minato-kunai-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/minato-kunai-sq-160.avif"
+      },
+      {
+        "src": "/assets/minato-kunai-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/minato-kunai-sq-320.avif"
+      },
+      {
+        "src": "/assets/minato-kunai-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/minato-kunai-sq-480.avif"
+      },
+      {
+        "src": "/assets/minato-kunai-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/minato-kunai-sq-640.avif"
+      },
+      {
+        "src": "/assets/minato-kunai-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/minato-kunai-sq-960.avif"
+      },
+      {
+        "src": "/assets/minato-kunai-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/minato-kunai-sq-1200.avif"
+      }
+    ],
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageSource": "Copy of RAV_4468.jpg",
+    "imageApprovedAt": "2026-10-11",
+    "gallery": [
+      {
+        "src": "/assets/minato-kunai-g2-640.webp",
+        "alt": "Close-up of the Minato kunai: tan engraved handle and black curved wings",
+        "width": 640,
+        "height": 640,
+        "variants": [
+          {
+            "src": "/assets/minato-kunai-g2-160.webp",
+            "width": 160,
+            "height": 160,
+            "avif": "/assets/minato-kunai-g2-160.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g2-320.webp",
+            "width": 320,
+            "height": 320,
+            "avif": "/assets/minato-kunai-g2-320.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g2-480.webp",
+            "width": 480,
+            "height": 480,
+            "avif": "/assets/minato-kunai-g2-480.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g2-640.webp",
+            "width": 640,
+            "height": 640,
+            "avif": "/assets/minato-kunai-g2-640.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g2-960.webp",
+            "width": 960,
+            "height": 960,
+            "avif": "/assets/minato-kunai-g2-960.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g2-1200.webp",
+            "width": 1200,
+            "height": 1200,
+            "avif": "/assets/minato-kunai-g2-1200.avif"
+          }
+        ]
+      },
+      {
+        "src": "/assets/minato-kunai-g3-640.webp",
+        "alt": "Close-up of the Minato kunai: black ring and tan handle with engraved characters",
+        "width": 640,
+        "height": 640,
+        "variants": [
+          {
+            "src": "/assets/minato-kunai-g3-160.webp",
+            "width": 160,
+            "height": 160,
+            "avif": "/assets/minato-kunai-g3-160.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g3-320.webp",
+            "width": 320,
+            "height": 320,
+            "avif": "/assets/minato-kunai-g3-320.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g3-480.webp",
+            "width": 480,
+            "height": 480,
+            "avif": "/assets/minato-kunai-g3-480.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g3-640.webp",
+            "width": 640,
+            "height": 640,
+            "avif": "/assets/minato-kunai-g3-640.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g3-960.webp",
+            "width": 960,
+            "height": 960,
+            "avif": "/assets/minato-kunai-g3-960.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g3-1200.webp",
+            "width": 1200,
+            "height": 1200,
+            "avif": "/assets/minato-kunai-g3-1200.avif"
+          }
+        ]
+      },
+      {
+        "src": "/assets/minato-kunai-g4-640.webp",
+        "alt": "Close-up of the Minato kunai: black blade with silver edge bevels and curved wings",
+        "width": 640,
+        "height": 640,
+        "variants": [
+          {
+            "src": "/assets/minato-kunai-g4-160.webp",
+            "width": 160,
+            "height": 160,
+            "avif": "/assets/minato-kunai-g4-160.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g4-320.webp",
+            "width": 320,
+            "height": 320,
+            "avif": "/assets/minato-kunai-g4-320.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g4-480.webp",
+            "width": 480,
+            "height": 480,
+            "avif": "/assets/minato-kunai-g4-480.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g4-640.webp",
+            "width": 640,
+            "height": 640,
+            "avif": "/assets/minato-kunai-g4-640.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g4-960.webp",
+            "width": 960,
+            "height": 960,
+            "avif": "/assets/minato-kunai-g4-960.avif"
+          },
+          {
+            "src": "/assets/minato-kunai-g4-1200.webp",
+            "width": 1200,
+            "height": 1200,
+            "avif": "/assets/minato-kunai-g4-1200.avif"
+          }
+        ]
+      }
+    ],
+    "shareImage": {
+      "src": "/assets/minato-kunai-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 1000,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HC-LIGHTFURY",
+    "slug": "light-fury-keychain",
+    "name": "Light Fury Keychain",
+    "category": "Keychains",
+    "tags": [
+      "How to Train Your Dragon",
+      "Keychains",
+      "Movies",
+      "Dragons"
+    ],
+    "description": "A Light Fury keychain for your collection. Size and finishing details are confirmed on enquiry.",
+    "priceLkr": 650,
+    "availability": "made-to-order",
+    "image": "/assets/light-fury-sq-640.webp",
+    "imageAlt": "A single painted white Light Fury keychain with blue eyes and black claws held in a hand",
+    "approved": true,
+    "source": "Product identity: recovery brief and April storefront screenshots. Price: owner's chosen Airtable Products source, read 2026-10-11 (record recI8XqnYur0JllUa). Description remains newly drafted and needs owner approval. Availability unconfirmed; storefront ID retained pending the Baymax/Kurama SKU conflict (QA F-17).",
+    "copyStatus": "owner-approved",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recI8XqnYur0JllUa",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-11",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageVariants": [
+      {
+        "src": "/assets/light-fury-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/light-fury-sq-160.avif"
+      },
+      {
+        "src": "/assets/light-fury-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/light-fury-sq-320.avif"
+      },
+      {
+        "src": "/assets/light-fury-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/light-fury-sq-480.avif"
+      },
+      {
+        "src": "/assets/light-fury-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/light-fury-sq-640.avif"
+      },
+      {
+        "src": "/assets/light-fury-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/light-fury-sq-960.avif"
+      },
+      {
+        "src": "/assets/light-fury-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/light-fury-sq-1200.avif"
+      }
+    ],
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageSource": "Variation 1 (2).jpg",
+    "imageApprovedAt": "2026-10-11",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/light-fury-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HC-KUNAI",
+    "slug": "classic-kunai",
+    "name": "Classic Kunai",
+    "category": "Props",
+    "tags": [
+      "Naruto",
+      "Anime"
+    ],
+    "description": "A classic kunai display prop. Tell us the size and colour you have in mind when requesting a quote.",
+    "priceLkr": 1350,
+    "availability": "made-to-order",
+    "image": "/assets/classic-kunai-sq-640.webp",
+    "imageAlt": "Black 3D-printed kunai with a white wrapped handle and a black ring, on a light grey backdrop",
+    "approved": true,
+    "source": "Product identity: recovery brief and April storefront screenshots. Price: owner's chosen Airtable Products source, read 2026-10-11 (record recXi9upTrq3CYmlF). Description remains newly drafted and needs owner approval. Availability unconfirmed; storefront ID retained pending the Baymax/Kurama SKU conflict (QA F-17).",
+    "copyStatus": "owner-approved",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recXi9upTrq3CYmlF",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-11",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageVariants": [
+      {
+        "src": "/assets/classic-kunai-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/classic-kunai-sq-160.avif"
+      },
+      {
+        "src": "/assets/classic-kunai-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/classic-kunai-sq-320.avif"
+      },
+      {
+        "src": "/assets/classic-kunai-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/classic-kunai-sq-480.avif"
+      },
+      {
+        "src": "/assets/classic-kunai-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/classic-kunai-sq-640.avif"
+      },
+      {
+        "src": "/assets/classic-kunai-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/classic-kunai-sq-960.avif"
+      },
+      {
+        "src": "/assets/classic-kunai-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/classic-kunai-sq-1200.avif"
+      }
+    ],
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageSource": "Copy of RAV_4322.jpg",
+    "imageApprovedAt": "2026-10-11",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/classic-kunai-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 1000,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB505",
+    "slug": "bridgerton-bookmark",
+    "name": "Bridgerton Bookmark",
+    "category": "Bookmarks",
+    "tags": [
+      "Bridgerton"
+    ],
+    "description": "A Bridgerton bookmark to keep your place. Confirm the size and colour with us.",
+    "priceLkr": 400,
+    "availability": "made-to-order",
+    "image": "/assets/bridgerton-bookmark-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recdDPCKdRlekdkRF, Status Active). Airtable name \"Bridgerton Bookmark\", category \"Bookmark\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "owner-approved",
+    "sourceName": "Bridgerton Bookmark",
+    "sourceCategory": "Bookmark",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recdDPCKdRlekdkRF",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "White 3D-printed Bridgerton bookmark with raised lettering and an ornate cameo silhouette end, on black leather",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/bridgerton-bookmark-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/bridgerton-bookmark-sq-160.avif"
+      },
+      {
+        "src": "/assets/bridgerton-bookmark-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/bridgerton-bookmark-sq-320.avif"
+      },
+      {
+        "src": "/assets/bridgerton-bookmark-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/bridgerton-bookmark-sq-480.avif"
+      },
+      {
+        "src": "/assets/bridgerton-bookmark-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/bridgerton-bookmark-sq-640.avif"
+      },
+      {
+        "src": "/assets/bridgerton-bookmark-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/bridgerton-bookmark-sq-960.avif"
+      },
+      {
+        "src": "/assets/bridgerton-bookmark-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/bridgerton-bookmark-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB505-bridgerton-bookmark.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/bridgerton-bookmark-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 300,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB506",
+    "slug": "flexi-derpy-kpop-demon-hunters",
+    "name": "Flexi Derpy (Kpop Demon Hunters)",
+    "category": "Figures",
+    "tags": [
+      "Kpop Demon Hunters"
+    ],
+    "description": "A Flexi Derpy figure from Kpop Demon Hunters. Confirm the size, colour and finish with us.",
+    "priceLkr": 650,
+    "availability": "made-to-order",
+    "image": "/assets/flexi-derpy-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recFEK7J2SeYp25so, Status Active). Airtable name \"Flexi Derpy (Kpop Demon Hunters)\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "owner-approved",
+    "sourceName": "Flexi Derpy (Kpop Demon Hunters)",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recFEK7J2SeYp25so",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "A group of blue 3D-printed flexi Derpy figures with yellow eyes and cream joints",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/flexi-derpy-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/flexi-derpy-sq-160.avif"
+      },
+      {
+        "src": "/assets/flexi-derpy-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/flexi-derpy-sq-320.avif"
+      },
+      {
+        "src": "/assets/flexi-derpy-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/flexi-derpy-sq-480.avif"
+      },
+      {
+        "src": "/assets/flexi-derpy-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/flexi-derpy-sq-640.avif"
+      },
+      {
+        "src": "/assets/flexi-derpy-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/flexi-derpy-sq-960.avif"
+      },
+      {
+        "src": "/assets/flexi-derpy-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/flexi-derpy-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB506-flexi-derpy.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/flexi-derpy-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB507",
+    "slug": "office-desk-organizer-with-phone-holder",
+    "name": "Office Desk Organizer with Phone Holder",
+    "category": "Desk Organizers",
+    "tags": [],
+    "description": "A desk organizer with a phone holder for your workspace. Confirm the size and colour with us.",
+    "priceLkr": 2650,
+    "availability": "made-to-order",
+    "image": "/assets/desk-organizer-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recCcuDJYbdNWR4CV, Status Active). Airtable name \"Office Desk Organizer With Phone Holder\", category \"Desk Organizer\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "owner-approved",
+    "sourceName": "Office Desk Organizer With Phone Holder",
+    "sourceCategory": "Desk Organizer",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recCcuDJYbdNWR4CV",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "Black textured 3D-printed desk organizer with two yellow-lined pen cups and a phone stand slot, on a wooden floor",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/desk-organizer-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/desk-organizer-sq-160.avif"
+      },
+      {
+        "src": "/assets/desk-organizer-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/desk-organizer-sq-320.avif"
+      },
+      {
+        "src": "/assets/desk-organizer-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/desk-organizer-sq-480.avif"
+      },
+      {
+        "src": "/assets/desk-organizer-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/desk-organizer-sq-640.avif"
+      },
+      {
+        "src": "/assets/desk-organizer-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/desk-organizer-sq-960.avif"
+      },
+      {
+        "src": "/assets/desk-organizer-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/desk-organizer-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB507-desk-organizer.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/desk-organizer-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 2000,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB510",
+    "slug": "light-fury-big-wings",
+    "name": "Light Fury Big Wings",
+    "category": "Figures",
+    "tags": [
+      "Dragons"
+    ],
+    "description": "A Light Fury figure with big wings for your desk or shelf. Confirm the size, colour and finish with us.",
+    "priceLkr": 800,
+    "availability": "made-to-order",
+    "image": "/assets/light-fury-big-wings-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recKOLhc0zDkYrVBf, Status Active). Airtable name \"Light Fury Big Wings\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "owner-approved",
+    "sourceName": "Light Fury Big Wings",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recKOLhc0zDkYrVBf",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "White articulated 3D-printed Light Fury dragon with large wings and blue eyes, lying on dark fabric",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/light-fury-big-wings-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/light-fury-big-wings-sq-160.avif"
+      },
+      {
+        "src": "/assets/light-fury-big-wings-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/light-fury-big-wings-sq-320.avif"
+      },
+      {
+        "src": "/assets/light-fury-big-wings-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/light-fury-big-wings-sq-480.avif"
+      },
+      {
+        "src": "/assets/light-fury-big-wings-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/light-fury-big-wings-sq-640.avif"
+      },
+      {
+        "src": "/assets/light-fury-big-wings-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/light-fury-big-wings-sq-960.avif"
+      },
+      {
+        "src": "/assets/light-fury-big-wings-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/light-fury-big-wings-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB510-light-fury-big-wings.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/light-fury-big-wings-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 600,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB512",
+    "slug": "urban-spider-man",
+    "name": "Urban Spider-Man",
+    "category": "Figures",
+    "tags": [
+      "Marvel",
+      "Spider-Man"
+    ],
+    "description": "An Urban Spider-Man figure for your desk or shelf. Confirm the size, colour and finish with us.",
+    "priceLkr": 2350,
+    "availability": "made-to-order",
+    "image": "/assets/urban-spider-man-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record rec6SmgSi62ShemTW, Status Active). Airtable name \"Urban Spider Man\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "owner-approved",
+    "sourceName": "Urban Spider Man",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "rec6SmgSi62ShemTW",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "3D-printed Spider-Man figure in a black hooded jacket with a red web-pattern mask and white sneakers, standing on a wooden table",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/urban-spider-man-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/urban-spider-man-sq-160.avif"
+      },
+      {
+        "src": "/assets/urban-spider-man-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/urban-spider-man-sq-320.avif"
+      },
+      {
+        "src": "/assets/urban-spider-man-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/urban-spider-man-sq-480.avif"
+      },
+      {
+        "src": "/assets/urban-spider-man-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/urban-spider-man-sq-640.avif"
+      },
+      {
+        "src": "/assets/urban-spider-man-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/urban-spider-man-sq-960.avif"
+      },
+      {
+        "src": "/assets/urban-spider-man-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/urban-spider-man-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB512-urban-spider-man.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/urban-spider-man-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 1750,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB513",
+    "slug": "stormtrooper-keychain",
+    "name": "Stormtrooper Keychain (Star Wars)",
+    "category": "Keychains",
+    "tags": [
+      "Star Wars"
+    ],
+    "description": "A Stormtrooper keychain for your keys or bag. Confirm the size and colour with us.",
+    "priceLkr": 650,
+    "availability": "made-to-order",
+    "image": "/assets/stormtrooper-keychain-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recWAVV09ernSDOm0, Status Active). Airtable name \"Stormtrooper Star Wars keychain\", category \"Keytag\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed. Listed 2026-10-31 on the owner's \"List them rn\"; price 650 = Airtable 500 ÷ 0.75 under the owner's approved rule (2026-10-31).",
+    "copyStatus": "owner-approved",
+    "sourceName": "Stormtrooper Star Wars keychain",
+    "sourceCategory": "Keytag",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recWAVV09ernSDOm0",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "photoCredit": "designer",
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    },
+    "imageAlt": "Black and white 3D-printed Stormtrooper keychain on a metal key ring, on a light grey background",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/stormtrooper-keychain-sq-160.webp",
+        "width": 160,
+        "height": 160
+      },
+      {
+        "src": "/assets/stormtrooper-keychain-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/stormtrooper-keychain-sq-320.avif"
+      },
+      {
+        "src": "/assets/stormtrooper-keychain-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/stormtrooper-keychain-sq-480.avif"
+      },
+      {
+        "src": "/assets/stormtrooper-keychain-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/stormtrooper-keychain-sq-640.avif"
+      },
+      {
+        "src": "/assets/stormtrooper-keychain-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/stormtrooper-keychain-sq-960.avif"
+      }
+    ],
+    "imageSource": "1777632524778.png",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/stormtrooper-keychain-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB514",
+    "slug": "shuriken-ninja-star",
+    "name": "Shuriken Ninja Star",
+    "category": "Props",
+    "tags": [],
+    "description": "A shuriken ninja star prop for your collection. Confirm the size, colour and finish with us.",
+    "priceLkr": 650,
+    "availability": "made-to-order",
+    "image": "/assets/shuriken-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recjektyNRVkTaogy, Status Active). Airtable name \"Shuriken Ninja Star\", category \"Weapon\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "owner-approved",
+    "sourceName": "Shuriken Ninja Star",
+    "sourceCategory": "Weapon",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recjektyNRVkTaogy",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "White six-pointed 3D-printed shuriken ninja star held in a hand in front of cardboard",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/shuriken-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/shuriken-sq-160.avif"
+      },
+      {
+        "src": "/assets/shuriken-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/shuriken-sq-320.avif"
+      },
+      {
+        "src": "/assets/shuriken-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/shuriken-sq-480.avif"
+      },
+      {
+        "src": "/assets/shuriken-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/shuriken-sq-640.avif"
+      },
+      {
+        "src": "/assets/shuriken-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/shuriken-sq-960.avif"
+      },
+      {
+        "src": "/assets/shuriken-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/shuriken-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB514-shuriken.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/shuriken-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB515",
+    "slug": "grogu-baby-yoda-keychain",
+    "name": "Grogu Baby Yoda Keychain",
+    "category": "Keychains",
+    "tags": [
+      "Star Wars"
+    ],
+    "description": "A Grogu keychain for your keys or bag. Confirm the size and colour with us.",
+    "priceLkr": 650,
+    "availability": "made-to-order",
+    "image": "/assets/grogu-keychain-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recCQZOXNRK5YUqlL, Status Active). Airtable name \"Gorgu Baby Yoda keychain\", category \"Keytag\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "owner-approved",
+    "sourceName": "Gorgu Baby Yoda keychain",
+    "sourceCategory": "Keytag",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recCQZOXNRK5YUqlL",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "Flat 3D-printed Grogu keychain in green, white and brown with a silver keyring, on a black surface",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/grogu-keychain-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/grogu-keychain-sq-160.avif"
+      },
+      {
+        "src": "/assets/grogu-keychain-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/grogu-keychain-sq-320.avif"
+      },
+      {
+        "src": "/assets/grogu-keychain-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/grogu-keychain-sq-480.avif"
+      },
+      {
+        "src": "/assets/grogu-keychain-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/grogu-keychain-sq-640.avif"
+      },
+      {
+        "src": "/assets/grogu-keychain-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/grogu-keychain-sq-960.avif"
+      },
+      {
+        "src": "/assets/grogu-keychain-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/grogu-keychain-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB515-grogu-keychain.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/grogu-keychain-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB516",
+    "slug": "dummy-13-iron-man",
+    "name": "Dummy 13 Iron Man",
+    "category": "Figures",
+    "tags": [
+      "Marvel",
+      "Iron Man"
+    ],
+    "description": "A Dummy 13 figure styled as Iron Man. Confirm the size, colour and finish with us.",
+    "priceLkr": 2000,
+    "availability": "made-to-order",
+    "image": "/assets/dummy-13-iron-man-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record recAr4pXP6kkpzPZ8, Status Active). Airtable name \"Dummy13 Iron Man\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "owner-approved",
+    "sourceName": "Dummy13 Iron Man",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "recAr4pXP6kkpzPZ8",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "Red and yellow articulated 3D-printed Dummy 13 figure styled as Iron Man, held up in a hand",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/dummy-13-iron-man-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/dummy-13-iron-man-sq-160.avif"
+      },
+      {
+        "src": "/assets/dummy-13-iron-man-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/dummy-13-iron-man-sq-320.avif"
+      },
+      {
+        "src": "/assets/dummy-13-iron-man-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/dummy-13-iron-man-sq-480.avif"
+      },
+      {
+        "src": "/assets/dummy-13-iron-man-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/dummy-13-iron-man-sq-640.avif"
+      },
+      {
+        "src": "/assets/dummy-13-iron-man-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/dummy-13-iron-man-sq-960.avif"
+      },
+      {
+        "src": "/assets/dummy-13-iron-man-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/dummy-13-iron-man-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB516-dummy13-iron-man.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/dummy-13-iron-man-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 1500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB517",
+    "slug": "dummy-13-spider-man",
+    "name": "Dummy 13 Spider-Man",
+    "category": "Figures",
+    "tags": [
+      "Marvel",
+      "Spider-Man"
+    ],
+    "description": "A Dummy 13 figure styled as Spider-Man. Confirm the size, colour and finish with us.",
+    "priceLkr": 2000,
+    "availability": "made-to-order",
+    "image": "/assets/dummy-13-spider-man-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record rec444U7FQYCpPSG9, Status Active). Airtable name \"Dummy 13 Spider Man\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "owner-approved",
+    "sourceName": "Dummy 13 Spider Man",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "rec444U7FQYCpPSG9",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "Red and blue articulated 3D-printed Dummy 13 figure styled as Spider-Man in a crouching pose on a white background",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/dummy-13-spider-man-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/dummy-13-spider-man-sq-160.avif"
+      },
+      {
+        "src": "/assets/dummy-13-spider-man-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/dummy-13-spider-man-sq-320.avif"
+      },
+      {
+        "src": "/assets/dummy-13-spider-man-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/dummy-13-spider-man-sq-480.avif"
+      },
+      {
+        "src": "/assets/dummy-13-spider-man-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/dummy-13-spider-man-sq-640.avif"
+      },
+      {
+        "src": "/assets/dummy-13-spider-man-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/dummy-13-spider-man-sq-960.avif"
+      },
+      {
+        "src": "/assets/dummy-13-spider-man-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/dummy-13-spider-man-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB517-dummy13-spider-man.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/dummy-13-spider-man-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 1500,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB518",
+    "slug": "horse-figurine",
+    "name": "Horse Figurine",
+    "category": "Figures",
+    "tags": [],
+    "description": "A horse figurine for your desk or shelf. Confirm the size, colour and finish with us.",
+    "priceLkr": 2150,
+    "availability": "made-to-order",
+    "image": "/assets/horse-figurine-sq-640.webp",
+    "approved": true,
+    "source": "Product identity and price: owner's Airtable Products table, read 2026-10-16 (record rec2M4tmBzDXd1sxm, Status Active). Airtable name \"Horse figurine\", category \"Figurine\". Added on the owner's instruction of 2026-10-16. Description newly drafted and needs owner approval. Availability unconfirmed.",
+    "copyStatus": "owner-approved",
+    "sourceName": "Horse figurine",
+    "sourceCategory": "Figurine",
+    "priceSource": {
+      "provider": "Airtable",
+      "table": "Products",
+      "baseId": "appTRxtdHRFH7mgLX",
+      "tableId": "tblmUOdfunwP8iWKi",
+      "recordId": "rec2M4tmBzDXd1sxm",
+      "field": "Selling Price (LKR)",
+      "readAt": "2026-10-16",
+      "ownerDesignatedAt": "2026-10-11"
+    },
+    "imageAlt": "White low-poly 3D-printed horse figurine galloping on a rock base, on a grey stone table",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/horse-figurine-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/horse-figurine-sq-160.avif"
+      },
+      {
+        "src": "/assets/horse-figurine-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/horse-figurine-sq-320.avif"
+      },
+      {
+        "src": "/assets/horse-figurine-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/horse-figurine-sq-480.avif"
+      },
+      {
+        "src": "/assets/horse-figurine-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/horse-figurine-sq-640.avif"
+      },
+      {
+        "src": "/assets/horse-figurine-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/horse-figurine-sq-960.avif"
+      },
+      {
+        "src": "/assets/horse-figurine-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/horse-figurine-sq-1200.avif"
+      }
+    ],
+    "imageSource": "HNYCMB518-horse-figurine.jpg",
+    "imageApprovedAt": "2026-10-16",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/horse-figurine-share.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    "stallPriceLkr": 1600,
+    "priceRule": {
+      "rule": "Website price = Comic Con stall price ÷ 0.75, rounded to the nearest LKR 50",
+      "approvedBy": "owner",
+      "approvedAt": "2026-10-31"
+    }
+  },
+  {
+    "id": "HNYCMB519",
+    "slug": "pikachu",
+    "name": "Pikachu",
+    "category": "Figures",
+    "tags": [
+      "Pokémon",
+      "Anime"
+    ],
+    "description": "A Pikachu figure with a jointed lightning-bolt tail. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/pikachu-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB519 - Pikachu\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB519 - Pikachu",
+    "imageAlt": "Yellow 3D-printed Pikachu figure with an articulated lightning-bolt tail, sitting on a table",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/pikachu-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/pikachu-sq-160.avif"
+      },
+      {
+        "src": "/assets/pikachu-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/pikachu-sq-320.avif"
+      },
+      {
+        "src": "/assets/pikachu-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/pikachu-sq-480.avif"
+      },
+      {
+        "src": "/assets/pikachu-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/pikachu-sq-640.avif"
+      },
+      {
+        "src": "/assets/pikachu-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/pikachu-sq-960.avif"
+      }
+    ],
+    "imageSource": "handy_1790759188889.png",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/pikachu-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB520",
+    "slug": "dobby",
+    "name": "Dobby",
+    "category": "Figures",
+    "tags": [
+      "Harry Potter",
+      "Movies"
+    ],
+    "description": "A small Dobby figure for your shelf or desk. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/dobby-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB520 - Dobby\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB520 - Dobby",
+    "imageAlt": "Small 3D-printed Dobby figure with green eyes and a grey tunic, held in a hand",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/dobby-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/dobby-sq-160.avif"
+      },
+      {
+        "src": "/assets/dobby-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/dobby-sq-320.avif"
+      },
+      {
+        "src": "/assets/dobby-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/dobby-sq-480.avif"
+      },
+      {
+        "src": "/assets/dobby-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/dobby-sq-640.avif"
+      },
+      {
+        "src": "/assets/dobby-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/dobby-sq-960.avif"
+      },
+      {
+        "src": "/assets/dobby-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/dobby-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1790942351004.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/dobby-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB521",
+    "slug": "skeleton-keychain",
+    "name": "Skeleton Keychain",
+    "category": "Keychains",
+    "tags": [
+      "Halloween",
+      "Keychains"
+    ],
+    "description": "A jointed skeleton keychain that hangs from your keys or bag. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/skeleton-keychain-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB521 - Skeleton\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB521 - Skeleton",
+    "imageAlt": "White articulated 3D-printed skeleton keychain hanging from a key ring over an open hand",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/skeleton-keychain-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/skeleton-keychain-sq-160.avif"
+      },
+      {
+        "src": "/assets/skeleton-keychain-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/skeleton-keychain-sq-320.avif"
+      },
+      {
+        "src": "/assets/skeleton-keychain-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/skeleton-keychain-sq-480.avif"
+      },
+      {
+        "src": "/assets/skeleton-keychain-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/skeleton-keychain-sq-640.avif"
+      },
+      {
+        "src": "/assets/skeleton-keychain-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/skeleton-keychain-sq-960.avif"
+      },
+      {
+        "src": "/assets/skeleton-keychain-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/skeleton-keychain-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1791102641081.png",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/skeleton-keychain-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB522",
+    "slug": "panda-keychain",
+    "name": "Panda Keychain",
+    "category": "Keychains",
+    "tags": [
+      "Animals",
+      "Keychains"
+    ],
+    "description": "A waving panda keychain for your keys or bag. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/panda-keychain-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB522 - Panda\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB522 - Panda",
+    "imageAlt": "Black and white 3D-printed waving panda keychain with pink cheeks on a key ring",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/panda-keychain-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/panda-keychain-sq-160.avif"
+      },
+      {
+        "src": "/assets/panda-keychain-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/panda-keychain-sq-320.avif"
+      },
+      {
+        "src": "/assets/panda-keychain-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/panda-keychain-sq-480.avif"
+      },
+      {
+        "src": "/assets/panda-keychain-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/panda-keychain-sq-640.avif"
+      },
+      {
+        "src": "/assets/panda-keychain-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/panda-keychain-sq-960.avif"
+      }
+    ],
+    "imageSource": "1791993348044.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/panda-keychain-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB523",
+    "slug": "twilight-nazgul",
+    "name": "Twilight Nazgûl",
+    "category": "Figures",
+    "tags": [
+      "Lord of the Rings",
+      "Movies"
+    ],
+    "description": "A hooded Nazgûl figure with a sword, on a rocky base. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/twilight-nazgul-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB523 - Twilight Nazgul\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB523 - Twilight Nazgul",
+    "imageAlt": "Black 3D-printed hooded Nazgul figure holding a sword, on a rocky base",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/twilight-nazgul-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/twilight-nazgul-sq-160.avif"
+      },
+      {
+        "src": "/assets/twilight-nazgul-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/twilight-nazgul-sq-320.avif"
+      },
+      {
+        "src": "/assets/twilight-nazgul-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/twilight-nazgul-sq-480.avif"
+      },
+      {
+        "src": "/assets/twilight-nazgul-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/twilight-nazgul-sq-640.avif"
+      },
+      {
+        "src": "/assets/twilight-nazgul-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/twilight-nazgul-sq-960.avif"
+      }
+    ],
+    "imageSource": "1792043275017.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/twilight-nazgul-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB524",
+    "slug": "black-panther",
+    "name": "Black Panther",
+    "category": "Figures",
+    "tags": [
+      "Marvel",
+      "Movies"
+    ],
+    "description": "A crouching Black Panther figure. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/black-panther-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB524 - Black Panther\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB524 - Black Panther",
+    "imageAlt": "Grey 3D-printed Black Panther figure crouching, facing forward",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/black-panther-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/black-panther-sq-160.avif"
+      },
+      {
+        "src": "/assets/black-panther-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/black-panther-sq-320.avif"
+      },
+      {
+        "src": "/assets/black-panther-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/black-panther-sq-480.avif"
+      },
+      {
+        "src": "/assets/black-panther-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/black-panther-sq-640.avif"
+      },
+      {
+        "src": "/assets/black-panther-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/black-panther-sq-960.avif"
+      },
+      {
+        "src": "/assets/black-panther-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/black-panther-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1792076546195.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/black-panther-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB525",
+    "slug": "muscle-man-001",
+    "name": "Muscle Man 001",
+    "category": "Figures",
+    "tags": [
+      "Muscle Man Series"
+    ],
+    "description": "A muscle man figure with outstretched arms, from the Muscle Man series. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/muscle-man-001-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB525 Muscle man series 001\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB525 Muscle man series 001",
+    "imageAlt": "Light grey 3D-printed muscle man figure standing with arms stretched out, on a wooden table",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/muscle-man-001-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/muscle-man-001-sq-160.avif"
+      },
+      {
+        "src": "/assets/muscle-man-001-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/muscle-man-001-sq-320.avif"
+      },
+      {
+        "src": "/assets/muscle-man-001-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/muscle-man-001-sq-480.avif"
+      },
+      {
+        "src": "/assets/muscle-man-001-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/muscle-man-001-sq-640.avif"
+      },
+      {
+        "src": "/assets/muscle-man-001-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/muscle-man-001-sq-960.avif"
+      },
+      {
+        "src": "/assets/muscle-man-001-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/muscle-man-001-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1792484549523.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/muscle-man-001-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB526",
+    "slug": "muscle-man-002",
+    "name": "Muscle Man 002",
+    "category": "Figures",
+    "tags": [
+      "Muscle Man Series"
+    ],
+    "description": "A flexing muscle man figure, from the Muscle Man series. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/muscle-man-002-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB526 Muscle man series 002\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB526 Muscle man series 002",
+    "imageAlt": "Bronze-coloured 3D-printed muscle man figure flexing both arms, on a white table",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/muscle-man-002-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/muscle-man-002-sq-160.avif"
+      },
+      {
+        "src": "/assets/muscle-man-002-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/muscle-man-002-sq-320.avif"
+      },
+      {
+        "src": "/assets/muscle-man-002-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/muscle-man-002-sq-480.avif"
+      },
+      {
+        "src": "/assets/muscle-man-002-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/muscle-man-002-sq-640.avif"
+      },
+      {
+        "src": "/assets/muscle-man-002-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/muscle-man-002-sq-960.avif"
+      },
+      {
+        "src": "/assets/muscle-man-002-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/muscle-man-002-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1792485823342.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/muscle-man-002-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB527",
+    "slug": "hellbound-avenger",
+    "name": "Hellbound Avenger",
+    "category": "Figures",
+    "tags": [
+      "Comics"
+    ],
+    "description": "A caped antihero figure with flowing chains and cape. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/hellbound-avenger-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB527  Hellbound avenger\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB527  Hellbound avenger",
+    "imageAlt": "Grey 3D-printed caped antihero figure with flowing chains and cape, crouching",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/hellbound-avenger-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/hellbound-avenger-sq-160.avif"
+      },
+      {
+        "src": "/assets/hellbound-avenger-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/hellbound-avenger-sq-320.avif"
+      },
+      {
+        "src": "/assets/hellbound-avenger-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/hellbound-avenger-sq-480.avif"
+      },
+      {
+        "src": "/assets/hellbound-avenger-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/hellbound-avenger-sq-640.avif"
+      },
+      {
+        "src": "/assets/hellbound-avenger-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/hellbound-avenger-sq-960.avif"
+      },
+      {
+        "src": "/assets/hellbound-avenger-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/hellbound-avenger-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1792759515557.png",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/hellbound-avenger-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB528",
+    "slug": "tiered-bookmark-stand",
+    "name": "Tiered Bookmark Display Stand",
+    "category": "Desk Organizers",
+    "tags": [
+      "Bookmarks"
+    ],
+    "description": "A tiered stand to display your bookmarks. Bookmarks not included. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/tiered-bookmark-stand-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB528 Tiered bookmark display stand\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB528 Tiered bookmark display stand",
+    "imageAlt": "Black 3D-printed tiered bookmark display stand with a geometric pattern, empty, on a desk",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/tiered-bookmark-stand-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/tiered-bookmark-stand-sq-160.avif"
+      },
+      {
+        "src": "/assets/tiered-bookmark-stand-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/tiered-bookmark-stand-sq-320.avif"
+      },
+      {
+        "src": "/assets/tiered-bookmark-stand-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/tiered-bookmark-stand-sq-480.avif"
+      },
+      {
+        "src": "/assets/tiered-bookmark-stand-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/tiered-bookmark-stand-sq-640.avif"
+      },
+      {
+        "src": "/assets/tiered-bookmark-stand-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/tiered-bookmark-stand-sq-960.avif"
+      },
+      {
+        "src": "/assets/tiered-bookmark-stand-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/tiered-bookmark-stand-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1792760519507.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/tiered-bookmark-stand-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB529",
+    "slug": "shadow-ninja",
+    "name": "Shadow Ninja (Dark Warrior)",
+    "category": "Figures",
+    "tags": [
+      "Anime"
+    ],
+    "description": "A hooded ninja figure in a long coat, black edition. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/shadow-ninja-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB529 Shadow ninja black edition - Dark  worrier\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB529 Shadow ninja black edition - Dark  worrier",
+    "imageAlt": "Black 3D-printed hooded ninja figure in a long coat with a sword on its back",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/shadow-ninja-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/shadow-ninja-sq-160.avif"
+      },
+      {
+        "src": "/assets/shadow-ninja-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/shadow-ninja-sq-320.avif"
+      },
+      {
+        "src": "/assets/shadow-ninja-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/shadow-ninja-sq-480.avif"
+      },
+      {
+        "src": "/assets/shadow-ninja-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/shadow-ninja-sq-640.avif"
+      },
+      {
+        "src": "/assets/shadow-ninja-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/shadow-ninja-sq-960.avif"
+      }
+    ],
+    "imageSource": "handy_1792850654535.png",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/shadow-ninja-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB530",
+    "slug": "hueforge-poster-bin",
+    "name": "HueForge Poster Storage Bin",
+    "category": "Desk Organizers",
+    "tags": [
+      "HueForge"
+    ],
+    "description": "A storage bin that holds a row of HueForge prints. Prints not included. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/hueforge-poster-bin-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB530 Hueforge poster storage bin\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB530 Hueforge poster storage bin",
+    "imageAlt": "Grey 3D-printed storage bin holding a row of HueForge prints",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/hueforge-poster-bin-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/hueforge-poster-bin-sq-160.avif"
+      },
+      {
+        "src": "/assets/hueforge-poster-bin-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/hueforge-poster-bin-sq-320.avif"
+      },
+      {
+        "src": "/assets/hueforge-poster-bin-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/hueforge-poster-bin-sq-480.avif"
+      },
+      {
+        "src": "/assets/hueforge-poster-bin-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/hueforge-poster-bin-sq-640.avif"
+      },
+      {
+        "src": "/assets/hueforge-poster-bin-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/hueforge-poster-bin-sq-960.avif"
+      },
+      {
+        "src": "/assets/hueforge-poster-bin-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/hueforge-poster-bin-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1792851691397.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/hueforge-poster-bin-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB531",
+    "slug": "hueforge-poster-stand",
+    "name": "HueForge Poster Stand",
+    "category": "Desk Organizers",
+    "tags": [
+      "HueForge"
+    ],
+    "description": "A curved stand that holds a HueForge print upright. Print not included. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/hueforge-poster-stand-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB531 Hueforge stand\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB531 Hueforge stand",
+    "imageAlt": "Black curved 3D-printed stand for a HueForge print, on a wooden table",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/hueforge-poster-stand-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/hueforge-poster-stand-sq-160.avif"
+      },
+      {
+        "src": "/assets/hueforge-poster-stand-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/hueforge-poster-stand-sq-320.avif"
+      },
+      {
+        "src": "/assets/hueforge-poster-stand-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/hueforge-poster-stand-sq-480.avif"
+      },
+      {
+        "src": "/assets/hueforge-poster-stand-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/hueforge-poster-stand-sq-640.avif"
+      },
+      {
+        "src": "/assets/hueforge-poster-stand-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/hueforge-poster-stand-sq-960.avif"
+      },
+      {
+        "src": "/assets/hueforge-poster-stand-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/hueforge-poster-stand-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1792853041602.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/hueforge-poster-stand-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB532",
+    "slug": "halo-master-chief",
+    "name": "Halo Master Chief",
+    "category": "Figures",
+    "tags": [
+      "Halo",
+      "Games"
+    ],
+    "description": "A Master Chief figure with a rifle, on a debris base. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/halo-master-chief-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB532 Halo master chief\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB532 Halo master chief",
+    "imageAlt": "Tan 3D-printed Master Chief figure holding a rifle, on a debris base",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/halo-master-chief-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/halo-master-chief-sq-160.avif"
+      },
+      {
+        "src": "/assets/halo-master-chief-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/halo-master-chief-sq-320.avif"
+      },
+      {
+        "src": "/assets/halo-master-chief-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/halo-master-chief-sq-480.avif"
+      },
+      {
+        "src": "/assets/halo-master-chief-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/halo-master-chief-sq-640.avif"
+      },
+      {
+        "src": "/assets/halo-master-chief-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/halo-master-chief-sq-960.avif"
+      },
+      {
+        "src": "/assets/halo-master-chief-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/halo-master-chief-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1793361577809.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/halo-master-chief-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  },
+  {
+    "id": "HNYCMB533",
+    "slug": "nazgul-black-rider",
+    "name": "Nazgûl Black Rider",
+    "category": "Figures",
+    "tags": [
+      "Lord of the Rings",
+      "Movies"
+    ],
+    "description": "A Nazgûl on horseback with a sword, on a round base. Shown unpainted. Confirm the size and colour with us.",
+    "priceLkr": null,
+    "availability": "made-to-order",
+    "image": "/assets/nazgul-black-rider-sq-640.webp",
+    "approved": true,
+    "photoCredit": "designer",
+    "source": "Drive folder HoneyComb / 01 Products / \"HNYCMB533 Nazgul - the black rider\", photo downloaded 2026-10-31. Owner 2026-10-31: \"List them rn\"; photos are the model designer's, credited on the page (\"Use designer photos, credited\"). Price to be set by the owner in the admin.",
+    "copyStatus": "owner-approved",
+    "sourceName": "HNYCMB533 Nazgul - the black rider",
+    "imageAlt": "Tan unpainted 3D-printed Nazgul on horseback with a sword, on a round base",
+    "imageWidth": 640,
+    "imageHeight": 640,
+    "imageVariants": [
+      {
+        "src": "/assets/nazgul-black-rider-sq-160.webp",
+        "width": 160,
+        "height": 160,
+        "avif": "/assets/nazgul-black-rider-sq-160.avif"
+      },
+      {
+        "src": "/assets/nazgul-black-rider-sq-320.webp",
+        "width": 320,
+        "height": 320,
+        "avif": "/assets/nazgul-black-rider-sq-320.avif"
+      },
+      {
+        "src": "/assets/nazgul-black-rider-sq-480.webp",
+        "width": 480,
+        "height": 480,
+        "avif": "/assets/nazgul-black-rider-sq-480.avif"
+      },
+      {
+        "src": "/assets/nazgul-black-rider-sq-640.webp",
+        "width": 640,
+        "height": 640,
+        "avif": "/assets/nazgul-black-rider-sq-640.avif"
+      },
+      {
+        "src": "/assets/nazgul-black-rider-sq-960.webp",
+        "width": 960,
+        "height": 960,
+        "avif": "/assets/nazgul-black-rider-sq-960.avif"
+      },
+      {
+        "src": "/assets/nazgul-black-rider-sq-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "avif": "/assets/nazgul-black-rider-sq-1200.avif"
+      }
+    ],
+    "imageSource": "handy_1793362715932.jpg",
+    "imageApprovedAt": "2026-10-31",
+    "gallery": [],
+    "shareImage": {
+      "src": "/assets/nazgul-black-rider-share.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  }
+]

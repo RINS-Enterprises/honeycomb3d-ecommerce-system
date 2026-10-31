@@ -1,0 +1,29 @@
+{
+  "paypalOverseas": true,
+  "delivery": {
+    "text": "Test fixture delivery line, not an owner fact",
+    "feeLkr": 450.5
+  },
+  "paymentMethods": [
+    "Fixture method A",
+    "Fixture method B"
+  ],
+  "social": [
+    {
+      "label": "Fixture account",
+      "url": "https://example.com/fixture"
+    }
+  ],
+  "pages": {
+    "shipping": "Test fixture shipping text, not an owner fact.",
+    "returns": "Test fixture returns text, not an owner fact.",
+    "about": "Test fixture about text, not an owner fact.\n\nSecond paragraph."
+  },
+  "policies": false,
+  "promo": {
+    "sha256": "6543abf225796c5568f9f189d8f518f40bf424207c4ce234a82d00eb1826d0d1",
+    "percent": 25,
+    "from": "2000-01-01",
+    "until": "2999-12-31"
+  }
+}

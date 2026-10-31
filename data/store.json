@@ -1,0 +1,109 @@
+{
+  "name": "HoneyComb 3D",
+  "currency": "LKR",
+  "country": "Sri Lanka",
+  "mode": "live",
+  "whatsappNumber": "94710599815",
+  "whatsappVerified": true,
+  "searchIndexing": false,
+  "paypalOverseas": false,
+  "delivery": null,
+  "paymentMethods": [],
+  "paymentNote": null,
+  "social": [],
+  "pages": {
+    "shipping": null,
+    "returns": null,
+    "about": null
+  },
+  "policies": true,
+  "contact": {
+    "operator": "Isuru Sandaruwan",
+    "location": "Kegalle, Sri Lanka",
+    "email": "honeycomb3d.lk@gmail.com",
+    "updated": "2026-10-31"
+  },
+  "promo": {
+    "sha256": "6543abf225796c5568f9f189d8f518f40bf424207c4ce234a82d00eb1826d0d1",
+    "percent": 25,
+    "from": "2026-10-31",
+    "until": "2026-11-01"
+  },
+  "logo": "/assets/honeycomb-logo-dark-660.png",
+  "source": "Owner's own WhatsApp Business number 0710599815 (owner correction, 2026-10-18: an earlier mistyped number is banned in scripts/check.mjs).",
+  "logoWidth": 660,
+  "logoHeight": 192,
+  "logoVariants": [
+    {
+      "src": "/assets/honeycomb-logo-dark-264.png",
+      "width": 264,
+      "height": 77
+    },
+    {
+      "src": "/assets/honeycomb-logo-dark-660.png",
+      "width": 660,
+      "height": 192
+    }
+  ],
+  "hero": {
+    "product": "HNYCMB501",
+    "landscape": [
+      {
+        "src": "/assets/night-fury-hero-landscape-960.webp",
+        "width": 960,
+        "height": 480,
+        "avif": "/assets/night-fury-hero-landscape-960.avif"
+      },
+      {
+        "src": "/assets/night-fury-hero-landscape-1280.webp",
+        "width": 1280,
+        "height": 640,
+        "avif": "/assets/night-fury-hero-landscape-1280.avif"
+      },
+      {
+        "src": "/assets/night-fury-hero-landscape-1600.webp",
+        "width": 1600,
+        "height": 800,
+        "avif": "/assets/night-fury-hero-landscape-1600.avif"
+      },
+      {
+        "src": "/assets/night-fury-hero-landscape-1893.webp",
+        "width": 1893,
+        "height": 946,
+        "avif": "/assets/night-fury-hero-landscape-1893.avif"
+      }
+    ],
+    "portrait": [
+      {
+        "src": "/assets/night-fury-hero-portrait-480.webp",
+        "width": 480,
+        "height": 640,
+        "avif": "/assets/night-fury-hero-portrait-480.avif"
+      },
+      {
+        "src": "/assets/night-fury-hero-portrait-720.webp",
+        "width": 720,
+        "height": 960,
+        "avif": "/assets/night-fury-hero-portrait-720.avif"
+      },
+      {
+        "src": "/assets/night-fury-hero-portrait-960.webp",
+        "width": 960,
+        "height": 1280,
+        "avif": "/assets/night-fury-hero-portrait-960.avif"
+      },
+      {
+        "src": "/assets/night-fury-hero-portrait-1065.webp",
+        "width": 1065,
+        "height": 1420,
+        "avif": "/assets/night-fury-hero-portrait-1065.avif"
+      }
+    ],
+    "share": {
+      "src": "/assets/site-share.jpg",
+      "width": 1200,
+      "height": 630
+    }
+  },
+  "siteUrl": "https://honeycomb3d.store"
+}

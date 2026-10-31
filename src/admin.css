@@ -1,0 +1,30 @@
+/* Admin page only (/admin/). Uses the site tokens from styles.css. */
+.admin{max-width:960px;margin:0 auto;padding:var(--space-5) 16px var(--space-8)}
+.admin h1{font-family:var(--font-display);font-size:var(--step-2);margin:0}
+.admin-head{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);margin-bottom:var(--space-4)}
+.admin-login{max-width:22rem;margin:12vh auto 0;display:grid;gap:var(--space-4)}
+.admin label{display:grid;gap:4px;font-size:var(--step--1);color:var(--text-soft);min-width:0}
+.admin input,.admin select,.admin textarea{font:inherit;font-size:16px;color:var(--text);background:var(--bg-raise);border:1px solid var(--line-strong);border-radius:var(--radius-md);padding:10px 12px;width:100%}
+.admin input:focus,.admin select:focus,.admin textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.admin-tabs{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-3)}
+.admin-tabs button{font:inherit;color:var(--text-soft);background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-pill);padding:8px 14px;cursor:pointer}
+.admin-tabs button[aria-current]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.admin-status{min-height:1.5em;margin:var(--space-2) 0;font-size:var(--step--1)}
+.admin-status.good{color:#8fd694}.admin-status.bad{color:#ff9b8a}
+.admin-body{display:grid;gap:var(--space-4)}
+.admin-card{display:grid;grid-template-columns:160px 1fr;gap:var(--space-4);background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-lg);padding:var(--space-4)}
+.admin-promo-form,.admin-body>form:not([data-id]){grid-template-columns:1fr}
+.admin-photo img,.admin-nophoto{width:160px;height:160px;object-fit:cover;border-radius:var(--radius-md);background:var(--panel-2)}
+.admin-nophoto{display:grid;place-items:center;color:var(--muted);font-size:var(--step--1)}
+.admin-fields{display:grid;gap:var(--space-3);min-width:0}
+.admin-fields h2,.admin-fields h3,.admin-promos h2{margin:0;font-size:var(--step-1)}
+.admin-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:var(--space-3);align-items:end}
+.admin-check{display:flex!important;align-items:center;gap:var(--space-2)}
+.admin-check input{width:auto}
+.admin-id{margin:0;font-size:var(--step--1);color:var(--muted)}
+.admin-live{color:#8fd694}.admin-pending{color:var(--accent-soft)}
+.admin-profit{margin:0;font-size:var(--step--1);color:var(--accent-soft)}
+.admin-actions{display:flex;flex-wrap:wrap;gap:var(--space-3)}
+.admin .link-button{font:inherit;background:none;border:0;color:var(--accent-soft);text-decoration:underline;cursor:pointer;padding:0}
+.admin-promo-list{padding-left:1.2em;display:grid;gap:var(--space-2)}
+@media(max-width:560px){.admin-card{grid-template-columns:1fr}.admin-photo img,.admin-nophoto{width:100%;height:auto;aspect-ratio:1}}
