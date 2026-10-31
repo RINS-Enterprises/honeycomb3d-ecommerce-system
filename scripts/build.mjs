@@ -1,7 +1,7 @@
 import {readFile,writeFile,mkdir,copyFile,rm,access} from 'node:fs/promises';
 import {resolve,join,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {validateData,visibleProducts,searchIndexing,delivery,paymentMethods,paymentNote,socialLinks,trustPages,policiesOn} from '../src/domain.mjs';
+import {validateData,visibleProducts,promoList,searchIndexing,delivery,paymentMethods,paymentNote,socialLinks,trustPages,policiesOn} from '../src/domain.mjs';
 import {loadPolicies} from '../src/policies.mjs';
 import {loadStore} from './store.mjs';
 import {layout,home,shop,detail,cartPage,customPage,privacyPage,faqPage,trustPage,policyPage,notFound,sitemap} from '../src/render.mjs';
@@ -35,7 +35,9 @@ await page('faq/index.html',faqPage(site));
 for(const t of trustPages(site))await page(t.slug+'/index.html',trustPage(t,site));
 await page('404.html',notFound(products,site));
 for(const p of products)await page('products/'+p.slug+'/index.html',detail(p,products,site));
-for(const name of ['app.mjs','card.mjs','domain.mjs','styles.css'])await copyFile(join(root,'src',name),join(dist,name));
+for(const name of ['app.mjs','card.mjs','domain.mjs','styles.css','admin.mjs','admin.css'])await copyFile(join(root,'src',name),join(dist,name));
+// Admin page: not linked from the shop, never indexed. All data comes from the password-protected /api/admin/ functions.
+await page('admin/index.html','<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin | HoneyComb 3D</title><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0c0b0a"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/admin.css"><script type="module" src="/admin.mjs"></script></head><body><main class="admin" id="admin" data-testid="admin"><noscript>The admin page needs JavaScript.</noscript></main></body></html>');
 // Copy only explicitly referenced derivatives. Source images and unused assets never ship.
 const srcs=v=>[v.src,v.avif];
 const assets=new Set([store.logo,...(store.logoVariants||[]).map(v=>v.src),...heroVariants.flatMap(srcs),...products.flatMap(p=>[p.image,...(p.imageVariants||[]).flatMap(srcs),...(p.gallery||[]).flatMap(g=>g.variants.flatMap(srcs)),p.shareImage?.src])].filter(Boolean));
@@ -53,12 +55,12 @@ await mkdir(join(dist,'fonts'),{recursive:true});
 for(const name of ['bricolage-grotesque-display.woff2','OFL.txt'])await copyFile(join(root,'public/fonts',name),join(dist,'fonts',name));
 await mkdir(join(dist,'data'),{recursive:true});
 // Approval stays in the payload for client-side live filtering. Recovery and copy-workflow metadata do not.
-await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,copyStatus,imageSource,priceSource,priceRule,stallPriceLkr,imageApprovedAt,imageStatus,...p})=>({...p,source:'Public catalog'}))));
-await writeFile(join(dist,'data/store.json'),JSON.stringify({name:store.name,currency:store.currency,country:store.country,mode:store.mode,whatsappNumber:store.whatsappVerified?store.whatsappNumber:null,whatsappVerified:store.whatsappVerified,paypalOverseas:store.paypalOverseas===true,delivery:delivery(store),paymentMethods:paymentMethods(store),paymentNote:paymentNote(store),social:socialLinks(store),policies:policiesOn(store),promo:store.promo??null,contact:policiesOn(store)?store.contact:null,logo:store.logo,logoWidth:store.logoWidth,logoHeight:store.logoHeight,logoVariants:store.logoVariants,hero:heroVariants.length?store.hero:null}));
+await writeFile(join(dist,'data/products.json'),JSON.stringify(products.map(({source,copyStatus,imageSource,priceSource,priceRule,stallPriceLkr,imageApprovedAt,imageStatus,partner,approvedAt,...p})=>({...p,source:'Public catalog'}))));
+await writeFile(join(dist,'data/store.json'),JSON.stringify({name:store.name,currency:store.currency,country:store.country,mode:store.mode,whatsappNumber:store.whatsappVerified?store.whatsappNumber:null,whatsappVerified:store.whatsappVerified,paypalOverseas:store.paypalOverseas===true,delivery:delivery(store),paymentMethods:paymentMethods(store),paymentNote:paymentNote(store),social:socialLinks(store),policies:policiesOn(store),promo:store.promo??null,promos:(store.promos||[]).map(({note,...x})=>x),contact:policiesOn(store)?store.contact:null,logo:store.logo,logoWidth:store.logoWidth,logoHeight:store.logoHeight,logoVariants:store.logoVariants,hero:heroVariants.length?store.hero:null}));
 // Until the owner turns on searchIndexing (in preview and live alike): search engines stay out (with noindex on every page), but link-preview crawlers may fetch
 // pages and share images so shared links show a card. WhatsApp builds previews on the sender's phone.
 const PREVIEW_BOTS=['Twitterbot','facebookexternalhit','Facebot','LinkedInBot','Slackbot','Slackbot-LinkExpanding','TelegramBot','Discordbot','WhatsApp'];
-await writeFile(join(dist,'robots.txt'),!searchIndexing(store)?PREVIEW_BOTS.map(bot=>'User-agent: '+bot+'\nAllow: /\n').join('\n')+'\nUser-agent: *\nDisallow: /\n':'User-agent: *\nAllow: /\n\nSitemap: '+store.siteUrl.replace(/\/$/,'')+'/sitemap.xml\n');
+await writeFile(join(dist,'robots.txt'),!searchIndexing(store)?PREVIEW_BOTS.map(bot=>'User-agent: '+bot+'\nAllow: /\n').join('\n')+'\nUser-agent: *\nDisallow: /\n':'User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: '+store.siteUrl.replace(/\/$/,'')+'/sitemap.xml\n');
 // Indexing prep (D-12): the sitemap exists only once the owner turns searchIndexing on.
 if(searchIndexing(store))await writeFile(join(dist,'sitemap.xml'),sitemap(products,site));
 console.log('Built '+(products.length+7+trustPages(store).length+Math.max(0,policies.length-1))+' static pages into dist/ ('+store.mode+' mode).');

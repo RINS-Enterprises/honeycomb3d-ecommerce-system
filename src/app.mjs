@@ -1,5 +1,5 @@
 import {card} from './card.mjs';
-import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, promoActive, promoDiscount, normalizePromo, visibleProducts, paypalOverseas, cartSuggestions, delivery, orderNowUrl, paymentMethods, paymentNote} from './domain.mjs';
+import {CART_KEY, MAX_QUANTITY, MAX_LINES, normalizeCart, readCart, cartSummary, money, escapeHtml as e, orderMessage, whatsappUrl, validateData, promoActive, activePromos, promoDiscount, normalizePromo, visibleProducts, paypalOverseas, cartSuggestions, delivery, orderNowUrl, paymentMethods, paymentNote} from './domain.mjs';
 
 const status=document.querySelector('#status');
 let toastTimer;
@@ -296,9 +296,9 @@ function initCart() {
     });
     root.querySelector('#order-promo')?.addEventListener('input',async event=>{
       promoInput=event.target.value;const code=normalizePromo(promoInput);
-      const match=code&&await sha256(code)===store.promo.sha256;
+      const hash=code?await sha256(code):'',match=hash&&activePromos(store).find(x=>x.sha256===hash);
       if(event.target.value!==promoInput)return;
-      const was=!!promo;promo=match?{code,percent:store.promo.percent}:null;
+      const was=!!promo;promo=match?{code,percent:match.percent}:null;
       if(was!==!!promo)render('promo');else{root.querySelector('#promo-status').innerHTML=promoStatus(cartSummary(cart,products));root.querySelector('#order-handoff').innerHTML=handoff(message());}
     });
     root.querySelector('#order-paypal')?.addEventListener('change',event=>{

@@ -13,11 +13,13 @@ const all=JSON.parse(await readFile(join(root,'data/products.json'),'utf8'));
 const store=await loadStore(root);
 validateData(all,store);
 const products=visibleProducts(all,store);
+const publicStore=JSON.parse(await readFile(join(root,'dist/data/store.json'),'utf8'));
+assert(Array.isArray(publicStore.promos)&&publicStore.promos.every(x=>x.note===undefined),'Promo notes stay private');
 const publicProducts=JSON.parse(await readFile(join(root,'dist/data/products.json'),'utf8'));
 for(const p of publicProducts) {
   assert.equal(p.copyStatus,undefined,'Copy approval workflow must not be published');
   assert.equal(p.imageSource,undefined,'Recovery asset filenames must not be published');
-  for(const key of ['priceSource','priceRule','stallPriceLkr','imageApprovedAt','imageStatus'])assert.equal(p[key],undefined,'Source workflow metadata must not be published');
+  for(const key of ['priceSource','priceRule','stallPriceLkr','imageApprovedAt','imageStatus','partner','approvedAt'])assert.equal(p[key],undefined,'Source workflow metadata must not be published');
   assert.equal(p.source,'Public catalog','Recovery evidence must stay in source data');
 }
 const paths=['index.html','shop/index.html','cart/index.html','custom/index.html','privacy/index.html','faq/index.html','404.html',...trustPages(store).map(t=>t.slug+'/index.html'),...(policiesOn(store)?POLICY_PAGES.filter(p=>p.slug!=='privacy').map(p=>p.slug+'/index.html'):[]),...products.map(p=>'products/'+p.slug+'/index.html')];

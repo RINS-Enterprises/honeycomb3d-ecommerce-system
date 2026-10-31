@@ -9,6 +9,8 @@ const isHttpsUrl = v => { if (!/^https:\/\/[^\s]+$/.test(v) || v.length > 200) r
 // No regex v flag here: this file ships to browsers (Safari < 17 rejects the whole module); scripts/check.mjs guards it.
 const ownerText = (v, max, {lines=false}={}) => typeof v === 'string' && v.trim().length > 0 && v.trim().length <= max && /[^\p{Cf}\p{Z}\s]/u.test(v) && !(lines ? /(?![\n\r\t])\p{Cc}|[\u202a-\u202e\u2066-\u2069]/u : /\p{Cc}|\p{Cf}|\p{Zl}|\p{Zp}/u).test(v.trim());
 const sameName = v => v.trim().replace(/\s+/g,' ').toLowerCase();
+const realDay = v => typeof v==='string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && new Date(v+'T00:00:00Z').toISOString().slice(0,10)===v;
+const validPromo = (pr, note=false) => !!pr && typeof pr==='object' && !Array.isArray(pr) && !Object.keys(pr).some(k=>!['sha256','percent','from','until',...(note?['note']:[])].includes(k)) && /^[0-9a-f]{64}$/.test(pr.sha256||'') && Number.isInteger(pr.percent) && pr.percent>=1 && pr.percent<=90 && realDay(pr.from) && realDay(pr.until) && pr.until>=pr.from && (pr.note===undefined || ownerText(pr.note,80));
 // A positive LKR amount with at most two decimal places (prices and the delivery fee).
 const validLkr = v => Number.isFinite(v) && v > 0 && Number.isSafeInteger(Math.round(v*100)) && Math.abs(Math.round(v*100)-v*100) <= 1e-6;
 export function validateData(products, store) {
@@ -41,10 +43,9 @@ export function validateData(products, store) {
     const pg=store.pages;
     if (!pg || typeof pg !== 'object' || Array.isArray(pg) || Object.keys(pg).some(k=>!TRUST_PAGES.some(t=>t.key===k)) || Object.values(pg).some(v=>v !== null && !ownerText(v,4000,{lines:true}))) throw new Error('pages must map shipping, returns or about to null or the owner\'s text');
   }
-  if (store.promo !== undefined && store.promo !== null) {
-    const pr=store.promo, day=v=>typeof v==='string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && new Date(v+'T00:00:00Z').toISOString().slice(0,10)===v;
-    if (typeof pr!=='object' || Array.isArray(pr) || Object.keys(pr).some(k=>!['sha256','percent','from','until'].includes(k)) || !/^[0-9a-f]{64}$/.test(pr.sha256||'') || !Number.isInteger(pr.percent) || pr.percent<1 || pr.percent>90 || !day(pr.from) || !day(pr.until) || pr.until<pr.from) throw new Error('promo must be null or {sha256, percent 1-90, from, until} with YYYY-MM-DD dates');
-  }
+  if (store.promo !== undefined && store.promo !== null && !validPromo(store.promo)) throw new Error('promo must be null or {sha256, percent 1-90, from, until} with YYYY-MM-DD dates');
+  // Codes created in the admin: same shape plus an optional private note (never published).
+  if (store.promos !== undefined && (!Array.isArray(store.promos) || store.promos.length > 20 || store.promos.some(x=>!validPromo(x,true)) || new Set(promoList(store).map(x=>x.sha256)).size !== promoList(store).length)) throw new Error('promos must be a list of up to 20 distinct {sha256, percent 1-90, from, until, note?} codes');
   if (store.policies !== undefined && typeof store.policies !== 'boolean') throw new Error('policies must be true or false');
   if (store.contact !== undefined && store.contact !== null) {
     const c=store.contact;
@@ -88,6 +89,8 @@ export function validateData(products, store) {
       }
     }
     if (p.shareImage !== undefined && (!/^\/assets\/[a-zA-Z0-9_-]+\.jpg$/.test(p.shareImage.src) || !Number.isInteger(p.shareImage.width) || !Number.isInteger(p.shareImage.height))) throw new Error('Invalid share image: '+p.id);
+    // Partner stock (printed by the partner, sold by HoneyComb): the cost price stays private, for the profit split.
+    if (p.partner !== undefined && (!p.partner || typeof p.partner !== 'object' || Array.isArray(p.partner) || Object.keys(p.partner).some(k=>k!=='costLkr') || (p.partner.costLkr !== null && !validLkr(p.partner.costLkr)))) throw new Error('partner must be {costLkr} with null or a positive LKR amount: '+p.id);
     if (typeof p.approved !== 'boolean') throw new Error('Missing approval state');
     if (store.mode === 'live' && p.approved && (!p.image || p.availability === 'unconfirmed')) throw new Error(`Approved live product needs an original photo and confirmed availability: ${p.id}`);
   }
@@ -157,7 +160,10 @@ export function cartSuggestions(items, products, limit=3) {
 // files. Active on its dates in Sri Lanka time (UTC+05:30), inclusive; off (null) otherwise. The discount applies to priced items.
 export const normalizePromo = v => String(v||'').trim().toUpperCase().replace(/\s+/g,'');
 export const colomboDay = (now=Date.now()) => new Date(now+5.5*3600e3).toISOString().slice(0,10);
-export const promoActive = (store, now=Date.now()) => !!store.promo && colomboDay(now)>=store.promo.from && colomboDay(now)<=store.promo.until;
+// All promo codes: the original single code plus any created in the admin.
+export const promoList = store => [...(store.promo?[store.promo]:[]),...(Array.isArray(store.promos)?store.promos:[])];
+export const activePromos = (store, now=Date.now()) => promoList(store).filter(x=>colomboDay(now)>=x.from && colomboDay(now)<=x.until);
+export const promoActive = (store, now=Date.now()) => activePromos(store,now).length > 0;
 export const promoDiscount = (knownSubtotal, percent) => Math.round(knownSubtotal*percent)/100;
 export function orderMessage(items, products, notes='', {paypal=false, payment='', deliveryFeeLkr=null, promo=null}={}) {
   const s=cartSummary(items,products);
